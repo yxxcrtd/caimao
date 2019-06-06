@@ -1,0 +1,40 @@
+<#assign controller="ContactUs"/>
+<#include 'layout/layout.html'/>
+<#macro content>
+<div class="link-content content clearfix">
+        <div class="grid1050">
+            <div class="l-sidebar">
+                <ul>
+                    <li><a href="company-intro.htm">公司简介</a></li>
+                    <li><a href="manage-team.htm">管理团队</a></li>
+                    <li><a href="platform-advantage.htm">平台优势</a></li>
+                    <li class="active"><a href="contact-us.htm">联系我们</a></li>
+                </ul>
+            </div>
+            <div class="link-wrapper">
+                <div class="link-wrapper-inner">
+                    <h2>联系我们</h2>
+                    <div class="link-inner-contact">
+                        <div class="contact-map" id ="baiduMap">
+                            <img src="${dojoUrl}/app/resources/image/customize/map.png" style="width: 700px;height: 450px;border: none;">
+                        </div>
+                        <p style="font-weight: bold">用户：</p>
+                        <p>客户服务热线：4000-898-000 （服务时间：工作日8:00-20:00，非工作日9:00-18:00）</p>
+                        <p>客服邮箱：123@caimao.com</p>
+                        <p>用户交流QQ群：284822493</p>
+                        <p style="font-weight: bold">其他：</p>
+                        <p>媒体采访QQ：1253080692</p>
+                        <p>商务合作QQ：1577896810</p>
+                        <p>技术邮箱：tech@caimao.com</p>
+                        <p>公司传真：010-62987670</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+   <style type="text/css">  
+		.contact-map{width:700px;height:450px;}
+	</style>
+</#macro>
+

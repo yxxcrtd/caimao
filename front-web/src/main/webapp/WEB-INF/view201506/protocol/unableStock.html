@@ -1,0 +1,34 @@
+<div class="layout_wrap" id="dialog_point">
+    <div class="layout layout01" style="width: 480px;top: 50%;left: 50%;margin-left: -240px;margin-top: -240px;max-height: 450px;overflow: scroll;">
+        <h3 class="title">今日禁买股票<a href="javascript:void(0);" id="dialog_close"><i class="icons icon_close"></i></a></h3>
+        <div class="content">
+            <div class="fin-contract-content">
+                <table style="margin: 30px auto;" class="unableBox">
+                    <thead>
+                    <tr>
+                        <td><b>股票代码</b></td>
+                        <td><b>股票名称</b></td>
+                        <td width="40"></td>
+                        <td><b>股票代码</b></td>
+                        <td><b>股票名称</b></td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <#if (list?size > 0)>
+                        <#assign num = 0 />
+                        <#list list as i>
+                            <#if num == 0><tr></#if>
+                            <td>${i.code}</td><td>${i.name}</td>
+                            <#if num == 0><td width="40"></td></#if>
+                            <#assign num = num + 1 />
+                            <#if num == 2></tr><#assign num = 0 /></#if>
+                        </#list>
+                    </#if>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+</div>

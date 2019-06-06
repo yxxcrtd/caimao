@@ -1,0 +1,61 @@
+<!doctype html>
+<#include "ybk/config.html" />
+<#assign topMenu="myaccount"/>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>个人资料--邮币卡</title>
+		<link rel="stylesheet" href="${staticUrl}/style/miao.css?version=${jsVersion}" />
+		<script src="${staticUrl}/js/ybk/global.js?version=${jsVersion}" type="text/javascript"></script>
+	</head>
+	<body>
+		<#include "ybk/include/page/head.html" />
+
+		<div class="main usercenter">
+			
+			<div class="clearfix">
+				<div class="mod-left pagenav">
+					<em class="myaccount"><i></i><a href="/ybk/ucenter.html">我的开户</a></em>
+					<em class="myaccount"><i></i><a href="/ybk/user_info.html">个人资料</a></em>
+				</div>
+				<div class="mod-right">
+					<div class="mod-rightcontent maincont">
+						<div class="message">
+							<form action="">
+								<div class="group">
+									<div class="col_01">姓 名</div>
+									<div class="col_02">
+										<input type="text" name="userName" value="${user.userRealName}" readonly placeholder="请输入姓名" />
+										<span class="v_info"></span>
+									</div>
+								</div>
+								<div class="group">
+									<div class="col_01">身份证号</div>
+									<div class="col_02">
+										<input type="text" name="cardNo" value="${user.idcard}" readonly placeholder="请输入身份证号" />
+										<span class="v_info"></span>
+									</div>
+								</div>
+								<div class="group">
+									<div class="col_01">手机号</div>
+									<div class="col_02">
+										<input type="text" name="phoneNo" readonly placeholder="请输入手机号" />
+										<span class="v_info"></span>
+									</div>
+								</div>
+
+								<div class="group">
+									<button type="submit" class="btn_blue">保存</button>
+								</div>
+
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		<#include "ybk/include/page/foot.html" />
+	</body>
+</html>

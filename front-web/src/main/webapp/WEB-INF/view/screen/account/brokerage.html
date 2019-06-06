@@ -1,0 +1,189 @@
+<#assign controller="Brokerage"/>
+<#include 'layout/layout.html'/>
+<#macro content>
+    <link rel="stylesheet" type="text/css" href="${dojoUrl}/app/resources/custom/style/page/promote.css" />
+    <div id="doc_body">
+        <div class="topic">
+            <div class="wrap01">
+                <div class="section">
+                    <!--登录后显示-->
+                    <div class="invite" id="yes_login_div" style="display: none;">
+                        <a href="${baseUrl}/popularize/popularize.htm" class="btn_pro float_left">进入我的推广</a>
+                        <div class="invite_box float_left" id="copy_url"><input class="invite_link" type="text" id="popularTextUrl"/><span class="copy">复制</span><b class="msg" id="copy_tip" style="display: none">复制成功</b>
+                        </div>
+                        <div class="promote_join">
+                            渠道加盟：<br>
+                            联系人：陈经理<br>
+                            联系电话：13911116318
+                        </div>
+                    </div>
+                    <!--登录前显示-->
+                    <div class="invite" id="no_login_div">请<a class="btn_pro login" href="${baseUrl}/user/login.htm?return=/activity/brokerage">登录</a> 查看您的专属链接！
+                        <div class="promote_join">
+                            渠道加盟：<br>
+                            联系人：陈经理<br>
+                            联系电话：13911116318
+                        </div>
+                    </div>
+
+                    <h2>如何在财猫上推广<strong>月入过万</strong>？</h2>
+                    <div class="example">
+                        <span>推广了<br>50个用户</span><span>每个用户月融20万</span><span>月息1.8%升级为V3</span><p>月收入=50*20万*1.8%*8%+50*50=1.69万</p>
+                    </div>
+                    <p>您可以从融资用户的利息里分享佣金,邀请一个用户后，只要他持续在财猫交易，您可以获得稳定的收益。</p>
+                    <p>邀请好友就送50元：每邀请1位好友注册充值，并且月融额满1万元，即返50元现金奖励</p>
+                    <p>返现将在第二个工作日以积分形式给到邀请人账户。</p>
+                </div>
+            </div>
+            <div class="wrap02 bg">
+                <div class="section clear_fix">
+                    <div class="left float_left">
+                        <h3>邀请融资越多，<br/>
+                            你的返佣比例就会越大哦！</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <td width="120">累计月融额度</td>
+                                <td width="130">邀请融资人数</td>
+                                <td width="105">等级</td>
+                                <td width="100">佣金率</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>30万以下</td>
+                                <td>3人以下</td>
+                                <td>V0</td>
+                                <td>3%</td>
+                            </tr>
+                            <tr>
+                                <td>满30万</td>
+                                <td>满3人</td>
+                                <td>V1</td>
+                                <td>5%</td>
+                            </tr>
+                            <tr>
+                                <td>满100万</td>
+                                <td>满5人</td>
+                                <td>V2</td>
+                                <td>7%</td>
+                            </tr>
+                            <tr>
+                                <td>满1000万</td>
+                                <td>满20人</td>
+                                <td>V3</td>
+                                <td>8%</td>
+                            </tr>
+                            <tr>
+                                <td>满3000万</td>
+                                <td>满30人</td>
+                                <td>V4</td>
+                                <td>10%</td>
+                            </tr>
+                            <tr>
+                                <td>满1亿</td>
+                                <td>满50人</td>
+                                <td>V5</td>
+                                <td>12%</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <p>返佣的佣金最终以好友融资实际产生的利息为准，邀请日融资用户获得返利额度的计算公式为 <span>日融资额/22</span> ，每日累加。参与返佣的基数为邀请好友前20天融资产生的利息。</p>
+                    </div>
+                    <div class="right float_right">
+                        <h3><i class="icon_invite"></i>邀请排行</h3>
+                        <div id="Tab" class="tab">
+                            <div class="Menubox">
+                                <ul>
+                                    <li class="hover" onmouseover="setTab('one',1,2)" id="one1">融资人数</li>
+                                    <li onmouseover="setTab('one',2,2)" id="one2" class="">融资金额</li>
+                                </ul>
+                            </div>
+                            <div class="Contentbox">
+                                <div class="hover" id="con_one_1" style="display: block;">
+                                    <ul>
+                                        <li><span>排名</span><span>手机号</span><span>融资人数</span></li>
+                                    </ul>
+                                    <ul class="down" id="rank1">
+                                    </ul>
+                                </div>
+                                <div style="display: none;" id="con_one_2">
+                                    <ul>
+                                        <li><span>排名</span><span>手机号</span><span>融资金额</span></li>
+                                    </ul>
+                                    <ul class="down" id="rank2">
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="wrap03">
+                <div class="section">
+                    <dl>
+                        <dt class="float_left"></dt>
+                        <dd class="float_right">限时奖励:
+                            每邀请一位好友注册并月融资1万元，将获得50元奖励！上不封顶！</dd>
+                    </dl>
+                </div>
+            </div>
+
+            <div class="wrap04 bg">
+                <div class="section">
+                    <dl>
+                        <dt class="float_left"></dt>
+                        <dd class="float_right"></dd>
+                    </dl>
+                    <div class="invite_box" id="copy_url01"><input class="invite_link" type="text" id="popularTextUrl2"><span class="copy">复制</span><b class="msg" id="copy_tip01" style="display: none">复制成功</b>
+                    </div>
+                </div>
+            </div>
+
+            <div class="wrap05">
+                <div class="section">
+                    <dl>
+                        <dt class="float_left"></dt>
+                        <dd class="float_right"></dd>
+                    </dl>
+                    <p><a href="${baseUrl}/popularize/popularize.htm" class="btn_pro float_left">立即行动，为自己创造财富！</a></p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script src="${dojoUrl}/app/resources/custom/images//ZeroClipboard.min.js"></script>
+    <script>
+        var CopyUrl = new ZeroClipboard( document.getElementById('copy_url')),
+                CopyTip = document.getElementById('copy_tip');
+
+        CopyUrl.on( "ready", function( readyEvent ) {
+            CopyUrl.on( "aftercopy", function( event ) {
+                CopyTip.style.display = 'block';
+            });
+
+        });
+
+        var CopyUrl01 = new ZeroClipboard( document.getElementById('copy_url01')),
+                CopyTip01 = document.getElementById('copy_tip01');
+
+        CopyUrl01.on( "ready", function( readyEvent ) {
+            CopyUrl01.on( "aftercopy", function( event ) {
+                CopyTip01.style.display = 'block';
+            });
+
+        });
+
+        function setTab(name,cursel,n){
+            for(i=1;i<=n;i++){
+                var menu=document.getElementById(name+i);
+                var con=document.getElementById("con_"+name+"_"+i);
+                menu.className=i==cursel&&"hover";
+                con.style.display=i==cursel?"block":"none";
+            }
+        }
+
+    </script>]
+</#macro>

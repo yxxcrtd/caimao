@@ -1,0 +1,37 @@
+<#assign title="密码管理"/>
+<#assign header="密码管理"/>
+<#assign bg="bg-gray"/>
+<#include 'mobile/layout/layout.html'/>
+<#macro content>
+
+<article class="content">
+
+
+<!--表单-->
+<aside class="con-frame">
+<ul class="datalist">
+<li class="datalist-item clearfix">
+<a href="${basePath}/mobile/user/findtradepwd.htm" class="am-grid datalist-line">
+        <div class="am-grid-item am-grid-item-50  am-ft-left">
+        <h4 class="am-ft-md cm-left am-ft-main">找回安全密码</h4>
+        </div> 
+        <div class="am-grid-item am-grid-item-50 am-ft-right am-right-15">
+        <span class="type-ico am-icon-arrow-right"></span>
+        </div>
+</a>
+</li>
+<li class="datalist-item clearfix">
+<a href="${basePath}/mobile/user/changetradepwd.htm" class="am-grid datalist-line">
+        <div class="am-grid-item am-grid-item-50  am-ft-left">
+        <h4 class="am-ft-md cm-left am-ft-main">修改安全密码</h4>
+        </div> 
+        <div class="am-grid-item am-grid-item-50 am-ft-right am-right-15">
+        <span class="type-ico am-icon-arrow-right"></span>
+        </div>
+</a>
+</li>
+</ul>
+</aside>
+
+</article>
+</#macro>

@@ -1,0 +1,80 @@
+<#include 'mobile/layout/layout.html'/> 
+<#macro assignSet>
+	<#assign title="账户设置" /> 
+	<#assign header="账户设置" />
+	<#assign footer="3"/> 
+	<#assign bg="bg-gray"/> 
+	<#assign controller="personSet"/> 
+</#macro>
+
+<#macro content>
+<article class="content">
+	<!--框架，未绑定银行卡时-->
+	<aside class="con-frame con-frame-notop con-spacing10" id="cardInfo">
+	</aside>
+	<!--框架-->
+	<!--提示-->
+	<p class="tx-warning con-spacing10">
+		<span class="am-ft-tabText">提现前必须完成绑卡操作，否则将无法正常提现</span>
+	</p>
+	<!--提示-->
+
+	<!--表单-->
+	<aside class="con-frame">
+		<ul class="datalist">
+			<li class="datalist-item clearfix"><a href="###"
+				class="am-grid datalist-line">
+					<div class="am-grid-item am-grid-item-50  am-ft-left">
+						<h4 class="am-ft-md cm-left am-ft-main">手机号</h4>
+					</div>
+					<div class="am-grid-item am-grid-item-50 am-ft-right am-right-15">
+						<span class="am-ft-gray" id="userName"></span>
+					</div>
+			</a></li>
+			<li class="datalist-item clearfix">
+				<a href="${basePath}/mobile/user/changeloginpwd.htm"
+				class="am-grid datalist-line">
+					<div class="am-grid-item am-grid-item-50  am-ft-left" id="f_login">
+						<h4 class="am-ft-md cm-left am-ft-main">登录密码</h4>
+<!-- 						<span class="level level-in am-left-10">中</span> -->
+					</div>
+					<div class="am-grid-item am-grid-item-50 am-ft-right am-right-15">
+						<span class="type-ico am-icon-arrow-right"></span>
+					</div></a>
+			</li>
+			<li class="datalist-item clearfix" >
+				<a  class="am-grid datalist-line">
+					<div class="am-grid-item am-grid-item-50  am-ft-left">
+						<h4 class="am-ft-md cm-left am-ft-main">实名认证</h4>
+					</div>
+					<div class="am-grid-item am-grid-item-50 am-ft-right am-right-15" id="certification_icon">
+<!-- 						<span class="type-ico am-icon-arrow-right"></span> -->
+<!-- 				        <span class="am-ft-gray">已认证</span> -->
+					</div>
+				</a>
+			</li>
+			<li class="datalist-item clearfix" >
+			<a href="${basePath}/mobile/user/tradepwd.htm"  class="am-grid datalist-line">
+					<div class="am-grid-item am-grid-item-50  am-ft-left" id="f_trade">
+						<h4 class="am-ft-md cm-left am-ft-main">安全密码</h4>
+					</div>
+					<div class="am-grid-item am-grid-item-50 am-ft-right am-right-15">
+						<span class="type-ico am-icon-arrow-right"></span>
+					</div>
+			</a></li>
+			
+			<li class="datalist-item clearfix" >
+			<a id="tradePwdQuestion" class="am-grid datalist-line">
+					<div class="am-grid-item am-grid-item-50  am-ft-left" id="f_tradePwdQuestion">
+						<h4 class="am-ft-md cm-left am-ft-main">安全密码保护问题</h4>
+					</div>
+					<div class="am-grid-item am-grid-item-50 am-ft-right am-right-15">
+						<span class="am-ft-gray" id="questionMsg">忘记了,找回密保</span>
+					</div>
+			</a></li>
+			
+		</ul>
+	</aside>
+
+</article>
+</#macro>

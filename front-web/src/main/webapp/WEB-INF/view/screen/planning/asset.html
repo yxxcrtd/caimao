@@ -1,0 +1,46 @@
+<#assign title="团融网"/>
+<#assign name="理财中心"/>
+<#assign controller="PlannerAsset"/>
+<#include 'layout/main_layout.html'/>
+<#macro subContent>
+	<#include 'layout/home_head.html'/>
+	<#include 'layout/twolevel_menu.html'/>
+</#macro>
+<#macro content>
+<div class="contents clearfix">
+<#include 'layout/planning_sidebar.html'/>
+<!--右边start-->
+<div class="con-rside cm-right">
+<div class="frame-all grid-812">
+<div class="con-ReCa">
+<table width="100%" border="0" cellspacing="0" class="table-assetsIndex">
+  <tbody>
+  <tr>
+    <td colspan="2" rowspan="2">
+    <p><span class="am-ft-md">账户总值：</span></p>
+    <p><b class="am-ft-number" id="asset_total_value"  >--</b> 元 </p></td>
+    <th>资金余额：</th>
+    <td><b class="am-ft-number am-ft-lg" id="cur_amount" >--</b> 元 </td>
+    <th>证券市值：</th>
+    <td><b class="am-ft-number am-ft-lg" id="stock_asset" >--</b> 元 </td>
+  </tr>
+  <tr>
+    <th>可用余额：</th>
+    <td><b class="am-ft-number am-ft-lg" id="available_amount" >--</b> 元</td>
+    <th></th>
+    <td></td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<div id="grid"></div>
+</div>
+<!--右边end-->
+
+</div>
+</#macro>
+
+<#macro subScript>
+</#macro>

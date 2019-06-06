@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd"
+       default-autowire="default">
+
+    <context:property-placeholder
+            ignore-resource-not-found="true"
+            location="classpath*:application.properties,classpath*:dubbo-conf.properties,classpath*:redis-conf.properties"/>
+    <!-- 扫描package进行注解 -->
+    <context:component-scan base-package="com.hsnet">
+        <context:exclude-filter type="annotation"
+                                expression="org.springframework.stereotype.Controller"></context:exclude-filter>
+        <context:exclude-filter type="annotation"
+                                expression="org.springframework.web.bind.annotation.RestController"></context:exclude-filter>
+    </context:component-scan>
+
+    <bean id="applicationProperties" class="com.hsnet.pz.base.ApplicationProperties"/>
+
+    <!-- 链接配置 -->
+    <!--
+    <bean id="jRProxyService" class="com.hsnet.frontcore.connection.JRProxyService"
+        init-method="initProviders">
+        <property name="jrProxyProviderManager" ref="jRProxyProviderManager" />
+    </bean>
+    <bean id="jRProxyProviderManager" class="com.hsnet.frontcore.connection.JRProxyProviderManager">
+        <property name="providers">
+            <set>
+                <ref bean="t2ServiceProvider" />
+            </set>
+        </property>
+    </bean>
+    <bean id="t2ServiceProvider" class="com.hsnet.frontcore.connection.t2.T2ServiceProvider" />
+    <bean id="t2ServiceInitializer" class="com.hsnet.frontcore.connection.t2.T2ServiceInitializer"
+        init-method="init" />	-->
+    <bean id="jRManagerInitializer"
+          class="com.hsnet.frontcore.connection.jrmanager.JRManagerInitializer"
+          init-method="init" destroy-method="shutdown"/>
+
+    <!-- 任务配置 -->
+    <!--
+    <task:executor id="executor" pool-size="5" />
+    <task:scheduler id="scheduler" pool-size="10" />
+    <task:annotation-driven executor="executor" scheduler="scheduler" />
+     -->
+    <!-- 验证码配置 -->
+    <bean id="fastHashMapCaptchaStore" class="com.octo.captcha.service.captchastore.FastHashMapCaptchaStore"/>
+    <bean id="captchaEngineEx" class="com.hsnet.pz.ao.service.MyCaptchaEngine"/>
+    <bean id="imageCaptchaService" class="com.hsnet.pz.ao.service.CustomGenericManageableCaptchaService">
+        <constructor-arg type="com.octo.captcha.service.captchastore.CaptchaStore" index="0">
+            <ref bean="fastHashMapCaptchaStore"/>
+        </constructor-arg>
+        <constructor-arg type="com.octo.captcha.engine.CaptchaEngine" index="1">
+            <ref bean="captchaEngineEx"/>
+        </constructor-arg>
+        <constructor-arg index="2">
+            <value>180</value>
+        </constructor-arg>
+        <constructor-arg index="3">
+            <value>100000</value>
+        </constructor-arg>
+        <constructor-arg index="4">
+            <value>75000</value>
+        </constructor-arg>
+    </bean>
+    <!-- 对象转换工具设置 -->
+    <bean id="dozerMapperManager" class="com.hsnet.pz.controller.quote.utils.DozerMapperManager">
+        <property name="mappingFiles">
+            <list>
+                <value>dozer/QuoteMapper.xml</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="dictionaryServiceImpl" class="com.hsnet.frontcore.dictionary.service.DictionaryServiceImpl">
+        <property name="loaders">
+            <list>
+                <bean class="com.hsnet.frontcore.dictionary.service.XmlDictLoader"></bean>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="dictManager" class="com.hsnet.frontcore.dictionary.DictManager">
+        <property name="dictionaryServiceImpl" ref="dictionaryServiceImpl"></property>
+    </bean>
+</beans>

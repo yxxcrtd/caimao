@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="GjsNJSHistoryTrade">
+
+    <resultMap id="BaseResultMap" type="com.caimao.gjs.api.entity.history.GjsNJSHistoryTradeEntity">
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="date" property="date" jdbcType="VARCHAR" />
+        <result column="firm_id" property="firmId" jdbcType="VARCHAR" />
+        <result column="serial_no" property="serialNo" jdbcType="VARCHAR" />
+        <result column="cont_no" property="contNo" jdbcType="VARCHAR" />
+        <result column="ware_id" property="wareId" jdbcType="VARCHAR" />
+        <result column="buy_or_Sal" property="buyOrSal" jdbcType="VARCHAR" />
+        <result column="con_price" property="conPrice" jdbcType="VARCHAR" />
+        <result column="cont_num" property="contNum" jdbcType="VARCHAR" />
+        <result column="f_time" property="fTime" jdbcType="VARCHAR" />
+        <result column="tmp_money" property="tmpMoney" jdbcType="VARCHAR" />
+        <result column="order_sty" property="orderSty" jdbcType="VARCHAR" />
+        <result column="cont_qty" property="contQty" jdbcType="VARCHAR" />
+        <result column="c_generate_flag" property="cGenerateFlag" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <!--所有列-->
+    <sql id="Base_Column_List">
+        id, date, firm_id, serial_no, cont_no, ware_id, buy_or_sal, con_price, cont_num, f_time, tmp_money, order_sty, cont_qty, c_generate_flag
+    </sql>
+
+    <!--根据开始时间和结束时间查询-->
+    <select id="queryNJSHistoryTradeWithPage" resultMap="BaseResultMap" parameterType="com.caimao.gjs.api.entity.req.FQueryHistoryTradeReq">
+        SELECT <include refid="Base_Column_List" />
+        FROM gjs_njs_history_trade
+        WHERE firm_id = #{traderId, jdbcType=VARCHAR}
+        <if test="startDate != null and  startDate != ''">
+            AND date &gt;= #{startDate}
+        </if>
+        <if test="endDate != null and  endDate != ''">
+            AND date &lt;= #{endDate}
+        </if>
+        ORDER BY date desc,f_time DESC
+    </select>
+
+    <!-- 根据日期查询历史交易记录 -->
+    <select id="queryNJSHistoryTradeListByDate" resultMap="BaseResultMap" parameterType="com.caimao.gjs.api.entity.req.FQueryHistoryTradeReq">
+        SELECT <include refid="Base_Column_List" /> FROM gjs_njs_history_trade WHERE date = #{date, jdbcType=VARCHAR}
+    </select>
+
+    <!--添加-->
+    <insert id="insert" parameterType="com.caimao.gjs.api.entity.history.GjsNJSHistoryTradeEntity">
+        insert into gjs_njs_history_trade
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="date != null">date,</if>
+            <if test="firmId != null">firm_id,</if>
+            <if test="serialNo != null">serial_no,</if>
+            <if test="contNo != null">cont_no,</if>
+            <if test="wareId != null">ware_id,</if>
+            <if test="buyOrSal != null">buy_or_Sal,</if>
+            <if test="conPrice != null">con_price,</if>
+            <if test="contNum != null">cont_num,</if>
+            <if test="fTime != null">f_time,</if>
+            <if test="tmpMoney != null">tmp_money,</if>
+            <if test="orderSty != null">order_sty,</if>
+            <if test="contQty != null">cont_qty,</if>
+            <if test="cGenerateFlag != null">c_generate_flag,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id, jdbcType=BIGINT},</if>
+            <if test="date != null">#{date, jdbcType=VARCHAR},</if>
+            <if test="firmId != null">#{firmId, jdbcType=VARCHAR},</if>
+            <if test="serialNo != null">#{serialNo, jdbcType=VARCHAR},</if>
+            <if test="contNo != null">#{contNo, jdbcType=VARCHAR},</if>
+            <if test="wareId != null">#{wareId, jdbcType=VARCHAR},</if>
+            <if test="buyOrSal != null">#{buyOrSal, jdbcType=VARCHAR},</if>
+            <if test="conPrice != null">#{conPrice, jdbcType=VARCHAR},</if>
+            <if test="contNum != null">#{contNum, jdbcType=VARCHAR},</if>
+            <if test="fTime != null">#{fTime, jdbcType=VARCHAR},</if>
+            <if test="tmpMoney != null">#{tmpMoney, jdbcType=VARCHAR},</if>
+            <if test="orderSty != null">#{orderSty, jdbcType=VARCHAR},</if>
+            <if test="contQty != null">#{contQty, jdbcType=VARCHAR},</if>
+            <if test="cGenerateFlag != null">#{cGenerateFlag, jdbcType=VARCHAR},</if>
+        </trim>
+    </insert>
+
+    <!-- 后台管理用的查询 -->
+    <!-- 根据TraderId查询NJS历史交易列表 -->
+    <select id="queryNJSHistoryTradeListByTraderIdForManage" resultMap="BaseResultMap" parameterType="java.lang.String">
+        SELECT <include refid="Base_Column_List" /> FROM gjs_njs_history_trade WHERE firm_id = #{traderId, jdbcType=VARCHAR}
+    </select>
+
+    <!-- NJS累计交易额 -->
+    <select id="getHistoryTradeTotalMoney" resultType="java.lang.String">
+        SELECT SUM(ABS(cont_qty)) FROM gjs_njs_history_trade
+    </select>
+
+    <!-- NJS累计交易次数 -->
+    <select id="getHistoryTradeTotalCount" resultType="java.lang.Long">
+        SELECT COUNT(1) FROM gjs_njs_history_trade
+    </select>
+
+</mapper>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="YBKRSI">
+    <resultMap id="BaseResultMap" type="com.caimao.bana.api.entity.ybk.YBKRSIEntity">
+        <id column="exchange_name" property="exchangeName" jdbcType="CHAR"/>
+        <id column="code" property="code" jdbcType="CHAR"/>
+        <id column="date" property="date" jdbcType="TIMESTAMP"/>
+        <id column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="rsi1" property="rsi1" jdbcType="BIGINT"/>
+        <result column="rsi2" property="rsi2" jdbcType="BIGINT"/>
+        <result column="rsi3" property="rsi3" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        exchange_name, code, date, update_time, rsi1, rsi2, rsi3
+    </sql>
+
+    <insert id="insert" parameterType="com.caimao.bana.api.entity.ybk.YBKRSIEntity">
+        INSERT INTO ybk_rsi
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="exchangeName != null">exchange_name,</if>
+            <if test="code != null">code,</if>
+            <if test="date != null">date,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="rsi1 != null">rsi1,</if>
+            <if test="rsi2 != null">rsi2,</if>
+            <if test="rsi3 != null">rsi3,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="exchangeName != null">#{exchangeName},</if>
+            <if test="code != null">#{code},</if>
+            <if test="date != null">#{date},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="rsi1 != null">#{rsi1},</if>
+            <if test="rsi2 != null">#{rsi2},</if>
+            <if test="rsi3 != null">#{rsi3},</if>
+        </trim>
+    </insert>
+
+    <update id="update" parameterType="com.caimao.bana.api.entity.ybk.YBKRSIEntity">
+        UPDATE ybk_rsi
+        <set>
+            <if test="updateTime != null" >update_time = #{updateTime},</if>
+            <if test="rsi1 != null" >rsi1 = #{rsi1},</if>
+            <if test="rsi2 != null" >rsi2 = #{rsi2},</if>
+            <if test="rsi3 != null" >rsi3 = #{rsi3},</if>
+        </set>
+        WHERE exchange_name = #{exchangeName} AND code = #{code} AND date = #{date,jdbcType=DATE}
+    </update>
+
+    <select id="queryExist" parameterType="com.caimao.bana.api.entity.ybk.YBKRSIEntity" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM ybk_rsi
+        WHERE exchange_name = #{exchangeName} AND code = #{code} AND date = #{date,jdbcType=DATE}
+    </select>
+
+    <select id="queryRSI" parameterType="com.caimao.bana.api.entity.req.ybk.FYbkMarketReq" resultType="com.caimao.bana.api.entity.res.ybk.FYBKRSIRes">
+        SELECT
+        date,
+        update_time AS updateTime,
+        rsi1,
+        rsi2,
+        rsi3
+        FROM ybk_rsi
+        WHERE exchange_name = #{exchangeShortName} AND code = #{code}
+        ORDER BY date DESC
+        LIMIT #{limit}
+    </select>
+</mapper>

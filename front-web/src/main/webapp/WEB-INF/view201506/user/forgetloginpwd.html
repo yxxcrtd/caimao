@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+<#include "config.html"/>
+<head>
+    <meta charset="utf-8">
+    <title>找回密码-财猫网</title>
+
+    <!--基本布局样式-->
+    <link rel="stylesheet" type="text/css" href="${dojoUrl}/style/page/page.css?v=${jsVersion}" />
+    <script src="${dojoUrl}/js/userFindpassword.js?v=${jsVersion}"></script>
+</head>
+
+<body>
+<#include 'include/page/head.html'/>
+
+<!--找回密码第一步-->
+<div id="findPwdStep1Div" class="login">
+    <div class="section">
+        <dl class="step">
+            <dt></dt>
+            <dd><span>输入手机号</span><span>重置密码</span><span> &nbsp;完成</span></dd>
+        </dl>
+    </div>
+    <div class="section relative">
+        <div class="home_login home_login_bg"></div>
+        <div class="home_login">
+            <form action="/user/forgetpwd" method="post" id="forget1">
+                <div class="hd">
+                    <h5 class="align_left">&nbsp;找回密码</h5>
+                </div>
+                <div class="bd m_b_15">
+                    <div class="group m_b_37">
+                        <input id="findPwdMobile" type="text" autocomplete="off" validateType="empty:请输入手机号码 phone" placeholder="请输入手机号码" class="input_text input_name" maxlength="11"/>
+                    </div>
+                    <div class="group m_b_37 clear_fix">
+                        <input id="smsCheckCode" type="text" autocomplete="off" validateType="empty:请输入验证码 authcode" placeholder="请输入短信验证码" class="input_text  input_verify" maxlength="6"/>
+                        <button id="sendSmsCheckCode" type="button" class="verify">发送验证码</button>
+                    </div>
+                    <button id="findPwdS1Btn" class="btn btn_red size_full" type="button">下一步</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--找回密码第二步-->
+<div id="findPwdStep2Div" class="login" style="display: none;">
+    <div class="section">
+        <dl class="step">
+            <dt class="dt01"></dt>
+            <dd><span>输入手机号</span><span>重置密码</span><span> &nbsp;完成</span></dd>
+        </dl>
+    </div>
+    <div class="section relative">
+        <div class="home_login home_login_bg"></div>
+        <form action="/user/forgetpwd" method="post" id="forget2">
+            <div class="home_login">
+                <div class="hd">
+                    <h5 class="align_left">&nbsp;重置密码</h5>
+                </div>
+                <div class="bd m_b_15">
+                    <div class="group p_b_15">
+                        <input id="password" type="password" validateType="empty:密码不能为空 len:6:16 password" placeholder="设置登录密码" class="input_text input_pass" maxlength="20">
+                        <i id="levelBar" class="icons icon_low"></i>
+                    </div>
+                    <div class="group m_b_50">
+                        <input id="passwordConfirm" type="password" validateType="empty:密码不能为空 same:#password:两次密码不一致" placeholder="设置登录密码" class="input_text input_pass" maxlength="20">
+                    </div>
+                    <button id="findPwdS2Btn" class="btn btn_red size_full m_t_8" type="button">完成</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!--找回密码第三步-->
+<div id="findPwdStep3Div" class="login" style="display: none;">
+    <div class="section">
+        <dl class="step">
+            <dt class="dt02"></dt>
+            <dd><span>输入手机号</span><span>重置密码</span><span> &nbsp;完成</span></dd>
+        </dl>
+        <div class="complete">
+            <i class="icon_complete"></i>
+            <h5>恭喜您，登录密码重置成功</h5>
+
+            <p>请使用新密码重新登录</p>
+            <a href="/user/login.html" id="findPwdS3Btn" class="btn_white">完成</a>
+        </div>
+    </div>
+</div>
+<#include 'include/page/foot.html'/>
+
+</body>
+</html>

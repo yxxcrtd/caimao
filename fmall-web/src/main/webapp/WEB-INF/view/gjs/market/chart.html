@@ -1,0 +1,183 @@
+<!doctype html>
+<#include "gjs/config.html" />
+<#assign topMenu="market" />
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>行情-财猫贵金属（财猫网）最安全的贵金属投资理财平台</title>
+
+<#include "gjs/include/page/head.html" />
+<script src="${staticUrl}/chart/layout.js?version=${jsVersion}"></script>
+<script src="${staticUrl}/chart/chart.js?version=${jsVersion}"></script>
+<body>
+<#include "gjs/include/menu/topNav.html" />
+<#include "gjs/include/menu/menu.html" />
+
+	<div class="chartPage">
+		<div class="innerCont">
+			<div class="left">
+				<div class="leftBox">
+					<div class="clearfix head">
+						<div class="goodTitle">
+							<dl id="goodTitle">
+								<dt><a href="" class="prv btn" action="default" data="prv">&lt;</a><em id="goodTitleShow"><script type="text/x-tmpl"><%=data && data[0] && data[0].prodName%><span>[<%=data && data[0] && data[0].prodCode%>]</span></script></em><a href="" class="next btn" action="default" data="next">&gt;</a></dt>
+								<dd>
+									<div><input type="text" name="" value="" stop="1" placeholder="代码/简拼"></div>
+									<ul id="resList">
+										<script type="text/x-tmpl">
+										<li class="listHead"><span>商品</span><span>代码</span><span class="exchange">交易所</span></li>
+										<% for(var i = 0, l = Math.min(data.length,10); i < l; i++){ %>
+										<li onclick="location.href='?code=<%=data[i].prodCode%>.<%=data[i].exchange%>&tab=<%=tab%>'"><span><%=data[i].prodName%></span><span><%=data[i].prodCode%></span><span class="exchange"><%=data[i].exchange%></span></li>
+										<% } %>
+										</script>
+									</ul>
+								</dd>
+							</dl>
+							<script>
+								var fire = h.render.omnipotent(),
+									code = $_GET("code"),
+									tab = $_GET("tab") || 1;
+								h.plan("#resList",fire.key);
+								showSearch('#goodTitle',fire,code)
+							</script>
+						</div>
+						<div class="goodsCtrl" id="goodBtns">
+							<span class="btn fav"><i></i>加入自选</span>
+							<a href="market.html">返回列表</a>
+						</div>
+					</div>
+					<script>
+						var fire = h.render.omnipotent();
+						h.plan("#goodTitleShow",fire.key);
+						h.option = h.api.query_lots_goods({prodCode : code},fire);
+						h.request(h.option);
+						fireGoodBtns("#goodBtns",tab,code);
+					</script>
+					<div class="ctrl">
+						<em class="btnGroup" id="btnCroup">
+							<span class="btn" act="kt" data-val="timeshare">分时</span>
+							<span class="btn" act="changePeriod" data-val="1min">1分K线</span>
+							<span class="btn" act="changePeriod" data-val="30min">30分K线</span>
+							<span class="btn" act="changePeriod" data-val="1hour">60分K线</span>
+							<span class="btn" act="changePeriod" data-val="1day">日K线</span>
+						</em>
+						<dl style="display:none">
+							<dt>主图</dt>
+							<dd>
+								<ul>
+									<li class="on"><i></i>MA</li>
+									<li><i></i>BOLL</li>
+								</ul>
+							</dd>
+						</dl>
+						<dl style="display:none">
+							<dt>副图</dt>
+							<dd>
+								<ul>
+									<li class="on"><i></i>MACD</li>
+									<li><i></i>KDJ</li>
+									<li><i></i>RSI</li>
+									<li><i></i>WR</li>
+								</ul>
+							</dd>
+						</dl>
+					</div>
+					<div class="chart" id="chart"></div>
+				</div>
+				<script>
+					var codeArr = code.split("."),
+						today = "201511",
+						chartObj;
+                    switchbtn("#btnCroup",'span',1);
+                    CFG.user.ex = codeArr.pop();
+                    CFG.user.stockID = codeArr.join(".");
+                    CFG.user.timeShare = 1;
+                    CFG.user.timesLens = 60*(CFG.user.ex.toUpperCase() == "NJS" ? '${njsHours}' : '${sjsHours}');
+                    CFG.user.cyc = "1min";
+                    chartObj = chart('chart');
+                    singleLayout(chartObj);
+                </script>
+			</div>
+			<!-- cycle 只能为数字，并且1：1分钟K线，2：5分钟K线，3：15分钟K线，4：30分钟K线，5：60分钟K线，6：日K线，7：周K线，8：月K线，9：年K线，10：分时，11:5日分时 -->
+			<div class="right">
+				<div class="marketDepth">
+					<div class="takeAim" id="market">
+						<script type="text/x-tmpl">
+						<%
+							var bid = data.bidGrp.split("|"),
+								ask = data.offerGrp.split("|");
+						%>
+						<ul class="sel">
+							<% for(var pa,l = ask.length;l--;){
+								pa = ask[l].split(",");
+							%>
+								<li><span>卖<%=l+1%></span><span class="price"><%=cutFixed(pa[0],2)%></span><span class="amount"><%=cutFixed(pa[1])%></span></li>
+							<% } %>
+						</ul>
+						<div class="current <%if(data.pxChangeRate < 0){%>green<%}else{%>red<%}%>"><em><%=cutFixed(data.lastPx,2)%></em><i><%=cutFixed(data.pxChangeRate,2)%>%</i></div>
+						<ul class="buy">
+							<% for(var pa,i = 0, l = bid.length; i < l; i++){
+								pa = bid[i].split(",");
+							%>
+								<li><span>买<%=i+1%></span><span class="price"><%=cutFixed(pa[0],2)%></span><span class="amount"><%=cutFixed(pa[1])%></span></li>
+							<% } %>
+						</ul>
+						</script>
+					</div>
+				</div>
+				<script>
+					var fire = h.render.omnipotent();
+					h.plan("#market",fire.key);
+					h.option = h.api.query_good(code,fire);
+					h.loop(h.option,3000);
+				</script>
+				<dl class="goodsInfo" id="goodsInfo">
+					<script type="text/x-tmpl">
+					<%
+						var data = data[0] || {};
+					%>
+					<dt>
+						<em>今开：<span <%if(data.pxChangeRate < 0){%>class="green"<%}else{%>class="red"<%}%>><%=data.openPx || "/"%></span></em>
+						<em>最新：<span <%if(data.pxChangeRate < 0){%>class="green"<%}else{%>class="red"<%}%>><%=data.lastPx || "/"%></span></em>
+						<em>最高：<span <%if(data.pxChangeRate < 0){%>class="green"<%}else{%>class="red"<%}%>><%=data.highPx || "/"%></span></em>
+						<em>最低：<span <%if(data.pxChangeRate < 0){%>class="green"<%}else{%>class="red"<%}%>><%=data.lowPx || "/"%></span></em>
+					</dt>
+					<dd>
+						<em>昨收：<span><%=data.preclosePx || "/"%></span></em>
+						<em>涨跌幅：<span <%if(data.pxChangeRate < 0){%>class="green"<%}else{%>class="red"<%}%>><%=data.pxChangeRate ? cutFixed(data.pxChangeRate,2)+"%" : "/"%></span></em>
+						<em>成交量：<span><%=data.businessAmount ? shortIndex(data.businessAmount,1) : "/"%></span></em>
+						<em>成交额：<span><%=data.businessBalance ? shortIndex(data.businessBalance,1) : "/"%></span></em>
+					</dd>
+					</script>
+				</dl>
+				<script>
+					var fire = h.render.omnipotent();
+					h.plan("#goodsInfo",fire.key);
+					h.option = h.api.query_lots_goods({prodCode : code},fire);
+					h.loop(h.option,3000);
+				</script>
+				<div class="tradeHistory">
+					<div class="tableHead"><span class="time">时间</span><span class="price">价格</span><span class="amount">数量</span></div>
+					<ul class="tableBody" id="tradeHistory">
+						<script type="text/x-tmpl">
+							<%for(var i = 0, l = data.length; i < l; i++){%>
+							<li><span class="time"><%=totime(data[i].minTime,"h:i:s")%></span><span class="price"><%=cutFixed(data[i].lastPx,2)%></span><span class="amount"><%=shortIndex(data[i].lastAmount)%></span></li>
+							<%}%>
+						</script>
+					</ul>
+					<script>
+						var fire = h.render.omnipotent();
+						h.plan("#tradeHistory",fire.key);
+						h.option = h.api.query_history(code,50,fire);
+						h.loop(h.option,3000);
+					</script>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+<#include "gjs/include/page/foot.html" />
+	</body>
+</html>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="YBKActivity">
+    <resultMap id="BaseResultMap" type="com.caimao.bana.api.entity.ybk.YBKActivityEntity">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="exchange_id" property="exchangeId" jdbcType="INTEGER"/>
+        <result column="exchange_name" property="exchangeName" jdbcType="VARCHAR"/>
+        <result column="activity_name" property="activityName" jdbcType="VARCHAR"/>
+        <result column="end_datetime" property="endDatetime" jdbcType="TIMESTAMP"/>
+        <result column="ask" property="ask" jdbcType="VARCHAR"/>
+        <result column="reward" property="reward" jdbcType="VARCHAR"/>
+        <result column="reward_value" property="rewardValue" jdbcType="VARCHAR"/>
+        <result column="is_show" property="isShow" jdbcType="INTEGER"/>
+        <result column="activity_url" property="activityUrl" jdbcType="VARCHAR"/>
+        <result column="activity_banner" property="activityBanner" jdbcType="VARCHAR"/>
+        <result column="sort" property="sort" jdbcType="INTEGER"/>
+        <result column="created" property="created" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, exchange_id, exchange_name, activity_name, end_datetime, ask, reward, reward_value, is_show, activity_url, activity_banner, sort, created
+    </sql>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.caimao.bana.api.entity.ybk.YBKActivityEntity">
+        INSERT INTO ybk_activity
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="exchangeId != null">exchange_id,</if>
+            <if test="exchangeName != null">exchange_name,</if>
+            <if test="activityName != null">activity_name,</if>
+            <if test="endDatetime != null">end_datetime,</if>
+            <if test="ask != null">ask,</if>
+            <if test="reward != null">reward,</if>
+            <if test="rewardValue != null">reward_value,</if>
+            <if test="isShow != null">is_show,</if>
+            <if test="activityUrl != null">activity_url,</if>
+            <if test="activityBanner != null">activity_banner,</if>
+            <if test="sort != null">sort,</if>
+            <if test="created != null">created,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="exchangeId != null">#{exchangeId},</if>
+            <if test="exchangeName != null">#{exchangeName},</if>
+            <if test="activityName != null">#{activityName},</if>
+            <if test="endDatetime != null">#{endDatetime},</if>
+            <if test="ask != null">#{ask},</if>
+            <if test="reward != null">#{reward},</if>
+            <if test="rewardValue != null">#{rewardValue},</if>
+            <if test="isShow != null">#{isShow},</if>
+            <if test="activityUrl != null">#{activityUrl},</if>
+            <if test="activityBanner != null">#{activityBanner},</if>
+            <if test="sort != null">#{sort},</if>
+            <if test="created != null">#{created},</if>
+        </trim>
+    </insert>
+
+    <delete id="delete">
+        DELETE FROM ybk_activity
+        WHERE id = #{id}
+    </delete>
+
+    <update id="update">
+        UPDATE ybk_activity
+        <set>
+            <if test="exchangeId != null" >exchange_id = #{exchangeId},</if>
+            <if test="exchangeName != null" >exchange_name = #{exchangeName},</if>
+            <if test="activityName != null" >activity_name = #{activityName},</if>
+            <if test="endDatetime != null" >end_datetime = #{endDatetime},</if>
+            <if test="ask != null" >ask = #{ask},</if>
+            <if test="reward != null" >reward = #{reward},</if>
+            <if test="rewardValue != null" >reward_value = #{rewardValue},</if>
+            <if test="isShow != null" >is_show = #{isShow},</if>
+            <if test="activityUrl != null" >activity_url = #{activityUrl},</if>
+            <if test="activityBanner != null" >activity_banner = #{activityBanner},</if>
+            <if test="sort != null" >sort = #{sort},</if>
+            <if test="created != null" >created = #{created},</if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <select id="queryById" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM ybk_activity
+        WHERE id = #{id}
+    </select>
+
+    <select id="queryListWithPage" resultMap="BaseResultMap" parameterType="com.caimao.bana.api.entity.req.ybk.FYBKQueryActivityListReq">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM ybk_activity
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="exchangeId !=null">
+                AND exchange_id = #{exchangeId}
+            </if>
+            <if test="dateStart !=null and dateStart != ''">
+                AND created &gt;= #{dateStart}
+            </if>
+            <if test="dateEnd !=null and dateEnd != ''">
+                AND created &lt;= #{dateEnd}
+            </if>
+            <if test="isShow !=null">
+                AND is_show = #{isShow}
+            </if>
+        </trim>
+        ORDER BY sort desc,created DESC
+    </select>
+</mapper>

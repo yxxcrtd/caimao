@@ -1,0 +1,66 @@
+@charset "utf-8";
+
+@mixin tran($p:all,$t:0.5s,$f:ease){
+-webkit-transition: $p $t $f;
+   -moz-transition: $p $t $f;
+     -o-transition: $p $t $f;
+        transition: $p $t $f;
+}
+
+@mixin opacity($n:1){
+	opacity:$n;
+	filter:alpha(opacity=$n*100);
+}
+
+@mixin radius($lt,$rt:'null',$rb:'null',$lb:'null'){
+	@if($rt == 'null'){$rt : $lt}
+	@if($rb == 'null'){$rb : $lt}
+	@if($lb == 'null'){$lb : $lt}
+	-moz-border-radius:$lt $rt $rb $lb;
+	-webkit-border-radius:$lt $rt $rb $lb;
+	border-radius:$lt $rt $rb $lb;
+}
+
+
+@mixin clearFix{
+  @if ie6{
+	*zoom:1;
+  }
+  &:after{
+	content: '.';
+	clear: both;
+	display: block;
+	height: 0;
+	visibility: hidden;
+  }
+}
+
+%clearfix,.clearfix{
+  @include clearFix
+}
+
+@mixin input($brColor:#E6E6E6, $bgColor:#fff, $fColor:#5376BE){
+  @if($bgColor == ''){
+	background-color: #fff;
+  }@else if($bgColor == none){
+	background-color: transparent;
+  }@else{
+	background-color: $bgColor;
+  }
+  @if($brColor == ''){
+	border:1px solid #E6E6E6;
+  }
+  @else if ($brColor == none){
+	border:1px solid transparent;
+  }@else{
+	border:1px solid $brColor;
+  }
+  outline:0;
+  padding:0;
+  box-sizing: border-box;
+  @if($fColor != none) {
+	&:hover{
+	  border-color: darken($fColor, 6%);
+	}
+  }
+}

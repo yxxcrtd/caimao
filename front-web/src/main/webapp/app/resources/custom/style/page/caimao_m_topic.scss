@@ -1,0 +1,158 @@
+@charset "utf-8";
+/*引入reset*/
+@import "../module/reset";
+/*引入base*/
+@import "../module/base";
+/*==变量==*/
+$imgURL : '../../images/';
+
+#doc_topic{
+  background-color: #f9f0dd;
+  font-family: "FontAwesome", "Helvetica Neue", Helvetica, Microsoft Yahei, Hiragino Sans GB, WenQuanYi Micro Hei, sans-serif;
+}
+.topic_1{
+  @include img($imgURL + 'm_topic_coupon.jpg',50% 0);
+  background-size: 320px auto;
+  width: 320px;
+  margin: 0 auto;
+  .topic_coupon{
+    width: 280px;
+    height: 100px;
+    padding-top: 188px;
+    line-height: 28px;
+    text-align: center;
+    .yuan{
+      font-size:45px;
+      color:#f4c75c;
+      i{
+        font-size: 18px;
+        font-style: normal;
+      }
+    }
+    .type{
+      color:#f4c75c;
+      font-size: 20px;
+      font-weight: 700;
+    }
+    .time{
+      color: #FFF;
+      font-size: 14px;
+    }
+  }
+  .topic_form{
+    height: 190px;
+    text-align: center;
+    width: 300px;
+    margin: 0 auto;
+    dt{
+      font-size: 18px;
+      color: #FFF;
+      height: 32px;
+      line-height: 32px;
+    }
+    dd{
+      height: 48px;
+    }
+    .topic_input{
+      outline: none;
+      width: 230px;
+      background: #FFF;
+      border-radius: 5px;
+      height: 34px;
+      border: none;
+      &:focus{
+        box-shadow: inset 0 1px 1px transparent, 0 0 5px lighten(#CCC,5%);
+      }
+      text-indent: 1em;
+    }
+    .topic_btn{
+      outline: none;
+      width: 230px;
+      background: #c33434;
+      border-radius: 5px;
+      height: 34px;
+      color: #FFF;
+      border: none;
+      &:active{
+        background-color: darken(#c33434,5%);
+        box-shadow: inset 0 3px 5px  darken(#c33434,15%);
+      }
+    }
+  }
+}
+.topic_2{
+  @include img($imgURL + 'm_topic_coupon_2.jpg',50% 0);
+  background-size: 320px auto;
+  width: 320px;
+  margin: 0 auto;
+  text-align: center;
+  .topic_title{
+    color: #b92f2f;
+    font-size: 18px;
+    padding-top: 135px;
+  }
+  .topic_coupon{
+    width: 280px;
+    height: 125px;
+    padding-top: 28px;
+    line-height: 28px;
+    text-align: center;
+    .yuan{
+      font-size:45px;
+      color:#f4c75c;
+      i{
+        font-size: 18px;
+        font-style: normal;
+      }
+    }
+    .type{
+      color:#f4c75c;
+      font-size: 20px;
+      font-weight: 700;
+    }
+    .time{
+      color: #FFF;
+      font-size: 14px;
+    }
+  }
+  .topic_share{
+    min-height: 200px;
+    color: #FFF;
+    .text{
+      font-size: 13px;
+      line-height: 33px;
+      height: 33px;
+    }
+    .yuan{
+      font-size: 20px;
+      width: 300px;
+      height: 25px;
+      line-height: 25px;
+    }
+    .type{
+      font-size: 14px;
+      width: 300px;
+    }
+  }
+}
+.an_shake{
+  animation: shake .5s 0 ease both;
+  -webkit-animation: shake .5s 0 ease both;
+  -moz-animation: shake .5s 0 ease both;
+}
+
+@keyframes shake{
+  0%,100%{transform:translateX(0)}
+  20%,60%{transform:translateX(-10px)}
+  40%,80%{transform:translateX(10px)}
+}
+@-webkit-keyframes shake{
+  0%,100%{-webkit-transform:translateX(0)}
+  20%,60%{-webkit-transform:translateX(-10px)}
+  40%,80%{-webkit-transform:translateX(10px)}
+}
+@-moz-keyframes shake{
+  0%,100%{-moz-transform:translateX(0)}
+  20%,60%{-moz-transform:translateX(-10px)}
+  40%,80%{-moz-transform:translateX(10px)}
+}

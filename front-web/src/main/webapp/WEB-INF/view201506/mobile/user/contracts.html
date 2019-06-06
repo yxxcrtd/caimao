@@ -1,0 +1,48 @@
+<#assign bg="bg-gray"/>
+<#assign controller="contracts"/> 
+<#assign title="合约"/>
+<#assign header="合约"/>
+<#assign footer="3"/>
+<#include 'mobile/layout/layout.html'/>
+
+<#macro headerContent>
+<!--tab-->
+<div class="navi-container bg-gray">
+	<ul class="listTab listTab-3 listLateral" id="tabList">
+			<li class="listTab-item active"><a>操盘中</a></li>
+			<li class="listTab-item"><a>已结束</a></li>
+			<li class="listTab-item"><a>审核中</a></li>
+	</ul>
+</div>
+<!--tab-->
+</#macro>
+
+<#macro content>
+
+<!--下部-->
+<article class="content" style="padding-top:99px;" id="content">
+<div class="con-spacing15 con-prompt" style="display: none;" id="noPzPanel">
+<!--提示-->
+<p><span>您暂时还没有任何融资</span></p>
+        
+
+<!--提示-->
+
+
+<!--按钮-->
+<div class="btn-page btn-page-center con-spacing15">
+        <a href="${basePath}/mobile/indexPz.htm" class="am-button am-button-red">
+        <span class="am-ft-white">去融资</span>
+        </a>
+        
+</div>
+<!--按钮-->
+
+</div>
+
+
+<div style="text-align: center;display: none" id="loading"><img src='${basePath}/mobile/images/indicator.gif' /></div>
+
+</article>
+</#macro>
+

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="OptionalStock">
+    <insert id="insertStock" parameterType="hashmap" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO optional_stock (user_id, stock_code, stock_name, market_type, created)
+        VALUES (#{userId}, #{stockCode}, #{stockName}, #{marketType}, #{created})
+    </insert>
+
+    <delete id="deleteStock" parameterType="map">
+        DELETE FROM optional_stock
+        WHERE user_id = #{userId} AND id = #{id}
+    </delete>
+
+    <delete id="deleteStockByCode" parameterType="map">
+        DELETE FROM optional_stock
+        WHERE user_id = #{userId} AND stock_code = #{stockCode}
+    </delete>
+
+    <select id="queryStockByUserId" resultType="com.caimao.bana.api.entity.OptionalStockEntity" parameterType="map">
+        SELECT
+        id,
+        user_id AS userId,
+        stock_code AS stockCode,
+        stock_name AS stockName,
+        market_type AS marketType,
+        sort,
+        created
+        FROM optional_stock
+        WHERE user_id = #{userId}
+        ORDER BY sort DESC, id DESC
+    </select>
+
+    <update id="sortStock" parameterType="map">
+        UPDATE optional_stock
+        SET sort = #{sort}
+        <where>
+            user_id = #{userId} AND id = #{id}
+        </where>
+    </update>
+
+    <select id="queryUserStockNum" resultType="int" parameterType="map">
+        SELECT COUNT(*)
+        FROM optional_stock
+        WHERE user_id = #{userId}
+    </select>
+</mapper>

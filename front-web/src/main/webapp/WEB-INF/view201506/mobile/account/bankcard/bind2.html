@@ -1,0 +1,30 @@
+<#assign bg="bg-gray"/> 
+<#assign controller="bind2"/> 
+<#assign title="银行卡信息"/>
+<#assign header="银行卡信息"/>
+<#assign footer="3"/>
+<#include 'mobile/layout/layout.html'/>
+<#macro content>
+<article class="content" style="padding-bottom:59px;">
+
+<!--框架，已绑定银行卡时-->
+<aside class="con-frame con-frame-notop con-spacing10" id="cardInfo">
+
+</aside>
+<!--框架-->
+</article>
+
+</#macro>
+
+<#macro footerContent>
+
+
+<!--按钮-->
+	<div class="btn-page btn-page-center bg-white con-spacing15" id="btnPage">
+        <a href="${basePath}/mobile/account/bankcard/bind.htm" class="am-button am-button-red">
+        <span class="am-ft-white" >换卡</span>
+        </a>
+
+	</div>
+	<!--按钮-->
+</#macro>

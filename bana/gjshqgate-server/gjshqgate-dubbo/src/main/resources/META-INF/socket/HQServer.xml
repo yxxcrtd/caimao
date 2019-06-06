@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<servers>
+	<!--idle 表示最大闲，需要发心跳的间隔  valid 是false表示不生效 class 表示插件的实现类   port 端口     ip 服务器地址      thread 处理线程数   user 登录账户   pwd 登录密码-->
+   <server class="com.caimao.jserver.hq.njs.NJSHQPlugin" port="13132"
+             ip="183.62.138.189 " thread="1" user="HUOBI" pwd="huobi" valid="true" idle="60">
+   </server>
+     <server class="com.caimao.jserver.hq.sjs.SJSHQPlugin" port="48002" ip="112.95.144.26" thread="1" user="1080012271" pwd="97641239412631" valid="true" idle="60">
+     </server>
+         <!--
+         <server class="com.caimao.jserver.hq.sjs.SJSHQPlugin" port="17000"
+             ip="210.21.197.124" thread="1" user="1080017715" pwd="888888" idle="20"></server>
+         !-->
+</servers>

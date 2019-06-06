@@ -1,0 +1,33 @@
+<!doctype html>
+<#include "gjs/config.html" />
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>帮助</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<link rel="stylesheet" href="${staticUrl}/style/m_help.css" />
+		<script src="${staticUrl}/js/metal.js?version=${jsVersion}"></script>
+<script>
+	var IMGURL = "${imgUrl}";
+</script>
+	</head>
+	<body>
+		<div class="helpCont" id="list">
+			<script type="text/x-tmpl">
+					<% for(var j = 1,l2 = data.length; j < l2; j++){%>
+					<dl>
+						<dt><%=data[j][0]%></dt>
+						<dd>
+							<% for(var k = 1,l3 = data[j].length; k < l3; k++){%>
+							<p><%=data[j][k]%></p>
+							<%}%>
+						</dd>
+					</dl>
+					<%}%>
+			</script>
+		</div>
+		<script>
+			mHelpLayout();
+		</script>
+	</body>
+</html>

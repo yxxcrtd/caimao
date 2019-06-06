@@ -1,0 +1,64 @@
+<#include "home/config.html"/>
+<#include "home/include/head.html"/>
+    <title>财猫账户</title>
+</head>
+
+<body>
+<!--头部-->
+<div class="header">
+<#include "home/include/topRich.html" />
+<#include "home/include/menuLine.html" />
+</div>
+<!--内容区-->
+<div class="main">
+   <div class="docMain w">
+       <div class="docMainLeft">
+<#include "home/include/accountLeft.html" />
+       </div>
+       <div class="docMainIn" id="exList">
+           <div class="ybkMainIn">
+               <div class="informationTit"><span class="f_l">海西交易所</span> <a class="f_r" href="" isopen="1" action="showHide">收起</a></div>
+               <div class="accountIn">
+                   <table class="cur">
+                       <thead>
+                       <tr>
+                           <td><div class="col_1"><img src="${imgUrl}/account/hxjys_logo.png" width="38" height="38" alt=""/><span>海西交易所</span><a href="">[详情]</a></div></td>
+                           <td><div class="col_2">
+                               <p>农业银行 : <b>6228****6073</b>   <b>*畅</b> </p>
+                               <p>交易账号：<b>60089001212</b></p>
+                           </div></td>
+                           <td><div class="col_3">
+                               <!-- <a class="btn" href="">去交易</a> -->
+                           </div></td>
+                       </tr>
+                       </thead>
+                   </table>
+               </div>
+           </div>
+           <div class="ybkMainIn">
+               <div class="informationTit grayTit"><span class="f_l">中南文交所</span> <a class="f_r" href="" action="showHide">展开</a></div>
+               <div class="accountIn">
+                   <table>
+                       <thead>
+                       <tr>
+                           <td><div class="col_1"><img src="${imgUrl}/account/znjys_logo.png" width="38" height="38" alt=""/><span>中南文交所</span><a href="">[详情]</a></div></td>
+                           <td><div class="col_2">
+                               <p>上金所是经国务院批准，由中国人民银行组建，<br>
+                                   上海黄金交易所于2002年正式运行。</p>
+                           </div></td>
+                           <td><div class="col_3">
+                               <a class="btn" href="">去开户</a>
+                           </div></td>
+                       </tr>
+                       </thead>
+                   </table>
+               </div>
+           </div>
+
+       </div>
+   </div>
+</div>
+<script>
+  accountList("exList")
+</script>
+<#include "home/include/footRich.html" />

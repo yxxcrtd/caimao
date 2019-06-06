@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+    <!-- 提供方应用信息，用于计算依赖关系 -->
+    <dubbo:application name="gjshq_provider"/>
+    <!-- 使用zookeeper注册中心暴露服务地址 -->
+    <dubbo:registry id="gjshq_dubbo_server" protocol="zookeeper" address="${zk.address}"/>
+    <!-- 用dubbo协议在20880端口暴露服务 -->
+    <dubbo:protocol name="dubbo" host="${dubbo.server.host}" port="${dubbo.server.port}"/>
+    <!-- 声明需要暴露的服务接口 -->
+
+    <!--贵金属行情job-->
+    <dubbo:service interface="com.caimao.hq.api.service.IGJSHqJobService"
+                   ref="gjsHqJobService"
+                   group="${dubbo.group}" version="${dubbo.version}" timeout="${dubbo.timeout}"
+                   executes="${dubbo.executes}" retries="0"/>
+
+    <!-- 节假日设置的接口服务 -->
+    <dubbo:reference id="gjsHolidayService"
+                     interface="com.caimao.gjs.api.service.IGjsHolidayService"
+                     group="${group}" version="${version}" timeout="${timeout}" check="false" cluster="failsafe"/>
+
+
+
+
+
+</beans>

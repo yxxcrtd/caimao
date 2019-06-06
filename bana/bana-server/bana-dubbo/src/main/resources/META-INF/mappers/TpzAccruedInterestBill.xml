@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="TpzAccruedInterestBill">
+
+    <resultMap id="BaseResultMap" type="com.caimao.bana.api.entity.TpzAccruedInterestBillEntity">
+        <id column="order_no" property="orderNo" jdbcType="BIGINT"/>
+        <result column="user_id" property="userId" jdbcType="BIGINT"/>
+        <result column="contract_no" property="contractNo" jdbcType="BIGINT"/>
+        <result column="order_amount" property="orderAmount" jdbcType="BIGINT"/>
+        <result column="settle_interest_begin_date" property="settleInterestBeginDate" jdbcType="VARCHAR"/>
+        <result column="settle_interest_end_date" property="settleInterestEndDate" jdbcType="VARCHAR"/>
+        <result column="bill_abstract" property="billAbstract" jdbcType="VARCHAR"/>
+        <result column="work_date" property="workDate" jdbcType="VARCHAR"/>
+        <result column="create_datetime" property="createDatetime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        order_no, user_id, contract_no, order_amount, settle_interest_begin_date, settle_interest_end_date,
+        bill_abstract, work_date, create_datetime
+    </sql>
+
+    <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from tpz_accrued_interest_bill
+        where order_no = #{orderNo,jdbcType=BIGINT}
+    </select>
+
+    <select id="queryAccruedInterestBillListByWorkDate" resultMap="BaseResultMap" parameterType="java.lang.String">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM tpz_accrued_interest_bill
+        WHERE work_date = #{workDate,jdbcType=VARCHAR}
+        <!--AND NOT EXISTS(SELECT order_no FROM invite_return_history WHERE-->
+        <!--invite_return_history.order_no = tpz_accrued_interest_bill.order_no)-->
+    </select>
+
+    <delete id="deleteById" parameterType="java.lang.Long">
+        DELETE FROM tpz_accrued_interest_bill
+        WHERE order_no = #{orderNo,jdbcType=BIGINT}
+    </delete>
+
+    <insert id="save" parameterType="com.caimao.bana.api.entity.TpzAccruedInterestBillEntity">
+        insert into tpz_accrued_interest_bill
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="orderNo != 0">
+                order_no,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="contractNo != null">
+                contract_no,
+            </if>
+            <if test="orderAmount != null">
+                order_amount,
+            </if>
+            <if test="settleInterestBeginDate != null">
+                settle_interest_begin_date,
+            </if>
+            <if test="settleInterestEndDate != null">
+                settle_interest_end_date,
+            </if>
+            <if test="billAbstract != null">
+                bill_abstract,
+            </if>
+            <if test="workDate != null">
+                work_date,
+            </if>
+            <if test="createDatetime != null">
+                create_datetime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="orderNo != 0">
+                #{orderNo,jdbcType=BIGINT},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="contractNo != null">
+                #{contractNo,jdbcType=BIGINT},
+            </if>
+            <if test="orderAmount != null">
+                #{orderAmount,jdbcType=BIGINT},
+            </if>
+            <if test="settleInterestBeginDate != null">
+                #{settleInterestBeginDate,jdbcType=VARCHAR},
+            </if>
+            <if test="settleInterestEndDate != null">
+                #{settleInterestEndDate,jdbcType=VARCHAR},
+            </if>
+            <if test="billAbstract != null">
+                #{billAbstract,jdbcType=VARCHAR},
+            </if>
+            <if test="workDate != null">
+                #{workDate,jdbcType=VARCHAR},
+            </if>
+            <if test="createDatetime != null">
+                #{createDatetime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="update" parameterType="com.caimao.bana.api.entity.TpzAccruedInterestBillEntity">
+        update tpz_accrued_interest_bill
+        <set>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="contractNo != null">
+                contract_no = #{contractNo,jdbcType=BIGINT},
+            </if>
+            <if test="orderAmount != null">
+                order_amount = #{orderAmount,jdbcType=BIGINT},
+            </if>
+            <if test="settleInterestBeginDate != null">
+                settle_interest_begin_date = #{settleInterestBeginDate,jdbcType=VARCHAR},
+            </if>
+            <if test="settleInterestEndDate != null">
+                settle_interest_end_date = #{settleInterestEndDate,jdbcType=VARCHAR},
+            </if>
+            <if test="billAbstract != null">
+                bill_abstract = #{billAbstract,jdbcType=VARCHAR},
+            </if>
+            <if test="workDate != null">
+                work_date = #{workDate,jdbcType=VARCHAR},
+            </if>
+            <if test="createDatetime != null">
+                create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where order_no = #{orderNo,jdbcType=BIGINT}
+    </update>
+
+    <select id="getByDate" resultType="java.lang.Integer" parameterType="java.util.HashMap">
+        SELECT count(1)
+        FROM tpz_accrued_interest_bill
+        WHERE work_date = #{date} AND contract_no = #{contractNo}
+    </select>
+
+    <select id="queryByDate" resultMap="BaseResultMap" parameterType="java.lang.String">
+        SELECT
+            u.ref_user_id user_id,
+            b.order_amount
+        FROM
+            tpz_accrued_interest_bill b, tpz_user u
+        WHERE b.user_id = u.user_id AND u.ref_user_id != 0
+              AND b.work_date = #{value}
+    </select>
+
+    <select id="queryBillReceivedCnt" resultType="java.lang.Integer">
+        SELECT count(1)
+        FROM tpz_accrued_interest_bill
+        WHERE contract_no = #{contractNo}
+    </select>
+
+    <select id="queryBillAmountByContractNo" resultType="java.lang.Integer">
+        SELECT SUM(order_amount)
+        FROM tpz_accrued_interest_bill
+        WHERE contract_no = #{contractNo}
+    </select>
+</mapper>

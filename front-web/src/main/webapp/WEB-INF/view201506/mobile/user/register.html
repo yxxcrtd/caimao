@@ -1,0 +1,77 @@
+<#assign title="注册"/>
+<#assign header="注册"/>
+<#assign bg="bg-white"/>
+<#assign controller="register"/>
+<#include 'mobile/layout/layout.html'/>
+
+<#macro content>
+<div id="register_p1">
+<article class="content">
+
+
+<!--登录-->
+<aside class="con-spacing25">
+<ul class="am-listLogin am-listReg">
+<li class="am-listLogin-item">
+<div class="am-flexbox">
+<div class="am-flexbox-item icon-item">
+<i class="type-icon user-ico"></i></div>
+<div class="am-flexbox-item"><span class="ui-form-field am-left-15"><input id="login_name" type="text" autocomplete="off" class="text_input" maxlength="18" defaultvalue="输入手机号码" value="" placeholder="输入用户名">
+</span></div>
+<div class="am-flexbox-item ft-item"><i class="type-icon">
+</i></div>
+</div>
+<p class="prompt"><span class="am-ft-sm">您常用的手机号码</span></p>
+</li>
+
+<li class="am-listLogin-item">
+<div class="am-flexbox">
+<div class="am-flexbox-item icon-item"><i class="type-icon password-ico"></i></div>
+<div class="am-flexbox-item"><span class="ui-form-field am-left-15"><input id="login_pwd" type="password" class="text_input" maxlength="18" defaultvalue="输入密码" value="" placeholder="输入密码">
+</span></div>
+<div class="am-flexbox-item ft-item"><span class="level"></span></div><!--level-strong为强, level-in为中, level-weak为弱-->
+</div>
+<p class="prompt"><span class="am-ft-sm">6~16位字符，至少包含数字、字母、符号</span></p>
+</li>
+
+<li class="am-listLogin-item">
+<div class="am-flexbox">
+<div class="am-flexbox-item icon-item"><i class="type-icon password-ico"></i></div>
+<div class="am-flexbox-item"><span class="ui-form-field am-left-15"><input id="login_pwd2" type="password" class="text_input" maxlength="18" defaultvalue="确认密码" value="" placeholder="确认密码">
+</span></div>
+<div class="am-flexbox-item ft-item"><i class="type-icon">
+</i></div>
+</div>
+<p class="prompt"><span class="am-ft-sm"></span></p>
+</li>
+</ul>
+    
+    
+<div class=" am-pt-10 am-left-15">
+<span class="ui-input-checkbox" id="login_agree_checkbox"><input id="login_agree" style="display:none" type="checkbox"></span>
+<span class="am-ft-sm am-left-5 am-ft-tabText">我已阅读并同意<a href="${basePath}/mobile/agreement-4.htm">《${default_title}用户服务协议》</a></span>
+</div>
+
+<!--按钮-->
+<div class="btn-page btn-page-center" style="margin-top:30px;">
+        <a id="regist" class="am-button am-button-red btn-disabled">
+        <span>立即注册</span>
+        </a>
+        
+</div>
+<!--按钮-->
+</aside>
+<!--登录-->
+
+
+
+
+
+</article>
+</div>
+<div id="register_p2" style="display: none;">
+	<#include 'mobile/component/verification.html'/>
+</div>
+
+</#macro>
+

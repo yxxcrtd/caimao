@@ -1,0 +1,127 @@
+<!doctype html>
+<html>
+<#include "config.html"/>
+<#assign curTopMenu="account"/>
+<#assign curLeftMenu="withdraw"/>
+<head>
+    <meta charset="utf-8">
+    <title>银行卡管理-财猫网</title>
+    <meta name="keywords" content="融资，股票融资，投资融资，理财融资，融资平台，融资炒股，融资网，融资公司" />
+	<meta name="description" content="财猫网由金融服务、风险管理及互联网运营等业界一流的专业人士组成的超百人全职运营团队。提供股票融资服务，致力于为公众提供一个国际化、高收益、安全、专业的互联网资产交易平台"/>
+    <!--基本布局样式-->
+	<link rel="stylesheet" type="text/css" href="${dojoUrl}/style/page/page.css?v=${jsVersion}" />
+	<link rel="stylesheet" type="text/css" href="${dojoUrl}/style/page/recharge.css?v=${jsVersion}" />
+    <script type="text/javascript" src="${dojoUrl}/js/bankCard.js?v=${jsVersion}"></script>
+</head>
+<body>
+<#if userEntity.idcard??>
+	<#assign idcard = userEntity.idcard?substring(0,3)+'**** ****'+userEntity.idcard?substring(14, 18) />
+<#else/>
+	<#assign idcard = "" />
+</#if>
+
+
+<#include 'include/page/head.html'/>
+<!--内容区-->
+<div id="main">
+    <div class="w sec_main">
+        <#include 'include/menu/account_left.html'/>
+        <div class="right_bar">
+			<div class="tabNav">
+				<ul>
+					<li><a href="${basePath}/account/withdraw.htm">我要提现</a> </li>
+					<li><a class="on" href="${basePath}/account/bankcard.htm">银行卡管理</a> </li>
+					<li><a href="${basePath}/account/hiswithdraw.htm">提现记录</a> </li>
+				</ul>
+			</div>
+			<#if card?? >
+				<div class="cardShow transferBox">
+					<dl>
+						<dt>
+							<!--<i class="bankIcon icbc"></i>-->
+							<span>${card.bankName}</span>
+							<a href="javascript:void(0);" id="hua">换卡</a>
+							<em>${card.bankCardName}</em>
+							<strong>${card.bankCardNo}</strong>
+						</dt>
+						<dd>${card.province}${card.city}${card.openBank}</dd>
+					</dl>
+				</div>
+			<#else>
+				<div class="bindCard bankcard counter" id="noBankCard">
+					<p class="title">您暂未绑定任何银行卡，快去绑定吧！</p>
+					<p class="notice">提现前必须完成绑卡操作，否则将无法正常提现</p>
+					<a href="javascript:void(0);" id="jsAddCard">添加银行卡</a>
+				</div>
+			</#if>
+			<div class="changeCard transferBox" id="changeBankCard" style="display: none;">
+				<p><span></span>更换银行卡</p>
+				<dl class="clear_fix formgroup cardListBox">
+					<dt>选择银行卡</dt>
+					<dd class="inputBox">
+						<ul id="bankSelectBox">
+							<li data-no="001" class="on"><img src="${imgUrl}/001.jpg"><i></i></li>
+							<li data-no="002"><img src="${imgUrl}/002.jpg"><i></i></li>
+							<li data-no="003"><img src="${imgUrl}/003.jpg"><i></i></li>
+							<li data-no="004"><img src="${imgUrl}/004.jpg"><i></i></li>
+							<li data-no="005"><img src="${imgUrl}/005.jpg"><i></i></li>
+							<li data-no="006"><img src="${imgUrl}/006.jpg"><i></i></li>
+							<li data-no="007"><img src="${imgUrl}/007.jpg"><i></i></li>
+							<li data-no="008"><img src="${imgUrl}/008.jpg"><i></i></li>
+							<li data-no="009"><img src="${imgUrl}/009.jpg"><i></i></li>
+							<li data-no="010"><img src="${imgUrl}/010.jpg"><i></i></li>
+							<li data-no="011"><img src="${imgUrl}/011.jpg"><i></i></li>
+							<li data-no="012"><img src="${imgUrl}/012.jpg"><i></i></li>
+							<li data-no="013"><img src="${imgUrl}/013.jpg"><i></i></li>
+							<li data-no="014"><img src="${imgUrl}/014.jpg"><i></i></li>
+						</ul>
+					</dd>
+				</dl>
+				<dl class="clear_fix formgroup">
+					<dt>真实姓名</dt>
+					<dd class="inputBox"><input type="text" autocomplete="off" disabled="disabled" class="textInput" value="${userEntity.userRealName}" maxlength="10"/></dd>
+				</dl>
+				<dl class="clear_fix formgroup">
+					<dt>身份证号</dt>
+					<dd class="inputBox"><input type="text" autocomplete="off" disabled="disabled" class="textInput" value="${idcard}" maxlength="18"/></dd>
+				</dl>
+				<dl class="clear_fix formgroup">
+					<dt>银行卡号</dt>
+					<dd class="inputBox"><input type="text" autocomplete="off" class="textInput" placeholder="请输入银行卡号" id="bankCard" maxlength="50"/></dd>
+				</dl>
+				<dl class="clear_fix formgroup">
+					<dt>确认卡号</dt>
+					<dd class="inputBox"><input type="text" autocomplete="off" class="textInput" placeholder="请输入确认银行卡号" id="bankCardConfirm" maxlength="50"/></dd>
+				</dl>
+				<dl class="clear_fix formgroup">
+					<dt>开户支行</dt>
+					<dd class="inputBox">
+						<select id="province">
+							<option value="110000,北京">北京</option>
+						</select>
+						<select id="city">
+							<option value="110000,北京">北京</option>
+						</select>
+						<input type="text" autocomplete="off" class="textInput" placeholder="支行地址" id="bankReg"/><p>例如：xx省xx市xxx支行 或xxx分理处，如果您不清楚的话，可以致电银行客服咨询</p></dd>
+				</dl>
+				<dl class="clear_fix formgroup">
+					<dt></dt>
+					<#if userEntity.idcard??>
+						<dd class="inputBox">
+							<a href="javascript:void(0);" class="btn" id="jsBtnSub">完成</a>
+							<!--<a href="javascript:void(0);" class="btn graybtn" id="jsBtnSubReturn">取消</a>-->
+						</dd>
+					<#else/>
+						<dd class="inputBox">
+							<span style="color: red;">请先完成<a href="/account/safe.htm">实名认证</a></span>
+						</dd>
+					</#if>
+
+				</dl>
+			</div>
+        </div>
+    </div>
+</div>
+<#include 'include/page/foot.html'/>
+</body>
+</html>

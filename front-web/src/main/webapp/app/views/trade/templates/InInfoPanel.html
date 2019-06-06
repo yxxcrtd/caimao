@@ -1,0 +1,32 @@
+<div class="money-transfer-wrapper">
+    <div class="money-transfer-inner">
+        <table class="money-transfer-step1">
+            <tbody><tr>
+                <th><em>选择操作员编号：</em></th>
+                <td>
+                    <div data-dojo-attach-point="tradeFldNode"></div>
+                </td>
+            </tr>
+            <tr> 
+                <th><em>可用余额：</em></th>
+                <td>
+                    <em class="mt-num-xxl am-ft-orange" style="color:#ff0000;" data-dojo-attach-point="enableAmountNode"></em>元
+                    <a class="am-left-15 blue" href="${baseUrl}/account/recharge.htm">充值</a>
+                </td>
+            </tr>
+            <tr>
+                <th><em>转入金额：</em></th>
+                <td>
+                    <div data-dojo-attach-point="amountNode"></div><em class="am-left-5">元</em>
+                </td>
+            </tr>
+            <tr>
+                <th></th>
+                <td>
+                    <div data-dojo-attach-point="nextBtnNode"></div>
+                </td>
+            </tr>
+            </tbody></table>
+
+    </div>
+</div>

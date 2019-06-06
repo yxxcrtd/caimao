@@ -1,0 +1,250 @@
+<#assign title="买入"/>
+<#assign header="买入"/>
+<#assign footer="0"/>
+<#assign bg="bg-gray"/>
+<#assign controller="buy"/>
+<#include 'mobile/layout/layout.html'/>
+
+
+<#macro headerContent>
+<!--tab-->
+	<#assign tabItem="1"/>
+	<#include 'mobile/component/tradeHeader.html'/>
+<!--tab-->
+
+</#macro>
+
+<#macro content>
+<article class="content" style="padding-top:99px; padding-bottom:56px;" id="panel1">
+<!--提醒设置-->
+<!-- <p class="bg-grayDeep">
+<span class="am-ft-sm">您的账户余额少于100元，无法交易请</span><a href="../recharge/pay-1.html" class="am-left-5">立即充值</a>
+</p> -->
+<!--提醒设置-->
+
+
+<!--上部strat-->
+<aside class="trading-tside bg-white con-spacing15">
+
+<!--第一start-->
+<div class="cm-clear clearfix">
+<!--左边-->
+<div class="cm-left tradingIndex-lside lineRight-gray">
+<p class="am-ft-center"></p>
+<p class="am-ft-center"><b class="am-ft-xxxl" id="newPrice"></b></p>
+<div class="am-flexbox">
+<div class="am-flexbox-item am-ft-left"><span class="am-ft-sm" id="chargeRate"></span></div>
+<div class="am-flexbox-item am-ft-right"><span class="am-ft-sm" id="chargeValue"></span></div>
+
+</div>
+</div>
+
+<!--右边-->
+<div class="tradingIndex-rside horizontal-wrapper" style="left: 0; width: auto;"  id="scrollTable">
+<div style="width:1000px">
+<div class="am-grid am-float am-pb-5" >
+<div class="am-grid-item am-grid-item-20"><span class="am-ft-sm">买一</span></div>
+<div class="am-grid-item am-grid-item-40"><span class="am-ft-sm" id="buyPrice1"></span></div>
+<div class="am-grid-item am-grid-item-40"><span class="am-ft-sm" id="buyCount1"></span></div>
+</div>
+
+<div class="am-grid am-float am-pb-5" >
+<div class="am-grid-item am-grid-item-20"><span class="am-ft-sm">买二</span></div>
+<div class="am-grid-item am-grid-item-40"><span class="am-ft-sm" id="buyPrice2"></span></div>
+<div class="am-grid-item am-grid-item-40"><span class="am-ft-sm" id="buyCount2"></span></div>
+</div>
+
+<div class="am-grid am-float am-pb-5" >
+<div class="am-grid-item am-grid-item-20"><span class="am-ft-sm">买三</span></div>
+<div class="am-grid-item am-grid-item-40"><span class="am-ft-sm" id="buyPrice3"></span></div>
+<div class="am-grid-item am-grid-item-40"><span class="am-ft-sm" id="buyCount3"></span></div>
+</div>
+
+<div class="am-grid am-float am-pb-5" >
+<div class="am-grid-item am-grid-item-20"><span class="am-ft-sm">买四</span></div>
+<div class="am-grid-item am-grid-item-40"><span class="am-ft-sm" id="buyPrice4"></span></div>
+<div class="am-grid-item am-grid-item-40"><span class="am-ft-sm" id="buyCount4"></span></div>
+</div>
+
+<div class="am-grid am-float am-pb-5" >
+<div class="am-grid-item am-grid-item-20"><span class="am-ft-sm">买五</span></div>
+<div class="am-grid-item am-grid-item-40"><span class="am-ft-sm" id="buyPrice5"></span></div>
+<div class="am-grid-item am-grid-item-40"><span class="am-ft-sm" id="buyCount5"></span></div>
+</div>
+
+<div class="am-grid am-float am-pb-5" >
+<div class="am-grid-item am-grid-item-20"><span class="am-ft-sm">涨停</span></div>
+<div class="am-grid-item am-grid-item-40"><span class="am-ft-sm" id="upPrice"></span></div>
+</div>
+
+<div style="clear:both"></div>
+
+<div class="am-grid am-float am-pt-5" >
+<div class="am-grid-item am-grid-item-20"><span class="am-ft-sm">卖一</span></div>
+<div class="am-grid-item am-grid-item-40"><span class="am-ft-sm" id="sellPrice1"></span></div>
+<div class="am-grid-item am-grid-item-40"><span class="am-ft-sm" id="sellCount1"></span></div>
+</div>
+
+<div class="am-grid am-float am-pt-5" >
+<div class="am-grid-item am-grid-item-20"><span class="am-ft-sm">卖二</span></div>
+<div class="am-grid-item am-grid-item-40"><span class="am-ft-sm" id="sellPrice2"></span></div>
+<div class="am-grid-item am-grid-item-40"><span class="am-ft-sm" id="sellCount2"></span></div>
+</div>
+<div class="am-grid am-float am-pt-5" >
+<div class="am-grid-item am-grid-item-20"><span class="am-ft-sm">卖三</span></div>
+<div class="am-grid-item am-grid-item-40"><span class="am-ft-sm" id="sellPrice3"></span></div>
+<div class="am-grid-item am-grid-item-40"><span class="am-ft-sm" id="sellCount3"></span></div>
+</div>
+<div class="am-grid am-float am-pt-5" >
+<div class="am-grid-item am-grid-item-20"><span class="am-ft-sm">卖四</span></div>
+<div class="am-grid-item am-grid-item-40"><span class="am-ft-sm" id="sellPrice4"></span></div>
+<div class="am-grid-item am-grid-item-40"><span class="am-ft-sm" id="sellCount4"></span></div>
+</div>
+<div class="am-grid am-float am-pt-5" >
+<div class="am-grid-item am-grid-item-20"><span class="am-ft-sm">卖五</span></div>
+<div class="am-grid-item am-grid-item-40"><span class="am-ft-sm" id="sellPrice5"></span></div>
+<div class="am-grid-item am-grid-item-40"><span class="am-ft-sm" id="sellCount5"></span></div>
+</div>
+
+<div class="am-grid am-float am-pb-5" >
+<div class="am-grid-item am-grid-item-20"><span class="am-ft-sm">跌停</span></div>
+<div class="am-grid-item am-grid-item-40"><span class="am-ft-sm" id="downPrice"></span></div>
+</div>
+
+
+</div>
+
+<!--右边的三角形，如滑动时不出现-->
+<span class="arrow-horizontal" id="arrowShape"></span>
+</div>
+
+</div>
+<!--第一end-->
+
+
+</aside>
+<!--上部end-->
+
+
+<div class="con-spacing15 ">
+<aside class="am-mt-20">        
+<h4 class="am-ft-md">交易子账号</h4>
+<div class="am-flexbox am-mt-10 select-container">
+<span  class="select-choice"><select class="am-ft-md am-left-15" style="display: none;" id="choseHoms"></select><i class="type-ico am-icon-arrow-bottom"></i></span>
+
+</div>
+</aside>
+</div>
+
+
+<!--表单-->
+<aside class="con-frame">
+<ul class="">
+<li class="datalist-item datalist-select-item clearfix">
+<div class="am-grid datalist-line">
+        <div class="am-grid-item am-grid-item-40 am-ft-left">
+        <span class="ui-form-field">
+<input id="stockCode" type="text" autocomplete="off" class="text_input" maxlength="18" defaultvalue="输入证券代码" value="" placeholder="输入证券代码">
+</span>
+</div>
+<div class="am-grid-item am-grid-item-60 am-ft-right am-right-15" id="showCodeDiv">
+<span class="am-right-5" ></span><b></b>
+</div>
+<!--浮出部分-->
+<div class="list-codeSug" id="codeList" style="display:none;max-height:144px;overflow-y: scroll;">
+
+</div>
+<!--浮出部分-->
+</div>
+</li>
+<!-- <li class="datalist-item clearfix">
+<a  class="am-grid datalist-line">
+        <div class="am-grid-item am-grid-item-25  am-ft-left">
+        <h4 class="am-ft-md cm-left am-ft-tabText">交易子账号</h4>
+        </div> 
+        <div class="am-grid-item am-grid-item-75 am-ft-right am-right-15" id="choseHoms">
+        <span class="am-ft-md am-ft-main am-right-10"></span>
+        <span class="type-ico am-icon-arrow-right"></span>
+        </div>
+</a>
+</li> -->
+<li class="datalist-item clearfix">
+<div class="am-grid datalist-line">
+        <div class="am-grid-item am-grid-item-25  am-ft-left">
+        <h4 class="am-ft-md cm-left am-ft-tabText">可用余额</h4>
+        </div>
+        <div class="am-grid-item am-grid-item-75 am-ft-right am-right-15">
+       <big class="am-ft-bignNum am-right-5 am-ft-orange" id="available"></big>元
+</div>
+</div>
+</li>
+
+</ul>
+</aside>
+<!--表单-->
+
+
+
+
+
+<!--价格-->
+<div class="bg-white con-detailRemind trading-tside con-spacing15 am-mt-15">
+<h4 class="am-ft-md">委托价格</h4>
+<div class="am-flexbox am-flexbox-remind am-pt-15" id="pricePanel" >
+<div class="am-flexbox-item" style="max-width:43px;"><a  class="tagsinput tagsinput-minus tagsinput-minusMoney"><span>—</span></a></div>
+<div class="am-flexbox-item"><span class="ui-form-field"><input name="" id="priceSpinner" class="form-input am-ft-center money" defaultvalue="" value="" placeholder="">
+</span></div>
+<div class="am-flexbox-item" style="max-width:43px;"><a class="tagsinput tagsinput-add tagsinput-addMoney"><span>+</span></a></div>
+
+</div>
+</div>
+<!--价格-->
+
+<!--价格-->
+<div class="bg-white con-detailRemind trading-tside con-spacing15 am-mt-15">
+<div class="clearfix">
+<h4 class="cm-left am-ft-md">委托数量</h4>
+<p class="cm-right"><span class="am-ft-tabText am-right-5">可买数量</span><b class="am-ft-orange" id="cBuyNumber">0</b></p>
+</div>
+<div class="am-flexbox am-flexbox-remind am-pt-15" id="numberPanel">
+<div class="am-flexbox-item" style="max-width:43px;"><a class="tagsinput tagsinput-minus tagsinput-minusNumber"><span>—</span></a></div>
+<div class="am-flexbox-item"><span class="ui-form-field"><input style="ime-mode:Disabled" onkeyup="this.value=this.value.replace(/\D/g,'')"  onafterpaste="this.value=this.value.replace(/\D/g,'')" id="buyNumber" type="text" autocomplete="off" class="form-input am-ft-center" defaultvalue="" value="" placeholder="">
+</span></div>
+<div class="am-flexbox-item" style="max-width:43px;"><a class="tagsinput tagsinput-add tagsinput-addNumber"><span>+</span></a></div>
+</div>
+</div>
+<!--价格-->
+
+<aside class="con-frame">
+<ul class="datalist">
+<li class="datalist-item clearfix">
+<div class="am-grid datalist-line">
+        <div class="am-grid-item am-grid-item-25  am-ft-right">
+        <h4 class="am-ft-md cm-left">安全密码</h4>
+        </div>
+        <div class="am-grid-item am-grid-item-75 am-ft-right am-right-15">
+        <span class="ui-form-field">
+<input id="tradePwd" type="password"  class="text_input" maxlength="18" defaultvalue="输入密码" value="" placeholder="输入密码">
+</span>
+</div>
+</div>
+</li>
+</ul>
+</aside>
+<!--表单-->
+</article>
+
+</#macro>
+
+<#macro footerContent>
+<!--按钮-->
+<div class="btn-page btn-page-center bg-white con-spacing15">
+        <a id="buyBtn" class="am-button am-button-red">
+        <span class="am-ft-white">买入</span>
+        </a>
+        
+</div>
+<!--按钮-->
+
+</#macro>
+

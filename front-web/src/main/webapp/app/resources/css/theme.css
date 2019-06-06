@@ -1,0 +1,184 @@
+/* first公共元素*/
+@import 'themes/cp.css';
+.firstTheme .ft-colorFirst{ color:#e50000!important;}
+.firstTheme .ft-colorSecond{ color:#f38000!important;}
+.firstTheme .lineMain{ border-color:#dcdcdc!important;}
+.firstTheme .lineMain2{ border-color:#e4e4e4!important;}
+.firstTheme .bgGaryMain{ background-color:#fafafa!important;}
+
+.firstTheme .btn-mred{
+    color: #fff;
+    background-color:#ea3030;
+    border-bottom:2px #b21f1f solid;
+}
+.firstTheme .btn-mred .btn-text{color: #fff;}
+.firstTheme .btn-morange{
+    color: #fff;
+    background-color:#f38000;
+    border-bottom:2px #ce7102 solid;
+}
+.firstTheme .btn-mblue{
+    color: #fff;
+    background-color:#32CBD9;
+    border-bottom:2px #24B8C4 solid;
+}
+.firstTheme .btn-mblue .btn-text{color: #fff;padding: 5px 25px;font-size: 16px;}
+.firstTheme .btn-morange .btn-text{color: #fff;}
+.firstTheme .progress{background-color: #e3e4e8;color: #0377b0;}
+.firstTheme .progress-bar-rise{background-color: #ff3e3e;}
+
+
+/*-----------------页面元素--------------*/
+/*头部first*/
+.firstTheme .topbar{background: #f7f7f7;border-bottom: 1px solid #eee;}
+.firstTheme .topbar-user{color:#666;}
+.firstTheme .topMenu-item a{color:#666;}
+.firstTheme .topMenu-link{color:#666666;}
+.firstTheme .topMenu-link:hover{
+    color:#666;
+    text-decoration:underline;
+}
+
+/*头部second*/
+.secondTheme .topbar{background: #444444;border-bottom: 1px solid #444444;}
+.secondTheme .topbar-user{color:#fff;}
+.secondTheme .topMenu-item a{color:#fff;}
+.secondTheme .topMenu-link{color:#fff;}
+.secondTheme .topMenu-link:hover{
+    color:#fff;
+    text-decoration:underline;
+}
+
+/*导航栏菜单first*/
+.firstTheme .nav-item a{color:#333;}
+.firstTheme .nav-item a:hover, .nav-item a.active{color:#333; border-bottom:1px #666 solid; }
+
+/*导航栏菜单second*/
+.secondTheme .nav-item a{color:#4d4d4d;}
+.secondTheme .nav-item a:hover, .nav-item a.active{color:#ca2e35; border-bottom:3px #e0444d solid; }
+
+/*图片切换second*/
+.firstTheme .fullSlide .hd ul li
+{
+    color: #666;
+    background:#fff;
+    border:1px #f1f1f1 solid;
+}
+.firstTheme .fullSlide .hd ul .on {
+    background:#bb0b17;
+    color:#fff;
+    border:1px #bb0b17 solid;
+}
+
+/*图片切换second*/
+.secondTheme .fullSlide .hd ul li
+{
+    color: #666;
+    background:#fff;
+    border:1px #f1f1f1 solid;
+}
+.secondTheme .fullSlide .hd ul .on {
+    background:#bb0b17;
+    color:#fff;
+    border:1px #bb0b17 solid;
+}
+
+/*首页中间内容first*/
+.firstTheme .title-profit-p2p{color:#b72022;}
+.firstTheme .quantity-center{ background-color:#e4393c;  color:#fff;}
+.firstTheme .btm-sign-list h4 {
+    color: #b72022;
+}
+.firstTheme .btn-red-profitIndex{ background-color:#af191a;}
+
+.firstTheme .statisticsIndex{border-bottom:1px #cccccc solid; background-color:#fafafa;}
+.firstTheme .statisticsIndex b.am-ft-number{ color:#f38000;}
+.firstTheme .sign-list li{ width:25%;}
+.firstTheme .sign-list p{ color:#666;}
+
+.firstTheme .frame-all-index {
+    background: #fff;
+    margin-top: 20px;
+    border: 1px solid #dcdcdc;
+}
+.firstTheme .titleB-frame{ border-bottom-width:1px; border-bottom-style:solid;}
+.firstTheme .titleB-frame-1{background:url(../image/index/icon-index-xinshou.png) no-repeat top right;}
+.firstTheme .titleB-frame-2{background:url(../image/index/icon-index-dasai.png) no-repeat top right;}
+.firstTheme .titleB-frame h3.color2{ border-left:6px #f38000 solid;}
+.firstTheme .titleB-frame h3.color1{ border-left:6px #ea3030 solid;}
+.firstTheme .titleB-frame h3.color3{ border-left:6px #32CBD9 solid;}
+.firstTheme .frame-tableIndex{ color:#666;}
+
+.firstTheme .lside-pzIndex{border-right-width:1px; border-right-style:solid;}
+.firstTheme .titleS-frame{border-bottom-width:1px; border-bottom-style:solid;}
+
+
+.firstTheme .all-pageIndex{background-color: #fff;border: 1px solid;border-top-color: #ED27FD!important;border-top-width: 2px; }
+.firstTheme .list-pageIndex-item{border-bottom-width:1px; border-bottom-style:solid;}
+.firstTheme .all-pageIndex .last{
+    border-bottom:none;
+}
+
+.firstTheme .con-link a {border: 1px #dadada solid;}
+
+.firstTheme .proLoanWarpper {border-top: 2px solid #EA3030!important;}
+.firstTheme .proContestWarpper {border-top: 2px solid #F38000!important;}
+.firstTheme .proFreeWarpper {border-top: 2px solid #32CBD9!important;}
+
+/*下载页面first*/
+.firstTheme .banner-download .sign-download{ color:#666;}
+.banner-download .ewm-android img{width:100px; height:100px; border:10px solid rgba(255,255,255,.5);}
+
+
+
+/*首页中间内容second*/
+.secondTheme .title-profit-p2p{color: #666666;}
+.secondTheme .quantity-center{ background-color:#f4f4f4;  color:#666666;}
+.secondTheme .btm-sign-list h4 {
+    color: #666;
+}
+.secondTheme .btn-red-profitIndex{ background-color:#e0444d;}
+
+
+
+
+
+
+/*底部first*/
+/*.firstTheme .footer {
+    background: #f7f7f7;
+    border-top: 1px solid #dadada;
+    color: #999;
+}*/
+.firstTheme .bottominfo dl{border-right:1px #dcdcdc solid;border-left:1px #fff solid;}
+.firstTheme .bottominfo dl.first{border-left:none;}
+.firstTheme .bottominfo dl.last{border-right:none;}
+.firstTheme .bottominfo dt{ color:#666666;}
+.firstTheme .bottominfo dd a {
+    color: #999;
+}
+.firstTheme .bottominfo .icon{background:url(../images/common/dot02.png) 0px center no-repeat;}
+.firstTheme .bottominfo .icon b{color:#1bbde5;}
+
+/*底部second*/
+.secondTheme .footer {
+    background: #444444;
+    border-top: 1px solid #444444;
+    color: #a0a0a0;
+}
+.secondTheme .partner {
+    color:#a0a0a0;
+}
+.secondTheme .partner a, .secondTheme .footer a {
+    color: #a0a0a0;
+}
+.secondTheme .partner a:hover{color:#e0444d;}
+.secondTheme .partner-img{
+    color: #a0a0a0;
+}
+.secondTheme .partner-img a {
+    color: #a0a0a0;
+}
+.secondTheme .foot-bottom {
+    color: #a0a0a0;
+}

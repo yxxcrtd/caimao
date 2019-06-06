@@ -1,0 +1,74 @@
+<#assign controller="StockAssets"/>
+<#include 'layout/layout.html'/>
+<#macro content>
+    <div class="contents clearfix">
+        <div class="con-lside cm-left conside" id="sidemenuctn" style="position: inherit;">
+        </div>
+        <div class="con-rside cm-right">
+            <!--标题-->
+            <!-- <div class="title-page"><h3 class="am-ft-xl">我的资产</h3></div> -->
+
+            <div class="con-transactions ">
+                <!--表单-->
+                <form class="ui-form" role="form">
+                    <div class="ui-form-item" style="margin-bottom:5px;">
+                        <label class="ui-label">操作员编号：</label>
+
+                        <div class="ui-select" id="childAccountDiv"><!--ui-select-expansion去掉时，下半部隐藏-->
+                            <!--  <a class="layer" href="#"><span class="text">100080</span><span class="icon"></span></a>
+                             <div class="detail">
+                              <a href="#">100080</a>
+                               </div> -->
+                        </div>
+                    </div>
+                </form>
+                <!--表单-->
+
+                <!--资产总额-->
+                <div class="frame-all" style="width: 798px;">
+                    <div class="con-ReCa" style="padding: 0px; height: auto;">
+                        <table width="100%" border="0" cellspacing="0" class="table-assetsIndex" style="margin-left: 45px;">
+                            <tbody>
+                            <tr>
+                                <td colspan="2" rowspan="2">
+                                    <p><span class="am-ft-md">账户总值：</span></p>
+
+                                    <p><b class="am-ft-number" id="assetTotalValue">0.00</b> <span
+                                            class="am-ft-md"> 元 </span></p></td>
+                                <th>资金余额：</th>
+                                <td><b class="am-ft-number am-ft-lg" id="cur_amount">0.00</b> 元</td>
+                                <th>证券市值：</th>
+                                <td><b class="am-ft-number am-ft-lg" id="stockAsset">0.00</b> 元</td>
+                            </tr>
+                            <tr>
+                                <th>可用余额：</th>
+                                <td><b class="am-ft-number am-ft-lg" id="available_amount">0.00</b> 元</td>
+                                <th></th>
+                                <td></td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+
+                <!--资产总额-->
+
+                <div id="grid_f">
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</#macro>
+
+<#macro subScript>
+    <!-- 绘制行情图部分使用了jquery，后续调整为dojo -->
+    <script type="text/javascript" src="${basePath}/app/ux/jquery/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" src="${basePath}/app/ux/highstock/highstock.js"></script>
+    <script type="text/javascript" src="${basePath}/app/ux/chart/timeShareChart.js"></script>
+</#macro>

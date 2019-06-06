@@ -1,0 +1,49 @@
+<!--顶部条-->
+<div id="top">
+    <div class="w top_in">
+        <div class="f_l left">
+            <!--<span><a href="/download.htm"><i class="icons icon_app"></i> 财猫app </a></span><s>|</s>-->
+            <span class="weixin m_l_10"><i class="icons icon_weixin"><span></span></i></span>
+            <span><a href="${weiboUrl}"><i class="icons icon_weibo"></i></a></span>
+            <span><a href="/account/index.htm" style="color: red;">财猫主站</i></a></span>
+            <span><a href="${ybkUrl}">财猫邮币卡</i></a></span>
+            <span><a href="${jinUrl}">财猫贵金属</i></a></span>
+        </div>
+        <div class="f_r right topline2 noticeOpen">
+            <div id="_unlogin" style="display: none;">
+                您好！欢迎来到财猫网！
+                <a href="${basePath}/user/login.html"> 登录</a> | <a href="${basePath}/user/register.html"> 注册</a>
+            </div>
+            <div id="_login" style="display: none;">
+                <a href="https://www.caimao.com/user/info.html" class="font_grayD">返回新版</a>
+                <span class="font_red noticeBtn" id="_openMsgSwitch"><i class="icons" id="_msgIcons"></i><span id="_notReadMsgNum">0</span></span>
+                <span class="plr_10 font_black">
+                    您好，<a href="/account/index.htm" class="font_black"><span id="_userName"></span></a>
+                </span>
+                 <a href="/user/logout.html" class="font_grayD">退出</a>
+                <div id="_msgPoint"></div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!--头部-->
+<div id="header">
+    <div class="w header_in">
+        <div class="f_l left">
+            <h1 class="icons icon_logo"><a href="${homeUrl}">财猫网</a></h1><p class="icons icon_logo_p">招招有财</p>
+        </div>
+        <div class="f_r right">
+            <ul id="jsTopMenu">
+                <li><a href="${homeUrl}" <#if curTopMenu == "index">class="hov"</#if>>首页 <b></b></a></li>
+                <li><a href="${basePath}/account/index.htm" <#if curTopMenu == "account">class="hov"</#if>>账户<b></b></a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div id="notice">
+    <div class="w">
+        <i class="icons icon_notice"></i><label id="noticeBlock"></label>
+        <!--<span id="noticeIKnow">我知道了</span>-->
+    </div>
+</div>

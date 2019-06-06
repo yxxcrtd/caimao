@@ -1,0 +1,56 @@
+<#include 'mobile/layout/config.html'/>
+<#if assignSet ??> <@assignSet/></#if>
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="Expires" content="0" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<meta name="format-detection" content="telephone=no" />
+    <link rel="shortcut icon" type="image/ico" href="${basePath}/app/resources/image/customize/favicon.ico">
+<title>${title?default(default_title)}</title>
+<link rel="stylesheet" type="text/css" href="${basePath}/mobile/css/global.css"/>
+<link rel="stylesheet" type="text/css" href="${basePath}/mobile/css/layout.css"/>
+<link rel="stylesheet" type="text/css" href="${basePath}/mobile/css/zepto.alert.css"/>
+<link rel="stylesheet" type="text/css" href="${basePath}/mobile/css/idangerous.swiper.css"/>
+<link rel="stylesheet" type="text/css" href="${basePath}/mobile/css/mobiscroll.custom-2.6.2.min.css" />
+<script type="text/javascript" src="${basePath}/mobile/js/common/zepto.min.js"></script>
+<script type="text/javascript" src="${basePath}/mobile/js/common/callbacks.js"></script>
+<script type="text/javascript" src="${basePath}/mobile/js/common/deferred.js"></script>
+<script type="text/javascript" src="${basePath}/mobile/js/common/fx.js"></script>
+<script type="text/javascript" src="${basePath}/mobile/js/common/commonUtil.js"></script>
+<script type="text/javascript" src="${basePath}/mobile/js/common/zepto.alert.js"></script>
+<script type="text/javascript" src="${basePath}/mobile/js/common/mobiscroll.zepto.js"></script>
+<script type="text/javascript" src="${basePath}/mobile/js/common/mobiscroll.custom-2.6.2.min.js"></script>
+<script type="text/javascript" src="${basePath}/mobile/js/common/RSA.js"></script>
+<script type="text/javascript" src="${basePath}/mobile/js/common/idangerous.swiper.min.js"></script>
+<script type="text/javascript" src="${basePath}/mobile/js/common/form.min.js"></script>
+<script type="text/javascript" src="${basePath}/mobile/js/common/uploadPreview.min.js"></script>
+<script type="text/javascript">
+	var basePath = '${basePath}';
+	var allPath = '${dojoUrl}';
+	var countdownSeconds = 60;
+	
+	var mobileUrl = '${basePath}/mobile';
+	var proContest = '${proContest}';
+	var upload = false;
+	<#if isUploadCertification>
+		upload = true;
+	</#if>
+	$(function(){
+		$("#go_back").click(function(){
+			history.go(-1);
+		});
+		$("#navigation${footer}").addClass("active");
+	});
+</script>
+<#if controller ??><script type="text/javascript" src="${basePath}/mobile/js/views/${controller}.js"></script></#if>
+
+
+</head>
+<body class="${bg}">
+<#if header ??> <#include 'mobile/layout/header.html'/></#if>
+<#if content ??> <@content/></#if>
+<#if footer ??> <#include 'mobile/layout/footer.html'/></#if>
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+    <#include "weixin/config.html"/>
+    <head>
+        <meta charset="UTF-8">
+        <title>股计</title>
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=false">
+        <meta name="format-detection" content="telephone=no"/>
+        <#include "weixin/guji/include/js.html"/>
+        <script>
+            domready(function(){
+                setMaskSize("mask");
+                setMaskSize("followOfficial");
+                // 绑定分享 Click 事件
+                $("#share").on("click", function() {
+                    $(".box").show();
+                    $(".myShare").css({ display: "block", height: $(document).height() });
+                    $("body").css({ overflow: "hidden" }); // 禁用滚动条
+                });
+
+                $(".box").on("click", function() {
+                    $(".box").hide();
+                    $(".myShare").css({ display: "none" });
+                    $("body").css({ overflow: "auto" });
+                });
+            });
+
+            wx.ready(function(){
+                // 要显示的菜单项
+                wx.showMenuItems({
+                    menuList: ['menuItem:share:appMessage', 'menuItem:share:timeline', 'menuItem:favorite']
+                });
+                // 分享到朋友圈的东东
+                wx.onMenuShareTimeline({
+                    title: '${shareInfo.title}', // 分享标题
+                    link: '${shareInfo.link}', // 分享链接
+                    imgUrl: '${shareInfo.imgUrl}', // 分享图标
+                    success: function () {
+                        // 用户确认分享后执行的回调函数
+                    },
+                    cancel: function () {
+                        // 用户取消分享后执行的回调函数
+                    }
+                });
+                // 分享给朋友的东东
+                wx.onMenuShareAppMessage({
+                    title: '${shareInfo.title}', // 分享标题
+                    desc: '${shareInfo.desc}', // 分享描述
+                    link: '${shareInfo.link}', // 分享链接
+                    imgUrl: '${shareInfo.imgUrl}', // 分享图标
+                    type: '${shareInfo.type}', // 分享类型,music、video或link，不填默认为link
+                    dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+                    success: function () {
+                        // 用户确认分享后执行的回调函数
+                    },
+                    cancel: function () {
+                        // 用户取消分享后执行的回调函数
+                    }
+                });
+            });
+        </script>
+    </head>
+
+    <body class="bottomMenu">
+        <div class="myShare"></div>
+        <div class="follow">
+            <span id="fans">
+                <span id="fansTitle">粉丝</span>
+                <span id="fansCount">${focusMe!0}</span>
+            </span>
+            <#if (loginOpenId == userInfo.openId)>
+                <span id="share">分享</span>
+                <div class="box"></div>
+            <#else>
+                <span id="follow" onclick="optFollow()" data-isFollowGuji="${isFollowGuji}" data-wxId="${userInfo.wxId}" data-isFollow="${isFollow}" data-checkOpenId="${authInfo.openId}" <#if isFollow == true>class="followBtn followed"<#else>class="followBtn"</#if> >
+                    <#if isFollow == true>已关注<#else>关注</#if>
+                </span>
+            </#if>
+        </div>
+
+        <div class="userLine">
+            <div class="photo"><div><img src="${userInfo.headimgurl}" /></div></div>
+            <strong class="name">
+                ${userInfo.nickname}
+                <#if userInfo.authStatus == 2><i class="vip vip1"></i></#if>
+            </strong>
+            <div class="title">
+                <#if userInfo.authStatus == 2>${userInfo.certificationAuth}</#if><!--1未认证;2已认证;3待审核-->
+            </div>
+        </div>
+
+        <div class="stockList">
+            <!--先显示大盘的-->
+            <#list stockList as i>
+                <#if i.stockType == 'DP'>
+                    <div class="stockUnit">
+                        <div class="mod-right">
+                            <div class="mod-rightcontent stock">
+                                <em onclick="window.location.href='/weixin/guji/recommendStock.html?wxId=${i.wxId}&stockCode=${i.stockCode}'">
+                                    <strong>${i.stockName}</strong>
+                                    <b>
+                                        <#if (1 == i.positions)>看多
+                                            <#elseif (2 == i.positions)>中性
+                                            <#elseif (3 == i.positions)>看空
+                                        </#if>
+                                    </b>
+                                    <span class="priceDetail">
+                                        <#if (i.targetPrice > 0)>
+                                            <div>最新 ${i.currentPrice?string('0.00')}</div>
+                                            <div>目标 <#if ("0.00" == i.targetPrice)>&nbsp;-<#else>${i.targetPrice}</#if></div>
+                                        </#if>
+                                        <i></i>
+                                    </span>
+                                    <span class="priceIncrease">
+                                        <#if (0 < i.increase)><div class="raise">+${i.increase?string('0.00')}%</div>
+                                            <#elseif (0 > i.increase)><div class="drop">${i.increase?string('0.00')}%</div>
+                                            <#else><div class="equal">${i.increase?string('0')}%</div>
+                                        </#if>
+                                    </span>
+                                </em>
+                            </div>
+                        </div>
+                    </div>
+                </#if>
+            </#list>
+
+            <!--在显示股票的-->
+            <#list stockList as i>
+                <#if i.stockType == 'GP'>
+                    <div class="stockUnit">
+                        <div class="mod-right">
+                            <div class="mod-rightcontent stock">
+                                <em onclick="window.location.href='/weixin/guji/recommendStock.html?wxId=${i.wxId}&stockCode=${i.stockCode}'">
+                                    <strong>${i.stockName}</strong>
+                                    <b>${i.stockCode}</b>
+                                    <span class="priceDetail">
+                                        <div>最新价 ${i.currentPrice?string('0.00')}</div>
+                                        <div>目标价 <#if ("0.00" == i.targetPrice)>&nbsp;-<#else>${i.targetPrice}</#if></div>
+                                        <i></i>
+                                    </span>
+                                    <span class="priceIncrease">
+                                        <#if (0 < i.increase)><div class="raise">+${i.increase?string('0.00')}%</div>
+                                            <#elseif (0 > i.increase)><div class="drop">${i.increase?string('0.00')}%</div>
+                                            <#else><div class="equal">${i.increase?string('0')}%</div>
+                                        </#if>
+                                    </span>
+                                </em>
+                            </div>
+                        </div>
+                    </div>
+                </#if>
+            </#list>
+        </div>
+
+        <#include "weixin/guji/include/menu.html"/>
+
+        <div class="mask" id="mask" >
+            <div class="shade"></div>
+            <dl customaction="click">
+                <dt>确定不再关注此人？</dt>
+                <dd onclick="optConfFollow()">确定</dd>
+                <dd onclick="optCancelFollow()">取消</dd>
+            </dl>
+        </div>
+
+        <div class="followOfficial" id="followOfficial">
+            <div class="shade"></div>
+            <div class="besideBox">
+                <dl>
+                    <dt customAction="click"><img src="${imgUrl}/qrcode.jpg"></dt>
+                    <dd class="title">关注“股计”公众号</dd>
+                    <dd>跟踪${userInfo.nickname}的分析</dd>
+                    <dd customAction="click" onclick="closeFollowAlert()">关闭</dd>
+                </dl>
+            </div>
+        </div>
+
+    </body>
+</html>

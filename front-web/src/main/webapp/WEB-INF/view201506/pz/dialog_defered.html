@@ -1,0 +1,56 @@
+<div class="layout" id="dialog_point">
+    <h3 class="title">融资支付 <a href="javascript:void(0);" id="dialog_close"><i class="icons icon_close"></i></a> </h3>
+
+    <div class="group m_t_10">
+        <p>展期期限
+            <select style="width: 220px; height: 40px; margin-left: 15px;" id="prodTerms">
+                <#list terms as t>
+                    <option value="${t}">个月</option>
+                </#list>
+            </select>
+        </p>
+        <p style="padding-top: 30px; padding-left: 25px;">费用<span style="padding-left: 23px;">300元/月(月利率10.8%)</span></p>
+        <div>安全密码</div>
+        <div><input class="input_text" type="password" placeholder="请输入安全密码" maxlength="20" /></div>
+
+    </div>
+
+    <div class="group m_t_30">
+        <button class="btn btn_red">确认展期</button>
+    </div>
+
+    <div class="dialog_error">
+        <span id="dialog_error"></span>
+    </div>
+
+</div>
+<div class="mask"></div>
+
+<script type="text/javascript">
+    // 展期的操作
+    $('#_dialog').on("click", "#querentiying", function() {
+        // 合约ID，转入金额
+        var contractNo = $('#contractNo').val();
+        var tradePwd = $('#tradePwd').val() * 100;
+        if (tradePwd == "") {
+            $('#dialog_error').html("请填写安全密码");
+            return false;
+        }
+        $.ajax({
+            url : "/pz/operation/repay",
+            type : "POST",
+            data : {
+                contract_no : contractNo,
+                trade_pwd : RSAUtils.encryptedString(key, tradePwd)
+            },
+            dataType : "json",
+            success : function(res) {
+                if (res.success == true) {
+                    Alert.show("转出盈利成功", "确认", function() {window.location.reload()});
+                } else {
+                    alert("失败");
+                }
+            }
+        });
+    });
+</script>

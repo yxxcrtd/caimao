@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="GetuiUserIdMap">
+
+    <!-- 表所有字段和属性 -->
+    <resultMap id="BaseResultMap" type="com.caimao.bana.api.entity.getui.GetuiUserIdMapEntity" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="user_id" property="userId" jdbcType="VARCHAR" />
+        <result column="cid" property="cid" jdbcType="VARCHAR" />
+        <result column="device_token" property="deviceToken" jdbcType="VARCHAR" />
+        <result column="device_type" property="deviceType" jdbcType="VARCHAR" />
+        <result column="time_update" property="timeUpdate" jdbcType="TIMESTAMP" />
+        <result column="time_create" property="timeCreate" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <!-- 表所有字段 -->
+    <sql id="Base_Column_List" >
+        id, 
+        user_id, 
+        cid, 
+        device_token, 
+        device_type, 
+        time_update, 
+        time_create
+    </sql>
+
+    <!-- 根据CID查找 -->
+    <select id="selectByCid" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select <include refid="Base_Column_List" /> from getui_user_id_map where cid = #{cid, jdbcType=VARCHAR}
+    </select>
+
+    <!-- 根据USERID查找 -->
+    <select id="selectByUserid" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select <include refid="Base_Column_List" /> from getui_user_id_map where user_id = #{userId, jdbcType=BIGINT}
+    </select>
+
+    <!--根据用户与设备类型搜索-->
+    <select id="selectByUserIdAndType" resultMap="BaseResultMap" parameterType="java.util.HashMap" >
+        select <include refid="Base_Column_List" /> from getui_user_id_map where user_id = #{userId, jdbcType=BIGINT} AND device_type = #{deviceType, jdbcType=VARCHAR}
+    </select>
+
+    <!-- 根据ID删除 -->
+    <delete id="deleteById" parameterType="java.lang.Long" >
+        delete from getui_user_id_map where id = #{id, jdbcType=BIGINT}
+    </delete>
+
+    <!-- 插入 -->
+    <insert id="insert" parameterType="com.caimao.bana.api.entity.getui.GetuiUserIdMapEntity">
+        insert into getui_user_id_map
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="cid != null">
+                cid,
+            </if>
+            <if test="deviceToken != null">
+                device_token,
+            </if>
+            <if test="deviceType != null">
+                device_type,
+            </if>
+            <if test="timeUpdate != null">
+                time_update,
+            </if>
+            <if test="timeCreate != null">
+                time_create,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id, jdbcType=BIGINT},
+            </if>
+            <if test="userId != null">
+                #{userId, jdbcType=VARCHAR},
+            </if>
+            <if test="cid != null">
+                #{cid, jdbcType=VARCHAR},
+            </if>
+            <if test="deviceToken != null">
+                #{deviceToken, jdbcType=VARCHAR},
+            </if>
+            <if test="deviceType != null">
+                #{deviceType, jdbcType=VARCHAR},
+            </if>
+            <if test="timeUpdate != null">
+                #{timeUpdate, jdbcType=TIMESTAMP},
+            </if>
+            <if test="timeCreate != null">
+                #{timeCreate, jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <!-- 修改 -->
+    <update id="update" parameterType="com.caimao.bana.api.entity.getui.GetuiUserIdMapEntity">
+        update getui_user_id_map
+        <set>
+            <if test="userId != null">
+                user_id = #{userId, jdbcType=VARCHAR},
+            </if>
+            <if test="cid != null">
+                cid = #{cid, jdbcType=VARCHAR},
+            </if>
+            <if test="deviceToken != null">
+                device_token = #{deviceToken, jdbcType=VARCHAR},
+            </if>
+            <if test="deviceType != null">
+                device_type = #{deviceType, jdbcType=VARCHAR},
+            </if>
+            <if test="timeUpdate != null">
+                time_update = #{timeUpdate, jdbcType=TIMESTAMP},
+            </if>
+            <if test="timeCreate != null">
+                time_create = #{timeCreate, jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id, jdbcType=BIGINT}
+    </update>
+
+</mapper>

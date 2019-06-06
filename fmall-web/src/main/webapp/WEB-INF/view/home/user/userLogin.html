@@ -1,0 +1,71 @@
+<#include "home/config.html"/>
+<#include "home/include/head.html"/>
+    <title>登录财猫账户</title>
+</head>
+
+<body>
+<!--头部-->
+<script>
+    var REF = typeof $_GET("return") == 'undefined' ? "/user/account.html" : decodeURIComponent($_GET('return'));
+</script>
+<div class="header">
+    <#include "home/include/topNav.html" />
+    <div class="nav">
+        <div class="w">
+            <h1 class="left">
+                <a href="/"></a>
+                <b>欢迎登录</b>
+            </h1>
+        </div>
+    </div>
+</div>
+<!--内容区-->
+<!--注册第一步-->
+<div class="main login_bg">
+    <div class="w clearfix">
+        <div class="login">
+            <div class="tit">
+                <b class="f_l">财猫登录</b>
+                <span class="f_r">没有账户？<a href="/user/register.html">快速注册</a></span>
+            </div>
+            <div class="col col_tel">
+                <input class="input" type="text" placeholder="请输入手机号" id="loginName"/>
+            </div>
+            <div class="col col_password">
+                <input class="input" type="password" placeholder="请输入登录密码" id="loginPwd"/>
+            </div>
+            <div class="col hidden">
+                <input class="input input_tu_verify" type="text" id="captcha"/> <img src="/captcha" id="captchaPic" width="80" height="30" alt=""/>
+            </div>
+            <div class="hidden" id="notice"><i class="icons"></i>你输入的手机号有误，请重新输入。</div>
+            <div class="col">
+                <button type="submit" class="btn" id="btn">登录</button>
+                <span class="f_r"><a href="/user/resetCaimaoPwd.html">忘记密码？</a></span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="login_down w">
+    <ul>
+        <li>
+            <i class="icon_01"></i>
+            <p>
+                <b>交易品种多</b>财猫网不断的丰富交易品种
+            </p>
+        </li>
+        <li>
+            <i class="icon_02"></i>
+            <p>
+                <b>交易成本低</b>财猫网不断的降低交易成本
+            </p>
+        </li>
+        <li>
+            <i class="icon_03"></i>
+            <p>
+                <b>交易效率高</b>财猫网不断的提升交易效率
+            </p>
+        </li>
+    </ul>
+</div>
+<script>login()</script>
+<#include "home/include/foot.html" />

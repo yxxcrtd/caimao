@@ -1,0 +1,90 @@
+.genericProgressBar {
+	
+}
+
+.genericProgressBarNormal {
+	background-image: -webkit-linear-gradient( top, #FFC065, #ED961A);
+	background-image: -moz-linear-gradient( top, #FFC065, #ED961A);
+	background-image: -ms-linear-gradient( top, #FFC065, #ED961A);
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient (GradientType=0, startColorstr=#FFC065, endColorstr=#ED961A)";
+	background-color: #FFC065;
+}
+
+.genericProgressBarBad {
+	background-image: -webkit-linear-gradient( top, #E95000, #F00202);
+	background-image: -moz-linear-gradient( top, #E95000, #F00202);
+	background-image: -ms-linear-gradient( top, #E95000, #F00202);
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient (GradientType=0, startColorstr=#E95000, endColorstr=#F00202)";
+	background-color: #E95000;
+}
+
+.genericProgressBarGood {
+	background-image: -webkit-linear-gradient( top, #FFE56E, #FFC200);
+	background-image: -moz-linear-gradient( top, #FFE56E, #FFC200);
+	background-image: -ms-linear-gradient( top, #FFE56E, #FFC200);
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient (GradientType=0, startColorstr=#FFE56E, endColorstr=#FFC200)";
+	background-color: #FFE56E;
+}
+
+.genericProgressBarGreat {
+	background-image: -webkit-linear-gradient( top, #93FD00, #85DF08);
+	background-image: -moz-linear-gradient( top, #93FD00, #85DF08);
+	background-image: -ms-linear-gradient( top, #93FD00, #85DF08);
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient (GradientType=0, startColorstr=#93FD00, endColorstr=#85DF08)";
+	background-color: #93FD00;
+}
+
+.genericProgressBarFull {
+	height: 12px;
+	background-image: -webkit-linear-gradient(
+		top,
+		#A1A1A1, 
+		#888888 10%,
+		#C0C0C0 50%,
+		#BEBEBE);
+	background-image: -moz-linear-gradient(
+		top,
+		#A1A1A1, 
+		#888888 10%,
+		#C0C0C0 50%,
+		#BEBEBE);
+	background-image: -ms-linear-gradient(
+		top,
+		#A1A1A1, 
+		#888888 10%,
+		#C0C0C0 50%,
+		#BEBEBE);
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient (GradientType=0, startColorstr=#A1A1A1, endColorstr=#BEBEBE)";
+	background-color: #BEBEBE;
+	border-radius: 0px 15px 0px 0px;
+	float: left;
+	width: 80%;
+	margin: 5px 5px 0 5px;
+}
+
+.genericProgressBarBar {
+    border-radius: 0px 15px 0px 0px;
+    height: 120%;
+    margin-top: -1px;
+    box-shadow: 0px 0px 0px 1px #D0D0D0;
+    transition: all 1s ease-out;
+    width: 0%;
+}
+
+.genericProgressBar:after {
+	display: block;
+	clear: both;
+	content: "";
+	visibility: hidden;
+	height: 0;
+}
+
+.genericProgressBarText {
+	color: #ff672b;
+	font-size: 14px!important;
+	font-weight: bold;
+}
+
+.genericProgressBar label {
+	font-size: 14px;
+}

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="TpzPayChannel">
+    <select id="getPayById" resultType="com.caimao.bana.api.entity.TpzPayChannelEntity">
+        SELECT
+        channel_id as channelId, channel_name as channelName, channel_status as channelStatus, merchant_id as merchantId, channel_version as channelVersion,
+        sign_type as signType, poundage_type as poundageType, business_webgateway as businessWebgateway, business_wapgateway as businessWapgateway,
+        sign_key as signKey, cer_path as cerPath, remark, business_filegateway as businessFilegateway
+        FROM tpz_pay_channel WHERE channel_id = #{channelId}
+    </select>
+</mapper>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="GujiFavourRecord">
+
+    <!-- 表所有字段和属性 -->
+    <resultMap id="BaseResultMap" type="com.caimao.bana.api.entity.guji.GujiFavourRecordEntity" >
+        <result column="share_id" property="shareId" jdbcType="BIGINT" />
+        <result column="open_id" property="openId" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <!-- 表所有字段 -->
+    <sql id="Base_Column_List" >
+        share_id, 
+        open_id, 
+        create_time
+    </sql>
+
+    <!-- 根据ID查找 -->
+    <select id="selectByShareIdAndOpenId" resultMap="BaseResultMap" parameterType="java.util.Map" >
+        select <include refid="Base_Column_List" /> from guji_favour_record where share_id = #{shareId, jdbcType=BIGINT} AND open_id = #{openId, jdbcType=VARCHAR}
+    </select>
+
+    <!-- 根据ID删除 -->
+    <delete id="delete" parameterType="java.util.Map" >
+        delete from guji_favour_record where share_id = #{shareId, jdbcType=BIGINT} AND open_id = #{openId, jdbcType=VARCHAR}
+    </delete>
+
+    <!-- 插入 -->
+    <insert id="insert" parameterType="com.caimao.bana.api.entity.guji.GujiFavourRecordEntity">
+        insert into guji_favour_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="shareId != null">
+                share_id,
+            </if>
+            <if test="openId != null">
+                open_id,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="shareId != null">
+                #{shareId, jdbcType=VARCHAR},
+            </if>
+            <if test="openId != null">
+                #{openId, jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime, jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+</mapper>

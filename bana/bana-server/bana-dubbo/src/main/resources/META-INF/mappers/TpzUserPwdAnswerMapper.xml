@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="TpzUserPwdAnswer" >
+  <resultMap id="BaseResultMap" type="com.caimao.bana.api.entity.TpzUserPwdAnswerEntity" >
+    <id column="user_id" property="userId" jdbcType="BIGINT" />
+    <id column="question_id" property="questionId" jdbcType="VARCHAR" />
+    <result column="answer_result" property="answerResult" jdbcType="VARCHAR" />
+  </resultMap>
+  
+<!--   <resultMap id="F830014ResResultMap" type="com.hsnet.pz.biz.user.dto.res.F830014Res" > -->
+<!--     <id column="user_id" property="userId" jdbcType="BIGINT" /> -->
+<!--     <result column="question_id" property="questionId" jdbcType="VARCHAR" /> -->
+<!--     <result column="question_title" property="questionTitle" jdbcType="VARCHAR" /> -->
+<!--     <result column="answer_result" property="answerResult" jdbcType="VARCHAR" /> -->
+<!--   </resultMap> -->
+  <sql id="Base_Column_List" >
+    user_id, question_id, answer_result
+  </sql>
+  <!-- æ ¹æ®IDæ¥è¯¢å¯ä¿é®é¢  -->
+   <select id="queryByUser" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+   select 
+   <include refid="Base_Column_List" />
+   from tpz_user_pwd_answer
+   where user_id = #{userId,jdbcType=BIGINT}
+  </select>
+  <!-- å¤ä¸ªæ¡ä»¶æ¥è¯¢ -->
+  <select id="getByUserQuestion" resultMap="BaseResultMap" parameterType="com.caimao.bana.api.entity.TpzUserPwdAnswerEntity" >
+    select 
+    <include refid="Base_Column_List" />
+    from tpz_user_pwd_answer
+    <trim prefix="WHERE" prefixOverrides="AND | OR">
+	    <if test="userId != null and userId != '' ">
+			AND user_id = #{userId,jdbcType=BIGINT}
+		</if>
+		<if test="questionId != null and questionId != '' ">
+			AND question_id = #{questionId,jdbcType=VARCHAR}
+		</if>
+    </trim>
+  </select>
+  <!--  æ ¹æ®IDå é¤å¯ä¿é®é¢ -->
+  <delete id="deleteById" parameterType="java.lang.Long" >
+    delete from tpz_user_pwd_answer
+    where user_id = #{userId,jdbcType=BIGINT}
+  </delete>
+  <!--  è®¾ç½®å¯ä¿é®é¢  -->
+  <insert id="save" parameterType="com.caimao.bana.api.entity.TpzUserPwdAnswerEntity" >
+    insert into tpz_user_pwd_answer
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != 0" >
+        user_id,
+      </if>
+      <if test="questionId != null" >
+        question_id,
+      </if>
+      <if test="answerResult != null" >
+        answer_result,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="questionId != null" >
+        #{questionId,jdbcType=VARCHAR},
+      </if>
+      <if test="answerResult != null" >
+        #{answerResult,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+   <insert id="batchInsert" parameterType="java.util.List" >
+		INSERT INTO tpz_user_pwd_answer(
+		user_id
+		,question_id
+		,answer_result		
+		)
+		VALUES
+	    <foreach collection="list" item="item" index="index" separator="," >  
+	        (#{item.userId},#{item.questionId},#{item.answerResult})  
+	    </foreach> 	     
+  </insert>
+  <!--  æ´æ°å¯ä¿ -->
+  <update id="update" parameterType="com.caimao.bana.api.entity.TpzUserPwdAnswerEntity" >
+    update tpz_user_pwd_answer
+    <set >
+      <if test="answerResult != null" >
+        answer_result = #{answerResult,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=BIGINT}
+      and question_id = #{questionId,jdbcType=VARCHAR}
+  </update>
+  <!--  æ¥è¯¢åºæ­¤ç¨æ·å¯¹åºçå¯ä¿é®é¢ -->
+<!--   <select id="queryF830014ReqWithPage" resultMap="F830014ResResultMap" parameterType="com.hsnet.pz.biz.user.dto.req.F830014Req"> -->
+<!-- 	  SELECT a.user_id, a.question_id, b.question_title, a.answer_result FROM tpz_user_pwd_answer a, tpz_pwd_question b WHERE a.question_id = b.question_id  AND a.user_id= #{userId,jdbcType=BIGINT} -->
+<!--   	<trim prefix="ORDER BY "> -->
+<!-- 		<if test="orderColumn != null and  orderColumn != ''"> -->
+<!-- 			${orderColumn} ${orderDir}  -->
+<!-- 		</if> -->
+<!-- 	</trim> -->
+<!--   </select> -->
+</mapper>

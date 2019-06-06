@@ -1,0 +1,196 @@
+<#assign bg="bg-white"/> <#assign title="实盘大赛"/> <#assign
+controller="P4"/> <#assign header="实盘大赛"/> <#assign footer="1"/>
+<#include 'mobile/layout/layout.html'/> <#macro>
+<article class="content" style="padding-bottom: 105px;">
+	<div class="con-spacing10">
+		<!--报名标题-->
+		<div class="title-signUp">
+			<p class="am-ft-left am-ft-white">
+				第一季大赛<span class="am-ft-sm am-left-5">（9月01日-9月31日）</span>
+			</p>
+			<p class="am-ft-right">
+				<span class="am-ft-sm">报名人数<b class="am-ft-md">1,003</b>人
+				</span>
+			</p>
+		</div>
+		<!--报名标题-->
+		<!--报名标题-->
+		<div class="title-signUp title-signUp-2">
+			<p class="am-ft-left am-ft-tabText">
+				第二季大赛<span class="am-ft-sm am-left-5">（10月01日-10月31日）</span>
+			</p>
+			<p class="am-ft-right">
+				<span class="am-ft-sm">报名人数<b class="am-ft-md">603</b>人
+				</span>
+			</p>
+		</div>
+		<!--报名标题-->
+		<!--流程-->
+		<div class="bg-white">
+			<ul class="list-navContest listLateral">
+				<li><i class="icon"></i>
+					<p class="am-pt-10">
+						<b class="am-ft-sm">开始比赛</b>
+					</p>
+					<p>
+						<span class="am-ft-sm">10月01日</span>
+					</p></li>
+				<li><i class="icon"></i>
+					<p class="am-pt-10">
+						<span class="am-ft-sm">10月31日</span>
+					</p>
+					<p>
+						<b class="am-ft-sm">停止报名</b>
+					</p></li>
+				<li><i class="icon"></i>
+					<p class="am-pt-10">
+						<b class="am-ft-sm">公布战绩</b>
+					</p>
+					<p>
+						<span class="am-ft-sm">11月01日</span>
+					</p></li>
+			</ul>
+		</div>
+		<!--流程-->
+
+		<!--奖金-->
+		<div class="bgBonus">
+			<ul class="listLateral">
+				<li class="">
+					<div class="NO1">
+						<p class="p1">
+							<i class="iconBonus iconBonus1"></i>
+						</p>
+						<p class="line am-ft-red">
+							<span class="am-ft-sm">￥</span><b class="am-ft-md" id="rankAmount1">30000</b>
+						</p>
+						<p class="p1">
+							<span class="am-ft-sm">NO.1</span>
+						</p>
+					</div>
+				</li>
+				<li class="">
+					<div class="NO2">
+						<p class="p1">
+							<i class="iconBonus iconBonus2"></i>
+						</p>
+						<p class="line am-ft-red">
+							<span class="am-ft-sm">￥</span><b class="am-ft-md" id="rankAmount2"></b>
+						</p>
+						<p class="p1">
+							<span class="am-ft-sm">NO.2</span>
+						</p>
+					</div>
+				</li>
+				<li class="">
+					<div class="NO3">
+						<p class="p1">
+							<i class="iconBonus iconBonus3"></i>
+						</p>
+						<p class="line am-ft-red">
+							<span class="am-ft-sm">￥</span><b class="am-ft-md" id="rankAmount3"></b>
+						</p>
+						<p class="p1">
+							<span class="am-ft-sm">NO.3</span>
+						</p>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<!--奖金-->
+
+		<ol class="nav-contestInfo">
+			<li>
+				<div class="clearfix">
+					<span class="cm-left number"><i>01</i></span>
+					<div class="cm-right">
+						<p>
+							<span class="am-ft-lg">赠送<b class="am-ft-orange" id="loanAmount"></b>元实盘资金
+							</span>
+						</p>
+						<p class="p2">
+							<span class="am-ft-sm am-ft-gray">完全免费</span>
+						</p>
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class="clearfix">
+					<span class="cm-left number"><i>02</i></span>
+					<div class="cm-right">
+						<p>
+							<span class="am-ft-lg">缴纳 <b class="am-ft-orange" id="riskAmount"></b>元
+								保证金
+							</span>
+						</p>
+						<p class="p2">
+							<span class="am-ft-sm am-ft-gray">结束时如无亏损全额返还如亏损扣除亏损剩余返还</span>
+						</p>
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class="clearfix">
+					<span class="cm-left number"><i>03</i></span>
+					<div class="cm-right">
+						<p>
+							<span class="am-ft-lg">总共<b class="am-ft-orange" id="allAmount"></b>元
+								实盘资金
+							</span>
+						</p>
+						<p class="p2">
+							<span class="am-ft-sm am-ft-gray">由您操盘，盈利归您，亏损在您的保证金中扣除</span>
+						</p>
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class="clearfix">
+					<span class="cm-left number"><i>04</i></span>
+					<div class="cm-right">
+						<p>
+							<span class="am-ft-lg">比赛<b class="am-ft-orange">1</b>个月
+							</span>
+						</p>
+						<p class="p2">
+							<span class="am-ft-sm am-ft-gray">公布战绩，发放奖金</span>
+						</p>
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class="clearfix">
+					<span class="cm-left number"><i>05</i></span>
+					<div class="cm-right">
+						<p>
+							<span class="am-ft-lg">盈利归你，亏损自负</span>
+						</p>
+						<p class="p2">
+							<span class="am-ft-sm am-ft-gray">交易账户总资产低于</span><span id="exposureAmount"></span><span>元时自动平仓并退出比赛，剩余保证金退还给您</span>
+						</p>
+					</div>
+				</div>
+			</li>
+		</ol>
+
+
+		<div class="bgBonus">
+			<span class="am-ft-lg">报名费<b class="am-ft-orange">0</b>元 <span
+				class="am-ft-sm am-ft-gray">如有疑问请联系客服：<a href="###">021-5889-9999</a></span></span>
+		</div>
+
+
+	</div>
+</article>
+</#macro> <#macro footerContent>
+
+<!--按钮-->
+<div id="addBtn1"
+	class="btn-page btn-page-center bg-white con-spacing15">
+	<a class="am-button am-button-red"> <span class="am-ft-white">开始报名</span>
+	</a>
+
+</div>
+<!--按钮-->
+
+</#macro>

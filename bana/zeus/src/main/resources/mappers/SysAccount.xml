@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SysAccount">
+    <select id="getSysAccountList" resultType="com.caimao.zeus.admin.entity.SysAccount">
+        SELECT
+        id,
+        available_amount AS availableAmount,
+        alias_name AS aliasName,
+        memo
+        FROM csys_account
+        ORDER BY id ASC
+    </select>
+
+    <select id="getSysAccountById" resultType="com.caimao.zeus.admin.entity.SysAccount">
+        SELECT
+        id,
+        available_amount AS availableAmount,
+        alias_name AS aliasName,
+        memo
+        FROM csys_account
+        WHERE id = #{id}
+    </select>
+
+    <select id="getSysAccountByIdForUpdate" resultType="com.caimao.zeus.admin.entity.SysAccount">
+        SELECT
+        id,
+        available_amount AS availableAmount,
+        alias_name AS aliasName,
+        memo
+        FROM csys_account
+        WHERE id = #{id}
+    </select>
+
+    <insert id="insertSysAccount" parameterType="com.caimao.zeus.admin.entity.SysAccount" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO csys_account (available_amount, alias_name, memo)
+        VALUES (0, #{aliasName}, #{memo})
+    </insert>
+
+    <update id="updateSysAccount" parameterType="map">
+        UPDATE csys_account
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="_parameter.containsKey('aliasName')">
+                alias_name=#{aliasName},
+            </if>
+            <if test="_parameter.containsKey('memo')">
+                memo=#{memo},
+            </if>
+        </trim>
+        <where>
+            id=#{id}
+        </where>
+    </update>
+
+    <update id="updateSysAccountBalance" parameterType="map">
+        UPDATE csys_account
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="_parameter.containsKey('availableAmount')">
+                available_amount = available_amount + #{availableAmount},
+            </if>
+        </trim>
+        <where>
+            id=#{id}
+        </where>
+    </update>
+
+    <insert id="insertSysAccountJour" parameterType="com.caimao.zeus.admin.entity.SysAccountJour" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO csys_account_jour (sys_account_id,ext_id,trans_type,trans_amount,pre_amount,post_amount,remark,created)
+        VALUES (#{sysAccountId}, #{extId}, #{transType}, #{transAmount}, #{preAmount}, #{postAmount}, #{remark}, now())
+    </insert>
+
+    <select id="queryChangeBalanceJourResWithPage" resultType="com.caimao.zeus.admin.entity.res.ChangeBalanceJourRes" parameterType="com.caimao.zeus.admin.entity.req.ChangeBalanceJourReq" >
+        SELECT
+        t1.id,
+        t1.sys_account_id AS sysAccountId,
+        t1.ext_id AS extId,
+        t1.trans_type AS transType,
+        t1.trans_amount AS transAmount,
+        t1.pre_amount AS preAmount,
+        t1.post_amount AS postAmount,
+        t1.remark,
+        t1.created,
+        t2.alias_name AS aliasName
+        FROM csys_account_jour t1 LEFT JOIN csys_account t2 ON t1.sys_account_id = t2.id
+        WHERE 1=1
+        <if test="sysAccountId != null">
+            AND t1.sys_account_id = #{sysAccountId}
+        </if>
+        <if test="transType != null">
+            AND t1.trans_type = #{transType}
+        </if>
+        <if test="startDate != null and  startDate != ''">
+            AND t1.created &gt;= #{startDate}
+        </if>
+        <if test="endDate != null and  endDate != ''">
+            AND t1.created &lt;= #{endDate}
+        </if>
+        <trim prefix="ORDER BY ">
+            <if test="orderColumn != null and  orderColumn != ''">
+                ${orderColumn} ${orderDir}
+            </if>
+        </trim>
+    </select>
+</mapper>

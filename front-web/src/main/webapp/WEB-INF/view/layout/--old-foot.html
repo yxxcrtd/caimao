@@ -1,0 +1,70 @@
+<div class="footer clearfix" style="overflow: visible;">
+        <div class="footer-wrapper grid1050 clearfix">
+
+            <div class="ft-left">
+                <!--关于我们链接、专业合作机构-->
+                <div class="ft-left-inner clearfix">
+                    <!--关于我们link 链接-->
+                    <div class="inner-links">
+                        <h2>关于我们</h2>
+                        <ul>
+                            <li><a href="${basePath}/company-intro.htm">公司简介</a></li>
+                            <li><a href="${basePath}/company-qualification.htm">公司资质</a></li>
+                            <li><a href="${basePath}/security.htm">安全保障</a></li>
+                            <li><a href="${basePath}/company-culture.htm">企业文化</a></li>
+                            <li><a href="${basePath}/development-history.htm">发展历程</a></li>
+                            <li><a href="${basePath}/shareholder.htm">股东背景</a></li>
+                            <li><a href="${basePath}/manage-team.htm">管理团队</a></li>
+                            <li><a href="${basePath}/join-us.htm">加入我们</a></li>
+                            <li><a href="${basePath}/safeguards.htm">保障措施</a></li>
+                            <li><a href="${basePath}/platform-advantage.htm">平台优势</a></li>
+                        </ul>
+                    </div>
+                    <div class="concern-us">
+                            <h2>关注我们</h2>
+                            <div class="concern-us-sign" style="position: relative;">
+                                <#if weiboUrl><a target="_blank" href="${weiboUrl}"><i class="fa fa-weibo fa-lg" title="新浪微博"></i></a></#if>
+                                <a target="_blank" href="http://wpa.b.qq.com/cgi/wpa.php?ln=1&uin=${QQ}"><i class="fa fa-qq fa-lg" title="qq"></i></a>
+                                <#if wechatImg>
+                                <i class="fa fa-weixin fa-lg" title="微信">
+	                                <div class="ewm-box">
+	                            		<i class="i-slip"></i>
+	                            		<img class="footer-weixin" src="${dojoUrl}/app/resources/image/customize/${wechatImg}"></img>
+	                            	</div>
+                                </i>
+                            	</#if>
+                            	
+                            </div>
+                    <div class="down-load">
+                        <div class="down-load-left">
+                            <h2>交易软件下载</h2>
+                            <a target="_blank" href="//www.ihoms.com/www/download/download.do"><div class="sign-homs"></div></a>
+                            
+                        </div>
+                        
+                    </div>
+                            
+                        </div>
+                    
+                </div>
+                <!--关于我们链接、专业合作机构 end-->
+                
+            </div>
+
+            <div class="ft-right">
+                <div class="ft-right-inner">
+                    <h2><a href="${basePath}/contact-us.htm">联系我们</a></h2>
+                    <p><span><i class="fa phone-icon">&#xf095;</i>${hotline}</span>
+                    <#if email><em class="line">|</em><span><i class="fa email-icon">&#xf064;</i>
+                    <a href="mailto:${email}">${email}</a></span></#if></p>
+                    <p>地址：${address}</p>
+                </div>
+                
+            </div>
+            
+            <div class="footer-record">
+            	<p>版权所有 © ${company}</p>
+            	<p>${webRecord}</p>
+            </div>
+        </div>
+    </div>

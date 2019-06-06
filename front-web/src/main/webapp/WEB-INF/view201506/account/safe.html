@@ -1,0 +1,123 @@
+<!doctype html>
+<html>
+<#include "config.html"/>
+<#assign curTopMenu="account"/>
+<#assign curLeftMenu="security"/>
+<head>
+    <meta charset="utf-8">
+    <title>账户安全-财猫网</title>
+    <meta name="keywords" content="融资，股票融资，投资融资，理财融资，融资平台，融资炒股，融资网，融资公司" />
+	<meta name="description" content="财猫网由金融服务、风险管理及互联网运营等业界一流的专业人士组成的超百人全职运营团队。提供股票融资服务，致力于为公众提供一个国际化、高收益、安全、专业的互联网资产交易平台"/>
+    <!--基本布局样式-->
+    <link rel="stylesheet" type="text/css" href="${dojoUrl}/style/page/page.css?v=${jsVersion}" />
+    <script type="text/javascript" src="${dojoUrl}/js/safe.js?v=${jsVersion}"></script>
+</head>
+<body>
+<#include 'include/page/head.html'/>
+<#assign umobile = cuser.mobile?substring(0,3)+'****'+cuser.mobile?substring(7,11) />
+<#assign pwdStrength=["low","medium","high"]/>
+<!--内容区-->
+<div id="main">
+    <div class="w sec_main">
+        <#include 'include/menu/account_left.html'/>
+        <div class="right_bar">
+           <h3 class="title"><span>账户安全</span></h3>
+            <h4 class="tit no_border">登录账户<b>${umobile}</b></h4>
+            <ul class="news_list">
+                <li>
+                    <h5 class="title">
+                        <span class="f_l left"><i id="jsPwdComplete" class="icons icon_complete"></i>登录密码</span>
+                        <span class="f_l mid">密码安全度 <i id="jspwdShow" class="icons icon_${pwdStrength[(loginPwdStrength?number)-1]}"></i></span>
+                        <a href="javascript:void(0);" class="f_l detail">修改</a>
+                    </h5>
+                    <div class="info hide">
+                        <!--修改登录密码-->
+                        <#include 'include/account/modify_login_pwd.html'/>
+                    </div>
+                </li>
+                <li>
+                    <h5 class="title">
+                        <span class="f_l left"><i class="icons icon_complete"></i>绑定手机</span>
+                        <span class="f_l mid"> <b>${umobile}</b>用于登录财猫网，接收重要通知消息</span>
+                        <a href="javascript:;" class="f_l detail">修改</a>
+                    </h5>
+                    <div class="info hide">
+                        <!--绑定手机-->
+                        <#include 'include/account/bind_mobile.html'/>
+                    </div>
+                </li>
+                <li>
+                    <h5 class="title">
+                        <span class="f_l left"><i id="jsTradeComplete" class="icons ${(cuser.isSetTradePwd=='1')?string('icon_complete','icon_complete_no')}"></i>安全密码</span>
+                        <#if tradeStrength == null>
+                            <span class="f_l mid">您还未设置安全密码，为了您的账户安全，请及时设置安全密码。</span>
+                        <#else/>
+                            <span class="f_l mid">密码安全度 <i id="jsTradeShow" class="icons icon_${pwdStrength[tradeStrength?number-1]}"></i></span>
+                        </#if>
+                        <a href="javascript:void(0);" class="f_l detail" ${(cuser.isSetTradePwd=='1')?string('style="width: 44px;"','')} onclick="changeShowTradePwd('set')">${(cuser.isSetTradePwd=='1')?string('修改','设置')}</a>
+                        <#if cuser.isSetTradePwd == '1'>
+                            &nbsp;&nbsp;<a href="javascript:void(0);" class="f_l detail" style="width: 60px;" onclick="changeShowTradePwd('find')">忘记？</a>
+                        </#if>
+
+                    </h5>
+                    <div class="info hide">
+                        <!--设置、修改安全密码-->
+                        <#include 'include/account/set_trade_pwd.html'/>
+                    </div>
+                </li>
+                <li>
+                    <h5 class="title">
+                        <span class="f_l left"><i class="icons ${(userPwdQuestion.totalCount==0)?string('icon_complete_no','icon_complete')}"></i>安全密码保护问题</span>
+                        <span class="f_l mid">记住您的密码保护问题及答案，以便后续密码遗忘或变更时确认是否本人修改。</span>
+                        <a href="javascript:void(0);" class="f_l detail">${(userPwdQuestion.totalCount==0)?string('设置','修改')}</a>
+                    </h5>
+                    <div class="info hide">
+                        <!--设置、找回安全密码-->
+                        <#if userPwdQuestion.totalCount == 0>
+                            <#include 'include/account/set_pwd_question.html'/>
+                        <#else/>
+                            <#include 'include/account/reset_pwd_question.html'/>
+                        </#if>
+                    </div>
+                </li>
+                <li>
+                    <h5 class="title">
+                        <span class="f_l left"><i id="jsRealStatus" class="icons ${(cuser.isTrust=='1')?string('icon_complete','icon_complete_no')}"></i>实名认证</span>
+                        <#if cuser.isTrust=="1">
+                            <span class="f_l mid">您已完成实名认证 : ${cuser.userRealName?substring(0,1)}**</span>
+                        <#else/>
+                            <span class="f_l mid">重要！你提现的银行卡信息需与实名同名才可以提现</span>
+                            <a href="javascript:void(0);" id="jsReal" class="f_l detail">认证</a>
+                        </#if>
+                    </h5>
+                    <div class="info hide">
+                        <!--用户实名认证-->
+                        <#include 'include/account/user_auth.html'/>
+                    </div>
+                </li>
+                <li>
+                    <h5 class="title">
+                        <span class="f_l left"><i id="jsMailStatus" class="icons ${(cuser.email != "")?string('icon_complete','icon_complete_no')}"></i>绑定邮箱</span>
+                        <#if cuser.email == "">
+                            <span class="f_l mid">重要通知将及时通知您</span>
+                        <#else/>
+                            <span class="f_l mid">已绑定 : ${cuser.email}</span>
+                        </#if>
+                        <a href="javascript:void(0);" class="f_l detail">${(cuser.email != "")?string('修改','绑定')}</a>
+                    </h5>
+                    <div class="info hide">
+                        <!--绑定、修改邮箱-->
+                        <#if cuser.email == "">
+                            <#include 'include/account/bind_email.html'/>
+                        <#else/>
+                            <#include 'include/account/rebind_email.html'/>
+                        </#if>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<#include 'include/page/foot.html'/>
+</body>
+</html>

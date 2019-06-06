@@ -1,0 +1,27 @@
+@charset "utf-8";
+
+@mixin tran($p:all,$t:0.5s,$f:ease){
+-webkit-transition: $p $t $f;
+   -moz-transition: $p $t $f;
+     -o-transition: $p $t $f;
+        transition: $p $t $f;
+}
+
+@mixin opacity($n:1){
+	opacity:$n;
+	filter:alpha(opacity=$n*100);
+}
+
+@mixin radius($lt,$rt:'null',$rb:'null',$lb:'null'){
+	@if($rt == 'null'){$rt : $lt}
+	@if($rb == 'null'){$rb : $lt}
+	@if($lb == 'null'){$lb : $lt}
+	-moz-border-radius:$lt $rt $rb $lb;
+	-webkit-border-radius:$lt $rt $rb $lb;
+	border-radius:$lt $rt $rb $lb;
+}
+@mixin css3($key,$val){
+	@each $prefix in -moz-,-o-,-webkit-,''{
+		#{$prefix}#{$key} : #{$val};
+	}
+}

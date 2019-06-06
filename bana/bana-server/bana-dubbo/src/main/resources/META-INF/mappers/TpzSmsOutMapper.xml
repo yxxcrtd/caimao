@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="TpzSmsOut">
+    <resultMap id="BaseResultMap" type="com.caimao.bana.api.entity.TpzSmsOutEntity" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="sms_content" property="smsContent" jdbcType="VARCHAR" />
+    <result column="sms_status" property="smsStatus" jdbcType="CHAR" />
+    <result column="sms_type" property="smsType" jdbcType="VARCHAR" />
+    <result column="send_datetime" property="sendDatetime" jdbcType="TIMESTAMP" />
+    <result column="create_datetime" property="createDatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, mobile, sms_content, sms_status, sms_type, send_datetime, create_datetime
+  </sql>
+  <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tpz_sms_out
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Long" >
+    delete from tpz_sms_out
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="save" parameterType="com.caimao.bana.api.entity.TpzSmsOutEntity" >
+    insert into tpz_sms_out
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != 0  and  id  != ''" >
+        id,
+      </if>
+      <if test="mobile != null  and  mobile  != ''" >
+        mobile,
+      </if>
+      <if test="smsContent != null  and smsContent   != ''" >
+        sms_content,
+      </if>
+      <if test="smsStatus != null  and  smsStatus  != ''" >
+        sms_status,
+      </if>
+      <if test="smsType != null  and  smsType  != ''" >
+        sms_type,
+      </if>
+      <if test="sendDatetime != null  and sendDatetime   != ''" >
+        send_datetime,
+      </if>
+      <if test="createDatetime != null  and createDatetime   != ''" >
+        create_datetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != 0  and  id  != ''" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="mobile != null  and  mobile  != ''" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="smsContent != null  and  smsContent  != ''" >
+        #{smsContent,jdbcType=VARCHAR},
+      </if>
+      <if test="smsStatus != null  and smsStatus   != ''" >
+        #{smsStatus,jdbcType=CHAR},
+      </if>
+      <if test="smsType != null  and  smsType  != ''" >
+        #{smsType,jdbcType=VARCHAR},
+      </if>
+      <if test="sendDatetime != null  and  sendDatetime  != ''" >
+        #{sendDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createDatetime != null  and createDatetime   != ''" >
+        #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.caimao.bana.api.entity.TpzSmsOutEntity" >
+    update tpz_sms_out
+    <set >
+      <if test="mobile != null  and  mobile  != ''" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="smsContent != null  and  smsContent  != ''" >
+        sms_content = #{smsContent,jdbcType=VARCHAR},
+      </if>
+      <if test="smsStatus != null  and smsStatus   != ''" >
+        sms_status = #{smsStatus,jdbcType=CHAR},
+      </if>
+      <if test="smsType != null  and smsType   != ''" >
+        sms_type = #{smsType,jdbcType=VARCHAR},
+      </if>
+      <if test="sendDatetime != null  and sendDatetime   != ''" >
+        send_datetime = #{sendDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createDatetime != null  and  createDatetime  != ''" >
+        create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <!-- user-defined -->
+  <sql id="where_condition">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="mobile != null and  mobile != ''">
+				AND t.mobile = #{mobile}
+			</if>
+			<if test="smsStatus != null and  smsStatus != ''">
+				AND t.sms_status = #{smsStatus}			
+			</if>
+			<if test="smsType != null and  smsType != ''">
+				AND t.sms_type = #{smsType}
+			</if>
+			<if test="createDatetimeBegin != null and  createDatetimeBegin != ''">
+				AND t.create_datetime &gt;= #{createDatetimeBegin}
+			</if>
+			<if test="createDatetimeEnd != null and  createDatetimeEnd != ''">
+				AND t.create_datetime &lt;= #{createDatetimeEnd}
+			</if>
+		</trim>
+	</sql>
+
+
+  <!--获取指定号码，在指定时间后发送的短信条数-->
+  <select id="getSmsCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+    SELECT count(*) as cnt
+    from tpz_sms_out
+    where mobile = #{mobile} and create_datetime &gt;= #{beginTime} and sms_type = #{smsType}
+  </select>
+<!-- 	 <sql id="where_condition831918"> -->
+<!-- 		<trim prefix="WHERE" prefixOverrides="AND | OR"> -->
+<!-- 			<if test="smsStatus != null and  smsStatus != ''"> -->
+<!-- 				AND t.sms_status = #{smsStatus}			 -->
+<!-- 			</if> -->
+			 
+<!-- 		</trim> -->
+<!-- 	</sql> -->
+<!--   <select id="queryF831905ResWithPage" resultMap="F831905ResMap" parameterType="com.hsnet.pz.biz.base.dto.req.F831905Req" > -->
+<!--     select  -->
+<!--     <include refid="Base_Column_List" /> -->
+<!--     from tpz_sms_out t -->
+<!--     <include refid="where_condition"/> -->
+<!--     <trim prefix="ORDER BY "> -->
+<!-- 			<if test="orderColumn != null and  orderColumn != ''"> -->
+<!-- 				${orderColumn} ${orderDir}  -->
+<!-- 			</if> -->
+<!-- 		</trim> -->
+<!--   </select> -->
+<!--   <select id="queryF831918ResWithPage" resultMap="F831918ResMap" parameterType="com.hsnet.pz.biz.base.dto.req.F831918Req" > -->
+<!--     select  -->
+<!--     <include refid="Base_Column_List" /> -->
+<!--     from tpz_sms_out t -->
+<!--     <include refid="where_condition831918"/> -->
+<!--     <trim prefix="ORDER BY "> -->
+<!-- 			<if test="orderColumn != null and  orderColumn != ''"> -->
+<!-- 				${orderColumn} ${orderDir}  -->
+<!-- 			</if> -->
+<!-- 		</trim> -->
+<!--   </select> -->
+
+  <!--查询已发短信但未注册的用户-->
+  <select id="queryUnRegisterMobileWithPage" resultType="com.caimao.bana.api.entity.res.FSmsListRes" parameterType="com.caimao.bana.api.entity.req.FSmsListReq">
+    SELECT id, mobile, create_datetime AS createDatetime FROM (SELECT id, mobile, create_datetime FROM tpz_sms_out
+    <where>
+      NOT mobile IN (SELECT phoneNo FROM ybk_account)
+      <if test="null != id and '' != id"><![CDATA[ and id=#{id}]]></if>
+      <if test="null != mobile and '' != mobile"><![CDATA[ and mobile like concat('%', #{mobile, jdbcType=VARCHAR}, '%')]]></if>
+      <if test="null != startDate and '' != startDate"><![CDATA[ and create_datetime >= #{startDate}]]></if>
+      <if test="null != endDate and '' != endDate"><![CDATA[ and create_datetime >= #{endDate}]]></if>
+    </where>
+    GROUP BY mobile) AS t
+    ORDER BY create_datetime DESC
+  </select>
+
+</mapper>

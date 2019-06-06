@@ -1,0 +1,210 @@
+<#assign controller="NewGuidelines"/>
+<#include 'layout/layout.html'/>
+<#macro content>
+    <style type="text/css">
+        .topic_head{
+            background: #3d5ec9;
+        }
+        .topic_head .col_1,.topic_head .col_2,.topic_head .col_3,.topic_head .col_4{
+            height: 155px;
+        }
+        .topic_head .col_1{
+            background: url('${dojoUrl}/app/resources/custom/images/topic/topic_150511/topic_head_01.png') no-repeat 50% 0;
+        }
+        .topic_head .col_2{
+            background: url('${dojoUrl}/app/resources/custom/images/topic/topic_150511/topic_head_02.png') no-repeat 50% 0;
+        }
+        .topic_head .col_3{
+            background: url('${dojoUrl}/app/resources/custom/images/topic/topic_150511/topic_head_03.png') no-repeat 50% 0;
+        }
+        .topic_head .col_4{
+            background: url('${dojoUrl}/app/resources/custom/images/topic/topic_150511/topic_head_04.png') no-repeat 50% 0;
+            height: 145px;
+            position: relative;
+
+        }
+        .topic_head .col_4:after{
+            content: '';
+            display: block;
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 10px solid #56ce97;
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            margin-left: -10px;
+        }
+        .topic_head .col_3 a{
+            display: block;
+            height: 100px;
+            width: 570px;
+            margin: 0 auto;
+        }
+        .topic_text{
+            padding: 0 55px;
+        }
+        .topic_title{
+            font-size: 21px;
+            background: #7dadfe;
+            color: #FFF;
+            width: 205px;
+            height: 50px;
+            line-height: 50px;
+            border-radius: 50px;
+            text-align: center;
+        }
+        .topic_t p{
+            line-height: 26px;
+            font-size: 14px;
+        }
+        .topic_body{
+            background: #7dadfe;
+        }
+        .topic_body .col_1,.topic_body .col_2,.topic_body .col_3,.topic_body .col_4{
+            height: 179px;
+        }
+        .topic_body .col_1{
+            background: url('${dojoUrl}/app/resources/custom/images/topic/topic_150511/topic_body_01.png') no-repeat 50% 0;
+        }
+        .topic_body .col_2{
+            background: url('${dojoUrl}/app/resources/custom/images/topic/topic_150511/topic_body_02.png') no-repeat 50% 0;
+        }
+        .topic_body .col_3{
+            background: url('${dojoUrl}/app/resources/custom/images/topic/topic_150511/topic_body_03.png') no-repeat 50% 0;
+            height: 178px;
+        }
+        .topic_body .col_4{
+            background: url('${dojoUrl}/app/resources/custom/images/topic/topic_150511/topic_body_04.png') no-repeat 50% 0;
+            height: 168px;
+            position: relative;
+        }
+        .topic_body .col_4:after{
+            content: '';
+            display: block;
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 10px solid #7dadfe;
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            margin-left: -10px;
+        }
+        .topic_invite{
+
+            background:#FFF url('${dojoUrl}/app/resources/custom/images/topic/topic_150511/topic_invite.png') no-repeat 50% 0;
+            padding-top: 150px;
+            height: 90px;
+        }
+        .topic_foot{
+            height: 300px;
+            background:#7dadfe url('${dojoUrl}/app/resources/custom/images/topic/topic_150511/topic_foot.png') no-repeat 50% 0;
+        }
+        .invite_box{
+            margin-left:260px;
+            color: #6c94e4;
+            height: 32px;
+            line-height: 32px;
+            cursor: pointer;
+            position: relative;
+        }
+        .invite_box span{
+            vertical-align: middle;
+            height: 32px;
+            padding: 0 10px;
+            display: inline-block;
+            line-height: 30px;
+
+        }
+        .invite_box .invite_link{
+            border: 1px solid #d0d1d4;
+            box-shadow: 0 0 2px #CCC;
+            height: 30px;
+            width: 500px;
+            padding: 0 10px;
+        }
+        .invite_box .invite_btn{
+            background: #e59345;
+            color: #FFF;
+        }
+        .invite_box .msg{
+            display: block;
+            position: absolute;
+            background: #71a1f2;
+            height: 20px;
+            line-height: 20px;
+            top: -18px;
+            left: 50%;
+            color: #FFF;
+            font-size: 12px;
+            padding: 0 10px;
+            width: 160px;
+            margin-left: -90px;
+            text-align: center;
+
+        }
+    </style>
+    <div id="doc_body" class="bg_gray">
+
+        <div class="topic_wrap">
+            <div class="topic_head">
+                <div class="col_1"></div>
+                <div class="col_2"></div>
+                <div class="col_3">
+                    <a href="${basePath}/user/register.htm"></a>
+                </div>
+                <div class="col_4"></div>
+            </div>
+
+            <div class="section" style="padding: 30px 0;">
+                <div class="topic_text">
+                    <h3 class="topic_title">活动规划</h3>
+                    <div class="topic_t">
+                        <p>1.日融资用户前3天免息；月融资用户前3天免息。（每名用户只限一次免息）</p>
+                        <p>2.返息时间：每日16:00前融资的用户，当日16:00-18:00返息到账户；每日16:00后融资的用户，次日16:00-18:00返息到账户。</p>
+                        <p>3.活动期间月融资额度超过30万，送招财猫一个。</p>
+                        <p>4.活动期间月融资额度超过100万，送50G银币一枚。</p>
+                        <p>5.活动期间月融资额度超过200万，送Apple Watch一个。</p>
+                        <p>6.活动期间月融资额度超过300万，送iPhone6一个。</p>
+                        <p>7.活动奖品在活动结束后统一发放</p>
+                        <p>8.活动时间：2015年5月12日-2015年5月22日</p>
+                        <p>9.本活动最终解释权归财猫网所有。</p>
+                    </div>
+                </div>
+            </div>
+            <div class="topic_body">
+                <div class="col_1"></div>
+                <div class="col_2"></div>
+                <div class="col_3"></div>
+                <div class="col_4"></div>
+            </div>
+            <!--<div class="topic_invite">
+                <div class="section">
+                    <div class="invite_box" id="copy_url" data-clipboard-text="aaa">
+                        您的推广链接
+                        <input class="invite_link" type="text" value="aaa" /><span class="invite_btn">复制</span>
+                        <b class="msg" id="copy_tip" style="display: none">复制成功</b>
+                    </div>
+                </div>
+            </div>-->
+            <div class="topic_foot">
+            </div>
+        </div>
+
+    </div>
+    <!--<script src="${dojoUrl}/app/resources/custom/images/topic/topic_150511/ZeroClipboard.min.js"></script>
+    <script>
+        var CopyUrl = new ZeroClipboard( document.getElementById('copy_url')),
+                CopyTip = document.getElementById('copy_tip');
+
+        CopyUrl.on( "ready", function( readyEvent ) {
+            CopyUrl.on( "aftercopy", function( event ) {
+                CopyTip.style.display = 'block';
+            });
+
+        });
+    </script>-->
+</#macro>

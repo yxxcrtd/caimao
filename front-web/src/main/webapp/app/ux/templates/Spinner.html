@@ -1,0 +1,11 @@
+<div class="dijit dijitReset dijitInline dijitLeft customSpinner" id="widget_${id}" role="presentation">
+	<div class="dijitReset dijitLeft dijitButtonNode dijitArrowButton dijitDownArrowButton" data-dojo-attach-point="downArrowNode">
+		<i class="fa">&#xf068;</i>
+	</div>
+	<div class="dijitReset dijitInputField dijitInputContainer" data-dojo-attach-point="inputFieldNode">
+		<input class='dijitReset dijitInputInner' data-dojo-attach-point="textbox,focusNode" type="${type}" data-dojo-attach-event="onkeydown:_onKeyDown" role="spinbutton" autocomplete="off" ${!nameAttrSetting}/>
+	</div>
+	<div class="dijitReset dijitLeft dijitButtonNode dijitArrowButton dijitUpArrowButton" data-dojo-attach-point="upArrowNode">
+		<i class="fa">&#xf067;</i>
+	</div>
+</div>

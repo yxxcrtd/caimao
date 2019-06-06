@@ -1,0 +1,806 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ZeusStatistics">
+    <select id="queryUserDepositTotal" resultType="java.lang.Long">
+        SELECT SUM(order_amount) FROM tpz_charge_order WHERE order_status = '03' AND user_id = #{userId}
+    </select>
+
+    <select id="queryUserWithdrawTotal" resultType="java.lang.Long">
+        SELECT SUM(order_amount) FROM tpz_withdraw_order WHERE order_status IN('03', '06') AND user_id = #{userId}
+    </select>
+
+    <select id="queryLastWithdrawSuccess" resultType="date">
+        SELECT verify_datetime
+        FROM tpz_withdraw_order
+        WHERE user_id = #{userId} AND order_status = '03'
+        ORDER BY order_no DESC LIMIT 1
+    </select>
+
+    <select id="queryIsHasBadJour" resultType="Long" parameterType="hashmap">
+        SELECT COUNT(*)
+        FROM tpz_homs_account_jour
+        WHERE user_id = #{userId} AND trans_datetime &gt;= #{dateStart} AND trans_datetime &lt; #{dateEnd} AND LENGTH(ref_serial_no) &gt; 10
+    </select>
+
+    <select id="queryHomsAccountJourListWithPage" resultType="com.caimao.bana.api.entity.TpzHomsAccountJourEntity" parameterType="com.caimao.bana.api.entity.req.FTPZQueryHomsAccountJourReq">
+        SELECT
+        t1.id,
+        t1.user_id AS userId,
+        t1.pz_account_id AS pzAccountId,
+        t1.homs_fund_account AS homsFundAccount,
+        t1.homs_combine_id AS homsCombineId,
+        t1.homs_manage_id AS homsManageId,
+        t1.trans_amount AS transAmount,
+        t1.trans_datetime AS transDatetime,
+        t1.post_amount AS postAmount,
+        t1.seq_flag AS seqFlag,
+        t1.account_biz_type AS accountBizType,
+        t1.ref_serial_no AS refSerialNo,
+        t1.remark,
+        t1.work_date AS workDate,
+        t2.user_real_name AS userName,
+        t2.mobile AS mobile
+        FROM tpz_homs_account_jour t1
+        LEFT JOIN tpz_user t2 ON t1.user_id = t2.user_id
+        <where>
+            <if test="userId!=null and userId != ''"><![CDATA[ and t1.user_id=#{userId}]]></if>
+            <if test="userName!=null and userName != ''"><![CDATA[ and t2.user_real_name like concat('%', #{userName,jdbcType=VARCHAR}, '%')]]></if>
+            <if test="mobile!=null and mobile != ''"><![CDATA[ and t2.mobile = #{mobile}]]></if>
+            <if test="accountBizType!=null and accountBizType!=''"><![CDATA[ and t1.account_biz_type = #{accountBizType}]]></if>
+            <if test="dateStart!=null and dateStart!=''"><![CDATA[ and t1.trans_datetime >= #{dateStart}]]></if>
+            <if test="dateEnd!=null and dateEnd!=''"><![CDATA[ and t1.trans_datetime < #{dateEnd}]]></if>
+        </where>
+        <trim prefix="ORDER BY ">
+            <if test="orderColumn != null and  orderColumn != ''">
+                ${orderColumn} ${orderDir}
+            </if>
+        </trim>
+    </select>
+
+    <select id="queryUserAccountJourListWithPage" resultType="com.caimao.bana.api.entity.TpzAccountJourEntity" parameterType="com.caimao.bana.api.entity.req.FTPZQueryUserAccountJourReq">
+        SELECT
+        t1.id AS id,
+        t1.pz_account_id AS pzAccountId,
+        t1.user_id AS userId,
+        t1.trans_datetime AS transDatetime,
+        t1.account_biz_type AS accountBizType,
+        t1.trans_amount AS transAmount,
+        t1.pre_amount AS preAmount,
+        t1.post_amount AS postAmount,
+        t1.seq_flag AS seqFlag,
+        t1.ref_serial_no AS refSerialNo,
+        t1.remark AS remark,
+        t1.work_date AS workDate,
+        t1.version AS version,
+        t2.user_real_name AS userName,
+        t2.mobile AS mobile
+        FROM tpz_account_jour t1
+        LEFT JOIN tpz_user t2 ON t1.user_id = t2.user_id
+        <where>
+            <if test="userId!=null and userId != ''"><![CDATA[ and t1.user_id=#{userId}]]></if>
+            <if test="userName!=null and userName != ''"><![CDATA[ and t2.user_real_name like concat('%', #{userName,jdbcType=VARCHAR}, '%')]]></if>
+            <if test="mobile!=null and mobile != ''"><![CDATA[ and t2.mobile = #{mobile}]]></if>
+            <if test="accountBizType!=null and accountBizType!=''"><![CDATA[ and t1.account_biz_type = #{accountBizType}]]></if>
+            <if test="dateStart!=null and dateStart!=''"><![CDATA[ and t1.trans_datetime >= #{dateStart}]]></if>
+            <if test="dateEnd!=null and dateEnd!=''"><![CDATA[ and t1.trans_datetime < #{dateEnd}]]></if>
+        </where>
+        <trim prefix="ORDER BY ">
+            <if test="orderColumn != null and  orderColumn != ''">
+                ${orderColumn} ${orderDir}
+            </if>
+        </trim>
+    </select>
+
+    <insert id="saveHomsFinanceHistory" parameterType="hashmap" useGeneratedKeys="true" keyProperty="id">
+        insert into bana_homs_finance_history
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="transDate != null" >
+                trans_date,
+            </if>
+            trans_no,
+            <if test="transBizType != null" >
+                trans_biz_type,
+            </if>
+            <if test="stockCode != null" >
+                stock_code,
+            </if>
+            <if test="stockName != null" >
+                stock_name,
+            </if>
+            <if test="account != null" >
+                account,
+            </if>
+            <if test="accountUnitNo != null" >
+                account_unit_no,
+            </if>
+            <if test="accountUnitName != null" >
+                account_unit_name,
+            </if>
+            <if test="transAmount != null" >
+                trans_amount,
+            </if>
+            <if test="postAmount != null" >
+                post_amount,
+            </if>
+            <if test="entrustDirection != null" >
+                entrust_direction,
+            </if>
+            <if test="entrustPrice != null" >
+                entrust_price,
+            </if>
+            <if test="entrustAmount != null" >
+                entrust_amount,
+            </if>
+            <if test="tradeFee != null" >
+                trade_fee,
+            </if>
+            <if test="stampDuty != null" >
+                stamp_duty,
+            </if>
+            <if test="transferFee != null" >
+                transfer_fee,
+            </if>
+            <if test="commission != null" >
+                commission,
+            </if>
+            <if test="handlingFee != null" >
+                handling_fee,
+            </if>
+            <if test="secCharges != null" >
+                sec_charges,
+            </if>
+            <if test="currency != null" >
+                currency,
+            </if>
+            <if test="transSubject != null" >
+                trans_subject,
+            </if>
+            <if test="subjectTransAmount != null" >
+                subject_trans_amount,
+            </if>
+            <if test="subjectPostAmount != null" >
+                subject_post_amount,
+            </if>
+            <if test="remark != null" >
+                remark,
+            </if>
+            <if test="technicalServices != null" >
+                technical_services,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="transDate != null" >
+                #{transDate},
+            </if>
+            #{transNo},
+            <if test="transBizType != null" >
+                #{transBizType},
+            </if>
+            <if test="stockCode != null" >
+                #{stockCode},
+            </if>
+            <if test="stockName != null" >
+                #{stockName},
+            </if>
+            <if test="account != null" >
+                #{account},
+            </if>
+            <if test="accountUnitNo != null" >
+                #{accountUnitNo},
+            </if>
+            <if test="accountUnitName != null" >
+                #{accountUnitName},
+            </if>
+            <if test="transAmount != null" >
+                #{transAmount},
+            </if>
+            <if test="postAmount != null" >
+                #{postAmount},
+            </if>
+            <if test="entrustDirection != null" >
+                #{entrustDirection},
+            </if>
+            <if test="entrustPrice != null" >
+                #{entrustPrice},
+            </if>
+            <if test="entrustAmount != null" >
+                #{entrustAmount},
+            </if>
+            <if test="tradeFee != null" >
+                #{tradeFee},
+            </if>
+            <if test="stampDuty != null" >
+                #{stampDuty},
+            </if>
+            <if test="transferFee != null" >
+                #{transferFee},
+            </if>
+            <if test="commission != null" >
+                #{commission},
+            </if>
+            <if test="handlingFee != null" >
+                #{handlingFee},
+            </if>
+            <if test="secCharges != null" >
+                #{secCharges},
+            </if>
+            <if test="currency != null" >
+                #{currency},
+            </if>
+            <if test="transSubject != null" >
+                #{transSubject},
+            </if>
+            <if test="subjectTransAmount != null" >
+                #{subjectTransAmount},
+            </if>
+            <if test="subjectPostAmount != null" >
+                #{subjectPostAmount},
+            </if>
+            <if test="remark != null" >
+                #{remark},
+            </if>
+            <if test="technicalServices != null" >
+                #{technicalServices},
+            </if>
+        </trim>
+    </insert>
+
+    <insert id="saveHomsFinanceHistoryBatch" parameterType="java.util.List">
+        insert into bana_homs_finance_history
+        (
+        account,
+        account_unit_name,
+        account_unit_no,
+        commission,
+        currency,
+        entrust_amount,
+        entrust_direction,
+        entrust_price,
+        handling_fee,
+        post_amount,
+        remark,
+        sec_charges,
+        stamp_duty,
+        stock_code,
+        stock_name,
+        subject_post_amount,
+        subject_trans_amount,
+        technical_services,
+        trade_fee,
+        trans_amount,
+        trans_biz_type,
+        trans_date,
+        trans_no,
+        trans_subject,
+        transfer_fee
+        ) VALUES
+        <foreach item="item" index="index" collection="list" open="" separator="," close="">
+            (
+            #{item.account},
+            #{item.accountUnitName},
+            #{item.accountUnitNo},
+            #{item.commission},
+            #{item.currency},
+            #{item.entrustAmount},
+            #{item.entrustDirection},
+            #{item.entrustPrice},
+            #{item.handlingFee},
+            #{item.postAmount},
+            #{item.remark},
+            #{item.secCharges},
+            #{item.stampDuty},
+            #{item.stockCode},
+            #{item.stockName},
+            #{item.subjectPostAmount},
+            #{item.subjectTransAmount},
+            #{item.technicalServices},
+            #{item.tradeFee},
+            #{item.transAmount},
+            #{item.transBizType},
+            #{item.transDate},
+            #{item.transNo},
+            #{item.transSubject},
+            #{item.transferFee}
+            )
+        </foreach>
+    </insert>
+
+    <select id="queryHomsJourListWithPage" resultType="com.caimao.bana.api.entity.zeus.BanaHomsFinanceHistoryEntity" parameterType="com.caimao.bana.api.entity.req.FZeusHomsJourReq">
+        SELECT
+        id AS id,
+        trans_date AS transDate,
+        trans_no AS transNo,
+        trans_biz_type AS transBizType,
+        stock_code AS stockCode,
+        stock_name AS stockName,
+        account AS account,
+        account_unit_no AS accountUnitNo,
+        account_unit_name AS accountUnitName,
+        trans_amount AS transAmount,
+        post_amount AS postAmount,
+        entrust_direction AS entrustDirection,
+        entrust_price AS entrustPrice,
+        entrust_amount AS entrustAmount,
+        trade_fee AS tradeFee,
+        stamp_duty AS stampDuty,
+        transfer_fee AS transferFee,
+        commission AS commission,
+        handling_fee AS handlingFee,
+        sec_charges AS secCharges,
+        currency AS currency,
+        trans_subject AS transSubject,
+        subject_trans_amount AS subjectTransAmount,
+        subject_post_amount AS subjectPostAmount,
+        remark AS remark,
+        technical_services AS technicalServices
+        FROM bana_homs_finance_history
+        <where>
+            <if test="transNo!=null and transNo != ''"><![CDATA[ and trans_no>=#{transNo}]]></if>
+            <if test="transBizType!=null and transBizType != ''"><![CDATA[ and trans_biz_type = #{transBizType}]]></if>
+            <if test="stockCode!=null and stockCode!=''"><![CDATA[ and stock_code = #{stockCode}]]></if>
+            <if test="stockName!=null and stockName!=''"><![CDATA[ and stock_name = #{stockName}]]></if>
+            <if test="account!=null and account!=''"><![CDATA[ and account like concat('%', #{account}, '%')]]></if>
+            <if test="accountUnitNo!=null and accountUnitNo!=''"><![CDATA[ and account_unit_no = #{accountUnitNo}]]></if>
+            <if test="accountUnitName!=null and accountUnitName!=''"><![CDATA[ and account_unit_name like concat('%', #{accountUnitName}, '%')]]></if>
+            <if test="transAmount!=null and transAmount!=''"><![CDATA[ and trans_amount = #{transAmount}]]></if>
+            <if test="accountType == 1"><![CDATA[ and account_unit_name like concat('%', '管理单元', '%')]]></if>
+            <if test="accountType == 2"><![CDATA[ and account_unit_name not like concat('%', '管理单元', '%')]]></if>
+            <if test="dateStart!=null and dateStart!=''"><![CDATA[ and trans_date >= #{dateStart}]]></if>
+            <if test="dateEnd!=null and dateEnd!=''"><![CDATA[ and trans_date < #{dateEnd}]]></if>
+        </where>
+        <trim prefix="ORDER BY ">
+            <if test="orderColumn != null and  orderColumn != ''">
+                ${orderColumn} ${orderDir}
+            </if>
+        </trim>
+    </select>
+
+    <select id="queryUserBalanceDailyListWithPage" resultType="com.caimao.bana.api.entity.zeus.ZeusUserBalanceDailyEntity" parameterType="com.caimao.bana.api.entity.req.FZeusUserBalanceDailyReq">
+        SELECT
+        available_amount AS availableAmount,
+        freeze_amount AS freezeAmount,
+        user_count AS userCount,
+        loan_interest_total AS loanInterestTotal,
+        loan_total AS loanTotal,
+        loan_total_repay AS loanTotalRepay,
+        p2p_interest_total AS p2pInterestTotal,
+        p2p_interest_total_pay AS p2pInterestTotalPay,
+        p2p_invest_total AS p2pInvestTotal,
+        p2p_invest_total_fail AS p2pInvestTotalFail,
+        p2p_invest_total_success AS p2pInvestTotalSuccess,
+        p2p_invest_total_repay AS p2pInvestTotalRepay,
+        deposit_total AS depositTotal,
+        withdraw_total AS withdrawTotal,
+        loan_balance AS loanBalance,
+        created,
+        create_datetime AS createDatetime
+        FROM zeus_user_balance_daily
+        <where>
+            <if test="dateStart!=null and dateStart!=''"><![CDATA[ and created >= #{dateStart}]]></if>
+            <if test="dateEnd!=null and dateEnd!=''"><![CDATA[ and created < #{dateEnd}]]></if>
+        </where>
+        <trim prefix="ORDER BY ">
+            <if test="orderColumn != null and  orderColumn != ''">
+                ${orderColumn} ${orderDir}
+            </if>
+        </trim>
+    </select>
+
+    <select id="userBalanceDailyBalance" resultType="hashmap">
+        SELECT
+        SUM(avalaible_amount) AS availableAmount,
+        SUM(freeze_amount) AS freezeAmount,
+        COUNT(*) AS userCount
+        FROM tpz_account
+    </select>
+
+    <select id="userBalanceDailyLoanInterest" resultType="long">
+        SELECT SUM(order_amount) FROM tpz_accrued_interest_bill
+    </select>
+
+    <select id="userBalanceDailyLoanCurrent" resultType="long">
+        SELECT SUM(loan_amount) FROM tpz_loan_contract
+    </select>
+
+    <select id="userBalanceDailyLoanHis" resultType="long">
+        SELECT SUM(loan_amount) FROM his_tpz_loan_contract
+    </select>
+
+    <select id="userBalanceDailyLoanRepay" resultType="long">
+        SELECT SUM(repay_amount) FROM his_tpz_loan_contract
+    </select>
+
+    <select id="userBalanceDailyP2PInterest" resultType="long">
+        SELECT SUM(pay_target_interest) FROM p2p_loan_record WHERE target_status IN (1, 2)
+    </select>
+
+    <select id="userBalanceDailyP2PInterestPay" resultType="long">
+        SELECT SUM(interest_value) FROM p2p_interest_record
+    </select>
+
+    <select id="userBalanceDailyP2PInvest" resultType="long">
+        SELECT SUM(invest_value) FROM p2p_invest_record
+    </select>
+
+    <select id="userBalanceDailyP2PInvestFail" resultType="long">
+        SELECT SUM(invest_value) FROM p2p_invest_record WHERE invest_status = 2
+    </select>
+
+    <select id="userBalanceDailyP2PInvestSuccess" resultType="long">
+        SELECT SUM(invest_value) FROM p2p_invest_record WHERE invest_status = 3
+    </select>
+
+    <select id="userBalanceDailyP2PInvestRepay" resultType="long">
+        SELECT SUM(invest_value) FROM p2p_invest_record WHERE invest_status = 4
+    </select>
+
+    <select id="userBalanceDailyDepositTotal" resultType="long">
+        SELECT SUM(order_amount) FROM tpz_charge_order WHERE order_status = '03'
+    </select>
+
+    <select id="userBalanceDailyWithdrawTotal" resultType="long">
+        SELECT SUM(order_amount) FROM tpz_withdraw_order WHERE order_status = '03'
+    </select>
+
+    <select id="userBalanceDailyLoanBalance" resultType="long">
+        SELECT SUM(loan_amount) FROM tpz_loan_contract
+    </select>
+
+    <insert id="userBalanceDailySave" parameterType="com.caimao.bana.api.entity.zeus.ZeusUserBalanceDailyEntity" useGeneratedKeys="true" keyProperty="created">
+        INSERT INTO zeus_user_balance_daily (available_amount, freeze_amount, user_count, loan_interest_total, loan_total, loan_total_repay, p2p_interest_total, p2p_interest_total_pay, p2p_invest_total, p2p_invest_total_fail, p2p_invest_total_success, p2p_invest_total_repay, deposit_total, withdraw_total, loan_balance, created, create_datetime)
+        VALUES (#{availableAmount}, #{freezeAmount}, #{userCount}, #{loanInterestTotal}, #{loanTotal}, #{loanTotalRepay}, #{p2pInterestTotal}, #{p2pInterestTotalPay}, #{p2pInvestTotal}, #{p2pInvestTotalFail}, #{p2pInvestTotalSuccess}, #{p2pInvestTotalRepay}, #{depositTotal}, #{withdrawTotal}, #{loanBalance}, #{created}, #{createDatetime})
+    </insert>
+
+    <select id="getTotalByBizType" resultType="long">
+        SELECT SUM(trans_amount)
+        FROM tpz_account_jour
+        WHERE user_id = #{userId}
+        AND account_biz_type = #{accountBizType}
+        AND seq_flag = #{seqFlag}
+        AND work_date &gt;= #{dateStart}
+        AND work_date &lt;= #{dateEnd}
+    </select>
+
+    <select id="getAccountTotal" resultType="long">
+        SELECT SUM(CASE WHEN seq_flag = 2 THEN trans_amount ELSE -1 * trans_amount END)
+        FROM tpz_account_jour
+        WHERE user_id = #{userId}
+        AND work_date &gt;= #{dateStart}
+        AND work_date &lt;= #{dateEnd}
+    </select>
+
+    <select id="queryHomsAccountLoanLog" parameterType="com.caimao.bana.api.entity.zeus.ZeusHomsAccountLoanLogEntity" resultType="com.caimao.bana.api.entity.zeus.ZeusHomsAccountLoanLogEntity">
+        SELECT
+        user_id AS userId,
+        pz_account_id AS pzAccountId,
+        contract_no AS contractNo,
+        homs_fund_account AS homsFundAccount,
+        homs_combine_id AS homsCombineId,
+        homs_manage_id AS homsManageId,
+        asset_id AS assetId,
+        begin_amount AS beginAmount,
+        operator_no AS operatorNo,
+        create_datetime AS createDatetime
+        FROM zeus_homs_account_loan_log
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="userId != null">
+                AND user_id = #{userId}
+            </if>
+            <if test="homsCombineId != null and homsCombineId != ''">
+                AND homs_combine_id = #{homsCombineId}
+            </if>
+            <if test="createDatetime != null and createDatetime != ''">
+                AND create_datetime = #{createDatetime}
+            </if>
+        </trim>
+    </select>
+
+    <insert id="saveHomsAccountLoanLog" parameterType="com.caimao.bana.api.entity.zeus.ZeusHomsAccountLoanLogEntity">
+        insert into zeus_homs_account_loan_log
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            user_id,
+            pz_account_id,
+            <if test="contractNo != null" >
+                contract_no,
+            </if>
+            homs_fund_account,
+            homs_combine_id,
+            homs_manage_id,
+            asset_id,
+            begin_amount,
+            operator_no,
+            create_datetime
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            #{userId},
+            #{pzAccountId},
+            <if test="contractNo != null" >
+                #{contractNo},
+            </if>
+            #{homsFundAccount},
+            #{homsCombineId},
+            #{homsManageId},
+            #{assetId},
+            #{beginAmount},
+            #{operatorNo},
+            #{createDatetime}
+        </trim>
+    </insert>
+
+    <select id="queryHomsFinanceHistoryStart" parameterType="hashmap" resultType="com.caimao.bana.api.entity.zeus.BanaHomsFinanceHistoryEntity">
+        SELECT
+        id AS id,
+        trans_date AS transDate,
+        trans_no AS transNo,
+        trans_biz_type AS transBizType,
+        stock_code AS stockCode,
+        stock_name AS stockName,
+        account AS account,
+        account_unit_no AS accountUnitNo,
+        account_unit_name AS accountUnitName,
+        trans_amount AS transAmount,
+        post_amount AS postAmount,
+        entrust_direction AS entrustDirection,
+        entrust_price AS entrustPrice,
+        entrust_amount AS entrustAmount,
+        trade_fee AS tradeFee,
+        stamp_duty AS stampDuty,
+        transfer_fee AS transferFee,
+        commission AS commission,
+        handling_fee AS handlingFee,
+        sec_charges AS secCharges,
+        currency AS currency,
+        trans_subject AS transSubject,
+        subject_trans_amount AS subjectTransAmount,
+        subject_post_amount AS subjectPostAmount,
+        remark AS remark,
+        technical_services AS technicalServices
+        FROM bana_homs_finance_history
+        WHERE
+        trans_date &gt;= #{transDate} AND
+        account_unit_no = #{accountUnitNo} AND
+        trans_amount = #{transAmount} AND
+        <![CDATA[ remark LIKE concat('%', #{remark,jdbcType=VARCHAR}, '%')]]>
+        ORDER BY trans_no ASC
+        LIMIT 1
+    </select>
+
+    <select id="queryHomsFinanceHistoryEnd" parameterType="hashmap" resultType="com.caimao.bana.api.entity.zeus.BanaHomsFinanceHistoryEntity">
+        SELECT
+        id AS id,
+        trans_date AS transDate,
+        trans_no AS transNo,
+        trans_biz_type AS transBizType,
+        stock_code AS stockCode,
+        stock_name AS stockName,
+        account AS account,
+        account_unit_no AS accountUnitNo,
+        account_unit_name AS accountUnitName,
+        trans_amount AS transAmount,
+        post_amount AS postAmount,
+        entrust_direction AS entrustDirection,
+        entrust_price AS entrustPrice,
+        entrust_amount AS entrustAmount,
+        trade_fee AS tradeFee,
+        stamp_duty AS stampDuty,
+        transfer_fee AS transferFee,
+        commission AS commission,
+        handling_fee AS handlingFee,
+        sec_charges AS secCharges,
+        currency AS currency,
+        trans_subject AS transSubject,
+        subject_trans_amount AS subjectTransAmount,
+        subject_post_amount AS subjectPostAmount,
+        remark AS remark,
+        technical_services AS technicalServices
+        FROM bana_homs_finance_history
+        WHERE
+        trans_no &gt;= #{transNo} AND
+        account_unit_no = #{accountUnitNo} AND
+        <![CDATA[ remark LIKE concat('%', #{remark,jdbcType=VARCHAR}, '%')]]>
+        ORDER BY trans_no ASC
+        LIMIT 1
+    </select>
+
+    <select id="queryHomsFinanceHistoryEnd2" parameterType="hashmap" resultType="com.caimao.bana.api.entity.zeus.BanaHomsFinanceHistoryEntity">
+        SELECT
+        id AS id,
+        trans_date AS transDate,
+        trans_no AS transNo,
+        trans_biz_type AS transBizType,
+        stock_code AS stockCode,
+        stock_name AS stockName,
+        account AS account,
+        account_unit_no AS accountUnitNo,
+        account_unit_name AS accountUnitName,
+        trans_amount AS transAmount,
+        post_amount AS postAmount,
+        entrust_direction AS entrustDirection,
+        entrust_price AS entrustPrice,
+        entrust_amount AS entrustAmount,
+        trade_fee AS tradeFee,
+        stamp_duty AS stampDuty,
+        transfer_fee AS transferFee,
+        commission AS commission,
+        handling_fee AS handlingFee,
+        sec_charges AS secCharges,
+        currency AS currency,
+        trans_subject AS transSubject,
+        subject_trans_amount AS subjectTransAmount,
+        subject_post_amount AS subjectPostAmount,
+        remark AS remark,
+        technical_services AS technicalServices
+        FROM bana_homs_finance_history
+        WHERE
+        trans_no &gt;= #{transNo} AND
+        account_unit_no = #{accountUnitNo} AND
+        <![CDATA[ (remark LIKE concat('%', #{remark,jdbcType=VARCHAR}, '%') OR remark LIKE concat('%', #{remark2,jdbcType=VARCHAR}, '%'))]]>
+        ORDER BY trans_no ASC
+        LIMIT 1
+    </select>
+
+    <select id="queryHomsFinanceHistoryTotalByBizType" parameterType="hashmap" resultType="long">
+        SELECT SUM(trans_amount)
+        FROM bana_homs_finance_history
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            AND account_unit_no = #{accountUnitNo}
+            AND trans_no &gt;= #{transNoStart}
+            <if test="transNoEnd != null and transNoEnd != ''">
+                AND trans_no &lt;= #{transNoEnd}
+            </if>
+            AND trans_biz_type = #{transBizType}
+        </trim>
+    </select>
+
+    <select id="queryHomsFinanceHistoryTotalByRemark" parameterType="hashmap" resultType="long">
+        SELECT SUM(trans_amount)
+        FROM bana_homs_finance_history
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            AND account_unit_no = #{accountUnitNo}
+            AND trans_no &gt;= #{transNoStart}
+            <if test="transNoEnd != null and transNoEnd != ''">
+                AND trans_no &lt;= #{transNoEnd}
+            </if>
+            <![CDATA[ AND remark LIKE concat('%', #{remark,jdbcType=VARCHAR}, '%')]]>
+        </trim>
+    </select>
+
+    <select id="queryHomsFinanceHistoryTotalByRemark2" parameterType="hashmap" resultType="long">
+        SELECT SUM(trans_amount)
+        FROM bana_homs_finance_history
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            AND account_unit_no = #{accountUnitNo}
+            AND trans_no &gt;= #{transNoStart}
+            <if test="transNoEnd != null and transNoEnd != ''">
+                AND trans_no &lt;= #{transNoEnd}
+            </if>
+            <![CDATA[ AND (remark LIKE concat('%', #{remark,jdbcType=VARCHAR}, '%') OR remark LIKE concat('%', #{remark2,jdbcType=VARCHAR}, '%'))]]>
+        </trim>
+    </select>
+
+    <select id="queryOperationRegNew" resultType="Long" parameterType="hashmap">
+        SELECT COUNT(*) FROM tpz_user WHERE ref_user_id = #{refUserId} AND register_datetime &gt;= #{dateStart} AND register_datetime &lt;= #{dateEnd}
+    </select>
+    <select id="queryOperationRegAll" resultType="Long" parameterType="hashmap">
+        SELECT COUNT(*) FROM tpz_user WHERE ref_user_id = #{refUserId}
+    </select>
+    <select id="queryOperationRealNameNew" resultType="Long" parameterType="hashmap">
+        SELECT COUNT(*) FROM tpz_user WHERE ref_user_id = #{refUserId} AND user_real_name IS NOT NULL AND register_datetime &gt;= #{dateStart} AND register_datetime &lt;= #{dateEnd}
+    </select>
+    <select id="queryOperationRealNameAll" resultType="Long" parameterType="hashmap">
+        SELECT COUNT(*) FROM tpz_user WHERE ref_user_id = #{refUserId} AND user_real_name IS NOT NULL
+    </select>
+
+    <!--邮币卡当日注册数-->
+    <select id="queryYBKRegiestNew" resultType="Long" parameterType="hashmap">
+        SELECT COUNT(*) FROM ybk_account WHERE status = 3 AND user_id IN(SELECT user_id FROM tpz_user WHERE ref_user_id = #{refUserId}) AND create_date &gt;= #{dateStart} AND create_date &lt; #{dateEnd}
+    </select>
+    <!--邮币卡总的注册数-->
+    <select id="queryYBKRegiestAll" resultType="Long" parameterType="hashmap">
+        SELECT COUNT(*) FROM ybk_account WHERE status = 3 AND user_id IN(SELECT user_id FROM tpz_user WHERE ref_user_id = #{refUserId})
+    </select>
+
+
+    <select id="queryOperationLoanUserNew" resultType="Long" parameterType="hashmap">
+        SELECT COUNT(*) FROM (SELECT * FROM tpz_loan_apply WHERE user_id IN (SELECT user_id FROM tpz_user WHERE ref_user_id = #{refUserId}) AND verify_status = 1 AND verify_datetime &gt;= #{dateStart} AND verify_datetime &lt;= #{dateEnd} GROUP BY user_id) tmp
+    </select>
+    <select id="queryOperationLoanUserAll" resultType="Long" parameterType="hashmap">
+        SELECT COUNT(*) FROM (SELECT * FROM tpz_loan_apply WHERE user_id IN (SELECT user_id FROM tpz_user WHERE ref_user_id = #{refUserId}) AND verify_status = 1 GROUP BY user_id) tmp
+    </select>
+    <select id="queryOperationLoanAmountNew" resultType="Long" parameterType="hashmap">
+        SELECT SUM(order_amount) FROM tpz_loan_apply WHERE user_id IN (SELECT user_id FROM tpz_user WHERE ref_user_id = #{refUserId}) AND verify_status = 1 AND verify_datetime &gt;= #{dateStart} AND verify_datetime &lt;= #{dateEnd}
+    </select>
+    <select id="queryOperationLoanAmountAll" resultType="Long" parameterType="hashmap">
+        SELECT SUM(order_amount) FROM tpz_loan_apply WHERE user_id IN (SELECT user_id FROM tpz_user WHERE ref_user_id = #{refUserId}) AND verify_status = 1
+    </select>
+    <select id="queryOperationLoanInterestNew" resultType="Long" parameterType="hashmap">
+        SELECT SUM(order_amount) FROM tpz_accrued_interest_bill WHERE user_id IN (SELECT user_id FROM tpz_user WHERE ref_user_id = #{refUserId}) AND create_datetime &gt;= #{dateStart} AND create_datetime &lt;= #{dateEnd}
+    </select>
+    <select id="queryOperationLoanInterestAll" resultType="Long" parameterType="hashmap">
+        SELECT SUM(order_amount) FROM tpz_accrued_interest_bill WHERE user_id IN (SELECT user_id FROM tpz_user WHERE ref_user_id = #{refUserId})
+    </select>
+    <select id="queryDateRealUserList" resultType="com.caimao.bana.api.entity.TpzUserEntity" parameterType="hashmap">
+        SELECT
+        user_id AS userId,
+        user_name AS userName,
+        user_real_name AS userRealName,
+        user_nick_name AS userNickName,
+        user_grade AS userGrade,
+        user_score AS userScore,
+        user_pwd_strength AS userPwdStrength,
+        email AS email,
+        mobile AS mobile,
+        idcard_kind AS idcardKind,
+        idcard AS idcard,
+        user_address AS userAddress,
+        register_datetime AS registerDatetime,
+        register_ip AS registerIp,
+        last_login_datetime AS lastLoginDatetime,
+        last_login_ip AS lastLoginIp,
+        login_count AS loginCount,
+        user_status AS userStatus,
+        error_count AS errorCount,
+        is_trust AS isTrust,
+        user_init AS userInit,
+        user_kind AS userKind,
+        caimao_id AS caimaoId,
+        ref_user_id AS refUserId
+        FROM tpz_user
+        WHERE ref_user_id = #{refUserId} AND user_real_name IS NOT NULL AND register_datetime &gt;= #{dateStart} AND register_datetime &lt;= #{dateEnd}
+    </select>
+
+    <select id="queryContractByNo" resultType="com.caimao.bana.api.entity.TpzLoanContractEntity">
+        SELECT
+        contract_no AS contractNo,
+        pz_account_id AS pzAccountId,
+        contract_type AS contractType,
+        user_id AS userId,
+        user_real_name AS userRealName,
+        prod_bill_type AS prodBillType,
+        interest_accrual_mode AS interestAccrualMode,
+        interest_settle_mode AS interestSettleMode,
+        interest_settle_days AS interestSettleDays,
+        contract_begin_date AS contractBeginDate,
+        contract_end_date AS contractEndDate,
+        begin_interest_date AS beginInterestDate,
+        cash_amount AS cashAmount,
+        loan_ratio AS loanRatio,
+        interest_rate AS interestRate,
+        fee,
+        loan_amount AS loanAmount,
+        repay_amount AS repayAmount,
+        contract_sign_datetime AS contractSignDatetime,
+        contract_stop_datetime AS contractStopDatetime,
+        contract_status AS contractStatus,
+        settled_interest AS settledInterest,
+        accrued_interest AS accruedInterest,
+        last_settle_interest_date AS lastSettleInterestDate,
+        next_settle_interest_date AS nextSettleInterestDate,
+        counterpart_idcard AS counterpartIdcard,
+        counterpart_name AS counterpartName,
+        counterpart_fund_account AS counterpartFundAccount,
+        counterpart_user_id AS counterpartUserId,
+        rel_contract_no AS relContractNo,
+        prod_id AS prodId,
+        idcard,
+        remark,
+        create_datetime AS createDatetime,
+        update_datetime AS updateDatetime,
+        prod_term AS prodTerm
+        FROM tpz_loan_contract
+        WHERE contract_no = #{contractNo}
+    </select>
+
+    <insert id="insertContractHistory" parameterType="com.caimao.bana.api.entity.TpzLoanContractEntity">
+        insert into his_tpz_loan_contract (contract_no, pz_account_id, contract_type, user_id, user_real_name, prod_bill_type, interest_accrual_mode, interest_settle_mode, interest_settle_days, contract_begin_date, contract_end_date, begin_interest_date, cash_amount, loan_ratio, interest_rate, fee, loan_amount, repay_amount, contract_sign_datetime, contract_stop_datetime, contract_status, settled_interest, accrued_interest, last_settle_interest_date, next_settle_interest_date, counterpart_idcard, counterpart_name, counterpart_fund_account, counterpart_user_id, rel_contract_no, prod_id, idcard, remark, create_datetime, update_datetime, prod_term) values(#{contractNo},#{pzAccountId},#{contractType},#{userId},#{userRealName},#{prodBillType},#{interestAccrualMode},#{interestSettleMode},#{interestSettleDays},#{contractBeginDate},#{contractEndDate},#{beginInterestDate},#{cashAmount},#{loanRatio},#{interestRate},#{fee},#{loanAmount},#{repayAmount},#{contractSignDatetime},#{contractStopDatetime},#{contractStatus},#{settledInterest},#{accruedInterest},#{lastSettleInterestDate},#{nextSettleInterestDate},#{counterpartIdcard},#{counterpartName},#{counterpartFundAccount},#{counterpartUserId},#{relContractNo},#{prodId},#{idcard},#{remark},#{createDatetime},#{updateDatetime},#{prodTerm});
+    </insert>
+
+    <insert id="insertContractRepay" parameterType="com.caimao.bana.api.entity.TpzRepayOrderEntity">
+        INSERT INTO tpz_repay_order (order_no, contract_no, pz_account_id, user_id, order_amount, accrued_interest, order_abstract, remark, repay_datetime) VALUES (#{orderNo}, #{contractNo}, #{pzAccountId}, #{userId}, #{orderAmount}, #{accruedInterest}, #{orderAbstract}, #{remark}, #{repayDatetime});
+    </insert>
+
+    <delete id="deleteContractByNo">
+        DELETE FROM tpz_loan_contract WHERE contract_no = #{contractNo};
+    </delete>
+</mapper>

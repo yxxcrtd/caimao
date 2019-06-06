@@ -1,0 +1,268 @@
+<#include 'mobile/layout/layout.html'/> 
+<#macro assignSet>
+	<#assign bg="bg-white"/> 
+	<#assign title="投标详情"/>
+	<#assign controller="tenderDetail"/> 
+	<#assign header="投标详情"/> 
+	<#assign footer="2"/>
+</#macro>
+<#macro content>
+<article class="content" style="padding-bottom: 93px;">
+	<!--筹款中-->
+	<div class="contractNum bg-gray con-spacing10 clearfix">
+		<p class="cm-left">
+			<span class="am-ft-md">投标详情</span>
+		</p>
+		<p class="cm-right contractNum-month">
+			<mark class="label" id="status"></mark>
+		</p>
+	</div>
+	<!--筹款中-->
+
+	<!--表单-->
+	<aside class="con-frame con-frame-notop">
+		<ul class="datalist">
+			<li class="datalist-item clearfix">
+				<div class="am-grid datalist-line">
+					<div class="am-grid-item am-grid-item-50  am-ft-left">
+						<h4 class="am-ft-md cm-left am-ft-tabText">借款总额</h4>
+					</div>
+					<div class="am-grid-item am-grid-item-50 am-ft-right am-right-15">
+						<big class="am-ft-bignNum am-ft-orange am-right-5" id="invsAmountPre"></big>元
+					</div>
+				</div>
+			</li>
+			<li class="datalist-item clearfix">
+				<div class="am-grid datalist-line">
+					<div class="am-grid-item am-grid-item-50  am-ft-left">
+						<h4 class="am-ft-md cm-left am-ft-tabText">年化收益</h4>
+					</div>
+					<div class="am-grid-item am-grid-item-50 am-ft-right am-right-15">
+						<big class="am-ft-bignNum am-ft-orange" id="rate"></big>
+					</div>
+				</div>
+			</li>
+			<li class="datalist-item clearfix">
+				<div class="am-grid datalist-line">
+					<div class="am-grid-item am-grid-item-50  am-ft-left">
+						<h4 class="am-ft-md cm-left am-ft-tabText">付息方式</h4>
+					</div>
+					<div class="am-grid-item am-grid-item-50 am-ft-right am-right-15">
+						<span class="am-ft-main">每月提前付息</span>
+					</div>
+				</div>
+			</li>
+			<li class="datalist-item clearfix">
+				<div class="am-grid datalist-line">
+					<div class="am-grid-item am-grid-item-50  am-ft-left">
+						<h4 class="am-ft-md cm-left am-ft-tabText">每月利息</h4>
+					</div>
+					<div class="am-grid-item am-grid-item-50 am-ft-right am-right-15">
+						<span class="am-ft-main" id="invsInterestNode"></span><span>元</span>
+					</div>
+				</div>
+			</li>
+			<li class="datalist-item clearfix">
+				<div class="am-grid datalist-line">
+					<div class="am-grid-item am-grid-item-50  am-ft-left">
+						<h4 class="am-ft-md cm-left am-ft-tabText">借款期限</h4>
+					</div>
+					<div class="am-grid-item am-grid-item-50 am-ft-right am-right-15">
+						<span class="am-ft-main" id="loanTerm"></span>
+					</div>
+				</div>
+			</li>
+			<li class="datalist-item clearfix">
+				<div class="am-grid datalist-line">
+					<div class="am-grid-item am-grid-item-40  am-ft-left">
+						<h4 class="am-ft-md cm-left am-ft-tabText">到期时间</h4>
+					</div>
+					<div class="am-grid-item am-grid-item-60 am-ft-right am-right-15">
+						<span class="am-ft-main" id="invsDateRaiseEnd"></span>
+					</div>
+				</div>
+			</li>
+			<li class="datalist-item clearfix">
+				<div class="am-grid datalist-line">
+					<div class="am-grid-item am-grid-item-50  am-ft-left">
+						<h4 class="am-ft-md cm-left am-ft-tabText">当前进度</h4>
+					</div>
+					<div class="am-grid-item am-grid-item-50 am-ft-right am-right-15">
+						<big class="am-ft-bignNum am-ft-orange" id="currenPercent"></big>
+					</div>
+				</div>
+			</li>
+			<li class="datalist-item clearfix">
+				<div class="am-grid datalist-line">
+					<div class="am-grid-item am-grid-item-50  am-ft-left">
+						<h4 class="am-ft-md cm-left am-ft-tabText">还需资金</h4>
+					</div>
+					<div class="am-grid-item am-grid-item-50 am-ft-right am-right-15">
+						<big class="am-ft-bignNum am-ft-orange am-right-5" id="lackAmount"></big>元
+					</div>
+				</div>
+			</li>
+		</ul>
+	</aside>
+
+	<!--股票融资方案-->
+	<aside class="am-pt-15">
+		<h3 class="title-table">股票融资方案</h3>
+		<dl class="dl-moneyMain bg-white">
+			<dt>
+				<p>
+					<b id="allAmount"></b><span class="am-ft-sm">元</span>
+				</p>
+				<p class="am-pt-5">
+					<span class="am-ft-sm am-ft-tabText">总操盘资产</span>
+				</p>
+			</dt>
+			<dt>
+				<p>
+					<b id="invsAmountPre2"></b><span class="am-ft-sm">元</span>
+				</p>
+				<p class="am-pt-5">
+					<span class="am-ft-sm am-ft-tabText">借款金额</span>
+				</p>
+			</dt>
+			<dt>
+				<p>
+					<b id="riskAmount"></b><span class="am-ft-sm">元</span>
+				</p>
+				<p class="am-pt-5">
+					<span class="am-ft-sm am-ft-tabText">风险保证金</span>
+				</p>
+			</dt>
+		</dl>
+	</aside>
+	<!--股票融资方案-->
+	<!-- 用户可用余额-->
+	<aside id="panel2" class="am-pt-15  am-pb-15"
+		style="border: 2px solid #ff4d4f; margin-top: 15px; background: #fff;display: none;">
+
+		<div id="trustPanel">
+			<div class="btn-page btn-page-center con-spacing15">
+				<a href="${basePath}/mobile/user/certification.htm"
+					class="am-button am-button-red">立即实名认证</a>
+			</div>
+		</div>
+		<div id="selfDetail" class="clearfix">
+			<h4 class="am-ft-center">
+				可用余额：<b class="am-ft-bignNum am-ft-orange am-left-5"
+					id="availableAmount"></b>元
+			</h4>
+			<div  class="btn-page btn-page-center ">
+				<a  href="${basePath}/mobile/account/recharge.htm" class="am-button am-button-red"> <span class="am-ft-white">立即充值</span>
+				</a>
+			</div>
+			
+		</div>
+		<div id="selfPass">
+
+			<h4 class="am-ft-center">
+				可用余额：<b class="am-ft-bignNum am-ft-orange am-left-5"
+					id="availableAmount1"></b>元
+			</h4>
+
+			<ul class="am-list am-listCapital con-spacing15">
+				<li class="am-list-item">
+					<div class="am-flexbox ui-formContainer am-mt-10">
+						<div class="am-flexbox-item">
+							<span class="ui-form-field am-left-15"><input id="payAmount" name="payAmount"
+								type="text" class="text_input money" maxlength="18" defaultvalue="1000" value=""
+								placeholder="1000"> </span>
+
+						</div>
+						<div class="am-flexbox-item ft-item">
+							<span class="">元</span>
+						</div>
+					</div>
+				</li>
+				<li class="am-list-item">
+					<div>
+						<h4 class="am-ft-md am-ft-10">安全密码:</h4>
+						<div class="am-flexbox ui-formContainer am-mt-10">
+							<div class="am-flexbox-item am-left-15">
+								<span class="ui-form-field"> <input name="password"
+									type="password" id="password" class="text_input" maxlength="18"
+									defaultvalue="" value="" placeholder="">
+								</span>
+							</div>
+						</div>
+				</li>
+				<li class="am-list-item"	>
+					<aside class="am-mt-20"> 
+						<span class="ui-input-checkbox ui-input-checkbox-active" id="agree_checkbox"></span>
+						<span class="am-ft-sm am-left-5 am-ft-tabText">我已阅读并同意<a href="${basePath}/mobile/agreement-1.htm">《${proP2P}p2p协议》</a></span>
+					</aside>
+				</li>
+			</ul>
+			
+			
+			
+			<!--按钮-->
+			<div  class="btn-page btn-page-center con-spacing15">
+				<a id="addBtn1" class="am-button am-button-red"> <span class="am-ft-white">立即投标</span>
+				</a>
+			</div>
+			<!--按钮-->
+	</aside>
+	<!-- 用户账户余额 -->
+
+	<!--借款人信息-->
+	<aside class="am-pt-15">
+		<h3 class="title-table">借款人信息</h3>
+
+		<table width="100%" border="0" cellspacing="0" class="table-about">
+			<tr>
+				<th>姓名</th>
+				<td id="userName"></td>
+				<th>手机号</th>
+				<td id="userPhone"></td>
+			</tr>
+			<tr>
+				<th>身份认证</th>
+				<td id="idcard"></td>
+				<th>注册时间</th>
+				<td id="createDatetime"></td>
+			</tr>
+			<tr>
+				<th>借款笔数</th>
+				<td  id="loanNumber"></td>
+				<th>成功还款笔数</th>
+				<td  id="repayNumber"></td>
+			</tr>
+		</table>
+
+	</aside>
+	<!--借款人信息-->
+
+	<!--资金出借记录-->
+	<aside class="am-pt-15">
+		<h3 class="title-table clearfix">
+			<p class="cm-left">
+				<span class="am-ft-md">资金出借记录</span>
+			</p>
+			<p class="cm-right am-right-10">
+				<span class="am-ft-sm">总额：<b id="currentAmount"></b>元
+				</span>
+			</p>
+		</h3>
+
+
+		<table width="100%" border="0" cellspacing="0" class="table-list">
+			<tr id="trList">
+				<th class="tb-left">出借人</th>
+				<th class="tb-center">出借资金</th>
+				<th class="tb-right">投资时间</th>
+			</tr>
+
+		</table>
+
+
+	</aside>
+	<!--资金出借记录-->
+
+</article>
+</#macro>
+

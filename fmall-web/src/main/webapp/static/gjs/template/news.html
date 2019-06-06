@@ -1,0 +1,234 @@
+<!doctype html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title></title>
+		<link rel="stylesheet" href="../prod/style/style.css" />
+		<script src="../prod/js/metal.js"></script>
+		<script>
+			var h = http(),
+				isLogin = 0;
+		</script>
+	</head>
+	<body>
+
+	<div class="top">
+		<div class="innerCont clearfix">
+			<div class="topnav">
+				<a href="">财猫主站</a><!--
+				--><a href="">财猫邮币卡</a><!--
+				--><a href="">财猫贵金属</a>
+			</div>
+			<div class="user"><a href="" class="appdownload" id="appdownload"><i></i>APP下载</a><a href="">登录</a><span>|</span><a href="">注册</a><div class="qrcode" id="qrcode"><img src="../img/qrcode_android.png" ><img src="../img/qrcode_apple.png"></div></div>
+		</div>
+	</div>
+	<div class="menuline">
+		<div class="innerCont clearfix">
+			<div class="logo"><a href="home.html"><img src="../img/logo.png"></a></div>
+			<div class="menu">
+				<a href="home.html">首页<i><span>◆</span></i></a><!--
+				--><a href="market.html">行情<i><span>◆</span></i></a><!--
+				--><a href="news.html" class="on">资讯<i><span>◆</span></i></a><!--
+				--><a href="openAccount.html">快速开户<b>hot!</b><i><span>◆</span></i></a><!--
+				--><a href="help.html">帮助<i><span>◆</span></i></a>
+			</div>
+			<div class="asset">
+				<div class="totalAsset">
+					总资产：<b>9999999.99</b>
+				</div>
+				<dl class="assetDetail">
+					<dt><em><span>总收益：</span><i class="rise">+234.55</i></em><em><span>可用保证金：</span><b>99999999.55</b></em></dt>
+					<dd class="njs">
+						<p><b>南交所</b><span>ID：2342342</span><span>绑定卡：招行（尾号2342）</span></p>
+						<div class="countAsset">
+							<div class="result">净资产：<i>99999999.55</i> = </div>
+							<ul class="section">
+								<li><i></i>可用保证金：23422.55</li>
+								<li><i></i>持仓盈利：+53.55</li>
+								<li><i></i>持仓成本：563.22</li>
+							</ul>
+						</div>
+					</dd>
+					<dd class="sjs">
+						<p><b>上金所</b></p>
+						<div class="btnBox"><a href="" class="openAccount">去开户</a></div>
+					</dd>
+				</dl>
+			</div>
+		</div>
+	</div>
+	
+
+	<div class="newsPage">
+		<div class="innerCont clearfix">
+			<div class="mod-left nav">
+				<ul>
+					<li class="on"><i></i><a href="">经济要闻</a></li>
+					<li><i></i><a href="">实时快讯</a></li>
+				</ul>
+
+			</div>
+			<div class="mod-right">
+				<div class="mod-rightcontent newsList" id="newsList">
+					<div class="loading"><img src="../img/loading.gif"></div>
+					<script type="text/x-tmpl">
+						<ul class="newsFlash">
+								<% for(var _this,i = 0, l = data.items.length; i < l; i++){
+									_this = data.items[i];
+								%>
+								<li><a href="content.html?id=<%=_this.id%>"><%=_this.title%></a><em class="newsInfo"><span>浏览:<%=_this.viewCount%></span><span><%=_this.created%></span></em></li>
+								<%
+									}
+								%>
+							
+						</ul>
+						
+						<%if(data.pages > 1){%>
+
+						<div class="page">
+							<div class="mod-page mod-page-separate mod-page-small">
+									<%
+									var n = data.currentPage,
+										itemLength = 5;
+									%>
+									<%	if (n != 1) {	%>
+											<a href="?data.currentPage - 1" class="pageprv">上一页</a>
+									<%	} else {	%>
+											<a href="#" class="pageprv z-dis">上一页</a>
+									<%	}	%>
+									<%	if (data.pages > itemLength && !(n - Math.ceil(itemLength / 2) <= 0)){	%>
+											<a href="?1">1</a><i>...</i>
+									<%	}	%>
+									<%	if (data.pages > itemLength) {	%>
+									<%		if (n - Math.ceil(itemLength / 2) <= 0) {	%>
+									<%			for (var i = 0, j; i < itemLength; i++) {	%>
+									<%				j = i + 1;	%>
+									<%				if (j == n) {	%>
+														<a href="#" class="z-crt"><%=n%></a>
+									<%				} else {	%>
+														<a href="?<%=j%>"><%=j%></a>
+									<%				}	%>
+									<%			}	%>
+									<%		} else if (data.pages - Math.ceil(itemLength / 2) <= n) {	%>
+									<%			for (var i = 1; i < itemLength; i++) {	%>
+									<%				if (n === data.pages) {	%>
+									<%					i--;	%>
+									<%					break;	%>
+									<%				}	%>
+									<%				if (n + i === data.pages) break;	%>
+									<%			}	%>
+									<%			i++;	%>
+									<%			for (var j = itemLength - i; i < itemLength; i++) {	%>
+													<a href="?<%=n-j%>"><%=(n - j)%></a>
+									<%				j--;	%>
+									<%			}	%>
+												<a href="#" class="z-crt"><%=n%></a>
+
+									<%			for (var i = 1; i < itemLength; i++) {	%>
+									<%				if (n === data.pages) {	%>
+									<%					i--;	%>
+									<%					break;	%>
+									<%				}	%>
+													<a href="?<%=n+i%>"><%=(n + i)%></a>
+									<%				if (n + i === data.pages) break;	%>
+									<%			}	%>
+									<%		} else {	%>
+									<%			for (var i = -1 * Math.floor(itemLength / 2); i < Math.ceil(itemLength / 2); i++) {	%>
+									<%				if (i == 0) {	%>
+														<a href="#" class="z-crt"><%=n%></a>
+									<%				} else {	%>
+														<a href="?<%=n+i%>"><%=(n + i)%></a>
+									<%				}	%>
+									<%			}	%>
+									<%		}	%>
+									<%	} else {	%>
+									<%		for (var i = 1; i <= data.pages; i++) {	%>
+									<%			if (i == n) {	%>
+													<a href="#" class="z-crt"><%=n%></a>
+									<%			} else {	%>
+													<a href="?<%=i%>"><%=i%></a>
+									<%			}	%>
+									<%		}	%>
+									<%	}	%>
+									<%	if (data.pages > itemLength && !(data.pages - Math.ceil(itemLength / 2) <= n)){%>
+										<i>...</i><a href="?<%=data.pages%>"><%=data.pages%></a>
+									<%	}	%>
+									<%	if (n != data.pages) {	%>
+											<a href="?<%=data.currentPage*1 + 1%>" class="pagenxt">下一页</a>
+									<%	} else {	%>
+											<a href="#" class="pagenxt z-dis">下一页</a>
+									<%	};	%>
+							</div>
+						</div>
+						<%
+							}
+						%>
+					</script>
+				</div>
+
+					<script>
+						var fire = h.render.omnipotent(),
+							cur = location.search.replace("?","")*1 || 1;
+						h.plan("#newsList",fire.key);
+						console.log(cur)
+						h.option = h.api.notice_list(10,cur,fire);
+						h.request(h.option);
+					</script>
+			</div>
+		</div>
+
+		<div class="innerCont noticeBox">
+			<div class="notice">
+				<p>1.财猫贵金属的数据解读是计算机自动获取并通过程序运算进行的理论性解读，不代表实际影响。</p>
+				<p>2.我们会尽力保证数据发布速度与准确性，由于不可控因素导致数据未能及时发布敬请谅解。</p>
+				<p>3.您或许看到有些数据延迟或提前发布，这是由于数据公布机构有时未必会准时发布所导致。</p>
+				<p>4.我们尊重作品的版权，由于内容庞杂，如某些文章侵犯了您的权益，请与我们联系删除。</p>
+			</div>
+		</div>
+	</div>
+	
+
+
+	<div class="bottom">
+		<div class="bottomnav">
+			<a href="about.html">关于我们</a><!--
+					--><span>|</span><!--
+					--><a href="rule.html">服务条款</a><!--
+					--><span>|</span><!--
+					--><a href="help.html">帮助中心</a>
+		</div>
+		<div class="contact">
+			<div class="inner">
+				<em class="qq"><i></i>官方QQ群 4006660888</em><!--
+						--><span>|</span><!--
+						--><em class="phone"><i></i>24小时服务电话 4000-898-000</em>
+			</div>
+		</div>
+		<div class="copyright">
+			<p>版权所有 © 北京朋乐投资管理有限公司 丨 京ICP备15016693号</p>
+		</div>
+	</div>
+
+	<div class="rightBar">
+		<div class="takeAim">
+			<div class="tools">
+				<dl class="goTop">
+					<dt></dt>
+				</dl>
+				<dl class="tel">
+					<dt></dt>
+					<dd><i></i><b>4000-898-000</b></dd>
+				</dl>
+				<dl class="qq">
+					<dt></dt>
+					<dd><i></i><b>800097600</b></dd>
+				</dl>
+				<dl class="app">
+					<dt></dt>
+					<dd><img src="../img/qrcode.jpg"><p>扫码下载贵金属APP</p></dd>
+				</dl>
+			</div>
+		</div>
+	</div>
+	</body>
+</html>

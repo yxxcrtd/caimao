@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="GujiUserStock">
+
+    <!-- 表所有字段和属性 -->
+    <resultMap id="BaseResultMap" type="com.caimao.bana.api.entity.guji.GujiUserStockEntity" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="wx_id" property="wxId" jdbcType="BIGINT" />
+        <result column="open_id" property="openId" jdbcType="VARCHAR" />
+        <result column="stock_type" property="stockType" jdbcType="VARCHAR" />
+        <result column="stock_code" property="stockCode" jdbcType="VARCHAR" />
+        <result column="stock_name" property="stockName" jdbcType="VARCHAR" />
+        <result column="stock_price" property="stockPrice" jdbcType="VARCHAR" />
+        <result column="target_price" property="targetPrice" jdbcType="VARCHAR" />
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <!-- 表所有字段 -->
+    <sql id="Base_Column_List" >
+        id,
+        wx_id,
+        open_id, 
+        stock_type, 
+        stock_code, 
+        stock_name, 
+        stock_price,
+        target_price,
+        update_time,
+        create_time
+    </sql>
+
+    <!-- 根据ID查找 -->
+    <select id="findById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        SELECT <include refid="Base_Column_List" /> FROM guji_user_stock WHERE id = #{id, jdbcType=BIGINT}
+    </select>
+
+    <!-- 根据微信ID查找 -->
+    <select id="selectByWxId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select <include refid="Base_Column_List" /> from guji_user_stock where wx_id = #{wxId, jdbcType=BIGINT} ORDER BY positions DESC
+    </select>
+
+    <select id="selectByWxIdAndCode" resultMap="BaseResultMap" parameterType="java.util.Map" >
+        select <include refid="Base_Column_List" /> from guji_user_stock where wx_id = #{wxId, jdbcType=BIGINT} AND stock_code = #{stockCode, jdbcType=VARCHAR}
+    </select>
+
+    <!-- 插入 -->
+    <insert id="insert" parameterType="com.caimao.bana.api.entity.guji.GujiUserStockEntity">
+        insert into guji_user_stock
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="wxId != null">
+                wx_id,
+            </if>
+            <if test="openId != null">
+                open_id,
+            </if>
+            <if test="stockType != null">
+                stock_type,
+            </if>
+            <if test="stockCode != null">
+                stock_code,
+            </if>
+            <if test="stockName != null">
+                stock_name,
+            </if>
+            <if test="stockPrice != null">
+                stock_price,
+            </if>
+            <if test="targetPrice != null">
+                target_price,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="wxId != null">
+                #{wxId, jdbcType=BIGINT},
+            </if>
+            <if test="openId != null">
+                #{openId, jdbcType=VARCHAR},
+            </if>
+            <if test="stockType != null">
+                #{stockType, jdbcType=VARCHAR},
+            </if>
+            <if test="stockCode != null">
+                #{stockCode, jdbcType=VARCHAR},
+            </if>
+            <if test="stockName != null">
+                #{stockName, jdbcType=VARCHAR},
+            </if>
+            <if test="stockPrice != null">
+                #{stockPrice, jdbcType=VARCHAR},
+            </if>
+            <if test="targetPrice != null">
+                #{targetPrice, jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime, jdbcType=TIMESTAMP},
+            </if>
+            <if test="createTime != null">
+                #{createTime, jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <!-- 修改 -->
+    <update id="update" parameterType="com.caimao.bana.api.entity.guji.GujiUserStockEntity">
+        update guji_user_stock
+        <set>
+            <if test="wxId != null">
+                wx_id = #{wxId, jdbcType=BIGINT},
+            </if>
+            <if test="openId != null">
+                open_id = #{openId, jdbcType=VARCHAR},
+            </if>
+            <if test="stockType != null">
+                stock_type = #{stockType, jdbcType=VARCHAR},
+            </if>
+            <if test="stockCode != null">
+                stock_code = #{stockCode, jdbcType=VARCHAR},
+            </if>
+            <if test="stockName != null">
+                stock_name = #{stockName, jdbcType=VARCHAR},
+            </if>
+            <if test="stockPrice != null">
+                stock_price = #{stockPrice, jdbcType=VARCHAR},
+            </if>
+            <if test="targetPrice != null">
+                target_price = #{targetPrice, jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime, jdbcType=TIMESTAMP},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime, jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id, jdbcType=BIGINT}
+    </update>
+
+    <delete id="delete" parameterType="Long">
+        DELETE FROM guji_user_stock WHERE id = #{id, jdbcType=BIGINT}
+    </delete>
+
+</mapper>

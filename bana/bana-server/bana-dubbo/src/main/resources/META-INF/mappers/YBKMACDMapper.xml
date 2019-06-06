@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="YBKMACD">
+    <resultMap id="BaseResultMap" type="com.caimao.bana.api.entity.ybk.YBKMACDEntity">
+        <id column="exchange_name" property="exchangeName" jdbcType="CHAR"/>
+        <id column="code" property="code" jdbcType="CHAR"/>
+        <id column="date" property="date" jdbcType="TIMESTAMP"/>
+        <id column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="dif" property="dif" jdbcType="BIGINT"/>
+        <result column="dea" property="dea" jdbcType="BIGINT"/>
+        <result column="macd" property="macd" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        exchange_name, code, date, update_time, dif, dea, macd
+    </sql>
+
+    <insert id="insert" parameterType="com.caimao.bana.api.entity.ybk.YBKMACDEntity">
+        INSERT INTO ybk_macd
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="exchangeName != null">exchange_name,</if>
+            <if test="code != null">code,</if>
+            <if test="date != null">date,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="dif != null">dif,</if>
+            <if test="dea != null">dea,</if>
+            <if test="macd != null">macd,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="exchangeName != null">#{exchangeName},</if>
+            <if test="code != null">#{code},</if>
+            <if test="date != null">#{date},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="dif != null">#{dif},</if>
+            <if test="dea != null">#{dea},</if>
+            <if test="macd != null">#{macd},</if>
+        </trim>
+    </insert>
+
+    <update id="update" parameterType="com.caimao.bana.api.entity.ybk.YBKMACDEntity">
+        UPDATE ybk_macd
+        <set>
+            <if test="updateTime != null" >update_time = #{updateTime},</if>
+            <if test="dif != null" >dif = #{dif},</if>
+            <if test="dea != null" >dea = #{dea},</if>
+            <if test="macd != null" >macd = #{macd},</if>
+        </set>
+        WHERE exchange_name = #{exchangeName} AND code = #{code} AND date = #{date,jdbcType=DATE}
+    </update>
+
+    <select id="queryExist" parameterType="com.caimao.bana.api.entity.ybk.YBKMACDEntity" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM ybk_macd
+        WHERE exchange_name = #{exchangeName} AND code = #{code} AND date = #{date,jdbcType=DATE}
+    </select>
+
+    <select id="queryMACD" parameterType="com.caimao.bana.api.entity.req.ybk.FYbkMarketReq" resultType="com.caimao.bana.api.entity.res.ybk.FYBKMACDRes">
+        SELECT
+        date,
+        update_time AS updateTime,
+        dif,
+        dea,
+        macd
+        FROM ybk_macd
+        WHERE exchange_name = #{exchangeShortName} AND code = #{code}
+        ORDER BY date DESC
+        LIMIT #{limit}
+    </select>
+</mapper>

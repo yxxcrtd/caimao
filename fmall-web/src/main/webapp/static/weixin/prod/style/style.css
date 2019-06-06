@@ -1,0 +1,772 @@
+/** RESET **/
+body {
+  font-family: 'Microsoft YaHei',Lucida Grande,Lucida Sans Unicode,\5B8B\4F53;
+  -webkit-text-size-adjust: none;
+  color: #6a6a6a;
+  _font: 12px/1.5 \5B8B\4F53; }
+
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, p, form, input, textarea {
+  padding: 0;
+  margin: 0; }
+
+ol, ul {
+  list-style: none; }
+
+li {
+  list-style-type: none; }
+
+table {
+  margin: 0 auto;
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+img {
+  vertical-align: top;
+  border: 0; }
+
+caption, th {
+  text-align: left; }
+
+h1, h2, h3, h4, h5, h6, button, input, select, textarea {
+  font-size: 100%;
+  font-weight: 400; }
+
+i, u, em, b, strong {
+  font-style: normal;
+  text-decoration: none;
+  font-weight: 400; }
+
+input, textarea, button, select, button {
+  outline: none;
+  resize: none;
+  font-family: \5B8B\4F53; }
+
+a {
+  color: #666;
+  text-decoration: none;
+  -webkit-transition: color 0.4s ease;
+  -moz-transition: color 0.4s ease;
+  -o-transition: color 0.4s ease;
+  transition: color 0.4s ease;
+  -webkit-transition: background-color 0.4s ease;
+  -moz-transition: background-color 0.4s ease;
+  -o-transition: background-color 0.4s ease;
+  transition: background-color 0.4s ease; }
+  a:visited {
+    text-decoration: none; }
+  a:hover {
+    color: #5376be;
+    text-decoration: none;
+    -webkit-transition: color 0.4s ease;
+    -moz-transition: color 0.4s ease;
+    -o-transition: color 0.4s ease;
+    transition: color 0.4s ease;
+    -webkit-transition: background-color 0.4s ease;
+    -moz-transition: background-color 0.4s ease;
+    -o-transition: background-color 0.4s ease;
+    transition: background-color 0.4s ease; }
+
+.clearfix, .listBox dl, .stockList .stockUnit, .sayingFollow {
+  *zoom: 1; }
+  .clearfix:after, .listBox dl:after, .stockList .stockUnit:after, .sayingFollow:after {
+    clear: both;
+    height: 0;
+    overflow: hidden;
+    display: block;
+    visibility: hidden;
+    content: "."; }
+
+html, body {
+  background: #fff; }
+
+body {
+  color: #666; }
+
+.unselect, .bottomMenuObj em, .listBox .empty span, .listBox dl dd .stock, .listBox dl dd .saying, .listBox dl dd .uInfo, .follow span, .stockList .stock em, .sayingFollow .followBtn, .sayingFollow .name span, .sayingList .theme .saying, .sayingList .theme .fav span, .mask dd, .followOfficial dd:last-child {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none; }
+
+.likeBtn:active, .bottomMenuObj em:active, .listBox .empty span:active, .listBox dl dd .stock:active, .listBox dl dd .saying:active, .listBox dl dd .uInfo span:active, .follow span:active, .stockList .stock em:active, .sayingFollow .followBtn:active, .sayingFollow .name span:active, .sayingList .theme .saying:active, .mask dd:active, .followOfficial dd:active:last-child {
+  background-color: #f3f3f3; }
+.likeBtn.unlikeBtn:active, .bottomMenuObj em.unlikeBtn:active, .listBox .empty span.unlikeBtn:active, .listBox dl dd .unlikeBtn.stock:active, .listBox dl dd .unlikeBtn.saying:active, .listBox dl dd .uInfo span.unlikeBtn:active, .follow span.unlikeBtn:active, .stockList .stock em.unlikeBtn:active, .sayingFollow .unlikeBtn.followBtn:active, .sayingFollow .name span.unlikeBtn:active, .sayingList .theme .unlikeBtn.saying:active, .mask dd.unlikeBtn:active, .followOfficial dd.unlikeBtn:active:last-child {
+  background-color: transparent; }
+
+.likeBtnBlue:active, .sayingList .theme:nth-child(even) .saying:active {
+  background-color: #47a3d1; }
+.likeBtnBlue.unlikeBtn:active, .sayingList .theme:nth-child(even) .unlikeBtn.saying:active {
+  background-color: transparent; }
+
+.overflowdot {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; }
+
+.sprite, .listBox dl dd .uInfo span.master i.vip, .listBox dl dd .uInfo span.fav, .listBox dl dd .uInfo span.faved, .follow span, .userLine .name i.vip, .stockList .stock i, .sayingFollow .followBtn, .sayingFollow .name i.vip, .sayingList .theme .fav span {
+  background: url("../../img/sprite2.png") no-repeat; }
+
+.bottomMenu {
+  padding-bottom: 50px;
+}
+.bottomMenuObj {
+  height: 48px;
+  overflow: hidden;
+  border-top: 1px solid #c8c8c8;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  font-size: 14px;
+  background: #fff;
+}
+
+.bottomMenuObj em {
+  display: block;
+  width: 33%;
+  float: left;
+  height: 48px;
+  text-align: center;
+}
+
+.bottomMenuObj em.on {
+  color: #FF0000;
+}
+
+      .bottomMenuObj em.on i.fav {
+        background-position: 0 -49px; }
+      .bottomMenuObj em.on i.pub {
+        background-position: 0 4px; }
+
+.bottomMenuObj i {
+  font-size: 30px;
+  display: inline-block;
+  vertical-align: middle;
+  zoom: 0.5;
+  height: 46px;
+  line-height: 46px;
+  margin-top: 24px;
+}
+
+    .bottomMenuObj i.fav {
+      background-position: 0 -149px; }
+    .bottomMenuObj i.pub {
+      background-position: 0 -96px; }
+
+.load {
+  height: 56px;
+  line-height: 56px;
+  text-align: center;
+  font-size: 18px;
+  color: #c0c0c0;
+  background: #f8f8f8; }
+
+.listBox .empty {
+  text-align: center;
+  position: fixed;
+  width: 100%;
+  top: 20%;
+}
+.listBox .empty .home {
+  width: auto;
+  height: 105px;
+  background: url("../../img/home.png") no-repeat 50% 50%;
+}
+.listBox .empty .word {
+  font-size: 20px;
+  color: #999999;
+  padding: 50px;
+}
+.listBox .empty .link {
+  font-size: 18px;
+  color: #FFFFFF;
+  background-color: #FF9900;
+  width: 120px;
+  height: 50px;
+  line-height: 50px;
+  margin: 0 auto;
+}
+
+.listBox .list {
+  border-top: 1px solid #ddd;
+  padding: 23px 16px; }
+  .listBox .list:fist-child {
+    border: 0 none; }
+.listBox dl {
+  /*****
+  	<div class="clearfix">
+  	    <div class="mod-left">
+  	    	left
+  	    </div>
+  	    <div class="mod-right">
+  	        <div class="mod-rightcontent">
+  	        	right
+  	        </div>
+  	    </div>
+  	</div>
+  *****/ }
+  .listBox dl .mod-left {
+    position: relative;
+    float: left;
+    width: 56px;
+    margin-right: -56px; }
+  .listBox dl .mod-right {
+    float: right;
+    width: 100%; }
+  .listBox dl .mod-rightcontent {
+    margin-left: 56px; }
+  .listBox dl dt div {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    overflow: hidden; }
+  .listBox dl dt img {
+    max-width: 40px;
+    max-height: 40px; }
+  .listBox dl dd {
+    font-size: 16px; }
+    .listBox dl dd .stock {
+      color: #41a0cf;
+      font-size: 14px; }
+      .listBox dl dd .stock i {
+        padding-left: 7px; }
+    .listBox dl dd .saying {
+      line-height: 24px;
+      color: #333;
+      padding-bottom: 8px; }
+    .listBox dl dd .uInfo {
+      overflow: hidden;
+      height: 52px;
+      position: relative; }
+      .listBox dl dd .uInfo span.master {
+        color: #3399cc;
+        display: inline-block;
+        height: 22px; }
+        .listBox dl dd .uInfo span.master i.vip {
+          display: inline-block;
+          width: 30px;
+          height: 32px;
+          vertical-align: middle;
+          zoom: 0.5; }
+        .listBox dl dd .uInfo span.master i.vip1 {
+          background-position: 0 -206px;
+          margin-left: 8px; }
+      .listBox dl dd .uInfo span.fav, .listBox dl dd .uInfo span.faved {
+        display: block;
+        width: 48px;
+        height: 80px;
+        font-size: 28px;
+        text-align: center;
+        color: #c0c0c0;
+        zoom: 0.5;
+        position: absolute;
+        right: 0;
+        top: 0;
+        background-position: 4px -310px; }
+      .listBox dl dd .uInfo span.faved {
+        background-position: -116px -310px; }
+      .listBox dl dd .uInfo i {
+        color: #c0c0c0;
+        font-size: 14px;
+        display: block; }
+
+.follow {
+  background: #3399cc;
+  height: 95px;
+  position: relative; }
+
+.follow #follow {
+    position: absolute;
+    right: 32px;
+    bottom: 20px;
+    color: #fff;
+    font-size: 28px;
+    line-height: 28px;
+    padding: 6px 20px 8px 48px;
+    border-radius: 6px;
+    border: 2px solid #fff;
+    zoom: 0.5;
+    background-position: 0 -450px;
+}
+    .follow span.followed {
+      background-position: 0 -400px; }
+
+.follow #share {
+    position: absolute;
+    right: 32px;
+    bottom: 20px;
+    color: #fff;
+    font-size: 30px;
+    padding: 6px 20px 8px 48px;
+    zoom: 0.5;
+    width: 90px;
+    height: 40px;
+    line-height: 40px;
+    background: #FF9966 none;
+}
+.follow #fans {
+    position: absolute;
+    font-size: 14px;
+    color: #FFFFFF;
+    padding-left: 50px;
+    padding-top: 63px;
+    background: none;
+}
+.follow #fansTitle {
+    color: #C0C0C0;
+}
+.follow #fansCount {
+    font-weight: bold;
+}
+
+.myShare {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    position: absolute;
+    background: #000;
+    z-index: 100;
+    opacity: 0.4;
+    overflow: hidden;
+}
+.box {
+    display: none;
+    opacity: 0.9;
+    width: 365px;
+    height: 620px;
+    position: absolute;
+    z-index: 101;
+    background: url("../../img/mask.png") no-repeat;
+    background-size: 100% 100%;
+}
+
+.userLine {
+  position: relative;
+  text-align: center;
+  border-bottom: 1px solid #ddd; }
+  .userLine .photo {
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: 50%;
+    top: -48px; }
+    .userLine .photo div {
+      position: absolute;
+      left: -36px;
+      top: 0;
+      width: 72px;
+      height: 72px;
+      text-align: center;
+      line-height: 72px; }
+    .userLine .photo img {
+      max-width: 72px;
+      max-height: 72px; }
+  .userLine .name {
+    color: #333;
+    padding-top: 32px;
+    height: 34px;
+    display: inline-block;
+    font-size: 24px; }
+    .userLine .name i.vip {
+      display: inline-block;
+      width: 30px;
+      height: 32px;
+      vertical-align: middle;
+      zoom: 0.5; }
+    .userLine .name i.vip1 {
+      background-position: 0 -206px;
+      margin-left: 8px; }
+  .userLine .title {
+    color: #c0c0c0;
+    font-size: 14px;
+    height: 42px; }
+
+.stockList .stockUnit {
+  /*****
+  	<div class="clearfix">
+  	    <div class="mod-left">
+  	    	left
+  	    </div>
+  	    <div class="mod-right">
+  	        <div class="mod-rightcontent">
+  	        	right
+  	        </div>
+  	    </div>
+  	</div>
+  *****/ }
+  .stockList .stockUnit .mod-left {
+    position: relative;
+    float: left;
+    width: 80px;
+    margin-right: -80px; }
+  .stockList .stockUnit .mod-right {
+    float: right;
+    width: 100%; }
+.stockList .stockUnit .mod-rightcontent  {
+  margin-left: 30px;
+}
+
+/* 分析师的个人主页 - 大盘和推荐股票的价格列表 */
+.stockList .priceDetail {
+  width: 200px;
+  line-height: 20px;
+  margin-top: -10px
+}
+.stockList .priceDetail div {
+  padding-bottom: 10px;
+}
+/* 分析师的个人主页 - 大盘和推荐股票的价格列表后面的箭头 */
+.stockList i {
+  float: right;
+  margin: -65px 10px 0 0;
+}
+/* 分析师的个人主页 - 大盘和推荐股票的涨跌幅 */
+.stockList .priceIncrease {
+  width: 95px;
+  line-height: 20px;
+  margin-top: -8px
+}
+.stockList .priceIncrease .raise, .stockList .priceIncrease .drop, .stockList .priceIncrease .equal {
+  margin-top: -4px;
+  padding: 2px 7px;
+  width: 55px;
+  text-align: center;
+  color: #FFFFFF;
+  font-size: 13px;
+  font-weight: bold;
+}
+.stockList .priceIncrease .raise {
+  background-color: #FF0000;
+}
+.stockList .priceIncrease .drop {
+  background-color: #00CC67;
+}
+.stockList .priceIncrease .equal {
+  background-color: #999999;
+}
+
+.stockList .percentageFigure {
+  padding-top: 18px; }
+  .stockList .percentageFigure div {
+    width: 46px;
+    height: 46px;
+    border-radius: 25px;
+    border: 2px solid #ff9000;
+    color: #ff9000;
+    font-size: 16px;
+    text-align: center;
+    line-height: 46px;
+    margin: 0 auto; }
+.stockList .stock {
+  position: relative;
+  border-bottom: 1px solid #ddd; }
+  .stockList .stock em {
+    display: block;
+    padding-top: 20px;
+    height: 64px;
+    color: #c0c0c0;
+    font-size: 14px; }
+  .stockList .stock strong {
+    color: #333;
+    font-size: 18px;
+    display: block;
+    height: 26px; }
+  .stockList .stock span {
+    position: absolute;
+    display: inline-block;
+    right: 15px;
+    top: 34px;
+    font-size: 14px;
+    line-height: 15px; }
+  .stockList .stock i {
+    display: inline-block;
+    width: 20px;
+    height: 30px;
+    font-size: 28px;
+    zoom: 0.5;
+    background-position: 0 -608px;
+    margin-left: 30px;
+    vertical-align: middle; }
+
+.sayingFollow {
+  background: #fff;
+  height: 72px;
+  position: relative; }
+  .sayingFollow .followBtn {
+    position: absolute;
+    right: 32px;
+    bottom: 20px;
+    color: #3399cc;
+    font-size: 28px;
+    line-height: 28px;
+    padding: 6px 20px 8px 48px;
+    border-radius: 6px;
+    border: 2px solid #3399cc;
+    zoom: 0.5;
+    background-position: 0 -550px; }
+    .sayingFollow .followBtn.followed {
+      background-position: 0 -500px; }
+  .sayingFollow .photo {
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: 16px;
+    top: 24px; }
+    .sayingFollow .photo div {
+      width: 72px;
+      height: 72px;
+      text-align: center;
+      line-height: 72px; }
+    .sayingFollow .photo img {
+      max-width: 72px;
+      max-height: 72px; }
+  .sayingFollow .name {
+    color: #333;
+    margin: 32px 0 0 102px;
+    height: 34px;
+    font-size: 24px;
+    float: left; }
+    .sayingFollow .name i.vip {
+      display: inline-block;
+      width: 30px;
+      height: 32px;
+      vertical-align: middle;
+      zoom: 0.5; }
+    .sayingFollow .name i.vip1 {
+      background-position: 0 -206px;
+      margin-left: 8px; }
+
+.stockTitle {
+  background: #3399cc;
+  height: 90px;
+  font-size: 24px;
+  color: #fff;
+  padding-left: 102px; }
+  .stockTitle strong {
+    display: block;
+    padding-top: 20px;
+    height: 24px; }
+  .stockTitle b {
+    padding-left: 10px; }
+  .stockTitle span {
+    font-size: 14px; }
+
+.sayingList .theme {
+  padding: 0 16px; }
+  .sayingList .theme .info {
+    overflow: hidden;
+    font-size: 14px;
+    padding-top: 30px;
+    height: 38px; }
+    .sayingList .theme .info strong {
+      float: left;
+      color: #3399cc; }
+    .sayingList .theme .info b {
+      float: right;
+      color: #3399cc; }
+    .sayingList .theme .info span {
+      color: #c0c0c0;
+      padding-right: 5px; }
+  .sayingList .theme .showMore {
+    color: #3399cc;
+    font-size: 14px;
+    padding: 3px 10px 4px;
+    border-radius: 3px;
+    margin: 5px auto;
+    width: 140px;
+    text-align: center;
+    border: 1px solid #3399cc; }
+  .sayingList .theme .saying {
+    font-size: 18px;
+    line-height: 30px;
+    max-height: 120px;
+    overflow: hidden; }
+  .sayingList .theme .fav {
+    color: #c0c0c0;
+    position: relative;
+    padding-top: 20px;
+    height: 54px; }
+    .sayingList .theme .fav i {
+      font-size: 14px; }
+    .sayingList .theme .fav span {
+      display: block;
+      width: 48px;
+      height: 80px;
+      font-size: 28px;
+      text-align: center;
+      color: #c0c0c0;
+      position: absolute;
+      right: 0;
+      top: 0;
+      zoom: 0.5;
+      background-position: 4px -310px; }
+      .sayingList .theme .fav span.faved {
+        background-position: -116px -310px; }
+  .sayingList .theme:nth-child(even) {
+    background: #3399cc;
+    color: #fff; }
+    .sayingList .theme:nth-child(even) .showMore {
+      color: #fff;
+      border-color: #fff; }
+    .sayingList .theme:nth-child(even) .info strong {
+      color: #fff; }
+    .sayingList .theme:nth-child(even) .info b {
+      color: #fff; }
+    .sayingList .theme:nth-child(even) .fav {
+      color: #fff; }
+      .sayingList .theme:nth-child(even) .fav span {
+        color: #fff;
+        background-position: -56px -310px; }
+        .sayingList .theme:nth-child(even) .fav span.faved {
+          background-position: -116px -310px; }
+
+.mask {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  display: none;
+  overflow: hidden; }
+  .mask .shade {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8); }
+  .mask dl {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    background: #fff;
+    color: #333333; }
+  .mask dt {
+    font-size: 14px;
+    height: 44px;
+    line-height: 44px; }
+  .mask dd {
+    font-size: 16px;
+    height: 42px;
+    line-height: 42px;
+    border-top: 3px solid #dddddd; }
+    .mask dd.sure {
+      border-top-width: 1px;
+      height: 48px;
+      line-height: 48px; }
+
+.followOfficial {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  display: none;
+  overflow: hidden; }
+  .followOfficial .shade {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8); }
+  .followOfficial dl {
+    position: fixed;
+    top: 20%;
+    width: 100%;
+    -webkit-box-sizing: border-box;
+    padding: 0 40px;
+    text-align: center;
+    color: #333333; }
+  .followOfficial dt {
+    background: #fff;
+    padding: 22px 0; }
+    .followOfficial dt img {
+      width: 60%; }
+  .followOfficial dd {
+    background: #fff;
+    text-align: center;
+    height: 33px;
+    font-size: 14px; }
+    .followOfficial dd.title {
+      font-size: 16px;
+      height: 25px; }
+    .followOfficial dd:last-child {
+      font-size: 16px;
+      color: #3398cc;
+      height: 44px;
+      line-height: 44px;
+      border-top: 1px solid #ddd; }
+
+
+#myCommentProfile {
+  height: 160px;
+  width: 400px;
+
+  background-color: #eee;
+}
+/*头像div*/
+#myCommentProfile #headImg {
+  width: 150px;
+  height: 110px;
+  padding: 50px 5px 0 0;
+}
+/*头像*/
+#myCommentProfile #headImg img {
+  float: right;
+  width: 72px;
+  height: 72px;
+}
+#headImg {
+  float: left;
+}
+#headImgRight {
+  float: left;
+}
+#headImgRightBottom {
+  color: #999999;
+  font-size: 14px;
+  padding: 10px;
+}
+
+#myCommentConfig {
+  background-color: #2E99CC;
+  padding: 10px;
+  height: 20px;
+  color: #FFFFFF;
+  text-align: center;
+}
+#myCommentConfigInfo {
+  margin-right: 20px;
+}
+
+#myCommentGP {
+  margin: 0 auto;
+  height: 180px;
+  line-height: 180px;
+  border-bottom: 1px solid #999999;
+}
+#myCommentDP {
+  margin: 0 auto;
+  height: 180px;
+  line-height: 180px;
+  border-bottom: 1px solid #999999;
+}
+#myCommentInfo {
+  text-align: center;
+}
+#myComment .red {
+  color: #FF0000;
+  font-size: 16px;
+  padding: 5px;
+}
+
+
+#myComment .myCommentFont {
+  color: #FF9900;
+  font-size: 26px;
+  padding: 50px 0 5px 10px;
+}

@@ -1,0 +1,90 @@
+<#assign bg="bg-gray"/> 
+<#assign controller="certification1"/>
+<#assign title="实名认证"/> 
+<#assign header="实名认证"/>
+<#include 'mobile/layout/layout.html'/>
+<article class="content" style="padding-bottom: 60px;">
+	<div id="panel1">
+		<!--表单-->
+		<aside class="con-frame">
+			<ul class="datalist">
+				<li class="datalist-item clearfix">
+					<div class="am-grid datalist-line">
+						<div class="am-grid-item am-grid-item-25  am-ft-right">
+							<h4 class="am-ft-md  cm-left">真实姓名</h4>
+						</div>
+						<div class="am-grid-item am-grid-item-75 am-ft-left am-left-10">
+							<span class="ui-form-field"> <input name="real_name"
+								id="real_name" type="text" class="text_input" maxlength="18"
+								defaultvalue="输入姓名" value="" placeholder="输入姓名">
+							</span>
+						</div>
+					</div>
+				</li>
+				<li class="datalist-item clearfix">
+					<div class="am-grid datalist-line">
+						<div class="am-grid-item am-grid-item-25  am-ft-right">
+							<h4 class="am-ft-md  cm-left">证件类型</h4>
+						</div>
+						<div class="am-grid-item am-grid-item-75 am-ft-left am-left-10">
+							<span>大陆身份证</span>
+						</div>
+					</div>
+				</li>
+
+
+				<li class="datalist-item clearfix">
+					<div class="am-grid datalist-line">
+						<div class="am-grid-item am-grid-item-25  am-ft-right">
+							<h4 class="am-ft-md cm-left">证件号码</h4>
+						</div>
+						<div class="am-grid-item am-grid-item-75 am-ft-left am-left-10">
+							<span class="ui-form-field"> <input name="idcard"
+								id="idcard" type="text" class="text_input" maxlength="18"  defaultvalue="输入证件号码"
+								value="" placeholder="输入证件号码">
+							</span>
+						<!--  	<p class="f-right" id="resetBtn">
+								<i class=" type-icon icon-errorLogin"></i>
+							</p>-->
+						</div>
+					</div>
+				</li>
+			</ul>
+		</aside>
+		<div class="am-footer am-footerBtn-one">
+			<!--按钮-->
+			<div id="addBtn1"
+				class="btn-page btn-page-center bg-white con-spacing15">
+				<a  class="am-button am-button-red">
+					<span>下一步</span>
+				</a>
+			</div>
+			<!--按钮-->
+		</div>
+	</div>
+	
+	<div id="panel3">
+		<div class="con-spacing15 con-prompt">
+			<!--提示-->
+			<p>
+				<i class="icon-prompt icon-prompt-success"></i>
+			</p>
+			<p>
+				<span>实名认证成功</span>
+			</p>
+			<p class="am-ft-gray">
+				<span class="am-ft-sm"></span>
+			</p>
+			<!--提示-->
+
+			<!--按钮-->
+			<div  id = "returnBtn2"  class="btn-page btn-page-center con-spacing15">
+				<a href="${basePath}/mobile/user/index.htm" class="am-button am-button-red"> <span
+					class="am-ft-white">返回账户设置</span>
+				</a>
+			</div>
+			<!--按钮-->
+		</div>
+	</div>
+</article>
+

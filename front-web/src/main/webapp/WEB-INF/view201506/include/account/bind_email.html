@@ -1,0 +1,47 @@
+<form id="bindEmailForm" action="/user/email/change" class="p_l_40" method="post">
+    <div class="group m_t_10">
+        <div class="col_1">邮箱</div>
+        <div class="col_2"><input class="input_text" name="email" id="bindEmailEmail" type="text" autocomplete="off" validateType="empty:请输入邮箱 email" maxlength="30"/></div>
+    </div>
+    <div class="group m_t_10">
+        <div class="col_1">安全密码</div>
+        <div class="col_2">
+            <input class="input_text" type="password" name="tradePwd" id="bindEmailTradePwd" validateType="empty:请输入安全密码 len:6:16 password" maxlength="20"/>
+        </div>
+    </div>
+
+    <div class="group m_t_10">
+        <div class="col_1"></div>
+        <div class="col_2">
+            <button type="button" id="bindEmailSumbile" class="btn size_m btn_blue">保存</button>
+        </div>
+    </div>
+</form>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        var form = $('#bindEmailForm'),
+                email = $('#bindEmailEmail'),
+                tradepwd = $('#bindEmailTradePwd'),
+                submit = $('#bindEmailSumbile');
+
+        // 表单验证
+        formValidate.init(form);
+
+        // 提交
+        $(submit).click(function() {
+            if (formValidate.validateForm(form) == false) {
+                return false;
+            }
+            $.post("/user/email/change",{email:$(email).val(),tradePwd:RSAUtils.encryptedString($(tradepwd).val())},function(response){
+                if(response.success){
+                    // TODO 关闭所有显示框，弹框提示成功
+                    Alert.show("绑定邮箱成功", "确认", function() {window.location.reload()});
+                }else{
+                    formValidate.showFormTips(submit, response.msg);
+                }
+            });
+        });
+
+    });
+</script>

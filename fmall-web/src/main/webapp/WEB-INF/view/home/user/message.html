@@ -1,0 +1,69 @@
+<#include "home/config.html"/>
+<#include "home/include/head.html"/>
+<#assign userTopMenu="msg"/>
+    <title>消息通知</title>
+</head>
+
+<body>
+<!--头部-->
+<div class="header">
+<#include "home/include/topRich.html" />
+<#include "home/include/menuLine.html" />
+</div>
+<!--内容区-->
+<div class="main">
+    <div class="w MessageNotice">
+        <div class="MessageTop clearfix">
+            <div class="f_l">
+                <select onchange="window.location.href='/user/message.html?model='+this.value;">
+                    <option value="">全部</option>
+                    <option value="1" <#if model == "1">selected</#if> >主站</option>
+                    <option value="2" <#if model == "2">selected</#if> >邮币卡</option>
+                    <option value="3" <#if model == "3">selected</#if> >贵金属</option>
+                </select>
+            </div>
+            <div class="f_r">
+                <#if (msgList.items?size>0)>
+                    <a href="/user/clear_message.html">清空</a> <s>|</s>  <a href="javascript:void(0);" onclick="delMsg()">删除</a>
+                </#if>
+            </div>
+        </div>
+        <div class="MessageIn">
+            <form name="form" id="form" method="post" action="/user/del_message.html">
+                <table>
+                    <tbody>
+                    <#if (msgList.items?size>0)>
+                        <#list msgList.items as m>
+                            <tr>
+                                <td>
+                                    <label class="col_1"><input type="checkbox" name="ids" value="${m.pushMsgId}" />
+                                    <#switch m.pushModel>
+                                        <#case "1">主站<#break>
+                                        <#case "2">邮币卡<#break>
+                                        <#case "3">贵金属<#break>
+                                    </#switch>
+                                    </label>
+                                </td>
+                                <td><div class="col_2">${m.pushMsgTitle}</div></td>
+                                <td><div class="col_3">${m.createDatetime?string("yyyy-MM-dd HH:mm:ss")}</div></td>
+                            </tr>
+                        </#list>
+                    <#else>
+                        <div style="height:500px;line-height:300px;font-size:24px;text-align:center;">您暂时没有消息</div>
+                    </#if>
+                    </tbody>
+                </table>
+            </form>
+            ${pageHtml}
+        </div>
+
+    </div>
+</div>
+
+<script>
+    function delMsg() {
+        document.getElementById("form").submit();
+    }
+</script>
+
+<#include "home/include/footRich.html" />

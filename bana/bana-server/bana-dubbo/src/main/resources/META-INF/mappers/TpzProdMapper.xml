@@ -1,0 +1,479 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="TpzProd">
+  <resultMap id="BaseResultMap" type="com.caimao.bana.api.entity.TpzProdEntity" >
+    <id column="prod_id" property="prodId" jdbcType="BIGINT" />
+    <result column="prod_name" property="prodName" jdbcType="VARCHAR" />
+    <result column="prod_note" property="prodNote" jdbcType="VARCHAR" />
+    <result column="prod_status" property="prodStatus" jdbcType="CHAR" />
+    <result column="prod_grade" property="prodGrade" jdbcType="VARCHAR" />
+    <result column="prod_type_id" property="prodTypeId" jdbcType="VARCHAR" />
+    <result column="prod_loan_ratio_max" property="prodLoanRatioMax" jdbcType="INTEGER" />
+    <result column="prod_loan_ratio_min" property="prodLoanRatioMin" jdbcType="INTEGER" />
+    <result column="prod_amount_max" property="prodAmountMax" jdbcType="BIGINT" />
+    <result column="prod_amount_min" property="prodAmountMin" jdbcType="BIGINT" />
+    <result column="prod_terms" property="prodTerms" jdbcType="VARCHAR" />
+    <result column="prod_bill_accords" property="prodBillAccords" jdbcType="VARCHAR" />
+    <result column="prod_bill_type" property="prodBillType" jdbcType="VARCHAR" />
+    <result column="prod_defer_mode" property="prodDeferMode" jdbcType="CHAR" />
+    <result column="interest_accrual_mode" property="interestAccrualMode" jdbcType="VARCHAR" />
+    <result column="interest_settle_mode" property="interestSettleMode" jdbcType="VARCHAR" />
+    <result column="interest_settle_days" property="interestSettleDays" jdbcType="INTEGER" />
+    <result column="prod_repay_mode" property="prodRepayMode" jdbcType="CHAR" />
+    <result column="prod_repay_close_days" property="prodRepayCloseDays" jdbcType="INTEGER" />
+    <result column="prod_repay_penalty_flag" property="prodRepayPenaltyFlag" jdbcType="CHAR" />
+    <result column="prod_repay_penalty_days" property="prodRepayPenaltyDays" jdbcType="INTEGER" />
+    <result column="prod_add_mode" property="prodAddMode" jdbcType="CHAR" />
+    <result column="prod_add_num" property="prodAddNum" jdbcType="INTEGER" />
+    <result column="prod_defered_mode" property="prodDeferedMode" jdbcType="CHAR" />
+    <result column="prod_defered_num" property="prodDeferedNum" jdbcType="INTEGER" />
+    <result column="create_datetime" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="update_datetime" property="updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="prod_loan_limit" property="prodLoanLimit" jdbcType="INTEGER" />
+    <result column="prod_loan_cur_limit" property="prodLoanCurLimit" jdbcType="INTEGER" />
+   	<result column="add_to_prod" property="addToProd" jdbcType="INTEGER" />
+    <result column="defered_to_prod" property="deferedToProd" jdbcType="INTEGER" />
+  </resultMap>
+ <resultMap id="F830910ResMap" type="com.caimao.bana.api.entity.res.F830910Res" >
+    <id column="prod_id" property="prodId" jdbcType="BIGINT" />
+    <result column="prod_name" property="prodName" jdbcType="VARCHAR" />
+    <result column="prod_note" property="prodNote" jdbcType="VARCHAR" />
+    <result column="prod_status" property="prodStatus" jdbcType="CHAR" />
+    <result column="prod_grade" property="prodGrade" jdbcType="VARCHAR" />
+    <result column="prod_type_id" property="prodTypeId" jdbcType="VARCHAR" />
+    <result column="prod_loan_ratio_max" property="prodLoanRatioMax" jdbcType="INTEGER" />
+    <result column="prod_loan_ratio_min" property="prodLoanRatioMin" jdbcType="INTEGER" />
+    <result column="prod_amount_max" property="prodAmountMax" jdbcType="BIGINT" />
+    <result column="prod_amount_min" property="prodAmountMin" jdbcType="BIGINT" />
+    <result column="prod_terms" property="prodTerms" jdbcType="VARCHAR" />
+    <result column="prod_bill_accords" property="prodBillAccords" jdbcType="VARCHAR" />
+    <result column="prod_bill_type" property="prodBillType" jdbcType="VARCHAR" />
+    <result column="prod_defer_mode" property="prodDeferMode" jdbcType="CHAR" />
+    <result column="interest_accrual_mode" property="interestAccrualMode" jdbcType="VARCHAR" />
+    <result column="interest_settle_mode" property="interestSettleMode" jdbcType="VARCHAR" />
+    <result column="interest_settle_days" property="interestSettleDays" jdbcType="INTEGER" />
+    <result column="prod_repay_mode" property="prodRepayMode" jdbcType="CHAR" />
+    <result column="prod_repay_close_days" property="prodRepayCloseDays" jdbcType="INTEGER" />
+    <result column="prod_repay_penalty_flag" property="prodRepayPenaltyFlag" jdbcType="CHAR" />
+    <result column="prod_repay_penalty_days" property="prodRepayPenaltyDays" jdbcType="INTEGER" />
+    <result column="prod_add_mode" property="prodAddMode" jdbcType="CHAR" />
+    <result column="prod_add_num" property="prodAddNum" jdbcType="INTEGER" />
+    <result column="prod_defered_mode" property="prodDeferedMode" jdbcType="CHAR" />
+    <result column="prod_defered_num" property="prodDeferedNum" jdbcType="INTEGER" />
+    <result column="prod_loan_limit" property="prodLoanLimit" jdbcType="INTEGER" />
+    <result column="prod_loan_cur_limit" property="prodLoanCurLimit" jdbcType="INTEGER" />
+   	<result column="add_to_prod" property="addToProd" jdbcType="INTEGER" />
+    <result column="defered_to_prod" property="deferedToProd" jdbcType="INTEGER" />
+  </resultMap>
+<!--   <resultMap id="F831911ResMap" type="com.hsnet.pz.biz.base.dto.res.F831911Res" > -->
+<!--    <id column="prod_id" property="prodId" jdbcType="BIGINT" /> -->
+<!--     <result column="prod_name" property="prodName" jdbcType="VARCHAR" /> -->
+<!--     <result column="prod_note" property="prodNote" jdbcType="VARCHAR" /> -->
+<!--     <result column="prod_status" property="prodStatus" jdbcType="CHAR" /> -->
+<!--     <result column="prod_grade" property="prodGrade" jdbcType="VARCHAR" /> -->
+<!--     <result column="prod_type_id" property="prodTypeId" jdbcType="VARCHAR" /> -->
+<!--     <result column="prod_loan_ratio_max" property="prodLoanRatioMax" jdbcType="INTEGER" /> -->
+<!--     <result column="prod_loan_ratio_min" property="prodLoanRatioMin" jdbcType="INTEGER" /> -->
+<!--     <result column="prod_amount_max" property="prodAmountMax" jdbcType="BIGINT" /> -->
+<!--     <result column="prod_amount_min" property="prodAmountMin" jdbcType="BIGINT" /> -->
+<!--     <result column="prod_terms" property="prodTerms" jdbcType="VARCHAR" /> -->
+<!--     <result column="prod_bill_accords" property="prodBillAccords" jdbcType="VARCHAR" /> -->
+<!--     <result column="prod_bill_type" property="prodBillType" jdbcType="VARCHAR" /> -->
+<!--     <result column="prod_defer_mode" property="prodDeferMode" jdbcType="CHAR" /> -->
+<!--     <result column="interest_accrual_mode" property="interestAccrualMode" jdbcType="VARCHAR" /> -->
+<!--     <result column="interest_settle_mode" property="interestSettleMode" jdbcType="VARCHAR" /> -->
+<!--     <result column="interest_settle_days" property="interestSettleDays" jdbcType="INTEGER" /> -->
+<!--     <result column="prod_repay_mode" property="prodRepayMode" jdbcType="CHAR" /> -->
+<!--     <result column="prod_repay_close_days" property="prodRepayCloseDays" jdbcType="INTEGER" /> -->
+<!--     <result column="prod_repay_penalty_flag" property="prodRepayPenaltyFlag" jdbcType="CHAR" /> -->
+<!--     <result column="prod_repay_penalty_days" property="prodRepayPenaltyDays" jdbcType="INTEGER" /> -->
+<!--     <result column="prod_add_mode" property="prodAddMode" jdbcType="CHAR" /> -->
+<!--     <result column="prod_add_num" property="prodAddNum" jdbcType="INTEGER" /> -->
+<!--     <result column="prod_defered_mode" property="prodDeferedMode" jdbcType="CHAR" /> -->
+<!--     <result column="prod_defered_num" property="prodDeferedNum" jdbcType="INTEGER" /> -->
+<!--     <result column="create_datetime" property="createDatetime" jdbcType="TIMESTAMP" /> -->
+<!--     <result column="update_datetime" property="updateDatetime" jdbcType="TIMESTAMP" /> -->
+<!--     <result column="prod_loan_limit" property="prodLoanLimit" jdbcType="INTEGER" /> -->
+<!--     <result column="prod_loan_cur_limit" property="prodLoanCurLimit" jdbcType="INTEGER" /> -->
+<!--    	<result column="add_to_prod" property="addToProd" jdbcType="INTEGER" /> -->
+<!--     <result column="defered_to_prod" property="deferedToProd" jdbcType="INTEGER" /> -->
+<!--   </resultMap> -->
+  <sql id="Base_Column_List" >
+    prod_id, prod_name, prod_note, prod_status, prod_grade, prod_type_id, prod_loan_ratio_max, 
+    prod_loan_ratio_min, prod_amount_max, prod_amount_min, prod_terms, prod_bill_accords, 
+    prod_bill_type, prod_defer_mode, interest_accrual_mode, interest_settle_mode, interest_settle_days, 
+    prod_repay_mode, prod_repay_close_days, prod_repay_penalty_flag, prod_repay_penalty_days, 
+    prod_add_mode, prod_add_num, prod_defered_mode, prod_defered_num, create_datetime, 
+    update_datetime,prod_loan_limit,prod_loan_cur_limit,add_to_prod,defered_to_prod
+  </sql>
+  <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tpz_prod
+    where prod_id = #{prodId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Long" >
+    delete from tpz_prod
+    where prod_id = #{prodId,jdbcType=BIGINT}
+  </delete>
+  <insert id="save" parameterType="com.caimao.bana.api.entity.TpzProdEntity" >
+    insert into tpz_prod
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="prodId != 0" >
+        prod_id,
+      </if>
+      <if test="prodName != null and   prodName != ''" >
+        prod_name,
+      </if>
+      <if test="prodNote != null and  prodNote  != ''" >
+        prod_note,
+      </if>
+      <if test="prodStatus != null and  prodStatus  != ''" >
+        prod_status,
+      </if>
+      <if test="prodGrade != null and   prodGrade != ''" >
+        prod_grade,
+      </if>
+      <if test="prodTypeId != null and  prodTypeId  != ''" >
+        prod_type_id,
+      </if>
+      <if test="prodLoanRatioMax != null and  prodLoanRatioMax  != ''" >
+        prod_loan_ratio_max,
+      </if>
+      <if test="prodLoanRatioMin != null and  prodLoanRatioMin  != ''" >
+        prod_loan_ratio_min,
+      </if>
+      <if test="prodAmountMax != null and  prodAmountMax  != ''" >
+        prod_amount_max,
+      </if>
+      <if test="prodAmountMin != null and   prodAmountMin != ''" >
+        prod_amount_min,
+      </if>
+      <if test="prodTerms != null and  prodTerms  != ''" >
+        prod_terms,
+      </if>
+      <if test="prodBillAccords != null and  prodBillAccords  != ''" >
+        prod_bill_accords,
+      </if>
+      <if test="prodBillType != null and  prodBillType  != ''" >
+        prod_bill_type,
+      </if>
+      <if test="prodDeferMode != null and  prodDeferMode  != ''" >
+        prod_defer_mode,
+      </if>
+      <if test="interestAccrualMode != null and   interestAccrualMode != ''" >
+        interest_accrual_mode,
+      </if>
+      <if test="interestSettleMode != null and  interestSettleMode  != ''" >
+        interest_settle_mode,
+      </if>
+      <if test="interestSettleDays != null and interestSettleDays   != ''" >
+        interest_settle_days,
+      </if>
+      <if test="prodRepayMode != null and  prodRepayMode  != ''" >
+        prod_repay_mode,
+      </if>
+      <if test="prodRepayCloseDays != null and  prodRepayCloseDays  != ''" >
+        prod_repay_close_days,
+      </if>
+      <if test="prodRepayPenaltyFlag != null and prodRepayPenaltyFlag   != ''" >
+        prod_repay_penalty_flag,
+      </if>
+      <if test="prodRepayPenaltyDays != null and prodRepayPenaltyDays   != ''" >
+        prod_repay_penalty_days,
+      </if>
+      <if test="prodAddMode != null and  prodAddMode  != ''" >
+        prod_add_mode,
+      </if>
+      <if test="prodAddNum != null and   prodAddNum != ''" >
+        prod_add_num,
+      </if>
+      <if test="prodDeferedMode != null and  prodDeferedMode  != ''" >
+        prod_defered_mode,
+      </if>
+      <if test="prodDeferedNum != null and   prodDeferedNum != ''" >
+        prod_defered_num,
+      </if>
+      <if test="createDatetime != null and  createDatetime  != ''" >
+        create_datetime,
+      </if>
+      <if test="updateDatetime != null and  updateDatetime  != ''" >
+        update_datetime,
+      </if>
+      <if test="prodLoanLimit != null and   prodLoanLimit != ''" >
+        prod_loan_limit,
+      </if>
+      <if test="prodLoanCurLimit != null and   prodLoanCurLimit != ''" >
+        prod_loan_cur_limit,
+      </if>
+      
+      <if test="addToProd != null and   addToProd != ''" >
+        add_to_prod	,
+      </if>
+      <if test="deferedToProd != null and   deferedToProd != ''" >
+        defered_to_prod,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="prodId != 0" >
+        #{prodId,jdbcType=BIGINT},
+      </if>
+      <if test="prodName != null and   prodName != ''" >
+        #{prodName,jdbcType=VARCHAR},
+      </if>
+      <if test="prodNote != null and  prodNote  != ''" >
+        #{prodNote,jdbcType=VARCHAR},
+      </if>
+      <if test="prodStatus != null and  prodStatus  != ''" >
+        #{prodStatus,jdbcType=CHAR},
+      </if>
+      <if test="prodGrade != null and  prodGrade  != ''" >
+        #{prodGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="prodTypeId != null and  prodTypeId  != ''" >
+        #{prodTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="prodLoanRatioMax != null and  prodLoanRatioMax  != ''" >
+        #{prodLoanRatioMax,jdbcType=INTEGER},
+      </if>
+      <if test="prodLoanRatioMin != null and   prodLoanRatioMin != ''" >
+        #{prodLoanRatioMin,jdbcType=INTEGER},
+      </if>
+      <if test="prodAmountMax != null and  prodAmountMax  != ''" >
+        #{prodAmountMax,jdbcType=BIGINT},
+      </if>
+      <if test="prodAmountMin != null and   prodAmountMin != ''" >
+        #{prodAmountMin,jdbcType=BIGINT},
+      </if>
+      <if test="prodTerms != null and   prodTerms != ''" >
+        #{prodTerms,jdbcType=VARCHAR},
+      </if>
+      <if test="prodBillAccords != null and  prodBillAccords  != ''" >
+        #{prodBillAccords,jdbcType=VARCHAR},
+      </if>
+      <if test="prodBillType != null and  prodBillType  != ''" >
+        #{prodBillType,jdbcType=VARCHAR},
+      </if>
+      <if test="prodDeferMode != null and  prodDeferMode  != ''" >
+        #{prodDeferMode,jdbcType=CHAR},
+      </if>
+      <if test="interestAccrualMode != null and  interestAccrualMode  != ''" >
+        #{interestAccrualMode,jdbcType=VARCHAR},
+      </if>
+      <if test="interestSettleMode != null and  interestSettleMode  != ''" >
+        #{interestSettleMode,jdbcType=VARCHAR},
+      </if>
+      <if test="interestSettleDays != null and   interestSettleDays != ''" >
+        #{interestSettleDays,jdbcType=INTEGER},
+      </if>
+      <if test="prodRepayMode != null and  prodRepayMode  != ''" >
+        #{prodRepayMode,jdbcType=CHAR},
+      </if>
+      <if test="prodRepayCloseDays != null and  prodRepayCloseDays  != ''" >
+        #{prodRepayCloseDays,jdbcType=INTEGER},
+      </if>
+      <if test="prodRepayPenaltyFlag != null and  prodRepayPenaltyFlag  != ''" >
+        #{prodRepayPenaltyFlag,jdbcType=CHAR},
+      </if>
+      <if test="prodRepayPenaltyDays != null and  prodRepayPenaltyDays  != ''" >
+        #{prodRepayPenaltyDays,jdbcType=INTEGER},
+      </if>
+      <if test="prodAddMode != null and   prodAddMode != ''" >
+        #{prodAddMode,jdbcType=CHAR},
+      </if>
+      <if test="prodAddNum != null and  prodAddNum  != ''" >
+        #{prodAddNum,jdbcType=INTEGER},
+      </if>
+      <if test="prodDeferedMode != null and  prodDeferedMode  != ''" >
+        #{prodDeferedMode,jdbcType=CHAR},
+      </if>
+      <if test="prodDeferedNum != null and   prodDeferedNum != ''" >
+        #{prodDeferedNum,jdbcType=INTEGER},
+      </if>
+      <if test="createDatetime != null and   createDatetime != ''" >
+        #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDatetime != null and   updateDatetime != ''" >
+        #{updateDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="prodLoanLimit != null and   prodLoanLimit != ''" >
+        #{prodLoanLimit,jdbcType=INTEGER},
+      </if>
+      <if test="prodLoanCurLimit != null and   prodLoanCurLimit != ''" >
+        #{prodLoanCurLimit,jdbcType=INTEGER},
+      </if>
+      <if test="addToProd != null and   addToProd != ''" >
+        #{addToProd,jdbcType=INTEGER},
+      </if>
+      <if test="deferedToProd != null and   deferedToProd != ''" >
+        #{deferedToProd,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.caimao.bana.api.entity.TpzProdEntity" >
+   update tpz_prod
+    set
+        prod_name = #{prodName,jdbcType=VARCHAR},
+        prod_note = #{prodNote,jdbcType=VARCHAR},
+        prod_status = #{prodStatus,jdbcType=CHAR},
+        prod_grade = #{prodGrade,jdbcType=VARCHAR},
+        prod_type_id = #{prodTypeId,jdbcType=VARCHAR},
+        prod_loan_ratio_max = #{prodLoanRatioMax,jdbcType=INTEGER},
+        prod_loan_ratio_min = #{prodLoanRatioMin,jdbcType=INTEGER},
+        prod_amount_max = #{prodAmountMax,jdbcType=BIGINT},
+        prod_amount_min = #{prodAmountMin,jdbcType=BIGINT},
+        prod_terms = #{prodTerms,jdbcType=VARCHAR},
+        prod_bill_accords = #{prodBillAccords,jdbcType=VARCHAR},
+        prod_bill_type = #{prodBillType,jdbcType=VARCHAR},
+        prod_defer_mode = #{prodDeferMode,jdbcType=CHAR},
+        interest_accrual_mode = #{interestAccrualMode,jdbcType=VARCHAR},
+        interest_settle_mode = #{interestSettleMode,jdbcType=VARCHAR},
+        interest_settle_days = #{interestSettleDays,jdbcType=INTEGER},
+        prod_repay_mode = #{prodRepayMode,jdbcType=CHAR},
+        prod_repay_close_days = #{prodRepayCloseDays,jdbcType=INTEGER},
+        prod_repay_penalty_flag = #{prodRepayPenaltyFlag,jdbcType=CHAR},
+        prod_repay_penalty_days = #{prodRepayPenaltyDays,jdbcType=INTEGER},
+        prod_add_mode = #{prodAddMode,jdbcType=CHAR},
+        prod_add_num = #{prodAddNum,jdbcType=INTEGER},
+        prod_defered_mode = #{prodDeferedMode,jdbcType=CHAR},
+        prod_defered_num = #{prodDeferedNum,jdbcType=INTEGER},
+        create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+        update_datetime = #{updateDatetime,jdbcType=TIMESTAMP},
+        prod_loan_limit = #{prodLoanLimit,jdbcType=INTEGER},
+        prod_loan_cur_limit = #{prodLoanCurLimit,jdbcType=INTEGER},
+        add_to_prod=#{addToProd,jdbcType=INTEGER},
+        defered_to_prod=#{deferedToProd,jdbcType=INTEGER}
+    where prod_id = #{prodId,jdbcType=BIGINT}
+  </update>
+  
+  <!-- user define -->
+  <sql id="where_condition">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="prodId != null and  prodId != ''">
+				AND t.prod_id = #{prodId}			
+			</if>
+			<if test="prodStatus != null and  prodStatus != ''">
+				AND t.prod_status = #{prodStatus}
+			</if>
+			<if test="prodTypeId != null and  prodTypeId != ''">
+				AND t.prod_type_id = #{prodTypeId}
+			</if>
+		</trim>
+	</sql>
+<!--     <sql id="where_conditionF831911"> -->
+<!-- 		<trim prefix="WHERE" prefixOverrides="AND | OR"> -->
+<!-- 			<if test="prodId != null and  prodId != ''"> -->
+<!-- 				AND t.prod_id = #{prodId}			 -->
+<!-- 			</if> -->
+<!-- 			<if test="prodStatus != null and  prodStatus != ''"> -->
+<!-- 				AND t.prod_status = #{prodStatus} -->
+<!-- 			</if> -->
+<!-- 			<if test="prodTypeId != null and  prodTypeId != ''"> -->
+<!-- 				AND t.prod_type_id = #{prodTypeId} -->
+<!-- 			</if> -->
+<!-- 		</trim> -->
+<!-- 	</sql> -->
+<select id="queryProductList" resultMap="F830910ResMap" parameterType="com.caimao.bana.api.entity.req.product.FQueryProductReq" >
+    select 
+    <include refid="Base_Column_List" />
+    from tpz_prod t
+    <include refid="where_condition"/>
+    <trim prefix="ORDER BY ">
+			<if test="orderColumn != null and  orderColumn != ''">
+				${orderColumn} ${orderDir} 
+			</if>
+		</trim>
+  </select>
+<!--   <select id="queryF831911ResWithPage" resultMap="F831911ResMap" parameterType="com.hsnet.pz.biz.base.dto.req.F831911Req" > -->
+<!--     select  -->
+<!--     <include refid="Base_Column_List" /> -->
+<!--     from tpz_prod t -->
+<!--     <include refid="where_conditionF831911"/> -->
+<!--     <trim prefix="ORDER BY "> -->
+<!-- 			<if test="orderColumn != null and  orderColumn != ''"> -->
+<!-- 				${orderColumn} ${orderDir}  -->
+<!-- 			</if> -->
+<!-- 		</trim> -->
+<!--   </select> -->
+  
+  <!-- API一次性返回复杂产品 -->
+<!--   <resultMap id="F832021ResMap" type="com.hsnet.pz.biz.base.dto.res.F832021Res" > -->
+<!--     <id column="prod_id" property="prodId" jdbcType="BIGINT" /> -->
+<!--     <result column="prod_name" property="prodName" jdbcType="VARCHAR" /> -->
+<!--     <result column="prod_note" property="prodNote" jdbcType="VARCHAR" /> -->
+<!--     <result column="prod_status" property="prodStatus" jdbcType="CHAR" /> -->
+<!--     <result column="prod_grade" property="prodGrade" jdbcType="VARCHAR" /> -->
+<!--     <result column="prod_type_id" property="prodTypeId" jdbcType="VARCHAR" /> -->
+<!--     <result column="prod_loan_ratio_max" property="prodLoanRatioMax" jdbcType="INTEGER" /> -->
+<!--     <result column="prod_loan_ratio_min" property="prodLoanRatioMin" jdbcType="INTEGER" /> -->
+<!--     <result column="prod_amount_max" property="prodAmountMax" jdbcType="BIGINT" /> -->
+<!--     <result column="prod_amount_min" property="prodAmountMin" jdbcType="BIGINT" /> -->
+<!--     <result column="prod_terms" property="prodTerms" jdbcType="VARCHAR" /> -->
+<!--     <result column="prod_bill_accords" property="prodBillAccords" jdbcType="VARCHAR" /> -->
+<!--     <result column="prod_bill_type" property="prodBillType" jdbcType="VARCHAR" /> -->
+<!--     <result column="prod_defer_mode" property="prodDeferMode" jdbcType="CHAR" /> -->
+<!--     <result column="interest_accrual_mode" property="interestAccrualMode" jdbcType="VARCHAR" /> -->
+<!--     <result column="interest_settle_mode" property="interestSettleMode" jdbcType="VARCHAR" /> -->
+<!--     <result column="interest_settle_days" property="interestSettleDays" jdbcType="INTEGER" /> -->
+<!--     <result column="prod_repay_mode" property="prodRepayMode" jdbcType="CHAR" /> -->
+<!--     <result column="prod_repay_close_days" property="prodRepayCloseDays" jdbcType="INTEGER" /> -->
+<!--     <result column="prod_repay_penalty_flag" property="prodRepayPenaltyFlag" jdbcType="CHAR" /> -->
+<!--     <result column="prod_repay_penalty_days" property="prodRepayPenaltyDays" jdbcType="INTEGER" /> -->
+<!--     <result column="prod_add_mode" property="prodAddMode" jdbcType="CHAR" /> -->
+<!--     <result column="prod_add_num" property="prodAddNum" jdbcType="INTEGER" /> -->
+<!--     <result column="prod_defered_mode" property="prodDeferedMode" jdbcType="CHAR" /> -->
+<!--     <result column="prod_defered_num" property="prodDeferedNum" jdbcType="INTEGER" /> -->
+<!--     <result column="create_datetime" property="createDatetime" jdbcType="TIMESTAMP" /> -->
+<!--     <result column="update_datetime" property="updateDatetime" jdbcType="TIMESTAMP" /> -->
+<!--     <result column="prod_loan_limit" property="prodLoanLimit" jdbcType="INTEGER" /> -->
+<!--     <result column="prod_loan_cur_limit" property="prodLoanCurLimit" jdbcType="INTEGER" /> -->
+<!--    	<result column="add_to_prod" property="addToProd" jdbcType="INTEGER" /> -->
+<!--     <result column="defered_to_prod" property="deferedToProd" jdbcType="INTEGER" /> -->
+<!--     <collection property="f830912ResList" select="selectf830912ResListByProdId" column="prod_id" ofType="com.hsnet.pz.biz.base.dto.res.F830912Res"></collection> -->
+<!--   </resultMap> -->
+<!--    <resultMap id="f830912ResMap" type="com.hsnet.pz.biz.base.dto.res.F830912Res" > -->
+<!--     <id column="id" property="id" jdbcType="BIGINT" /> -->
+<!--     <result column="prod_id" property="prodId" jdbcType="BIGINT" /> -->
+<!--     <result column="loan_ratio_from" property="loanRatioFrom" jdbcType="DOUBLE" /> -->
+<!--     <result column="loan_ratio_to" property="loanRatioTo" jdbcType="DOUBLE" /> -->
+<!--     <result column="loan_amount_from" property="loanAmountFrom" jdbcType="BIGINT" /> -->
+<!--     <result column="loan_amount_to" property="loanAmountTo" jdbcType="BIGINT" /> -->
+<!--     <result column="loan_term_from" property="loanTermFrom" jdbcType="INTEGER" /> -->
+<!--     <result column="loan_term_to" property="loanTermTo" jdbcType="INTEGER" /> -->
+<!--     <result column="fee" property="fee" jdbcType="BIGINT" /> -->
+<!--     <result column="interest_rate" property="interestRate" jdbcType="DOUBLE" /> -->
+<!--     <result column="exposure_ratio" property="exposureRatio" jdbcType="DOUBLE" /> -->
+<!--     <result column="enable_ratio" property="enableRatio" jdbcType="DOUBLE" /> -->
+<!--     <result column="stock_pool_no" property="stockPoolNo" jdbcType="BIGINT" /> -->
+<!--     <result column="stock_ratio_limit" property="stockRatioLimit" jdbcType="DOUBLE" /> -->
+<!--     <result column="remark" property="remark" jdbcType="VARCHAR" /> -->
+<!--   </resultMap> -->
+<!--   <select id="queryF832021ResList" resultMap="F832021ResMap" parameterType="com.hsnet.pz.biz.base.dto.req.F832021Req" > -->
+<!--     select  -->
+<!--     <include refid="Base_Column_List" /> -->
+<!--     from tpz_prod t -->
+<!--     <include refid="where_conditionF831911"/>     -->
+<!--   </select> -->
+<!--   <select id="selectf830912ResListByProdId" resultMap="f830912ResMap" parameterType="java.lang.Long" > -->
+<!--     select  -->
+<!--     id, prod_id, loan_ratio_from, loan_ratio_to, loan_amount_from, loan_amount_to, loan_term_from,  -->
+<!--     loan_term_to, fee, interest_rate, exposure_ratio, enable_ratio, stock_pool_no,  -->
+<!--     stock_ratio_limit, remark, create_datetime, update_datetime -->
+<!--     from tpz_prod_detail  -->
+<!--     where prod_id = #{prodId} -->
+<!--   </select> -->
+
+	
+  <select id="getProdListByStatusWithPage" resultMap="F830910ResMap" parameterType="com.caimao.bana.api.entity.req.product.FQueryProductReq" >
+    select 
+    <include refid="Base_Column_List" />
+    from tpz_prod t
+    <include refid="where_condition"/>
+    <trim prefix="ORDER BY ">
+			<if test="orderColumn != null and  orderColumn != ''">
+				${orderColumn} ${orderDir} 
+			</if>
+		</trim>
+  </select>
+</mapper>

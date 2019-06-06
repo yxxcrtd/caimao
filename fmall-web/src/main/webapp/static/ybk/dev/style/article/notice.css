@@ -1,0 +1,139 @@
+body{
+	font-size: 12px;
+}
+.warp{
+	 position: absolute;
+	 top: 0;
+    z-index: 1;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+}
+#scroller {
+    position: absolute;
+    z-index: 1;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    width: 100%;
+    -webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -o-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-touch-callout: none; /*??*/
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-text-size-adjust: none;
+    -moz-text-size-adjust: none;
+    -ms-text-size-adjust: none;
+    -o-text-size-adjust: none;
+    text-size-adjust: none;
+}
+
+#scroller-pullDown,#scroller-pullUp {
+    background: #fff;
+    height: 40px;
+    line-height: 2.4em;
+    padding: 5px 10px;
+    font-size: 14px;
+    color: #888;
+	text-indent: 3em;
+	position:absolute;
+	left:0px;
+	width:100%;
+	background: url(../img/slideUp.png) no-repeat;
+	background-position: left center;
+	background-size:1.3em 3em;
+	margin-left: 10%;
+}
+#scroller-pullDown{
+	top:-40px;
+}
+#scroller-pullUp{
+	bottom:-40px;
+}
+
+#scroller-pullDown .pull-up-msg,#scroller-pullUp .pull-down-msg {
+	padding-left:20px;
+}
+
+#scroller-pullDown .pull-down-icon,#scroller-pullUp .pull-up-icon{
+	display:inline-block;
+	color:#f00;
+	font-size:1.4;
+	-webkit-transform:rotate(0deg);
+	-webkit-transition-property: -webkit-transform;
+	-webkit-transition-duration: 500ms;
+}
+#scroller-pullDown .pull-down-icon.reverse_icon,#scroller-pullUp .pull-up-icon.reverse_icon{
+	-webkit-transform: rotate(-180deg);
+}
+.banner{
+	width: 100%;
+	position: relative;
+}
+.banner img{
+	width: 100%;
+}
+.banner .mb p{
+	color: #fff;
+	font-size: 1.25em;
+	line-height: 3.5em;
+	text-indent: .7em;
+	font-weight: 500;
+}
+.mb{
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: 40%;
+	background: -webkit-linear-gradient(top, rgba(0, 0, 0, .01) 0%, rgba(0, 0, 0, 0.65) 100%, #fff 100%); 
+}
+.list{
+	width: 90%;
+	margin-left: 5%;
+
+}
+.list dl{
+	width: 100%;
+	margin-top: 4%;
+	margin-bottom: 4%;
+	float: left;
+}
+.list dl dt{
+	width: 30%;
+	height: 100%;
+	display: inline-block;
+	float: left;
+	display: none;
+}
+.list dl dt img{
+	width: 100%;
+}
+.list dl dd{
+	display: inline-block;
+	width: 100%;
+	margin-left: 1.5em;
+	float: left;
+}
+.list dl dd p{
+	margin: 0;
+}
+.bt{
+	font-size: 1.3em;
+	margin-top: 0;
+	color: #000;
+	font-weight: bold;
+	width: 90%;
+}
+.list dl dd .time{
+	color: #b9b9b9;
+	margin-top: .5em;
+	width: 90%;
+}
+.time a:nth-child(2){
+	float: right;
+}

@@ -1,0 +1,771 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>行情中心-全部交易所</title>
+	<script src="../prod/js/chart/lib.js"></script>
+	<script src="../prod/js/ybk/home.tab.js"></script>
+    <script src="../prod/js/ybk/user.fav.js"></script>
+	<link href="../prod/style/style.css" rel="stylesheet">
+	<link href="../prod/style/style.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="top">
+	<div class="innerCont clearfix">
+		<div class="topnav">
+			<a href="">财猫主站</a><!--
+					--><a href="">财猫邮币卡</a><!--
+					--><a href="">财猫贵金属</a><!--
+					--><a href="">财猫原油</a><!--
+					--><a href="">财猫美股</a><!--
+					--><a href="">财猫大牛股</a>
+		</div>
+		<div class="user"><a href="javascript:void(0);" class="appdownload" id="appdownload"><i></i>APP下载</a><a href="">登录</a><span>|</span><a href="">注册</a><div class="qrcode" id="qrcode"><img src="../img/qrcode_android.png" ><!--<img src="${ybkUrl}/static/img/qrcode_apple.png">--><p style="
+    text-align: center;
+          "><a href="https://ybk.caimao.com/static/img/app/Youbi.apk" target="_blank" stoped="1">点击下载</a></p></div></div>
+        <script>
+        (function(){
+            var isShow = 0,
+                qrcode = document.querySelector("#qrcode"),
+            addEvent = document.addEventListener ?
+                    function(o, t, f) {
+                        o.addEventListener(t, f, false)
+                } : function(o, t, f) {
+                    o.attachEvent('on' + t, f)
+                }
+            addEvent(document,'click',function(e){
+                var tar = e.target || window.event.srcElement;
+                if(tar.getAttribute("stoped"))return;
+                if(isShow){
+                    isShow = false;
+                    qrcode.style.display = "none";
+                }
+
+            });
+            addEvent(document.querySelector("#appdownload"),'click',function(e){
+                var tar = e.target || window.event.srcElement;
+                if(tar.getAttribute("stoped"))return;
+                if (e && e.stopPropagation) {
+                    e.stopPropagation();
+                    e.preventDefault();
+                } else {
+                    window.event.cancelBubble = true;
+                    window.event.returnValue = false;
+                }
+                if(isShow){
+                    isShow = false;
+                    qrcode.style.display = "none";
+                }else{
+                    isShow = true;
+                    qrcode.style.display = "block";
+                }
+            });
+        })();
+        </script></div>
+	</div>
+</div>
+<div class="menuline">
+	<div class="innerCont clearfix">
+		<div class="logo"><a href=""><img src="../img/logo.png"></a></div>
+		<div class="menu">
+			<a href="" class="on">首页<i><span>◆</span></i></a><!--
+					--><a href="">行情中心<i><span>◆</span></i></a><!--
+					--><a href="">打新申购<i><span>◆</span></i></a><!--
+					--><a href="">交易所公告<i><span>◆</span></i></a><!--
+					--><a href="">快速开户<b>hot!</b><i><span>◆</span></i></a><!--
+					--><a href="">个人中心<i><span>◆</span></i></a>
+		</div>
+	</div>
+</div>
+
+
+<div class="main home">
+	<div class="marketRank">
+		<div class="clearfix">
+		    <div class="mod-left rankTitle">
+		    	<a href="">今日行情</a>
+		    </div>
+		    <div class="mod-right">
+		        <div class="mod-rightcontent rankList">
+		        	<div class="tableList">
+		        	<table class="table table_striped table_hover">
+                        <colgroup>
+                            <col></col>
+                            <col></col>
+                            <col></col>
+                            <col></col>
+                            <col></col>
+                            <col></col>
+                            <col></col>
+                            <col></col>
+                        </colgroup>
+                        <thead>
+                        	<tr>
+                        		<th>邮币卡电子盘</th>
+                        		<th class="right">指数</th>
+                        		<th class="right">涨跌幅</th>
+                        		<th class="right">成交金额</th>
+                        		<th class="right">成交量</th>
+                        		<th class="right">打新申购</th>
+                        		<th class="center">是否开盘</th>
+                        		<th class="center">行情</th>
+                        	</tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1南京交易所</td>
+                                <td class="right"><b class="green">2340</b></td>
+                                <td class="right"><b class="green">-10.00%</b> </td>
+                                <td class="right">70.42亿</td>
+                                <td class="right">200</td>
+                                <td class="right">22</td>
+                                <td class="center">开盘中</td>
+                                <td class="center"></td>
+                            </tr>
+                            <tr>
+                                <td>2南京交易所</td>
+                                <td class="right"><b class="green">2340</b></td>
+                                <td class="right"><b class="green">-10.00%</b> </td>
+                                <td class="right">70.42亿</td>
+                                <td class="right">200</td>
+                                <td class="right">22</td>
+                                <td class="center">开盘中</td>
+                                <td class="center"></td>
+                            </tr>
+                            <tr>
+                                <td>3南京交易所</td>
+                                <td class="right"><b class="green">2340</b></td>
+                                <td class="right"><b class="green">-10.00%</b> </td>
+                                <td class="right">70.42亿</td>
+                                <td class="right">200</td>
+                                <td class="right">22</td>
+                                <td class="center">开盘中</td>
+                                <td class="center"></td>
+                            </tr>
+                            <tr>
+                                <td>4南京交易所</td>
+                                <td class="right"><b class="green">2340</b></td>
+                                <td class="right"><b class="green">-10.00%</b> </td>
+                                <td class="right">70.42亿</td>
+                                <td class="right">200</td>
+                                <td class="right">22</td>
+                                <td class="center">开盘中</td>
+                                <td class="center"></td>
+                            </tr>
+                            <tr>
+                                <td>5南京交易所</td>
+                                <td class="right"><b class="green">2340</b></td>
+                                <td class="right"><b class="green">-10.00%</b> </td>
+                                <td class="right">70.42亿</td>
+                                <td class="right">200</td>
+                                <td class="right">22</td>
+                                <td class="center">开盘中</td>
+                                <td class="center"></td>
+                            </tr>
+                            <tr>
+                                <td>6南京交易所</td>
+                                <td class="right"><b class="green">2340</b></td>
+                                <td class="right"><b class="green">-10.00%</b> </td>
+                                <td class="right">70.42亿</td>
+                                <td class="right">200</td>
+                                <td class="right">22</td>
+                                <td class="center">开盘中</td>
+                                <td class="center"></td>
+                            </tr>
+                            <tr>
+                                <td>7南京交易所</td>
+                                <td class="right"><b class="green">2340</b></td>
+                                <td class="right"><b class="green">-10.00%</b> </td>
+                                <td class="right">70.42亿</td>
+                                <td class="right">200</td>
+                                <td class="right">22</td>
+                                <td class="center">开盘中</td>
+                                <td class="center"></td>
+                            </tr>
+                            <tr>
+                                <td>8南京交易所</td>
+                                <td class="right"><b class="green">2340</b></td>
+                                <td class="right"><b class="green">-10.00%</b> </td>
+                                <td class="right">70.42亿</td>
+                                <td class="right">200</td>
+                                <td class="right">22</td>
+                                <td class="center">开盘中</td>
+                                <td class="center"></td>
+                            </tr>
+                            <tr>
+                                <td>9南京交易所</td>
+                                <td class="right"><b class="green">2340</b></td>
+                                <td class="right"><b class="green">-10.00%</b> </td>
+                                <td class="right">70.42亿</td>
+                                <td class="right">200</td>
+                                <td class="right">22</td>
+                                <td class="center">开盘中</td>
+                                <td class="center"></td>
+                            </tr>
+                            <tr>
+                                <td>10南京交易所</td>
+                                <td class="right"><b class="green">2340</b></td>
+                                <td class="right"><b class="green">-10.00%</b> </td>
+                                <td class="right">70.42亿</td>
+                                <td class="right">200</td>
+                                <td class="right">22</td>
+                                <td class="center">开盘中</td>
+                                <td class="center"></td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                    </div>
+		        </div>
+		    </div>
+		</div>
+	</div>
+	<div class="top10">
+		<div class="clearfix">
+		    <div class="mod-left rankTitle">
+		    	<a href="">今日行情</a>
+		    </div>
+		    <div class="mod-right">
+		        <div class="mod-rightcontent rankList">
+		        	<div class="tableList">
+		        	<div class="tbas">
+		        		<div class="tabinner" id="tabbox">
+		        			<div class="tabList">
+		        			<ul id="tabs">
+		        				<li><a act="switch" href="">1南京文交所</a></li>
+		        				<li><a act="switch" href="">2上海文交所</a></li>
+		        				<li><a act="switch" href="">3南京文</a></li>
+		        				<li><a act="switch" href="">4上海文交所</a></li>
+		        				<li><a act="switch" href="">5南京文交所</a></li>
+		        				<li><a act="switch" href="">6上海文交所</a></li>
+		        				<li><a act="switch" href="">7南京文所</a></li>
+		        				<li><a act="switch" href="">8上海交所</a></li>
+		        				<li><a act="switch" href="">9南京文交所</a></li>
+		        				<li><a act="switch" href="">10上海文交所</a></li>
+		        				<li><a act="switch" href="">11南所</a></li>
+		        				<li><a act="switch" href="">12上海文交所</a></li>
+		        				<li><a act="switch" href="">13南京文</a></li>
+		        				<li><a act="switch" href="">14上海文交所</a></li>
+		        				<li><a act="switch" href="">15南京文交所</a></li>
+		        				<li><a act="switch" href="">16上海文交所</a></li>
+		        				<li><a act="switch" href="">17南京文</a></li>
+		        				<li><a act="switch" href="">18上海文交所</a></li>
+		        				<li><a act="switch" href="">19南京文交所</a></li>
+		        				<li><a act="switch" href="">20交所</a></li>
+		        				<li><a act="switch" href="">21上海文交所</a></li>
+		        				<li><a act="switch" href="">22南京文交所</a></li>
+		        				<li><a act="switch" href="">23上文交所</a></li>
+		        				<li><a act="switch" href="">24南京文交所</a></li>
+		        				<li><a act="switch" href="">25上文交所</a></li>
+		        				<li><a act="switch" href="">26南京文交所</a></li>
+		        				<li><a act="switch" href="">27上海文交所</a></li>
+		        				<li><a act="switch" href="">28南交所</a></li>
+		        				<li><a act="switch" href="">29上海文交所</a></li>
+		        				<li><a act="switch" href="">30南京交所</a></li>
+		        				<li><a act="switch" href="">31上海交所</a></li>
+		        				<li><a act="switch" href="">32南京文交所</a></li>
+		        				<li><a act="switch" href="">33上海文交所</a></li>
+		        				<li><a act="switch" href="">34南文交所</a></li>
+		        				<li><a act="switch" href="">35上海文交所</a></li>
+		        				<li><a act="switch" href="">36南</a></li>
+		        				<li><a act="switch" href="">37上海文交所</a></li>
+		        				<li><a act="switch" href="">38南京文交所</a></li>
+		        				<li><a act="switch" href="">39上文交所</a></li>
+		        				<li><a act="switch" href="">40上海文交所</a></li>
+		        				<li><a act="switch" href="">41南京文所</a></li>
+		        				<li><a act="switch" href="">42上海文交所</a></li>
+		        				<li><a act="switch" href="">43南京文交所</a></li>
+		        				<li><a act="switch" href="">44上交所</a></li>
+		        				<li><a act="switch" href="">45南京文交所</a></li>
+		        				<li><a act="switch" href="">46南京文交所</a></li>
+		        				<li><a act="switch" href="">47文交所</a></li>
+		        				<li><a act="switch" href="">48南京文交所</a></li>
+		        				<li><a act="switch" href="">49南京文交所</a></li>
+		        				<li><a act="switch" href="">50上海文所</a></li>
+		        				<li><a act="switch" href="">51南京文所</a></li>
+		        				<li><a act="switch" href="">52上海文交所</a></li>
+		        				<li><a act="switch" href="">53南京文交所</a></li>
+		        				<li><a act="switch" href="">54上海文交所</a></li>
+		        				<li><a act="switch" href="">55南文交所</a></li>
+		        				<li><a act="switch" href="">56海交所</a></li>
+		        				<li><a act="switch" href="">57南京文交所</a></li>
+		        				<li><a act="switch" href="">58上海文交所</a></li>
+		        				<li><a act="switch" href="">59上海文交所</a></li>
+		        				<li><a act="switch" href="">60南京文交所</a></li>
+		        				<li><a act="switch" href="">61文交所</a></li>
+		        				<li><a act="switch" href="">62南京文交所</a></li>
+		        				<li><a act="switch" href="">63上海文交所</a></li>
+		        				<li><a act="switch" href="">64南京文交所</a></li>
+		        				<li><a act="switch" href="">65上交所</a></li>
+		        				<li><a act="switch" href="">66南京文交所</a></li>
+		        				<li><a act="switch" href="">67上海文交所</a></li>
+		        				<li><a act="switch" href="">68南京文交所</a></li>
+		        				<li><a act="switch" href="">69上海文交所</a></li>
+		        				<li><a act="switch" href="">70南京文交所</a></li>
+		        				<li><a act="switch" href="">71上海文交所</a></li>
+		        				<li><a act="switch" href="">72南京文交所</a></li>
+		        				<li><a act="switch" href="">73上海文交所</a></li>
+		        				<li><a act="switch" href="">74南京文交所</a></li>
+		        				<li><a act="switch" href="">75上海文交所</a></li>
+		        				<li><a act="switch" href="">76南京文交所</a></li>
+		        				<li><a act="switch" href="">77上海文交所</a></li>
+		        			</ul>
+		        			</div>
+		        			<b act="next">&gt;</b><i act="pre">&lt;</i>
+		        		<script>
+		        		tabLoopMove('#tabbox','#tabs',1)
+		        		</script>
+		        		</div>
+		        	</div>
+		        	<table class="table table_striped table_hover">
+                        <colgroup>
+                            <col style="width:50px;"></col>
+                            <col></col>
+                            <col></col>
+                            <col></col>
+                            <col></col>
+                            <col></col>
+                            <col></col>
+                            <col></col>
+                            <col></col>
+                            <col></col>
+                            <col></col>
+                        </colgroup>
+                        <thead>
+                        	<tr>
+                        		<th></th>
+                        		<th>藏品代码</th>
+                        		<th>藏品简称</th>
+                        		<th class="right">最新价</th>
+                        		<th class="right">涨跌幅</th>
+                        		<th class="right">今开盘</th>
+                        		<th class="right">昨收盘</th>
+                        		<th class="right">成交量</th>
+                        		<th class="right">成交金额</th>
+                        		<th class="right">最高价</th>
+                        		<th class="right">最低价</th>
+                        	</tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><em>1</em></td>
+                                <td>400123</td>
+                                <td>811藏币</td>
+                                <td class="right"><b class="green">2340</b></td>
+                                <td class="right"><b class="green">-10.00%</b> </td>
+                                <td class="right">200.23</td>
+                                <td class="right">200.11</td>
+                                <td class="right">200</td>
+                                <td class="right">70.42亿</td>
+                                <td class="right">200.23</td>
+                                <td class="right">200.11</td>
+                            </tr>
+                            <tr>
+                                <td><em>2</em></td>
+                                <td>400123</td>
+                                <td>811藏币</td>
+                                <td class="right"><b class="green">2340</b></td>
+                                <td class="right"><b class="green">-10.00%</b> </td>
+                                <td class="right">200.23</td>
+                                <td class="right">200.11</td>
+                                <td class="right">200</td>
+                                <td class="right">70.42亿</td>
+                                <td class="right">200.23</td>
+                                <td class="right">200.11</td>
+                            </tr>
+                            <tr>
+                                <td><em>3</em></td>
+                                <td>400123</td>
+                                <td>811藏币</td>
+                                <td class="right"><b class="green">2340</b></td>
+                                <td class="right"><b class="green">-10.00%</b> </td>
+                                <td class="right">200.23</td>
+                                <td class="right">200.11</td>
+                                <td class="right">200</td>
+                                <td class="right">70.42亿</td>
+                                <td class="right">200.23</td>
+                                <td class="right">200.11</td>
+                            </tr>
+                            <tr>
+                                <td><i>4</i></td>
+                                <td>400123</td>
+                                <td>811藏币</td>
+                                <td class="right"><b class="green">2340</b></td>
+                                <td class="right"><b class="green">-10.00%</b> </td>
+                                <td class="right">200.23</td>
+                                <td class="right">200.11</td>
+                                <td class="right">200</td>
+                                <td class="right">70.42亿</td>
+                                <td class="right">200.23</td>
+                                <td class="right">200.11</td>
+                            </tr>
+                            <tr>
+                                <td><i>4</i></td>
+                                <td>400123</td>
+                                <td>811藏币</td>
+                                <td class="right"><b class="green">2340</b></td>
+                                <td class="right"><b class="green">-10.00%</b> </td>
+                                <td class="right">200.23</td>
+                                <td class="right">200.11</td>
+                                <td class="right">200</td>
+                                <td class="right">70.42亿</td>
+                                <td class="right">200.23</td>
+                                <td class="right">200.11</td>
+                            </tr>
+                            <tr>
+                                <td><i>4</i></td>
+                                <td>400123</td>
+                                <td>811藏币</td>
+                                <td class="right"><b class="green">2340</b></td>
+                                <td class="right"><b class="green">-10.00%</b> </td>
+                                <td class="right">200.23</td>
+                                <td class="right">200.11</td>
+                                <td class="right">200</td>
+                                <td class="right">70.42亿</td>
+                                <td class="right">200.23</td>
+                                <td class="right">200.11</td>
+                            </tr>
+                            <tr>
+                                <td><i>4</i></td>
+                                <td>400123</td>
+                                <td>811藏币</td>
+                                <td class="right"><b class="green">2340</b></td>
+                                <td class="right"><b class="green">-10.00%</b> </td>
+                                <td class="right">200.23</td>
+                                <td class="right">200.11</td>
+                                <td class="right">200</td>
+                                <td class="right">70.42亿</td>
+                                <td class="right">200.23</td>
+                                <td class="right">200.11</td>
+                            </tr>
+                            <tr>
+                                <td><i>4</i></td>
+                                <td>400123</td>
+                                <td>811藏币</td>
+                                <td class="right"><b class="green">2340</b></td>
+                                <td class="right"><b class="green">-10.00%</b> </td>
+                                <td class="right">200.23</td>
+                                <td class="right">200.11</td>
+                                <td class="right">200</td>
+                                <td class="right">70.42亿</td>
+                                <td class="right">200.23</td>
+                                <td class="right">200.11</td>
+                            </tr>
+                            <tr>
+                                <td><i>4</i></td>
+                                <td>400123</td>
+                                <td>811藏币</td>
+                                <td class="right"><b class="green">2340</b></td>
+                                <td class="right"><b class="green">-10.00%</b> </td>
+                                <td class="right">200.23</td>
+                                <td class="right">200.11</td>
+                                <td class="right">200</td>
+                                <td class="right">70.42亿</td>
+                                <td class="right">200.23</td>
+                                <td class="right">200.11</td>
+                            </tr>
+                            <tr>
+                                <td><i>4</i></td>
+                                <td>400123</td>
+                                <td>811藏币</td>
+                                <td class="right"><b class="green">2340</b></td>
+                                <td class="right"><b class="green">-10.00%</b> </td>
+                                <td class="right">200.23</td>
+                                <td class="right">200.11</td>
+                                <td class="right">200</td>
+                                <td class="right">70.42亿</td>
+                                <td class="right">200.23</td>
+                                <td class="right">200.11</td>
+                            </tr>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                    </div>
+		        </div>
+		    </div>
+		</div>
+	</div>
+	<div class="news">
+		<div class="innerBox">
+			<div class="listUnit opt">
+				<div class="head">
+					<strong><a href="">我的自选</a></strong><a class="more" href="">更多》</a>
+				</div>
+				<div class="body">
+
+                    <dl class="empty" id="emptyOpt" style="display:none;">
+                        <dt><img src="../img/empty.jpg"></dt>
+                        <dd>您暂无自选<br><a href="">去藏品详情页添加自选</a></dd>
+                    </dl>
+					<table class="table table_striped table_hover">
+                        <colgroup>
+                            <col style="width:64px;"></col>
+                            <col style="width:90px;"></col>
+                            <col style="width:90px;"></col>
+                            <col style="width:62px;"></col>
+                            <col style="width:62px;"></col>
+                        </colgroup>
+                        <thead>
+                        	<tr>
+                        		<th style="padding-left:0;">藏品代码</th>
+                        		<th>藏品简称</th>
+                        		<th>交易所</th>
+                        		<th class="right">最新价</th>
+                        		<th class="right">涨跌幅</th>
+                        	</tr>
+                        </thead>
+                        <tbody id="box">
+	                        <script type="text/x-tmpl">
+	                            <% for(var i = 0, l = Math.min(data.length,5); i < l; i++){
+	                                var _this = data[i],
+	                                    className = _this.currentPrice - _this.closePrice > 0 ?
+	                                        "red" : "green";
+	                                %>
+		                            <tr onclick="window.location.href='/ybk/market_char.html?name=<%=_this.exchangeShortName%>&code=<%=_this.code%>'">
+		                                <td style="padding-left:0;"><%=_this.code%></td>
+		                                <td><div title="<%=_this.name%>"><%=_this.name%></div></td>
+		                                <td class="lowPoint"><%=_this.exchangeName%></td>
+		                                <td class="right highPoint"><b><%=(_this.currentPrice/100).toFixed(2)%></b></td>
+		                                <td class="right highestPoint"><b class="<%=className%>"><%=((_this.currentPrice - _this.closePrice)/_this.closePrice).toFixed(2)%>%</b> </td>
+		                            </tr>
+	                            <%}%>
+                            </script>
+                        </tbody>
+
+                        <script>
+                            var box = document.querySelector("#box"),
+                                show = box.parentNode,
+                                empty = document.querySelector("#emptyOpt"),
+                                html = box.querySelector("script").innerHTML,
+                                fav = fav();
+                            fav.list(writeHtml)
+                            function writeHtml(data){
+                                if(data.length){
+                                    box.innerHTML = rentmpl(html,{
+                                        data : data
+                                    });
+                                    show.style.display = "block";
+                                    empty.style.display = "none";
+                                }else{
+                                    show.style.display = "none";
+                                    empty.style.display = "block";
+                                }
+                            } 
+                        </script>
+                    </table>
+                </div>
+			</div>
+			<div class="listUnit newgoods">
+				<div class="head">
+					<strong><a href="">打新申购</a></strong><a class="more" href="">更多》</a>
+				</div>
+				<div class="body">
+                        <dl class="empty">
+                            <dt><img src="../img/empty.jpg"></dt>
+                            <dd>您暂无自选</dd>
+                        </dl>
+				</div>
+			</div>
+			<div class="listUnit price">
+				<div class="head">
+					<strong><a href="">市场价格</a></strong><a class="more" href="">更多》</a>
+				</div>
+				<div class="body">
+					<ul>
+						<li><a href="">[南京]8月31日17YBK早盘综合描</a><span>【08-31】</span></li>
+						<li><a href="">[南京]8月31日17YBK早盘综合描</a><span>【08-31】</span></li>
+						<li><a href="">[南京]8月31日17YBK早盘综合描</a><span>【08-31】</span></li>
+						<li><a href="">[南京]8月31日17YBK早盘综合描</a><span>【08-31】</span></li>
+						<li><a href="">[南京]8月31日17YBK早盘综合描</a><span>【08-31】</span></li>
+						<li><a href="">[南京]8月31日17YBK早盘综合描</a><span>【08-31】</span></li>
+					</ul>
+				</div>
+			</div>
+			<div class="listUnit pause">
+				<div class="head">
+					<strong><a href="">停牌公告</a></strong><a class="more" href="">更多》</a>
+				</div>
+				<div class="body">
+					<ul>
+						<li><a href="">[南京]8月31日17YBK早盘综合描</a><span>【08-31】</span></li>
+						<li><a href="">[南京]8月31日17YBK早盘综合描</a><span>【08-31】</span></li>
+						<li><a href="">[南京]8月31日17YBK早盘综合描</a><span>【08-31】</span></li>
+						<li><a href="">[南京]8月31日17YBK早盘综合描</a><span>【08-31】</span></li>
+						<li><a href="">[南京]8月31日17YBK早盘综合描</a><span>【08-31】</span></li>
+						<li><a href="">[南京]8月31日17YBK早盘综合描</a><span>【08-31】</span></li>
+					</ul>
+				</div>
+			</div>
+			<div class="listUnit qq">
+				<div class="head">
+					<strong><a href="">行业QQ群</a></strong><a class="more" href="">更多》</a>
+				</div>
+				<div class="body">
+					<ul>
+						<li><b>1032483655</b><i>未满</i></li>
+						<li><b>1032483655</b><i>未满</i></li>
+						<li><b>1032483655</b><i>已满</i></li>
+						<li><b>1032483655</b><i>已满</i></li>
+						<li><b>1032483655</b><i>已满</i></li>
+						<li><b>1032483655</b><i>已满</i></li>
+					</ul>
+				</div>
+			</div>
+			<div class="listUnit knowledge">
+				<div class="head">
+					<strong><a href="">邮币百科</a></strong><a class="more" href="">更多》</a>
+				</div>
+				<div class="body">
+					<ul>
+						<li><a href="">[南京]8月31日17YBK早盘综合描</a><span>【08-31】</span></li>
+						<li><a href="">[南京]8月31日17YBK早盘综合描</a><span>【08-31】</span></li>
+						<li><a href="">[南京]8月31日17YBK早盘综合描</a><span>【08-31】</span></li>
+						<li><a href="">[南京]8月31日17YBK早盘综合描</a><span>【08-31】</span></li>
+						<li><a href="">[南京]8月31日17YBK早盘综合描</a><span>【08-31】</span></li>
+						<li><a href="">[南京]8月31日17YBK早盘综合描</a><span>【08-31】</span></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="partners">
+	<div class="innerBox">
+		<div class="title"><img src="../img/partners.jpg"></div>
+		<div class="list">
+			<div class="inner">
+			<a href=""><img src="../img/exchange/nfwjs.jpg"></a>
+			<a href=""><img src="../img/exchange/hxwjs1.jpg"></a>
+			<a href=""><img src="../img/exchange/hzwjs.jpg"></a>
+			<a href=""><img src="../img/exchange/shybk.jpg"></a>
+			<a href=""><img src="../img/exchange/jswjs.jpg"></a>
+			<a href=""><img src="../img/exchange/njwjs.jpg"></a>
+			<a href=""><img src="../img/exchange/bjsflt.jpg"></a>
+			<a href=""><img src="../img/exchange/hxwjs.jpg"></a>
+			<a href=""><img src="../img/exchange/jmj.jpg"></a>
+			<a href=""><img src="../img/exchange/znwjs.jpg"></a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="bottom">
+	<div class="bottomnav">
+		<a href="">关于我们</a><!--
+				--><span>|</span><!--
+				--><a href="">服务条款</a><!--
+				--><span>|</span><!--
+				--><a href="">帮助中心</a><!--
+				--><span>|</span><!--
+				--><a href="">客户端下载</a>
+	</div>
+	<div class="contact">
+		<div class="inner">
+			<em class="qq"><i></i>官方QQ群 4006660888</em><!--
+					--><span>|</span><!--
+					--><em class="phone"><i></i>24小时服务电话 4000-898-000</em>
+		</div>
+	</div>
+	<div class="copyright">
+		<p class="notice">声明：所有用户观点不代表财猫网认同。本站禁止推销、非法理财、私下收费等行为，请用户甄别。投资有风险，入市需谨慎！</p>
+		<p>京公网安备　11010102000845  京ICP备13000642号  2013-2015©版权所有</p>
+	</div>
+</div>
+
+<div id="float_right">
+    <div id="izl_rmenu" class="izl-rmenu">
+
+        <!--<div class="side_toolbar btn-custom">-->
+            <!--<i class="icons icon_btn_custom"></i>-->
+            <!--<div class="custom" style="display: none;">-->
+                <!--<i class="icons icon_btn_custom"></i>-->
+                <!--<p>-->
+                    <!--<a href="">在线客服</a>-->
+                <!--</p>-->
+            <!--</div>-->
+        <!--</div>-->
+        <div class="side_toolbar btn-custom">
+            <a href="https://www.caimao.com/q" title="财猫行情" target="_blank"><i class="icons icon_btn_custom"></i></a>
+        </div>
+        <div class="side_toolbar btn-phone">
+            <i class="icons icon_btn_phone"></i>
+            <div class="phone" style="display: none;">
+                <i class="icons icon_btn_phone"></i>
+                <p>
+                    服务电话<br>
+                    4000-898-000
+                </p>
+            </div>
+        </div>
+        <div class="side_toolbar btn-tel">
+            <i class="icons icon_btn_tel"></i>
+            <div class="tel" style="display: none;width: 160px;left: -115px;">
+                <i class="icons icon_btn_tel"></i>
+                <p>
+                    客服QQ <br/>
+                    <a href="http://wpa.b.qq.com/cgi/wpa.php?ln=1&uin=800097600&${.now?long}" target="_blank">800097600</a>
+                </p>
+            </div>
+        </div>
+
+        <div class="side_toolbar btn-top">
+            <i class="icons icon_btn_top"></i>
+        </div>
+    </div>
+</div><script src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
+
+<script>
+        // 左侧浮动条条
+    $("#izl_rmenu").each(function(){
+        //$(this).find(".btn-custom").mouseenter(function(){
+        //    $(this).find(".custom").fadeIn("slow");
+        //});
+        //$(this).find(".btn-custom").mouseleave(function(){
+        //    $(this).find(".custom").fadeOut("fast");
+        //});
+        var hoverTimer, outTimer;
+        $(this).find(".btn-phone").mouseenter(function(){
+            hoverTimer = setTimeout('$("#izl_rmenu").find(".phone").fadeIn("fast")', 200);
+            //$("#izl_rmenu").find(".phone").fadeIn("fast");
+        });
+        $(this).find(".btn-phone").mouseleave(function(){
+            if (typeof hoverTimer == 'number') clearTimeout(hoverTimer);
+            $("#izl_rmenu").find(".phone").fadeOut("fast");
+        });
+        $(this).find(".btn-tel").mouseenter(function(){
+            hoverTimer = setTimeout('$("#izl_rmenu").find(".tel").fadeIn("fast")', 200);
+            //$("#izl_rmenu").find(".tel").fadeIn("fast");
+        });
+        $(this).find(".btn-tel").mouseleave(function(){
+            if (typeof hoverTimer == 'number') clearTimeout(hoverTimer);
+            $("#izl_rmenu").find(".tel").fadeOut("fast");
+        });
+        $(this).find(".btn-top").click(function(){
+            $("html, body").animate({
+                "scroll-top":0
+            },"slow");
+        });
+    });
+    var lastRmenuStatus=false;
+    $(window).scroll(function(){//bug
+        var _top=$(window).scrollTop();
+        if(_top>200){
+            $("#izl_rmenu").data("expanded",true);
+        }else{
+            $("#izl_rmenu").data("expanded",false);
+        }
+        if($("#izl_rmenu").data("expanded")!=lastRmenuStatus){
+            lastRmenuStatus=$("#izl_rmenu").data("expanded");
+            if(lastRmenuStatus){
+                $("#izl_rmenu .btn-top").slideDown();
+            }else{
+                $("#izl_rmenu .btn-top").slideUp();
+            }
+        }
+    });
+</script>
+</body>
+</html>

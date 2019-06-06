@@ -1,0 +1,261 @@
+<#include 'mobile/layout/layout.html'/> 
+<#macro assignSet>
+	<#assign bg="bg-white"/> 
+	<#assign title=proFree/>
+	<#assign controller="P3"/>
+	<#assign header=proFree/> 
+	<#assign footer="1"/>
+</#macro>
+
+
+<#macro headerContent>
+
+	<div class="navi-container bg-gray">
+		<ol class="ui-step ui-step-3">
+			<li class="ui-step-start ui-step-active">
+				<div class="ui-step-line">-</div>
+				<div class="ui-step-icon">
+					<i class="iconfont"></i> <i class="ui-step-number">1</i> <span
+						class="ui-step-text">申请免费体验</span>
+				</div>
+			</li>
+
+			<li>
+				<div class="ui-step-line">-</div>
+				<div class="ui-step-icon">
+					<i class="iconfont"></i> <i class="ui-step-number">2</i> <span
+						class="ui-step-text">支付保证金</span>
+				</div>
+			</li>
+
+
+			<li class="ui-step-end">
+				<div class="ui-step-line">-</div>
+				<div class="ui-step-icon">
+					<i class="iconfont"></i> <i class="ui-step-number">3</i> <span
+						class="ui-step-text">申请成功</span>
+				</div>
+			</li>
+		</ol>
+	</div>
+	<!--流程-->
+</#macro>
+<#macro content>
+<div id="panel1">
+	<article class="content"
+		style="padding-top: 118px;padding-bottom:56px;">
+		<!--表单-->
+
+		<aside class="con-spacing15 ">
+			<ul class="list-amoutCompetition list-amoutCompetition-1">
+				<li class="list-amoutCompetition-item">
+					<div class="line">
+						<p>
+							<span class="am-ft-tabText am-ft-md">我们出</span>
+						</p>
+						<p>
+							<b class="am-ft-xl am-ft-orange" id="loanAccount"></b>元
+						</p>
+					</div>
+				</li>
+				<li class="list-amoutCompetition-item">
+					<div class="line">
+						<p>
+							<span class="am-ft-tabText am-ft-md">您出</span>
+						</p>
+						<p class="am-pt-5">
+							<b class="am-ft-xl am-ft-orange" id="riskAccount"></b>元
+						</p>
+					</div>
+				</li>
+				<li class="list-amoutCompetition-item">
+					<div class="line">
+						<p>
+							<span class="am-ft-tabText am-ft-md">总共</span>
+						</p>
+						<p class="am-pt-5">
+							<b class="am-ft-xl am-ft-orange" id="allAccount"></b>元
+						</p>
+					</div>
+				</li>
+				<li class="list-amoutCompetition-item">
+					<div class="line">
+						<p>
+							<span class="am-ft-tabText am-ft-md">盈利全归您，亏损我们来承担</span>
+						</p>
+					</div>
+				</li>
+			</ul>
+		</aside>
+		<!--表单-->
+
+		<div class="bg-gray con-spacing15 am-mt-15 lineTop-gray">
+			<dl class="dl-capitalInfo">
+				<dt class="dl-capitalInfo-item">
+					<h4>提醒</h4>
+					<div class="pt">
+						<span class="am-ft-orange am-lh-24">申请当日必须买入股票，t+1日14：45分之前必须卖出股票，45分之后系统自动平仓</span>
+					</div>
+				</dt>
+			</dl>
+		</div>
+
+	</article>
+
+</div>
+<div id="panel2">
+	<article class="content"
+		style="padding-top: 118px;">
+		<div class="con-spacing15 con-prompt">
+			<!--提示-->
+
+			<p id="riskAccountP">
+				<span>支付风险保证金<span class="am-ft-orange" id="riskAccount1"></span>元
+				</span>
+			</p>
+			<div id="trustPanel" style="display: none;">
+				
+				<div id="panel2_prompt1">
+					<p ><i class="icon-prompt icon-prompt-error"></i></p>
+					<p><span>很抱歉，未实名认证！</span></p>
+				</div>
+				
+				<div  class="btn-page btn-page-center con-spacing15">
+					<a href="${basePath}/mobile/user/certification.htm?tg=${basePath}/mobile/P3.htm" class="am-button am-button-red">立即实名认证</a>
+				</div>
+			</div>
+			<div id="selfDetail" style="display: none;">
+				<p class="am-ft-gray">
+					可用余额 <b class="am-ft-main"><span id="selfAccount"></span></b> 元
+				</p>
+				<div  class="btn-page btn-page-center con-spacing15">
+					<a href="${basePath}/mobile/account/recharge.htm?tg=${basePath}/mobile/P3.htm" class="am-button am-button-red">立即充值</a>
+				</div>
+				
+			</div>
+
+			<!--提示-->
+			<div id="selfPass" style="display: none;">
+				<p class="am-ft-gray">
+					可用余额 <b class="am-ft-main"><span id="selfAccount1"></span></b> 元
+				</p>
+					<div class="con-spacing10">
+				<aside class="con-frame">
+					<ul class="datalist datalist-password">
+						<li class="datalist-item clearfix">
+							<div class="am-grid datalist-line">
+								<div class="am-grid-item am-grid-item-25  am-ft-right">
+									<h4 class="am-ft-md cm-left" id="riskValue">安全密码</h4>
+								</div>
+								<div
+									class="am-grid-item am-grid-item-75 am-ft-right am-right-15">
+									<span class="ui-form-field"> <input type="password"  id="password" class="text_input" maxlength="18" placeholder="输入安全密码" />
+									</span>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</aside>
+			</div>
+				
+			</div>
+
+			<!--提示-->
+
+
+			<!--按钮-->
+			<div  class="btn-page btn-page-center con-spacing15" style="display: none;">
+				<a id="addBtn2" class="am-button am-button-red"> <span class="am-ft-white">确认体验</span>
+				</a>
+
+			</div>
+			<!--按钮-->
+		</div>
+
+
+
+	</article>
+</div>
+
+	<article class="content" id="panel3"
+		style="padding-top: 118px; ">
+		<div class="con-spacing15 con-prompt">
+			<!--提示-->
+			<p>
+				<i class="icon-prompt icon-prompt-wait"></i>
+			</p>
+			<p>
+				<span>融资申请已成功提交</span>
+			</p>
+			<p class="am-ft-gray">
+				<span class="am-ft-sm">申请正在紧张处理，请耐心等待</span>
+			</p>
+
+
+			<!--提示-->
+
+
+			<!--按钮-->
+			<div  class="btn-page btn-page-center con-spacing15">
+				<a id="addBtn3" href="${basePath}/mobile/user/contracts.htm"
+					class="am-button am-button-red"> <span class="am-ft-white">合约详情</span>
+				</a>
+
+			</div>
+			<!--按钮-->
+
+			<p class="am-ft-sm phone">
+				如有疑问请拨打客服电话: <#include 'mobile/component/phonePanel.html'/>
+			</p>
+		</div>
+
+
+
+	</article>
+
+<div id="panel4">
+	<article class="content"
+		style="padding-top: 118px;">
+		<div class="con-spacing15 con-prompt">
+			<!--提示-->
+			<p>
+				<i class="icon-prompt icon-prompt-error"></i>
+			</p>
+			<p>
+				<span>很抱歉，申请失败啦！</span>
+			</p>
+			<p class="am-ft-gray">
+				<span class="am-ft-sm" id="errMsg"></span>
+			</p>
+
+
+			<!--提示-->
+
+
+			<!--按钮-->
+			<div class="btn-page btn-page-center con-spacing15">
+				<a href="${basePath}/mobile/P3.htm" class="am-button am-button-red"> <span
+					class="am-ft-white">重新申请</span>
+				</a>
+
+			</div>
+			<!--按钮-->
+		</div>
+
+
+
+	</article>
+</div>
+</#macro>
+<#macro footerContent>
+
+				<!--按钮-->
+		<div 
+			class="btn-page btn-page-center bg-white con-spacing15">
+			<a id="addBtn1" class="am-button am-button-red"> <span class="am-ft-white">我要体验</span>
+			</a>
+
+		</div>
+				<!--按钮-->
+
+</#macro>

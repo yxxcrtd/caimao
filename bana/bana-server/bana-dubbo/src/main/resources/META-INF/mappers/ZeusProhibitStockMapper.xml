@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ZeusProhibitStock">
+
+    <resultMap id="BaseResultMap" type="com.caimao.bana.api.entity.zeus.ZeusProhibitStockEntity">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="code" property="code" jdbcType="VARCHAR"/>
+        <result column="created" property="created" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, name, code, created
+    </sql>
+
+    <!--获取所有禁买股票的信息-->
+    <select id="list" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from zeus_prohibit_stock
+        order by created desc
+    </select>
+
+    <!--删除指定的禁买股票信息-->
+    <delete id="del" parameterType="java.lang.Integer">
+        DELETE FROM zeus_prohibit_stock
+        WHERE id = #{id}
+    </delete>
+
+    <!--保存禁买股票信息-->
+    <insert id="save" parameterType="com.caimao.bana.api.entity.zeus.ZeusProhibitStockEntity">
+        insert into zeus_prohibit_stock
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null">
+                name,
+            </if>
+            <if test="code != null">
+                code,
+            </if>
+            <if test="created != null">
+                created,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null">
+                #{name},
+            </if>
+            <if test="code != null">
+                #{code},
+            </if>
+            <if test="created != null">
+                #{created},
+            </if>
+        </trim>
+    </insert>
+
+
+</mapper>

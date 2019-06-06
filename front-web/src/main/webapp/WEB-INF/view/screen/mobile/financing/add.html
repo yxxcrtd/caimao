@@ -1,0 +1,152 @@
+<#assign title="追加"/>
+<#assign header="追加"/>
+<#assign footer="1"/>
+<#assign bg="bg-white"/>
+<#assign controller="add"/>
+<#include 'mobile/layout/layout.html'/>
+
+<#macro headerContent>
+<!--流程-->
+<div class="navi-container bg-gray">
+<ol class="ui-step ui-step-3">
+<li class="ui-step-start ui-step-active">
+<div class="ui-step-line">-</div>
+<div class="ui-step-icon">
+<i class="iconfont"></i>
+<i class="ui-step-number">1</i>
+<span class="ui-step-text">申请追加</span>
+</div>
+</li>		
+		
+<li>
+<div class="ui-step-line">-</div>
+<div class="ui-step-icon">
+<i class="iconfont"></i>
+<i class="ui-step-number">2</i>
+<span class="ui-step-text">支付保证金</span>
+</div>
+</li>	
+			
+
+<li class="ui-step-end">
+<div class="ui-step-line">-</div>
+<div class="ui-step-icon">
+<i class="iconfont"></i>
+<i class="ui-step-number">3</i>
+<span class="ui-step-text">申请成功</span>
+</div>
+</li>	
+</ol>
+</div>
+<!--流程-->
+</#macro>
+
+<#macro content>
+
+<!--下部-->
+<article class="content" style="padding-top:117px; padding-bottom:56px;" id="panel1">
+
+<!--合同号-->
+<div class="contractNum bg-gray con-spacing10">
+<b class="am-ft-sm am-ft-tabText">原合约</b><a class="am-left-10" ><b id="contract_no"></b></a>
+</div>
+<!--合同-->
+
+
+
+
+<aside class="con-spacing15 "  >
+<ul class="am-list list-amoutCompetition list-amoutCompetition-1" style="overflow:visible;">
+<li class="am-list-item">
+<h4 class="am-ft-md">追加的金额</h4>
+<div class="am-flexbox ui-formContainer am-mt-10">
+<div class="am-flexbox-item"><span class="ui-form-field am-left-15"><input id="additional"  type="text" class="text_input money"  maxlength="18" defaultvalue="输入金额" value="" placeholder="输入金额">
+</span></div>
+<div class="am-flexbox-item ft-item"><span >元
+</span></div>
+</div>
+</li>
+<li class="list-amoutCompetition-item am-list-item"  >
+<h4 class="am-ft-md">所需保证金</h4>
+
+<div class="am-flexbox ui-formContainer  flexbox-textarea am-mt-10" id="additionalts">
+<div class="am-flexbox-item am-left-15"><span class="ui-form-field">
+<textarea name="" cols="" rows="" disabled="disabled" class="am-textarea" defaultvalue="请先输入您追加的金额,根据您的追加金额算出所需保证金" value="" placeholder="请先输入您追加的金额,根据您的追加金额算出所需保证金"></textarea>
+</span></div>
+</div>
+
+<div class="line am-mt-10" id="additionalDiv" style="display:none">
+	<p><b class="am-ft-xl am-ft-orange" id="additionalAmount" ></b>元</p>
+</div>
+</li>
+
+<li class="am-list-item" id="terms" style="display: none;">
+	<h4 class="am-ft-md am-mt-20" style="margin-top: 102px!important;" >使用期限</h4>
+<div class="am-flexbox am-mt-10 select-container">
+<a class="select-choice"><span class="am-ft-md am-left-15"></span><i class="type-ico am-icon-arrow-bottom"></i></a>
+	<ul class="select-results" >
+ 
+    </ul>
+</div>
+</li>
+</ul>
+<div style="clear:both"></div>
+<div class=" am-pt-10 am-left-15">
+<span class="ui-input-checkbox ui-input-checkbox-active" id="agree_checkbox"></span>
+<span class="am-ft-sm am-left-5 am-ft-tabText" id="agreeDayText" style="display: none">我已阅读并同意<a href="${basePath}/mobile/agreement-3.htm">《${proDay}服务协议》</a></span>
+<span class="am-ft-sm am-left-5 am-ft-tabText" id="agreeMonthText"  style="display: none">我已阅读并同意<a href="${basePath}/mobile/agreement-3.htm">《${proMonth}服务协议》</a></span>
+</div>
+
+</aside>
+
+<div class="bg-gray con-spacing15 am-mt-15 lineTop-gray" id="financingInfo">
+</div>
+
+</article>
+
+<article class="content" style="padding-top:118px; padding-bottom:50px;display: none;" id="panel2">
+<div class="con-spacing15 con-prompt"  id="prompt">
+
+<!--按钮-->
+</div>
+
+</article>
+
+<article class="content" style="padding-top:118px; padding-bottom:50px;display: none;" id="panel3">
+<div class="con-spacing15 con-prompt">
+<!--提示-->
+<p><i class="icon-prompt icon-prompt-wait"></i></p>
+<p><span>追加申请已成功提交</span></p>
+<p class="am-ft-gray"><span class="am-ft-sm">申请正在紧张处理，请耐心等待</span></p>
+
+<!--提示-->
+
+
+<!--按钮-->
+<div class="btn-page btn-page-center con-spacing15">
+        <a href="${basePath}/mobile/user/contracts.htm" class="am-button am-button-red">
+        <span class="am-ft-white">合约详情</span>
+        </a>
+        
+</div>
+<!--按钮-->
+
+<p class="am-ft-sm phone">如有疑问请拨打客服电话: <#include 'mobile/component/phonePanel.html'/></p>
+</div>
+
+
+
+</article>
+</#macro>
+
+
+<#macro footerContent>
+	<!--按钮-->
+	<div class="btn-page btn-page-center bg-white con-spacing15" id="btnPage">
+        <a id="addNext" class="am-button am-button-red">
+        <span class="am-ft-white" >我要追加</span>
+        </a>
+        
+	</div>
+	<!--按钮-->
+</#macro>

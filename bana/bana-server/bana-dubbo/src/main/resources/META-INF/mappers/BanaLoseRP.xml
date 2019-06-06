@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="BanaLoseRP">
+    <select id="getRecordByUserId" resultType="com.caimao.bana.api.entity.activity.BanaLoseRPRecordEntity">
+        SELECT
+        id,
+        user_id AS userId,
+        money,
+        created
+        FROM bana_lose_rp_record WHERE user_id = #{userId}
+    </select>
+
+    <select id="getLoseRpDataForUpdate" resultType="com.caimao.bana.api.entity.activity.BanaLoseRPEntity">
+        SELECT
+        rp_id AS rpId,
+        rp_data AS rpData,
+        updated
+        FROM bana_lose_rp WHERE rp_id = #{rpId} FOR UPDATE
+    </select>
+
+    <update id="updateBanaLoseRP" parameterType="hashmap">
+        UPDATE bana_lose_rp
+        SET rp_data = '${rpData}', updated = #{updated}
+        WHERE rp_id = #{rpId}
+    </update>
+
+    <insert id="insertRecord" parameterType="com.caimao.bana.api.entity.activity.BanaLoseRPRecordEntity" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO bana_lose_rp_record (user_id, money, created)
+        VALUES (#{userId}, #{money}, #{created})
+    </insert>
+</mapper>

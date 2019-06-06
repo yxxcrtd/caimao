@@ -1,0 +1,120 @@
+<!doctype html>
+<html>
+<#include "config.html"/>
+<#assign curTopMenu="account"/>
+<#assign curLeftMenu="deposit"/>
+<head>
+    <meta charset="utf-8">
+    <title>网银充值-财猫网</title>
+    <meta name="keywords" content="融资，股票融资，投资融资，理财融资，融资平台，融资炒股，融资网，融资公司" />
+	<meta name="description" content="财猫网由金融服务、风险管理及互联网运营等业界一流的专业人士组成的超百人全职运营团队。提供股票融资服务，致力于为公众提供一个国际化、高收益、安全、专业的互联网资产交易平台"/>
+    <!--基本布局样式-->
+    <link rel="stylesheet" type="text/css" href="${dojoUrl}/style/page/page.css?v=${jsVersion}" />
+    <link rel="stylesheet" type="text/css" href="${dojoUrl}/style/page/recharge.css?v=${jsVersion}" />
+    <script type="text/javascript" src="${dojoUrl}/js/accountRecharge.js?v=${jsVersion}"></script>
+</head>
+<body>
+<#include 'include/page/head.html'/>
+<!--内容区-->
+<div id="main">
+    <div class="w sec_main">
+        <#include 'include/menu/account_left.html'/>
+        <div class="right_bar">
+            <div class="tabNav">
+                <ul>
+                    <li><a class="on" href="${basePath}/account/recharge/wangyin.htm">网银充值</a> </li>
+                    <li><a href="${basePath}/account/recharge/zhifubao.htm">支付宝转账</a> </li>
+                    <li><a href="${basePath}/account/recharge/yinhang.htm">银行转账</a> </li>
+                    <li><a href="${basePath}/account/recharge/history.htm">充值记录</a> </li>
+                </ul>
+            </div>
+            <div class="cyberBank transferBox" id="transferBox">
+                <div class="selectBank">
+                    <p><span>注：暂时不支持信用卡充值</span>请选择充值银行</p>
+                    <ul id="bankSelectBox">
+                        <li data-no="001" class="on"><img src="${imgUrl}/001.jpg"><i></i></li>
+                        <li data-no="002"><img src="${imgUrl}/002.jpg"><i></i></li>
+                        <li data-no="003"><img src="${imgUrl}/003.jpg"><i></i></li>
+                        <li data-no="004"><img src="${imgUrl}/004.jpg"><i></i></li>
+                        <li data-no="005"><img src="${imgUrl}/005.jpg"><i></i></li>
+                        <li data-no="006"><img src="${imgUrl}/006.jpg"><i></i></li>
+                        <li data-no="007"><img src="${imgUrl}/007.jpg"><i></i></li>
+                        <li data-no="008"><img src="${imgUrl}/008.jpg"><i></i></li>
+                        <li data-no="009"><img src="${imgUrl}/009.jpg"><i></i></li>
+                        <li data-no="010"><img src="${imgUrl}/010.jpg"><i></i></li>
+                        <li data-no="011"><img src="${imgUrl}/011.jpg"><i></i></li>
+                        <li data-no="012"><img src="${imgUrl}/012.jpg"><i></i></li>
+                        <li data-no="013"><img src="${imgUrl}/013.jpg"><i></i></li>
+                        <li data-no="014"><img src="${imgUrl}/014.jpg"><i></i></li>
+                    </ul>
+                </div>
+                <dl class="clearFix formgroup">
+                    <dt>可用余额</dt>
+                    <dd><i class="orange bold">${formatAmount(balance.avalaibleAmount - balance.freezeAmount, 2, "", 1)}</i>元</dd>
+                </dl>
+                <dl class="clear_fix formgroup" style="position: relative">
+                    <dt class="attachTip noticeTip rechargeNumCh" id="cNumCh"></dt>
+                    <dt>充值金额</dt>
+                    <dd class="inputBox"><input maxlength="8" type="text" autocomplete="off" class="textInput" id="cNum" validateType="empty:请输入充值金额 money max:100000"><label for="cNum">元</label></dd>
+                </dl>
+                <dl class="clear_fix formgroup">
+                    <dt>手续费</dt>
+                    <dd><i class="black bold">0.00</i> 元  (推广期间，财猫网承担在线充值手续费，请放心使用)</dd>
+                </dl>
+                <#if balance??>
+                    <a href="javascript:void(0);" class="btn btn_red" id="submitBtn">下一步</a>
+                <#else>
+                    <div>请先完成<a href="/account/safe.htm">实名认证</a></div>
+                </#if>
+            </div>
+            <div class="confirmForm transferBox" id="transferBoxConfirm" style="display: none">
+                <table border="0" cellpadding="0" cellspacing="1">
+                    <tr><td class="thead"><span>充值方式　</span></td><td>　<div id="FBankSelect"></div></td></tr>
+                    <tr><td class="thead"><span>充值金额　</span></td><td>　<i class="orange bold" id="FRechargeAmount">0</i> 元</td></tr>
+                    <tr><td class="thead"><span>手续费　</span></td><td>　<i class="black bold">0</i> 元  (推广期间，财猫网承担在线充值手续费，请放心使用)</td></tr>
+                    <tr><td class="thead"><span>合计　</span></td><td>　<i class="orange bold" id="FRechargeAmountConfirm">0</i> 元</td></tr>
+                </table>
+                <div class="btnGroup clear_fix">
+                    <a href="javascript:void(0);" class="btn btn_red" id="submitBtnConfirm">确认充值</a><a href="javascript:void(0);" class="btn graybtn" id="submitBtnReturn">返回上一步</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<form name="form3" id="recharge_form_heepay" style="display:none" action="https://pay.heepay.com/Payment/Index.aspx" method="post">
+    <!--必填--》当前接口版本号 1 -->
+    <input type="hidden" name="version" value="">
+    <!--选填--》是否使用手机触屏版，1=是，PC版请不用传本参数 -->
+    <input type="hidden" name="is_phone" value="">
+    <!--必填--》支付类型 -->
+    <input type="hidden" name="pay_type" value="">
+    <!--选填--》支付类型编码 -->
+    <input type="hidden" name="pay_code" value="">
+    <!--必填--》商户编号 -->
+    <input type="hidden" name="agent_id" value="">
+    <!--必填--》商户系统内部的定单号 -->
+    <input type="hidden" name="agent_bill_id" value="">
+    <!--必填--》订单总金额 -->
+    <input type="hidden" name="pay_amt" value="">
+    <!--必填--》支付后返回的商户处理页面 -->
+    <input type="hidden" name="notify_url" value="">
+    <!--必填--》支付后返回的商户显示页面 -->
+    <input type="hidden" name="return_url" value="">
+    <!--必填--》用户所在客户端的真实ip其中的“.”替换为“_” -->
+    <input type="hidden" name="user_ip" value="">
+    <!--必填--》提交单据的时间 -->
+    <input type="hidden" name="agent_bill_time" value="">
+    <!--必填--》商品名称 -->
+    <input type="hidden" name="goods_name" value="">
+    <!--选填--》产品数量 -->
+    <input type="hidden" name="goods_num" value="">
+    <!--必填--》商户自定义 -->
+    <input type="hidden" name="remark" value="">
+    <!--选填--》支付说明-->
+    <input type="hidden" name="goods_note" value="">
+    <!--必填--》MD5签名结果-->
+    <input type="hidden" name="sign" value="">
+</form>
+<#include 'include/page/foot.html'/>
+</body>
+</html>

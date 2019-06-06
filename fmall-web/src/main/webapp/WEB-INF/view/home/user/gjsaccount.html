@@ -1,0 +1,135 @@
+<#include "home/config.html"/>
+<#include "home/include/head.html"/>
+	<title>财猫贵金属账户</title>
+</head>
+<body>
+<#assign leftMenu="2"/>
+<#assign userTopMenu="account"/>
+<!--头部-->
+<div class="header">
+<#include "home/include/topRich.html" />
+<#include "home/include/menuLine.html" />
+
+</div>
+<!--内容区-->
+<div class="main">
+   <div class="docMain w">
+	   <div class="docMainLeft">
+
+<#include "home/include/accountLeft.html" />
+	   </div>
+	   <div class="docMainIn" id="exList">
+
+			<script type="text/x-tmpl">
+			<%for(var _this,i = 0,l = data.length; i < l; i++){
+				_this = data[i];%>
+				<%if(!_this["empty"]){%>
+		   <div class="gjsMainIn">
+			   <div class="informationTit "><span class="f_l"><%=_this.exchangeName%></span> <a class="f_r" href="" isopen="1" action="showHide">收起</a></div>
+			   <div class="accountIn">
+				   <table class="cur">
+					   <thead>
+					   <tr>
+						   <td><div class="col_1"><img src="${imgUrl}/account/<%=_this.exchange.toLowerCase()%>_logo.png" width="38" height="38" alt=""/><span><%=_this.exchangeName%></span><!--<a href="">[详情]</a>--></div></td>
+						   <td><div class="col_2">
+							   <p><%=_this.bankName%> : <b>********<%=_this.bankCard%></b>   <b><%=_this.realName%></b> </p>
+							   <p>交易账号：<b><%=_this.traderId%></b></p>
+						   </div></td>
+						   <td><div class="col_3">
+							   <!-- <a class="btn" href="">去交易</a> -->
+						   </div></td>
+					   </tr>
+					   </thead>
+					   <tbody>
+					   <tr>
+						   <td><div class="col_1"><b>交易密码 </b> <i class="icons icon_lock_blue"></i></div></td>
+						   <td><div class="col_2"><p></p></div></td>
+						   <td><div class="col_3"><a href="/gjs/account/modifyPwd.html?exchange=<%=_this.exchange%>&tid=<%=_this.traderId%>&wind=trade&exn=<%=_this.exchangeName%>">修改密码</a><s>|</s> <a href="/gjs/account/resetPwd.html?exchange=<%=_this.exchange%>&tid=<%=_this.traderId%>&wind=trade&exn=<%=_this.exchangeName%>">重置密码</a></div></td>
+					   </tr>
+					   <tr>
+						   <td><div class="col_1"><b>资金密码 </b> <i class="icons icon_lock_blue"></i></div></td>
+						   <td><div class="col_2"><p></p></div></td>
+						   <td><div class="col_3"><a href="/gjs/account/modifyPwd.html?exchange=<%=_this.exchange%>&tid=<%=_this.traderId%>&wind=funds&exn=<%=_this.exchangeName%>">修改密码</a> <s>|</s> <a href="/gjs/account/resetPwd.html?exchange=<%=_this.exchange%>&tid=<%=_this.traderId%>&wind=funds&exn=<%=_this.exchangeName%>">重置密码</a></div></td>
+					   </tr>
+
+					   </tbody>
+				   </table>
+			   </div>
+		   </div>
+		   <%}else{%>
+		   <div class="gjsMainIn">
+			   <div class="informationTit"><span class="f_l"><%=_this.exchangeName%></span> <a class="f_r" href="" isopen="1" action="showHide">收起</a></div>
+			   <div class="accountIn">
+				   <table class="cur">
+					   <thead>
+					   <tr>
+						   <td><div class="col_1"><img src="${imgUrl}/account/<%=_this.exchange.toLowerCase()%>_logo.png" width="38" height="38" alt=""/><span><%=_this.exchangeName%></span><!--<a href="">[详情]</a>--></div></td>
+						   <td><div class="col_2">
+							   <p><%=_this.content%></p>
+						   </div></td>
+						   <td><div class="col_3">
+						   		<%if(_this.exchange == "NJS"){%>
+							   <a class="btn" href="${gjsUrl}/gjs/openAccount.html">去开户</a> <%}%>
+						   </div></td>
+					   </tr>
+					   </thead>
+				   </table>
+			   </div>
+		   </div>
+		   <%}%>
+		   <%}%>
+		   </script>
+
+
+
+	   </div>
+   </div>
+</div>
+<script>
+var bankList = {
+        "NJS" : {"003":"招商银行","005":"建设银行","012":"中信银行","013":"华夏银行","014":"平安银行","019":"光大银行","408":"中国银行","410":"兴业银行"},
+        "SJS" : {"005":"建设银行"}
+    }
+	function gjsAccount(id){
+		var box = document.querySelector(id),
+			html = box.querySelector("script").innerHTML,
+			r = request(),
+			data = [];
+		r.ajax({
+			url : "/api/gjs_account/queryGJSAccount",
+			type : "GET",
+			data : {token : token},
+			success : function(d){
+				if(d.success){
+					if(d.data['SJS']){
+						d.data.SJS.exchangeName = "上海黄金交易所";
+						d.data.SJS.bankName = bankList.SJS[d.data.SJS.bankId];
+						d.data.SJS.realName = d.data.SJS.realName.replace(/[\u4e00-\u9fa5]{1}/,"*")
+						data.push(d.data.SJS)
+					}else{
+						data.push({empty:1,exchangeName : "上海黄金交易所", exchange : "SJS", content: "上海黄金交易所是经国务院批准，由中国人民银行组建，专门从事黄金交易的国家级市场；全球万余家机构和千万个人投资者的选择。"})
+					}
+					if(d.data['NJS']){
+						d.data.NJS.exchangeName = "南方稀贵金属交易所";
+						d.data.NJS.bankName = bankList.NJS[d.data.NJS.bankId];
+						d.data.NJS.realName = d.data.NJS.realName.replace(/[\u4e00-\u9fa5]{1}/,"*");
+						data.push(d.data.NJS)
+					}else{
+						data.push({empty:1,exchangeName : "南方稀贵金属交易所", exchange : "NJS", content : "南交所：证监会核准备案的稀贵金属“证券化”交易所；<br>21小时T+0双向交易，10秒即可完成的便捷开户，可随时提取现货。"})
+					}
+					writeHtml(data);
+				}
+			}
+		})
+		function writeHtml(d){
+			var data = d;
+			box.innerHTML = rentmpl(html,{data:d});
+		}
+	}
+</script>
+<script>
+	accountList("exList");
+	gjsAccount("#exList");
+</script>
+
+<#include "home/include/footRich.html" />

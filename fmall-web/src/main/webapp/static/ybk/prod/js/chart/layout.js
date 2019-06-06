@@ -1,0 +1,1 @@
+function singleLayout(t){function e(){t.draw&&t.draw({w:t.box.offsetWidth,h:t.box.offsetHeight})}var o;t.setdomlist&&t.setdomlist({}),Event.add(window,"resize",function(){o&&clearTimeout(o),o=setTimeout(e,10)}),t.size={w:t.box.offsetWidth,h:t.box.offsetHeight},e(),t.stockChart.winReset=e}

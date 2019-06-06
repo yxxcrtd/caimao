@@ -1,0 +1,7 @@
+###dubbo#####
+group=test_wx
+zk_address=172.32.1.222:2121
+timeout=100000
+executes=300
+version=0.0.1
+

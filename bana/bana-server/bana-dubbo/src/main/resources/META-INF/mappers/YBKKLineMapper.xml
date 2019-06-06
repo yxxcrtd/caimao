@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="YBKKLine">
+    <resultMap id="BaseResultMap" type="com.caimao.bana.api.entity.ybk.YBKKLineEntity">
+        <id column="exchange_name" property="exchangeName" jdbcType="CHAR"/>
+        <id column="code" property="code" jdbcType="CHAR"/>
+        <id column="date" property="date" jdbcType="TIMESTAMP"/>
+        <id column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="open_price" property="openPrice" jdbcType="BIGINT"/>
+        <result column="high_price" property="highPrice" jdbcType="BIGINT"/>
+        <result column="low_price" property="lowPrice" jdbcType="BIGINT"/>
+        <result column="cur_price" property="curPrice" jdbcType="BIGINT"/>
+        <result column="close_price" property="closePrice" jdbcType="BIGINT"/>
+        <result column="current_gains" property="currentGains" jdbcType="BIGINT"/>
+        <result column="total_amount" property="totalAmount" jdbcType="BIGINT"/>
+        <result column="total_money" property="totalMoney" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        exchange_name, code, date, update_time, open_price, high_price, low_price,cur_price, close_price, current_gains, total_amount, total_money
+    </sql>
+
+    <insert id="insert" parameterType="com.caimao.bana.api.entity.ybk.YBKKLineEntity">
+        INSERT INTO ybk_kline
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="exchangeName != null">exchange_name,</if>
+            <if test="code != null">code,</if>
+            <if test="date != null">date,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="openPrice != null">open_price,</if>
+            <if test="highPrice != null">high_price,</if>
+            <if test="lowPrice != null">low_price,</if>
+            <if test="curPrice != null">cur_price,</if>
+            <if test="closePrice != null">close_price,</if>
+            <if test="currentGains != null">current_gains,</if>
+            <if test="totalAmount != null">total_amount,</if>
+            <if test="totalMoney != null">total_money,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="exchangeName != null">#{exchangeName},</if>
+            <if test="code != null">#{code},</if>
+            <if test="date != null">#{date},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="openPrice != null">#{openPrice},</if>
+            <if test="highPrice != null">#{highPrice},</if>
+            <if test="curPrice != null">#{curPrice},</if>
+            <if test="lowPrice != null">#{lowPrice},</if>
+            <if test="closePrice != null">#{closePrice},</if>
+            <if test="currentGains != null">#{currentGains},</if>
+            <if test="totalAmount != null">#{totalAmount},</if>
+            <if test="totalMoney != null">#{totalMoney},</if>
+        </trim>
+    </insert>
+
+    <update id="update" parameterType="com.caimao.bana.api.entity.ybk.YBKKLineEntity">
+        UPDATE ybk_kline
+        <set>
+            <if test="updateTime != null" >update_time = #{updateTime},</if>
+            <if test="openPrice != null" >open_price = #{openPrice},</if>
+            <if test="highPrice != null" >high_price = #{highPrice},</if>
+            <if test="lowPrice != null" >low_price = #{lowPrice},</if>
+            <if test="curPrice != null" >cur_price = #{curPrice},</if>
+            <if test="closePrice != null" >close_price = #{closePrice},</if>
+            <if test="currentGains != null" >current_gains = #{currentGains},</if>
+            <if test="totalAmount != null" >total_amount = #{totalAmount},</if>
+            <if test="totalMoney != null" >total_money = #{totalMoney},</if>
+        </set>
+        WHERE exchange_name = #{exchangeName} AND code = #{code} AND date = #{date,jdbcType=DATE}
+    </update>
+
+    <select id="queryExist" parameterType="com.caimao.bana.api.entity.ybk.YBKKLineEntity" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM ybk_kline
+        WHERE exchange_name = #{exchangeName} AND code = #{code} AND date = #{date,jdbcType=DATE}
+    </select>
+
+    <select id="queryNumOfDays" parameterType="com.caimao.bana.api.entity.ybk.YBKKLineEntity" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM ybk_kline
+        WHERE exchange_name = #{exchangeName} AND code = #{code} AND date &lt;= #{date,jdbcType=DATE}
+        ORDER BY date DESC LIMIT #{days}
+    </select>
+
+    <select id="queryKLine" parameterType="com.caimao.bana.api.entity.req.ybk.FYbkMarketReq" resultType="com.caimao.bana.api.entity.res.ybk.FYBKKLineRes">
+        SELECT
+        date,
+        update_time AS updateTime,
+        open_price AS openPrice,
+        high_price AS highPrice,
+        low_price AS lowPrice,
+        cur_price AS curPrice,
+        close_price AS closePrice,
+        total_amount AS totalAmount,
+        current_gains AS currentGains,
+        total_money AS totalMoney
+        FROM ybk_kline
+        WHERE exchange_name = #{exchangeShortName} AND code = #{code}
+        ORDER BY `date` DESC
+        LIMIT #{limit}
+    </select>
+
+    <select id="queryCollectionRankingWithPage" parameterType="hashmap" resultType="com.caimao.bana.api.entity.res.ybk.FYBKCollectionRankingRes">
+        SELECT
+        code,
+        current_gains AS changeRate,
+        cur_price AS currentPrice,
+        open_price AS openPrice,
+        high_price AS highPrice,
+        close_price AS closePrice,
+        low_price AS lowPrice,
+        total_amount AS totalAmount,
+        total_money AS totalMoney,
+        update_time AS updateTime
+        FROM ybk_kline
+        WHERE exchange_name = #{exchangeShortName} AND date = #{hqDate,jdbcType=DATE}
+        <trim prefix="ORDER BY ">
+            <if test="orderColumn != null and  orderColumn != ''">
+                ${orderColumn} ${orderDir}
+            </if>
+        </trim>
+    </select>
+
+    <select id="getLastDate" resultType="java.util.Date">
+        SELECT `date` FROM ybk_kline where exchange_name = #{exchangeShortName} ORDER BY `date` DESC limit 1
+    </select>
+
+    <select id="getCollectionInfo" parameterType="java.util.HashMap" resultType="com.caimao.bana.api.entity.res.ybk.FYBKCollectionRankingRes">
+        SELECT
+        t1.code,
+        t2.good_name AS  `name`,
+        t2.short_name AS exchangeShortName,
+        t2.exchange_name AS exchangeName,
+        t1.current_gains AS changeRate,
+        t1.cur_price AS currentPrice,
+        t1.open_price AS openPrice,
+        t1.high_price AS highPrice,
+        t1.close_price AS closePrice,
+        t1.low_price AS lowPrice,
+        t1.total_amount AS totalAmount,
+        t1.total_money AS totalMoney,
+        t1.update_time AS updateTime
+        FROM ybk_kline t1
+        LEFT JOIN ybk_goods t2 ON t1.code = t2.good_code AND t1.exchange_name=t2.short_name
+        WHERE t1.exchange_name = #{exchangeShortName,jdbcType=VARCHAR} AND t1.code = #{code,jdbcType=VARCHAR}
+        ORDER BY updateTime DESC limit 1
+    </select>
+</mapper>

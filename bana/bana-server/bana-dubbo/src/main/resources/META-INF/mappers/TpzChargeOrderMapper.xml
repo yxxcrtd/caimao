@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="TpzChargeOrder">
+    <resultMap id="BaseResultMap" type="com.caimao.bana.api.entity.TpzChargeOrderEntity">
+        <id column="order_no" property="orderNo" jdbcType="BIGINT" />
+        <result column="user_id" property="userId" jdbcType="BIGINT" />
+        <result column="pz_account_id" property="pzAccountId" jdbcType="BIGINT" />
+        <result column="order_name" property="orderName" jdbcType="VARCHAR" />
+        <result column="order_status" property="orderStatus" jdbcType="VARCHAR" />
+        <result column="bank_no" property="bankNo" jdbcType="VARCHAR" />
+        <result column="bank_code" property="bankCode" jdbcType="VARCHAR" />
+        <result column="bank_card_name" property="bankCardName"
+                jdbcType="VARCHAR" />
+        <result column="bank_card_no" property="bankCardNo" jdbcType="VARCHAR" />
+        <result column="currency_type" property="currencyType"
+                jdbcType="VARCHAR" />
+        <result column="order_amount" property="orderAmount" jdbcType="BIGINT" />
+        <result column="order_abstract" property="orderAbstract"
+                jdbcType="VARCHAR" />
+        <result column="bank_success_datetime" property="bankSuccessDatetime"
+                jdbcType="TIMESTAMP" />
+        <result column="pay_submit_datetime" property="paySubmitDatetime"
+                jdbcType="TIMESTAMP" />
+        <result column="channel_service_charge" property="channelServiceCharge"
+                jdbcType="BIGINT" />
+        <result column="bank_result_code" property="bankResultCode"
+                jdbcType="VARCHAR" />
+        <result column="bank_result_code_note" property="bankResultCodeNote"
+                jdbcType="VARCHAR" />
+        <result column="pay_id" property="payId" jdbcType="VARCHAR" />
+        <result column="pay_result_note" property="payResultNote"
+                jdbcType="VARCHAR" />
+        <result column="pay_result_datetime" property="payResultDatetime"
+                jdbcType="TIMESTAMP" />
+        <result column="check_status" property="checkStatus" jdbcType="VARCHAR" />
+        <result column="work_date" property="workDate" jdbcType="VARCHAR" />
+        <result column="create_datetime" property="createDatetime"
+                jdbcType="TIMESTAMP" />
+        <result column="update_datetime" property="updateDatetime"
+                jdbcType="TIMESTAMP" />
+        <result column="remark" property="remark" jdbcType="VARCHAR" />
+        <result column="channel_id" property="channelId" jdbcType="BIGINT" />
+        <result column="pay_type" property="payType" jdbcType="VARCHAR" />
+        <result column="verify_user" property="verifyUser" jdbcType="VARCHAR" />
+        <result column="verify_datetime" property="verifyDatetime"
+                jdbcType="TIMESTAMP" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        order_no, user_id, pz_account_id, order_name, order_status,
+        bank_no, bank_code,
+        bank_card_name,
+        bank_card_no, currency_type,
+        order_amount, order_abstract, bank_success_datetime,
+        pay_submit_datetime, channel_service_charge, bank_result_code,
+        bank_result_code_note,
+        pay_id, pay_result_note, pay_result_datetime,
+        check_status, work_date,
+        create_datetime,
+        update_datetime,
+        remark,channel_id,pay_type,verify_user, verify_datetime
+    </sql>
+    <insert id="save" parameterType="com.caimao.bana.api.entity.TpzChargeOrderEntity">
+        insert into tpz_charge_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="orderNo != 0">
+                order_no,
+            </if>
+            <if test="userId != 0">
+                user_id,
+            </if>
+            <if test="pzAccountId != 0">
+                pz_account_id,
+            </if>
+            <if test="orderName != null">
+                order_name,
+            </if>
+            <if test="orderStatus != null">
+                order_status,
+            </if>
+            <if test="bankNo != null">
+                bank_no,
+            </if>
+            <if test="bankCode != null">
+                bank_code,
+            </if>
+            <if test="bankCardName != null">
+                bank_card_name,
+            </if>
+            <if test="bankCardNo != null">
+                bank_card_no,
+            </if>
+            <if test="currencyType != null">
+                currency_type,
+            </if>
+            <if test="orderAmount != null">
+                order_amount,
+            </if>
+            <if test="orderAbstract != null">
+                order_abstract,
+            </if>
+            <if test="bankSuccessDatetime != null">
+                bank_success_datetime,
+            </if>
+            <if test="paySubmitDatetime != null">
+                pay_submit_datetime,
+            </if>
+            <if test="channelServiceCharge != null">
+                channel_service_charge,
+            </if>
+            <if test="bankResultCode != null">
+                bank_result_code,
+            </if>
+            <if test="bankResultCodeNote != null">
+                bank_result_code_note,
+            </if>
+            <if test="payId != null">
+                pay_id,
+            </if>
+            <if test="payResultNote != null">
+                pay_result_note,
+            </if>
+            <if test="payResultDatetime != null">
+                pay_result_datetime,
+            </if>
+            <if test="checkStatus != null">
+                check_status,
+            </if>
+            <if test="workDate != null">
+                work_date,
+            </if>
+            <if test="createDatetime != null">
+                create_datetime,
+            </if>
+            <if test="updateDatetime != null">
+                update_datetime,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="channelId != 0">
+                channel_id,
+            </if>
+            <if test="payType != null">
+                pay_type,
+            </if>
+            <if test="verifyUser != null">
+                verify_user,
+            </if>
+            <if test="verifyDatetime != null">
+                verify_datetime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="orderNo != 0">
+                #{orderNo,jdbcType=BIGINT},
+            </if>
+            <if test="userId != 0">
+                #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="pzAccountId != 0">
+                #{pzAccountId,jdbcType=BIGINT},
+            </if>
+            <if test="orderName != null">
+                #{orderName,jdbcType=VARCHAR},
+            </if>
+            <if test="orderStatus != null">
+                #{orderStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="bankNo != null">
+                #{bankNo,jdbcType=VARCHAR},
+            </if>
+            <if test="bankCode != null">
+                #{bankCode,jdbcType=VARCHAR},
+            </if>
+            <if test="bankCardName != null">
+                #{bankCardName,jdbcType=VARCHAR},
+            </if>
+            <if test="bankCardNo != null">
+                #{bankCardNo,jdbcType=VARCHAR},
+            </if>
+            <if test="currencyType != null">
+                #{currencyType,jdbcType=VARCHAR},
+            </if>
+            <if test="orderAmount != null">
+                #{orderAmount,jdbcType=BIGINT},
+            </if>
+            <if test="orderAbstract != null">
+                #{orderAbstract,jdbcType=VARCHAR},
+            </if>
+            <if test="bankSuccessDatetime != null">
+                #{bankSuccessDatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="paySubmitDatetime != null">
+                #{paySubmitDatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="channelServiceCharge != null">
+                #{channelServiceCharge,jdbcType=BIGINT},
+            </if>
+            <if test="bankResultCode != null">
+                #{bankResultCode,jdbcType=VARCHAR},
+            </if>
+            <if test="bankResultCodeNote != null">
+                #{bankResultCodeNote,jdbcType=VARCHAR},
+            </if>
+            <if test="payId != null">
+                #{payId,jdbcType=VARCHAR},
+            </if>
+            <if test="payResultNote != null">
+                #{payResultNote,jdbcType=VARCHAR},
+            </if>
+            <if test="payResultDatetime != null">
+                #{payResultDatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="checkStatus != null">
+                #{checkStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="workDate != null">
+                #{workDate,jdbcType=VARCHAR},
+            </if>
+            <if test="createDatetime != null">
+                #{createDatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDatetime != null">
+                #{updateDatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+
+            <if test="channelId != 0">
+                #{channelId,jdbcType=VARCHAR},
+            </if>
+            <if test="payType != null">
+                #{payType,jdbcType=VARCHAR},
+            </if>
+            <if test="verifyUser != null">
+                #{verifyUser,jdbcType=VARCHAR},
+            </if>
+            <if test="verifyDatetime != null">
+                #{verifyDatetime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="getChargeOrderByOrderNo" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from tpz_charge_order
+        where order_no = #{orderNo,jdbcType=BIGINT} FOR UPDATE
+    </select>
+
+    <select id="getChargeOrdersByUserId" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tpz_charge_order WHERE user_id = #{userId}
+    </select>
+
+    <update id="update" parameterType="com.caimao.bana.api.entity.TpzChargeOrderEntity">
+        update tpz_charge_order
+        <set>
+            <if test="userId != 0">
+                user_id = #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="pzAccountId != 0">
+                pz_account_id = #{pzAccountId,jdbcType=BIGINT},
+            </if>
+            <if test="orderName != null">
+                order_name = #{orderName,jdbcType=VARCHAR},
+            </if>
+            <if test="orderStatus != null">
+                order_status = #{orderStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="bankNo != null and bankNo != ''">
+                bank_no = #{bankNo,jdbcType=VARCHAR},
+            </if>
+            <if test="bankCode != null">
+                bank_code = #{bankCode,jdbcType=VARCHAR},
+            </if>
+            <if test="bankCardName != null">
+                bank_card_name = #{bankCardName,jdbcType=VARCHAR},
+            </if>
+            <if test="bankCardNo != null">
+                bank_card_no = #{bankCardNo,jdbcType=VARCHAR},
+            </if>
+            <if test="currencyType != null">
+                currency_type = #{currencyType,jdbcType=VARCHAR},
+            </if>
+            <if test="orderAmount != null">
+                order_amount = #{orderAmount,jdbcType=BIGINT},
+            </if>
+            <if test="orderAbstract != null">
+                order_abstract = #{orderAbstract,jdbcType=VARCHAR},
+            </if>
+            <if test="bankSuccessDatetime != null">
+                bank_success_datetime =
+                #{bankSuccessDatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="paySubmitDatetime != null">
+                pay_submit_datetime =
+                #{paySubmitDatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="channelServiceCharge != null">
+                channel_service_charge =
+                #{channelServiceCharge,jdbcType=BIGINT},
+            </if>
+            <if test="bankResultCode != null">
+                bank_result_code = #{bankResultCode,jdbcType=VARCHAR},
+            </if>
+            <if test="bankResultCodeNote != null">
+                bank_result_code_note =
+                #{bankResultCodeNote,jdbcType=VARCHAR},
+            </if>
+            <if test="payId != null">
+                pay_id = #{payId,jdbcType=VARCHAR},
+            </if>
+            <if test="payResultNote != null">
+                pay_result_note = #{payResultNote,jdbcType=VARCHAR},
+            </if>
+            <if test="payResultDatetime != null">
+                pay_result_datetime =
+                #{payResultDatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="checkStatus != null">
+                check_status = #{checkStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="workDate != null">
+                work_date = #{workDate,jdbcType=VARCHAR},
+            </if>
+            <if test="createDatetime != null">
+                create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDatetime != null">
+                update_datetime = #{updateDatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+
+            <if test="channelId != 0">
+                channel_id= #{channelId,jdbcType=VARCHAR},
+            </if>
+            <if test="payType != null">
+                pay_type= #{payType,jdbcType=VARCHAR},
+            </if>
+            <if test="verifyUser != null">
+                verify_user = #{verifyUser,jdbcType=VARCHAR},
+            </if>
+            <if test="verifyDatetime != null">
+                verify_datetime = #{verifyDatetime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where order_no = #{orderNo,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateAlipay" parameterType="com.caimao.bana.api.entity.TpzChargeOrderEntity">
+        update tpz_charge_order
+        <set>
+            <if test="orderStatus != null">
+                order_status = #{orderStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="updateDatetime != null">
+                update_datetime = #{updateDatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="verifyUser != null">
+                verify_user = #{verifyUser,jdbcType=VARCHAR},
+            </if>
+            <if test="verifyDatetime != null">
+                verify_datetime = #{verifyDatetime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where order_no = #{orderNo,jdbcType=BIGINT}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM tpz_charge_order WHERE order_no = #{orderNo}
+    </delete>
+
+    <select id="queryChargeOrderWithPage" resultMap="BaseResultMap"
+            parameterType="com.caimao.bana.api.entity.TpzChargeOrderEntity">
+        SELECT
+        <include refid="Base_Column_List" />
+        from tpz_charge_order
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="userId != null and userId != 0">
+                AND user_id = #{userId}
+            </if>
+            <if test="pzAccountId != null and pzAccountId != 0">
+                AND pz_account_id = #{pzAccountId}
+            </if>
+            <if test="orderStatus != null and orderStatus != ''">
+                AND order_status = #{orderStatus}
+            </if>
+            <if test="channelId != null ">
+                AND channel_id = #{channelId}
+            </if>
+            <if test="createDatetimeBegin != null and createDatetimeBegin != '' ">
+                <![CDATA[AND create_datetime >= #{createDatetimeBegin}]]>
+            </if>
+            <if test="createDatetimeEnd != null and createDatetimeEnd != '' ">
+                <![CDATA[ AND create_datetime <= #{createDatetimeEnd}]]>
+            </if>
+        </trim>
+        <trim prefix="ORDER BY ">
+            <if test="orderColumn != null and  orderColumn != ''">
+                ${orderColumn} ${orderDir}
+            </if>
+        </trim>
+    </select>
+
+    <select id="queryAlipayNoSuccess" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tpz_charge_order
+        WHERE channel_id = -1 AND pay_type = -1 AND order_status = '06' AND create_datetime &gt;= #{dateStart}
+    </select>
+</mapper>

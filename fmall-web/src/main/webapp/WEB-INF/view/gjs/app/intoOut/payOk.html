@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<#include "gjs/config.html" />
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>转账成功</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1, user-scalable=false">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no"/>
+    <link rel="stylesheet" href="${staticUrl}/app/intoOut/css/reset.css" />
+    <link rel="stylesheet" href="${staticUrl}/app/intoOut/css/open.css" />
+</head>
+<body>
+<div class='intoMain'>
+    <div class="complete">
+        <dl>
+            <dt><img src="${imgUrl}/right.png" alt=""></dt>
+            <dd id="infos">
+                
+            </dd>
+        </dl>
+        <a href="caimaogjsapp://?action=closeWebView" class="btn btn1">完成</a>
+    </div>
+</div>
+<script src='${staticUrl}/app/kaihu/js/zepto.js'></script>
+<script>
+    ;(function(){
+        var exchange = $_GET("exchange") || "njs",
+            token = $_GET("token") || "",
+            money = $_GET("money") || "",
+            bankName = $_GET("bankName") || "",
+            bankCard = $_GET("bankCard") || "";
+        document.querySelector("#infos").innerHTML = "<h1>转账申请已经受理</h1><p>"+bankName+"（尾号"+bankCard+"）</p><p>转账金额："+money+"</p>";
+    })();
+</script>
+</body>
+</html>

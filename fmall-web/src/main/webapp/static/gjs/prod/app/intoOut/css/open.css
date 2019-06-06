@@ -1,0 +1,284 @@
+body{
+	background: #eeeeee;
+	font-size: 10px;
+	font-family:'Microsoft YaHei',Lucida Grande,Lucida Sans Unicode,\5B8B\4F53;
+}
+input,select{outline:0 none;}
+ul,li{
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.wrapper{
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    min-height:480px;
+    overflow: hidden;
+    background: #eeeeee;
+}
+.wrapper2{
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    min-height:480px;
+    background: #eeeeee;
+}
+.intoMain {
+	width: 100%;
+	border-top: 1px solid #e5e5e5;
+}
+.intoTab{
+	width: 90%;
+	height: 2em;
+	margin-left: 5%;
+	margin-top: 1.3em;
+}
+.intoTab li{
+	width: 33.33%;
+	font-size: 1.3em;
+	height: 2em;
+	line-height: 2em;
+	text-align: center;
+	border: 1px solid #568eff;
+	float: left;
+}
+.intoTab li a{
+	color: #568eff;
+	display:block;width:100%;
+	height: 2em;
+	line-height: 2em;
+}
+.intoTab li:first-child , .intoTab li:nth-child(2){
+	border-right: none;
+}
+.high{
+	background: #568eff;
+}
+.intoTab li .wordHigh{
+color: #fff;
+}
+.bank{
+	width: 100%;
+	float: left;
+	background: #fff;
+
+	font-size: 1.7em;
+	margin: 0;
+	margin-top: 1.3em;
+	height: 4.5em;
+}
+.bank img{
+	float: left;
+		margin: .5em 0 .8em 1em;
+}
+.bank p{
+	float: left;
+	height: 4.5em;
+	margin: 0;
+	line-height: 4.5em;
+	margin-left: 1em;
+	font-size: 1em;
+}
+.word-1{
+	color: #a9a9a9;
+	float: left;
+	margin: 1em 0 0 1em;
+	width: 100%;
+}
+.cardholder{
+	width: 100%;
+	text-indent: 5%;
+	font-size: 1.6em;
+	color: #000;
+	height: 2.5em;
+	line-height: 2.5em;
+	background: #fff;
+	border-bottom: 1px solid #e5e5e5;
+	border-top: 1px solid #e5e5e5;
+	float: left;
+	margin:0.5em 0;
+	padding:1px 0;
+	overflow: hidden;
+}
+.cardholder span{
+	color: #000;
+	/* margin-left: 1em; */
+}
+.cardholder input{
+	border: none;
+	height: 2.3em;
+	width:65%;
+	line-height:2.3em;
+	margin-left: .9em;
+	color: #d4d4d4;
+}
+.words-2{
+	 margin-left: 5%;
+	 color: #969696;
+}
+.bankNotice{
+	width: 100%;
+	float:left;color:#eee;text-align:center;font-size:1.4em;
+	padding-top:1em;
+	-webkit-transition:color ease 1s;
+}
+.bankList{
+	width: 100%;
+	background: #fff;
+	margin-top: 1em;
+	border-top: 1px solid #e5e5e5;
+	float: left;
+}
+.bankList p{
+	width: 95%;
+	margin: 0;
+	font-size: 1.7em;
+	margin-left: 5%;
+	height: 2.5em;
+	line-height: 2.5em;
+	color: #000;
+	float: left;
+}
+.bankList p span{
+	margin-left: 2.1em;
+	color: #d4d4d4;
+}
+.bankList p input{
+	border: none;
+	height: 2.4em;
+	line-height:2.4em;
+	margin-left: 1.3em;
+	color: #d4d4d4;
+}
+.bankList p:first-child input{
+	margin-left: 2.3em;
+}
+.bankList p:first-child{
+	border-bottom: 1px solid #e5e5e5;
+}
+.bankList span ::-webkit-input-placeholder { /* WebKit browsers */
+    color:    #d4d4d4;
+}
+.next-2{
+	background: #568eff;
+	width: 100%;
+	color: #fff;
+	margin-top: 2em;
+	height: 2em;
+	line-height: 2em;
+	float: left;
+	text-align: center;
+	font-size: 2em;
+}
+.next-3{
+	margin-top:0.5em;
+}
+.complete{
+	width: 100%;
+}
+.complete dl{
+	width: 100%;
+	margin-top: 10em;
+}
+.complete dl dt img{
+width: 20%;
+height: 20%;
+display: block;
+margin: 0 auto;
+margin-top: 6em;
+}
+.complete dl dd{
+	width: 100%;
+	margin: 0;
+}
+.complete dl dd p{
+	width: 100%;
+	text-align: center;
+	margin: 0;
+	color: #969696;
+	line-height: 2em;
+	font-size: 1.3em;
+}
+.complete dl dd p span{
+	color: #568eff;
+	margin-left: .3em;
+}
+.complete dl dd h1{
+	width: 100%;
+	text-align: center;
+	margin: 0;
+	margin-top: 1em;
+}
+.complete h2{
+	width: 100%;
+	text-align: center;
+	color: #568eff;
+}
+.btn{
+	width: 90%;
+	margin-left: 5%;
+	display: block;
+	text-align: center;
+	font-size: 1.6em;
+	padding: .3em;
+	border-radius: 2px;
+	margin-top: 4em;
+	float: left;
+	background: #568eff;
+		color: #fff;
+}
+
+.queryList{
+	width: 100%;
+	background: #fff;
+	margin-top: 1.5em;
+	float: left;
+}
+.queryList li:first-child{
+	width: 100%;
+	margin: 0;
+	float: left;
+	font-size: 1.5em;
+	height: 2.8em;
+	line-height: 2.8em;
+	border-bottom: 1px solid #e5e5e5;
+}
+.queryList li:first-child .time{
+	margin-left: 5%;
+	background: none;
+	text-indent: 0;
+}
+.queryList li:first-child .money{
+	margin-right: 5%;
+	color: #9e9e9e;
+}
+.queryList li{
+	width: 90%;
+	margin-left: 5%;
+	float: left;
+	font-size: 1.5em;
+	height: 3em;
+	line-height: 3em;
+	border-bottom: 1px solid #e5e5e5;
+}
+.queryList .time{
+	float: left;
+	color: #9e9e9e;
+	background: url(../img/time.png) no-repeat;
+	display: block;
+	text-indent: 1.6em;
+	background-position: 0 center;
+	background-size: 1.2em 1.2em;
+}
+.queryList .money{
+	float: right;
+	display: block;
+	color: #000;
+}

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="GjsNJSHistoryEntrust">
+
+    <resultMap id="BaseResultMap" type="com.caimao.gjs.api.entity.history.GjsNJSHistoryEntrustEntity">
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="date" property="date" jdbcType="VARCHAR" />
+        <result column="trader_id" property="traderId" jdbcType="VARCHAR" />
+        <result column="serial_no" property="serialNo" jdbcType="VARCHAR" />
+        <result column="ware_id" property="wareId" jdbcType="VARCHAR" />
+        <result column="buy_or_Sal" property="buyOrSal" jdbcType="VARCHAR" />
+        <result column="price" property="price" jdbcType="VARCHAR" />
+        <result column="num" property="num" jdbcType="VARCHAR" />
+        <result column="cont_num" property="contNum" jdbcType="VARCHAR" />
+        <result column="time" property="time" jdbcType="VARCHAR" />
+        <result column="c_status" property="cStatus" jdbcType="VARCHAR" />
+        <result column="s_cancle_time" property="sCancleTime" jdbcType="VARCHAR" />
+        <result column="so_ip_address" property="soIpAddress" jdbcType="VARCHAR" />
+        <result column="c_generate_flag" property="cGenerateFlag" jdbcType="VARCHAR" />
+        <result column="order_sty" property="orderSty" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--所有列-->
+    <sql id="Base_Column_List">
+        id, date, trader_id, serial_no, ware_id, buy_or_Sal, price, num, cont_num, time, c_status, s_cancle_time, so_ip_address, c_generate_flag, order_sty
+    </sql>
+
+    <!--根据开始时间和结束时间查询-->
+    <select id="queryNJSHistoryEntrustWithPage" resultMap="BaseResultMap" parameterType="com.caimao.gjs.api.entity.req.FQueryHistoryEntrustReq">
+        SELECT <include refid="Base_Column_List" />
+        FROM gjs_njs_history_entrust
+        WHERE trader_id = #{traderId, jdbcType=VARCHAR}
+        <if test="startDate != null and  startDate != ''">
+            AND date &gt;= #{startDate}
+        </if>
+        <if test="endDate != null and  endDate != ''">
+            AND date &lt;= #{endDate}
+        </if>
+        ORDER BY date desc,time DESC
+    </select>
+
+    <!-- 根据日期查询历史委托记录 -->
+    <select id="queryNJSHistoryEntrustListByDate" resultMap="BaseResultMap" parameterType="com.caimao.gjs.api.entity.req.FQueryHistoryEntrustReq">
+        SELECT <include refid="Base_Column_List" /> FROM gjs_njs_history_entrust WHERE date = #{date, jdbcType=VARCHAR}
+    </select>
+
+    <!--添加-->
+    <insert id="insert" parameterType="com.caimao.gjs.api.entity.history.GjsNJSHistoryEntrustEntity">
+        insert into gjs_njs_history_entrust
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="date != null">date,</if>
+            <if test="traderId != null">trader_id,</if>
+            <if test="serialNo != null">serial_no,</if>
+            <if test="wareId != null">ware_id,</if>
+            <if test="buyOrSal != null">buy_or_Sal,</if>
+            <if test="price != null">price,</if>
+            <if test="num != null">num,</if>
+            <if test="contNum != null">cont_num,</if>
+            <if test="time != null">time,</if>
+            <if test="cStatus != null">c_status,</if>
+            <if test="sCancleTime != null">s_cancle_time,</if>
+            <if test="soIpAddress != null">so_ip_address,</if>
+            <if test="cGenerateFlag != null">c_generate_flag,</if>
+            <if test="orderSty != null">order_sty,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id, jdbcType=BIGINT},</if>
+            <if test="date != null">#{date, jdbcType=VARCHAR},</if>
+            <if test="traderId != null">#{traderId, jdbcType=VARCHAR},</if>
+            <if test="serialNo != null">#{serialNo, jdbcType=VARCHAR},</if>
+            <if test="wareId != null">#{wareId, jdbcType=VARCHAR},</if>
+            <if test="buyOrSal != null">#{buyOrSal, jdbcType=VARCHAR},</if>
+            <if test="price != null">#{price, jdbcType=VARCHAR},</if>
+            <if test="num != null">#{num, jdbcType=VARCHAR},</if>
+            <if test="contNum != null">#{contNum, jdbcType=VARCHAR},</if>
+            <if test="time != null">#{time, jdbcType=VARCHAR},</if>
+            <if test="cStatus != null">#{cStatus, jdbcType=VARCHAR},</if>
+            <if test="sCancleTime != null">#{sCancleTime, jdbcType=VARCHAR},</if>
+            <if test="soIpAddress != null">#{soIpAddress, jdbcType=VARCHAR},</if>
+            <if test="cGenerateFlag != null">#{cGenerateFlag, jdbcType=VARCHAR},</if>
+            <if test="orderSty != null">#{orderSty, jdbcType=VARCHAR},</if>
+        </trim>
+    </insert>
+
+    <!--根据ID查询-->
+    <select id="findById" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select <include refid="Base_Column_List" /> from gjs_njs_history_entrust where id = #{id, jdbcType=BIGINT}
+    </select>
+
+    <!--删除-->
+    <delete id="delById" parameterType="java.lang.Long">
+        delete from gjs_njs_history_entrust where id = #{id, jdbcType=BIGINT}
+    </delete>
+
+    <!--更新-->
+    <update id="update" parameterType="com.caimao.gjs.api.entity.history.GjsNJSHistoryEntrustEntity">update gjs_njs_history_entrust
+        <set>
+            <if test="date != null">date = #{date, jdbcType=VARCHAR},</if>
+            <if test="traderId != null">trader_id = #{traderId, jdbcType=VARCHAR},</if>
+            <if test="serialNo != null">serial_no = #{serialNo, jdbcType=VARCHAR},</if>
+            <if test="wareId != null">ware_id = #{wareId, jdbcType=VARCHAR},</if>
+            <if test="buyOrSal != null">buy_or_Sal = #{buyOrSal, jdbcType=VARCHAR},</if>
+            <if test="price != null">price = #{price, jdbcType=VARCHAR},</if>
+            <if test="num != null">num = #{num, jdbcType=VARCHAR},</if>
+            <if test="contNum != null">cont_num = #{contNum, jdbcType=VARCHAR},</if>
+            <if test="time != null">time = #{time, jdbcType=VARCHAR},</if>
+            <if test="cStatus != null">c_status = #{cStatus, jdbcType=VARCHAR},</if>
+            <if test="sCancleTime != null">s_cancle_time = #{sCancleTime, jdbcType=VARCHAR},</if>
+            <if test="soIpAddress != null">so_ip_address = #{soIpAddress, jdbcType=VARCHAR},</if>
+            <if test="cGenerateFlag != null">c_generate_flag = #{cGenerateFlag, jdbcType=VARCHAR},</if>
+        </set>
+        where id = #{id, jdbcType=BIGINT}
+    </update>
+
+    <!-- 后台管理用的查询 -->
+    <!-- 根据TraderId查询NJS历史委托列表 -->
+    <select id="queryNJSHistoryEntrustListByTraderIdForManage" resultMap="BaseResultMap" parameterType="java.lang.String">
+        SELECT <include refid="Base_Column_List" /> FROM gjs_njs_history_entrust WHERE trader_id = #{trader_id, jdbcType=VARCHAR}
+    </select>
+
+
+</mapper>

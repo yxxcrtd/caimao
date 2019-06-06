@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<#include "config.html"/>
+<#assign curTopMenu="account"/>
+<#assign curLeftMenu="popularize"/>
+<head>
+	<meta charset="utf-8">
+	<title>推广记录-财猫网</title>
+	<link rel="stylesheet" type="text/css" href="${dojoUrl}/style/page/page.css?v=${jsVersion}">
+	<script type="text/javascript" src="${dojoUrl}/js/global.js?v=${jsVersion}"></script>
+</head>
+<body>
+<#include 'include/page/head.html'/>
+<!--内容区-->
+<div id="main">
+	<div class="w sec_main">
+		<!--左右布局-->
+		<#include 'include/menu/account_left.html'/>
+		<div class="right_bar">
+			<#include 'popularize/include_nav_bar.html'/>
+			<div class="record">
+				<table class="table m_t_20 table_striped table_hover">
+					<thead>
+					<tr>
+						<th width="50%">姓名</th>
+						<th width="50%">手机号</th>
+					</tr>
+					</thead>
+					<tbody>
+					<#if dataList.items>
+						<#list dataList.items as i>
+							<tr>
+								<td>${i.userRealName}</td>
+								<td>${i.mobile}</td>
+							</tr>
+						</#list>
+						<#else>
+							<tr class="table_crumbs">
+								<td colspan="5">
+									<i class="icons icon_info_null"></i>
+									<p>推广记录为空</p>
+								</td>
+							</tr>
+					</#if>
+					</tbody>
+				</table>
+			</div>
+			${pageHtml}
+		</div>
+	</div>
+</div>
+<#include 'include/page/foot.html'/>
+</body>
+</html>

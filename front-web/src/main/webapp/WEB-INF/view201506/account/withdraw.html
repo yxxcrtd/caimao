@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+<#include "config.html"/>
+<#assign curTopMenu="account"/>
+<#assign curLeftMenu="withdraw"/>
+<head>
+    <meta charset="utf-8">
+    <title>我要提现-财猫网</title>
+    <meta name="keywords" content="融资，股票融资，投资融资，理财融资，融资平台，融资炒股，融资网，融资公司" />
+    <meta name="description" content="财猫网由金融服务、风险管理及互联网运营等业界一流的专业人士组成的超百人全职运营团队。提供股票融资服务，致力于为公众提供一个国际化、高收益、安全、专业的互联网资产交易平台"/>
+    <!--基本布局样式-->
+    <link rel="stylesheet" type="text/css" href="${dojoUrl}/style/page/page.css?v=${jsVersion}" />
+    <link rel="stylesheet" type="text/css" href="${dojoUrl}/style/page/recharge.css?v=${jsVersion}" />
+    <script type="text/javascript" src="${dojoUrl}/js/withdraw.js?v=${jsVersion}"></script>
+</head>
+<body>
+<#include 'include/page/head.html'/>
+<!--内容区-->
+<div id="main">
+    <div class="w sec_main">
+        <#include 'include/menu/account_left.html'/>
+        <div class="right_bar">
+            <div class="tabNav">
+                <ul>
+                    <li><a class="on" href="${basePath}/account/withdraw.htm">我要提现</a> </li>
+                    <li><a href="${basePath}/account/bankcard.htm">银行卡管理</a> </li>
+                    <li><a href="${basePath}/account/hiswithdraw.htm">提现记录</a> </li>
+                </ul>
+            </div>
+            <div class="takeCash bankcard">
+                <form id="withdrawForm">
+                    <dl class="clearFix formgroup">
+                        <dt>可用余额</dt>
+                        <dd><i class="orange bold">${formatAmount(balance.avalaibleAmount - balance.freezeAmount, 2, "", 1)}</i>元</dd>
+                    </dl>
+                    <dl class="clear_fix formgroup" style="position: relative">
+                        <dt class="attachTip noticeTip rechargeNumCh" id="cNumCh"></dt>
+                        <dt>提现金额</dt>
+                        <dd class="inputBox"><input maxlength="8" type="text" autocomplete="off" class="textInput" id="cNum" validateType="empty:请填写提现金额 money min:100" /><label for="cNum">元</label></dd>
+                    </dl>
+                    <dl class="clear_fix formgroup">
+                        <dt>银行卡</dt>
+                        <#if card??>
+                            <dd class="mycard"><img src="${imgUrl}/${card.bankNo}.jpg"> 尾号 <b class="bold black">${card.bankCardNo?substring(card.bankCardNo?length-4,card.bankCardNo?length)}</b></dd>
+                            <#else>
+                                <dd>您没有<a href="/account/bankcard.htm">绑定银行卡</a>，无法提现</dd>
+                        </#if>
+                    </dl>
+                    <dl class="clear_fix formgroup">
+                        <dt>安全密码</dt>
+                        <dd class="actionBox"><input type="password" id="pwd" class="textInput" validateType="empty:请填写安全密码 len:6:16 password" maxlength="20"/><span id="eyes"></span></dd>
+                    </dl>
+                    <#if (balance.avalaibleAmount - balance.freezeAmount) gte 10000 && card??>
+                        <a href="javascript:void(0);" class="btn btn_red" id="withdrawSubmit">确认提现</a>
+                    <#else>
+                        <a href="javascript:void(0);" class="btn disable">确认提现</a>
+                        <#if (balance.avalaibleAmount - balance.freezeAmount) lte 10000>
+                            <span class="error">可用余额小于100元</span>
+                        </#if>
+                    </#if>
+                    <script type="text/javascript">cansee('eyes');</script>
+                </form>
+                <div style="margin-top: 20px;">
+                    <p style="line-height: 30px;">1. 工作日17:30之前的提现一般当天可以到账；</p>
+                    <p style="line-height: 30px;">2. 工作日17:30之后以及非工作日的提现，将在下一个工作日到账；</p>
+                    <p style="line-height: 30px;">3. 5万以上提现到账较慢，如果您需要快速到账，请分多笔5万以下进行提现。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<#include 'include/page/foot.html'/>
+</body>
+</html>

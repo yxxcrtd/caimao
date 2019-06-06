@@ -1,0 +1,14 @@
+ <article class="wrapper bg-white">
+<!--顶部导航-->
+
+<div class="am-header" id="header" style="display: none;">
+<#if goBack ??> <#else><a id="go_back" class="header-Link header-leftLink"><i class="am-icon-arrow-left"></i></a></#if>
+<h1>${header}</h1>
+
+ <#if repayButton ??> <@repayButton /></#if>
+
+</div>
+
+<#if headerContent ??> <@headerContent/></#if>
+<!--顶部导航-->
+ </article>

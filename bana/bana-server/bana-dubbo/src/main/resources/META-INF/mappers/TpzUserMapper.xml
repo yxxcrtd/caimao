@@ -1,0 +1,995 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="TpzUser">
+    <resultMap id="BaseResultMap" type="com.caimao.bana.api.entity.TpzUserEntity">
+        <id column="user_id" property="userId" jdbcType="BIGINT"/>
+        <result column="user_name" property="userName" jdbcType="VARCHAR"/>
+        <result column="user_real_name" property="userRealName" jdbcType="VARCHAR"/>
+        <result column="user_nick_name" property="userNickName" jdbcType="VARCHAR"/>
+        <result column="user_grade" property="userGrade" jdbcType="DECIMAL"/>
+        <result column="user_score" property="userScore" jdbcType="INTEGER"/>
+        <result column="user_pwd" property="userPwd" jdbcType="VARCHAR"/>
+        <result column="user_pwd_strength" property="userPwdStrength" jdbcType="CHAR"/>
+        <result column="pwd_salt_key" property="pwdSaltKey" jdbcType="VARCHAR"/>
+        <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="mobile" property="mobile" jdbcType="VARCHAR"/>
+        <result column="idcard_kind" property="idcardKind" jdbcType="CHAR"/>
+        <result column="idcard" property="idcard" jdbcType="VARCHAR"/>
+        <result column="user_address" property="userAddress" jdbcType="VARCHAR"/>
+        <result column="register_datetime" property="registerDatetime" jdbcType="TIMESTAMP"/>
+        <result column="register_ip" property="registerIp" jdbcType="VARCHAR"/>
+        <result column="last_login_datetime" property="lastLoginDatetime" jdbcType="TIMESTAMP"/>
+        <result column="last_login_ip" property="lastLoginIp" jdbcType="VARCHAR"/>
+        <result column="login_count" property="loginCount" jdbcType="INTEGER"/>
+        <result column="user_status" property="userStatus" jdbcType="CHAR"/>
+        <result column="error_count" property="errorCount" jdbcType="INTEGER"/>
+        <result column="is_trust" property="isTrust" jdbcType="CHAR"/>
+        <result column="user_init" property="userInit" jdbcType="VARCHAR"/>
+        <result column="user_kind" property="userKind" jdbcType="VARCHAR"/>
+        <result column="ref_user_id" property="refUserId" jdbcType="BIGINT"/>
+        <result column="caimao_id" property="caimaoId" jdbcType="BIGINT"/>
+        <result column="huobi_uid" property="huobiUid" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        user_id, user_name, user_real_name, user_nick_name, user_grade, user_score, user_pwd,
+        user_pwd_strength, pwd_salt_key, email, mobile, idcard_kind, idcard, user_address, register_datetime,
+        register_ip, last_login_datetime, last_login_ip, login_count, user_status, error_count,
+        is_trust, user_init, user_kind,ref_user_id,caimao_id,huobi_uid
+    </sql>
+
+    <select id="getByCaimaoId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from tpz_user
+        WHERE caimao_id = #{caimaoId,jdbcType=BIGINT}
+    </select>
+
+    <select id="getByHuobiUid" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from tpz_user
+        WHERE huobiUid = #{huobiUid,jdbcType=BIGINT}
+    </select>
+
+    <!-- 根据用户ID来查找用户-->
+    <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from tpz_user
+        WHERE user_id = #{userId,jdbcType=BIGINT}
+    </select>
+
+    <select id="getByIdForUpdate" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from tpz_user
+        WHERE user_id = #{userId,jdbcType=BIGINT}
+    </select>
+    <!--查询手机号是否存在-->
+    <select id="isMobileExist" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from tpz_user
+        WHERE mobile = #{mobile,jdbcType=VARCHAR}
+    </select>
+    <!--查询用户名是否存在-->
+    <select id="isUserNameExist" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from tpz_user
+        WHERE user_name = #{userName,jdbcType=VARCHAR}
+    </select>
+    <!--根据手机号码或者用户名查询用户信息-->
+    <select id="queryUserByNameOrMobile" resultMap="BaseResultMap"
+            parameterType="com.caimao.bana.api.entity.TpzUserEntity">
+        select
+        <include refid="Base_Column_List"/>
+        from tpz_user
+        where mobile = #{mobile} or user_name = #{userName}
+    </select>
+    <select id="queryUserByPhone" resultMap="BaseResultMap" parameterType="com.caimao.bana.api.entity.TpzUserEntity">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM tpz_user
+        WHERE mobile = #{mobile}
+    </select>
+    <select id="queryUserBynameAndPwd" resultMap="BaseResultMap"
+            parameterType="com.caimao.bana.api.entity.TpzUserEntity">
+        select
+        <include refid="Base_Column_List"/>
+        from tpz_user
+        where user_name = #{userName} and user_pwd = #{userPwd}
+    </select>
+    <select id="queryUserBymobileAndPwd" resultMap="BaseResultMap"
+            parameterType="com.caimao.bana.api.entity.TpzUserEntity">
+        select
+        <include refid="Base_Column_List"/>
+        from tpz_user
+        where mobile = #{mobile} and user_pwd = #{userPwd}
+    </select>
+    <select id="queryUserByUserIdOrMobile" resultMap="BaseResultMap"
+            parameterType="com.caimao.bana.api.entity.TpzUserEntity">
+        select
+        <include refid="Base_Column_List"/>
+        from tpz_user
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="mobile != null and mobile != '' ">
+                AND mobile = #{mobile} OR
+            </if>
+            <if test="userId != null and userId != '' ">
+                user_id = #{userId}
+            </if>
+        </trim>
+    </select>
+    <!--查询用户信息-->
+    <select id="queryUser" resultMap="BaseResultMap" parameterType="com.caimao.bana.api.entity.TpzUserEntity">
+        select
+        <include refid="Base_Column_List"/>
+        from tpz_user
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="userName != null and userName != '' ">
+                AND user_name = #{userName}
+            </if>
+            <if test="mobile != null and mobile != '' ">
+                AND mobile = #{mobile}
+            </if>
+            <if test="userPwd != null and userPwd != '' ">
+                AND user_pwd = #{userPwd}
+            </if>
+            <if test="userId != null and userId != '' ">
+                AND user_id = #{userId}
+            </if>
+            <if test="userRealName != null and userRealName != '' ">
+                AND user_real_name = #{userRealName}
+            </if>
+            <if test="userNickName != null and userNickName != '' ">
+                AND user_nick_name = #{userNickName}
+            </if>
+            <if test="isTrust != null and isTrust != '' ">
+                AND is_trust = #{isTrust}
+            </if>
+            <if test="idcard != null and idcard != '' ">
+                AND idcard = #{idcard}
+            </if>
+            <if test="email != null and email != '' ">
+                AND email = #{email}
+            </if>
+            <if test="registerDatetimeBegin != null and registerDatetimeBegin != '' ">
+                <![CDATA[AND t.register_datetime >= #{registerDatetimeBegin}]]>
+            </if>
+            <if test="registerDatetimeEnd != null and registerDatetimeEnd != '' ">
+                <![CDATA[AND t.register_datetime <= #{registerDatetimeEnd}]]>
+            </if>
+        </trim>
+    </select>
+
+    <delete id="deleteById" parameterType="java.lang.Long">
+        delete from tpz_user
+        where user_id = #{userId,jdbcType=BIGINT}
+    </delete>
+
+    <insert id="save" parameterType="com.caimao.bana.api.entity.TpzUserEntity">
+        insert into tpz_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != 0">
+                user_id,
+            </if>
+            <if test="userName != null">
+                user_name,
+            </if>
+            <if test="userRealName != null">
+                user_real_name,
+            </if>
+            <if test="userNickName != null">
+                user_nick_name,
+            </if>
+            <if test="userGrade != null">
+                user_grade,
+            </if>
+            <if test="userScore != null">
+                user_score,
+            </if>
+            <if test="userPwd != null">
+                user_pwd,
+            </if>
+            <if test="userPwdStrength != null">
+                user_pwd_strength,
+            </if>
+            <if test="pwdSaltKey != null">
+                pwd_salt_key,
+            </if>
+            <if test="email != null">
+                email,
+            </if>
+            <if test="mobile != null">
+                mobile,
+            </if>
+            <if test="idcardKind != null">
+                idcard_kind,
+            </if>
+            <if test="idcard != null">
+                idcard,
+            </if>
+            <if test="userAddress != null">
+                user_address,
+            </if>
+            <if test="registerDatetime != null">
+                register_datetime,
+            </if>
+            <if test="registerIp != null">
+                register_ip,
+            </if>
+            <if test="lastLoginDatetime != null">
+                last_login_datetime,
+            </if>
+            <if test="lastLoginIp != null">
+                last_login_ip,
+            </if>
+            <if test="loginCount != null">
+                login_count,
+            </if>
+            <if test="userStatus != null">
+                user_status,
+            </if>
+            <if test="errorCount != null">
+                error_count,
+            </if>
+            <if test="isTrust != null">
+                is_trust,
+            </if>
+            <if test="userInit != null">
+                user_init,
+            </if>
+            <if test="userKind != null">
+                user_kind,
+            </if>
+            <if test="refUserId != null">
+                ref_user_id,
+            </if>
+            <if test="huobiUid != null">
+                huobi_uid,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != 0">
+                #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="userName != null">
+                #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="userRealName != null">
+                #{userRealName,jdbcType=VARCHAR},
+            </if>
+            <if test="userNickName != null">
+                #{userNickName,jdbcType=VARCHAR},
+            </if>
+            <if test="userGrade != null">
+                #{userGrade,jdbcType=DECIMAL},
+            </if>
+            <if test="userScore != null">
+                #{userScore,jdbcType=INTEGER},
+            </if>
+            <if test="userPwd != null">
+                #{userPwd,jdbcType=VARCHAR},
+            </if>
+            <if test="userPwdStrength != null">
+                #{userPwdStrength,jdbcType=CHAR},
+            </if>
+            <if test="pwdSaltKey != null">
+                #{pwdSaltKey,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="mobile != null">
+                #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="idcardKind != null">
+                #{idcardKind,jdbcType=CHAR},
+            </if>
+            <if test="idcard != null">
+                #{idcard,jdbcType=VARCHAR},
+            </if>
+            <if test="userAddress != null">
+                #{userAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="registerDatetime != null">
+                #{registerDatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="registerIp != null">
+                #{registerIp,jdbcType=VARCHAR},
+            </if>
+            <if test="lastLoginDatetime != null">
+                #{lastLoginDatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastLoginIp != null">
+                #{lastLoginIp,jdbcType=VARCHAR},
+            </if>
+            <if test="loginCount != null">
+                #{loginCount,jdbcType=INTEGER},
+            </if>
+            <if test="userStatus != null">
+                #{userStatus,jdbcType=CHAR},
+            </if>
+            <if test="errorCount != null">
+                #{errorCount,jdbcType=INTEGER},
+            </if>
+            <if test="isTrust != null">
+                #{isTrust,jdbcType=CHAR},
+            </if>
+            <if test="userInit != null">
+                #{userInit,jdbcType=VARCHAR},
+            </if>
+            <if test="userKind != null">
+                #{userKind,jdbcType=VARCHAR},
+            </if>
+            <if test="refUserId != null">
+                #{refUserId,jdbcType=BIGINT},
+            </if>
+            <if test="huobiUid != null">
+                #{huobiUid,jdbcType=BIGINT},
+            </if>
+        </trim>
+    </insert>
+    <!--用户登陆失败，更新用户信息表-->
+    <update id="updateLoginFail" parameterType="java.lang.Long">
+        UPDATE tpz_user
+        SET
+        error_count = error_count+1
+        WHERE
+        user_id= #{userId,jdbcType=BIGINT}
+    </update>
+    <!--用户登陆成功，更新用户信息表-->
+    <update id="updateLoginSuccess" parameterType="com.caimao.bana.api.entity.TpzUserEntity">
+        UPDATE tpz_user
+        SET
+        last_login_datetime = #{lastLoginDatetime}
+        ,last_login_ip = #{lastLoginIp}
+        ,login_count = login_count +1
+        WHERE
+        user_id= #{userId,jdbcType=BIGINT}
+    </update>
+    <!--更新用户的登陆密码-->
+    <update id="updateLoginPwd" parameterType="com.caimao.bana.api.entity.TpzUserEntity">
+        update tpz_user
+        set user_pwd = #{userPwd}
+        ,user_pwd_strength = #{userPwdStrength}
+        ,pwd_salt_key = #{pwdSaltKey}
+        where mobile = #{mobile}
+    </update>
+    <!--更新用户信息-->
+    <update id="update" parameterType="com.caimao.bana.api.entity.TpzUserEntity">
+        update tpz_user
+        <set>
+            <if test="userName != null">
+                user_name = #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="userRealName != null">
+                user_real_name = #{userRealName,jdbcType=VARCHAR},
+            </if>
+            <if test="userNickName != null">
+                user_nick_name = #{userNickName,jdbcType=VARCHAR},
+            </if>
+            <if test="userGrade != null">
+                user_grade = #{userGrade,jdbcType=DECIMAL},
+            </if>
+            <if test="userScore != null">
+                user_score = #{userScore,jdbcType=INTEGER},
+            </if>
+            <if test="userPwd != null">
+                user_pwd = #{userPwd,jdbcType=VARCHAR},
+            </if>
+            <if test="userPwdStrength != null">
+                user_pwd_strength = #{userPwdStrength,jdbcType=CHAR},
+            </if>
+            <if test="pwdSaltKey != null">
+                pwd_salt_key = #{pwdSaltKey,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                email = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="mobile != null">
+                mobile = #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="idcardKind != null">
+                idcard_kind = #{idcardKind,jdbcType=CHAR},
+            </if>
+            <if test="idcard != null">
+                idcard = #{idcard,jdbcType=VARCHAR},
+            </if>
+            <if test="userAddress != null">
+                user_address = #{userAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="registerDatetime != null">
+                register_datetime = #{registerDatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="registerIp != null">
+                register_ip = #{registerIp,jdbcType=VARCHAR},
+            </if>
+            <if test="lastLoginDatetime != null">
+                last_login_datetime = #{lastLoginDatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastLoginIp != null">
+                last_login_ip = #{lastLoginIp,jdbcType=VARCHAR},
+            </if>
+            <if test="loginCount != null">
+                login_count = #{loginCount,jdbcType=INTEGER},
+            </if>
+            <if test="userStatus != null">
+                user_status = #{userStatus,jdbcType=CHAR},
+            </if>
+            <if test="errorCount != null">
+                error_count = #{errorCount,jdbcType=INTEGER},
+            </if>
+            <if test="isTrust != null">
+                is_trust = #{isTrust,jdbcType=CHAR},
+            </if>
+            <if test="userInit != null">
+                user_init = #{userInit,jdbcType=VARCHAR},
+            </if>
+            <if test="userKind != null">
+                user_kind = #{userKind,jdbcType=VARCHAR},
+            </if>
+            <if test="huobiUid != null">
+                huobi_uid = #{huobiUid,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where user_id = #{userId,jdbcType=BIGINT}
+    </update>
+    <!--更新用户的邮箱-->
+    <update id="updateEmail" parameterType="com.caimao.bana.api.entity.TpzUserEntity">
+        UPDATE tpz_user
+        SET
+        email = #{email}
+        WHERE
+        user_id= #{userId}
+    </update>
+
+    <update id="updateScore" parameterType="com.caimao.bana.api.entity.TpzUserEntity">
+        UPDATE tpz_user
+        SET
+        user_score = #{userScore}
+        WHERE
+        user_id= #{userId}
+    </update>
+
+    <select id="refUser" resultType="java.lang.Integer" parameterType="java.lang.Long">
+        select count(1) from tpz_user t where t.ref_user_id = #{refUserId,jdbcType=BIGINT}
+    </select>
+
+    <!--获取指定用户邀请的用户，在指定的时间之后-->
+    <select id="getUserRefList" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from tpz_user t
+        where t.ref_user_id = #{userId,jdbcType=BIGINT} and register_datetime &gt;= #{date}
+    </select>
+
+    <select id="getWebUserCount" resultType="java.lang.Integer" parameterType="java.lang.Long">
+        select count(1) from tpz_user t where t.user_kind = '01'
+        <if test="value != null and value != 0">
+            and t.ref_user_id=#{value}
+        </if>
+    </select>
+
+    <select id="getUserById" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM tpz_user WHERE user_id = #{userId} FOR UPDATE
+    </select>
+
+    <update id="doChangeUserRefUserId" parameterType="hashmap">
+        UPDATE tpz_user
+        SET
+        ref_user_id = #{refUserId}
+        WHERE
+        user_id= #{userId}
+    </update>
+
+    <select id="queryUserListWithPage" resultType="com.caimao.bana.api.entity.res.FUserListRes" parameterType="com.caimao.bana.api.entity.req.FUserListReq">
+        SELECT
+        t1.user_id AS userId,
+        t1.user_name AS userName,
+        t1.user_real_name AS userRealName,
+        t1.user_nick_name AS userNickName,
+        t1.user_grade AS userGrade,
+        t1.user_score AS userScore,
+        t1.email AS email,
+        t1.mobile AS mobile,
+        t1.idcard_kind AS idcardKind,
+        t1.idcard AS idcard,
+        t1.user_address AS userAddress,
+        t1.register_datetime AS registerDatetime,
+        t1.register_ip AS registerIp,
+        t1.last_login_datetime AS lastLoginDatetime,
+        t1.last_login_ip AS lastLoginIp,
+        t1.login_count AS loginCount,
+        t1.user_status AS userStatus,
+        t1.error_count AS errorCount,
+        t1.is_trust AS isTrust,
+        t1.user_init AS userInit,
+        t1.user_kind AS userKind,
+        t1.caimao_id AS caimaoId,
+        t1.ref_user_id AS refUserId,
+        t2.gender AS gender,
+        t2.birthday AS birthday,
+        t2.user_intro AS userIntro,
+        t2.user_qq AS userQq,
+        t2.user_phone AS userPhone,
+        t2.user_photo AS userPhoto,
+        t2.user_signature AS userSignature,
+        t2.user_occupation AS userOccupation,
+        t2.user_education AS userEducation,
+        t2.invr_empiric AS invrEmpiric,
+        t2.prohi_withdraw AS prohiWithdraw
+        FROM tpz_user t1 LEFT JOIN tpz_user_ext t2 ON t1.user_id = t2.user_id
+        <where>
+            <if test="userId!=null and userId != ''"><![CDATA[ and t1.user_id=#{userId}]]></if>
+            <if test="userRealName!=null and userRealName != ''"><![CDATA[ and t1.user_real_name like concat('%', #{userRealName,jdbcType=VARCHAR}, '%')]]></if>
+            <if test="mobile!=null and mobile != ''"><![CDATA[ and t1.mobile = #{mobile}]]></if>
+            <if test="withdrawStatus!=null and withdrawStatus!=''"><![CDATA[ and t2.prohi_withdraw = #{withdrawStatus}]]></if>
+        </where>
+        <trim prefix="ORDER BY ">
+            <if test="orderColumn != null and  orderColumn != ''">
+                ${orderColumn} ${orderDir}
+            </if>
+        </trim>
+    </select>
+
+    <!-- 查询用户总数 -->
+    <select id="queryUserCount" resultType="java.lang.Integer">
+        SELECT count(1) FROM tpz_user
+    </select>
+
+    <!--根据开始时间和结束时间统计注册用户数-->
+    <select id="queryRegisterCount" resultType="java.lang.Integer" parameterType="java.util.HashMap">
+        SELECT count(1) FROM tpz_user WHERE register_datetime BETWEEN #{startDate} AND #{endDate}
+    </select>
+
+
+    <!-- 用户 -->
+    <select id="queryGjsUserStatisticsListWithPage" resultType="com.caimao.bana.api.entity.res.FUserListRes" parameterType="com.caimao.bana.api.entity.req.FUserListReq">
+        SELECT * FROM (SELECT
+            u.user_id AS userId, u.mobile AS mobile, u.register_datetime AS registerDatetime, u.register_ip AS registerIp, u.last_login_datetime AS lastLoginDatetime, u.last_login_ip AS lastLoginIp, u.ref_user_id AS refUserId
+            <if test="(null != exchange and '' != exchange) or (null != status1 and '' != status1) and (5 > status1)">, a.exchange AS exchange, a.is_sign AS isSign, a.bank_id AS bankId</if>
+        FROM tpz_user u
+            <if test="(null != exchange and '' != exchange) or (null != status1 and '' != status1) and (5 > status1)">RIGHT JOIN gjs_account a ON u.user_id = a.user_id</if>
+
+            <!-- 出入金 -->
+            <if test="null != exchange and '' != exchange">
+                <choose>
+                    <when test="'njs' == exchange and (2 == status1 or 3 == status1)">LEFT JOIN gjs_njs_history_transfer f ON a.trader_id = f.firm_id</when>
+                    <when test="'sjs' == exchange and (2 == status1 or 3 == status1)">LEFT JOIN gjs_sjs_history_transfer f ON a.trader_id = f.trader_id</when>
+                </choose>
+            </if>
+
+            <!-- 交易 -->
+            <if test="null != exchange and '' != exchange">
+                <choose>
+                    <when test="'njs' == exchange and (4 == status1)">LEFT JOIN gjs_njs_history_trade f ON a.trader_id = f.firm_id</when>
+                    <when test="'sjs' == exchange and (4 == status1)">LEFT JOIN gjs_sjs_history_trade f ON a.trader_id = f.trader_id</when>
+                </choose>
+            </if>
+
+        <where>
+            <!--全部-->
+            <if test="'' == status1">
+                <if test="null != startDate and '' != startDate"><![CDATA[AND u.register_datetime >= #{startDate}]]></if>
+                <if test="null != endDate and '' != endDate"><![CDATA[AND u.register_datetime <= #{endDate}]]></if>
+            </if>
+
+            <!-- 开户 -->
+            <if test="1 == status1">
+                <if test="null != startDate and '' != startDate"><![CDATA[AND a.create_datetime >= #{startDate}]]></if>
+                <if test="null != endDate and '' != endDate"><![CDATA[AND a.create_datetime <= #{endDate}]]></if>
+                <![CDATA[AND a.bank_id IS NOT NULL]]>
+            </if>
+
+            <!-- 未开户 -->
+            <if test="7 == status1">
+                <if test="null != startDate and '' != startDate"><![CDATA[AND a.create_datetime >= #{startDate}]]></if>
+                <if test="null != endDate and '' != endDate"><![CDATA[AND a.create_datetime <= #{endDate}]]></if>
+                <![CDATA[AND u.user_id NOT IN (SELECT user_id FROM gjs_account)]]>
+            </if>
+
+            <!-- 入金 -->
+            <if test="null != exchange and '' != exchange">
+                <if test="'njs' == exchange and 2 == status1">
+                    <if test="null != startDate and '' != startDate"><![CDATA[AND f.deal_date >= #{startDate}]]></if>
+                    <if test="null != endDate and '' != endDate"><![CDATA[AND f.deal_date <= #{endDate}]]></if>
+                    <![CDATA[AND f.change_type = 'A']]>
+                </if>
+                <if test="'sjs' == exchange and 2 == status1">
+                    <if test="null != startDate and '' != startDate"><![CDATA[AND f.exch_date >= #{startDate}]]></if>
+                    <if test="null != endDate and '' != endDate"><![CDATA[AND f.exch_date <= #{endDate}]]></if>
+                    <![CDATA[AND f.access_way = 'A']]>
+                </if>
+            </if>
+
+            <!-- 出金 -->
+            <if test="null != exchange and '' != exchange">
+                <if test="'njs' == exchange and 3 == status1">
+                    <if test="null != startDate and '' != startDate"><![CDATA[AND f.deal_date >= #{startDate}]]></if>
+                    <if test="null != endDate and '' != endDate"><![CDATA[AND f.deal_date <= #{endDate}]]></if>
+                    <![CDATA[AND f.change_type = 'B']]>
+                </if>
+                <if test="'sjs' == exchange and 3 == status1">
+                    <if test="null != startDate and '' != startDate"><![CDATA[AND f.exch_date >= #{startDate}]]></if>
+                    <if test="null != endDate and '' != endDate"><![CDATA[AND f.exch_date <= #{endDate}]]></if>
+                    <![CDATA[AND f.access_way = 'B']]>
+                </if>
+            </if>
+
+            <!-- 交易 -->
+            <if test="null != exchange and '' != exchange">
+                <if test="'njs' == exchange and 4 == status1">
+                    <if test="null != startDate and '' != startDate"><![CDATA[AND f.date >= #{startDate}]]></if>
+                    <if test="null != endDate and '' != endDate"><![CDATA[AND f.date <= #{endDate}]]></if>
+                    <![CDATA[AND f.firm_id IS NOT NULL]]>
+                </if>
+                <if test="'sjs' == exchange and 4 == status1">
+                    <if test="null != startDate and '' != startDate"><![CDATA[AND f.exch_date >= #{startDate}]]></if>
+                    <if test="null != endDate and '' != endDate"><![CDATA[AND f.exch_date <= #{endDate}]]></if>
+                    <![CDATA[AND f.trader_id IS NOT NULL]]>
+                </if>
+            </if>
+
+            <if test="null != exchange and '' != exchange"><![CDATA[AND a.exchange = #{exchange}]]></if>
+            <if test="null != refUserId and '' != refUserId"><![CDATA[AND u.ref_user_id like concat('%', #{refUserId}, '%')]]></if>
+        </where>
+
+        <!-- 出入金 -->
+        <if test="null != exchange and '' != exchange and (2 == status1 or 3 == status1 or 4 == status1)">GROUP BY u.user_id</if>
+
+        <trim prefix="ORDER BY ">
+            <if test="orderColumn != null and  orderColumn != ''">
+                ${orderColumn} ${orderDir}
+            </if>
+        </trim>
+        ) AS t
+    </select>
+
+    <!-- 开户 -->
+    <select id="queryGjsUserOpenAccountStatisticsListWithPage" resultType="com.caimao.bana.api.entity.res.FUserListRes" parameterType="com.caimao.bana.api.entity.req.FUserListReq">
+        SELECT * FROM (SELECT
+            a.user_id AS userId, a.exchange AS exchange1, a.real_name AS userRealName, a.bank_id AS bankId, a.bank_card AS bankCard, a.create_datetime AS createDatetime,
+            u.mobile AS mobile, u.ref_user_id AS refUserId
+        FROM tpz_user u
+
+            RIGHT JOIN gjs_account a ON u.user_id = a.user_id
+
+            <!-- 出入金 -->
+            <choose>
+                <when test="'njs' == exchange and (2 == status1 or 3 == status1)">LEFT JOIN gjs_njs_history_transfer f ON a.trader_id = f.firm_id</when>
+                <when test="'sjs' == exchange and (2 == status1 or 3 == status1)">LEFT JOIN gjs_sjs_history_transfer f ON a.trader_id = f.trader_id</when>
+            </choose>
+
+            <!-- 交易 -->
+            <choose>
+                <when test="'njs' == exchange and (4 == status1)">LEFT JOIN gjs_njs_history_trade f ON a.trader_id = f.firm_id</when>
+                <when test="'sjs' == exchange and (4 == status1)">LEFT JOIN gjs_sjs_history_trade f ON a.trader_id = f.trader_id</when>
+            </choose>
+
+            <where>
+                <!-- 全部（即：开户）-->
+                <if test="'' == status1 or 1 == status1">
+                    <if test="null != startDate and '' != startDate"><![CDATA[AND a.create_datetime >= #{startDate}]]></if>
+                    <if test="null != endDate and '' != endDate"><![CDATA[AND a.create_datetime <= #{endDate}]]></if>
+                    <![CDATA[AND a.bank_id IS NOT NULL]]>
+                </if>
+
+                <!-- 入金 -->
+                <if test="'njs' == exchange and 2 == status1">
+                    <if test="null != startDate and '' != startDate"><![CDATA[AND f.deal_date >= #{startDate}]]></if>
+                    <if test="null != endDate and '' != endDate"><![CDATA[AND f.deal_date <= #{endDate}]]></if>
+                    <![CDATA[AND f.change_type = 'A']]>
+                </if>
+                <if test="'sjs' == exchange and 2 == status1">
+                    <if test="null != startDate and '' != startDate"><![CDATA[AND f.exch_date >= #{startDate}]]></if>
+                    <if test="null != endDate and '' != endDate"><![CDATA[AND f.exch_date <= #{endDate}]]></if>
+                    <![CDATA[AND f.access_way = 'A']]>
+                </if>
+
+                <!-- 出金 -->
+                <if test="'njs' == exchange and 3 == status1">
+                    <if test="null != startDate and '' != startDate"><![CDATA[AND f.deal_date >= #{startDate}]]></if>
+                    <if test="null != endDate and '' != endDate"><![CDATA[AND f.deal_date <= #{endDate}]]></if>
+                    <![CDATA[AND f.change_type = 'B']]>
+                </if>
+                <if test="'sjs' == exchange and 3 == status1">
+                    <if test="null != startDate and '' != startDate"><![CDATA[AND f.exch_date >= #{startDate}]]></if>
+                    <if test="null != endDate and '' != endDate"><![CDATA[AND f.exch_date <= #{endDate}]]></if>
+                    <![CDATA[AND f.access_way = 'B']]>
+                </if>
+
+                <!-- 交易 -->
+                <if test="'njs' == exchange and 4 == status1">
+                    <if test="null != startDate and '' != startDate"><![CDATA[AND f.date >= #{startDate}]]></if>
+                    <if test="null != endDate and '' != endDate"><![CDATA[AND f.date <= #{endDate}]]></if>
+                    <![CDATA[AND f.firm_id IS NOT NULL]]>
+                </if>
+                <if test="'sjs' == exchange and 4 == status1">
+                    <if test="null != startDate and '' != startDate"><![CDATA[AND f.exch_date >= #{startDate}]]></if>
+                    <if test="null != endDate and '' != endDate"><![CDATA[AND f.exch_date <= #{endDate}]]></if>
+                    <![CDATA[AND f.trader_id IS NOT NULL]]>
+                </if>
+
+                <if test="null != exchange and '' != exchange"><![CDATA[AND a.exchange = #{exchange}]]></if>
+                <if test="null != refUserId and '' != refUserId"><![CDATA[AND u.ref_user_id like concat('%', #{refUserId}, '%')]]></if>
+            </where>
+
+            <!-- 出入金 -->
+            <if test="2 == status1 or 3 == status1 or 4 == status1">GROUP BY u.user_id</if>
+
+            <trim prefix="ORDER BY ">
+                <if test="orderColumn != null and  orderColumn != ''">
+                    ${orderColumn} ${orderDir}
+                </if>
+            </trim>
+        ) AS t
+    </select>
+
+
+    <!-- 交易 -->
+    <select id="queryGjsUserTradeStatisticsListWithPage" resultType="com.caimao.bana.api.entity.res.FUserListRes" parameterType="com.caimao.bana.api.entity.req.FUserListReq">
+        SELECT * FROM (SELECT
+            u.user_id AS userId,
+            a.real_name AS userRealName,
+            u.mobile AS mobile,
+            u.ref_user_id AS refUserId,
+            a.exchange AS exchange1
+            <choose>
+                <when test="'njs' == exchange and (1 == status1 or 4 == status1)">, SUM(f.cont_qty) AS njsTotalMoney</when>
+                <when test="'njs' == exchange and (2 == status1 or 3 == status1)">, SUM(f.change_money) AS njsTotalMoney</when>
+                <when test="'sjs' == exchange and (1 == status1 or 4 == status1)">, SUM(f.exch_bal) AS sjsTotalMoney</when>
+                <when test="'sjs' == exchange and (2 == status1 or 3 == status1)">, SUM(f.exch_bal) AS sjsTotalMoney</when>
+            </choose>
+            <choose>
+                <when test="'njs' == exchange and (2 == status1 or 3 == status1)">, f.deal_date AS dealDate</when>
+                <when test="'njs' == exchange">, f.date AS dealDate</when>
+                <when test="'sjs' == exchange">, f.exch_date AS dealDate</when>
+            </choose>
+
+            FROM tpz_user u RIGHT JOIN gjs_account a ON u.user_id = a.user_id
+
+            <!-- 全部（即：交易） -->
+            <choose>
+                <when test="'njs' == exchange and (null == status1 or '' == status1 or 1 == status1 or 4 == status1)">LEFT JOIN gjs_njs_history_trade f ON a.trader_id = f.firm_id</when>
+                <when test="'sjs' == exchange and (null == status1 or '' == status1 or 1 == status1 or 4 == status1)">LEFT JOIN gjs_sjs_history_trade f ON a.trader_id = f.trader_id</when>
+            </choose>
+
+            <!-- 出入金 -->
+            <choose>
+                <when test="'njs' == exchange and (2 == status1 or 3 == status1)">LEFT JOIN gjs_njs_history_transfer f ON a.trader_id = f.firm_id</when>
+                <when test="'sjs' == exchange and (2 == status1 or 3 == status1)">LEFT JOIN gjs_sjs_history_transfer f ON a.trader_id = f.trader_id</when>
+            </choose>
+
+            <where>
+                <!-- 全部（即：交易）-->
+                <if test="'njs' == exchange and (null == status1 or '' == status1 or 4 == status1)">
+                    <if test="null != startDate and '' != startDate"><![CDATA[AND f.date >= #{startDate}]]></if>
+                    <if test="null != endDate and '' != endDate"><![CDATA[AND f.date <= #{endDate}]]></if>
+                    <![CDATA[AND f.firm_id IS NOT NULL]]>
+                </if>
+                <if test="'sjs' == exchange and (null == status1 or '' == status1 or 4 == status1)">
+                    <if test="null != startDate and '' != startDate"><![CDATA[AND f.exch_date >= #{startDate}]]></if>
+                    <if test="null != endDate and '' != endDate"><![CDATA[AND f.exch_date <= #{endDate}]]></if>
+                    <![CDATA[AND f.trader_id IS NOT NULL]]>
+                </if>
+
+                <!-- 开户 -->
+                <if test="1 == status1">
+                    <if test="null != startDate and '' != startDate"><![CDATA[AND a.create_datetime >= #{startDate}]]></if>
+                    <if test="null != endDate and '' != endDate"><![CDATA[AND a.create_datetime <= #{endDate}]]></if>
+                    <![CDATA[AND a.bank_id IS NOT NULL]]>
+                </if>
+
+                <!-- 入金 -->
+                <if test="'njs' == exchange and 2 == status1">
+                    <if test="null != startDate and '' != startDate"><![CDATA[AND f.deal_date >= #{startDate}]]></if>
+                    <if test="null != endDate and '' != endDate"><![CDATA[AND f.deal_date <= #{endDate}]]></if>
+                    <![CDATA[AND f.change_type = 'A']]>
+                </if>
+                <if test="'sjs' == exchange and 2 == status1">
+                    <if test="null != startDate and '' != startDate"><![CDATA[AND f.exch_date >= #{startDate}]]></if>
+                    <if test="null != endDate and '' != endDate"><![CDATA[AND f.exch_date <= #{endDate}]]></if>
+                    <![CDATA[AND f.access_way = 'A']]>
+                </if>
+
+                <!-- 出金 -->
+                <if test="'njs' == exchange and 3 == status1">
+                    <if test="null != startDate and '' != startDate"><![CDATA[AND f.deal_date >= #{startDate}]]></if>
+                    <if test="null != endDate and '' != endDate"><![CDATA[AND f.deal_date <= #{endDate}]]></if>
+                    <![CDATA[AND f.change_type = 'B']]>
+                </if>
+                <if test="'sjs' == exchange and 3 == status1">
+                    <if test="null != startDate and '' != startDate"><![CDATA[AND f.exch_date >= #{startDate}]]></if>
+                    <if test="null != endDate and '' != endDate"><![CDATA[AND f.exch_date <= #{endDate}]]></if>
+                    <![CDATA[AND f.access_way = 'B']]>
+                </if>
+
+                <if test="null != exchange and '' != exchange"><![CDATA[AND a.exchange = #{exchange}]]></if>
+                <if test="null != refUserId and '' != refUserId"><![CDATA[AND u.ref_user_id like concat('%', #{refUserId}, '%')]]></if>
+            </where>
+
+            GROUP BY u.user_id,
+                <choose>
+                    <when test="'njs' == exchange and (2 == status1 or 3 == status1)">f.deal_date</when>
+                    <when test="'njs' == exchange">f.date</when>
+                    <when test="'sjs' == exchange">f.exch_date</when>
+                </choose>
+
+            ORDER BY
+                <choose>
+                    <when test="'njs' == exchange and (2 == status1 or 3 == status1)">f.deal_date</when>
+                    <when test="'njs' == exchange">f.date</when>
+                    <when test="'sjs' == exchange">f.exch_date</when>
+                </choose>
+            DESC
+        ) AS t
+    </select>
+
+
+    <!-- 资金 -->
+    <select id="queryGjsUserMoneyStatisticsListWithPage" resultType="com.caimao.bana.api.entity.res.FUserListRes" parameterType="com.caimao.bana.api.entity.req.FUserListReq">
+        SELECT * FROM (SELECT
+            u.user_id AS userId,
+            a.real_name AS userRealName,
+            <choose>
+                <when test="1 == status1 or 4 == status1">a.create_datetime AS createDatetime,</when>
+            </choose>
+            u.mobile AS mobile,
+            u.ref_user_id AS refUserId,
+            a.exchange AS exchange1
+            <choose>
+                <when test="'njs' == exchange and (1 == status1 or 4 == status1)">, SUM(f.cont_qty) AS njsTotalMoney</when>
+                <when test="'njs' == exchange and (null == status1 or '' == status1 or 2 == status1 or 3 == status1)">, SUM(f.change_money) AS njsTotalMoney</when>
+                <when test="'sjs' == exchange and (1 == status1 or 4 == status1)">, SUM(f.exch_bal) AS sjsTotalMoney</when>
+                <when test="'sjs' == exchange and (null == status1 or '' == status1 or 2 == status1 or 3 == status1)">, SUM(f.exch_bal) AS sjsTotalMoney</when>
+            </choose>
+            <choose>
+                <when test="'njs' == exchange and (2 == status1 or 3 == status1)">, f.deal_date AS dealDate</when>
+                <when test="'njs' == exchange and (1 == status1 or 4 == status1)">, f.date AS dealDate</when>
+                <when test="'njs' == exchange">, f.deal_date AS dealDate</when>
+                <when test="'sjs' == exchange">, f.exch_date AS dealDate</when>
+            </choose>
+            <choose>
+                <when test="'njs' == exchange and (1 == status1 or 4 == status1)">, f.buy_or_sal AS changeType</when>
+                <when test="'njs' == exchange and (null == status1 or '' == status1 or 2 == status1 or 3 == status1)">, f.change_type AS changeType</when>
+                <when test="'sjs' == exchange and (null == status1 or '' == status1 or 2 == status1 or 3 == status1)">, f.access_way AS changeType</when>
+                <when test="'sjs' == exchange and (1 == status1 or 4 == status1)">, f.bs AS changeType</when>
+            </choose>
+
+        FROM tpz_user u RIGHT JOIN gjs_account a ON u.user_id = a.user_id
+
+            <!-- 全部（即：出入金） -->
+            <choose>
+                <when test="'njs' == exchange and (null == status1 or '' == status1 or 2 == status1 or 3 == status1)">LEFT JOIN gjs_njs_history_transfer f ON a.trader_id = f.firm_id</when>
+                <when test="'sjs' == exchange and (null == status1 or '' == status1 or 2 == status1 or 3 == status1)">LEFT JOIN gjs_sjs_history_transfer f ON a.trader_id = f.trader_id</when>
+            </choose>
+
+            <!-- 交易 -->
+            <choose>
+                <when test="'njs' == exchange and (1 == status1 or 4 == status1)">LEFT JOIN gjs_njs_history_trade f ON a.trader_id = f.firm_id</when>
+                <when test="'sjs' == exchange and (1 == status1 or 4 == status1)">LEFT JOIN gjs_sjs_history_trade f ON a.trader_id = f.trader_id</when>
+            </choose>
+
+        <where>
+            <!-- 入金 -->
+            <if test="'njs' == exchange and 2 == status1">
+                <if test="null != startDate and '' != startDate"><![CDATA[AND f.deal_date >= #{startDate}]]></if>
+                <if test="null != endDate and '' != endDate"><![CDATA[AND f.deal_date <= #{endDate}]]></if>
+                <![CDATA[AND f.change_type = 'A']]>
+            </if>
+            <if test="'sjs' == exchange and 2 == status1">
+                <if test="null != startDate and '' != startDate"><![CDATA[AND f.exch_date >= #{startDate}]]></if>
+                <if test="null != endDate and '' != endDate"><![CDATA[AND f.exch_date <= #{endDate}]]></if>
+                <![CDATA[AND f.access_way = 'A']]>
+            </if>
+
+            <!-- 出金 -->
+            <if test="'njs' == exchange and 3 == status1">
+                <if test="null != startDate and '' != startDate"><![CDATA[AND f.deal_date >= #{startDate}]]></if>
+                <if test="null != endDate and '' != endDate"><![CDATA[AND f.deal_date <= #{endDate}]]></if>
+                <![CDATA[AND f.change_type = 'B']]>
+            </if>
+            <if test="'sjs' == exchange and 3 == status1">
+                <if test="null != startDate and '' != startDate"><![CDATA[AND f.exch_date >= #{startDate}]]></if>
+                <if test="null != endDate and '' != endDate"><![CDATA[AND f.exch_date <= #{endDate}]]></if>
+                <![CDATA[AND f.access_way = 'B']]>
+            </if>
+
+            <if test="'njs' == exchange and (null == status1 or '' == status1 or 4 == status1)">
+                <if test="null != startDate and '' != startDate"><![CDATA[AND f.deal_date >= #{startDate}]]></if>
+                <if test="null != endDate and '' != endDate"><![CDATA[AND f.deal_date <= #{endDate}]]></if>
+                <![CDATA[AND f.firm_id IS NOT NULL]]>
+            </if>
+            <if test="'sjs' == exchange and (null == status1 or '' == status1 or 4 == status1)">
+                <if test="null != startDate and '' != startDate"><![CDATA[AND f.exch_date >= #{startDate}]]></if>
+                <if test="null != endDate and '' != endDate"><![CDATA[AND f.exch_date <= #{endDate}]]></if>
+                <![CDATA[AND f.trader_id IS NOT NULL]]>
+            </if>
+
+            <!-- 开户 -->
+            <if test="1 == status1">
+                <if test="null != startDate and '' != startDate"><![CDATA[AND a.create_datetime >= #{startDate}]]></if>
+                <if test="null != endDate and '' != endDate"><![CDATA[AND a.create_datetime <= #{endDate}]]></if>
+                <![CDATA[AND a.bank_id IS NOT NULL]]>
+            </if>
+
+            <if test="null != exchange and '' != exchange"><![CDATA[AND a.exchange = #{exchange}]]></if>
+            <if test="null != refUserId and '' != refUserId"><![CDATA[AND u.ref_user_id like concat('%', #{refUserId}, '%')]]></if>
+        </where>
+
+            GROUP BY u.user_id,
+                <choose>
+                    <when test="'njs' == exchange and (2 == status1 or 3 == status1)">f.deal_date</when>
+                    <when test="'njs' == exchange and (1 == status1 or 4 == status1)">f.date</when>
+                    <when test="'njs' == exchange">f.deal_date</when>
+                    <when test="'sjs' == exchange">f.exch_date</when>
+                </choose>
+
+            ORDER BY
+                <choose>
+                    <when test="'njs' == exchange and (null == status1 or '' == status1 or 2 == status1 or 3 == status1)">f.deal_date</when>
+                    <when test="'njs' == exchange and (1 == status1 or 4 == status1)">f.date</when>
+                    <when test="'sjs' == exchange">f.exch_date</when>
+                </choose>
+            DESC
+        ) AS t
+    </select>
+
+
+
+
+
+    <!-- 转化-->
+    <select id="queryGjsUserTransformStatisticsListWithPage" resultType="com.caimao.bana.api.entity.res.FUserListRes" parameterType="com.caimao.bana.api.entity.req.FUserListReq">
+        SELECT * FROM (SELECT
+        u.user_id AS userId,
+        a.real_name AS userRealName,
+        u.mobile AS mobile,
+        u.ref_user_id AS refUserId,
+        a.exchange AS exchange1,
+        <choose>
+            <when test="'njs' == exchange and (null == status1 or '' == status1 or 2 == status1 or 3 == status1)">SUM(f.change_money) AS njsTotalMoney,</when>
+            <when test="'sjs' == exchange and (null == status1 or '' == status1 or 1 == status1 or 4 == status1)">SUM(f.exch_bal) AS sjsTotalMoney,</when>
+        </choose>
+        f.deal_date AS dealDate,
+        f.change_type AS changeType
+        FROM tpz_user u
+
+        RIGHT JOIN gjs_account a ON u.user_id = a.user_id
+
+        <!-- 出入金 -->
+        <choose>
+            <when test="'njs' == exchange and (null == status1 or '' == status1 or 2 == status1 or 3 == status1)">LEFT JOIN gjs_njs_history_transfer f ON a.trader_id = f.firm_id</when>
+            <when test="'sjs' == exchange and (null == status1 or '' == status1 or 2 == status1 or 3 == status1)">LEFT JOIN gjs_sjs_history_transfer f ON a.trader_id = f.trader_id</when>
+        </choose>
+
+        <!-- 交易 -->
+        <choose>
+            <when test="'njs' == exchange and (4 == status1)">LEFT JOIN gjs_njs_history_trade f ON a.trader_id = f.firm_id</when>
+            <when test="'sjs' == exchange and (4 == status1)">LEFT JOIN gjs_sjs_history_trade f ON a.trader_id = f.trader_id</when>
+        </choose>
+
+
+
+
+        <where>
+            <if test="null != startDate and '' != startDate"><![CDATA[AND u.register_datetime >= #{startDate}]]></if>
+            <if test="null != endDate and '' != endDate"><![CDATA[AND u.register_datetime <= #{endDate}]]></if>
+            <if test="null != exchange and '' != exchange"><![CDATA[AND a.exchange = #{exchange}]]></if>
+            <if test="null != refUserId and '' != refUserId"><![CDATA[AND u.ref_user_id like concat('%', #{refUserId}, '%')]]></if>
+            <if test="null != bankId and '' != bankId"><![CDATA[AND a.bank_id IS NOT NULL]]></if>
+            <if test="null != changeType and '' != changeType"><![CDATA[AND f.change_type = #{changeType}]]></if>
+        </where>
+        GROUP BY u.user_id
+        ORDER BY f.deal_date DESC
+
+        ) AS t
+    </select>
+
+</mapper>

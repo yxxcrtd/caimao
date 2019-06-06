@@ -1,0 +1,119 @@
+<#include "home/config.html"/>
+<#include "home/include/head.html"/>
+    <title>注册财猫账户</title>
+</head>
+
+<body>
+<!--头部-->
+<div class="header">
+    <#include "home/include/topNav.html" />
+    <div class="nav">
+        <div class="w">
+            <h1 class="left">
+                <a href="/"></a>
+                <b>欢迎注册</b>
+            </h1>
+        </div>
+    </div>
+</div>
+<!--内容区-->
+<!--注册第一步-->
+<div id="reg1">
+<div class="main login_bg">
+    <div class="w clearfix">
+        <div class="login" id="regBox">
+            <div class="tit">
+                <b class="f_l">手机注册</b>
+                <span class="f_r">已有账户？<a href="/user/login.html">直接登录</a></span>
+            </div>
+            <div class="col">
+                <input class="input" type="text" placeholder="请输入手机号" />
+            </div>
+            <div class="col">
+                <input class="input input_tu_verify" type="text" id="captcha"/> <img src="/captcha" id="captchaPic" width="80" height="30" alt=""/>
+            </div>
+            <div class="col clearfix">
+                <input class="input input_verify" type="text" placeholder="请输入短信获取验证码" />
+                <button class="verify" type="button" id="getMobCode">获取验证码</button>
+            </div>
+            <div class="hidden" id="notice1"><i class="icons"></i>你输入的手机号有误，请重新输入。</div>
+            <div class="col"><button type="submit" class="btn" id="regBtn">注册</button></div>
+            <div class="col" style="display: none;">
+                <label><input type="checkbox" checked>我已阅读并同意 <a href="javascript:void(0);">《财猫网用户协议》</a></label>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="login_down w">
+    <ul>
+        <li>
+            <i class="icon_01"></i>
+            <p>
+                <b>交易品种多</b>财猫网不断的丰富交易品种
+            </p>
+        </li>
+        <li>
+            <i class="icon_02"></i>
+            <p>
+                <b>交易成本低</b>财猫网不断的降低交易成本
+            </p>
+        </li>
+        <li>
+            <i class="icon_03"></i>
+            <p>
+                <b>交易效率高</b>财猫网不断的提升交易效率
+            </p>
+        </li>
+    </ul>
+</div>
+</div>
+
+<!--重置登录密码第二步-->
+<div class="main" id="reg2" style="display:none">
+    <div class="w">
+        <div class="setMain">
+            <div class="setMainTit">设置财猫密码</div>
+            <div class="setMainIn">
+                <p class="setMainInTit"><i class="icons icon_info"></i>定期更换密码可以让你的账户更加安全。建议密码采用字母和数字混合，并且不短于6位。</p>
+                    <div class="group">
+                        <div class="col_1">密码</div>
+                        <div class="col_2"><input type="password" placeholder="请输入密码" /></div>
+                    </div>
+                    <div class="group">
+                        <div class="col_1">确认密码</div>
+                        <div class="col_2"><input type="password" placeholder="请再次输入密码" /></div>
+                    </div>
+                    <div class="hidden" id="notice2"> <i class="icons"></i>你输入的密码有误，请重新输入。 </div>
+                    <div class="group">
+                        <div class="col_1"></div>
+                        <div class="col_2"><button type="submit" class="btn" id="submit">确认提交</button></div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--注册成功-->
+<div class="main" id="reg3" style="display:none;">
+    <div class="w">
+        <div class="setMain">
+            <div class="setMainSuccess">
+                <div class="setMainSuccessTop clearfix">
+                    <div class="left f_l"><i class="icons icon_compete"></i>恭喜您，财猫注册成功！</div>
+                    <div class="right f_r">
+                        <a href="${gjsUrl}/gjs/openAccount.html"><i class="icons"></i>贵金属开户</a>
+                        <a href="${ybkUrl}/ybk/open_account.html"><i class="icons"></i>邮币卡开户</a>
+                    </div>
+                </div>
+                <div class="setMainSuccessFoot">
+                    <a href="/user/account.html">返回账户中心</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    reg();
+</script>
+<#include "home/include/foot.html" />

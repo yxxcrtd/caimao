@@ -1,0 +1,47 @@
+
+<#include 'mobile/layout/layout.html'/>
+
+ <#macro content>
+ 	    <script type="text/javascript">
+        $(function () {
+            var curr = new Date().getFullYear();
+            var opt = {
+
+            }
+
+            opt.date = {preset : 'date'};
+	opt.datetime = { preset : 'datetime', minDate: new Date(2012,3,10,9,22), maxDate: new Date(2014,7,30,15,44), stepMinute: 5  };
+	opt.time = {preset : 'time'};
+	opt.tree_list = {preset : 'list', labels: ['Region', 'Country', 'City']};
+	opt.image_text = {preset : 'list', labels: ['Cars']};
+	opt.select = {preset : 'select'};
+	<!--Script-->
+
+           /*  $('select.changes').bind('change', function() {
+                var demo = $('#demo').val();
+                $(".demos").hide();
+                if (!($("#demo_"+demo).length))
+                    demo = 'default';
+
+                $("#demo_" + demo).show();
+                $('#test_'+demo).val('').scroller('destroy').scroller($.extend(opt[$('#demo').val()], { theme: $('#theme').val(), mode: $('#mode').val(), display: $('#display').val(), lang: $('#language').val() }));
+            });
+
+            $('#demo').trigger('change');
+     */
+     
+     		$("#test_default").scroller('destroy').scroller({
+     			preset:"date",
+	     		 theme: 'default', //皮肤样式
+	             display: 'modal', //显示方式 
+	             mode: 'scroller', //日期选择模式
+	             dateFormat: 'yy-mm-dd', // 日期格式
+	             lang:'chinese',
+	             dateOrder: 'yymmdd', //面板中日期排列格式
+	             endYear:2030 //结束年份
+     		});
+        });
+    </script>
+ 
+            <input type="text" name="test_default" id="test_default" />
+ </#macro>

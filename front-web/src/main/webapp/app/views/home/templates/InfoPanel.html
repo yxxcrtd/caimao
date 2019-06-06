@@ -1,0 +1,68 @@
+<div>
+    <div class="line l-user">
+        <div class="l-user-l">
+            <a href="${baseUrl}/user/avatar.htm">
+            <div class="home-avator-wrapper img-zoom-up">
+                <img data-dojo-attach-point="avatarNode" src="${dojoUrl}app/resources/image/bosheng/avatar-img.jpg"
+                                                          style="width: 80px;height: 80px;"></div></a>
+
+            <div class="txt">
+                <em class="to-greet" data-dojo-attach-point="greetNode"></em><span class="user-grade">Lv<span data-dojo-attach-point="gradeNode"></span></span><br>
+                <div data-dojo-attach-point="sucurityNode"></div>
+
+                <div data-dojo-attach-point="userStatusNode" class="d-user-status">
+                    <i data-dojo-attach-point="mobileNode" class="fa fa-mobile-phone"></i>
+                    <i data-dojo-attach-point="userRealNameNode" class="fa fa-male"></i>
+                    <i data-dojo-attach-point="bankcardNode" class="fa fa-credit-card"></i>
+                    <i data-dojo-attach-point="tradePwdNode" class="fa fa-lock"></i>
+                </div>
+
+            </div>
+            <div class="v-line-dashed"></div>
+        </div>
+        <div class="l-user-r">
+            <div class="txt">
+                <span class="name">可用余额</span><br>
+                <span class="num"><em data-dojo-attach-point="avalaibleAmountNode">0.00</em>元</span>
+            </div>
+            <div class="btn">
+                <a href="${baseUrl}/account/recharge.htm" target="_blank" style="margin-bottom: 8px;"><div data-dojo-attach-point="rechangeBtnNode"></div></a>
+                <a href="${baseUrl}/account/withdraw.htm" target="_blank"><div data-dojo-attach-point="withdrawBtnNode"></div></a>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div class="line l-money">
+        <ul>
+            <li>
+                <div class="txt">
+                    <span class="name">借款总额</span><br>
+                    <span class="num" ><em data-dojo-attach-point="loanAmountNode">0.00</em>元</span>
+                </div>
+                <i class="v-line-dashed"></i>
+            </li>
+            <li>
+                <div class="txt">
+                    <span class="name">保证金总额</span><br>
+                    <span class="num"><em data-dojo-attach-point="totalCashAmountNode">0.00</em>元</span>
+                </div>
+                <i class="v-line-dashed"></i>
+            </li>
+            <li>
+                <div class="txt">
+                    <span class="name">冻结金额</span><br>
+                    <span class="num"><em data-dojo-attach-point="freezeAmountNode">0.00</em>元</span>
+                </div>
+
+                <i class="v-line-dashed"></i>
+            </li>
+            <li>
+                <div class="txt">
+                    <span class="name">管理费</span><br>
+                    <span class="num"><em data-dojo-attach-point="totalSettledInterestNode">0.00</em>元</span>
+                </div>
+
+            </li>
+        </ul>
+    </div>
+</div>

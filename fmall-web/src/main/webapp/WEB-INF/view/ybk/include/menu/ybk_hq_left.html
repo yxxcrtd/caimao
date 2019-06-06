@@ -1,0 +1,64 @@
+<div class="mod-left">
+    <div class="goodsnav">
+        <div class="search" id="search">
+            <input type="text" stop="1">
+            <ul style="display:none"></ul>
+            <script>
+            (function(){
+                var box = document.querySelector("#search"),
+                    req = request(),
+                    input = box.querySelector("input"),
+                    ul = box.querySelector("ul"),
+                    st = 0,
+                    val = '',
+                    html = "<li title='{3}-{0}' onclick='location.href=\"/ybk/market_char.html?name={2}&code={1}\"'><span>{0}</span><i>{1}</i></li>";
+                function getGoods(){
+                    st = new Date()*1;
+                    if(input.value == val)return;
+                    val = input.value;
+                    if(val == "")return htmlwrite([]);
+                    req.ajax({
+                        url : "/api/ybk/searchGoods",
+                        type : "GET",
+                        data : {goodCondition : val, timestamp : st},
+                        success : function(d){
+                            if(d.success && st <= d.data.timestamp){
+                                htmlwrite(d.data.goods);
+                            }
+                        }
+
+                    })
+                }
+                function htmlwrite(d){
+                    var str = "";
+                    for(var i = 0, l = Math.min(d.length,10); i < l; i++){
+                        str += toFormatStr(html,d[i].goodName,d[i].goodCode,d[i].shortName,d[i].exchangeName);
+                    }
+                    if(i > 0){
+                        ul.style.display = "block";
+                    }else{
+                        ul.style.display = "none"
+                    }
+                    ul.innerHTML = str;
+                }
+                !function(){
+                    var __this = arguments.callee,__arguments = arguments;
+                    getGoods();
+                    return setTimeout(function() {
+                            __this.apply(this,__arguments)
+                        }, 300);
+                }()
+            })()
+            </script>
+        </div>
+        <ul class="nav">
+            <li onclick="window.location.href='/ybk/optional.html'" <#if leftMenu == "optional">class="on"</#if>><a href="/ybk/optional.html">我的自选</a> </li>
+            <li onclick="window.location.href='/ybk/exchange_index.html'" <#if leftMenu == "all">class="on"</#if>><a href="/ybk/exchange_index.html">全部交易所</a></li>
+            <#if eList?size>
+                <#list eList as e>
+                    <li onclick="window.location.href='/ybk/market.html?name=${e.shortName}'" <#if leftMenu == e.shortName>class="on"</#if> ><a href="/ybk/market.html?name=${e.shortName}">${e.name}</a></li>
+                </#list>
+            </#if>
+        </ul>
+    </div>
+</div>

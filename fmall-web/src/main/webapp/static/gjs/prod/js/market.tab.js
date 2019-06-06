@@ -1,0 +1,1 @@
+function marketTab(e,r){var t=document.querySelector(e);html=t.querySelector("script").innerHTML,t.innerHTML=rentmpl(html,{tab:r})}

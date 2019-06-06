@@ -1,0 +1,119 @@
+
+<!doctype html>
+<#include "config.html"/>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>邮币卡开户送大礼 -- 财猫网</title>
+    <link rel="stylesheet" type="text/css" href="${dojoUrl}/style/page/page.css?v=${jsVersion}">
+    <link rel="stylesheet" href="${dojoUrl}/style/style/style.css?v=${jsVersion}" />
+    <script type="text/javascript" src="${dojoUrl}/js/global.js?v=${jsVersion}"></script>
+    <script>
+        $(document).ready(function() {
+            $('#notice').hide();
+        });
+    </script>
+</head>
+<body>
+<!--顶部条-->
+<div id="top">
+    <div class="w top_in">
+        <div class="f_l left">
+            <!--<span><a href="/download.htm"><i class="icons icon_app"></i> 财猫app </a></span><s>|</s>-->
+            <span class="weixin m_l_10"><i class="icons icon_weixin"><span></span></i></span>
+            <span><a href="${weiboUrl}"><i class="icons icon_weibo"></i></a></span>
+            <span><a href="/" style="color: red;">财猫主站</i></a></span>
+            <span><a href="${ybkUrl}">财猫邮币卡</i></a></span>
+        </div>
+        <div class="f_r right topline2 noticeOpen">
+            <div id="_unlogin" style="display: none;">
+                您好！欢迎来到财猫网！
+                <a href="${basePath}/user/login.html"> 登录</a> | <a href="${basePath}/user/register.html"> 注册</a>
+            </div>
+            <div id="_login" style="display: none;">
+                <span class="font_red noticeBtn" id="_openMsgSwitch"><i class="icons" id="_msgIcons"></i><span id="_notReadMsgNum">0</span></span>
+                <span class="plr_10 font_black">
+                    您好，<a href="/account/index.htm" class="font_black"><span id="_userName"></span></a>
+                </span>
+                <a href="/user/logout.html" class="font_grayD">退出</a>
+                <div id="_msgPoint"></div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!--头部-->
+<div id="header">
+    <div class="w header_in">
+        <div class="f_l left">
+            <h1 class="icons icon_logo"><a href="/">财猫网</a></h1><p class="icons icon_logo_p">招招有财</p>
+        </div>
+        <div class="f_r right">
+            <ul id="jsTopMenu">
+                <li><a href="${basePath}/index.htm" <#if curTopMenu == "index">class="hov"</#if>>首页 <b></b></a></li>
+                <li><a href="${basePath}/account/index.htm" <#if curTopMenu == "account">class="hov"</#if>>账户<b></b></a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="wrap head">
+            <div class="inner"><a target="_blank" href="${ybkUrl}/ybk/open_account.html" class="iwant"></a></div>
+        </div>
+        <div class="wrap about">
+            <div class="inner">
+                <dl>
+                    <dt>对活动存有任何疑问，请拨打咨询电话:4000-898-000 或QQ咨询客服</dt>
+                    <dd>加入QQ群：333855308   335443289</dd>
+                </dl>
+                <ul>
+                    <li class="about1">邮币卡是指具有投资价值的邮票、钱币、电话卡，已成为拓展人们集藏与投资渠道的新趋势。现在，邮币卡电子盘令交易者可以像投资股票一样投资买卖邮币卡藏品。</li>
+                    <li class="about2">中国有30多家邮币卡交易所，用户提交开户资料步骤繁琐，在一家开户后，若要在其他交易所进行交易，还需重进行繁琐的开户流程。现在，您只要在财猫网上提交一次资料，就可以完成多家交易所开户流程，开启邮币卡交易。财猫网集成了国内主流交易所的行情，您无需多站切换，便可尽览多家藏品价格趋势。</li>
+                    <li>南京文交所钱币邮票交易中心是全国首家钱币邮票实物挂牌交易平台、全国首家公开集中的钱币邮票线上交易平台。南京文交所钱币邮票交易中心聚集国内钱币邮票界专业团队整合优质资源打造的钱币邮票交易平台。</li>
+                </ul>
+            </div>
+        </div>
+        <div class="wrap gift">
+            <div class="inner">
+                <p class="rich">2015上半年，邮币卡市场整体价格上涨<i>5</i>倍</p>
+                <p class="iscoming">9月23日至10月31日活动期间，在财猫网预约开户可获得以下豪礼：</p>
+                <div class="giftbox">
+                    <ul>
+                        <li>1.开户前<i>100</i>名（含）并于10月31日前成功交易一次，即可获得3枚《53年大号伍分》（价值210元，可提取）
+</li>
+                        <li>2.开户前<i>500</i>名（含）并于10月31日前成功交易一次，即可获得2枚《53年大号伍分》（价值140元，可提取）
+</li>
+                        <li>3.开户前<i>1000</i>名（含）并于10月31日前成功交易一次，即可获得1枚《53年大号伍分》（价值70元，可提取）
+</li>
+                        <li>获奖名单将以公告形式发布在财猫官网上，11月2日统一送出至用户账户。</li>
+                    </ul>
+                    <p>10月31日前在财猫网开户成功的投资者，将有机会获得玫瑰金iphone6S一部，11月2日开奖。</p>
+                    <p style="font-size:12px;color:#dcc;margin-top:10px;line-height:1.5">中奖号码计算规则:<br/>取活动截止日期最后100名开户成功的用户手机号码后4位次排列组成一组数值，将这100组数值之和除以（10000+总开户人数），余数加0000组成的4位数尾号对应的手机号即为中奖号码。如果该尾号没有对应手机号，则尾号大于等于5000，加0001取4位数尾号，尾号小于5000，减0001取4位数尾号，再查找对应的手机号为中奖号码，以此类推直到找出为止。 如果一个尾号对应多个手机号码，恭喜，对应上的手机号码都获奖。</p>
+                </div>
+            </div>
+        </div>
+        <div class="wrap account">
+            <div class="inner" style="height:340px;">
+                <div class="step">
+                    <dl>
+                        <dt>1.点击“我要开户”</dt>
+                        <dd>在这之前请您准备：身份证正、反面照片、银行卡正面照片。</dd>
+                    </dl>
+                    <dl>
+                        <dt>2.按照流程提交开户信息</dt>
+                        <dd>完成这步您就离奖品很近啦！</dd>
+                    </dl>
+                    <dl>
+                        <dt>3.完成您的银行卡和商户绑定。开户成功！</dt>
+                        <dd></dd>
+                    </dl>
+                </div>
+                <a href="${ybkUrl}/ybk/open_account.html" class="btn2"></a>
+                <div class="notice" style="min-height:1px;">对活动存有任何疑问，请拨打咨询电话:4000-898-000 或QQ咨询客服<br>加入QQ群：333855308   335443289<br>财猫网对本活动拥有最终解释权。</div>
+            </div>
+        </div>
+
+<#include 'include/page/foot.html'/>
+
+</body>
+</html>

@@ -1,0 +1,130 @@
+<#assign controller="P2PP2"/>
+<#include 'layout/layout.html'/>
+<#macro content>
+<div class="content">
+<div class="grid1000 main clearfix">
+    <div class="conside" id="sidemenuctn" style="position: absolute;width: 145px;"></div>
+    <div class="content-wrap" style="width: 840px;">
+        <!--步骤start-->
+        <ul class="navi-container">
+            <ol class="ui-step ui-step-5">
+                <li class="ui-step-start ui-step-active">
+                    <div class="ui-step-line">-</div>
+                    <div class="ui-step-icon">
+                        <i class="iconfont"></i>
+                        <i class="ui-step-number">1</i>
+                        <span class="ui-step-text">申请股票融资</span>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="ui-step-line">-</div>
+                    <div class="ui-step-icon">
+                        <i class="iconfont"></i>
+                        <i class="ui-step-number">2</i>
+                        <span class="ui-step-text">支付投资本金</span>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="ui-step-line">-</div>
+                    <div class="ui-step-icon">
+                        <i class="iconfont"></i>
+                        <i class="ui-step-number">3</i>
+                        <span class="ui-step-text">融资申请成功</span>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="ui-step-line">-</div>
+                    <div class="ui-step-icon">
+                        <i class="iconfont"></i>
+                        <i class="ui-step-number">4</i>
+                        <span class="ui-step-text">开始投资股票</span>
+                    </div>
+                </li>
+
+
+                <li class="ui-step-end">
+                    <div class="ui-step-line">-</div>
+                    <div class="ui-step-icon">
+                        <i class="iconfont"></i>
+                        <i class="ui-step-number">5</i>
+                        <span class="ui-step-text">盈利全归您</span>
+                    </div>
+                </li>
+            </ol>
+        </ul>
+        <!--步骤end-->
+    </div>
+    <div class="content-wrap" style="width: 840px;display: none;" id="free_p">
+        <p style="background: #fef0e7;border: 1px solid #ffc6a7;text-align: center;color: #4D4D4D;margin-left: 25px;padding: 5px;">您正在参加财猫网的3天免息融资活动，收取的管理费会在每日16：00-18：00 返还到你的账户。</p>
+    </div>
+        <!--框架-->
+        <div class="content-wrap" style="width: 840px;">
+            <div class="" id="contentctn">
+                <div id="panel1">
+                    <!--申请资金操盘-->
+                    <div class="con-dxStep01 clearfix">
+                        <div class="cm-left dxStep01-lside" style="width: 380px;">
+                            <!--标题-->
+                            <div class="title-common clearfix" style="margin-left: 25px;">
+                                <h2 class="cm-left">您的本金</h2>
+                            </div>
+                            <div id="deposit-amount-fld" style="margin-left: 25px;"></div>
+                            <div id="select-loan-panel"></div>
+
+                            <!--金额-->
+                            <div class="pagination">
+                                <ul class="list-amoutCompetition" data-dojo-attach-point="selectNode">
+
+                                </ul>
+                            </div>
+                            <!--金额-->
+                        </div>
+                        <div id="rightctn"></div>
+                    </div>
+                    <!--申请资金操盘-->
+
+
+                    <!--是否同意-->
+                    <div class="am-ft-center">
+                        <p class=" am-pt-15"><span class="am-ft-md">如有疑问请联系客服：${hotline}</span></p>
+
+                        <p class=" am-pt-15"><label class="checkbox" for="checkbox1">
+                            <input type="checkbox" value="" id="checkbox1" data-toggle="checkbox" <#if !proMonthSwitch>disabled="disabled"</#if>
+                                   class="custom-checkbox"><span
+                                class="icons"><span class="icon-unchecked"></span><span
+                                class="icon-checked"></span></span><span
+                                class="icons"><span class="icon-unchecked"></span><span
+                                class="icon-checked"></span></span>
+                            <span class="am-ft-md">我已经阅读并同意<a id="protocoltoggler">《借款协议》</a></span>
+                            <#if !proMonthSwitch><div class="am-ft-md" style="color: red;">${proMonthCloseMsg}</div></#if>
+                        </label></p>
+
+                        <div class="button-center am-pt-15">
+                            <div id="loaninfobtn"></div>
+                        </div>
+                    </div>
+                </div>
+                <!--是否同意-->
+
+
+                <!--详细说明-->
+                <div class="con-instructions">
+		            <b class="am-ft-md">详细说明：</b>
+		            <ul>
+		            <#list proMonthDesc as d>
+		        		<li>${d}</li>
+		        	</#list>
+		            </ul>
+		        </div>
+                <!--详细说明-->
+
+            </div>
+        </div>
+        <!--框架end-->
+</div>
+
+    </div>
+</#macro>

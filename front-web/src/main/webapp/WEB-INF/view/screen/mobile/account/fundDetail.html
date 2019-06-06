@@ -1,0 +1,101 @@
+<#include 'mobile/layout/header.html'/>
+<script type="text/javascript" src="${basePath}/mobile/js/views/fundDetail.js"></script>
+
+
+<body class="bg-gray">
+<article class="wrapper bg-white">
+<!--顶部导航-->
+<div class="am-header">
+<a href="###" class="header-Link header-leftLink"><i class="am-icon-arrow-left"></i></a>
+<h1><span id="contractNo">2014111000005</span></h1>
+</div>
+<!--顶部导航-->
+</article>
+
+<!--下部-->
+<article class="content">
+<!--操盘资金-->
+<aside class="bg-white trader-Top">
+<div class="trader-Top-1">
+<h6 class="am-ft-sm am-ft-tabText">总操盘资产</h6>
+<p class="am-ft-red"><big><span id="allAmount">40,000</span></big><span class="am-ft-xl">元</span></p>
+</div>
+
+<ul class="trader-Top-2 listLateral">
+<li class="loan">
+<p><b><span id="loanAmount"></span></b> <span class="am-ft-sm">元</span></p>
+<p><span class="am-ft-sm am-ft-tabText">借款金额</span></p>
+<i class="arror"></i>
+</li>
+<li class="risk">
+<p><b><span id="cashAmount"></span></b> <span class="am-ft-sm">元</span></p>
+<p><span class="am-ft-sm am-ft-tabText">保证金金额</span></p>
+<i class="arror"></i>
+</li>
+</ul>
+</aside>
+<!--操盘资金-->
+
+<!--基本信息-->
+<aside class="am-pt-15">
+<h3 class="title-table">基本信息</h3>
+
+<table width="100%" border="0" cellspacing="0" class="table-about">
+  <tr>
+    <th>亏损警告线</th>
+    <td>35000元</td>
+    <th>亏损平仓线</th>
+    <td>33000元</td>
+  </tr>
+  <tr>
+    <th>发起时间</th>
+    <td>2014-09-09</td>
+    <th>月利率</th>
+    <td>1.9分/月</td>
+  </tr>
+  <tr>
+    <th>开始日期</th>
+    <td>2014-09-10</td>
+    <th>到期日</th>
+    <td>2014-12-10</td>
+  </tr>
+  <tr>
+    <th>投资方向</th>
+    <td>沪深A股</td>
+    <th>仓位要求</th>
+    <td>不限制</td>
+  </tr>
+  <tr>
+    <th>股票市值</th>
+    <td>24980.00 元</td>
+    <th>维持率</th>
+    <td>6%</td>
+  </tr>
+</table>
+
+</aside>
+<!--基本信息-->
+
+<!--利息支付记录-->
+<aside class="am-pt-15">
+<h3 class="title-table">利息支付记录</h3>
+
+<table width="100%" border="0" cellspacing="0" class="table-list">
+  <tr>
+    <th class="tb-left">支付时间</th>
+    <th class="tb-center">支付金额</th>
+    <th class="tb-right">状态</th>
+  </tr>
+  <div id = "replyList">
+  </div>
+  
+</table>
+
+
+</aside>
+<!--利息支付记录-->
+
+
+</article>
+
+<#include 'mobile/layout/footer.html'/>

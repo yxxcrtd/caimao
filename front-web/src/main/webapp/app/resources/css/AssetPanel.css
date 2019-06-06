@@ -1,0 +1,77 @@
+.asset {
+	width: 659px;
+	display: inline;
+	float: right;
+}
+
+.assetIndexContainer {
+	background: #fef8f0;
+	padding: 20px 0 20px 40px;
+}
+
+.asset ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+.asset p {
+	margin: 0;
+	padding: 0;
+}
+
+.asset li {
+	float: left;
+	list-style: none;
+	display: inline-block;
+}
+
+.assetMD {
+	font-size: 14px;
+}
+
+.assetNumber {
+	font-size: 24px;
+	font-weight: bold;
+	font-family: "Arial";
+}
+
+.assetNumberGreen {
+	color: #3a9128;
+}
+
+.assetIndexItem {
+	width: 140px;
+	padding-right: 10px;
+}
+
+.assetTotal {
+	margin-top: 10px!important;
+}
+
+.assetChart {
+	padding: 20px 100px 0 60px;
+}
+
+.assetChart:after {
+	display: block;
+	clear: both;
+	content: "";
+	visibility: hidden;
+	height: 0;
+}
+
+.assetChartLeft {
+	width: 300px;
+	display: inline;
+	float: left;
+}
+
+.assetChartField {
+	font-size: 14px;
+	font-weight: normal;
+	text-align: left;
+	height: 30px;
+	line-height: 30px;
+}
+}

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<#include "config.html"/>
+<#assign curTopMenu="pz"/>
+<#assign curLeftMenu="myPz"/>
+<head>
+    <meta charset="utf-8">
+    <title>我的申请-财猫网</title>
+    <!--基本布局样式-->
+    <link rel="stylesheet" type="text/css" href="${dojoUrl}/style/page/page.css?v=${jsVersion}" />
+    <script src="${dojoUrl}/js/pzContracts.js?v=${jsVersion}"></script>
+</head>
+
+<body>
+<!--顶部条-->
+<#include "include/page/head.html" />
+
+
+<!--内容区-->
+<div id="main">
+    <div class="w sec_main">
+        <!--左右布局-->
+        <#include "include/menu/pz_left.html" />
+        <div class="right_bar">
+            <div class="tabNav">
+                <ul>
+                    <li><a href="/pz/contracts.html">当前合约</a></li>
+                    <li><a href="/pz/hiscontracts.html">历史合约</a></li>
+                    <li><a class="on" href="/pz/apply.html">我的申请</a></li>
+                </ul>
+            </div>
+
+            <div class="contract_list">
+                <#if apply>
+                    <#list apply.items as c>
+                        <div class="p_apply">
+                            <#if c.loanApplyAction == 9>
+                                <!--P2P配资-->
+                                <h4 class="tit">
+                                    <b>${c.prodName}</b>
+                                    <b clase="${dictStr("targetStatus", c.verifyStatus, 1)}">${dictStr("targetStatus", c.verifyStatus, 0)}</b>
+                                    <#if (c.investNum == 0 && c.verifyStatus == 0)>
+                                        <span class="f_r">&nbsp;&nbsp;&nbsp;&nbsp;<a href="/p2p/target/cancelTarget?targetId=${c.orderNo}">取消配资</a></span>
+                                    </#if>
+                                    <span class="f_r f_gray">发起时间：${c.applyDatetime?string("yyyy-MM-dd HH:mm:ss")}</span>
+                                </h4>
+                                <ul class="my_asset asset_in">
+                                    <li>借款金额<b>${formatAmount(c.orderAmount, 2, "", 1)}</b></li>
+                                    <li>保证金<b>${formatAmount(c.cashAmount, 2, "", 1)}</b></li>
+                                    <li>费用<b> <#if c.prodType == 1>日费率: <#else/>月费率: </#if> ${c.interestRate * 100}%</b></li>
+                                    <li>到期日<b> ${c.contractEndDate} </b></li>
+                                    <li>冻结资金<b>${formatAmount(c.freezeAmount, 2, "", 1)}元</b></li>
+                                </ul>
+                            <#else/>
+                                <h4 class="tit">
+                                    <b>${c.prodName}  ${c.orderNo}</b>
+                                    <b clase="${dictStr("loanApplyStatus", c.verifyStatus, 1)}">${dictStr("loanApplyStatus", c.verifyStatus, 0)}</b>
+                                    <span class="f_r f_gray">发起时间：${c.applyDatetime?string("yyyy-MM-dd HH:mm:ss")}</span>
+                                </h4>
+                                <ul class="my_asset asset_in">
+                                    <li>借款金额<b>${formatAmount(c.orderAmount, 2, "", 1)}</b></li>
+                                    <li>保证金<b>${formatAmount(c.cashAmount, 2, "", 1)}</b></li>
+                                    <li>费用<b> <#if c.prodType == 1>日费率: <#else/>月费率: </#if> ${c.interestRate * 100}%</b></li>
+                                    <li>到期日<b> ${c.contractEndDate} </b></li>
+                                    <li>冻结资金<b>${formatAmount(c.freezeAmount, 2, "", 1)}元</b></li>
+                                </ul>
+                            </#if>
+                        </div>
+
+                    </#list>
+                </#if>
+
+                ${pageHtml}
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<!--弹层-->
+
+<!--底部-->
+<#include "include/page/foot.html" />
+
+
+
+</body>
+</html>

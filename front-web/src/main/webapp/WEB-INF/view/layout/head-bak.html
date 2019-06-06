@@ -1,0 +1,40 @@
+
+<div id="doc_top_bar">
+    <div class="section">
+        <div class="float_left head_contact">
+            <i class="head_icon_phone"></i>
+            ${hotline}
+        </div>
+
+        <div class="float_left head_contact" style="padding-left: 10px;">
+            <i class="head_icon_qqqun"></i>
+            <span style="font-size: 18px;">官方QQ群：</span>
+            <a href="http://shang.qq.com/wpa/qunwpa?idkey=7b41227877e314ebc4dfc01ce9965b1e99df606687bc297ebd9c3efc6187fa76" target="_blank" style="color: #b73a3c;">${QQQUN}</a>
+        </div>
+        <div class="float_right">
+            <div id="usertopbar"></div>
+        </div>
+    </div>
+</div>
+<div id="doc_head">
+    <div class="head_masthead section">
+        <a href="${basePath}/index.htm"><h1 class="head_logo float_left" style="margin-top: 10px;"></h1></a>
+        <div class="head_describe float_left" style="display: none;"><span id="totalRegisterNode"></span> 位投资人累计融资 <span id="totalAmountNode"></span> 元</div>
+        <ul class="head_nav float_right">
+            <li><a href="${basePath}/index.htm">首页</a><i class="seg"></i></li>
+            <li><a href="${basePath}/trade/buy.htm">交易</a><i class="seg"></i></li>
+            <li><a href="<#if isProDay>${basePath}/p1.htm<#elseif isProMonth>${basePath}/p2.htm<#elseif isProFree>${basePath}/p3.htm<#elseif isProContest>${basePath}/p4.htm<#else>#</#if>">融资</a><i class="seg"></i></li>
+            <#if isProP2P>
+                <li><a href="${basePath}/tender.htm">${proP2P}</a><i class="seg"></i></li>
+            </#if>
+            <li><a href="${basePath}/home/index.htm">账户</a><i class="seg"></i></li>
+            <li><a href="${basePath}/download.htm">下载</a><i class="seg"></i></li>
+            <li><a href="${basePath}/guide.htm">新手引导</a></li>
+        </ul>
+    </div>
+    <#if siteNoticeNew>
+    <div class="head_notice">
+        <div class="section"><i class="icon_head_notice"></i><a href="${basePath}/notice.htm">${siteNoticeNew}</a></div>
+    </div>
+    </#if>
+</div>

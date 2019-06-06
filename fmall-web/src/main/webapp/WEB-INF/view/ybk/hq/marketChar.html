@@ -1,0 +1,146 @@
+
+<!doctype html>
+<#include "ybk/config.html" />
+<#assign topMenu="market" />
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>行情中心-邮币卡</title>
+    <link href="${staticUrl}/style/style.css?version=${jsVersion}" rel="stylesheet">
+    <script src="${staticUrl}/js/chart/lib.js?version=${jsVersion}"></script>
+    <script src="${staticUrl}/js/chart/layout.js?version=${jsVersion}"></script>
+    <script src="${staticUrl}/js/chart/chart.js?version=${jsVersion}"></script>
+    <script src="${staticUrl}/js/ybk/switchbtn.js?version=${jsVersion}"></script>
+    <script src="${staticUrl}/js/ybk/user.fav.js?version=${jsVersion}"></script>
+    <script src="${staticUrl}/js/ybk/global.js?version=${jsVersion}" type="text/javascript"></script>
+</head>
+
+<body>
+<#include "ybk/include/page/head.html" />
+
+<div class="main market">
+    <div class="clearfix">
+
+        <#include "ybk/include/menu/ybk_hq_left.html" />
+        
+                <div class="mod-right">
+                    <div class="mod-rightcontent">
+                        <div class="goodsChart">
+                            <div class="goodsInfo" id="curInfo" style="display:none">
+                                <script type="text/x-tmpl">
+                                    <table>
+                                        <tr>
+                                            <td>交易所</td>
+                                            <td>藏品代码</td>
+                                            <td>藏品简称</td>
+                                            <td>最新价</td>
+                                            <td>涨跌幅</td>
+                                            <td>昨收盘</td>
+                                            <td>今开盘</td>
+                                            <td>成交量</td>
+                                            <td>成交金额</td>
+                                            <td>最高价</td>
+                                            <td>最低价</td>
+                                        </tr>
+                                        <tr>
+                                            <td><%=data.exchangeName%></td>
+                                            <td><%=data.code%></td>
+                                            <td><%=data.name%></td>
+                                            <td><%=(data.currentPrice/100).toFixed(2)%></td>
+                                            <td><%=(data.changeRate/100).toFixed(2)%>%</td>
+                                            <td><%=(data.closePrice/100).toFixed(2)%></td>
+                                            <td><%=(data.openPrice/100).toFixed(2)%></td>
+                                            <td><%=shortIndex(data.totalAmount/100,2,10000,['万','亿','兆'])%></td>
+                                            <td><%=shortIndex(data.totalMoney/100,2,10000,['万','亿','兆'])%></td>
+                                            <td><%=(data.highPrice/100).toFixed(2)%></td>
+                                            <td><%=(data.lowPrice/100).toFixed(2)%></td>
+                                        </tr>
+                                    </table>
+                                </script>
+                            </div>
+                            <div class="chartBox">
+                                <dl class="ctrl">
+                                    <dt><div id="btnBox"><a href="" stop="1" act="kt" data-val="timeShare">分时</a><a href="" stop="1" act="kt" data-val="k">日k</a></div></dt>
+                                    <dd><a href="" id="addFav"></a>
+                                        <!--<a href="/ybk/market.html?name=${shortName}">返回列表</a>-->
+                                        <a href="javascript:window.location.href=document.referrer;">返回列表</a>
+                                    </dd>
+                                </dl>
+                                <div class="chart" id="chart"></div>
+                                <div class="ind">
+                                    <span class="on">MACD</span>
+                                    <span>KDJ</span>
+                                    <span>BOLL</span>
+                                    <span>PSY</span>
+                                    <span>OBV</span>
+                                    <span>RSI</span>
+                                    <span>WVAD</span>
+                                    <span>CCI</span>
+                                </div>
+                            </div>
+                            <script>
+                                var fav = fav(),
+                                        favBtn = document.querySelector("#addFav");
+                                switchbtn("#btnBox",'a')
+                                CFG.user.ex = '${shortName}';
+                                CFG.user.stockID = '${code}';
+                                CFG.user.timeShare = 1;
+                                singleLayout(chart('chart'))
+                                function checkFav(){
+                                    if(fav.isfav(CFG.user.stockID,CFG.user.ex)){
+                                        favBtn.innerHTML = "取消自选";
+                                        favBtn.className = "cancel";
+                                    }else{
+                                        favBtn.innerHTML = "加入自选";
+                                        favBtn.className = "";
+                                    }
+                                }
+                                Event.add(favBtn,"click",function(e){
+                                    Event.stop(e);
+                                    fav.isfav(CFG.user.stockID,CFG.user.ex) ? fav.del(CFG.user.stockID,CFG.user.ex) : fav.add(CFG.user.stockID,CFG.user.ex);
+                                    checkFav();
+                                });
+                                checkFav();
+                                (function(){
+                                    var curInfo = document.querySelector("#curInfo"),
+                                        html = curInfo.querySelector("script").innerHTML,
+                                        req = request();
+
+                                    !function(){
+                                        var __this = arguments.callee,__arguments = arguments;
+                                        req.ajax({
+                                            url : '/api/ybk/get_collection_info',
+                                            type : 'GET',
+                                            data : {
+                                                exchange_short_name : CFG.user.ex,
+                                                code : CFG.user.stockID
+                                            },
+                                            success : function(d){
+                                                if(d.success){
+                                                    curInfo.style.display = "block";
+                                                    curInfo.innerHTML = rentmpl(html,{
+                                                        data : d.data
+                                                    });
+                                                }
+                                            }
+                                        })
+                                        return setTimeout(function() {
+                                                __this.apply(this,__arguments)
+                                            }, 60000);
+                                    }()
+                                })()
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<#include "ybk/include/page/foot.html" />
+
+</body>
+</html>

@@ -1,0 +1,59 @@
+<div class="box">
+    <div class="con-box" style="background-color: #fff">
+        <div class="title-box clearfix" data-dojo-attach-point="titleCtnNode">
+            <h2 data-dojo-attach-point="titleNode" class="cm-left"></h2>
+            <a data-dojo-attach-point="closeNode" class="cm-right close-box">×</a>
+        </div>
+        <div data-dojo-attach-point="contentNode" style="padding: 20px 40px;">
+            <form data-dojo-attach-point="formNode" class="ui-form ui-form-box" role="form">
+                <div class="ui-form-item" style="padding-left: 130px;">
+                    <label class="ui-label">还款合约：</label>
+                    <div class="ui-text">
+                        <b data-dojo-attach-point="contractIdNode" style="color: #2ba1ff"></b>
+                    </div>
+                </div>
+                <div class="ui-form-item" style="padding-left: 130px;">
+                    <label class="ui-label">借款金额：</label>
+                    <div class="ui-text">
+                        <b data-dojo-attach-point="loanAmountNode"></b> 元
+                    </div>
+                </div>
+                <div class="ui-form-item" style="padding-left: 130px;">
+                    <label class="ui-label">可还金额：</label>
+                    <div class="ui-text">
+                        <b data-dojo-attach-point="availableBalanceNode"></b> 元
+                    </div>
+                </div>
+                <!--  鸿禧没有罚息概念，先注释 -->
+<!--                 <div class="ui-form-item" style="padding-left: 130px;">
+                    <label class="ui-label">罚息：</label>
+                    <div class="ui-text">
+                        <b data-dojo-attach-point="punitiveNode"></b> 元
+                    </div>
+                </div> -->
+                <div class="ui-form-item" style="padding-left: 130px;">
+                    <label class="ui-label">合计：</label>
+                    <div class="ui-text">
+                        <b data-dojo-attach-point="totalAmountNode"></b> 元
+                    </div>
+                </div>
+				  <div data-dojo-attach-point="tradePwdNode">
+                </div>
+                <div data-dojo-attach-point="btnNode">
+                </div>
+            </form>
+            <div id="repaymentSuccess" data-dojo-attach-point="promptNode" style="display:none;">
+                <div style="margin: 0 auto;">
+                    <div class="con-success clearfix">
+                        <div class="cm-left successIcon-lside"></div>
+                        <div class="cm-left successText-rside">
+                            <p class="layout01"><i data-dojo-attach-point="typeNode" class="fa icon-prompt-success">&#xf058;</i><b data-dojo-attach-point="msgNode">恭喜你，还款成功！</b></p>
+                            <p class="layout03"><span data-dojo-attach-point="subMsgNode"></span></p>
+                            <p class="layout02"><a data-dojo-attach-point="linkNode">刷新页面</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

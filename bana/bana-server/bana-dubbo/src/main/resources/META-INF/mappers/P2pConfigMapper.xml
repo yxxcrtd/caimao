@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="p2pConfig" >
+	<resultMap id="BaseResultMap" type="com.caimao.bana.api.entity.p2p.P2PConfigEntity" >
+		<id column="prod_id" property="prodId" jdbcType="BIGINT" />
+		<id column="prod_lever" property="prodLever" jdbcType="TINYINT" />
+		<result column="is_available" property="isAvailable" jdbcType="BIT" />
+		<result column="chuzi_min" property="chuziMin" jdbcType="BIGINT" />
+		<result column="chuzi_max" property="chuziMax" jdbcType="BIGINT" />
+		<result column="chuzi_rate" property="chuziRate" jdbcType="DECIMAL" />
+		<result column="manage_fee" property="manageFee" jdbcType="BIGINT" />
+		<result column="caimao_rate" property="caimaoRate" jdbcType="DECIMAL" />
+		<result column="manage_rate" property="manageRate" jdbcType="DECIMAL" />
+	</resultMap>
+	<sql id="Base_Column_List" >
+    prod_id, prod_lever, is_available, chuzi_min, chuzi_max, chuzi_rate, manage_fee,caimao_rate,manage_rate
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.caimao.bana.api.entity.p2p.P2PConfigEntity" >
+    select 
+		<include refid="Base_Column_List" />
+    from p2p_config
+    where prod_id = #{prodId,jdbcType=BIGINT}
+      and prod_lever = #{prodLever,jdbcType=TINYINT}
+	</select>
+	
+	<select id="selectByProdId" resultMap="BaseResultMap" parameterType="Long" >
+    select 
+		<include refid="Base_Column_List" />
+    from p2p_config
+    where prod_id = #{prodId,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="com.caimao.bana.api.entity.p2p.P2PConfigEntity" >
+    delete from p2p_config
+    where prod_id = #{prodId,jdbcType=BIGINT}
+      and prod_lever = #{prodLever,jdbcType=TINYINT}
+	</delete>
+	<insert id="insert" parameterType="com.caimao.bana.api.entity.p2p.P2PConfigEntity" >
+    insert into p2p_config
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="prodId!=null" >
+        prod_id,
+			</if>
+			<if test="prodLever !=null" >
+        prod_lever,
+			</if>
+			<if test="isAvailable !=null" >
+        is_available,
+			</if>
+			<if test="chuziMin !=null" >
+        chuzi_min,
+			</if>
+			<if test="chuziMax !=null" >
+        chuzi_max,
+			</if>
+			<if test="chuziRate !=null" >
+        chuzi_rate,
+			</if>
+			<if test="manageFee !=null" >
+        manage_fee,
+			</if>
+			<if test="caimaoRate !=null" >
+        caimao_rate,
+			</if>
+			<if test="manageRate !=null" >
+        manage_rate,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="prodId !=null" >
+        #{prodId,jdbcType=BIGINT},
+			</if>
+			<if test="prodLever !=null" >
+        #{prodLever,jdbcType=TINYINT},
+			</if>
+			<if test="isAvailable !=null" >
+        #{isAvailable,jdbcType=BIT}, 
+			</if>
+			<if test="chuziMin !=null" >
+       #{chuziMin,jdbcType=BIGINT},
+			</if>
+			<if test="chuziMax !=null" >
+      #{chuziMax,jdbcType=BIGINT}, 
+			</if>
+			<if test="chuziRate !=null" >
+       #{chuziRate,jdbcType=DECIMAL}, 
+			</if>
+			<if test="manageFee !=null" >
+        #{manageFee,jdbcType=BIGINT},
+			</if>
+			<if test="caimaoRate !=null" >
+        #{caimaoRate,jdbcType=DECIMAL}, 
+			</if>
+			<if test="manageRate !=null" >
+        #{manageRate,jdbcType=DECIMAL}, 
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKey" parameterType="com.caimao.bana.api.entity.p2p.P2PConfigEntity" >
+    update p2p_config
+		<set >
+			<if test="isAvailable != null" >
+        is_available = #{isAvailable,jdbcType=BIT},
+			</if>
+			<if test="chuziMin != null" >
+        chuzi_min = #{chuziMin,jdbcType=BIGINT},
+			</if>
+			<if test="chuziMax != null" >
+        chuzi_max = #{chuziMax,jdbcType=BIGINT},
+			</if>
+			<if test="chuziRate != null" >
+        chuzi_rate = #{chuziRate,jdbcType=DECIMAL},
+			</if>
+			<if test="manageFee != null" >
+         manage_fee = #{manageFee,jdbcType=BIGINT},
+			</if>
+			<if test="caimaoRate != null" >
+        caimao_rate = #{caimaoRate,jdbcType=DECIMAL},
+			</if>
+			<if test="manageRate != null" >
+        manage_rate = #{manageRate,jdbcType=DECIMAL},
+			</if>
+		</set>
+    where prod_id = #{prodId,jdbcType=BIGINT}
+      and prod_lever = #{prodLever,jdbcType=TINYINT}
+	</update>
+</mapper>

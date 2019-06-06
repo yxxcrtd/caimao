@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<#include "config.html"/>
+<#assign curTopMenu="pz"/>
+<#assign curLeftMenu="myPz"/>
+<head>
+    <meta charset="utf-8">
+    <title>合约信息-财猫网</title>
+    <!--基本布局样式-->
+    <link rel="stylesheet" type="text/css" href="${dojoUrl}/style/page/page.css?v=${jsVersion}" />
+    <script src="${dojoUrl}/js/pzContracts.js?v=${jsVersion}"></script>
+</head>
+
+<body>
+<!--顶部条-->
+<#include "include/page/head.html" />
+
+
+<!--内容区-->
+<div id="main">
+    <div class="w sec_main">
+        <!--左右布局-->
+        <#include "include/menu/pz_left.html" />
+        <div class="right_bar">
+            <div class="tabNav">
+                <ul>
+                    <li><a <#if isHisContract == 0>class="on"</#if> href="/pz/contracts.html">当前合约</a></li>
+                    <li><a <#if isHisContract != 0>class="on"</#if> href="/pz/hiscontracts.html">历史合约</a></li>
+                    <li><a href="/pz/apply.html">我的申请</a></li>
+                </ul>
+            </div>
+
+            <div class="p_present m_t_30">
+                <h4 class="tit"><b>${contractDetail.prodName}  ${contractDetail.contractNo}</b>
+                    <#if contractDetail.contractType == 0><strong>主合约</strong><#else/><strong class="blue">子合约</strong></#if>
+                                <span class="f_r f_gray">发起时间：${contractDetail.contractSignDatetime} &nbsp;&nbsp;&nbsp;
+                                </span>
+                </h4>
+                <#if isHisContract == 0>
+                    <ul class="my_asset asset_in">
+                        <li>总操盘资产<b><#if assetsInfo.totalAsset == null>--<#else/>${formatAmount(assetsInfo.totalAsset, 2, "", 1)}</#if></b></li>
+                        <li>股票市值<b><#if assetsInfo.totalMarketValue == null>--<#else/>${formatAmount(assetsInfo.totalMarketValue, 2, "", 1)}</#if></b></li>
+                        <li>可用金额<b><#if assetsInfo.curAmount == null>--<#else/>${formatAmount(assetsInfo.curAmount, 2, "", 1)}</#if></b></li>
+                        <li>亏损警告线<b><#if assetsInfo.enableRatio == null>--<#else/>${formatAmount(assetsInfo.enableRatio * assetsInfo.loanAmount, 2, "", 1)}</#if></b></li>
+                        <li>亏损平仓线<b><#if assetsInfo.exposureRatio == null>--<#else/>${formatAmount(assetsInfo.exposureRatio * assetsInfo.loanAmount, 2, "", 1)}</#if></b></li>
+                        <li>浮动盈亏<b class="font_red"><#if assetsInfo.totalProfit == null>--<#else/>${formatAmount(assetsInfo.totalProfit, 2, "", 1)}</#if></b></li>
+                    </ul>
+                </#if>
+
+                <ul class="my_asset asset_in m_b_15">
+                    <li>借款金额 <b>${formatAmount(contractDetail.loanAmount, 2, "", 1)}</b></li>
+                    <li>保证金 <b>${formatAmount(contractDetail.cashAmount, 2, "", 1)}</b></li>
+                    <li>费用 <b><#if contractDetail.prodTypeId == 1>日费率: <#else/>月费率: </#if>${contractDetail.interestRate * 100}%</b></li>
+                    <li>到期日 <b>${contractDetail.contractEndDate}</b></li>
+                    <li>下次结息日 <b>${contractDetail.nextSettleInterestDate}</b></li>
+                    <li>管理费 <b>${formatAmount(contractDetail.settledInterest, 2, "", 1)}</b></li>
+                </ul>
+                <#if isHisContract == 0>
+                    <p class="asset_btn">
+                        <a href="javascript:void(0);" class="btn btn_blue m_r_15 btn_size_100_30 zhuijiaheyue" data-contract-no="${contractDetail.contractNo}">追加合约</a>
+                        <a href="javascript:void(0);" class="btn btn_blue m_r_15 btn_size_100_30 zhuijiabaozhengjin" data-contract-no="${contractDetail.contractNo}">追加保证金</a>
+                        <a href="javascript:void(0);" class="btn btn_blue m_r_15 btn_size_100_30 huankuan" data-contract-no="${contractDetail.contractNo}">还款</a>
+                        <#if contractDetail.prodType == 2>
+                            <!--<a href="javascript:void(0);" class="btn btn_blue m_r_15 btn_size_100_30 zhanqi" data-contract-no="${contractDetail.contractNo}">展期</a>-->
+                        </#if>
+                        <a href="javascript:void(0);" class="btn btn_blue m_r_15 btn_size_100_30 zhuanchuyingli" data-contract-no="${contractDetail.contractNo}">转出盈利</a>
+                    </p>
+                </#if>
+            </div>
+
+
+            <div class="record">
+                <table class="table m_t_20 table_striped table_hover">
+                    <colgroup>
+                        <col style="width:210px;">
+                        <col style="width:150px;">
+                        <col style="width:210px;">
+                        <col style="width:130px;">
+                        <col style="width:160px;">
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th>支付日期</th>
+                        <th>支付金额(元)</th>
+                        <th>状态</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <#if interestList.items>
+                        <#list interestList.items as i>
+                            <tr>
+                                <td>${i.settleInterestBeginDate}</td>
+                                <td>${formatAmount(i.orderAmount, 2, "", 1)}</td>
+                                <td>${i.billAbstract}</td>
+                            </tr>
+                        </#list>
+                    </#if>
+                    </tbody>
+                </table>
+                ${pageHtml}
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+
+<!--弹层-->
+
+
+<!--底部-->
+<#include "include/page/foot.html" />
+
+</body>
+</html>

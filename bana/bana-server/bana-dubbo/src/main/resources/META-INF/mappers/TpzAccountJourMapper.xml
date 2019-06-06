@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="TpzAccountJour">
+
+    <resultMap id="BaseResultMap" type="com.caimao.bana.api.entity.TpzAccountJourEntity">
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="pz_account_id" property="pzAccountId" jdbcType="BIGINT" />
+        <result column="user_id" property="userId" jdbcType="BIGINT" />
+        <result column="trans_datetime" property="transDatetime" jdbcType="TIMESTAMP" />
+        <result column="account_biz_type" property="accountBizType" jdbcType="VARCHAR" />
+        <result column="trans_amount" property="transAmount" jdbcType="BIGINT" />
+        <result column="pre_amount" property="preAmount" jdbcType="BIGINT" />
+        <result column="post_amount" property="postAmount" jdbcType="BIGINT" />
+        <result column="seq_flag" property="seqFlag" jdbcType="VARCHAR" />
+        <result column="ref_serial_no" property="refSerialNo" jdbcType="VARCHAR" />
+        <result column="remark" property="remark" jdbcType="VARCHAR" />
+        <result column="work_date" property="workDate" jdbcType="VARCHAR" />
+        <result column="version" property="version" jdbcType="BIGINT" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id,
+        pz_account_id AS pzAccountId,
+        user_id AS userId,
+        trans_datetime AS transDatetime,
+        account_biz_type AS accountBizType,
+        trans_amount AS transAmount,
+        pre_amount AS preAmount,
+        post_amount AS postAmount,
+        seq_flag AS seqFlag,
+        ref_serial_no AS refSerialNo,
+        remark,
+        work_date AS workDate,
+        version
+    </sql>
+
+    <select id="queryById" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tpz_account_jour
+        WHERE id = #{id}
+    </select>
+
+    <update id="updateBizType">
+        UPDATE tpz_account_jour
+        SET account_biz_type = #{accountBizType}
+        WHERE id = #{id};
+    </update>
+
+    <resultMap id="FAccountQueryJourReq" type="com.caimao.bana.api.entity.res.FAccountQueryAccountJourRes">
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="pz_account_id" property="pzAccountId" jdbcType="BIGINT" />
+        <result column="user_id" property="userId" jdbcType="BIGINT" />
+        <result column="trans_datetime" property="transDatetime" jdbcType="TIMESTAMP" />
+        <result column="account_biz_type" property="accountBizType" jdbcType="VARCHAR" />
+        <result column="user_real_name" property="userRealName" jdbcType="VARCHAR" />
+        <result column="trans_amount" property="transAmount" jdbcType="BIGINT" />
+        <result column="pre_amount" property="preAmount" jdbcType="BIGINT" />
+        <result column="post_amount" property="postAmount" jdbcType="BIGINT" />
+        <result column="seq_flag" property="seqFlag" jdbcType="VARCHAR" />
+        <result column="ref_serial_no" property="refSerialNo" jdbcType="VARCHAR" />
+        <result column="remark" property="remark" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List1">
+        id, pz_account_id, t.user_id, trans_datetime,
+        account_biz_type,
+        trans_amount, pre_amount,
+        post_amount, seq_flag,
+        ref_serial_no, remark, work_date,version,user_real_name
+    </sql>
+
+    <insert id="save" parameterType="com.caimao.bana.api.entity.TpzAccountJourEntity">
+        insert into tpz_account_jour
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id !=0">
+                id,
+            </if>
+            <if test="pzAccountId != null">
+                pz_account_id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="transDatetime != null">
+                trans_datetime,
+            </if>
+            <if test="accountBizType != null">
+                account_biz_type,
+            </if>
+            <if test="transAmount != null">
+                trans_amount,
+            </if>
+            <if test="preAmount != null">
+                pre_amount,
+            </if>
+            <if test="postAmount != null">
+                post_amount,
+            </if>
+            <if test="seqFlag != null">
+                seq_flag,
+            </if>
+            <if test="refSerialNo != null">
+                ref_serial_no,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="workDate != null">
+                work_date,
+            </if>
+            <if test="version != null">
+                version,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id !=0">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="pzAccountId != null">
+                #{pzAccountId,jdbcType=BIGINT},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="transDatetime != null">
+                #{transDatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="accountBizType != null">
+                #{accountBizType,jdbcType=VARCHAR},
+            </if>
+            <if test="transAmount != null">
+                #{transAmount,jdbcType=BIGINT},
+            </if>
+            <if test="preAmount != null">
+                #{preAmount,jdbcType=BIGINT},
+            </if>
+            <if test="postAmount != null">
+                #{postAmount,jdbcType=BIGINT},
+            </if>
+            <if test="seqFlag != null">
+                #{seqFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="refSerialNo != null">
+                #{refSerialNo,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="workDate != null">
+                #{workDate,jdbcType=VARCHAR},
+            </if>
+            <if test="version != null">
+                #{version,jdbcType=BIGINT},
+            </if>
+        </trim>
+    </insert>
+
+    <!-- 分页查询 -->
+    <select id="queryAccountJourWithPage" resultMap="FAccountQueryJourReq" parameterType="com.caimao.bana.api.entity.req.FAccountQueryAccountJourReq">
+        select
+        <include refid="Base_Column_List1" />
+        from tpz_account_jour t , tpz_user u
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            t.user_id = u.user_id
+            <if test="pzAccountId != null and pzAccountId !='' ">
+                AND t.pz_account_id = #{pzAccountId}
+            </if>
+            <if test="userId != null and userId != ''">
+                AND t.user_id = #{userId}
+            </if>
+            <if test="startDate != null and startDate != '' ">
+                <![CDATA[AND t.work_date >= #{startDate}]]>
+            </if>
+            <if test="endDate != null and endDate != '' ">
+                <![CDATA[AND t.work_date <= #{endDate}]]>
+            </if>
+            <if test="refSerialNo != null and  refSerialNo != ''">
+                AND t.ref_serial_no =#{refSerialNo}
+            </if>
+            <if test="bizType != null and  bizType != ''">
+                AND t.account_biz_type =#{bizType}
+            </if>
+        </trim>
+        <trim prefix="ORDER BY ">
+            <if test="orderColumn != null and  orderColumn != ''">
+                ${orderColumn} ${orderDir}
+            </if>
+        </trim>
+    </select>
+
+
+    <sql id="Base_Column_Cond">
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="pzAccountId != null and pzAccountId !='' ">
+                AND t.pz_account_id = #{pzAccountId}
+            </if>
+            <if test="userId != null and userId != ''">
+                AND t.user_id = #{userId}
+            </if>
+            <if test="startDate != null and startDate != '' ">
+                <![CDATA[AND t.work_date >= #{startDate}]]>
+            </if>
+            <if test="endDate != null and endDate != '' ">
+                <![CDATA[AND t.work_date <= #{endDate}]]>
+            </if>
+            <if test="refSerialNo != null and  refSerialNo != ''">
+                AND t.ref_serial_no =#{refSerialNo}
+            </if>
+            <if test="bizType != null and  bizType != ''">
+                AND t.account_biz_type =#{bizType}
+            </if>
+
+        </trim>
+    </sql>
+
+</mapper>

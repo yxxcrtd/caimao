@@ -1,0 +1,356 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>财猫-充值</title>
+	<link href="../style/page/page.css" rel="stylesheet">
+	<link href="../style/page/notice.css" rel="stylesheet">
+	<link href="../style/page/p2p.css" rel="stylesheet">
+	<script src="../js/v2/actionTip.js"></script>
+</head>
+
+<body>
+<!--顶部条-->
+<div id="top">
+	<div class="w top_in">
+		<div class="f_l left">
+			<span>总资产：<b>400,000</b>元</span>
+			<span>股票市值：<b>400,000</b>元</span>
+			<span>可用：<b>400,000</b>元</span>
+			<span>警告线：<b>400,000</b>元</span>
+			<span>平仓线：<b>400,000</b>元</span>
+		</div>
+		<div class="f_r right topline2">
+			<!--消息框位灰色时  直接去掉icon_info即可-->
+			<span class="font_red noticeBtn" id="noticeBtn"><i class="icons icon_info"></i>99+</span>
+			<span>您好，张三 </span>
+			<a href="#">退出</a>
+			<div class="popNotice">
+				<dl class="noticeHead">
+					<dt>我的消息</dt>
+					<dd><i class="orange">16条未读</i>/200000000条消息</dd>
+				</dl>
+				<div class="noticeBody">
+					<dl class="unread">
+						<dt><i>■</i><em>您的HOMS子账户101816已达预警线,请及时追加保证金</em><a href="">追加</a></dt>
+						<dd>2015-06-16 11:00:41</dd>
+					</dl>
+					<dl class="unread">
+						<dt><i>■</i><em>您的HOMS子账户101816已达预警线,请及时追加保证金</em><a href="">追加</a></dt>
+						<dd>2015-06-16 11:00:41</dd>
+					</dl>
+					<dl class="unread">
+						<dt><i>■</i><em>您的HOMS子账户101816已达预警线,请及时追加保证金</em><a href="">追加</a></dt>
+						<dd>2015-06-16 11:00:41</dd>
+					</dl>
+					<dl class="unread">
+						<dt><i>■</i><em>您的HOMS子账户101816已达预警线,请及时追加保证金</em><a href="">追加</a></dt>
+						<dd>2015-06-16 11:00:41</dd>
+					</dl>
+					<dl>
+						<dt><i>■</i><em>您的HOMS子账户101816已达预警线,请及时追加保证金</em><a href="">追加</a></dt>
+						<dd>2015-06-16 11:00:41</dd>
+					</dl>
+					<dl>
+						<dt><i>■</i><em>您的HOMS子账户101816已达预警线,请及时追加保证金</em><a href="">追加</a></dt>
+						<dd>2015-06-16 11:00:41</dd>
+					</dl>
+					<dl>
+						<dt><i>■</i><em>您的HOMS子账户101816已达预警线,请及时追加保证金</em><a href="">追加</a></dt>
+						<dd>2015-06-16 11:00:41</dd>
+					</dl>
+					<dl>
+						<dt><i>■</i><em>您的HOMS子账户101816已达预警线,请及时追加保证金</em><a href="">追加</a></dt>
+						<dd>2015-06-16 11:00:41</dd>
+					</dl>
+					<p>暂无消息</p>
+				</div>
+			</div>
+			<script>
+				(function(){
+					var noticeIsClose = 1,
+						btn = document.querySelector("#noticeBtn"),
+						box = btn.parentNode,
+						tmpCN = box.className;
+					document.addEventListener ?
+						btn.addEventListener('click', switchNotice, false) : btn.attachEvent('onclick', switchNotice);
+					function switchNotice(){
+						if(noticeIsClose){
+							noticeIsClose = 0;
+							box.className = tmpCN + ' noticeOpen';
+						}else{
+							noticeIsClose = 1;
+							box.className = tmpCN;
+						}
+					}
+				})();
+			</script>
+		</div>
+	</div>
+	<!--登录前状态
+	<div class="w top_in">-->
+	<!--<div class="f_l left">-->
+	<!--</div>-->
+	<!--<div class="f_r right">-->
+	<!--您好！欢迎来到财猫网！-->
+	<!--<a href="#"> 登录</a> | <a href="#"> 注册</a>-->
+	<!--</div>-->
+	<!--</div>-->
+</div>
+
+<!--头部-->
+<div id="header">
+	<div class="w header_in">
+		<div class="f_l left">
+			<h1 class="icons icon_logo"><a href="#">财猫网</a></h1><p class="icons icon_logo_p">招招有财</p>
+		</div>
+		<div class="f_r right">
+			<ul>
+				<li><a href="#">首页 <b></b></a></li>
+				<li><a href="#">交易<b></b></a></li>
+				<li><a href="#">融资<b></b></a></li>
+				<li><a class="hov" href="#">账户<b></b></a></li>
+				<li><a href="#">下载<b></b></a></li>
+				<li><a href="#">新手引导<b></b></a></li>
+			</ul>
+		</div>
+	</div>
+
+</div>
+
+<!--内容区-->
+<div id="main">
+	<div class="w sec_main">
+		<!--左右布局-->
+		<div class="left_bar">
+			<ul>
+				<li><a href="#"><i class="icons icon_account"></i>我的账户</a></li>
+				<li><a class="hov" href=""><i class="icons icon_recharge"></i>我要充值</a></li>
+				<li><a href=""><i class="icons icon_withdraw"></i>我要提现</a></li>
+				<li><a href=""><i class="icons icon_fund"></i>资金明细</a></li>
+				<li><a href=""><i class="icons icon_secure"></i>账户安全</a></li>
+				<li><a href=""><i class="icons icon_message"></i>个人资料</a></li>
+			</ul>
+		</div>
+		<div class="right_bar">
+			<div class="tabNav">
+				<ul>
+					<li><a href="" class="on">可投项目(15)</a></li>
+					<li><a href="">满标项目(50)</a></li>
+				</ul>
+			</div>
+
+<!-- 投资（开始投资）.jpg begin -->
+			<div class="">
+
+
+				<table class="targetList table" id="targetList">
+					<thead>
+						<tr>
+							<td class="list-name"><span>名称</span></td>
+							<td class="list-rate"><span class="rank" act="changeRank" data-val="yearRate">年化收益率</span></td>
+							<td class="list-time"><span class="rank" act="changeRank" data-val="liftTime">借款期限</span></td>
+							<td class="list-progress"><span class="rank" act="changeRank" data-val="targetRate">进度</span></td>
+							<td colspan="2" class="list-left"><span>剩余金额</span></td>
+						</tr>
+					</thead>
+					<tbody id="targetBox">
+
+						<tr class="table_crumbs">
+							<td colspan="6">
+								<i class="icons icon_info_null"></i>
+								<p>可投项目为空，敬请期待！</p>
+							</td>
+						</tr>
+
+						<tr>
+							<td class="list-name">张三的借款<i>20</i>万</td>
+							<td class="list-rate">20%</td>
+							<td class="list-time">4个月</td>
+							<td class="list-progress"><b><i style="width:79%"></i></b><span>79%</span></td>
+							<td class="list-left">￥120,000</td>
+							<td class="list-ctrl"><a class="btn btn_red" href="1">投资</a></td>
+						</tr>
+						<tr>
+							<td class="list-name">张三的借款<i>20</i>万</td>
+							<td class="list-rate">20%</td>
+							<td class="list-time">4个月</td>
+							<td class="list-progress"><b><i style="width:79%"></i></b><span>79%</span></td>
+							<td class="list-left">￥120,000</td>
+							<td class="list-ctrl"><a class="btn btn_red" href="1">投资</a></td>
+						</tr>
+						<tr>
+							<td class="list-name">张三的借款<i>20</i>万</td>
+							<td class="list-rate">20%</td>
+							<td class="list-time">4个月</td>
+							<td class="list-progress"><b><i style="width:79%"></i></b><span>79%</span></td>
+							<td class="list-left">￥120,000</td>
+							<td class="list-ctrl"><a class="btn btn_red" href="1">投资</a></td>
+						</tr>
+						<tr>
+							<td class="list-name">张三的借款<i>20</i>万</td>
+							<td class="list-rate">20%</td>
+							<td class="list-time">4个月</td>
+							<td class="list-progress"><b><i style="width:79%"></i></b><span>79%</span></td>
+							<td class="list-left">￥120,000</td>
+							<td class="list-ctrl"><a class="btn" href="1">投资</a></td>
+						</tr>
+						<tr>
+							<td class="list-name">张三的借款<i>20</i>万</td>
+							<td class="list-rate">20%</td>
+							<td class="list-time">4个月</td>
+							<td class="list-progress"><b><i style="width:79%"></i></b><span>79%</span></td>
+							<td class="list-left">￥120,000</td>
+							<td class="list-ctrl"><a class="btn btn_red" href="1">投资</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			
+<!-- 投资（开始投资）.jpg end -->
+
+
+
+
+<!-- 投资（开始投资1）.jpg begin -->
+<div class="targetInfo">
+		<div class="clear_fix">
+			<div class="targetHere">
+				<strong>方先生借款<b>150万元</b><span></span>市值<b>180万元</b>股票做质押</strong>
+				<dl>
+					<dt>还款方式:</dt>
+					<dd>按月还息，到期还本</dd>
+				</dl>
+				<dl>
+					<dt>借款时间:</dt>
+					<dd>2015.06.06-2015.07.06<b>(30天)</b></dd>
+				</dl>
+				<dl>
+					<dt>总借款:</dt>
+					<dd><i class="bold">150,000元</i></dd>
+				</dl>
+				<dl>
+					<dt>年息收益:</dt>
+					<dd class="rates orange">25.25%</dd>
+				</dl>
+				<dl>
+					<dt>借款进度:</dt>
+					<dd class="linestep"><em><i style="width:42%"></i></em><b class="blue bold">42％</b> (已有4人投资120,000元)</dd>
+				</dl>
+				<dl>
+					<dt class="btnline">财猫领投:</dt>
+					<dd>10,000元 <a href="" class="btn btn_red">领投</a></dd>
+				</dl>
+				<dl class="fixLine1">
+					<dt>投资金额:</dt>
+					<dd><input type="text" id="invVol" placeholder="最高可投金额 30,000元"></dd>
+					<dd><span class="attachTip noticeTip"><i class="f_l">最高:<b>3000,000</b>元</i><i class="f_r">预计月收益：<b>200</b>元</i></span></dd>
+				</dl>
+				<dl class="m_t_10">
+					<dt class="pt_10">安全密码:</dt>
+					<dd><input type="text"  placeholder="请输入安全密码"></dd>
+				</dl>
+				<dl class="submit">
+					<dt> </dt>
+					<!--<dd><a href="" class="btn btn_red">立即投资</a></dd>-->
+					<dd><a href="" class="btn btn_gray">立即投资</a>  <span class="font_red m_l_10"> 请先进行 <a href="">登录</a> </span></dd>
+				</dl>
+			</div>
+			<!--<script>-->
+				<!--buildDom('#invVol');-->
+				<!--document.querySelector('#invVol').setStyle('height:20px;line-height:20px;color:#000;font-size:12px;overflow:hidden;').bottom().notice('<i style="float:left">最高:<b style="font-weight:700">3000,000</b>元</i><i style="float:right">预计月收益：<b style="color:#eb4636">200</b>元</i>')-->
+			<!--</script>-->
+			<div class="lender">
+				<div class="basicInfo">
+					<strong>借款人信息</strong>
+					<dl>
+						<dt>手机号:</dt>
+						<dd class="bold">138****479</dd>
+					</dl>
+					<dl>
+						<dt>借款人:</dt>
+						<dd class="bold">安先生</dd>
+					</dl>
+					<dl>
+						<dt>身份认证:</dt>
+						<dd class="green">已认证</dd>
+					</dl>
+					<i class="seal"></i>
+				</div>
+				<em>项目介绍</em>
+				<p>项目总额15万元，本项目借款人主要用于股票融资，提供 18万市值的股票抵押物。</p>
+				<p>项目年息收益<b class="red">25.25%</b>。</p>
+				<p>项目借款完成后，本站提供15万元的股票账户给借款人操盘，该账户只能股票买卖。</p>
+				<p>平台对股票账户进行实时监管，一旦账户资金低于14.50万则强制平仓，以保证本金及收益安全，投资无风险。</p>
+				<span id="cutdown"></span>
+				<script>
+					;(function(){
+						var cutdown = document.getElementById('cutdown'),
+							overplus = 10000,
+							limit = [86400,3600,60,1],
+							unit = ['天','小时','分','秒'],
+							idx = 0;
+						function getTimeStr(t,s){
+							var str = s || '',
+								ints = ~~(t/limit[idx]),
+								rem = t % limit[idx];
+							str += ints ? ints + unit[idx] : (s ? 0 + unit[idx] : '');
+							++idx;
+							return idx >= limit.length ? str : getTimeStr(rem,str)
+						}
+						!function(){
+							var __this = arguments.callee,__arguments = arguments;
+							--overplus;
+							idx = 0;
+							if(overplus){
+								cutdown.innerHTML = '项目还剩' + getTimeStr(overplus) + '结束';
+								return setTimeout(function() {
+										__this.apply(this,__arguments)
+									}, 1000);
+							}
+							cutdown.innerHTML = "项目已结束";
+						}()
+					})();
+				</script>
+			</div>
+		</div>
+		<div class="bidList">
+			<p><b>投标记录(<i>10</i>)</b><b>投标笔数:<i>10</i>笔</b><b>投标金额:<i class="red">￥117,160</i></b></p>
+			<dl>
+				<dt><span>投标人</span><span>投标金额</span><span>收益</span><span>投标日期</span></dt>
+				<dd><span>138****479</span><span>2000</span><span class="red">61.25</span><span>2015-06-04 11:14:23</span></dd>
+				<dd><span>138****479</span><span>2000</span><span class="red">61.25</span><span>2015-06-04 11:14:23</span></dd>
+				<dd><span>138****479</span><span>2000</span><span class="red">61.25</span><span>2015-06-04 11:14:23</span></dd>
+				<dd><span>138****479</span><span>2000</span><span class="red">61.25</span><span>2015-06-04 11:14:23</span></dd>
+				<dd><span>138****479</span><span>2000</span><span class="red">61.25</span><span>2015-06-04 11:14:23</span></dd>
+				<dd><span>138****479</span><span>2000</span><span class="red">61.25</span><span>2015-06-04 11:14:23</span></dd>
+				<dd><span>138****479</span><span>2000</span><span class="red">61.25</span><span>2015-06-04 11:14:23</span></dd>
+				<dd><span>138****479</span><span>2000</span><span class="red">61.25</span><span>2015-06-04 11:14:23</span></dd>
+			</dl>
+		</div>
+	</div>
+<!-- 投资（开始投资1）.jpg end -->
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+
+<!--底部-->
+<div id="footer">
+	<div class="w">
+		<p class="nav_sub"><a href="">关于我们</a>|<a href="">服务条款</a>|<a href="">帮助中心</a></p>
+		<p class="server"> <i class="icons icon_qqs"></i>官方QQ群4006660888  <i class="icons icon_telephone"></i>24小时服务电话4000-898-000</p>
+		<p class="server2">
+			<a class="weixin"><i class="icons icon_weixin_b"><span></span></i></a>
+			<a href="#"><i class="icons icon_weibo_b"> </i></a>
+		</p>
+		<p>版权所有 © 北京朋乐投资管理有限公司 丨 京ICP备15016693号</p>
+	</div>
+</div>
+</body>
+</html>

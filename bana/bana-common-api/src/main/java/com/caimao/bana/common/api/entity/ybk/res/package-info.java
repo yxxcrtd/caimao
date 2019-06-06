@@ -1,0 +1,1 @@
+package com.caimao.bana.common.api.entity.ybk.res;

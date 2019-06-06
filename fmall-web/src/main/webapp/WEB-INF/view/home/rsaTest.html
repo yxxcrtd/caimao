@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RSA加密测试页面</title>
+</head>
+<body>
+<div>
+    <form action="/_rsa_test" method="post">
+        <h2>RSA加密测试</h2>
+        <p>公钥（BASE64编码）：</p>
+        <p>MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDOI53uYwwr+M+Gniyx3iWU6CFi+FiF1oj4SBJK/Nzno133XfUIOcuf2ykJjpuP8b2JfGg5fUqLiDBNHZEoIbQAPw4hRZi1+hF5mvhdwIR8E1UK1YeJVpRY6AymW/IhqlxLGhdL49FvCKoJNORUH7wRCmH3gj+ly4zLHmRD2OEJnwIDAQAB</p>
+        <hr/>
+        <p>使用公钥进行RSA加密，然后将加密后进行 （BASE64编码）或转成（十六进制字符串，小写）</p>
+        <p>例如：（示例加密字符串，BASE64）</p>
+        <p>kxyEzcSHbI5SgybbO0DO6jnwBcWHD9lNoXfEwjEqsCrj9e1EQ1naLRrceHm3K9oyv6CjYg9h1vaNUcidlW6DPCzxCgWe9RIgoJAyo9TaOnZUYeNyKb1KQ2dXrKSTx/upftDZhgPjjZjSf3oYfB+2hTVrqPCsoXL6Kf4nkybL1SY=</p>
+        <p>例如：（示例加密字符串，十六进制）</p>
+        <p>90ece170807e85cc3f18db4219f984ea43a1faf0bc037240d6506c4b0129576ebd73bc3eedc21fb629447d3ef630e01c5b154205088c2ec5beeccf3192cf078f872d4100c560921a8ac3f1e8f926e75b21be50f425cfa2651a16e286fe4e0761b2cdd95d7ddbe03a237880641c1ee85ed368b58bcb05025eeed9774a2a044a74</p>
+        <div>
+            <p>请在下输入加密后的字符串</p>
+            <textarea type="text" name="mi" style="width: 500px; height: 100px;">${mi}</textarea>
+            <p>解密后的字符串</p>
+            <p>${target}</p>
+            <input type="submit" name="验证" />
+        </div>
+    </form>
+
+
+</div>
+
+</body>
+</html>

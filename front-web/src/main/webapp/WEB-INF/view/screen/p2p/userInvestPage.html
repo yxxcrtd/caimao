@@ -1,0 +1,102 @@
+<#assign controller="P2PuserInvestPage"/>
+<#include 'layout/layout.html'/>
+<link rel="stylesheet" type="text/css"
+      href="${dojoUrl}/app/resources/p2p/css/p2p.css" />
+<#macro content>
+    <div class="content">
+        <div class="grid1000 main clearfix">
+            <div class="conside" id="sidemenuctn" style="position: absolute;width: 145px;">
+            </div>
+            <!--框架-->
+            <div class="content-wrap" style="width: 820px;padding-top: 20px;">
+                <div class="targetInfo">
+                    <div class="myAssets">
+                        <div class="outbox">
+                            <div class="unitbox">
+                                <p>累计投资 <b><i id="userTotalInvestment">0</i>元</b></p>
+                                <dl>
+                                    <dt style="height: 60px;line-height: 30px;">已收本金<b><span id="userTotalMarginReceived">0</span>元</b></dt>
+                                    <dd style="height: 60px;line-height: 30px;">待收本金<b><span id="userTotalMarginClosed">0</span>元</b></dd>
+                                </dl>
+                            </div>
+                            <div class="unitbox">
+                                <p>累计收益 <b><i id="userTotalIncome">0</i>元</b></p>
+                                <dl>
+                                    <dt style="height: 60px;line-height: 30px;">已收利息<b><span id="userTotalInterestReceived">0</span>元</b></dt>
+                                    <dd style="height: 60px;line-height: 30px;">待收利息<b><span id="userTotalInterestClosed">0</span>元</b></dd>
+                                </dl>
+                            </div>
+                            <div class="unitbox">
+                                <p style="margin-bottom: 15px;">可用余额 <b><i id="userAvalaibleAmount">0</i>元</b></p>
+                                <a href="${baseUrl}/p2p/targetPage.htm" class="invBtn">投资</a>
+                            </div>
+                            <div class="unitbox">
+                                <a href="${baseUrl}/account/recharge.htm" class="recharge">充值</a>
+                                <a href="${baseUrl}/account/withdraw.htm" class="deposit">取现</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="myinv">
+                        <strong>我的投资</strong>
+                        <div class="frame-all frame-all-box" style="width: 800px;">
+                            <div class="filter-loan" style="padding: 0;">
+                                <div class="clearfix">
+                                    <div class="cm-left filter-date">
+                                        <span class="filter-loan-th">起止日期：</span>
+                                        <div id="daterangectn" style="margin-left: 90px;"></div>
+                                        <div class="filter-button">
+                                            <a id="inquirybutton" href="javascript:void(0)"
+                                               class="ui-button ui-button-sgray"><b
+                                                    class="ui-button-text am-ft-sm">查询</b></a>
+                                        </div>
+                                    </div>
+                                    <div id="datequickselectctn" class="cm-left second-left"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix" style="margin: 10px 0;">
+                            <span class="cm-left filter-loan-th">状态：</span>
+                            <ul id="filterlist" class="cm-left listLateral list-filter">
+                                <li class="list-filter-item" data-type="">
+                                    <a href="javascript:void(0)" class="active">全部</a>
+                                </li>
+                                <li class="list-filter-item" data-type="0">
+                                    <a href="javascript:void(0)">未满标</a>
+                                </li>
+                                <li class="list-filter-item" data-type="1">
+                                    <a href="javascript:void(0)">已满标</a>
+                                </li>
+                                <li class="list-filter-item" data-type="2">
+                                    <a href="javascript:void(0)">已流标</a>
+                                </li>
+                                <li class="list-filter-item" data-type="3">
+                                    <a href="javascript:void(0)">收益中</a>
+                                </li>
+                                <li class="list-filter-item" data-type="4">
+                                    <a href="javascript:void(0)">已还款</a>
+                                </li>
+                                <li class="list-filter-item" data-type="5">
+                                    <a href="javascript:void(0)">已取消</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="invList">
+                        <dl id="investBox">
+                            <script type="text/x-tmpl">
+                                <dt><span style="width:170px;">投标项目</span><span>投标金额</span><span>年息收益</span><span>利息收益</span><span style="width:100px;">投资时间</span><span style="width:100px;">到期时间</span><span>状态</span><span>操作</span></dt>
+                                <% for(var i = 0,l = data.length; i < l; i++){%>
+                                <dd><span style="width:170px;"><%=data[i].targetName%></span><span><%=~~(data[i].investValue / 100)%>元</span><span><%=parseInt(data[i].yearRate * 10000) / 100%>%</span><span><%=parseInt(data[i].payInterest) / 100%>元</span><span style="width:100px;"><%=new Date(parseInt(data[i].investCreated)).toLocaleDateString()%></span><span style="width:100px;"><%=(data[i].expirationDatetime?new Date(parseInt(data[i].expirationDatetime)).toLocaleDateString():'')%></span><span class="<%=(data[i].investStatus == 3?"green":"")%>"><%=(data[i].investStatus == 0?"未满标":data[i].investStatus == 1?"已满标":data[i].investStatus == 2?"已流标":data[i].investStatus == 3?"收益中":data[i].investStatus == 4?"已还款":"已取消")%></span><span><a target="_blank" href="${baseUrl}/p2p/userInvestDetail.htm?investId=<%=data[i].investId%>">查看详情</a></span></dd>
+                                <%}%>
+                            </script>
+                        </dl>
+                    </div>
+                    <div class="pagination-holder clearfix">
+                        <div id="light-pagination" class="pagination"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</#macro>

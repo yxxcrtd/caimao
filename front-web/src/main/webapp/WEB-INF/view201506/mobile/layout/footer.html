@@ -1,0 +1,89 @@
+<#if footerContent ??>
+<div class="am-footer am-footerBtn">
+<@footerContent/>
+<#else>
+<div class="am-footer">
+</#if>
+<script type="text/javascript">
+	function is_weixn(){
+        return true;
+	    var ua = navigator.userAgent.toLowerCase();  
+	    if(ua.match(/MicroMessenger/i)=="micromessenger") {  
+	        return true;  
+	    } else {  
+	        return false;  
+	    }  
+	} 
+	if(is_weixn()){
+		var html = '<div class="am-grid">'+
+        '<a id="navigation0" class="am-grid-item am-grid-item-25" href="${basePath}/mobile/index.htm">'+
+        '<p class="am-pt-5"><i class="type-icon footerIndex-ico"></i></p>'+
+        '<p><span class="am-ft-sm am-ft-center">首页</span></p>'+
+        '</a>'+
+         '<a id="navigation1" class="am-grid-item am-grid-item-25" href="${basePath}/mobile/indexPz.htm">'+
+        '<p class="am-pt-5"><i class="type-icon footerAssets-ico"></i></p>'+
+        '<p><font class="am-ft-sm am-ft-center">融资</font></p>'+
+        '</a>'+
+        '<a id="navigation2" class="am-grid-item am-grid-item-25" href="${basePath}/mobile/trade/assets.htm">'+
+        '<p class="am-pt-5"><i class="type-icon footerMoney-ico"></i></p>'+
+        '<p><font class="am-ft-sm am-ft-center">交易</font></p>'+
+        '</a>'+
+        '<a id="navigation3" class="am-grid-item am-grid-item-25" href="${basePath}/mobile/user/index.htm">'+
+        '<p class="am-pt-5"><i class="type-icon footerPerson-ico"></i></p>'+
+        '<p><font class="am-ft-sm am-ft-center">个人</font></p>'+
+        '</a>'+
+  		'</div>';
+		document.write(html);
+		var contents = $(".content");
+		for(var i in contents){
+			var bottom = parseInt(contents.eq(i).css("padding-bottom")) +56;
+			contents.eq(i).css({"padding-bottom":bottom+"px"});
+		}
+		/* var footerBottom = parseInt($(".am-footerBtn").css("height")) +47;
+		 $(".am-footerBtn").css({"height":footerBottom+"px"}); */
+		
+	}
+    function hide_headerAndFooter() {
+        //document.cookie = 'caimao_pz=1; path=/';
+        if (document.cookie.indexOf('caimao_pz') != -1) {
+            $('#header').hide();
+            $('.am-footer').hide();
+            $('.app_hide').hide();
+        } else {
+            $('#header').show();
+            $('.am-footer').show();
+            $('.app_hide').show();
+        }
+    }
+    //document.cookie = 'caimao_pz=1; path=/';
+    hide_headerAndFooter();
+</script>
+
+	 <!-- <div class="am-grid">
+        <a id="navigation0" class="am-grid-item am-grid-item-25" href="${basePath}/mobile/index.htm">
+        <p class="am-pt-5"><i class="type-icon footerIndex-ico"></i></p>
+        <p><span class="am-ft-sm am-ft-center">首页</span></p>
+        </a>
+         <a id="navigation1" class="am-grid-item am-grid-item-25" href="${basePath}/mobile/indexPz.htm">
+        <p class="am-pt-5"><i class="type-icon footerAssets-ico"></i></p>
+        <p><font class="am-ft-sm am-ft-center">融资</font></p>
+        </a>
+        <a id="navigation2" class="am-grid-item am-grid-item-25" href="${basePath}/mobile/tender.htm">
+        <p class="am-pt-5"><i class="type-icon footerMoney-ico"></i></p>
+        <p><font class="am-ft-sm am-ft-center">OK宝</font></p>
+        </a>
+        <a id="navigation3" class="am-grid-item am-grid-item-25" href="${basePath}/mobile/user/index.htm">
+        <p class="am-pt-5"><i class="type-icon footerPerson-ico"></i></p>
+        <p><font class="am-ft-sm am-ft-center">个人</font></p>
+        </a>
+  </div>  -->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?40c3749d7e01ea226451c05cc78ee57f";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+</div>

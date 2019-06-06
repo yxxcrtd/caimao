@@ -1,0 +1,56 @@
+<#assign bg="bg-login"/>
+<#assign header="财猫网登录"/>
+<#assign title="财猫网登录"/>
+<#assign footer="3"/>
+<#assign controller="login"/>
+<#include 'mobile/layout/layout.html'/>
+<#macro content>
+<article class="con-login con-spacing25 content">
+<!--头-->
+<p class="headPortrait"><img src="${basePath}/mobile/images/headPortrait/img-head01.jpg"/></p>
+<!--头-->
+
+<!--登录-->
+<aside class="tx-login">
+<ul class="am-listLogin">
+        <li class="am-listLogin-item">
+      <div class="am-flexbox">
+        <div class="am-flexbox-item icon-item">
+        <i class="type-icon user-ico"></i></div>
+         <div class="am-flexbox-item"><span class="ui-form-field am-left-15"><input id="login_name" type="text" autocomplete="off" class="text_input" defaultvalue="输入用户名" maxlength="11" value="" placeholder="输入用户名">
+</span></div>
+        </div>
+        </li>
+        <li class="am-listLogin-item">
+        <div class="am-flexbox">
+        <div class="am-flexbox-item icon-item"><i class="type-icon password-ico"></i></div>
+         <div class="am-flexbox-item"><span class="ui-form-field am-left-15"><input id="login_pwd" type="password" class="text_input"  defaultvalue="输入密码" maxlength="18" value="" placeholder="输入密码">
+</span></div>
+        </div>
+
+        </li>
+    </ul>
+</aside>
+<!--登录-->
+
+<!--按钮-->
+<div class="btn-page btn-page-center">
+        <a class="am-button am-button-red" id="login_button">
+        <span class="am-ft-white">立即登录</span>
+        </a>
+        <a href="${basePath}/mobile/user/forgetloginpwd.htm" class="am-button am-button-textRed am-mt-10">
+        <span class="">忘记密码？</span>
+        </a>
+        
+        <a href="${basePath}/mobile/user/register.htm" class="am-button am-button-lineRed" style="margin-top:40px;" >
+        <span class="">注册账号</span>
+        </a>
+        
+</div>
+<!--按钮-->
+
+</article>
+</#macro>
+
+
+

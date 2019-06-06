@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="AdminUser">
+    <select id="getLogin" resultType="com.caimao.zeus.admin.entity.User">
+        SELECT id,email,account,name,phone,pwd,status,created,updated,last_login_time AS lastLoginTime
+        FROM zeus_user
+        WHERE account = #{account} AND pwd = #{pwd} AND status = 0
+    </select>
+
+    <select id="getRuleByUrl" resultType="com.caimao.zeus.admin.entity.Rule">
+        SELECT id,pid,rule,rule_name AS ruleName,sort,rule_type AS ruleType,status,is_public AS isPublic,created
+        FROM zeus_rule
+        WHERE rule = #{rule}
+    </select>
+
+    <select id="getRuleById" resultType="com.caimao.zeus.admin.entity.Rule">
+        SELECT id,pid,rule,rule_name AS ruleName,sort,rule_type AS ruleType,status,is_public AS isPublic,created
+        FROM zeus_rule
+        WHERE id = #{id}
+    </select>
+
+    <select id="checkUserRule" resultType="com.caimao.zeus.admin.entity.UserRule">
+        SELECT user_id AS userId, rules
+        FROM zeus_user_rule
+        WHERE FIND_IN_SET(#{ruleId}, rules) AND user_id = #{userId}
+    </select>
+
+    <select id="getUserRuleStr" resultType="string">
+        SELECT rules
+        FROM zeus_user_rule
+        WHERE user_id = #{userId}
+    </select>
+
+    <select id="getUserRuleById" resultType="com.caimao.zeus.admin.entity.UserRule">
+        SELECT user_id AS userId, rules
+        FROM zeus_user_rule
+        WHERE user_id = #{userId}
+    </select>
+
+    <select id="getUserRuleDetail" resultType="com.caimao.zeus.admin.entity.Rule">
+        SELECT id,pid,rule,rule_name AS ruleName,sort,rule_type AS ruleType,status,is_public AS isPublic,created
+        FROM zeus_rule
+        WHERE id IN (${ruleStr})
+        ORDER BY sort DESC, id ASC, rule_type DESC
+    </select>
+
+    <select id="getAllRule" resultType="com.caimao.zeus.admin.entity.Rule">
+        SELECT id,pid,rule,rule_name AS ruleName,sort,rule_type AS ruleType,status,is_public AS isPublic,created
+        FROM zeus_rule
+        ORDER BY sort DESC, id ASC, rule_type DESC
+    </select>
+
+    <select id="getUserList" resultType="com.caimao.zeus.admin.entity.User">
+        SELECT
+        id,
+        email,
+        account,
+        name,
+        phone,
+        pwd,
+        status,
+        created,
+        updated,
+        last_login_time AS lastLoginTIme
+        FROM zeus_user
+        ORDER BY id ASC
+    </select>
+
+    <select id="getUserById" resultType="com.caimao.zeus.admin.entity.User">
+        SELECT id,email,account,name,phone,pwd,status,created,updated,last_login_time AS lastLoginTime
+        FROM zeus_user
+        WHERE id = #{id}
+    </select>
+
+    <insert id="insertUser" parameterType="com.caimao.zeus.admin.entity.User" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO zeus_user (email, account, name, phone, pwd, status, created, updated)
+        VALUES (#{email}, #{account}, #{name}, #{phone}, #{pwd}, ${status}, unix_timestamp(), unix_timestamp())
+    </insert>
+
+    <insert id="insertUserRule" parameterType="com.caimao.zeus.admin.entity.UserRule" useGeneratedKeys="true" keyProperty="userId">
+        INSERT INTO zeus_user_rule (user_id, rules)
+        VALUES (#{userId}, #{rules})
+    </insert>
+
+    <update id="updateUserRule" parameterType="map">
+        UPDATE zeus_user_rule
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="_parameter.containsKey('rules')">
+                rules=#{rules},
+            </if>
+        </trim>
+        <where>
+            user_id=#{userId}
+        </where>
+    </update>
+
+    <update id="updateUser" parameterType="map">
+        UPDATE zeus_user
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="_parameter.containsKey('email')">
+                email=#{email},
+            </if>
+            <if test="_parameter.containsKey('name')">
+                name=#{name},
+            </if>
+            <if test="_parameter.containsKey('phone')">
+                phone=#{phone},
+            </if>
+            <if test="_parameter.containsKey('pwd')">
+                pwd=#{pwd},
+            </if>
+            <if test="_parameter.containsKey('status')">
+                status=#{status},
+            </if>
+            <if test="_parameter.containsKey('updated')">
+                updated=#{updated},
+            </if>
+        </trim>
+        <where>
+            id=#{id}
+        </where>
+    </update>
+
+    <update id="userStatus" parameterType="map">
+        UPDATE zeus_user
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="_parameter.containsKey('status')">
+                status=#{status},
+            </if>
+            <if test="_parameter.containsKey('updated')">
+                updated=#{updated},
+            </if>
+        </trim>
+        <where>
+            id=#{id}
+        </where>
+    </update>
+
+    <delete id="userDel" parameterType="java.lang.Long" >
+        delete from zeus_user
+        where id = #{id}
+    </delete>
+
+    <insert id="insertRule" parameterType="com.caimao.zeus.admin.entity.Rule" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO zeus_rule (pid,rule,rule_name,sort,rule_type,status,is_public,created)
+        VALUES (#{pid}, #{rule}, #{ruleName}, #{sort}, #{ruleType}, #{status}, #{isPublic}, unix_timestamp())
+    </insert>
+
+    <update id="updateRule" parameterType="map">
+        UPDATE zeus_rule
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="_parameter.containsKey('pid')">
+                pid=#{pid},
+            </if>
+            <if test="_parameter.containsKey('rule')">
+                rule=#{rule},
+            </if>
+            <if test="_parameter.containsKey('ruleName')">
+                rule_name=#{ruleName},
+            </if>
+            <if test="_parameter.containsKey('sort')">
+                sort=#{sort},
+            </if>
+            <if test="_parameter.containsKey('ruleType')">
+                rule_type=#{ruleType},
+            </if>
+            <if test="_parameter.containsKey('status')">
+                status=#{status},
+            </if>
+            <if test="_parameter.containsKey('isPublic')">
+                is_public=#{isPublic},
+            </if>
+        </trim>
+        <where>
+            id=#{id}
+        </where>
+    </update>
+
+    <delete id="ruleDel" parameterType="java.lang.Long" >
+        delete from zeus_rule
+        where id IN (${ids})
+    </delete>
+
+    <update id="updateRuleSort" parameterType="map">
+        UPDATE zeus_rule
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="_parameter.containsKey('sort')">
+                sort=#{sort},
+            </if>
+        </trim>
+        <where>
+            id=#{id}
+        </where>
+    </update>
+
+    <select id="ruleHave" resultType="hashmap">
+        SELECT t2.`account`, t2.`name` FROM zeus_user_rule t1 LEFT JOIN zeus_user t2 ON t1.`user_id` = t2.`id` WHERE FIND_IN_SET(#{id}, t1.`rules`)
+    </select>
+</mapper>

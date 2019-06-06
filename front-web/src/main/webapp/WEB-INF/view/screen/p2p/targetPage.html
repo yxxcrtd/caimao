@@ -1,0 +1,51 @@
+<#assign controller="P2PTargetPage"/>
+<#include 'layout/layout.html'/>
+<link rel="stylesheet" type="text/css"
+      href="${dojoUrl}/app/resources/p2p/css/p2p.css" />
+<#macro content>
+    <div class="content">
+        <div class="grid1000 main clearfix">
+            <div class="conside" id="sidemenuctn" style="position: absolute;width: 145px;">
+            </div>
+            <!--框架-->
+            <div class="content-wrap" style="width: 820px;">
+                <div class="tab" id="tab">
+                    <div class="head">
+                        <span class="select"><i></i>可投项目 (<b id="totalTargetA">0</b>)</span>
+                        <span><i></i>满标项目 (<b id="totalTargetB">0</b>)</span>
+                    </div>
+                    <div class="panel" style="padding: 20px;">
+                        <table class="targetList" id="targetList">
+                            <thead>
+                            <tr>
+                                <td><span>名称</span></td>
+                                <td><span class="rank" act="changeRank" data-val="yearRate">年化收益率</span></td>
+                                <td><span class="rank" act="changeRank" data-val="liftTime">借款期限</span></td>
+                                <td><span class="rank" act="changeRank" data-val="targetRate">进度</span></td>
+                                <td clospan="2"><span class="rank" act="changeRank" data-val="targetOver">剩余金额</span></td>
+                            </tr>
+                            </thead>
+                            <tbody id="targetBox">
+                            <script type="text/x-tmpl">
+                                <% for(var i = 0,l = data.length; i < l; i++){%>
+                                <tr>
+                                    <td class="list-name"><em><%=data[i].targetName%></em><i><%=data[i].targetAmount%></i>万</td>
+                                    <td class="list-rate" style="width: 12%;"><%=data[i].yearRate%>%</td>
+                                    <td class="list-time" style="width: 10%;"><%=data[i].liftTime%> 天</td>
+                                    <td class="list-progress"><b><i style="width:<%=data[i].targetRate%>%"></i></b><span><%=data[i].targetRate%>%</span></td>
+                                    <td class="list-left" style="width: 14%;">　￥<%=data[i].targetOver%></td>
+                                    <td class="list-ctrl"><a href="${baseUrl}/p2p/targetDetail.htm?targetId=<%=data[i].targetId%>"><%=data[i].targetStatus == 0 ? "投资" : "查看"%></a></td>
+                                </tr>
+                                <%}%>
+                            </script>
+                            </tbody>
+                        </table>
+                        <div class="pagination-holder clearfix">
+                            <div id="light-pagination" class="pagination"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</#macro>

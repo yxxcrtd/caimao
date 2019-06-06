@@ -1,0 +1,379 @@
+<!doctype html>
+<html>
+<#include "config.html"/>
+<head>
+    <meta charset="utf-8">
+    <title>交易-财猫网</title>
+    <link rel="stylesheet" type="text/css" href="${dojoUrl}/style/page/trade.css?v=${jsVersion}">
+    <script src="https://www.caimao.com/q/js/prod/lib.js?v=${jsVersion}" type="text/javascript"></script>
+    <script src="https://www.caimao.com/q/js/prod/layout.js?v=${jsVersion}" type="text/javascript"></script>
+    <script src="https://www.caimao.com/q/js/prod/chart.js?v=${jsVersion}" type="text/javascript"></script>
+    <!--<script src="${dojoUrl}/js/kline/lib.js?v=${jsVersion}" type="text/javascript"></script>
+    <script src="${dojoUrl}/js/kline/layout.js?v=${jsVersion}" type="text/javascript"></script>
+    <script src="${dojoUrl}/js/kline/chart.js?v=${jsVersion}" type="text/javascript"></script>-->
+    <script src="${dojoUrl}/js/trade.js?v=${jsVersion}" type="text/javascript"></script>
+</head>
+<body>
+<#include 'include/page/head.html'/>
+<!--内容区-->
+<div id="main" stop="1">
+    <div class="w sec_main" stop="1">
+        <div class="float_hq_sign" id="control_stock_box">展开行情图>></div>
+        <div class="main2" id="stockHqBox" style="display: none" stop="1">
+            <div class="main2-left" style="position: relative;">
+                <ul class="all_stock_list_left">
+                    <li onclick="changeMarketType(70)"><a href="javascript:;">沪深<span>》</span></a></li>
+                    <li onclick="changeMarketType(24)"><a href="javascript:;">中小板<span>》</span></a></li>
+                    <li onclick="changeMarketType(25)"><a href="javascript:;">创业板<span>》</span></a></li>
+                    <li onclick="changeMarketType(10)"><a href="javascript:;">沪A<span>》</span></a></li>
+                    <li onclick="changeMarketType(11)"><a href="javascript:;">沪B<span>》</span></a></li>
+                    <li onclick="changeMarketType(12)"><a href="javascript:;">沪债券<span>》</span></a></li>
+                    <li onclick="changeMarketType(13)"><a href="javascript:;">沪基金<span>》</span></a></li>
+                    <li onclick="changeMarketType(20)"><a href="javascript:;">深A<span>》</span></a></li>
+                    <li onclick="changeMarketType(21)"><a href="javascript:;">深B<span>》</span></a></li>
+                    <li onclick="changeMarketType(22)"><a href="javascript:;">深债券<span>》</span></a></li>
+                    <li onclick="changeMarketType(23)"><a href="javascript:;">深基金<span>》</span></a></li>
+                    <li onclick="changeMarketType(101)"><a href="javascript:;">开放基金<span>》</span></a></li>
+                    <li onclick="changeMarketType(102)"><a href="javascript:;">封闭基金<span>》</span></a></li>
+                    <li onclick="changeMarketType(103)"><a href="javascript:;">ETF<span>》</span></a></li>
+                    <li onclick="changeMarketType(104)"><a href="javascript:;">LOF<span>》</span></a></li>
+                </ul>
+                <!--<ul class="all_stock_list_left_box" style="display:none;">
+                    <#list 1..2 as t>
+                        <li<#if t%5 == 0> style="border-right:0"</#if>><a href="#">电子器件</a></li>
+                    </#list>
+                </ul>-->
+            </div><!--左边的盒子-->
+            <div class="main2-center" style="position: relative" id="stockDetailMain">
+                <div class="main2-center-3">
+                    <div style="padding-top: 15px;">
+                        <h3 style="float: left"><span class="stock_detail_name" id="stock_detail_name">股票名称</span>(<span id="stock_detail_code">股票代码</span>)</h3>
+                        <p class="top stock_price_p" id="stock_detail_price"><b style="color: #fff">0</b><span class="symbol_jian"></span></p>
+                        <div class="stock_detail_btn_box"><a class="btn btn_red" id="mai" href="javascript:stockDetailBuy()">买入</a><a class="btn" id="maic" href="javascript:stockDetailSell()">卖出</a><a class="btn btn_blue" id="jia" href="javascript:;" onclick="stockDetailAddOptional(this)">加入自选</a> </div>
+                    </div>
+                </div>
+                <div class="kline_btn">
+                    <span act="kt" data-val="timeShare">分时</span><span act="changePeriod" data-val="1min">1分钟</span><span act="changePeriod" data-val="5min">5分钟</span><span act="changePeriod" data-val="15min">15分钟</span><span act="changePeriod" data-val="30min">30分钟</span><span act="changePeriod" data-val="1hour">1小时</span><span act="changePeriod" data-val="1day">日K</span><span act="changePeriod" data-val="1week">周K</span><span act="changePeriod" data-val="1month">月K</span>
+                </div>
+                <div class="main2-center-6 kline" id="kline" act="cross" style="background: #fff;position: relative"></div>
+            </div><!--中间的盒子-->
+            <div class="main2-center" style="display: none" id="stockListMain">
+                <div style="height: 40px">
+                    <ul class="zhishu_box">
+                        <li id="zhishu_sh"><b>上证指数</b><span>0</span><label>0%</label></li>
+                        <li id="zhishu_sz"><b>深证成指</b><span>0</span><label>0%</label></li>
+                        <li id="zhishu_szc"><b>创业板指</b><span>0</span><label>0%</label></li>
+                    </ul>
+                    <a class="btn backStockDetail" href="javascript:;" onclick="showStockDetail()" style="display: none">返回详情</a>
+                </div>
+                <div class="all_stock_list">
+                    <ul style="border-top: 1px solid #D1D1CF;background-color: #F6F7FB;">
+                        <li onclick="stock_list_sort(this, 49);" style="width: 76px;cursor: pointer">　代码<span></span></li>
+                        <li style="width: 85px;">名称</li>
+                        <li>最新价</li>
+                        <li>涨跌额</li>
+                        <li style="cursor: pointer" onclick="stock_list_sort(this, 10);">涨跌幅<span class="symbol_down"></span></li>
+                        <li>开盘</li>
+                        <li>最高</li>
+                        <li>最低</li>
+                        <li>昨收</li>
+                        <li>振幅</li>
+                        <li>市盈</li>
+                        <li>总手</li>
+                        <li onclick="stock_list_sort(this, 46);" style="cursor: pointer">换手<span></span></li>
+                        <li onclick="stock_list_sort(this, 30);" style="width: 80px;cursor: pointer">金额<span></span></li>
+                        <li style="width: 40px"></li>
+                    </ul>
+                    <div id="stock_list_box" style="height: 600px;overflow-y: scroll;overflow-x: hidden"></div>
+                </div>
+            </div><!--中间的盒子-->
+        </div>
+        <div class="sec_main clear_fix" stop="1">
+            <!--左右布局-->
+            <div class="left_bar">
+                <div style="position: relative">
+                    <input type="text" autocomplete="off" placeholder="简称/拼音/代码" id="optional_stock_search">
+                    <ul id="optional_stock_search_list" style="display: none;"></ul>
+                </div>
+                <div class="left_bar_1">
+                    <div class="left_bar_1_1">
+                        <p><img src="../../../static/img/zi.jpg"><a href="javascript:;">我的自选</a> </p>
+                    </div>
+                    <div class="left_bar_1_2">
+                        <table class="optional_stock">
+                            <thead>
+                            <tr>
+                                <td width="105">名称</td>
+                                <td width="70">价格(元)</td>
+                                <td width="55">涨跌幅</td>
+                                <td></td>
+                            </tr>
+                            </thead>
+                            <tbody id="user_optional_stock">
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="left_bar_1_1 hot_optional_stock_x" style="margin-top: 20px;">
+                        <p><img src="../../../static/img/gupiao.jpg"><a href="javascript:;">热门股票</a> </p>
+                    </div>
+                    <div class="left_bar_1_2 hot_optional_stock_x">
+                        <table class="optional_stock">
+                            <thead>
+                            <tr>
+                                <td width="105">名称</td>
+                                <td width="70">价格(元)</td>
+                                <td width="55">涨跌幅</td>
+                                <td></td>
+                            </tr>
+                            </thead>
+                            <tbody id="hot_optional_stock">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="right_bar clear_fix">
+                <div class="right_bar_1 combine_account_box">
+                    <ul id="combine_account_box">
+                        <li><span>操作账户</span></li>
+                        <#list homsAccountList as homsAccount>
+                            <li onclick="changeCombineId(this, '${homsAccount.homsCombineId}','${homsAccount.homsFundAccount}')" style="<#if homsAccount_index == 0>color:#5588CA</#if>">${homsAccount.operatorNo}</li>
+                        </#list>
+                    </ul>
+                    <a class="btn combine_more" href="javascript:;">></a>
+                </div><!--一个多余的盒子一行字的盒子-->
+                <div class="right_bar_left">
+                    <div class="balanceLineBox">
+                        <p class="combineAmount">可用 <span style="color: #eb4636;" id="available_amount">0</span> 元</p>
+                        <p class="show_alert_stock" id="show_alert_stock"></p>
+                        <p class="unable_stock" style="float:right;"><a href="javascript:;" id="unbaleBuy">今日禁买股</a></p>
+                    </div>
+                    <div class="right_bar_left_1">
+                        <div class="tradeBox" style="float: left;" id="tradeBoxBuy">
+                            <ul class="stockList" style="display: none" data-list="buy"></ul>
+                            <input type="hidden" name="exchange_type" value="" id="exchange_type_buy">
+                            <div class="text_group">
+                                <div class="relative">
+                                    <input type="text" autocomplete="off" class="inputX stockInput" id="stockBuyCode" maxlength="6">
+                                    <span class="text_placeholder">证券代码</span>
+                                    <span class="text_note" data-text="股票名称">股票名称</span>
+                                </div>
+                            </div>
+                            <div class="text_group">
+                                <div class="relative">
+                                    <input type="text" autocomplete="off" class="inputX" id="stockBuyPrice" maxlength="8">
+                                    <span class="text_placeholder">买入价格</span>
+                                    <span class="text_note">元</span>
+                                </div>
+                            </div>
+                            <div class="text_group">
+                                <div class="relative">
+                                    <input type="text" autocomplete="off" class="inputX" id="stockBuyAmount" maxlength="8">
+                                    <span class="text_placeholder">买入数量</span>
+                                    <span class="text_note" id="buyAbleAmount"></span>
+                                </div>
+                            </div>
+                            <div class="text_group fastSelect">
+                                <a class="btn btn_fast active" href="javascript:;" onclick="buyAmountFast(this, 1);">全部</a>
+                                <a class="btn btn_fast" href="javascript:;" onclick="buyAmountFast(this, 2)">1/2</a>
+                                <a class="btn btn_fast" href="javascript:;" onclick="buyAmountFast(this, 3)">1/3</a>
+                                <a class="btn btn_fast" href="javascript:;" onclick="buyAmountFast(this, 4)">1/4</a>
+                            </div>
+                            <div class="text_group">
+                                <div class="relative">
+                                    <input type="password" class="inputX" id="stockBuyPwd" maxlength="16">
+                                    <span class="text_placeholder">安全密码</span>
+                                </div>
+                            </div>
+                            <div class="text_group">
+                                <button type="button" class="tradeBtn tradeBuy" id="stockBuyBtn" onclick="stockBuy()">买入</button>
+                            </div>
+                        </div>
+                        <div class="tradeBox" style="float: right;" id="tradeBoxSell">
+                            <ul class="stockList" data-list="sell" style="display: none"></ul>
+                            <input type="hidden" name="exchange_type" value="" id="exchange_type_sell">
+                            <div class="text_group">
+                                <div class="relative">
+                                    <input type="text" autocomplete="off" class="inputX stockInput" id="stockSellCode" maxlength="6">
+                                    <span class="text_placeholder">证券代码</span>
+                                    <span class="text_note" data-text="股票名称">股票名称</span>
+                                </div>
+                            </div>
+                            <div class="text_group">
+                                <div class="relative">
+                                    <input type="text" autocomplete="off" class="inputX" id="stockSellPrice" maxlength="8">
+                                    <span class="text_placeholder">卖出价格</span>
+                                    <span class="text_note">元</span>
+                                </div>
+                            </div>
+                            <div class="text_group">
+                                <div class="relative">
+                                    <input type="text" autocomplete="off" class="inputX" id="stockSellAmount" maxlength="8">
+                                    <span class="text_placeholder">卖出数量</span>
+                                    <span class="text_note" id="sellAbleAmount"></span>
+                                </div>
+                            </div>
+                            <div class="text_group fastSelect">
+                                <a class="btn btn_fast active" href="javascript:void(0);" onclick="sellAmountFast(this, 1);">全部</a>
+                                <a class="btn btn_fast" href="javascript:void(0);" onclick="sellAmountFast(this, 2)">1/2</a>
+                                <a class="btn btn_fast" href="javascript:void(0);" onclick="sellAmountFast(this, 3)">1/3</a>
+                                <a class="btn btn_fast" href="javascript:void(0);" onclick="sellAmountFast(this, 4)">1/4</a>
+                            </div>
+                            <div class="text_group">
+                                <div class="relative">
+                                    <input type="password" class="inputX" id="stockSellPwd" maxlength="16">
+                                    <span class="text_placeholder">安全密码</span>
+                                </div>
+                            </div>
+                            <div class="text_group">
+                                <button type="button" class="tradeBtn tradeSell" id="stockSellBtn" onclick="stockSell()">卖出</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="right_bar_left_4">
+                        <a class="hov" href="javascript:void(0);" onclick="changeLabel(this, 'hold')">持仓</a>
+                        <a href="javascript:void(0);" onclick="changeLabel(this, 'cur_entrust')">委托</a>
+                        <a href="javascript:void(0);" onclick="changeLabel(this, 'cur_deal')">成交</a>
+                    </div>
+                    <table class="stock_label" id="stock_hold">
+                        <thead>
+                        <tr>
+                            <th>代码</th>
+                            <th>股票名称</th>
+                            <th>当前数量</th>
+                            <th>可用数量</th>
+                            <th>成本</th>
+                            <th>盈亏</th>
+                            <th>盈亏比</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <script type="text/x-tmpl">
+                        <% for(var i = 0,l = data.length; i < l; i++){%>
+                        <tr>
+                            <td><b><%=data[i].stockCode%></b></td>
+                            <td><%=data[i].stockName%></td>
+                            <td><%=data[i].currentAmount%></td>
+                            <td><%=data[i].enableAmount%></td>
+                            <td><%=CMUTILS.toYuanAndCommas(data[i].costBalance)%></td>
+                            <td><%=CMUTILS.toYuanAndCommas(data[i].marketValue - data[i].costBalance)%></td>
+                            <td><%=calYK(data[i].marketValue, data[i].costBalance)%>%</td>
+                        </tr>
+                        <%}%>
+                        </script>
+                        </tbody>
+                    </table>
+
+                    <table class="stock_label" id="stock_cur_entrust" style="display: none;">
+                        <thead>
+                        <tr>
+                            <th>代码</th>
+                            <th>股票名称</th>
+                            <th>类型</th>
+                            <th>数量</th>
+                            <th>价格</th>
+                            <th>状态</th>
+                            <th>成交数量</th>
+                            <th>成交金额</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <script type="text/x-tmpl">
+                        <% for(var i = 0,l = data.length; i < l; i++){%>
+                        <tr>
+                            <td><b><%=data[i].stockCode%></b></td>
+                            <td><%=data[i].stockName%></td>
+                            <td><%=Dict.get("entrustDirection", data[i].entrustDirection)%></td>
+                            <td><%=data[i].entrustAmount%></td>
+                            <td><%=data[i].entrustPrice%></td>
+                            <td><%=Dict.get("entrustStatus", data[i].entrustStatus)%></td>
+                            <td><%=data[i].businessAmount%></td>
+                            <td><%=CMUTILS.toYuanAndCommas(data[i].businessBalance)%></td>
+                            <td><%=showCancel(data[i].entrustNo, data[i].entrustStatus)%></td>
+                        </tr>
+                        <%}%>
+                        </script>
+                        </tbody>
+                    </table>
+
+                    <table class="stock_label" id="stock_cur_deal" style="display: none;">
+                        <thead>
+                        <tr>
+                            <th>代码</th>
+                            <th>股票名称</th>
+                            <th>类型</th>
+                            <th>成交数量</th>
+                            <th>成交价格</th>
+                            <th>成交金额</th>
+                            <th>成交时间</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <script type="text/x-tmpl">
+                        <% for(var i = 0,l = data.length; i < l; i++){%>
+                        <tr>
+                            <td><b><%=data[i].stockCode%></b></td>
+                            <td><%=data[i].stockName%></td>
+                            <td><%=Dict.get("entrustDirection", data[i].entrustDirection)%></td>
+                            <td><%=data[i].businessAmount%></td>
+                            <td><%=data[i].businessPrice%></td>
+                            <td><%=CMUTILS.toYuanAndCommas(data[i].businessBalance)%></td>
+                            <td><%=CMUTILS.formatTime(data[i].businessTime)%></td>
+                        </tr>
+                        <%}%>
+                        </script>
+                        </tbody>
+                    </table>
+                </div><!--右边盒子的左边-->
+
+                <div class="right_bar_right">
+                    <p class="align_center m_t_10" ><b><a href="#" id="r_stock_name">　</a></b></p>
+                    <div class="right_bar_right_1">
+                        <ul id="stockSell5" class="stock_hq_5">
+                            <li><label>卖5</label><b></b><span></span></li>
+                            <li><label>卖4</label><b></b><span></span></li>
+                            <li><label>卖3</label><b></b><span></span></li>
+                            <li><label>卖2</label><b></b><span></span></li>
+                            <li><label>卖1</label><b></b><span></span></li>
+                        </ul>
+                        <ul id="stockBuy5" class="stock_hq_5" style="padding-top: 20px;">
+                            <li><label>买1</label><b></b><span></span></li>
+                            <li><label>买2</label><b></b><span></span></li>
+                            <li><label>买3</label><b></b><span></span></li>
+                            <li><label>买4</label><b></b><span></span></li>
+                            <li><label>买5</label><b></b><span></span></li>
+                        </ul>
+                    </div>
+                    <div class="right_bar_right_2" id="stock_ticker">
+                        <ul>
+                            <li>最新 <b><span id="stock_ticker_newest">0</span></b></li>
+                            <li>最高 <b><span id="stock_ticker_highest">0</span></b></li>
+                            <li>涨跌 <b><span id="stock_ticker_change">0</span></b></li>
+                            <li>涨幅 <b><span id="stock_ticker_increase">0%</span></b></li>
+                            <li>现手 <b><span id="stock_ticker_now">0</span></b></li>
+                            <li>涨停 <b><span id="stock_ticker_up" class="colorUp">0</span></b></li>
+                            <li>外盘 <b><span id="stock_ticker_out">0</span></b></li>
+                        </ul>
+                        <ul>
+                            <li>开盘 <b><span id="stock_ticker_open">0</span></b></li>
+                            <li>最低 <b><span id="stock_ticker_lowest">0</span></b></li>
+                            <li>总额 <b><span id="stock_ticker_amount">0</span></b></li>
+                            <li>振幅 <b><span id="stock_ticker_amplitude">0%</span></b></li>
+                            <li>总手 <b><span id="stock_ticker_total">0</span></b></li>
+                            <li>跌停 <b><span id="stock_ticker_down" class="colorDown">0</span></b></li>
+                            <li>内盘 <b><span id="stock_ticker_in">0</span></b></li>
+                        </ul>
+                        <p style="clear: both"></p>
+                    </div>
+                    <div class="right_bar_right_3">
+                        <ul class="latest_trans" id="latest_trans" style="padding-left: 0;"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<#include 'include/page/foot.html'/>
+</body>
+</html>

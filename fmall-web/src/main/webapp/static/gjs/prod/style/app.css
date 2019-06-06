@@ -1,0 +1,172 @@
+/** RESET **/
+body {
+  font-family: 'Microsoft YaHei',Lucida Grande,Lucida Sans Unicode,\5B8B\4F53;
+  -webkit-text-size-adjust: none;
+  color: #6a6a6a;
+  _font: 12px/1.5 \5B8B\4F53;
+}
+
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, p, form, input, textarea {
+  padding: 0;
+  margin: 0;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+li {
+  list-style-type: none;
+}
+
+table {
+  margin: 0 auto;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+img {
+  vertical-align: top;
+  border: 0;
+}
+
+caption, th {
+  text-align: left;
+}
+
+h1, h2, h3, h4, h5, h6, button, input, select, textarea {
+  font-size: 100%;
+  font-weight: 400;
+}
+
+i, u, em, b, strong {
+  font-style: normal;
+  text-decoration: none;
+  font-weight: 400;
+}
+
+input, textarea, button, select, button {
+  outline: none;
+  resize: none;
+  font-family: \5B8B\4F53;
+}
+
+a {
+  color: #666;
+  text-decoration: none;
+  -webkit-transition: color 0.4s ease;
+  -moz-transition: color 0.4s ease;
+  -o-transition: color 0.4s ease;
+  transition: color 0.4s ease;
+  -webkit-transition: background-color 0.4s ease;
+  -moz-transition: background-color 0.4s ease;
+  -o-transition: background-color 0.4s ease;
+  transition: background-color 0.4s ease;
+}
+a:visited {
+  text-decoration: none;
+}
+a:hover {
+  color: #5376be;
+  text-decoration: none;
+  -webkit-transition: color 0.4s ease;
+  -moz-transition: color 0.4s ease;
+  -o-transition: color 0.4s ease;
+  transition: color 0.4s ease;
+  -webkit-transition: background-color 0.4s ease;
+  -moz-transition: background-color 0.4s ease;
+  -o-transition: background-color 0.4s ease;
+  transition: background-color 0.4s ease;
+}
+
+.clearfix {
+  *zoom: 1;
+}
+.clearfix:after {
+  clear: both;
+  height: 0;
+  overflow: hidden;
+  display: block;
+  visibility: hidden;
+  content: ".";
+}
+
+html {
+  background: #ffffff;
+}
+
+body {
+  background: #ffffff;
+  color: #000;
+  font-size: 16px;
+  padding: 0 12px;
+  font-family: "Microsoft Yahei";
+}
+
+.overflowdot {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+h1 {
+  font-size: 20px;
+  line-height: 27px;
+  padding: 20px 0 0;
+  overflow: hidden;
+  font-weight: 700;
+}
+
+h2 {
+  padding-top: 12px;
+  font-size: 12px;
+  color: #969696;
+  line-height: 21px;
+  height: 45px;
+}
+h2 img {
+  width: 21px;
+  height: 21px;
+  border-radius: 2px;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+h2 strong, h2 i {
+  display: inline-block;
+}
+h2 span {
+  display: inline-block;
+  color: #ececeb;
+  text-align: center;
+  width: 21px;
+}
+h2 i {
+  color: #b6b6b6;
+}
+
+.content {
+  line-height: 27px;
+}
+.content img {
+  width: 100%;
+  margin-bottom: 27px;
+  display: block;
+}
+.content p {
+  padding-bottom: 27px;
+}
+
+.fixedBox {
+  width: 1px;
+  height: 1px;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+}
+.fixedBox img {
+  position: absolute;
+  left: -33px;
+  top: -32px;
+  width: 67px;
+  height: 65px;
+}

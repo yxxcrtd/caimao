@@ -1,0 +1,63 @@
+<script type="text/javascript" src="${dojoUrl}/app/controllers/redpackage.js"></script>
+<script type="text/javascript">
+    var dojoConfig = {
+        locale: 'zh-cn',
+        selectorEngine: 'acme',
+        async: 1,
+        tlmSiblingOfDojo: 0,
+        isDebug: ${isDebug},
+        baseUrl: '${dojoUrl}',
+        packages: [
+            {name: 'dojo', location: 'dojo'},
+            {name: 'dijit', location: 'dijit'},
+            {name: 'dojox', location: 'dojox'},
+            {name: 'app', location: 'app'}
+        ],
+        controller: '${controller}',
+
+        // customize set
+        cacheBust: 'v=${jsVersion}',
+        QQ: '${QQ}',
+        hotline: '${hotline}',
+        proDay: '${proDay}',
+        proDayUnit: '${proDayUnit}',
+        proDayCarry: '${proDayCarry}',
+        proDayLoanSelect: '${proDayLoanSelect}',
+        proMonth: '${proMonth}',
+        proMonthUnit: '${proMonthUnit}',
+        proMonthCarry: '${proMonthCarry}',
+        proFree: '${proFree}',
+        proContest: '${proContest}',
+        proOffer: '${proOffer}',
+        proP2P: '${proP2P}',
+        isProDay: '${isProDay}',
+        isProMonth: '${isProMonth}',
+        isProFree: '${isProFree}',
+        isProContest: '${isProContest}',
+        isProOffer: '${isProOffer}',
+        isProP2P: '${isProP2P}',
+        isPopularize: '${isPopularize}',
+        lipayAccountID: '${lipayAccountID}',
+        lipayAccountName: '${lipayAccountName}',
+        paymentPlatform: '${paymentPlatform}',
+        cutOffTime: '${cutOffTime}',
+        authentication: '${authentication}',
+        bankCards: '<#list bankCards as bc>${bc.bank},</#list>',
+        siteNotice: {title: '${siteNotice.title}', content: '${siteNotice.content}'},
+        popularizeUID: [],
+        freePid:['40','41','42','43','44','45','46','799674625687555','800165996789764','800170191093761', '800212738113537', '800270317518849']
+    };
+</script>
+<#if resRelease = ".min">
+    <script src="${dojoUrl}/app/min/dojo.js"></script>
+    <script src="${dojoUrl}/app/min/${controller}.js?v=${jsVersion}"></script>
+    <#else>
+        <script src="${dojoUrl}/dojo/dojo.js"></script>
+</#if>
+<#if subScript??> <@subScript/></#if>
+
+<script>
+    require(['app']);
+</script>
+
+<#include 'layout/sub_script.html'/>

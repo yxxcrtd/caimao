@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<servers>
+    <!-- class 表示插件的实现类   port 端口     ip 服务器地址      thread 处理线程数   user 登录账户   pwd 登录密码-->
+    <!--=========================================南交所=================================================-->
+
+     <server name="hq-njs" class="com.caimao.jserver.mina.njsHQ.NJSHQMinaPlugin" port="13132"
+                 ip="183.62.138.189" thread="1" connect="1" idle="10" userName="HUOBI" password="huobi" needReconnect="true"></server>
+
+
+       <!--<server name="hq-njs" class="com.caimao.jserver.mina.njsHQ.NJSHQMinaPlugin" port="11122"-->
+                 <!--ip="183.62.138.183" thread="1" connect="1" idle="5" userName="nfxg" password="nfxg"></server>-->
+
+    <server name="return-sjs" class="com.caimao.jserver.mina.sjsReturn.SJSMinaPluginReturn" port="48002"
+            ip="112.95.144.26" thread="1" connect="1" idle="10"  userName="1080012271" password="97641239412631" needReconnect="true"></server>
+</servers>

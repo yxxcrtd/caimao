@@ -1,0 +1,163 @@
+@charset "utf-8";
+
+@import "../module/base";         /*基础样式*/
+
+//着陆页
+  .land{
+    position: absolute;
+    left:0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    @include img($imgURL+'land/land_bg_red.png');
+    background-repeat: repeat;
+    background-color: #CB3D2B;
+    .indent{
+      p{
+        text-indent: -999999em;
+        height: 0;
+        font-size: 0;
+      }
+    }
+    .con{
+      @include img($imgURL+'land/land_top_bg.png',50% 13%);
+      height: 100%;
+      .btn{
+        width:260px;
+        height:54px;
+        line-height: 54px;
+        display: block;
+        margin: auto;
+        color: $red;
+        font-size:24px;
+        @include btn(none, #FFFC00);
+        box-shadow: 0 5px 0 #C3C100;
+        border-radius: 10px;
+      }
+      .btn_blue{
+        width:220px;
+        height:44px;
+        line-height: 44px;
+        display: block;
+        margin: auto;
+        color: $white;
+        font-size:20px;
+        text-align: center;
+        @include btn(none, #00B5E2);
+        box-shadow: 0 5px 0 #079DC2;
+        border-radius: 50px;
+      }
+      .top{
+        height:70%;
+        width:1030px;
+        margin: auto;
+        h1{
+          text-indent: -9999em;
+          height:83px;
+          margin: auto;
+          @include img($imgURL+'land/login_bg.png',0 30px);
+        }
+        .img{
+          height: 48%;
+          padding: 30px 0;
+          img{
+            display: block;
+            margin: auto;
+            height: 100%;
+          }
+        }
+      }
+      .bottom{
+        position: fixed;
+        bottom: 0;
+        height:29%;
+        width: 100%;
+        @include img($imgURL+'land/land_down_bg.png',50% 0);
+        background-color: #27456E;
+        border-top: 4px solid #3263A6;
+        .indent{
+          text-indent: -9999em;
+        }
+        img,a,p{
+          position: absolute;
+        }
+        img{
+          left:50%;
+          top:-40%;;
+          height:145%;
+          width: auto;
+          &:first-child{
+            top:30px;
+            left:15%;
+            height: 32.32%;
+            width: auto;
+          }
+        }
+        a{
+          left:16%;
+          top:55%;
+        }
+        p{
+          width: 100%;
+          height: 24px;
+          line-height: 24px;
+          bottom: 0;
+          color: $white;
+          font-size: 16px;
+          text-align: center;
+          padding: 5px 0;
+          background-color:rgba(26,41,62,0.7);
+          span{
+            color: $yellow;
+          }
+        }
+      }
+    }
+    .con01{
+      @include img($imgURL+'land/land01_top_bg.png',50% 13%);
+
+      .con_in{
+        position: relative;
+        height: 50%;
+        margin-top:20px;
+        .left{
+          position: absolute;
+          left:50%;
+          margin-left: -400px;
+          height: 100%;
+        }
+        .right{
+          position: absolute;
+          right:50%;
+          margin-right: -400px;
+          height: 100%;
+        }
+        img{
+          height: 100%;
+          width: auto;
+          margin: auto;
+          display: block;
+        }
+        p{
+          text-indent: -9999em;
+          font-size: 0;
+          height: 0;
+        }
+      }
+      .btn{
+        width: 80%;
+        margin-top:25px;
+      }
+    }
+  }
+
+.land03{
+  @include img($imgURL+'land/land_bg_blue.png');
+  background-repeat: repeat;
+  background-color: #0EC2F0;
+}
+.land02{
+  @include img($imgURL+'land/land_bg_yellow.png');
+  background-repeat: repeat;
+  background-color: #FFC330;
+}

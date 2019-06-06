@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="GjsPriceAlert">
+
+    <!-- 表所有字段和属性 -->
+    <resultMap id="BaseResultMap" type="com.caimao.hq.api.entity.GjsPriceAlertEntity" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="user_id" property="userId" jdbcType="VARCHAR" />
+        <result column="exchange" property="exchange" jdbcType="VARCHAR" />
+        <result column="good_code" property="goodCode" jdbcType="VARCHAR" />
+        <result column="good_name" property="goodName" jdbcType="VARCHAR" />
+        <result column="condition" property="condition" jdbcType="VARCHAR" />
+        <result column="on" property="on" jdbcType="VARCHAR" />
+        <result column="price" property="price" jdbcType="VARCHAR" />
+        <result column="last_send_time" property="lastSendTime" jdbcType="TIMESTAMP" />
+        <result column="send_num" property="sendNum" jdbcType="INTEGER" />
+        <result column="trigger_price" property="triggerPrice" jdbcType="VARCHAR" />
+        <result column="created" property="created" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <!-- 表所有字段 -->
+    <sql id="Base_Column_List" >
+        id, 
+        user_id, 
+        exchange, 
+        good_code, 
+        good_name, 
+        `condition`,
+        `on`,
+        price, 
+        last_send_time, 
+        send_num,
+        trigger_price,
+        created
+    </sql>
+
+    <!-- 根据ID查找 -->
+    <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select <include refid="Base_Column_List" /> from gjs_price_alert where id = #{id, jdbcType=BIGINT} FOR UPDATE
+    </select>
+
+    <!-- 根据userID查找 -->
+    <select id="selectByUserId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select <include refid="Base_Column_List" /> from gjs_price_alert where user_id = #{userId, jdbcType=BIGINT}
+    </select>
+
+    <!-- 根据ID删除 -->
+    <delete id="deleteById" parameterType="java.lang.Long" >
+        delete from gjs_price_alert where id = #{id, jdbcType=BIGINT}
+    </delete>
+
+    <!--重置用户的提醒价格-->
+    <update id="resetTriggerPrice" parameterType="java.util.HashMap">
+        UPDATE gjs_price_alert SET trigger_price = "0"
+        WHERE
+        trigger_price != "0"
+        AND `condition` = #{condition, jdbcType=VARCHAR}
+        <if test="condition == 1">
+            AND price &gt; #{nowPrice}
+            AND trigger_price &gt; #{nowPrice}
+        </if>
+        <if test="condition == 2">
+            AND price &lt; #{nowPrice}
+            AND trigger_price &lt; #{nowPrice}
+        </if>
+        <if test="condition == 3">
+            AND abs(price) &gt; abs(#{nowPrice})
+            AND abs(trigger_price) &gt; abs(#{nowPrice})
+        </if>
+    </update>
+
+    <!-- 分页查询 -->
+    <select id="queryPriceAlertList" resultMap="BaseResultMap" parameterType="com.caimao.hq.api.entity.req.FQueryGjsPriceAlertReq" >
+        select <include refid="Base_Column_List" /> from gjs_price_alert
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="userId !=null and userId != ''">
+                AND user_id = #{userId}
+            </if>
+            <if test="exchange !=null and exchange != ''">
+                AND exchange = #{exchange}
+            </if>
+            <if test="goodCode !=null and goodCode != ''">
+                AND good_code = #{goodCode}
+            </if>
+            <if test="condition !=null and condition != ''">
+                AND `condition` = #{condition}
+            </if>
+            <if test="on !=null and on != ''">
+                AND `on` = #{on}
+            </if>
+            <if test="condition == 1">
+                AND price &lt; #{price}
+            </if>
+            <if test="condition == 2">
+                AND price &gt; #{price}
+            </if>
+            <if test="condition == 3">
+                AND ABS(price) &lt; abs(#{price})
+            </if>
+            <if test="condition !=null and condition != ''">
+                AND (last_send_time IS NULL OR now() - last_send_time > 300)
+            </if>
+            AND trigger_price = '0'
+        </trim>
+    </select>
+
+    <select id="getPriceAlertInfo" resultMap="BaseResultMap" parameterType="com.caimao.hq.api.entity.GjsPriceAlertEntity" >
+        select <include refid="Base_Column_List" /> from gjs_price_alert
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="userId !=null and userId != ''">
+                AND user_id = #{userId}
+            </if>
+            <if test="exchange !=null and exchange != ''">
+                AND exchange = #{exchange}
+            </if>
+            <if test="goodCode !=null and goodCode != ''">
+                AND good_code = #{goodCode}
+            </if>
+            <if test="condition !=null and condition != ''">
+                AND `condition` = #{condition}
+            </if>
+        </trim>
+    </select>
+
+
+    <!-- 插入 -->
+    <insert id="insert" parameterType="com.caimao.hq.api.entity.GjsPriceAlertEntity">
+        insert into gjs_price_alert
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="exchange != null">
+                exchange,
+            </if>
+            <if test="goodCode != null">
+                good_code,
+            </if>
+            <if test="goodName != null">
+                good_name,
+            </if>
+            <if test="condition != null">
+                `condition`,
+            </if>
+            <if test="on != null">
+                `on`,
+            </if>
+            <if test="price != null">
+                price,
+            </if>
+            <if test="lastSendTime != null">
+                last_send_time,
+            </if>
+            <if test="sendNum != null">
+                send_num,
+            </if>
+            <if test="triggerPrice != null">
+                trigger_price,
+            </if>
+            <if test="created != null">
+                created,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id, jdbcType=BIGINT},
+            </if>
+            <if test="userId != null">
+                #{userId, jdbcType=VARCHAR},
+            </if>
+            <if test="exchange != null">
+                #{exchange, jdbcType=VARCHAR},
+            </if>
+            <if test="goodCode != null">
+                #{goodCode, jdbcType=VARCHAR},
+            </if>
+            <if test="goodName != null">
+                #{goodName, jdbcType=VARCHAR},
+            </if>
+            <if test="condition != null">
+                #{condition, jdbcType=VARCHAR},
+            </if>
+            <if test="on != null">
+                #{on, jdbcType=VARCHAR},
+            </if>
+            <if test="price != null">
+                #{price, jdbcType=VARCHAR},
+            </if>
+            <if test="lastSendTime != null">
+                #{lastSendTime, jdbcType=VARCHAR},
+            </if>
+            <if test="sendNum != null">
+                #{sendNum, jdbcType=INTEGER},
+            </if>
+            <if test="triggerPrice != null">
+                #{triggerPrice, jdbcType=VARCHAR},
+            </if>
+            <if test="created != null">
+                #{created, jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <!-- 修改 -->
+    <update id="update" parameterType="com.caimao.hq.api.entity.GjsPriceAlertEntity">
+        update gjs_price_alert
+        <set>
+            <if test="userId != null">
+                user_id = #{userId, jdbcType=VARCHAR},
+            </if>
+            <if test="exchange != null">
+                exchange = #{exchange, jdbcType=VARCHAR},
+            </if>
+            <if test="goodCode != null">
+                good_code = #{goodCode, jdbcType=VARCHAR},
+            </if>
+            <if test="goodName != null">
+                good_name = #{goodName, jdbcType=VARCHAR},
+            </if>
+            <if test="condition != null">
+                `condition` = #{condition, jdbcType=VARCHAR},
+            </if>
+            <if test="on != null">
+                `on` = #{on, jdbcType=VARCHAR},
+            </if>
+            <if test="price != null">
+                price = #{price, jdbcType=VARCHAR},
+            </if>
+            <if test="lastSendTime != null">
+                last_send_time = #{lastSendTime, jdbcType=TIMESTAMP},
+            </if>
+            <if test="sendNum != null">
+                send_num = #{sendNum, jdbcType=INTEGER},
+            </if>
+            <if test="triggerPrice != null">
+                trigger_price = #{triggerPrice, jdbcType=VARCHAR},
+            </if>
+            <if test="created != null">
+                created = #{created, jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id, jdbcType=BIGINT}
+    </update>
+
+</mapper>

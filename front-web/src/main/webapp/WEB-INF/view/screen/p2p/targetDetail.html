@@ -1,0 +1,114 @@
+<#assign controller="P2PTargetDetail"/>
+<#include 'layout/layout.html'/>
+<link rel="stylesheet" type="text/css"
+      href="${dojoUrl}/app/resources/p2p/css/p2p.css" />
+<#macro content>
+    <div class="content">
+        <div class="grid1000 main clearfix">
+            <div class="conside" id="sidemenuctn" style="position: absolute;width: 145px;">
+            </div>
+            <!--框架-->
+            <div class="content-wrap" style="width: 820px;padding-top: 20px;" id="no_content">
+                <div class="targetInfo" id="targetInfo">
+                    <div class="clearfix">
+                        <div class="targetHere">
+                            <strong><i id="targetUserNameF"></i>续约借款 <b class="targetLoanAmountF"></b><span>|</span>市值 <b class="targetMarketValue"></b> 股票做质押</strong>
+                            <dl>
+                                <dt>还款方式：</dt>
+                                <dd style="margin-left: 10px;">按月还息，到期还本</dd>
+                            </dl>
+                            <dl>
+                                <dt>借款时间：</dt>
+                                <dd id="targetLiftTime" style="margin-left: 10px;"></dd>
+                            </dl>
+                            <dl>
+                                <dt>总借款：</dt>
+                                <dd id="targetLoanAmount" style="margin-left: 10px;"></dd>
+                            </dl>
+                            <dl>
+                                <dt>年息收益：</dt>
+                                <dd class="targetYearRate" style="margin-left: 10px;"></dd>
+                            </dl>
+                            <dl>
+                                <dt>借款进度：</dt>
+                                <dd class="linestep" style="margin-left: 10px;"><em><i id="targetLoanProcess"></i></em><span id="targetRate"></span>％ (已有<span class="targetInvestCnt"></span>人投资<span class="targetActualValue"></span>元)</dd>
+                            </dl>
+                            <dl>
+                                <dt>财猫领投：</dt>
+                                <dd style="margin-left: 10px;"><span id="targetcaimaoValue"></span>元 <i class="icons">领投</i></dd>
+                            </dl>
+                            <dl id="investAmount">
+                            </dl>
+                            <div id="yujishouyiDom" style="  position: absolute;left: 410px;top: 357px;">预计月收益：<span id="yujishouyi">0</span>元</div>
+                            <dl style="margin-top: -15px;height: 16px;padding-left: 77px;">
+                                最高可投金额：<span id="maxInvestAmountNode"></span>元
+                            </dl>
+
+                            <dl id="secPwd">
+                            </dl>
+                            <!--是否同意-->
+                            <div class="am-ft-center">
+                                <p class=" am-pt-15">
+                                    <label class="checkbox" for="checkbox1" style="padding-right: 60px;">
+                                        <input type="checkbox" value="" id="checkbox1" data-toggle="checkbox" class="custom-checkbox">
+                                        <span class="icons">
+                                            <span class="icon-unchecked"></span>
+                                            <span class="icon-checked"></span>
+                                        </span>
+                                        <span class="icons">
+                                            <span class="icon-unchecked"></span>
+                                            <span class="icon-checked"></span>
+                                        </span>
+                                        <span class="am-ft-md">我已经阅读并同意<a id="protocoltoggler">《借款协议》</a></span>
+                                    </label>
+                                </p>
+                                <div class="button-center am-pt-15">
+                                    <div id="loaninfobtn"></div>
+                                </div>
+                            </div>
+                            <dl class="submit">
+                                <dt style="width: 78px;"> </dt>
+                                <dd id="touzi"></dd>
+                            </dl>
+                        </div>
+                        <div class="lender">
+                            <strong>借款人信息</strong>
+                            <dl>
+                                <dt>手机号:</dt>
+                                <dd id="targetMobile" style="width: auto;"></dd>
+                            </dl>
+                            <dl>
+                                <dt>借款人:</dt>
+                                <dd id="targetUserName" style="width: auto;"></dd>
+                            </dl>
+                            <dl>
+                                <dt>身份认证:</dt>
+                                <dd class="green" id="targetIsTrust" style="width: auto;">已认证</dd>
+                            </dl>
+                            <em>项目介绍</em>
+                            <p>项目总额<i class="targetLoanAmountF"></i>，本项目借款人主要用于股票融资，提供 <i class="targetMarketValue"></i> 市值的股票抵押物。</p>
+                            <p>项目年息收益<b class="red targetYearRate"></b>。</p>
+                            <p>项目借款完成后，本站提供<i class="targetLoanAmountF"></i>的股票账户给借款人操盘，该账户只能股票买卖。</p>
+                            <p>平台对股票账户进行实时监管，一旦账户资金低于<i id="targetLoanWarn"></i>则强制平仓，以保证本金及收益安全，投资无风险。</p>
+                            <span id="cutdown"></span>
+                        </div>
+                    </div>
+                    <div class="bidList">
+                        <p>投标记录(<i class="red targetInvestCnt"></i>)   投标笔数:<i class="red targetInvestCnt"></i>笔    投标金额: <span class="red">￥</span><i class="red targetActualValue"></i></p>
+                        <dl id="investBox">
+                            <script type="text/x-tmpl">
+                                <dt><span>投标人</span><span>投标金额</span><span style="width:140px">收益</span><span style="width:220px">投标日期</span></dt>
+                                <% for(var i = 0,l = data.length; i < l; i++){%>
+                                <dd><span><%=data[i].mobileHide%></span><span><%=parseInt(data[i].investValue) / 100%></span><span class="red" style="width:140px"><%=parseInt(data[i].yearValue/12 * (data[i].liftTime / 30)) / 100%></span><span style="width:220px"><%=new Date(parseInt(data[i].investCreated)).toLocaleString()%></span></dd>
+                                <%}%>
+                            </script>
+                        </dl>
+                        <div class="pagination-holder clearfix">
+                            <div id="light-pagination" class="pagination"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</#macro>

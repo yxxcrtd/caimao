@@ -1,0 +1,112 @@
+<!doctype html>
+<#include "gjs/config.html" />
+<#assign topMenu="article" />
+
+<#include "gjs/include/page/head_mob.html" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0,initial-scale=1, user-scalable=false">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-touch-fullscreen" content="yes">
+<meta name="format-detection" content="telephone=no" />
+<link rel="stylesheet" href="${staticUrl}/style/download/gjsload.css" />
+<style>
+	html,body{background:#fff;}
+</style>
+<body class="mob_body">
+
+<script>
+	var IMGURL = "${imgUrl}";
+</script>
+
+	<div class="newsContent mob_content" id="content" style="display:none">
+		<div class="innerCont">
+			<div class="content" id="newsCont" style="display:none">
+				<script type="text/x-tmpl">
+					<h1><%=data.title%></h1>
+					<p class="smallInfo"><span>浏览:<%=data.viewCount%></span><span><%=data.created%></span></p>
+					<div class="contMain"><%=data.content%></div>
+				</script>
+			</div>
+			<div class="content" id="textCont" style="display:none">
+				<script type="text/x-tmpl">
+					<h1><%=data.name%>银商绑定指南</h1>
+					<div class="contMain"><%=data.content%></div>
+				</script>
+			</div>
+			<div class="content" id="ruleCont" style="display:none">
+				<script type="text/x-tmpl">
+					<h1><%=data.title%></h1>
+					<div class="contMain"><%=data.content%></div>
+				</script>
+			</div>
+		</div>
+	</div>
+	<div id="download" class="wrapper" style="display:none">
+		<div class="downloadComing">
+		</div>
+		<div class="downloadKids">
+			<div class="kidHere"></div>
+		</div>
+		<div class="downloadNotice">
+		</div>
+		<div class="downloadBtn">
+			<div class="downloadBtnInner" id="btn">
+				<a href="/static/gjs/img/app/gjs.apk">Android下载</a>
+				<a href="javascript:void(0);" onclick="window.location.href='itms-services://?action=download-manifest&url=https://jin.caimao.com/static/gjs/img/app/gjs.plist';">iOS下载</a>
+			</div>
+			
+		</div>
+		<div class="mask" id="mask">
+		    <dl>
+		        <dt><img src="/static/ybk/img/topic/ybk/download/people.png" alt=""></dt>
+		        <dd>
+		            <p>点击右上角【在浏览器中打开】</p>
+		            <p>下载财猫贵金属APP</p>
+		        </dd>
+		    </dl>
+		</div>
+	</div>
+	<script>
+		;(function(){
+			var action = $_GET("action"),
+				content = document.querySelector("#content"),
+				download = document.querySelector("#download"),
+				btn = document.querySelector("#btn"),
+				mask = document.querySelector("#mask"),
+				newsCont = document.querySelector("#newsCont"),
+				textCont = document.querySelector("#textCont"),
+				ruleCont = document.querySelector("#ruleCont"),
+				obj = {};
+			if(action == "news"){
+				content.style.display = "block";
+				newsCont.style.display = "block";
+				h.plan("#newsCont",h.render.noticeContent.key);
+				h.option = h.api.notice_content($_GET("id"),h.render.noticeContent);
+				h.request(h.option);
+			}else if(action == "download"){
+				window.location = "${homeUrl}/tpl?tpl=/gjs/article/gjsDownload"
+				return;
+				download.style.display = "block";
+				Event.add(btn,"click",function(e){
+					if ("micromessenger" == navigator.userAgent.toLowerCase().match(/MicroMessenger/i)){
+						Event.stop(e);
+						mask.style.display = "block";
+					}
+				});
+			}else if(action == "bindbank"){
+				content.style.display = "block";
+				textCont.style.display = "block";
+				obj.key = action,
+				obj.exchange = $_GET("exchange") || "njs",
+				obj.bank = $_GET("bank") || "003";
+				contentLayout(obj,textCont)
+			}else if(action == "rule"){
+				content.style.display = "block";
+				ruleCont.style.display = "block";
+				obj.key = action;
+				obj.idx = $_GET("id");
+				contentLayout2(obj,ruleCont)
+			}
+		})();
+	</script>
+	</body>
+</html>

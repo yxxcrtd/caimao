@@ -1,0 +1,46 @@
+<#assign controller="Tender"/>
+<#include 'layout/layout.html'/>
+<#macro content>
+<div class="container" style="min-height: 800px;">
+<div class="content grid1000 top">
+<div class="financial-content" id="leftctn">
+<div class="pagination-holder clearfix">
+    <div id="light-pagination" class="pagination"></div>
+  </div>
+</div>
+<div class="conside-absr margt-50" id="rightctn">
+    <!--步骤（垂直）start-->
+    <div class="step-circle-v">
+        <ul>
+            <li>
+                <i class="i-circle-v">1</i><em>选择项目</em>
+            </li>
+            <li>
+                <i class="i-circle-v">2</i><em>投入金额</em>
+            </li>
+            <li>
+                <i class="i-circle-v">3</i><em>每月收取回报</em>
+            </li>
+            <li class="li-end">
+                <i class="i-circle-v">4</i><em>到期收回本金</em>
+            </li>
+        </ul>
+    </div>
+    <!--步骤（垂直）end -->
+
+    <!--新闻类型列表 start-->
+    <div class="newslist am-mt-10">
+        <div class="news-head clearfix">
+            <h2 class="cm-left">新手投钱攻略</h2>
+        </div>
+        <ul>
+            <li><i class="sign-dot"></i><a href="${basePath}/help.htm?a=1,2" target="_blank">什么是${proP2P}？</a></li>
+        </ul>
+    </div>
+    <!--新闻类型列表 end-->
+
+</div>
+
+</div>
+</div>
+</#macro>

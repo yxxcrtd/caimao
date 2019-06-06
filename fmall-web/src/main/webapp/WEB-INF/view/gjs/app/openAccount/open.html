@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<#include "gjs/config.html" />
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>开户</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1, user-scalable=false">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no"/>
+    <link rel="stylesheet" href="${staticUrl}/app/kaihu/css/reset.css" />
+    <link rel="stylesheet" href="${staticUrl}/app/kaihu/css/open.css" />
+</head>
+<body>
+<div class="wrapper">
+    <div class='operMain'>
+        <img src="${imgUrl}/open.png" alt="">
+
+        <div class='words-1' id="btn">
+            <h1>极速开户</h1>
+
+            <h2>支持一人多交易所</h2>
+        </div>
+        <a href="#" class='guide'>开户指南</a>
+    </div>
+</div>
+<script src='${staticUrl}/app/kaihu/js/zepto.js'></script>
+<script>
+    ;(function(){
+        var btn = $("#btn"),
+            exchange = "njs",
+            token = location.search.replace("?","").split("&")[0];
+        btn.click(function(){
+            location.href='name.html?'+exchange+'&'+token;
+        });
+    })();
+</script>
+</body>
+</html>

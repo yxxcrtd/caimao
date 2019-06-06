@@ -1,0 +1,72 @@
+<#assign controller="MoreInfo"/>
+<#include 'layout/layout.html'/>
+
+<#macro content>
+<div class="contents guide-contain">
+	<div class="inner">
+		<div class="s-tab">
+			<ul>
+				<li><span>最新公告</span></li>
+				<li class="active"><span>行业资讯</span></li>
+			</ul>
+		</div>
+		<!--最新公告-->
+		<div class="tab-contain new-list">
+			<ul id="moreInfo1">
+			</ul>
+			<div class="pagination-holder clearfix">
+				<div id="light-pagination1" class="pagination"></div>
+			</div>
+		</div>
+
+		<!--行业资讯 -->
+		<div class="tab-contain new-list active">
+			<ul id="moreInfo2">
+			</ul>
+			<div class="pagination-holder clearfix">
+				<div id="light-pagination2" class="pagination"></div>
+			</div>
+		</div>
+		<!--关于我们-->
+		<div class="tab-contain">
+			<h2>
+				公司简介 <span class="arrow-triangle"> <i class="triangle-top"></i>
+					<i class="triangle-bottom"></i>
+				</span>
+			</h2>
+			<p>&nbsp;</p>
+			<p>Xxxx是XXXX公司旗下网站，以下简称“XXX”。XXX是一家注册在上海自由贸易试验区的金融信息服务创新企业，注册资本万元。XXX平台于2013年8月上线，几经改版，从原先的简单的门户网站，到当前集投资人，借款人，第三方支付机构、交易系统为一体的多功能平台网站，致力于让客户得到更好的体验。我们将一如既往得不断的探索和改进。</p>
+
+			<h2>
+				公司资质 <span class="arrow-triangle"> <i class="triangle-top"></i>
+					<i class="triangle-bottom"></i>
+				</span>
+			</h2>
+			<p>&nbsp;</p>
+			<p>
+				<img src="${dojoUrl}/app/resources/image/tmp/u101.png" /> <img
+					src="${dojoUrl}/app/resources/image/tmp/u101.png" />
+			</p>
+			<div id="contactuslink">
+				<h2>
+					联系我们 <span class="arrow-triangle"> <i class="triangle-top"></i>
+						<i class="triangle-bottom"></i>
+					</span>
+				</h2>
+				<p>&nbsp;</p>
+				<p>
+					<span style="font-size: 16px; font-weight: bold;">杭州办：</span>
+				</p>
+				<p>地址：</p>
+				<p>邮编：</p>
+				<p>&nbsp;</p>
+			</div>
+		</div>
+
+	</div>
+</div>
+<!-- 分页 -->
+<div class="pagination-holder clearfix">
+	<div id="light-pagination1" class="pagination"></div>
+</div>
+</#macro>

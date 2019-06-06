@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Other_Candle">
+	<resultMap id="BaseResultMap" type="com.caimao.hq.api.entity.OtherCandle">
+		<id column="candle_id" property="candleId" jdbcType="BIGINT" />
+		<result column="exchange" property="exchange" jdbcType="VARCHAR" />
+		<result column="prod_code" property="prodCode" jdbcType="VARCHAR" />
+		<result column="prod_name" property="prodName" jdbcType="VARCHAR" />
+		<result column="min_time" property="minTime" jdbcType="VARCHAR" />
+		<result column="open_px" property="openPx" jdbcType="DOUBLE" />
+		<result column="high_px" property="highPx" jdbcType="DOUBLE" />
+		<result column="low_px" property="lowPx" jdbcType="DOUBLE" />
+		<result column="close_px" property="closePx" jdbcType="DOUBLE" />
+		<result column="business_amount" property="businessAmount" jdbcType="DOUBLE" />
+		<result column="business_balance" property="businessBalance" jdbcType="DOUBLE" />
+		<result column="last_px" property="lastPx" jdbcType="DOUBLE" />
+		<result column="cycle" property="cycle" jdbcType="VARCHAR" />
+		<result column="opt_date" property="optDate" jdbcType="VARCHAR" />
+		<result column="status" property="status" jdbcType="VARCHAR" />
+		<result column="preClose_px" property="preClosePx" jdbcType="DOUBLE" />
+		<result column="redis_key" property="redisKey" jdbcType="VARCHAR" />
+		<result column="pxChange" property="pxChange" jdbcType="DOUBLE" />
+		<result column="pxChangeRate" property="pxChangeRate" jdbcType="VARCHAR" />
+		<result column="last_settle" property="lastSettle" jdbcType="DOUBLE" />
+		<result column="settle" property="settle" jdbcType="DOUBLE" />
+		<result column="is_goods" property="isGoods" jdbcType="DOUBLE" />
+		<result column="average_px" property="averagePx" jdbcType="DOUBLE" />
+	</resultMap>
+
+	<!-- 保存 -->
+	<insert id="insert" parameterType="com.caimao.hq.api.entity.OtherCandle" useGeneratedKeys="true" keyProperty="candleid">
+		insert into gjs_candle_LIFFE(exchange, prod_code, prod_name, min_time, open_px, high_px, low_px, close_px, business_amount, business_balance, last_px, cycle, opt_date, status, preClose_px, redis_key, pxChange, pxChangeRate, settle, last_settle, is_goods, average_px)
+		values (#{exchange}, #{prodCode}, #{prodName}, #{minTime}, #{openPx}, #{highPx}, #{lowPx}, #{closePx}, #{businessAmount}, #{businessBalance}, #{lastPx}, #{cycle}, #{optDate}, #{status}, #{preClosePx}, #{redisKey}, #{pxChange}, #{pxChangeRate}, #{settle}, #{lastSettle}, #{isGoods}, #{averagePx})
+	</insert>
+
+	<!-- 批量保存 -->
+	<insert id="insertBatch" parameterType="java.util.List">
+		insert into gjs_candle_LIFFE(exchange, prod_code, prod_name, min_time, open_px, high_px, low_px, close_px, business_amount, business_balance, last_px, cycle, opt_date, status, preClose_px, redis_key, pxChange, pxChangeRate, settle, last_settle, is_goods, average_px)
+		values
+		<foreach collection="list" item="item" index="index" separator=",">
+			(#{item.exchange}, #{item.prodCode}, #{item.prodName}, #{item.minTime}, #{item.openPx}, #{item.highPx}, #{item.lowPx}, #{item.closePx}, #{item.businessAmount}, #{item.businessBalance}, #{item.lastPx}, #{item.cycle}, #{item.optDate}, #{item.status}, #{item.preClosePx}, #{item.redisKey}, #{item.pxChange}, #{item.pxChangeRate}, #{item.settle}, #{item.lastSettle}, #{item.isGoods}, #{item.averagePx})
+		</foreach>
+	</insert>
+
+	<!-- 清空历史数据 -->
+
+
+
+
+
+
+	<resultMap id="MultiDaySnapshotRes" type="com.caimao.hq.api.entity.MultiDaySnapshotRes">
+		<result column="prod_code" property="prodCode" jdbcType="VARCHAR" />
+		<result column="min_time" property="minTime" jdbcType="VARCHAR" />
+		<result column="close_px" property="closePx" jdbcType="DOUBLE" />
+		<result column="business_amount" property="businessAmount" jdbcType="DOUBLE" />
+		<result column="preClose_px" property="preClosePx" jdbcType="DOUBLE" />
+		<result column="is_goods" property="isGoods" jdbcType="DOUBLE" />
+		<result column="last_settle" property="lastSettle" jdbcType="DOUBLE" />
+		<result column="settle" property="settle" jdbcType="DOUBLE" />
+		<result column="average_px" property="averagePx" jdbcType="DOUBLE" />
+	</resultMap>
+
+
+	<sql id="baseField_Candle">
+		t.candle_id,t.exchange,t.prod_code, t.prod_name, t.min_time, t.open_px, t.high_px,t.pxChange,t.pxChangeRate,
+		t.low_px, t.close_px, t.business_amount,t.business_balance,t.last_px,t.cycle,t.opt_date,t.status,t.preClose_px,t.redis_key,t.settle,t.last_settle,t.is_goods,t.average_px
+	</sql>
+	<sql id="baseField_selectSnapshotFive">
+		t.prod_code, t.min_time, t.close_px, t.business_amount,t.preClose_px,t.is_goods,t.last_settle,t.settle,t.average_px
+	</sql>
+
+
+	<select id="selectList" resultMap="BaseResultMap" parameterType="com.caimao.hq.api.entity.NJSCandle">
+		select   <include refid="baseField_Candle" />
+		from gjs_njs_candle t
+		WHERE t.exchange = #{exchange}
+		<if test="cycle != null and  cycle != ''">
+			and t.cycle = #{cycle}
+		</if>
+
+		<if test="minTime != null and  minTime != ''">
+			and t.min_time = #{minTime}
+		</if>
+		<if test="prodCode != null and  prodCode != ''">
+			and t.prod_code = #{prodCode}
+		</if>
+		<if test="beginDate != null and  beginDate != ''">
+			AND left(t.min_time,10)>= #{beginDate}
+		</if>
+		<if test="endDate != null and  endDate != ''">
+			AND left(t.min_time,10) <![CDATA[ <= ]]>#{endDate}
+		</if>
+		order by  t.min_time  desc
+		limit #{number}
+	</select>
+
+
+	<select id="selectPreCandle" resultMap="BaseResultMap" parameterType="com.caimao.hq.api.entity.NJSCandle">
+		select  MAX(t.min_time) as min_time,t.close_px
+		from gjs_njs_candle t
+		WHERE t.exchange = #{exchange} and t.prod_code = #{prodCode}  AND t.cycle = #{cycle}
+		<if test="minTime != null and  minTime != ''">
+		AND  t.min_time <![CDATA[ < ]]>#{minTime}
+		</if>
+	</select>
+
+	<delete id="deleteByPK"   parameterType="String">
+		DELETE
+		from gjs_njs_candle
+		WHERE candle_id = #{candleId}
+	</delete>
+
+
+
+
+	<select id="selectNew" resultMap="BaseResultMap" parameterType="STRING">
+		 select * from (select * from gjs_njs_candle order by min_time desc) as a  where exchange = #{exchange} group by prod_code, cycle    order by min_time desc
+	</select>
+
+
+	<select id="selectDateNear5"  resultType="String" parameterType="com.caimao.hq.api.entity.TradeAmountReq">
+		Select  DISTINCT(left(t.min_time,8))  from gjs_njs_candle t
+		WHERE t.exchange = #{exchange}  and  t.prod_code = #{prodCode}   and  t.cycle='Minute1'
+		ORDER BY t.min_time desc
+		limit  #{type}
+	</select>
+
+	<select id="selectSnapshotFive" resultMap="MultiDaySnapshotRes" parameterType="com.caimao.hq.api.entity.TradeAmountReq">
+		select   <include refid="baseField_selectSnapshotFive" />
+		from gjs_njs_candle t
+		WHERE t.exchange = #{exchange} and t.prod_code = #{prodCode}   AND t.cycle = 'Minute1'
+		<if test="beginDate != null and  beginDate != ''">
+			AND left(t.min_time,12)>= #{beginDate}
+		</if>
+		<if test="endDate != null and  endDate != ''">
+			AND left(t.min_time,12) <![CDATA[ <= ]]>#{endDate}
+		</if>
+		order by  t.min_time  desc
+		limit 5000
+	</select>
+
+</mapper>

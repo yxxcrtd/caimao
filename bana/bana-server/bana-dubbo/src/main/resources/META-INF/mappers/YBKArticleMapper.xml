@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="YBKArticle">
+    <resultMap id="BaseResultMap" type="com.caimao.bana.api.entity.ybk.YBKArticleEntity">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="category_id" property="categoryId" jdbcType="INTEGER"/>
+        <result column="exchange_id" property="exchangeId" jdbcType="INTEGER"/>
+        <result column="exchange_name" property="exchangeName" jdbcType="VARCHAR"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="content" property="content" jdbcType="VARCHAR"/>
+        <result column="sort" property="sort" jdbcType="INTEGER"/>
+        <result column="view_count" property="viewCount" jdbcType="INTEGER"/>
+        <result column="is_show" property="isShow" jdbcType="INTEGER"/>
+        <result column="created" property="created" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,category_id,exchange_id,exchange_name,title,content,sort,view_count,is_show,created
+    </sql>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.caimao.bana.api.entity.ybk.YBKArticleEntity">
+        INSERT INTO ybk_article
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="categoryId != null">category_id,</if>
+            <if test="exchangeId != null">exchange_id,</if>
+            <if test="exchangeName != null">exchange_name,</if>
+            <if test="title != null">title,</if>
+            <if test="content != null">content,</if>
+            <if test="sort != null">sort,</if>
+            <if test="viewCount != null">view_count,</if>
+            <if test="isShow != null">is_show,</if>
+            <if test="created != null">created,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="categoryId != null">#{categoryId},</if>
+            <if test="exchangeId != null">#{exchangeId},</if>
+            <if test="exchangeName != null">#{exchangeName},</if>
+            <if test="title != null">#{title},</if>
+            <if test="content != null">#{content},</if>
+            <if test="sort != null">#{sort},</if>
+            <if test="viewCount != null">#{viewCount},</if>
+            <if test="isShow != null">#{isShow},</if>
+            <if test="created != null">#{created},</if>
+        </trim>
+    </insert>
+
+    <delete id="delete">
+        DELETE FROM ybk_article
+        WHERE id = #{id}
+    </delete>
+
+    <update id="update">
+        UPDATE ybk_article
+        <set>
+            <if test="categoryId != null" >category_id = #{categoryId},</if>
+            <if test="exchangeId != null" >exchange_id = #{exchangeId},</if>
+            <if test="exchangeName != null" >exchange_name = #{exchangeName},</if>
+            <if test="title != null" >title = #{title},</if>
+            <if test="content != null" >content = #{content},</if>
+            <if test="sort != null" >sort = #{sort},</if>
+            <if test="viewCount != null" >view_count = #{viewCount},</if>
+            <if test="isShow != null" >is_show = #{isShow},</if>
+            <if test="created != null" >created = #{created},</if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <update id="readArticle" parameterType="java.lang.Long">
+        UPDATE ybk_article SET view_count = view_count + 1 WHERE id = #{id}
+    </update>
+
+    <select id="queryById" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM ybk_article
+        WHERE id = #{id}
+    </select>
+
+    <!--获取指定交易所指定类型下，最新文章的信息-->
+    <select id="queryLastTime" resultMap="BaseResultMap" parameterType="java.util.Map">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM ybk_article AS a
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="categoryId !=null">
+                AND category_id = #{categoryId}
+            </if>
+            <if test="exchangeId !=null">
+                AND exchange_id = #{exchangeId}
+            </if>
+        </trim>
+        ORDER BY created DESC LIMIT 1
+    </select>
+
+    <select id="queryListWithPage" resultMap="BaseResultMap" parameterType="com.caimao.bana.api.entity.req.ybk.FYBKQueryArticleListReq">
+        SELECT
+        a.id, a.category_id as categoryId, a.exchange_id as exchangeId, e.name AS exchangeName, a.exchange_name as exchangeName, a.title, a.sort, a.view_count as viewCount, a.is_show as isShow, a.created, e.short_name AS exchangeShortName
+        FROM ybk_article AS a
+        LEFT JOIN ybk_exchange AS e ON a.exchange_id = e.id
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="categoryId !=null">
+                AND category_id = #{categoryId}
+            </if>
+            <if test="exchangeId !=null">
+                AND exchange_id = #{exchangeId}
+            </if>
+            <if test="dateStart !=null and dateStart != ''">
+                AND created &gt;= #{dateStart}
+            </if>
+            <if test="dateEnd !=null and dateEnd != ''">
+                AND created &lt;= #{dateEnd}
+            </if>
+            <if test="isShow !=null">
+                AND is_show = #{isShow}
+            </if>
+        </trim>
+        ORDER BY sort desc,created DESC
+    </select>
+
+    <select id="querySimpleListWithPage" resultType="com.caimao.bana.api.entity.res.ybk.FYBKArticleSimpleRes" parameterType="com.caimao.bana.api.entity.req.ybk.FYBKQueryArticleSimpleListReq">
+        SELECT
+        a.id, a.category_id as categoryId, a.exchange_id as exchangeId, e.name AS exchangeName, a.exchange_name as exchangeName, a.title, a.sort, a.view_count as viewCount, a.is_show as isShow, a.created, e.short_name AS exchangeShortName
+        FROM ybk_article AS a
+        LEFT JOIN ybk_exchange AS e ON a.exchange_id = e.id
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="categoryId !=null">
+                AND a.category_id = #{categoryId}
+            </if>
+            <if test="exchangeId !=null">
+                AND a.exchange_id = #{exchangeId}
+            </if>
+            <if test="dateStart !=null and dateStart != ''">
+                AND a.created &gt;= #{dateStart}
+            </if>
+            <if test="dateEnd !=null and dateEnd != ''">
+                AND a.created &lt;= #{dateEnd}
+            </if>
+            <if test="isShow !=null">
+                AND a.is_show = #{isShow}
+            </if>
+        </trim>
+        ORDER BY sort desc,created DESC
+    </select>
+    <select id="queryId" resultMap="BaseResultMap" parameterType="com.caimao.bana.api.entity.req.ybk.FYBKQueryArticleIdReq">
+        SELECT
+        a.id,a.title
+        FROM ybk_article AS a
+        LEFT JOIN ybk_exchange AS e ON a.exchange_id = e.id
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            e.status = 2
+            <if test="categoryId !=null">
+                AND a.category_id = #{categoryId}
+            </if>
+            <if test="exchangeId !=null">
+                AND a.exchange_id = #{exchangeId}
+            </if>
+            <if test="created !=null">
+                AND a.created
+                <if test="than ==1">
+                    &gt;
+                </if>
+                <if test="than ==-1">
+                    &lt;
+                </if>
+                #{created}
+            </if>
+            <if test="isShow !=null">
+                AND a.is_show = #{isShow}
+            </if>
+        </trim>
+        ORDER BY created
+        <if test="order==1">
+            ASC
+        </if>
+        <if test="order==-1">
+            DESC
+        </if>
+        limit 0,1
+    </select>
+</mapper>

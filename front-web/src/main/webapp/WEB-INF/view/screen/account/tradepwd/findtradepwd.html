@@ -1,0 +1,35 @@
+
+<#assign controller="TradePwdFindSelect"/>
+<#include 'layout/layout.html'/>
+<#macro content>
+<div class="contents grid-910">
+<!--框架-->
+<div id="contentctn" class="frame-all frame-all-box">
+<div class="con-all">
+<div class="con-all-text">您正在为账户<b class="am-ft-orange am-left-5 am-right-5" id="username_"></b>找回安全密码。<!-- 请选择找回方式： --></div>
+
+<!--找回安全密码-->
+<ul class="list-backWay">
+<li class="list-backWay-item firstLi">
+<i class="icon-backWay icon-backWay01"></i>
+<div class="text-backWay">
+<p><span class="am-ft-md">通过“回答密码保护问题+手机验证码”</span></p>
+<p class="am-pt-15"><span class="am-ft-gray">如果您的<span id="mobile_1"></span>手机还在正常使用，且记得预留的安全保护问题，请选择此方式</span></p>
+</div>
+<a href="${basePath}/account/tradepwd/find1.htm" class="ui-button ui-button-mred"><b class="ui-button-text am-ft-white am-ft-md">找回密码</b></a>
+</li>
+<!--<li class="list-backWay-item">
+<i class="icon-backWay icon-backWay02"></i>
+<div class="text-backWay">
+<p><span class="am-ft-md">通过“输入手机验证码+姓名+身份证号+绑定银行卡号”</span></p>
+<p class="am-pt-15"><span class="am-ft-gray">如果您的<span id="mobile_2"></span>手机还在正常使用，且记得绑定的银行卡号，请选择此方式</span></p>
+</div>
+<a href="${basePath}/account/tradepwd/find2.htm" class="ui-button ui-button-mred"><b class="ui-button-text am-ft-white am-ft-md">找回密码</b></a>
+</li>-->
+</ul>
+
+</div>
+
+</div><!--框架end-->
+</div>
+</#macro>

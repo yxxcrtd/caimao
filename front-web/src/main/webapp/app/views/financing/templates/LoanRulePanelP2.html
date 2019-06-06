@@ -1,0 +1,68 @@
+<div class="cm-right dxStep01-rside">
+    <!--标题-->
+    <div class="title-common clearfix">
+        <h2 class="cm-left">操盘规则</h2>
+    </div>
+
+
+    <div class="con-tableTransverse am-pt-5">
+        <table width="100%" border="0" cellspacing="0" class="tableTransverse">
+            <tbody>
+            <tr>
+                <th style="width: 120px;">操盘须知</th>
+                <td data-dojo-attach-point="noteNode"></td>
+            </tr>
+            <tr>
+                <th style="width: 120px;">总操盘资金</th>
+                <td><span class="td-numberOrange" data-dojo-attach-point="totalAmountNode">0</span>元</td>
+            </tr>
+            <tr>
+                <th style="width: 120px;">亏损警告线<i class="fa help" data-help="到达亏损警告线时只能卖出不能买入，财猫网有权利将仓位减至50%">&#xf059;</i></th>
+                <td>
+                    <div class="clearfix">
+                        <div class="cm-left text-left"><span class="td-numberOrange" data-dojo-attach-point="enableNode">0</span>元</div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th style="width: 120px;">亏损平仓线<i class="fa help" data-help="系统将进行平仓处理">&#xf059;</i></th>
+                <td>
+                    <div class="clearfix">
+                        <div class="cm-left text-left"><span class="td-numberOrange" data-dojo-attach-point="exposureNode">0</span>元</div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th style="width: 120px;">资金使用期限<i class="fa help" data-help="一个月按30个自然日计">&#xf059;</i></th>
+                <td>
+                    <div data-dojo-attach-point="daySelectNode"></div>
+                </td>
+            </tr>
+            <tr>
+                <th style="width: 120px;">费用</th>
+                <td>
+                    <div class="clearfix">
+                        <div class="cm-left text-left"><span data-dojo-attach-point="interestNode"></span></div>
+                    </div>
+                </td>
+            </tr>
+            <tr style="display: none">
+                <th style="width: 120px;">5开始交易时间3<i class="fa help" data-help="一般选择下个交易日，${overtimeStr}前申请审核通过后可选择当日直接交易">&#xf059;</i></th>
+                <td data-dojo-attach-point="tradeTimeNode">
+                    <label class="radio" data-dojo-attach-point="todaySelectNode">
+                        <input type="radio" name="optionsRadios" id="optionsRadios5" value="当日" data-toggle="radio" class="custom-radio"><span class="icons"><span class="icon-unchecked"></span><span class="icon-checked"></span></span><span class="icons"><span class="icon-unchecked"></span><span class="icon-checked"></span></span>
+                        当日
+                    </label>
+                    <label class="radio">
+                        <input checked="checked" type="radio" name="optionsRadios" id="optionsRadios4" value="下个交易日" data-toggle="radio" class="custom-radio"><span class="icons"><span class="icon-unchecked"></span><span class="icon-checked"></span></span><span class="icons"><span class="icon-unchecked"></span><span class="icon-checked"></span></span>
+                        下个交易日
+                    </label>
+
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+</div>

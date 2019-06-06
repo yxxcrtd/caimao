@@ -1,0 +1,315 @@
+<#include 'mobile/layout/layout.html'/> 
+<#macro assignSet>
+<#assign bg="bg-white"/> <#assign title=proMonth/> <#assign
+header=proMonth/> <#assign controller="P2"/> <#assign footer="1"/>
+</#macro>
+
+<#macro headerContent>
+
+<!--流程-->
+<div class="navi-container bg-gray">
+	<ol class="ui-step ui-step-3" id="ol_steps">
+		<li class="ui-step-start ui-step-active">
+			<div class="ui-step-line">-</div>
+			<div class="ui-step-icon">
+				<i class="iconfont"></i> <i class="ui-step-number">1</i> <span
+					class="ui-step-text">申请融资</span>
+			</div>
+		</li>
+		<li class="">
+			<div class="ui-step-line ui-step-active">-</div>
+			<div class="ui-step-icon">
+				<i class="iconfont"></i> <i class="ui-step-number">2</i> <span
+					class="ui-step-text">支付保证金</span>
+			</div>
+		</li>
+		<li class="ui-step-end">
+			<div class="ui-step-line">-</div>
+			<div class="ui-step-icon">
+				<i class="iconfont"></i> <i class="ui-step-number">3</i> <span
+					class="ui-step-text">申请成功</span>
+			</div>
+		</li>
+	</ol>
+</div>
+<!--流程-->
+
+</#macro> <#macro content>
+
+<article class="content"
+	style="padding-top: 118px;padding-bottom:56px;">
+	<div id="panel1">
+		<div class="con-spacing15">
+			<ul class="am-list am-listCapital">
+				<li class="am-list-item">
+					<h4 class="am-ft-md">您的本金</h4>
+					<div class="am-flexbox am-mt-10 ui-formContainer">
+						<div class="am-flexbox-item">
+							<span class="ui-form-field am-left-15"> <input
+								id="riskMargin" type="text" autocomplete="off"
+								class="text_input money" maxlength="18" defaultvalue="输入金额" value=""
+								placeholder="输入金额" >
+							</span>
+						</div>
+						<div class="am-flexbox-item ft-item">
+							<span class="">元 </span>
+						</div>
+					</div>
+					<h4 class="am-ft-md"><span id = "errMsg" style="color:red"></span></h4>
+				</li>
+			</ul>
+			<aside>
+				<h4 class="am-ft-md am-mt-10">可融资金</h4>
+				<ul class="list-amoutCompetition" id="margin_ratio">
+
+				</ul>
+				<div class=" ui-formContainer  flexbox-textarea am-mt-10" style="padding-top: 9px;" id="additionalts">
+					<div class="am-flexbox-item am-left-15"><span class="ui-form-field">
+					<textarea name="" cols="" rows="" disabled="disabled" class="am-textarea" defaultvalue="请先输入您追加的金额,根据您的追加金额算出所需保证金" value="" placeholder="请先输入您追加的金额,根据您的追加金额算出所需保证金"></textarea>
+					</span></div>
+				</div>
+				
+				<h4 class="am-ft-md"><span id = "errMsg1" style="color:red"></span></h4>
+                <p>* 部分杠杆融资需在电脑版进行&nbsp;&nbsp;&nbsp;<a href="javascript:void(0);" id="visit_pc" class="app_hide" style="display: none;">访问电脑版</a></p>
+			</aside>
+
+			<!-- 使用期限 -->
+			<aside class="am-mt-20">
+				<h4 class="am-ft-md">使用期限</h4>
+				<div class="am-flexbox am-mt-10 select-container">
+					<a id="loan_term_select" class="select-choice"><span
+						class="am-ft-md am-left-15" id="selectedTerm">1个月</span><i
+						class="type-ico am-icon-arrow-bottom"></i></a>
+					<ul class="select-results" id="loan_term" style="display: none;">
+
+					</ul>
+				</div>
+			</aside>
+			<div class=" am-pt-10 am-left-15">
+<span class="ui-input-checkbox ui-input-checkbox-active" id="agree_checkbox"></span>
+<span class="am-ft-sm am-left-5 am-ft-tabText">我已阅读并同意<a href="${basePath}/mobile/agreement-2.htm">《${proMonth}服务协议》</a></span>
+                <#if !proMonthSwitch><div style="color: red; margin: 10px;">${proMonthCloseMsg}</div></#if>
+</div>
+			<!--表单-->
+		</div>
+		<div class="bg-gray con-spacing15 am-mt-15 lineTop-gray">
+			<dl class="dl-capitalInfo">
+				<dt class="dl-capitalInfo-item">
+					<h4>月利率</h4>
+					<div class="clearfix pt">
+						<div class="cm-left text-left">
+							<span class="am-ft-orange" id="interest_month_rate"></span><span>元/月</span>
+						</div>
+						<div class="cm-left">
+							<span class="am-ft-gray am-ft-sm">即每1万元每月<span
+								id="interest_rate_desc"></span>元</span>
+						</div>
+					</div>
+				</dt>
+				<dt class="dl-capitalInfo-item">
+					<h4>操盘须知</h4>
+					<p class="pt">投资沪深A股，仓位不限制，盈利全归您</p>
+				</dt>
+				<dt class="dl-capitalInfo-item">
+					<h4>总操盘资金</h4>
+					<p class="pt">
+						<span class="am-ft-orange" id="all_account"></span><span>元</span>
+					</p>
+				</dt>
+				<dt class="dl-capitalInfo-item">
+					<h4>亏损警告线</h4>
+					<div class="clearfix pt">
+						<div class="cm-left text-left">
+							<span class="am-ft-orange" id="enable_account"></span><span>元</span>
+						</div>
+						<div class="cm-left">
+							<span class="am-ft-gray am-ft-sm">到达亏损警告线时只能卖出不能买入，财猫网有权利将仓位减至50%</span>
+						</div>
+					</div>
+				</dt>
+				<dt class="dl-capitalInfo-item">
+					<h4>亏损平仓线</h4>
+					<div class="clearfix pt">
+						<div class="cm-left text-left">
+							<span class="am-ft-orange" id="exposure_account"></span><span>元</span>
+						</div>
+						<div class="cm-left">
+							<span class="am-ft-gray am-ft-sm">系统将进行平仓处理</span>
+						</div>
+					</div>
+				</dt>
+				<dt class="dl-capitalInfo-item">
+					<h4>开始交易</h4>
+					<p class="pt">
+						<span>最迟下个交易日</span>
+					</p>
+				</dt>
+			</dl>
+
+		</div>
+
+        <!--按钮-->
+        <#if proMonthSwitch>
+            <div class="btn-page btn-page-center bg-white con-spacing15">
+                <a id="addBtn1" class="am-button am-button-red"> <span class="am-ft-white">我要融资</span>
+                </a>
+                <div id="errorStr" style="text-align: center; color: red;"></div>
+            </div>
+        </#if>
+        <!--按钮-->
+
+	</div>
+	<!-- 下一步页面 -->
+
+
+
+	<div class="con-spacing15 con-prompt" id="panel2" style="display: none;">
+		<!--提示-->
+		<div id="panel2_prompt1" style="display: none">
+			<p ><i class="icon-prompt icon-prompt-error"></i></p>
+			<p><span>很抱歉，未实名认证！</span></p>
+		</div>
+		
+		<div id="panel2_prompt2"  style="display: none">
+			<p>
+				<span>支付风险保证金<span class="am-ft-orange" id="riskValue"></span>元
+					+ 首月利息<span class="am-ft-orange" id="rateAccount"></span>元
+				</span>
+			</p>	
+		</div>
+		<div id="trustPanel" style="display: none;">
+
+			<div class="btn-page btn-page-center con-spacing15">
+				<a
+					href="${basePath}/mobile/user/certification.htm?tg=${basePath}/mobile/P2.htm"
+					class="am-button am-button-red">立即实名认证</a>
+			</div>
+		</div>
+	
+		
+		
+		<div id="selfDetail" style="display: none;">
+			<p class="am-ft-gray">
+				可用余额 <b class="am-ft-main"><span id="selfAccount"></span></b> 元
+			</p>
+			<div class="con-spacing10">
+				<aside class="con-frame">
+					<ul class="datalist datalist-password">
+						<li class="datalist-item clearfix">
+							<div class="am-grid datalist-line">
+								<div class="am-grid-item am-grid-item-25  am-ft-right">
+									<h4 class="am-ft-md cm-left" id="riskValue">安全密码</h4>
+								</div>
+								<div
+									class="am-grid-item am-grid-item-75 am-ft-right am-right-15">
+									<span class="ui-form-field"> <input type="password"
+										class="text_input" maxlength="18" id="password" placeholder="输入安全密码" />
+									</span>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</aside>
+			</div>
+
+
+
+		</div>
+
+		<div id="selfPass" style="display: none;">
+			<p class="am-ft-gray">
+				可用余额 <b class="am-ft-main"><span id="selfAccount1"></span></b> 元,还差
+				<b class="am-ft-main"><span id="lackAccount"></span></b> 元
+			</p>
+			<div class="btn-page btn-page-center con-spacing15">
+				<a
+					href="${basePath}/mobile/account/recharge.htm?tg=${basePath}/mobile/P2.htm"
+					class="am-button am-button-red">立即充值</a>
+			</div>
+
+		</div>
+
+
+
+		<!--按钮-->
+		<div  class="btn-page btn-page-center con-spacing15" style="display: none;">
+			<a id="addBtn2" class="am-button am-button-red"> <span class="am-ft-white">确认融资</span>
+			</a>
+
+		</div>
+		<!--按钮-->
+
+	</div>
+
+	<!-- 下一步页面结束 -->
+
+	<!-- 实名认证页面 -->
+
+	<div id="panel3" style="display: none;">
+		<article class="content">
+			<div class="con-spacing15 con-prompt">
+				<!--提示-->
+				<p>
+					<i class="icon-prompt icon-prompt-error"></i>
+				</p>
+				<p>
+					<span>很抱歉，申请失败啦！</span>
+				</p>
+				<p class="am-ft-gray">
+					<span class="am-ft-sm" id="errMsg2"></span>
+				</p>
+
+
+				<!--提示-->
+
+
+				<!--按钮-->
+				<div class="btn-page btn-page-center con-spacing15">
+					<a href="${basePath}/mobile/P2.htm" class="am-button am-button-red">
+						<span class="am-ft-white">重新申请</span>
+					</a>
+
+				</div>
+				<!--按钮-->
+			</div>
+
+
+
+		</article>
+	</div>
+	<!--实名认证页面结束 -->
+	<!--  申请成功开始-->
+
+	<div class="con-spacing15 con-prompt" id="panel4"  style="display: none;">
+		<!--提示-->
+		<p>
+			<i class="icon-prompt icon-prompt-wait"></i>
+		</p>
+		<p>
+			<span>融资申请已成功提交</span>
+		</p>
+		<p class="am-ft-gray">
+			<span class="am-ft-sm">申请正在紧张处理，请耐心等待</span>
+		</p>
+
+
+		<!--提示-->
+
+
+		<!--按钮-->
+		<div class="btn-page btn-page-center con-spacing15">
+			<a href="${basePath}/mobile/user/contracts.htm"
+				class="am-button am-button-red"> <span class="am-ft-white">合约详情</span>
+			</a>
+		</div>
+		<!--按钮-->
+
+		<p class="am-ft-sm phone">
+			如有疑问请拨打客服电话: <#include 'mobile/component/phonePanel.html'/>
+		</p>
+	</div>
+	<!-- 申请 成功结束 -->
+</article>
+</#macro>
+
+

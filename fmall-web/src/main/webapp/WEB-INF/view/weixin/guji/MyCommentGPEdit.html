@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <#include "weixin/config.html"/>
+    <head>
+        <meta charset="UTF-8">
+        <title>股计</title>
+        <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1, user-scalable=false">
+        <meta name="format-detection" content="telephone=no"/>
+        <#include "weixin/guji/include/js.html"/>
+        <script>
+            domready(function() {
+
+            });
+        </script>
+    </head>
+
+    <body>
+        <form name="myCommentGPEdit" id="myCommentGPEdit" action="/weixin/guji/myCommentGPSave" method="post">
+            <div id="">
+                <div>股票：
+                    <@s.formInput "entity.stockCode" "placeholder='输入股票代码或首字母缩写' style='width: 250px;'"/>
+                    <div class="showErrors"><@s.showErrors classOrStyle="red" /></div>
+                </div>
+                <div>
+                    目标价：
+                    <input type="radio" class="radio1" name="value" value="y" />不设
+                    <input type="radio" class="radio1" name="value" value="y" />
+                    <input type="text" name="targetPrice" value="${entity.targetPrice}" style="width: 100px;" />
+                </div>
+                <div>
+                    <div>点评：</div>
+                    <@s.formTextarea "entity.reason" "placeholder='建议20-500字' style='width: 99%; height: 200px;' "/>
+                    <div class="showErrors"><@s.showErrors classOrStyle="red" /></div>
+                </div>
+                <div>
+                    <input type="submit" value=" 发 布 " />
+                    <div id="tips"><#if tips??>${tips}</#if></div>
+                </div>
+            </div>
+            <@s.formHiddenInput "entity.wxId" />
+            <@s.formHiddenInput "entity.openId" />
+            <@s.formHiddenInput "entity.stockType" />
+            <@s.formHiddenInput "entity.stockName" />
+            <@s.formHiddenInput "entity.stockPrice" />
+        </form>
+
+        <#include "weixin/guji/include/menu.html"/>
+    </body>
+</html>

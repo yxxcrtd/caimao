@@ -1,0 +1,107 @@
+<#assign controller="AddContract"/>
+<#include 'layout/layout.html'/>
+
+<#macro content>
+<div class="grid1000">
+
+<!--步骤start-->
+<div class="navi-container">
+    <ol class="ui-step ui-step-5">
+        <li class="ui-step-start ui-step-active">
+            <div class="ui-step-line">-</div>
+            <div class="ui-step-icon">
+                <i class="iconfont"></i>
+                <i class="ui-step-number">1</i>
+                <span class="ui-step-text">申请追加借款</span>
+            </div>
+        </li>
+
+        <li>
+            <div class="ui-step-line">-</div>
+            <div class="ui-step-icon">
+                <i class="iconfont"></i>
+                <i class="ui-step-number">2</i>
+                <span class="ui-step-text">缴纳保证金</span>
+            </div>
+        </li>
+
+        <li>
+            <div class="ui-step-line">-</div>
+            <div class="ui-step-icon">
+                <i class="iconfont"></i>
+                <i class="ui-step-number">3</i>
+                <span class="ui-step-text">追加成功</span>
+            </div>
+        </li>
+
+        <li>
+            <div class="ui-step-line">-</div>
+            <div class="ui-step-icon">
+                <i class="iconfont"></i>
+                <i class="ui-step-number">4</i>
+                <span class="ui-step-text">开始投资股票</span>
+            </div>
+        </li>
+
+
+        <li class="ui-step-end">
+            <div class="ui-step-line">-</div>
+            <div class="ui-step-icon">
+                <i class="iconfont"></i>
+                <i class="ui-step-number">5</i>
+                <span class="ui-step-text">盈利全归您</span>
+            </div>
+        </li>
+    </ol>
+</div>
+<!--步骤end-->
+
+
+<!--框架-->
+<div class="">
+    <div class="" id="contentctn">
+        <div id="panel1">
+        			<div style="font-size:14px;display:none;">
+        				原合约： <span id="contract-panel" style="color:#0080fb;font-size:18px;"></span>
+        			</div>
+                    <!--申请资金操盘-->
+                    <div class="con-dxStep01 clearfix">
+                        <div class="cm-left dxStep01-lside">
+                            <!--标题-->
+                            <div class="title-common clearfix">
+                                <h2 class="cm-left">您需要追加的金额</h2>
+                            </div>
+                            <div id="deposit-amount-fld"></div>
+                            <div id="select-loan-panel"></div>
+
+                            <!--金额-->
+                            <div class="pagination">
+                                <ul class="list-amoutCompetition" data-dojo-attach-point="selectNode">
+
+                                </ul>
+                            </div>
+                            <!--金额-->
+                        </div>
+                        <div id="rightctn"></div>
+                    </div>
+                    <!--申请资金操盘-->
+
+
+                    <!--是否同意-->
+                    <div class="am-ft-center">
+                        <p class=" am-pt-15"><span class="am-ft-md">如有疑问请联系客服：${hotline}</span></p>
+
+                        <div class="button-center am-pt-15">
+                            <div id="loaninfobtn"></div>
+                        </div>
+                    </div>
+                </div>
+                <!--是否同意-->
+
+    </div>
+</div>
+<!--框架end-->
+
+
+</div>
+</#macro>

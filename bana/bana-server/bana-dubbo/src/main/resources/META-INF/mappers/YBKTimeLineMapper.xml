@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="YBKTimeLine">
+    <resultMap id="BaseResultMap" type="com.caimao.bana.api.entity.ybk.YBKTimeLineEntity">
+        <id column="exchange_name" property="exchangeName" jdbcType="CHAR"/>
+        <id column="code" property="code" jdbcType="CHAR"/>
+        <id column="datetime" property="datetime" jdbcType="TIMESTAMP"/>
+        <result column="yester_balance_price" property="yesterBalancePrice" jdbcType="BIGINT"/>
+        <result column="open_price" property="openPrice" jdbcType="BIGINT"/>
+        <result column="cur_price" property="curPrice" jdbcType="BIGINT"/>
+        <result column="current_gains" property="currentGains" jdbcType="BIGINT"/>
+        <result column="total_amount" property="totalAmount" jdbcType="BIGINT"/>
+        <result column="total_money" property="totalMoney" jdbcType="BIGINT"/>
+        <result column="high_price" property="highPrice" jdbcType="BIGINT"/>
+        <result column="low_price" property="lowPrice" jdbcType="BIGINT"/>
+        <result column="today_amount" property="todayAmount" jdbcType="BIGINT"/>
+        <result column="today_money" property="todayMoney" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        exchange_name, code, datetime, yester_balance_price, open_price, cur_price, current_gains, total_amount, total_money, high_price, low_price, today_amount, today_money
+    </sql>
+
+    <select id="getLastLine" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM ybk_timeline
+        WHERE exchange_name = #{exchange} AND `code` = #{code}
+        ORDER BY datetime DESC LIMIT 1;
+    </select>
+
+    <insert id="insert" parameterType="com.caimao.bana.api.entity.ybk.YBKTimeLineEntity">
+        INSERT INTO ybk_timeline
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="exchangeName != null">exchange_name,</if>
+            <if test="code != null">code,</if>
+            <if test="datetime != null">datetime,</if>
+            <if test="yesterBalancePrice != null">yester_balance_price,</if>
+            <if test="openPrice != null">open_price,</if>
+            <if test="curPrice != null">cur_price,</if>
+            <if test="currentGains != null">current_gains,</if>
+            <if test="totalAmount != null">total_amount,</if>
+            <if test="totalMoney != null">total_money,</if>
+            <if test="highPrice != null">high_price,</if>
+            <if test="lowPrice != null">low_price,</if>
+            <if test="todayAmount != null">today_amount,</if>
+            <if test="todayMoney != null">today_money,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="exchangeName != null">#{exchangeName},</if>
+            <if test="code != null">#{code},</if>
+            <if test="datetime != null">#{datetime},</if>
+            <if test="yesterBalancePrice != null">#{yesterBalancePrice},</if>
+            <if test="openPrice != null">#{openPrice},</if>
+            <if test="curPrice != null">#{curPrice},</if>
+            <if test="currentGains != null">#{currentGains},</if>
+            <if test="totalAmount != null">#{totalAmount},</if>
+            <if test="totalMoney != null">#{totalMoney},</if>
+            <if test="highPrice != null">#{highPrice},</if>
+            <if test="lowPrice != null">#{lowPrice},</if>
+            <if test="todayAmount != null">#{todayAmount},</if>
+            <if test="todayMoney != null">#{todayMoney},</if>
+        </trim>
+    </insert>
+
+    <select id="queryTimeLine" parameterType="com.caimao.bana.api.entity.req.ybk.FYbkMarketReq" resultType="com.caimao.bana.api.entity.res.ybk.FYBKTimeLineRes">
+        SELECT
+        datetime,
+        yester_balance_price AS yesterPrice,
+        cur_price AS curPrice,
+        total_amount as totalAmount,
+        total_money as totalMoney
+        FROM ybk_timeline
+        WHERE exchange_name = #{exchangeShortName} AND code = #{code}
+        <if test="datetime!=null">
+            AND datetime <![CDATA[ >= ]]>  #{datetime}
+        </if>
+        ORDER BY datetime DESC
+        LIMIT #{limit}
+    </select>
+</mapper>

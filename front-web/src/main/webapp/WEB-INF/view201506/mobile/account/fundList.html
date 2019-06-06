@@ -1,0 +1,75 @@
+<#assign bg="bg-gray"/> 
+<#assign controller="fundList"/> 
+<#assign title="资金明细"/> 
+<#assign header="资金明细"/>
+<#assign footer="3"/>
+<#include 'mobile/layout/layout.html'/>
+
+<#macro headerContent>
+<aside class="navi-container data-container bg-gray">
+<div class="am-flexbox">
+<div class="am-flexbox-item  select-container">
+<a class="select-choice"><input class="am-ft-sm am-left-10 date" onfocus="this.blur();" type="text" autocomplete="off" id="startDate" style="width:90%;border:none;"/></a>
+</div>
+<div class="am-flexbox-item am-ft-center" style="max-width:30px;">
+<span class="am-ft-sm">至</span>
+</div>
+<div class="am-flexbox-item select-container">
+<a  class="select-choice"><input class="am-ft-sm am-left-10 date" type="text" autocomplete="off" onfocus="this.blur();" id="endDate" style="width:90%;border:none;"/></a>
+</div>
+</div>
+</aside>
+
+</#macro>
+<#macro content>
+<article class="content" style="padding-top:87px;" id="content">
+
+
+<aside>
+<div class="contractNum bg-gray con-spacing10">
+<b>还款</b><span class="bar am-ft-xl am-ft-gray">|</span><b class="am-ft-red">¥ 10000</b>
+</div>
+
+<!--金额-->
+<dl class="dl-moneyMain bg-white">
+<dt>
+<p><span class="am-ft-sm am-ft-tabText">2014-06-02</span></p>
+<p class="am-pt-5"><span class="am-ft-sm am-ft-tabText">09:23:12</span></p>
+</dt>
+<dt>
+<p><b class="am-right-5">1,000</b><span class="am-ft-sm">元</span></p>
+<p class="am-pt-5"><span class="am-ft-sm am-ft-tabText">发生金额</span></p>
+</dt>
+<dt>
+<p><b>还款</b></p>
+<p class="am-pt-5"><span class="am-ft-sm am-ft-tabText">状态</span></p>
+</dt>
+</dl>
+<!--金额-->
+</aside>
+
+<aside>
+<div class="contractNum bg-gray con-spacing10">
+<b>取现</b><span class="bar am-ft-xl am-ft-gray">|</span><b class="am-ft-red">¥ 10000</b>
+</div>
+
+<!--金额-->
+<dl class="dl-moneyMain bg-white">
+<dt>
+<p><span class="am-ft-sm am-ft-tabText">2014-06-02</span></p>
+<p class="am-pt-5"><span class="am-ft-sm am-ft-tabText">09:23:12</span></p>
+</dt>
+<dt>
+<p><b class="am-right-5">1,000</b><span class="am-ft-sm">元</span></p>
+<p class="am-pt-5"><span class="am-ft-sm am-ft-tabText">发生金额</span></p>
+</dt>
+<dt>
+<p><b>取现</b></p>
+<p class="am-pt-5"><span class="am-ft-sm am-ft-tabText">状态</span></p>
+</dt>
+</dl>
+<!--金额-->
+</aside>
+<div style="text-align: center;display: none" id="loading"><img src='${basePath}/mobile/images/indicator.gif' /></div>
+</article>
+</#macro>

@@ -1,0 +1,150 @@
+@charset "utf-8";
+@import "variable";
+/*
+━━━━━━━
+mixin.scss
+掺合样式类
+BitUI
+━━━━━━━
+*/
+
+/*
+**clearFix
+**@include clearFix
+*/
+@mixin clearFix{
+  @if ie6{
+    *zoom:1;
+  }
+  &:after{
+    content: '.';
+    clear: both;
+    display: block;
+    height: 0;
+    visibility: hidden;
+  }
+}
+
+/*
+**clearFix
+**@extend %clearFix
+*/
+%clearFix{
+  @include clearFix
+}
+
+/*
+**btn着色
+**@include btn($color)
+*/
+@mixin btn($color){
+  background-color:$color;
+  border-color: $color;
+  &:hover,&:focus{
+    background-color: darken( $color , 5%);
+  }
+  &:active{
+    background-color: darken($color,5%);
+    box-shadow: inset 0 3px 5px  darken($color,15%);
+  }
+
+}
+/*
+*input文本框着色
+**@include input($color)
+*/
+@mixin input($color){
+  border-color: $color;
+  box-shadow: inset 0 1px 1px transparent;
+  &:hover{
+    @if $color == $gray{
+      border-color: $inputFocusColor;
+    }@else {
+      border-color: $color;
+    }
+
+  }
+  &:focus, &.focus{
+    @if $color == $gray{
+      border-color: $inputFocusColor;
+      box-shadow: inset 0 1px 1px transparent, 0 0 5px lighten($inputFocusColor,5%);
+    }@else {
+      border-color: $color;
+      box-shadow: inset 0 1px 1px transparent, 0 0 5px lighten($color,5%);
+    }
+  }
+}
+
+/*
+*媒体选择器
+*@include mediaQuery('min/max', $viewport1, $viewport2){.class{...}}
+*/
+
+@mixin mediaQuery($constraint, $viewport1, $viewport2: null) {
+
+  @if $constraint == 'min' {
+
+    @media screen and ('min-width': $viewport1) {
+      @content;
+    }
+
+  } @else if $constraint == 'max' {
+
+    @media screen and ('max-width': $viewport1) {
+      @content;
+    }
+
+  } @else {
+
+    @media screen and ('min-width': $viewport1) and ('max-width': $viewport2) {
+      @content;
+    }
+
+  }
+}
+/*
+*响应式
+*@include res(xs/s/m/l){.class{...}}
+*/
+
+@mixin res($size){
+  @if($size == 'size_xs'){
+    @include mediaQuery('max',$screen-xs){
+      @content;
+    }
+  }
+  @if($size == 'size_s'){
+    @include mediaQuery('',$screen-xs,$screen-s - 1){
+      @content;
+    }
+  }
+  @if($size == 'size_m'){
+    @include mediaQuery('',$screen-s,$screen-l - 1){
+      @content;
+    }
+  }
+  @if($size == 'size_l'){
+    @include mediaQuery('min',$screen-l){
+      @content;
+    }
+  }
+}
+
+/*
+*透明度
+*@include opacity($opacity)
+**/
+@mixin opacity($opacity) {
+  opacity: $opacity;
+  $opacity-ie: ($opacity * 100);
+  filter: alpha(opacity = $opacity-ie);
+}
+
+/*
+*背景图片
+*@include img($url,$position,$repeat)
+**/
+@mixin img($url, $position:0 0, $repeat:no-repeat){
+  background:url( $url + $versions ) $position $repeat;
+}
+

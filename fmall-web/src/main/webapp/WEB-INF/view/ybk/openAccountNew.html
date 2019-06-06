@@ -1,0 +1,54 @@
+<!doctype html>
+<#include "ybk/config.html" />
+<#assign topMenu="openAccount" />
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>我的开户--邮币卡</title>
+		<link rel="stylesheet" href="${staticUrl}/style/account.css" />
+    	<script src="${staticUrl}/js/chart/lib.js?version=${jsVersion}" type="text/javascript"></script>
+		<script src="${staticUrl}/js/ybk/global.js?version=${jsVersion}" type="text/javascript"></script>
+	</head>
+	<body>
+
+<#include "ybk/include/page/head.html" />
+${user.userId}
+		<div class="main">
+			<div class="openAccountTable">
+				<div class="openAccountTableAuto">
+					<table>
+						<thead>
+						<tr>
+							<th><div class="col_1">交易所名称</div></th>
+							<th><div class="col_2">银商绑定支持银行</div></th>
+							<th><div class="col_3">开户处理时间段</div></th>
+							<th><div class="col_5">出入金时间段</div></th>
+							<th><div class="col_6">银商绑定时间段</div></th>
+							<th><div class="col_8">交易时间段</div></th>
+							<th><div class="col_9">交易手续费</div></th>
+						</tr>
+						</thead>
+						<tbody>
+						<#list exchangeList as l>
+							<tr>
+								<td><div class="col_1">${l.name}<#if l.activity.name??><a href="/ybk/topic/open_gift.html" target="_blank" style="color: rosybrown;">（开户有礼）</a></#if></div></td>
+								<td><div class="col_2">${l.supportBank}</div></td>
+								<td><div class="col_3">${l.openProcessTimes}</div></td>
+								<td><div class="col_5">${l.comeInTimes}</div></td>
+								<td><div class="col_6">${l.bankBindTimes}</div></td>
+								<td><div class="col_8">${l.tradeTimes}</div></td>
+								<td><div class="col_9">${l.tradeFee}</div></td>
+							</tr>
+						</#list>
+
+						</tbody>
+					</table>
+				</div>
+				<div class="openAccountTableBtn">
+					<a class="btn" href="/ybk/open_account_step.html">了解了，我要开户</a>
+				</div>
+			</div>
+		</div>
+<#include "ybk/include/page/foot.html" />
+	</body>
+</html>

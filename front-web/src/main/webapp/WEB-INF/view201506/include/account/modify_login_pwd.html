@@ -1,0 +1,76 @@
+<form id="modify_pwd_login" action="/user/loginpwd/reset" method="post" class="p_l_40">
+    <div class="group m_t_10">
+        <div class="col_1">当前密码</div>
+        <div class="col_2">
+            <input class="input_text" name="oldPwd" id="login_pwd_cur_pwd" type="password" validateType="empty:请输入当前登录密码 len:6:16 password" placeholder="请输入当前密码" maxlength="20"/>
+        </div>
+    </div>
+    <div class="group m_t_10">
+        <div class="col_1">新密码</div>
+        <div class="col_2">
+            <input class="input_text"  type="password" name="newPwd" id="login_pwd_new_pwd" validateType="empty:请输入新密码 len:6:16 password" placeholder="请输入新密码" maxlength="20"/>
+            <i id="loginPwdStrong" class="icons icon_low"></i>
+        </div>
+    </div>
+    <div class="group m_t_10">
+        <div class="col_1">确认新密码</div>
+        <div class="col_2"><input class="input_text" name="rePwd" id="login_pwd_re_pwd" type="password" validateType="empty:请再次输入密码 same:#login_pwd_new_pwd:两次密码输入不一致" placeholder="请确认密码" maxlength="20"/></div>
+    </div>
+    <div class="group m_t_10">
+        <div class="col_1"></div>
+        <div class="col_2">
+            <button type="button" id="login_pwd_submit" class="btn size_m btn_blue">保存</button>
+        </div>
+    </div>
+</form>
+<script type="text/javascript">
+    $(document).ready(function() {
+        var formLoginPwd = $('#modify_pwd_login'),
+                loginPwdCurPwd = $('#login_pwd_cur_pwd'),
+                loginPwdNewPwd = $('#login_pwd_new_pwd'),
+                loginPwdRePwd = $('#login_pwd_re_pwd'),
+                loginPwdStrong = $('#loginPwdStrong'),
+                loginPwdSubmit = $('#login_pwd_submit');
+
+        // 初始化表单的验证方法
+        formValidate.init(formLoginPwd);
+        // 新密码修改后计算安全系数
+        $(loginPwdNewPwd).keyup(function() {
+            var pwdStrongVal = CMUTILS.pwdStrong($(this).val());
+            console.info("密码级别" + pwdStrongVal);
+            switch (pwdStrongVal) {
+                case 2:
+                    $(loginPwdStrong).attr("class", "icons icon_medium");
+                    break;
+                case 3:
+                    $(loginPwdStrong).attr("class", "icons icon_high");
+                    break;
+                default :
+                    $(loginPwdStrong).attr("class", "icons icon_low");
+            }
+            return true;
+        });
+        // 修改事件的触发
+        $(loginPwdSubmit).click(function() {
+            if (formValidate.validateForm(formLoginPwd) == false) {
+                return false;
+            }
+            var oldPwd = $(loginPwdCurPwd).val();
+            var newPwd = $(loginPwdNewPwd).val();
+            $.post("/user/loginpwd/reset",
+                    {
+                        oldPwd : RSAUtils.encryptedString(oldPwd),
+                        newPwd : RSAUtils.encryptedString(newPwd)
+                    },
+                    function(response){
+                        if(response.success){
+                            // 修改登录密码成功后，刷新当前页面，进行重新登录
+                            Alert.show("修改密码成功，请刷新页面重新登录", "确认", function() {window.location.reload()});
+                        }else{
+                            formValidate.showFormTips(loginPwdSubmit, response.msg);
+                        }
+                    }
+            );
+        });
+    });
+</script>

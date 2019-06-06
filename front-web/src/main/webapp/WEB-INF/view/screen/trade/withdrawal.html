@@ -1,0 +1,26 @@
+<#assign controller="StockWithdrwal"/>
+<#include 'layout/layout.html'/>
+<#macro content>
+<div class="contents clearfix">
+    <div class="con-lside cm-left conside" id="sidemenuctn" style="position: inherit;"></div>    
+	<!--右边start-->
+	<div class="con-rside cm-right">		
+		<div class="con-transactions ">
+			<!--表单-->
+			<form class="ui-form" role="form">
+				<div class="ui-form-item" style="margin-bottom:5px;">
+					<label class="ui-label">操作员编号：</label>
+					<div class="ui-select" id="childAccountDiv" ></div>
+				</div>
+			</form>
+			<!--表单-->
+			<!--表格-->
+			<div id="grid_f" ></div>
+			<!--表格-->
+		</div>
+	</div>
+	<!--右边end-->
+</div>
+</#macro>
+<#macro subScript>
+</#macro>

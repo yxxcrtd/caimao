@@ -1,0 +1,14 @@
+<jobs>
+	<!-- 股票初始化 -->
+	<job name="stock" updateTime="9:05" class="com.hundsun.quote.job.StockInitJob" prop="auto:true" required="true" enable="true" />
+	<!-- 股票板块数据 -->
+	<job name="stock_block" updateTime="09:00" class="com.hundsun.quote.job.BlockDataJob" required="true" enable="false" />
+	<!-- 财务数据 -->
+	<job name="finance_data" updateTime="09:00" class="com.hundsun.quote.job.StockFinJob" required="true" enable="false" />
+	<!-- 期货初始化 -->
+	<job name="futures" updateTime="08:55" prop="auto:true" class="com.hundsun.quote.job.FuturesInitJob" required="false" enable="false" />
+	<!-- 港股初始化 -->
+	<job name="hk_stock" updateTime="09:10" prop="auto:true" class="com.hundsun.quote.job.HKMarketInitJob" required="true" enable="false" />
+	<!-- 除权初始化 -->
+	<job name="exRight" updateTime="09:10" class="com.hundsun.quote.job.ExRightJob" required="true" enable="false" />
+</jobs>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="OtherData">
+
+    <select id="queryPZRankingList" resultType="com.caimao.bana.api.entity.res.FIndexPZRankingRes">
+        SELECT
+            u.mobile AS mobile,
+            a.*
+        FROM tpz_user u,
+            (SELECT
+                 user_id           AS user_id,
+                 cash_amount       AS cashAmount,
+                 loan_ratio        AS loanRatio,
+                 max(order_amount) AS loanAmount
+             FROM (SELECT *
+                   FROM tpz_loan_apply
+                   ORDER BY order_amount DESC) AS b
+             GROUP BY user_id
+            ) AS a
+        WHERE a.user_id = u.user_id
+        ORDER BY a.loanAmount DESC
+        LIMIT #{limit}
+    </select>
+
+    <select id="queryRealtimePZList" resultType="com.caimao.bana.api.entity.res.FIndexRealtimePZRes">
+        SELECT
+            a.user_id        AS userId,
+            u.mobile         AS mobile,
+            a.order_amount   AS loanAmount,
+            a.apply_datetime AS applyDatetime
+        FROM tpz_loan_apply AS a
+            LEFT JOIN tpz_user AS u ON u.user_id = a.user_id
+        ORDER BY a.apply_datetime DESC
+        LIMIT #{limit}
+    </select>
+
+    <!--获取总的注册人数-->
+    <select id="getTotalRegisterUserCount" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM tpz_user
+    </select>
+
+    <!--获取总的配资金额-->
+    <select id="getTotalPzSum" resultType="java.lang.Long">
+        SELECT SUM(order_amount) AS amount FROM tpz_loan_apply WHERE verify_status = 1;
+    </select>
+
+    <!--获取总的投资金额-->
+    <select id="getTotalInviestSum" resultType="java.lang.Long">
+      SELECT SUM(target_amount) AS val FROM p2p_loan_record WHERE target_status NOT IN(3, 4);
+    </select>
+
+    <!--获取总的利息收入-->
+    <select id="getTotalInterestSum" resultType="java.lang.Long">
+      SELECT SUM(pay_target_interest) AS val FROM p2p_loan_record WHERE target_status NOT IN(3, 4);
+    </select>
+
+</mapper>

@@ -1,0 +1,191 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>财猫-账户-提现记录</title>
+	<link href="../style/page/page.css" rel="stylesheet">
+</head>
+
+<body>
+<!--顶部未登录-->
+<div id="top">
+	<div class="w top_in">
+		<div class="f_l">您好！欢迎来到财猫网！</div>
+		<div class="f_r right">
+			<span class="plr_10"><a href="">登录</a></span><s>|</s>
+			<span class="plr_10"><a href="">注册</a></span><s>|</s>
+			<span class="plr_10"><i class="icons icon_weixin"><span></span></i></span><s>|</s>
+			<span class="plr_10 no_bor"><a href=""><i class="icons icon_weibo"></i></a></span><s>|</s>
+			<span class="font_red p_l_5"><i class="icons icon_tel"></i>24小时服务电话4000-898-000</span>
+		</div>
+	</div>
+</div>
+<!--顶部登录后-->
+<!--<div id="top">-->
+<!--<div class="w top_in">-->
+<!--<div class="f_l left">-->
+<!--<span>总资产:<b>400,000</b>元</span>-->
+<!--<span>浮动盈亏：<b class="red">-500元</b></span>-->
+<!--<span>浮动盈亏：<b class="cyan">+1500元</b></span>-->
+<!--<a class="red" href="">充值</a>-->
+<!--<a href="">按日融资</a>-->
+<!--<span class="icons icon_prompt">-->
+<!--</span>-->
+<!--<span class="icons icon_prompt_red"></span>-->
+<!--<span class="icons icon_prompt_orange"></span>-->
+<!--</div>-->
+<!--<div class="f_r right">-->
+<!--&lt;!&ndash;消息框位灰色时  直接去掉icon_info即可&ndash;&gt;-->
+<!--<span class="font_red"><i class="icons icon_info"></i>6</span>-->
+<!--<span class="plr_10">您好，马建军 </span>-->
+<!--<a href="#">退出</a>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+
+<!--头部-->
+<div id="header">
+	<div class="w header_in">
+		<div class="f_l left">
+			<h1 class="icons icon_logo"><a href="#">财猫网</a></h1><p class="icons icon_logo_p">招招有财</p>
+		</div>
+		<div class="f_r right">
+			<ul>
+				<li><a href="#">首页 <b></b></a></li>
+				<li><a href="#">交易<b></b></a></li>
+				<li><a href="#">融资<b></b></a></li>
+				<li><a class="hov" href="#">账户<b></b></a></li>
+				<li><a href="#">下载<b></b></a></li>
+				<li><a href="#">新手引导<b></b></a></li>
+			</ul>
+		</div>
+	</div>
+
+</div>
+
+<!--内容区-->
+<div id="main">
+	<div class="w sec_main">
+		<!--左右布局-->
+		<div class="left_bar">
+			<ul>
+				<li><a href="#"><i class="icons icon_account"></i>我的账户</a></li>
+				<li><a class="hov" href=""><i class="icons icon_recharge"></i>我要充值</a></li>
+				<li><a href=""><i class="icons icon_withdraw"></i>我要提现</a></li>
+				<li><a href=""><i class="icons icon_fund"></i>资金明细</a></li>
+				<li><a href=""><i class="icons icon_secure"></i>账户安全</a></li>
+				<li><a href=""><i class="icons icon_message"></i>个人资料</a></li>
+			</ul>
+		</div>
+		<div class="right_bar">
+			<div class="tabNav">
+				<ul>
+					<li><a href="">网银充值</a></li>
+					<li><a href="">支付宝转账</a></li>
+					<li><a href="">银行转账</a></li>
+					<li><a class="on" href="">充值记录</a></li>
+				</ul>
+			</div>
+
+			<div class="record">
+				<div class="table_tit m_t_20">
+                   <span>
+					   <label>
+                       状态
+                       <select name="" class="input_select">
+						   <option value="全部">全部</option>
+						   <option value="待处理">待处理</option>
+						   <option value="待确认">待确认</option>
+						   <option value="成功">成功</option>>
+						   <option value="失败">失败</option>>
+					   </select>
+					   </label>
+                   </span>
+                    <span>
+                      <label>  时间
+                         <select name="" class="input_select">
+							 <option value="全部">全部</option>
+							 <option value="今天">今天</option>
+							 <option value="一周">一周</option>
+							 <option value="三个月">三个月</option>>
+							 <option value="半年">半年</option>>
+						 </select>
+						</label>
+                    </span>
+                    <span>
+                        <a href="" class="btn btn_red">查询</a>
+                    </span>
+				</div>
+				<table class="table m_t_20 table_striped table_hover">
+					<colgroup>
+						<col style="width:210px;">
+						<col style="width:180px;">
+						<col style="width:150px;">
+						<col style="width:210px;">
+						<col style="width:110px;">
+						<col style="width:110px;">
+					</colgroup>
+					<thead>
+						<tr>
+							<th>单号</th>
+							<th>申请时间</th>
+							<th>订单金额（元）</th>
+							<th>银行卡号</th>
+							<th>状态</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+
+					<tbody>
+
+					<tr>
+						<td><strong>801899854954500</strong></td>
+						<td>2015-06-10 14:13:12</td>
+						<td><b class="font_red">5000,000</b></td>
+						<td>6227************123</td>
+						<td>待确认</td>
+						<td>--</td>
+					</tr>
+					<tr>
+						<td><strong>801899854954500</strong></td>
+						<td>2015-06-10 14:13:12</td>
+						<td><b class="font_red">5000,000</b></td>
+						<td>6227************123</td>
+						<td><b class="font_cyan">完成</b></td>
+						<td><b class="font_blue">取消提现</b></td>
+					</tr>
+
+
+					<tr class="table_crumbs">
+						<td colspan="6">
+							<i class="icons icon_info_null"></i>
+							<p>提现记录为空</p>
+						</td>
+					</tr>
+					</tbody>
+
+				</table>
+
+			</div>
+
+
+
+		</div>
+	</div>
+</div>
+
+
+<!--底部-->
+<div id="footer">
+	<div class="w">
+		<p class="nav_sub"><a href="">关于我们</a>|<a href="">服务条款</a>|<a href="">帮助中心</a></p>
+		<p class="server"> <i class="icons icon_qqs"></i>官方QQ群4006660888  <i class="icons icon_telephone"></i>24小时服务电话4000-898-000</p>
+		<p class="server2">
+			<a class="weixin"><i class="icons icon_weixin_b"><span></span></i></a>
+			<a href="#"><i class="icons icon_weibo_b"> </i></a>
+		</p>
+		<p>版权所有 © 北京朋乐投资管理有限公司 丨 京ICP备15016693号</p>
+	</div>
+</div>
+</body>
+</html>

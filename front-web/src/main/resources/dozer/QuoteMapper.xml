@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<mappings xmlns="http://dozer.sourceforge.net"  
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+       xsi:schemaLocation="http://dozer.sourceforge.net  
+       http://dozer.sourceforge.net/schema/beanmapping.xsd">
+       
+       <!--市场批量股票信息出参 -->
+       <mapping>
+           <class-a>com.hsnet.pz.ao.quote.dto.QueryReportData</class-a>
+           <class-b>com.hsnet.pz.ao.quote.dto.QueryReportDataRep</class-b>
+           <field> <a>stock_code</a> <b>stockCode</b> </field>
+           <field> <a>stock_name</a> <b>stockName</b> </field>
+           <field> <a>new_price</a> <b>newPrice</b> </field>
+           <field> <a>charge_value</a> <b>chargeValue</b> </field>
+           <field> <a>charge_rate</a> <b>chargeRate</b> </field>
+       </mapping>             
+       
+       <!--K线数据（日K,周K,月K） -->
+       <mapping>
+           <class-a>com.hsnet.pz.ao.quote.dto.QueryDayDataBigInt</class-a>
+           <class-b>com.hsnet.pz.ao.quote.dto.QueryDayDataBigIntRep</class-b>
+           <field> <a>open_price</a> <b>openPrice</b> </field>
+           <field> <a>close_price</a> <b>closePrice</b> </field>
+           <field> <a>max_price</a> <b>maxPrice</b> </field>
+           <field> <a>min_price</a> <b>minPrice</b> </field>
+           <field> <a>total</a> <b>total</b> </field>
+           <field> <a>money</a> <b>money</b> </field>
+           <field custom-converter="com.hsnet.quote.stock.mapper.DateMapper" > <a>date</a> <b>date</b> </field>
+           <field custom-converter="com.hsnet.quote.stock.mapper.TimestampMapper" > <a>date</a> <b>timeStamp</b> </field>
+       </mapping>       
+       
+        <!--实时数据-->
+       <mapping>
+           <class-a>com.hsnet.pz.ao.quote.dto.QueryRealTimeData</class-a>
+           <class-b>com.hsnet.pz.ao.quote.dto.QueryRealTimeDataRep</class-b>
+           <field> <a>stock_code</a> <b>stockCode</b> </field>
+           <field> <a>stock_name</a> <b>stockName</b> </field>
+           <field> <a>new_price</a> <b>newPrice</b> </field>
+           <field> <a>charge_value</a> <b>chargeValue</b> </field>
+           <field> <a>charge_rate</a> <b>chargeRate</b> </field>
+           <field> <a>up_price</a> <b>upPrice</b> </field>
+           <field> <a>down_price</a> <b>downPrice</b> </field>
+           <field> <a>open_price</a> <b>openPrice</b> </field>
+           <field> <a>max_price</a> <b>maxPrice</b> </field>
+           <field> <a>min_price</a> <b>minPrice</b> </field>
+           <field> <a>prev_close_price</a> <b>prevClosePrice</b> </field>
+           <field> <a>total</a> <b>total</b> </field>
+           <field> <a>total_amount</a> <b>totalAmount</b> </field>
+            <field> <a>total_value</a> <b>totalValue</b> </field>
+           <field> <a>circulate_value</a> <b>circulateValue</b> </field>
+           <field> <a>swing</a> <b>swing</b> </field>
+           <field> <a>turn_over_rate</a> <b>turnOverRate</b> </field>
+           <field> <a>pb_rate</a> <b>pbRate</b> </field>
+           <field> <a>pe_rate</a> <b>peRate</b> </field>
+           <!--  五档数据    -->
+           <field> <a>buy_count1</a> <b>buyCount1</b> </field>
+           <field> <a>buy_count2</a> <b>buyCount2</b> </field>
+           <field> <a>buy_count3</a> <b>buyCount3</b> </field>
+           <field> <a>buy_count4</a> <b>buyCount4</b> </field>
+           <field> <a>buy_count5</a> <b>buyCount5</b> </field>
+           <field> <a>buy_price1</a> <b>buyPrice1</b> </field>
+           <field> <a>buy_price2</a> <b>buyPrice2</b> </field>
+           <field> <a>buy_price3</a> <b>buyPrice3</b> </field>
+           <field> <a>buy_price4</a> <b>buyPrice4</b> </field>
+           <field> <a>buy_price5</a> <b>buyPrice5</b> </field>
+           <field> <a>sell_count1</a> <b>sellCount1</b> </field>
+           <field> <a>sell_count2</a> <b>sellCount2</b> </field>
+           <field> <a>sell_count3</a> <b>sellCount3</b> </field>
+           <field> <a>sell_count4</a> <b>sellCount4</b> </field>
+           <field> <a>sell_count5</a> <b>sellCount5</b> </field>
+           <field> <a>sell_price1</a> <b>sellPrice1</b> </field>
+           <field> <a>sell_price2</a> <b>sellPrice2</b> </field>
+           <field> <a>sell_price3</a> <b>sellPrice3</b> </field>
+           <field> <a>sell_price4</a> <b>sellPrice4</b> </field>
+           <field> <a>sell_price5</a> <b>sellPrice5</b> </field>
+           <field> <a>inside</a> <b>inside</b> </field>
+           <field> <a>outside</a> <b>outside</b> </field>
+       </mapping>   
+       
+       <!--批量实时数据-->
+       <mapping>
+           <class-a>com.hsnet.pz.ao.quote.dto.QueryRealTimeData</class-a>
+           <class-b>com.hsnet.pz.ao.quote.dto.QueryRealTimeDatasRep</class-b>
+           <field> <a>stock_code</a> <b>stockCode</b> </field>
+           <field> <a>stock_name</a> <b>stockName</b> </field>
+           <field> <a>new_price</a> <b>newPrice</b> </field>
+           <field> <a>charge_value</a> <b>chargeValue</b> </field>
+           <field> <a>charge_rate</a> <b>chargeRate</b> </field>
+           <field> <a>up_price</a> <b>upPrice</b> </field>
+           <field> <a>down_price</a> <b>downPrice</b> </field>
+           <field> <a>open_price</a> <b>openPrice</b> </field>
+           <field> <a>max_price</a> <b>maxPrice</b> </field>
+           <field> <a>min_price</a> <b>minPrice</b> </field>
+           <field> <a>prev_close_price</a> <b>prevClosePrice</b> </field>
+           <field> <a>total</a> <b>total</b> </field>
+           <field> <a>total_amount</a> <b>totalAmount</b> </field>
+            <field> <a>total_value</a> <b>totalValue</b> </field>
+           <field> <a>circulate_value</a> <b>circulateValue</b> </field>
+       </mapping>
+       
+        <!--分时数据-->
+       <mapping>
+           <class-a>com.hsnet.pz.ao.quote.dto.QueryTrendData</class-a>
+           <class-b>com.hsnet.pz.ao.quote.dto.QueryTrendDataRep</class-b>
+           <field> <a>new_price</a> <b>newPrice</b> </field>
+           <field> <a>average_price</a> <b>averagePrice</b> </field>
+           <field> <a>total</a> <b>total</b> </field>
+       </mapping> 
+       
+</mappings>

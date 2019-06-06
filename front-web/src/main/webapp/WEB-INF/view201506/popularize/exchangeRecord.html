@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+<#include "config.html"/>
+<#assign curTopMenu="account"/>
+<#assign curLeftMenu="popularize"/>
+<head>
+	<meta charset="utf-8">
+	<title>兑换记录-财猫网</title>
+	<link rel="stylesheet" type="text/css" href="${dojoUrl}/style/page/page.css?v=${jsVersion}">
+	<script type="text/javascript" src="${dojoUrl}/js/global.js?v=${jsVersion}"></script>
+</head>
+<body>
+<#include 'include/page/head.html'/>
+<!--内容区-->
+<div id="main">
+	<div class="w sec_main">
+		<!--左右布局-->
+		<#include 'include/menu/account_left.html'/>
+		<div class="right_bar">
+			<#include 'popularize/include_nav_bar.html'/>
+			<div class="record">
+				<div class="table_tit m_t_20">
+					<form method="get">
+						<span>
+                       类型
+                       <select name="status" class="input_select">
+						   <option value="0"<#if status == "0"> selected</#if>>待审核</option>
+						   <option value="1"<#if status == "1"> selected</#if>>审核通过</option>
+						   <option value="3"<#if status == "3"> selected</#if>>审核未通过</option>
+					   </select>
+                   </span>
+                    <span>
+                        时间
+                         <select name="dateStep" class="input_select">
+							 <option value="0"<#if dateStep == 0> selected</#if>>全部</option>
+							 <option value="1"<#if dateStep == 1> selected</#if>>今天</option>
+							 <option value="7"<#if dateStep == 7> selected</#if>>一周</option>
+							 <option value="90"<#if dateStep == 90> selected</#if>>三个月</option>
+							 <option value="180"<#if dateStep == 180> selected</#if>>半年</option>
+						 </select>
+                    </span>
+                    <span>
+						<button type="submit" class="btn btn_red">查询</button>
+                    </span>
+					</form>
+				</div>
+				<table class="table m_t_20 table_striped table_hover">
+					<colgroup>
+						<col style="width:260px;">
+						<col style="width:260px;">
+						<col style="width:180px;">
+						<col style="width:160px;">
+						<col style="width:120px;">
+					</colgroup>
+					<thead>
+					<tr>
+						<th>申请日期</th>
+						<th>审核日期</th>
+						<th>兑换积分</th>
+						<th>返现金额（元）</th>
+						<th>状态</th>
+					</tr>
+					</thead>
+					<tbody>
+					<#if dataList.items>
+						<#list dataList.items as i>
+							<tr>
+								<td>${i.createDatetime}</td>
+								<td>${i.verifyDatetime}</td>
+								<td><strong>${i.transAmount}</strong></td>
+								<td><b class="font_red">${formatAmount(i.scoreToMoney, 2, "", 1)}</b></td>
+								<td><b class="${dictStr('verifyStatus', i.verifyStatus, 1)}">${dictStr("verifyStatus", i.verifyStatus, 0)}</b></td>
+							</tr>
+						</#list>
+					<#else>
+						<tr class="table_crumbs">
+							<td colspan="5">
+								<i class="icons icon_info_null"></i>
+								<p>兑换记录为空</p>
+							</td>
+						</tr>
+					</#if>
+					</tbody>
+				</table>
+			</div>
+			${pageHtml}
+		</div>
+	</div>
+</div>
+<#include 'include/page/foot.html'/>
+</body>
+</html>

@@ -1,0 +1,9 @@
+<?xml version = "1.0" encoding="UTF-8" standalone = "no"?>
+<connections>
+	<!-- 股票行情请求连接 name：不可随意修改 -->
+    <connection name="stock_quote" class="com.hundsun.quote.net.QuoteConnManager" count="1" maxCount="1" create="true"
+                    timeout="10000" enable="true">
+             <unit serverAddress="112.124.211.83" serverPort="443" user="test" password="test"/>
+              <!--<unit serverAddress="10.139.101.40" serverPort="9999" user="test" password="test"/>-->
+    </connection>
+</connections>

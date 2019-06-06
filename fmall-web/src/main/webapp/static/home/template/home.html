@@ -1,0 +1,449 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>主站首页</title>
+    <link href="../dev/style/home.css" rel="stylesheet" media="screen">
+    <script type="text/javascript" src="../dev/js/jquery.js"></script>
+    <script type="text/javascript" src="../dev/js/home.js"></script>
+</head>
+
+<body>
+<div class="header">
+    <!--header-->
+    <div class="top">
+        <div class="w clearfix">
+            <h1 class="logo">
+                <a href="/"></a>
+                <b>招招有财</b>
+            </h1>
+            <ul class="nav">
+                <li><a class="hov" href="">首页</a></li>
+                <li><a href="">邮币卡</a></li>
+                <li><a href="">贵金属 <i class="icons icon_hot"></i> </a></li>
+                <li><a href="">港美股 <i class="icons icon_nobegin"></i></a></li>
+                <li class="nav_app">
+                    <a>下载APP <i class="icons icon_arrows"></i></a>
+                    <div class="sub">
+                        <img src="../img/home/ybk_ma.png"/>
+                        <img src="../img/home/gjs_ma.png"/>
+                    </div>
+                </li>
+            </ul>
+            <div class="login">
+                <p>
+                    <a class="login_a" href="">登陆</a><a href="">注册</a>
+                    <!--登陆后显示-->
+                    <!--<a class="user" href=""><i class="icons icons_user"></i>187447454746</a>-->
+                </p>
+            </div> 
+        </div>
+    </div>
+
+    <!--banner图-->
+    <div class="banner">
+        <div class="banner_box">
+            <b class="slideUp cur" style="background-image: url(../img/home/banner01.png);"><a href="#"></a></b>
+            <b class="slideUp" style="background-image: url(https://static.huobi.com/upic/apic/201510/1fdf2c8d8c215884b9f229bdb759a815.jpg);"><a href="#"></a></b>
+            <b class="slideUp" style="background-image: url(../img/home/banner01.png);"><a href="#"></a></b>
+            <b class="slideUp" style="background-image: url(https://static.huobi.com/upic/apic/201510/1fdf2c8d8c215884b9f229bdb759a815.jpg);"><a href="#"></a></b>
+            <b class="slideUp" style="background-image: url(../img/home/banner01.png);"><a href="#"></a></b>
+        </div>
+        <div class="w floor_top">
+            <!-- 轮播的页码  开始 -->
+            <ul class="page_list"></ul>
+            <div class="home_login">
+                <h5>&nbsp;注册财猫</h5>
+                <form action="/" method="" id="">
+                      <div class="group">
+                            <input id="registerMobile" validatetype="empty:手机号码不能为空 phone" type="text" autocomplete="off" placeholder="请输入手机号码" maxlength="11">
+                        </div>
+                        <div class="group clearfix">
+                            <input id="smsCheckCode" type="text" autocomplete="off" validatetype="empty:验证码不能为空 authcode" placeholder="请输入短信验证码" class="input_verify" maxlength="6">
+                            <button id="sendSmsCheckCode" type="button" class="verify">发送验证码</button>
+                        </div>
+                        <button id="registerS1Btn" type="button" class="btn">领取红包</button>
+                   </form>
+                <p class="ft"><a href="">忘记密码</a></p>
+                <div class="down">
+                    <p>[邮币卡】用户尾号8924，实时盈利999908元</p>
+                    <p>[邮币卡】用户尾号8924，实时盈利9998元</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="aptitude">
+        <ul class="w">
+            <li><i class="icons icon_aptitu_01"></i><span> 团队获红杉资本千万美元投资</span></li>
+            <li><i class="icons icon_aptitu_02"></i><span>10年金融经验团队为你服务</span></li>
+            <li class="last"><i class="icons icon_aptitu_03"></i><span>上海黄金交易所、深圳金融电子结算中心合作伙伴</span></li>
+        </ul>
+    </div>
+</div>
+
+<!--交易额-->
+<div class="trader">
+    <div class="w">
+        <div class="left">
+            累计交易额 <span>123456</span>万
+        </div>
+        <div class="right">
+            累计服务交易用户 <span>12390</span>名
+        </div>
+    </div>
+</div>
+
+<!--资质-->
+<div class="w advantage">
+    <ul>
+        <li>
+            <dl>
+                <dt><i class="icons icon_advantage_01"></i> <span>一站搞定多家开户</span></dt>
+                <dd>全网独家优势。一套资料就能开户你指定的多家邮币卡、贵金属交易所，省心省力。</dd>
+            </dl>
+        </li>
+        <li>
+            <dl>
+                <dt><i class="icons icon_advantage_02"></i> <span>甄选正规交易市场</span></dt>
+                <dd>财猫为你筛选的合作交易所都为国家授权正规交易所，信息安全、交易放心，保障您的权益。</dd>
+            </dl>
+        </li>
+        <li>
+            <dl>
+                <dt><i class="icons icon_advantage_03"></i> <span>资金全程银行托管</span></dt>
+                <dd>你的充值、提现都经银行托管，财猫从头到尾不接触你的资金，你的资产十分安全、有保障。</dd>
+            </dl>
+        </li>
+        <li>
+            <dl>
+                <dt><i class="icons icon_advantage_04"></i> <span>行业资讯快速准确</span></dt>
+                <dd>注册后，你会有专属客服。你可以随时在线咨询、电话沟通，明明白白交易，安安心心投资。</dd>
+            </dl>
+        </li>
+        <li>
+            <dl>
+                <dt><i class="icons icon_advantage_05"></i> <span>投资门槛低至百元</span></dt>
+                <dd>财猫为你选的投资品体验门槛成本低，最低100元充值。单笔交易额最低不到10元。</dd>
+            </dl>
+        </li>
+        <li>
+            <dl>
+                <dt><i class="icons icon_advantage_06"></i> <span>专属客服贴心服务</span></dt>
+                <dd>了解实时资讯很重要，它是你投资的重要参考。不必翻新闻网站，上财猫就可尽览。</dd>
+            </dl>
+        </li>
+    </ul>
+</div>
+<!--邮币卡-->
+<div class="w layout ybk">
+    <div class="information">
+        <p><i class="icons icons_info"></i> <a href="">送你价值100元53年大号伍分钱币！现在就去交易！</a></p>
+    </div>
+    <div class="clearfix">
+        <div class="left">
+            <h4>邮币卡 <span>· 投资新贵</span> </h4>
+            <p class="intro">邮币卡是中国特色新兴电子盘，越早进入越有机会。会交易股票就会交易邮币卡。</p>
+            <div class="a clearfix">
+                <span>T+0交易</span><span>可提实物</span><span>投资10元起步</span><span>白天交易</span><span>今年涨5倍</span><span>打新最受欢迎</span>
+            </div>
+            <a class="btn" href="">进入邮币卡</a>
+        </div>
+        <div class="mid">
+            <ul class="one">
+                <li>
+                    南京文交所
+                    <span class="red">1,886.32 <i class="icons"></i></span>
+                    <span>-12.63 &nbsp;&nbsp; -0.28%</span>
+                </li>
+                <li>
+                    中南文交所
+                    <span class="blue">1,886.32 <i class="icons"></i></span>
+                    <span>-12.63 &nbsp;&nbsp; -0.28%</span>
+                </li>
+                <li>
+                    中国艺交所
+                    <span class="red">1,886.32 <i class="icons"></i></span>
+                    <span>-12.63 &nbsp;&nbsp; -0.28%</span>
+                </li>
+            </ul>
+            <table class="table">
+                <colgroup>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                    <col style="width: 154px">
+                </colgroup>
+                <thead>
+                <tr>
+                    <th>交易方式</th>
+                    <th>交易制度</th>
+                    <th>交易费用</th>
+                    <th>资金存管</th>
+                    <th>交易单位(最小)</th>
+                    <th>交易时间（南京文交所)</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>T+0</td>
+                    <td>现货交易</td>
+                    <td>手续费</td>
+                    <td>银行存管 </td>
+                    <td>1枚 </td>
+                    <td>9:30-11:30;13:00-15:00</td>
+                </tr>
+                </tbody>
+            </table>
+            <ul class="three">
+                <li><a href=""><img src="../img/home/ybk_njwjs.png"/></a></li>
+                <li><a href=""><img src="../img/home/ybk_zgyjs.png"/></a></li>
+                <li><a href=""><img src="../img/home/ybk_nfwjs.png"/></a></li>
+                <li><a href=""><img src="../img/home/ybk_njwjs.png"/></a></li>
+            </ul>
+        </div>
+        <div class="right">
+            <p class="ma"><img src="../img/home/ybk_ma.png" width="88" height="88"/></p>
+            <a class="btn" href="">下载APP领红包</a>
+            <p>想了解更多?下载APP,随时咨询客服</p>
+        </div>
+    </div>
+</div>
+<!--贵金属-->
+<div class="w layout gjs">
+    <div class="information">
+        <p><i class="icons icons_info"></i> <a href="">开户送1000元白银，不花一分钱就能赚！还有现金红包等你拿！</a></p>
+    </div>
+    <div class="clearfix">
+        <div class="left">
+            <h4>贵金属 <span>· 价值恒久</span> </h4>
+            <p class="intro">投资贵金属好处多，既能通过交易赚取差价，还能避险经济,实现资产保值增值。</p>
+            <div class="a clearfix">
+                <span>保值增值</span><span>可提实物</span><span>晚间交易活跃</span><span>10倍杠杆</span><span>受国际经济指数影响</span><span>T+0交易</span>
+            </div>
+            <a class="btn" href="">进入贵金属</a>
+            <p class="course">买首饰、买金条≠投资黄金。 <i class="icons"></i><a href="">查看入门教学</a></p>
+        </div>
+        <div class="mid">
+            <ul class="one">
+                <li>
+                    白银10g
+                    <span class="red">1,886.32 <i class="icons"></i></span>
+                    <span>-12.63 &nbsp;&nbsp; -0.28%</span>
+                </li>
+                <li>
+                    白银T+D（kg)
+                    <span class="blue">1,886.32 <i class="icons"></i></span>
+                    <span>-12.63 &nbsp;&nbsp; -0.28%</span>
+                </li>
+                <li>
+                    迷你黄金g
+                    <span class="red">1,886.32 <i class="icons"></i></span>
+                    <span>-12.63 &nbsp;&nbsp; -0.28%</span>
+                </li>
+            </ul>
+            <table class="table">
+                <colgroup>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                    <col >
+                </colgroup>
+                <thead>
+                <tr>
+                    <th>交易方式</th>
+                    <th>交易制度</th>
+                    <th>交易机制</th>
+                    <th>资金存管</th>
+                    <th>交易单位(最小)</th>
+                    <th>交易时间</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>撮合交易<br>
+                        无用户对赌</td>
+                    <td>佣金万8<br>
+                        无点差/头寸</td>
+                    <td>双向交易<br>
+                        多空都赚</td>
+                    <td>银行存管 </td>
+                    <td>白银10克/手<br>
+                        黄金100克/手</td>
+                    <td>相见下方</td>
+                </tr>
+                </tbody>
+            </table>
+            <ul class="three">
+                <li>
+                    <a href=""><img src="../img/home/gjs_shhjjys.png"/></a>
+                    交易日9:00-次日6:00
+                </li>
+                <li><a href=""><img src="../img/home/gjs_nfxgjsjys.png"/></a>
+                    20:00-次日凌晨2:30 , 白天09:00-11:30，13:30-15:30
+                </li>
+            </ul>
+        </div>
+        <div class="right">
+            <p class="ma"><img src="../img/home/gjs_ma.png" width="88" height="88"/></p>
+            <a class="btn" href="">下载APP领红包</a>
+            <p>想了解更多?下载APP,随时咨询客服</p>
+        </div>
+    </div>
+</div>
+
+<div class="w layout gmg">
+    <div class="information"></div>
+    <div class="clearfix">
+        <div class="left">
+            <h4>港美股 <span>· 投资全球</span> </h4>
+            <p class="intro">投资贵金属好处多，既能通过交易赚取差价，还能避险经济,实现资产保值增值。</p>
+            <div class="a clearfix">
+                <span>配资全球资产</span><span>无涨跌幅限制 </span><span>可投资最优秀的科技公司</span><span>T+0交易</span>
+            </div>
+            <a class="btn" href="">即将开放</a>
+        </div>
+        <div class="mid">
+            <ul class="one">
+                <li>
+                    上证指数
+                    <span class="red">1,886.32 <i class="icons"></i></span>
+                    <span>-12.63 &nbsp;&nbsp; -0.28%</span>
+                </li>
+                <li>
+                    深证指数
+                    <span class="blue">1,886.32 <i class="icons"></i></span>
+                    <span>-12.63 &nbsp;&nbsp; -0.28%</span>
+                </li>
+                <li>
+                    恒生指数
+                    <span class="red">1,886.32 <i class="icons"></i></span>
+                    <span>-12.63 &nbsp;&nbsp; -0.28%</span>
+                </li>
+            </ul>
+            <ul class="one one_01">
+                <li>
+                    道琼斯指数
+                    <span class="red">1,886.32 <i class="icons"></i></span>
+                    <span>-12.63 &nbsp;&nbsp; -0.28%</span>
+                </li>
+                <li>
+                    纳斯达克
+                    <span class="red">1,886.32 <i class="icons"></i></span>
+                    <span>-12.63 &nbsp;&nbsp; -0.28%</span>
+                </li>
+                <li class="bg">
+
+                </li>
+            </ul>
+
+        </div>
+        <div class="right">
+            <p class="ma">敬请期待</p>
+            <a class="btn" href="">下载APP领红包</a>
+            <p>想了解更多?下载APP,随时咨询客服</p>
+        </div>
+    </div>
+</div>
+
+
+<!-- 合作伙伴-->
+<div class="partner">
+    <div class="w">
+        <h3>战略合作伙伴</h3>
+        <ul>
+            <li>
+                <a href=""><img src="../img/home/partner_sge.png"/></a>
+            </li>
+            <li>
+                <a href=""><img src="../img/home/partner_szjrdz.png"/></a>
+            </li>
+            <li>
+                <a href=""><img src="../img/home/partner_hszb.png"/></a>
+            </li>
+            <li>
+                <a href=""><img src="../img/home/partner_zfund.png"/></a>
+            </li>
+            <li>
+                <a href=""><img src="../img/home/partner_nfxtgjs.png"/></a>
+            </li>
+            <li>
+                <a href=""><img src="../img/home/partner_njwjs.png"/></a>
+            </li>
+            <li>
+                <a href=""><img src="../img/home/partner_huobi.png"/></a>
+            </li>
+            <li>
+                <a href=""><img src="../img/home/partner_lygjcy.png"/></a>
+            </li>
+        </ul>
+    </div>
+
+</div>
+
+
+<!--底部-->
+<div class="footer">
+    <div class="w clearfix">
+        <div class="left">
+            <div class="nav_sub">
+                <a href="">关于我们 </a> &nbsp;&nbsp;丨&nbsp;&nbsp;
+                <a href="">会员资质 </a> &nbsp;&nbsp;丨&nbsp;&nbsp;
+                <a href="">联系我们 </a> &nbsp;&nbsp;丨&nbsp;&nbsp;
+                <a href="">加入我们 </a> &nbsp;&nbsp;丨&nbsp;&nbsp;
+                <a href="">管理团队</a>
+                <a class="tel" href=""><i class="icons"></i> 4000-898-000</a>
+                <a class="service" href=""><i class="icons"></i> 在线咨询</a>
+            </div>
+            <p class="friend">友情链接<br>
+                <a href="">上海黄金交易所</a>  丨 <a href="">深圳金融电子结算中心</a> 丨  <a href="">红杉资本</a> 丨<a href=""> 真格基金</a> 丨 <a href="">南方稀贵金属交易所</a>  丨 <a href="">南京文交所</a> 丨 <a href="">火币Huobi.com</a> 丨  <a href="">陆羽国际茶业交易中心</a>
+            </p>
+            <p class="down">
+                版权所有©北京朋乐投资管理有限公司   丨  京ICP备15016693号-2   丨  风险提示/隐私保密条款
+            </p>
+        </div>
+        <div class="right">
+            <i class="icons"></i>财猫官方微信
+            <img src="../img/home/weixin_ma.png"/>
+        </div>
+    </div>
+</div>
+
+<div class="fixed_right">
+    <ul>
+        <li class="fix_qq"><a href=""><i class="icons"></i></a></li>
+        <li class="fix_tel">
+            <i class="icons"></i>
+            <p class="sub">4000-898-000</p>
+        </li>
+        <li class="fix_wei">
+            <i class="icons"></i>
+            <p class="sub">
+                <img src="../img/home/weixin_ma.png"/>
+                 财猫官方微信
+            </p>
+        </li>
+        <li class="fix_appload">
+            <i class="icons"></i>
+            <div class="sub">
+               <p>
+                   <img src="../img/home/ybk_ma.png"/>
+                   贵金属APP
+               </p>
+               <p>
+                   <img src="../img/home/gjs_ma.png"/>
+                    邮币卡APP
+               </p>
+            </div>
+        </li>
+    </ul>
+
+</div>
+<script>
+
+</script>
+</body>
+</html>

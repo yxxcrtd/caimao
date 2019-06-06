@@ -1,0 +1,89 @@
+@charset "utf-8";
+/*
+━━━━━━━
+reset.scss
+样式重置
+BitUI
+━━━━━━━
+*/
+/*reset*/
+
+html { color: #666}
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, button, textarea, p, blockquote, th, td { margin: 0; padding: 0 }
+body {font-family:"微软雅黑",Microsoft Yahei,SimSun, Arial; font-size: 14px }
+a {
+  background: transparent; color: #08c; text-decoration: none;
+  &:hover{
+  outline: thin dotted; color: #005580
+  }
+  &:active, &:hover{
+    outline: 0
+  }
+}
+
+table {
+  border-collapse: collapse; border-spacing: 0;
+ }
+
+fieldset, img { border: 0 }
+
+address, caption, cite, code, dfn, em, th, var, optgroup { font-style: inherit; font-weight: inherit }
+
+del, ins { text-decoration: none }
+
+li { list-style: none }
+
+h1, h2, h3, h4, h5, h6 { font-size: 100%;}
+
+h1, h2, h3 { margin: 0 }
+
+q:before, q:after { content: '' }
+
+abbr, acronym { border: 0; font-variant: normal }
+
+sup,sub{ vertical-align: baseline }
+
+code,kbd,pre,samp {font-family: Monaco, Menlo, Consolas, "Courier New", monospace;font-size: 1em; }
+
+pre{white-space: pre-wrap;page-break-inside: avoid;background: #333; color: #FFF; border-radius: 5px; text-align: left}
+
+code{ color: deeppink}
+
+legend { color: #000 }
+
+label {}
+
+input, button, textarea, select, optgroup, option { font-size: inherit; font-style: inherit; font-weight: inherit ;}
+
+input, button, textarea, select { vertical-align: middle;font: inherit;}
+
+button{
+  *overflow:visible; text-transform: none;
+}
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+img { vertical-align: top }
+
+optgroup { font-weight: normal }
+
+abbr, acronym { border-bottom: 1px dotted #000; cursor: help }
+
+em { font-style: italic }
+
+del { text-decoration: line-through }
+
+caption { margin-bottom: .5em; text-align: center }
+
+sup { vertical-align: super }
+
+sub { vertical-align: sub }
+
+area{
+  &,&:focus,&:active{
+    outline: none;  -moz-outline-style: none;
+  }
+}

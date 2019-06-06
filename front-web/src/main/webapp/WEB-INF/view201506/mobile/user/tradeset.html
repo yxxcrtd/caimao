@@ -1,0 +1,89 @@
+<#assign title="设置安全密码"/>
+<#assign header="设置安全密码"/>
+<#assign bg="bg-gray"/>
+<#assign controller="tradeset"/>
+<#include 'mobile/layout/layout.html'/>
+<#macro content>
+
+<article class="content" style="padding-bottom:60px;">
+
+
+<!--表单-->
+<aside class="con-frame">
+<ul class="datalist">
+<li class="datalist-item clearfix">
+<div class="am-grid datalist-line">
+        <div class="am-grid-item am-grid-item-25  am-ft-right">
+        <h4 class="am-ft-md cm-left">账户名</h4>
+        </div>
+        <div class="am-grid-item am-grid-item-75 am-ft-left am-left-10">
+        <b class="am-ft-xl" id="mobile"></b>
+        <p class="f-right"><a id="button_lineblack" class="am-button am-button-lineblack">发送验证码</a>
+<a id="button_lineblack_active" class="am-button am-button-lineblack am-button-lineblack-active"  style="display:none;">重发验证码<label></label></a></p>
+        </div>
+</div>
+</li>
+<li class="datalist-item clearfix">
+<div class="am-grid datalist-line">
+        <div class="am-grid-item am-grid-item-25  am-ft-right">
+        <h4 class="am-ft-md cm-left">短信验证码</h4>
+        </div>
+        <div class="am-grid-item am-grid-item-75 am-ft-left am-left-10">
+        <span class="ui-form-field">
+<input type="text" autocomplete="off" id="code" class="text_input" maxlength="6" defaultvalue="输入密码" value="" placeholder="输入密码">
+</span>
+</div>
+</div>
+</li>
+
+<li class="datalist-item clearfix">
+<div class="am-grid datalist-line">
+        <div class="am-grid-item am-grid-item-25  am-ft-right">
+        <h4 class="am-ft-md cm-left">安全密码</h4>
+        </div>
+        <div class="am-grid-item am-grid-item-75 am-ft-left am-left-10">
+        <span class="ui-form-field">
+<input  type="password" id="trade_Pwd" class="text_input" maxlength="18" defaultvalue="输入密码" value="" placeholder="输入密码">
+</span>
+<p class="f-right"></p>
+</div>
+</div>
+</li>
+
+<li class="datalist-item clearfix">
+<div class="am-grid datalist-line">
+        <div class="am-grid-item am-grid-item-25  am-ft-right">
+        <h4 class="am-ft-md cm-left">确认密码</h4>
+        </div>
+        <div class="am-grid-item am-grid-item-75 am-ft-left am-left-10">
+        <span class="ui-form-field">
+<input id="trade_Pwd2" type="password" class="text_input" maxlength="18" defaultvalue="输入密码" value="" placeholder="输入密码">
+</span>
+<p class="f-right"></p>
+</div>
+</div>
+</li>
+</ul>
+</aside>
+
+
+
+
+
+
+</article>
+
+
+
+<div class="am-footer am-footerBtn-one">
+<!--按钮-->
+<div class="btn-page btn-page-center bg-white con-spacing15">
+        <a id="submit_btn" class="am-button am-button-red">
+        <span>提交</span>
+        </a>
+        
+</div>
+<!--按钮-->
+</div>
+</#macro>
+

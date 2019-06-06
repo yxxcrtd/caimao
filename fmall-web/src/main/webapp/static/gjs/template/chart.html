@@ -1,0 +1,239 @@
+<!doctype html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title></title>
+		<link rel="stylesheet" href="../prod/style/style.css" />
+		<script src="../prod/js/metal.js"></script>
+		<script>
+			var h = http(),
+				isLogin = 0;
+		</script>
+	</head>
+	<body>
+
+	<div class="top">
+		<div class="innerCont clearfix">
+			<div class="topnav">
+				<a href="">财猫主站</a><!--
+				--><a href="">财猫邮币卡</a><!--
+				--><a href="">财猫贵金属</a>
+			</div>
+			<div class="user"><a href="" class="appdownload" id="appdownload"><i></i>APP下载</a><a href="">登录</a><span>|</span><a href="">注册</a><div class="qrcode" id="qrcode"><img src="../img/qrcode_android.png" ><img src="../img/qrcode_apple.png"></div></div>
+		</div>
+	</div>
+	<div class="menuline">
+		<div class="innerCont clearfix">
+			<div class="logo"><a href="home.html"><img src="../img/logo.png"></a></div>
+			<div class="menu">
+				<a href="home.html">首页<i><span>◆</span></i></a><!--
+				--><a href="market.html" class="on">行情<i><span>◆</span></i></a><!--
+				--><a href="news.html">资讯<i><span>◆</span></i></a><!--
+				--><a href="openAccount.html">快速开户<b>hot!</b><i><span>◆</span></i></a><!--
+				--><a href="help.html">帮助<i><span>◆</span></i></a>
+			</div>
+			<div class="asset">
+				<div class="totalAsset">
+					总资产：<b>9999999.99</b>
+				</div>
+				<dl class="assetDetail">
+					<dt><em><span>总收益：</span><i class="rise">+234.55</i></em><em><span>可用保证金：</span><b>99999999.55</b></em></dt>
+					<dd class="njs">
+						<p><b>南交所</b><span>ID：2342342</span><span>绑定卡：招行（尾号2342）</span></p>
+						<div class="countAsset">
+							<div class="result">净资产：<i>99999999.55</i> = </div>
+							<ul class="section">
+								<li><i></i>可用保证金：23422.55</li>
+								<li><i></i>持仓盈利：+53.55</li>
+								<li><i></i>持仓成本：563.22</li>
+							</ul>
+						</div>
+					</dd>
+					<dd class="sjs">
+						<p><b>上金所</b></p>
+						<div class="btnBox"><a href="" class="openAccount">去开户</a></div>
+					</dd>
+				</dl>
+			</div>
+		</div>
+	</div>
+	
+
+	
+	<div class="chartPage">
+		<div class="innerCont">
+			<div class="left">
+				<div class="leftBox">
+					<div class="clearfix head">
+						<div class="goodTitle">
+							<dl id="goodTitle">
+								<dt><a href="" class="prv btn" action="default">&lt;</a><em id="goodTitleShow"><script type="text/x-tmpl"><%=data[0].prodName%><span>[<%=data[0].prodCode%>]</span></script></em><a href="" class="next btn" action="default">&gt;</a></dt>
+								<dd>
+									<div><input type="text" name="" value="" placeholder="代码/简拼"></div>
+									<ul>
+										<li class="listHead"><span>商品</span><span>代码</span><span class="exchange">交易所</span></li>
+										<li><span>白银10AG</span><span>AG</span><span class="exchange">南交所</span></li>
+									</ul>
+								</dd>
+							</dl>
+							<script>
+							showSearch('#goodTitle')
+							</script>
+						</div>
+						<div class="goodsCtrl" id="goodBtns">
+							<span class="btn fav"><i></i>加入自选</span>
+							<a href="market.html">返回列表</a>
+						</div>
+					</div>
+					<script>
+						var fire = h.render.omnipotent(),
+							pat = location.search.replace("?","").split("&");
+						h.plan("#goodTitleShow",fire.key);
+						h.option = h.api.query_lots_goods({prodCode : pat[0]},fire);
+						h.request(h.option);
+						fireGoodBtns("#goodBtns",pat[1],pat[0]);
+					</script>
+					<div class="ctrl">
+						<em class="btnGroup">
+							<span class="btn on">分时</span>
+							<span class="btn">60分K线</span>
+							<span class="btn">日K</span>
+							<span class="btn">周K</span>
+						</em>
+						<dl>
+							<dt>主图</dt>
+							<dd>
+								<ul>
+									<li class="on"><i></i>MA</li>
+									<li><i></i>BOLL</li>
+								</ul>
+							</dd>
+						</dl>
+						<dl>
+							<dt>副图</dt>
+							<dd>
+								<ul>
+									<li class="on"><i></i>MACD</li>
+									<li><i></i>KDJ</li>
+									<li><i></i>RSI</li>
+									<li><i></i>WR</li>
+								</ul>
+							</dd>
+						</dl>
+					</div>
+					<div class="chart"></div>
+				</div>
+			</div>
+			<div class="right">
+				<div class="marketDepth">
+					<div class="takeAim">
+						<ul class="sel">
+							<li><span>卖5</span><span class="price">234.25</span><span class="amount">66</span></li>
+							<li><span>卖4</span><span class="price">234.25</span><span class="amount">66</span></li>
+							<li><span>卖3</span><span class="price">234.25</span><span class="amount">66</span></li>
+							<li><span>卖2</span><span class="price">234.25</span><span class="amount">66</span></li>
+							<li><span>卖1</span><span class="price">234.25</span><span class="amount">66</span></li>
+						</ul>
+						<div class="current"><em>12234.25</em><i>+23.43%</i></div>
+						<ul class="buy">
+							<li><span>买1</span><span class="price">234.25</span><span class="amount">66</span></li>
+							<li><span>买2</span><span class="price">234.25</span><span class="amount">66</span></li>
+							<li><span>买3</span><span class="price">234.25</span><span class="amount">66</span></li>
+							<li><span>买4</span><span class="price">234.25</span><span class="amount">66</span></li>
+							<li><span>买5</span><span class="price">234.25</span><span class="amount">66</span></li>
+						</ul>
+					</div>
+				</div>
+				<dl class="goodsInfo" id="goodsInfo">
+					<script type="text/x-tmpl">
+					<%
+						var data = data[0];
+					%>
+					<dt>
+						<em>今开：<span <%if(data.pxChangeRate < 0){%>class="green"<%}else{%>class="red"<%}%>><%=data.openPx%></span></em>
+						<em>最新：<span <%if(data.pxChangeRate < 0){%>class="green"<%}else{%>class="red"<%}%>><%=data.lastPx%></span></em>
+						<em>最高：<span <%if(data.pxChangeRate < 0){%>class="green"<%}else{%>class="red"<%}%>><%=data.highPx%></span></em>
+						<em>最低：<span <%if(data.pxChangeRate < 0){%>class="green"<%}else{%>class="red"<%}%>><%=data.lowPx%></span></em>
+					</dt>
+					<dd>
+						<em>昨收：<span><%=data.preclosePx%></span></em>
+						<em>涨跌幅：<span <%if(data.pxChangeRate < 0){%>class="green"<%}else{%>class="red"<%}%>><%=data.pxChangeRate%>%</span></em>
+						<em>成交量：<span><%=shortIndex(data.businessAmount*1,2,10000,binary[10000])%></span></em>
+						<em>成交额：<span><%=shortIndex(data.businessBalance*1,2,10000,binary[10000])%></span></em>
+					</dd>
+					</script>
+				</dl>
+				<script>
+					var fire = h.render.omnipotent(),
+						pat = location.search.replace("?","").split("&");
+					h.plan("#goodsInfo",fire.key);
+					h.option = h.api.query_lots_goods({prodCode : pat[0]},fire);
+					h.loop(h.option,3000);
+				</script>
+				<div class="tradeHistory">
+					<div class="tableHead"><span class="time">时间</span><span class="price">价格</span><span class="amount">数量</span></div>
+					<ul class="tableBody">
+						<li><span class="time">11:32:32</span><span class="price">3241.12</span><span class="amount">234</span></li>
+						<li><span class="time">11:32:32</span><span class="price">3241.12</span><span class="amount">234</span></li>
+						<li><span class="time">11:32:32</span><span class="price">3241.12</span><span class="amount">234</span></li>
+						<li><span class="time">11:32:32</span><span class="price">3241.12</span><span class="amount">234</span></li>
+						<li><span class="time">11:32:32</span><span class="price">3241.12</span><span class="amount">234</span></li>
+						<li><span class="time">11:32:32</span><span class="price">3241.12</span><span class="amount">234</span></li>
+						<li><span class="time">11:32:32</span><span class="price">3241.12</span><span class="amount">234</span></li>
+						<li><span class="time">11:32:32</span><span class="price">3241.12</span><span class="amount">234</span></li>
+						<li><span class="time">11:32:32</span><span class="price">3241.12</span><span class="amount">234</span></li>
+						<li><span class="time">11:32:32</span><span class="price">3241.12</span><span class="amount">234</span></li>
+						<li><span class="time">11:32:32</span><span class="price">3241.12</span><span class="amount">234</span></li>
+						<li><span class="time">11:32:32</span><span class="price">3241.12</span><span class="amount">234</span></li>
+						<li><span class="time">11:32:32</span><span class="price">3241.12</span><span class="amount">34234</span></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+	<div class="bottom">
+		<div class="bottomnav">
+			<a href="about.html">关于我们</a><!--
+					--><span>|</span><!--
+					--><a href="rule.html">服务条款</a><!--
+					--><span>|</span><!--
+					--><a href="help.html">帮助中心</a>
+		</div>
+		<div class="contact">
+			<div class="inner">
+				<em class="qq"><i></i>官方QQ群 4006660888</em><!--
+						--><span>|</span><!--
+						--><em class="phone"><i></i>24小时服务电话 4000-898-000</em>
+			</div>
+		</div>
+		<div class="copyright">
+			<p>版权所有 © 北京朋乐投资管理有限公司 丨 京ICP备15016693号</p>
+		</div>
+	</div>
+
+	<div class="rightBar">
+		<div class="takeAim">
+			<div class="tools">
+				<dl class="goTop">
+					<dt></dt>
+				</dl>
+				<dl class="tel">
+					<dt></dt>
+					<dd><i></i><b>4000-898-000</b></dd>
+				</dl>
+				<dl class="qq">
+					<dt></dt>
+					<dd><i></i><b>800097600</b></dd>
+				</dl>
+				<dl class="app">
+					<dt></dt>
+					<dd><img src="../img/qrcode.jpg"><p>扫码下载贵金属APP</p></dd>
+				</dl>
+			</div>
+		</div>
+	</div>
+	</body>
+</html>

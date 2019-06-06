@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="TpzHomsAccountChild">
+    <resultMap id="BaseResultMap" type="com.caimao.bana.api.entity.TpzHomsAccountChildEntity" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="homs_fund_account" property="homsFundAccount" jdbcType="BIGINT" />
+        <result column="homs_combine_id" property="homsCombineId" jdbcType="VARCHAR" />
+        <result column="homs_combine_name" property="homsCombineName" jdbcType="VARCHAR" />
+        <result column="homs_combine_status" property="homsCombineStatus" jdbcType="CHAR" />
+        <result column="combine_no" property="combineNo" jdbcType="VARCHAR" />
+        <result column="asset_id" property="assetId" jdbcType="VARCHAR" />
+        <result column="client_name" property="clientName" jdbcType="VARCHAR" />
+        <result column="assetunit_name" property="assetunitName" jdbcType="VARCHAR" />
+        <result column="counter_fee" property="counterFee" jdbcType="DECIMAL" />
+        <result column="operator_no" property="operatorNo" jdbcType="VARCHAR" />
+        <result column="operator_pwd" property="operatorPwd" jdbcType="VARCHAR" />
+        <result column="remark" property="remark" jdbcType="VARCHAR" />
+        <result column="trade_limit" property="tradeLimit" jdbcType="VARCHAR" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        id,homs_fund_account,homs_combine_id,homs_combine_name,homs_combine_status,combine_no,asset_id,
+        client_name,assetunit_name,counter_fee,operator_no,operator_pwd,remark,trade_limit
+    </sql>
+
+    <select id="queryAccountChildByAccount" resultMap="BaseResultMap" parameterType="hashmap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tpz_homs_account_child
+        WHERE homs_fund_account = #{homsFundAccount} AND homs_combine_id = #{homsCombineId}
+    </select>
+</mapper>

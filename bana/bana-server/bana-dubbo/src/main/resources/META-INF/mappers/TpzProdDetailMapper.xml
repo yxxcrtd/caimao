@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="TpzProdDetail">
+	<resultMap id="BaseResultMap"
+		type="com.caimao.bana.api.entity.TpzProdDetailEntity">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="prod_id" property="prodId" jdbcType="BIGINT" />
+		<result column="loan_ratio_from" property="loanRatioFrom"
+			jdbcType="DOUBLE" />
+		<result column="loan_ratio_to" property="loanRatioTo" jdbcType="DOUBLE" />
+		<result column="loan_amount_from" property="loanAmountFrom"
+			jdbcType="BIGINT" />
+		<result column="loan_amount_to" property="loanAmountTo"
+			jdbcType="BIGINT" />
+		<result column="loan_term_from" property="loanTermFrom"
+			jdbcType="INTEGER" />
+		<result column="loan_term_to" property="loanTermTo" jdbcType="INTEGER" />
+		<result column="fee" property="fee" jdbcType="BIGINT" />
+		<result column="interest_rate" property="interestRate"
+			jdbcType="DOUBLE" />
+		<result column="exposure_ratio" property="exposureRatio"
+			jdbcType="DOUBLE" />
+		<result column="enable_ratio" property="enableRatio" jdbcType="DOUBLE" />
+		<result column="stock_pool_no" property="stockPoolNo" jdbcType="BIGINT" />
+		<result column="stock_ratio_limit" property="stockRatioLimit"
+			jdbcType="DOUBLE" />
+		<result column="remark" property="remark" jdbcType="VARCHAR" />
+		<result column="create_datetime" property="createDatetime"
+			jdbcType="TIMESTAMP" />
+		<result column="update_datetime" property="updateDatetime"
+			jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, prod_id, loan_ratio_from, loan_ratio_to, loan_amount_from,
+		loan_amount_to, loan_term_from,
+		loan_term_to, fee, interest_rate, exposure_ratio, enable_ratio, stock_pool_no,
+		stock_ratio_limit, remark, create_datetime, update_datetime
+	</sql>
+	<select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from tpz_prod_detail
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteById" parameterType="java.lang.Long">
+		delete from tpz_prod_detail
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+	<insert id="save" parameterType="com.caimao.bana.api.entity.TpzProdDetailEntity">
+		insert into tpz_prod_detail
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id !=0">
+				id,
+			</if>
+			<if test="prodId != null and prodId  != ''">
+				prod_id,
+			</if>
+			<if test="loanRatioFrom != null and  loanRatioFrom != ''">
+				loan_ratio_from,
+			</if>
+			<if test="loanRatioTo != null and  loanRatioTo != ''">
+				loan_ratio_to,
+			</if>
+			<if test="loanAmountFrom != null and  loanAmountFrom != ''">
+				loan_amount_from,
+			</if>
+			<if test="loanAmountTo != null and loanAmountTo  != ''">
+				loan_amount_to,
+			</if>
+			<if test="loanTermFrom != null and  loanTermFrom != ''">
+				loan_term_from,
+			</if>
+			<if test="loanTermTo != null and  loanTermTo != ''">
+				loan_term_to,
+			</if>
+			<if test="fee != null and  fee != ''">
+				fee,
+			</if>
+			<if test="interestRate != null and  interestRate != ''">
+				interest_rate,
+			</if>
+			<if test="exposureRatio != null and  exposureRatio != ''">
+				exposure_ratio,
+			</if>
+			<if test="enableRatio != null and enableRatio  != ''">
+				enable_ratio,
+			</if>
+			<if test="stockPoolNo != null and stockPoolNo  != ''">
+				stock_pool_no,
+			</if>
+			<if test="stockRatioLimit != null and  stockRatioLimit != ''">
+				stock_ratio_limit,
+			</if>
+			<if test="remark != null and  remark != ''">
+				remark,
+			</if>
+			<if test="createDatetime != null and createDatetime  != ''">
+				create_datetime,
+			</if>
+			<if test="updateDatetime != null and  updateDatetime != ''">
+				update_datetime,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != 0">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="prodId != null and  prodId != ''">
+				#{prodId,jdbcType=BIGINT},
+			</if>
+			<if test="loanRatioFrom != null and  loanRatioFrom != ''">
+				#{loanRatioFrom,jdbcType=DOUBLE},
+			</if>
+			<if test="loanRatioTo != null and  loanRatioTo != ''">
+				#{loanRatioTo,jdbcType=DOUBLE},
+			</if>
+			<if test="loanAmountFrom != null and loanAmountFrom  != ''">
+				#{loanAmountFrom,jdbcType=BIGINT},
+			</if>
+			<if test="loanAmountTo != null and  loanAmountTo != ''">
+				#{loanAmountTo,jdbcType=BIGINT},
+			</if>
+			<if test="loanTermFrom != null and loanTermFrom  != ''">
+				#{loanTermFrom,jdbcType=INTEGER},
+			</if>
+			<if test="loanTermTo != null and  loanTermTo != ''">
+				#{loanTermTo,jdbcType=INTEGER},
+			</if>
+			<if test="fee != null and  fee != ''">
+				#{fee,jdbcType=BIGINT},
+			</if>
+			<if test="interestRate != null and  interestRate != ''">
+				#{interestRate,jdbcType=DOUBLE},
+			</if>
+			<if test="exposureRatio != null and  exposureRatio != ''">
+				#{exposureRatio,jdbcType=DOUBLE},
+			</if>
+			<if test="enableRatio != null and enableRatio  != ''">
+				#{enableRatio,jdbcType=DOUBLE},
+			</if>
+			<if test="stockPoolNo != null and stockPoolNo  != ''">
+				#{stockPoolNo,jdbcType=BIGINT},
+			</if>
+			<if test="stockRatioLimit != null and  stockRatioLimit != ''">
+				#{stockRatioLimit,jdbcType=DOUBLE},
+			</if>
+			<if test="remark != null and  remark != ''">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="createDatetime != null and  createDatetime != ''">
+				#{createDatetime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateDatetime != null and updateDatetime  != ''">
+				#{updateDatetime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="update" parameterType="com.caimao.bana.api.entity.TpzProdDetailEntity">
+		update tpz_prod_detail
+		set loan_ratio_from = #{loanRatioFrom,jdbcType=DOUBLE},
+		loan_ratio_to = #{loanRatioTo,jdbcType=DOUBLE},
+		loan_amount_from = #{loanAmountFrom,jdbcType=BIGINT},
+		loan_amount_to = #{loanAmountTo,jdbcType=BIGINT},
+		loan_term_from = #{loanTermFrom,jdbcType=INTEGER},
+		loan_term_to = #{loanTermTo,jdbcType=INTEGER},
+		fee = #{fee,jdbcType=BIGINT},
+		interest_rate = #{interestRate,jdbcType=DOUBLE},
+		exposure_ratio = #{exposureRatio,jdbcType=DOUBLE},
+		enable_ratio = #{enableRatio,jdbcType=DOUBLE},
+		stock_pool_no = #{stockPoolNo,jdbcType=BIGINT},
+		stock_ratio_limit = #{stockRatioLimit,jdbcType=DOUBLE},
+		remark = #{remark,jdbcType=VARCHAR},
+		update_datetime = #{updateDatetime,jdbcType=TIMESTAMP}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+
+	<select id="getProdDetail" resultMap="BaseResultMap"
+		parameterType="java.util.HashMap">
+		select fee, interest_rate, exposure_ratio, enable_ratio,
+		stock_pool_no, stock_ratio_limit,remark
+		from tpz_prod_detail
+		where prod_id = #{prodId}
+		<if test="loanRatio != null and loanRatio  != 0">
+			and #{loanRatio} &gt;= loan_ratio_from and #{loanRatio} &lt;
+			loan_ratio_to
+		</if>
+		<if test="loanAmount != null and  loanAmount != 0">
+			and #{loanAmount} &gt;= loan_amount_from and #{loanAmount} &lt;
+			loan_amount_to
+		</if>
+		<if test="loanTerm != null and  loanTerm != 0">
+			and #{loanTerm} &gt;= loan_term_from and #{loanTerm} &lt; loan_term_to
+		</if>
+	</select>
+
+ <resultMap id="FProductDetailRes" type="com.caimao.bana.api.entity.res.product.FProductDetailRes" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="prod_id" property="prodId" jdbcType="BIGINT" />
+    <result column="loan_ratio_from" property="loanRatioFrom" jdbcType="DOUBLE" />
+    <result column="loan_ratio_to" property="loanRatioTo" jdbcType="DOUBLE" />
+    <result column="loan_amount_from" property="loanAmountFrom" jdbcType="BIGINT" />
+    <result column="loan_amount_to" property="loanAmountTo" jdbcType="BIGINT" />
+    <result column="loan_term_from" property="loanTermFrom" jdbcType="INTEGER" />
+    <result column="loan_term_to" property="loanTermTo" jdbcType="INTEGER" />
+    <result column="fee" property="fee" jdbcType="BIGINT" />
+    <result column="interest_rate" property="interestRate" jdbcType="DOUBLE" />
+    <result column="exposure_ratio" property="exposureRatio" jdbcType="DOUBLE" />
+    <result column="enable_ratio" property="enableRatio" jdbcType="DOUBLE" />
+    <result column="stock_pool_no" property="stockPoolNo" jdbcType="BIGINT" />
+    <result column="stock_ratio_limit" property="stockRatioLimit" jdbcType="DOUBLE" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <select id="queryProdDetailList" resultMap="FProductDetailRes" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tpz_prod_detail
+    where prod_id = #{prodId,jdbcType=BIGINT}
+  </select>
+</mapper>

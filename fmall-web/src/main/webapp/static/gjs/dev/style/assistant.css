@@ -1,0 +1,442 @@
+/** RESET **/
+body {
+  font-family: 'Microsoft YaHei',Lucida Grande,Lucida Sans Unicode,\5B8B\4F53;
+  -webkit-text-size-adjust: none;
+  color: #6a6a6a;
+  _font: 12px/1.5 \5B8B\4F53; }
+
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, p, form, input, textarea {
+  padding: 0;
+  margin: 0; }
+
+ol, ul {
+  list-style: none; }
+
+li {
+  list-style-type: none; }
+
+table {
+  margin: 0 auto;
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+img {
+  vertical-align: top;
+  border: 0; }
+
+caption, th {
+  text-align: left; }
+
+h1, h2, h3, h4, h5, h6, button, input, select, textarea {
+  font-size: 100%;
+  font-weight: 400; }
+
+i, u, em, b, strong {
+  font-style: normal;
+  text-decoration: none;
+  font-weight: 400; }
+
+input, textarea, button, select, button {
+  outline: none;
+  resize: none;
+  font-family: \5B8B\4F53; }
+
+a {
+  color: #666;
+  text-decoration: none;
+  -webkit-transition: color 0.4s ease;
+  -moz-transition: color 0.4s ease;
+  -o-transition: color 0.4s ease;
+  transition: color 0.4s ease;
+  -webkit-transition: background-color 0.4s ease;
+  -moz-transition: background-color 0.4s ease;
+  -o-transition: background-color 0.4s ease;
+  transition: background-color 0.4s ease; }
+  a:visited {
+    text-decoration: none; }
+  a:hover {
+    color: #5376be;
+    text-decoration: none;
+    -webkit-transition: color 0.4s ease;
+    -moz-transition: color 0.4s ease;
+    -o-transition: color 0.4s ease;
+    transition: color 0.4s ease;
+    -webkit-transition: background-color 0.4s ease;
+    -moz-transition: background-color 0.4s ease;
+    -o-transition: background-color 0.4s ease;
+    transition: background-color 0.4s ease; }
+
+.clearfix {
+  *zoom: 1; }
+  .clearfix:after {
+    clear: both;
+    height: 0;
+    overflow: hidden;
+    display: block;
+    visibility: hidden;
+    content: "."; }
+
+.assistant {
+  border-bottom: 1px solid #dddddd;
+  padding-bottom: 25px;
+  width: 100%;
+  font-size: 16px; }
+  .assistant .assisMain {
+    width: 94%;
+    margin-left: 3%;
+    margin-top: 24px; }
+    .assistant .assisMain .assisMainL {
+      float: left;
+      width: 40px; }
+      .assistant .assisMain .assisMainL img {
+        display: block;
+        width: 40px;
+        height: 40px; }
+    .assistant .assisMain .assisMainR {
+      float: right;
+      overflow: hidden;
+      width: calc(100% - 60px);
+      margin-left: 20px; }
+      .assistant .assisMain .assisMainR h1 {
+        width: 100%;
+        float: left;
+        height: 40px; }
+        .assistant .assisMain .assisMainR h1 .name {
+          float: left; }
+          .assistant .assisMain .assisMainR h1 .name span {
+            color: #5aadd5; }
+            .assistant .assisMain .assisMainR h1 .name span img {
+              margin-top: 4px;
+              margin-left: 3px; }
+          .assistant .assisMain .assisMainR h1 .name i {
+            font-size: 14px; }
+        .assistant .assisMain .assisMainR h1 .xin {
+          float: right; }
+          .assistant .assisMain .assisMainR h1 .xin span {
+            color: #c8c8c8; }
+      .assistant .assisMain .assisMainR .word {
+        margin-top: 10px;
+        display: block;
+        float: left; }
+        .assistant .assisMain .assisMainR .word .stockName {
+          font-size: 14px;
+          color: #5aadd5;
+          margin-top: 10px; }
+
+.assisFooter {
+  width: 100%;
+  height: 50px;
+  position: fixed;
+  bottom: 0; }
+  .assisFooter .footerList1 {
+    width: 100%;
+    height: 50px; }
+    .assisFooter .footerList1 li {
+      float: left;
+      width: 50%;
+      text-align: center;
+      line-height: 50px;
+      background: #fff; }
+      .assisFooter .footerList1 li:first-child {
+        background: #f8f8f8; }
+      .assisFooter .footerList1 li .follow {
+        display: block;
+        width: 100%;
+        height: 50px;
+        background: url("../../img/assistant/star.png") no-repeat;
+        background-position: calc(100%/2 - 20px) center;
+        text-indent: 30px; }
+      .assisFooter .footerList1 li .hall {
+        display: block;
+        width: 100%;
+        height: 50px;
+        background: url("../../img/assistant/menu.png") no-repeat;
+        background-position: calc(100%/2 - 20px) center;
+        text-indent: 30px; }
+
+.personal-head {
+  width: 100%; }
+  .personal-head .head-top {
+    width: 100%;
+    height: 90px;
+    background: #3399cc;
+    position: relative; }
+    .personal-head .head-top .portrait {
+      width: 73px;
+      height: 73px;
+      position: absolute;
+      left: 50%;
+      margin-left: -36.5px;
+      margin-top: 35px; }
+    .personal-head .head-top .followBtn {
+      display: block;
+      width: 80px;
+      height: 30px;
+      border: 1px solid #fff;
+      text-align: center;
+      line-height: 30px;
+      font-size: 14px;
+      color: #fff;
+      border-radius: 5px;
+      float: right;
+      margin-top: 45px;
+      margin-right: 15px; }
+      .personal-head .head-top .followBtn img {
+        margin-top: 10px;
+        margin-right: 5px; }
+  .personal-head .head-bottom {
+    width: 100%;
+    background: #fff;
+    border: 1px solid #bbb; }
+    .personal-head .head-bottom h1 {
+      width: 100%;
+      text-align: center;
+      font-size: 20px;
+      margin-top: 40px; }
+      .personal-head .head-bottom h1 img {
+        margin-top: 8px;
+        margin-left: 3px; }
+    .personal-head .head-bottom p {
+      width: 100%;
+      text-align: center;
+      font-size: 14px;
+      color: #c0c0c0;
+      margin-top: 5px;
+      padding-bottom: 15px; }
+
+.personal-head2 {
+  width: 100%; }
+  .personal-head2 .head-top {
+    width: 100%;
+    height: 90px;
+    background: #fff;
+    position: relative; }
+    .personal-head2 .head-top .portrait {
+      width: 73px;
+      height: 73px;
+      position: absolute;
+      left: 5%;
+      margin-top: 35px; }
+    .personal-head2 .head-top h1 {
+      float: left;
+      margin-left: calc(5% + 88px);
+      margin-top: 45px;
+      color: #333; }
+      .personal-head2 .head-top h1 img {
+        margin-top: 4px;
+        margin-left: 3px; }
+    .personal-head2 .head-top .followBtn {
+      float: right;
+      display: block;
+      width: 80px;
+      height: 30px;
+      border: 1px solid #3399cc;
+      text-align: center;
+      line-height: 30px;
+      font-size: 14px;
+      color: #3399cc;
+      border-radius: 5px;
+      float: right;
+      margin-top: 45px;
+      margin-right: 15px; }
+      .personal-head2 .head-top .followBtn img {
+        margin-top: 10px;
+        margin-right: 5px; }
+    .personal-head2 .head-top .followBtn1 {
+      display: none; }
+  .personal-head2 .head-bottom {
+    width: 100%;
+    background: #3399cc;
+    border: 1px solid #bbb; }
+    .personal-head2 .head-bottom h1 {
+      width: 100%;
+      text-align: center;
+      font-size: 20px;
+      margin-top: 20px;
+      color: #fff; }
+      .personal-head2 .head-bottom h1 img {
+        margin-top: 10px;
+        margin-left: 3px; }
+    .personal-head2 .head-bottom p {
+      width: 100%;
+      text-align: center;
+      font-size: 14px;
+      color: #fff;
+      margin-top: 5px;
+      padding-bottom: 15px; }
+
+.personalMain {
+  width: 95%;
+  margin-left: 5%;
+  height: 85px; }
+  .personalMain .personalMainL {
+    width: 48px;
+    height: 85px;
+    margin-right: 5%;
+    float: left; }
+    .personalMain .personalMainL .yuan1 {
+      display: block;
+      width: 48px;
+      height: 48px;
+      background: #ff9000;
+      border-radius: 50%;
+      position: relative;
+      margin-top: 18px; }
+      .personalMain .personalMainL .yuan1 .yuan2 {
+        display: block;
+        width: 44px;
+        height: 44px;
+        background: #fff;
+        border-radius: 50%;
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        text-align: center;
+        line-height: 44px;
+        color: #ff9000; }
+  .personalMain .personalMainR {
+    width: calc(95.25% - 49px);
+    float: left;
+    border-bottom: 1px solid #bbb;
+    height: 85px; }
+    .personalMain .personalMainR h1 {
+      width: 100%;
+      float: left;
+      height: 40px;
+      margin-top: 20px; }
+      .personalMain .personalMainR h1 .stock {
+        float: left; }
+        .personalMain .personalMainR h1 .stock span {
+          color: #333333; }
+          .personalMain .personalMainR h1 .stock span img {
+            margin-top: 4px;
+            margin-left: 3px; }
+        .personalMain .personalMainR h1 .stock i {
+          font-size: 14px;
+          color: #c8c8c8; }
+      .personalMain .personalMainR h1 .time {
+        float: right;
+        color: #c8c8c8;
+        font-size: 14px;
+        margin-top: 12px; }
+        .personalMain .personalMainR h1 .time img {
+          margin-top: 2px;
+          margin-left: 15px;
+          margin-right: 10px; }
+
+.artBox {
+  width: 100%;
+  float: left; }
+  .artBox .artMain {
+    width: 90%;
+    margin-left: 5%;
+    background: #fff; }
+    .artBox .artMain h1 {
+      width: 100%;
+      font-size: 14px;
+      float: left;
+      margin-top: 30px; }
+      .artBox .artMain h1 .gallon {
+        display: block;
+        float: left;
+        color: #3399cc; }
+      .artBox .artMain h1 .price {
+        display: block;
+        float: right;
+        color: #c0c0c0; }
+        .artBox .artMain h1 .price span {
+          color: #3399cc; }
+    .artBox .artMain .articleWord {
+      color: #333;
+      line-height: 28px; }
+    .artBox .artMain h2 {
+      width: 100%;
+      float: left;
+      height: 40px;
+      margin-bottom: 20px; }
+      .artBox .artMain h2 .name {
+        float: left;
+        margin-top: 10px; }
+        .artBox .artMain h2 .name i {
+          font-size: 14px; }
+      .artBox .artMain h2 .xin {
+        float: right; }
+        .artBox .artMain h2 .xin span {
+          color: #c8c8c8; }
+
+.artBox2 {
+  width: 100%;
+  background: #3399cc;
+  float: left; }
+  .artBox2 .artMain {
+    width: 90%;
+    margin-left: 5%; }
+    .artBox2 .artMain h1 {
+      width: 100%;
+      font-size: 14px;
+      float: left;
+      margin-top: 30px; }
+      .artBox2 .artMain h1 .gallon {
+        display: block;
+        float: left;
+        color: #326b9d; }
+      .artBox2 .artMain h1 .price {
+        display: block;
+        float: right;
+        color: #fff; }
+        .artBox2 .artMain h1 .price span {
+          color: #326b9d; }
+    .artBox2 .artMain .articleWord {
+      color: #fff;
+      line-height: 28px; }
+    .artBox2 .artMain h2 {
+      width: 100%;
+      float: left;
+      height: 40px;
+      margin-bottom: 20px; }
+      .artBox2 .artMain h2 .name {
+        float: left;
+        margin-top: 10px; }
+        .artBox2 .artMain h2 .name i {
+          font-size: 14px;
+          color: #fff; }
+      .artBox2 .artMain h2 .xin {
+        float: right; }
+        .artBox2 .artMain h2 .xin span {
+          color: #fff; }
+
+.followMark {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: none; }
+  .followMark .btnBox {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    background: #fff; }
+    .followMark .btnBox p {
+      width: 100%;
+      background: #fff;
+      text-align: center;
+      color: #333; }
+    .followMark .btnBox .tips {
+      height: 45px;
+      line-height: 45px;
+      font-size: 14px;
+      border-bottom: 1px solid #dddddd; }
+    .followMark .btnBox .yes {
+      height: 48px;
+      line-height: 48px;
+      font-size: 16px;
+      border-bottom: 3px solid #dddddd; }
+    .followMark .btnBox .no {
+      height: 42px;
+      line-height: 42px;
+      font-size: 16px; }
+
+/*# sourceMappingURL=assistant.css.map */

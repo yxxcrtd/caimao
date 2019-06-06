@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd">
+
+    <mvc:annotation-driven conversion-service="conversion-service"/>
+
+    <mvc:default-servlet-handler/>
+
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+
+    <mvc:view-controller path="/" view-name="redirect:/index.jsp"/>
+    <mvc:view-controller path="/index" view-name="redirect:/index.jsp"/>
+    <mvc:resources mapping="/js/**" location="/WEB-INF/js/"/>
+
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/*"/>
+            <bean name="globalInterceptor" class="com.caimao.bana.gate.interceptor.TestInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+
+    <!-- 如果配置include-filter,expression=org.springframework.stereotype.Controller模式,则annotation驱动的事务和缓存都不会起作用,详细请读源码 -->
+    <context:component-scan base-package="com.caimao.bana.gate" annotation-config="true">
+        <context:include-filter type="annotation"
+                                expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+    <context:property-placeholder location="classpath*:/conf/freemarker*.properties"/>
+
+
+    <bean id="conversion-service"
+          class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+    </bean>
+
+    <!-- 对pdf、json、xml、excel之类的视图解析器 -->
+    <bean id="beanNameViewResolver"
+          class="org.springframework.web.servlet.view.BeanNameViewResolver"
+          p:order="0"/>
+
+    <!-- 配置freeMarker的模板路径 -->
+    <bean id="freemarkerConfig"
+          class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+        <property name="templateLoaderPath" value="${freemarker.templateLoaderPath}"/>
+        <property name="defaultEncoding" value="${freemarker.defaultEncoding}"/>
+        <property name="freemarkerSettings">
+            <props>
+                <prop key="template_update_delay">${freemarker.conf.template_update_delay}</prop>
+            </props>
+        </property>
+        <property name="freemarkerVariables">
+            <map>
+                <entry key="xml_escape" value-ref="fmXmlEscape"/>
+            </map>
+        </property>
+    </bean>
+    <bean id="fmXmlEscape" class="freemarker.template.utility.XmlEscape"/>
+
+    <!-- 视图解析器 -->
+    <bean id="freemarkerViewResolver"
+          class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver" p:order="1">
+        <property name="contentType" value="${freemarker.view.contentType}"/>
+        <property name="suffix" value="${freemarker.view.suffix}"/>
+        <property name="cache" value="${freemarker.view.cache}"/>
+        <property name="exposeSpringMacroHelpers" value="${freemarker.view.exposeSpringMacroHelpers}"/>
+        <property name="exposeSessionAttributes" value="${freemarker.view.exposeSessionAttributes}"/>
+        <property name="exposeRequestAttributes" value="${freemarker.view.exposeRequestAttributes}"/>
+        <property name="allowSessionOverride" value="${freemarker.view.allowSessionOverride}"/>
+        <property name="attributesMap" ref="freemarkerStaticModels"/>
+    </bean>
+
+    <bean id="freemarkerStaticModels" class="com.caimao.bana.gate.utils.FreemarkerStaticModels"
+          factory-method="getInstance">
+        <property name="staticModels" ref="freemarkerStaticModelsProps"/>
+    </bean>
+
+    <!-- 在freemarker中使用静态类 -->
+    <bean id="freemarkerStaticModelsProps"
+          class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="location" value="classpath:conf/freemarker-static.properties"/>
+    </bean>
+
+    <!-- restFul风格的视图解析器 -->
+    <bean id="restFulViewResolver"
+          class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver"
+          p:order="2">
+        <property name="contentNegotiationManager">
+            <bean class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+                <!-- 扩展名至mimeType的映射,即 /user.json => application/json -->
+                <property name="favorPathExtension" value="true"/>
+                <!-- 用于开启 /userinfo/123?format=json 的支持 -->
+                <property name="favorParameter" value="true"/>
+                <property name="parameterName" value="format"/>
+                <!-- 是否忽略Accept Header -->
+                <property name="ignoreAcceptHeader" value="true"/>
+                <property name="defaultContentType" value="text/html"/>
+                <!--扩展名到MIME的映射；favorPathExtension, favorParameter是true时起作用  -->
+                <property name="mediaTypes">
+                    <map>
+                        <entry key="json" value="application/json"/>
+                        <entry key="xml" value="application/xml"/>
+                        <entry key="jsonp" value="application/jsonp"/>
+                    </map>
+                </property>
+            </bean>
+        </property>
+        <property name="viewResolvers">
+            <list>
+                <ref bean="beanNameViewResolver"/>
+                <ref bean="freemarkerViewResolver"/>
+            </list>
+        </property>
+        <property name="defaultViews">
+            <list>
+                <bean class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
+                    <property name="extractValueFromSingleKeyModel" value="true"/>
+                </bean>
+                <bean class="org.springframework.web.servlet.view.xml.MarshallingView">
+                    <property name="marshaller">
+                        <bean class="org.springframework.oxm.xstream.XStreamMarshaller"/>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+</beans>

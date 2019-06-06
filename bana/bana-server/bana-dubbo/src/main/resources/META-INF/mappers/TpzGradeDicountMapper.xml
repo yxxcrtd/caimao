@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >  
+<mapper namespace="GradeDicount" >
+  <resultMap id="BaseResultMap" type="com.caimao.bana.api.entity.GradeDicountEntity" >
+    <id column="user_grade" property="userGrade" jdbcType="DECIMAL" />
+    <result column="discount_rate" property="discountRate" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    user_grade, discount_rate
+  </sql>
+  <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Short" >
+    select 
+    <include refid="Base_Column_List" />
+    from tpz_grade_dicount
+    where user_grade = #{userGrade,jdbcType=DECIMAL}
+  </select>
+  <select id="queryGradeDicount" resultMap="BaseResultMap"  >
+    select 
+    <include refid="Base_Column_List" />
+    from tpz_grade_dicount
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Short" >
+    delete from tpz_grade_dicount
+    where user_grade = #{userGrade,jdbcType=DECIMAL}
+  </delete>
+  <insert id="save" parameterType="com.caimao.bana.api.entity.GradeDicountEntity" >
+    insert into tpz_grade_dicount
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userGrade != null" >
+        user_grade,
+      </if>
+      <if test="discountRate != null" >
+        discount_rate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userGrade != null" >
+        #{userGrade,jdbcType=DECIMAL},
+      </if>
+      <if test="discountRate != null" >
+        #{discountRate,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.caimao.bana.api.entity.GradeDicountEntity" >
+    update tpz_grade_dicount
+    <set >
+      <if test="discountRate != null" >
+        discount_rate = #{discountRate,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where user_grade = #{userGrade,jdbcType=DECIMAL}
+  </update>
+  
+  <resultMap id="F831938ResMap" type="com.caimao.bana.api.entity.res.F831938Res" >
+    <id column="user_grade" property="userGrade" jdbcType="DECIMAL" />
+    <result column="discount_rate" property="discountRate" jdbcType="DECIMAL" />
+  </resultMap>
+  <select id="queryF831938Res" resultMap="F831938ResMap"  >
+    select 
+    <include refid="Base_Column_List" />
+    from tpz_grade_dicount
+  </select>
+</mapper>

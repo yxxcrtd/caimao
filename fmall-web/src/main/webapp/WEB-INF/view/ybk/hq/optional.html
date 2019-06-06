@@ -1,0 +1,124 @@
+
+<!doctype html>
+<#include "ybk/config.html" />
+<#assign topMenu="market" />
+<#assign leftMenu="optional" />
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>我的自选-邮币卡</title>
+    <link href="${staticUrl}/style/style.css?version=${jsVersion}" rel="stylesheet">
+    <script src="${staticUrl}/js/chart/lib.js?version=${jsVersion}"></script>
+    <script src="${staticUrl}/js/ybk/user.fav.js?version=${jsVersion}"></script>
+    <script src="${staticUrl}/js/ybk/global.js?version=${jsVersion}"></script>
+
+
+</head>
+
+<body>
+<#include "ybk/include/page/head.html" />
+
+<div class="main market">
+    <div class="clearfix">
+
+        <#include "ybk/include/menu/ybk_hq_left.html" />
+
+        <div class="mod-right">
+            <div class="mod-rightcontent">
+                <div class="goodsTable" id="emptyfill" style="display:none">
+                    <dl class="emptyOptional">
+                        <dt><img src="${imgUrl}/empty.jpg"></dt>
+                        <dd>您暂无自选<br>
+                            <#if eList?size>
+                                <a href="/ybk/market_char.html?name=${eList[0].shortName}&code=100001">去藏品详情页添加自选</a>
+                            </#if>
+                        </dd>
+                    </dl>
+                </div>
+                <div class="goodsTable" id="datafill" style="display:none">
+                    <div class="tableHead">
+                            <span class="big first">交易所</span>
+                            <span>藏品代码</span>
+                            <span class="wideTd">藏品简称</span>
+                            <span class="right">最新价</span>
+                            <span class="right">涨跌幅</span>
+                            <span class="right">今开盘</span>
+                            <span class="right">昨收盘</span>
+                            <span class="right">成交量</span>
+                            <span class="right">成交金额</span>
+                            <span class="right">最高价</span>
+                            <span class="right">最低价</span>
+                    </div>
+                    <div class="goodsList">
+                       
+                            <table class="table table_striped table_hover">
+                                <colgroup>
+                                    <col style="width:135px;"></col>
+                                    <col></col>
+                                    <col style="width:150px;"></col>
+                                    <col></col>
+                                    <col></col>
+                                    <col></col>
+                                    <col></col>
+                                    <col></col>
+                                    <col></col>
+                                    <col></col>
+                                    <col></col>
+                                </colgroup>
+                                <tbody id="box">
+                                    <script type="text/x-tmpl">
+                                        <% for(var i = 0, l = data.length; i < l; i++){
+                                            var _this = data[i],
+                                                className = _this.changeRate > 0 ?
+                                                    "red" : "green";
+                                            %>
+                                        <tr onclick="window.location.href='/ybk/market_char.html?name=<%=_this.exchangeShortName%>&code=<%=_this.code%>'">
+                                            <td><%=_this.exchangeName%></td>
+                                            <td><%=_this.code%></td>
+                                            <td><%=_this.name%></td>
+                                            <td class="right"><b class="<%=className%>"><%=(_this.currentPrice/100).toFixed(2)%></b></td>
+                                            <td class="right"><b class="<%=className%>"><%=(_this.changeRate/100).toFixed(2)%>%</b> </td>
+
+                                            <td class="right"><%=(_this.openPrice/100).toFixed(2)%></td>
+                                            <td class="right"><%=(_this.closePrice/100).toFixed(2)%></td>
+                                            <td class="right"><%=shortIndex(_this.totalAmount/100,2,10000,['万','亿','兆'])%></td>
+                                            <td class="right"><%=shortIndex(_this.totalMoney/100,2,10000,['万','亿','兆'])%></td>
+                                            <td class="right"><%=(_this.highPrice/100).toFixed(2)%></td>
+                                            <td class="right"><%=(_this.lowPrice/100).toFixed(2)%></td>
+                                        </tr>
+                                        <%}%>
+                                    </script>
+                                </tbody>
+                                <script>
+                                    var box = document.querySelector("#box"),
+                                        eb = document.querySelector("#emptyfill"),
+                                        db = document.querySelector("#datafill"),
+                                        html = box.querySelector("script").innerHTML,
+                                        fav = fav();
+                                    fav.list(writeHtml)
+                                    function writeHtml(data){
+                                        if(data.length){
+                                            db.style.display = "block";
+                                            eb.style.display = "none";
+                                            box.innerHTML = rentmpl(html,{
+                                                data : data
+                                            });
+                                        }else{
+                                            eb.style.display = "block";
+                                            db.style.display = "none";
+                                        }
+                                    } 
+                                </script>
+                            </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<#include "ybk/include/page/foot.html" />
+
+</body>
+</html>

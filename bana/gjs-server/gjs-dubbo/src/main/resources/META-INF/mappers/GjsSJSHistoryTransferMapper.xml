@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="GjsSJSHistoryTransfer">
+
+    <resultMap id="BaseResultMap" type="com.caimao.gjs.api.entity.history.GjsSJSHistoryTransferEntity">
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="trader_id" property="trader_id" jdbcType="VARCHAR" />
+        <result column="exch_date" property="exch_date" jdbcType="VARCHAR" />
+        <result column="serial_no" property="serial_no" jdbcType="VARCHAR" />
+        <result column="access_way" property="access_way" jdbcType="VARCHAR" />
+        <result column="exch_bal" property="exch_bal" jdbcType="DECIMAL" />
+        <result column="o_term_type" property="o_term_type" jdbcType="VARCHAR" />
+        <result column="bk_plat_date" property="bk_plat_date" jdbcType="VARCHAR" />
+        <result column="bk_seq_no" property="bk_seq_no" jdbcType="VARCHAR" />
+        <result column="in_account_flag" property="in_account_flag" jdbcType="VARCHAR" />
+        <result column="check_stat1" property="check_stat1" jdbcType="VARCHAR" />
+        <result column="check_stat2" property="check_stat2" jdbcType="VARCHAR" />
+        <result column="bk_rsp_code" property="bk_rsp_code" jdbcType="VARCHAR" />
+        <result column="bk_rsp_msg" property="bk_rsp_msg" jdbcType="VARCHAR" />
+        <result column="o_date" property="o_date" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <!--所有列-->
+    <sql id="Base_Column_List">
+        id, trader_id, exch_date, serial_no, access_way, exch_bal, o_term_type, bk_plat_date, bk_seq_no, in_account_flag, check_stat1, check_stat2, bk_rsp_code, bk_rsp_msg, o_date
+    </sql>
+
+    <!--根据开始时间和结束时间查询-->
+    <select id="querySJSHistoryTransferWithPage" resultMap="BaseResultMap" parameterType="com.caimao.gjs.api.entity.req.FQueryHistoryTransferReq">
+        SELECT <include refid="Base_Column_List" />
+        FROM gjs_sjs_history_transfer
+        WHERE trader_id = #{traderId, jdbcType=VARCHAR}
+        <if test="startDate != null and  startDate != ''">
+            AND exch_date &gt;= #{startDate}
+        </if>
+        <if test="endDate != null and  endDate != ''">
+            AND exch_date &lt;= #{endDate}
+        </if>
+        ORDER BY exch_date DESC
+    </select>
+
+    <!--添加-->
+    <insert id="insert" parameterType="com.caimao.gjs.api.entity.history.GjsSJSHistoryTransferEntity">
+        insert into gjs_sjs_history_transfer
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="trader_id != null">trader_id,</if>
+            <if test="exch_date != null">exch_date,</if>
+            <if test="serial_no != null">serial_no,</if>
+            <if test="access_way != null">access_way,</if>
+            <if test="exch_bal != null">exch_bal,</if>
+            <if test="o_term_type != null">o_term_type,</if>
+            <if test="bk_plat_date != null">bk_plat_date,</if>
+            <if test="bk_seq_no != null">bk_seq_no,</if>
+            <if test="in_account_flag != null">in_account_flag,</if>
+            <if test="check_stat1 != null">check_stat1,</if>
+            <if test="check_stat2 != null">check_stat2,</if>
+            <if test="bk_rsp_code != null">bk_rsp_code,</if>
+            <if test="bk_rsp_msg != null">bk_rsp_msg,</if>
+            <if test="o_date != null">o_date,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="trader_id != null">#{trader_id, jdbcType=VARCHAR},</if>
+            <if test="exch_date != null">#{exch_date, jdbcType=VARCHAR},</if>
+            <if test="serial_no != null">#{serial_no, jdbcType=VARCHAR},</if>
+            <if test="access_way != null">#{access_way, jdbcType=VARCHAR},</if>
+            <if test="exch_bal != null">#{exch_bal, jdbcType=DECIMAL},</if>
+            <if test="o_term_type != null">#{o_term_type, jdbcType=VARCHAR},</if>
+            <if test="bk_plat_date != null">#{bk_plat_date, jdbcType=VARCHAR},</if>
+            <if test="bk_seq_no != null">#{bk_seq_no, jdbcType=VARCHAR},</if>
+            <if test="in_account_flag != null">#{in_account_flag, jdbcType=VARCHAR},</if>
+            <if test="check_stat1 != null">#{check_stat1, jdbcType=VARCHAR},</if>
+            <if test="check_stat2 != null">#{check_stat2, jdbcType=VARCHAR},</if>
+            <if test="bk_rsp_code != null">#{bk_rsp_code, jdbcType=VARCHAR},</if>
+            <if test="bk_rsp_msg != null">#{bk_rsp_msg, jdbcType=VARCHAR},</if>
+            <if test="o_date != null">#{o_date, jdbcType=VARCHAR},</if>
+        </trim>
+    </insert>
+
+    <!-- 后台管理用的查询 -->
+    <!-- 根据TraderId查询SJS历史出入金列表 -->
+    <select id="querySJSHistoryTransferListByTraderIdForManage" resultMap="BaseResultMap" parameterType="java.lang.String">
+        SELECT <include refid="Base_Column_List" /> FROM gjs_sjs_history_transfer WHERE trader_id = #{trader_id, jdbcType=VARCHAR}
+    </select>
+
+    <!-- SJS累计出入金金额 -->
+    <select id="getSJSHistoryTransferTotalMoneySum" resultType="java.lang.Long" parameterType="java.util.HashMap">
+        SELECT SUM(ABS(exch_bal)) FROM gjs_sjs_history_transfer WHERE access_way = #{type, jdbcType=VARCHAR}
+    </select>
+
+    <!-- SJS累计出入金次数 -->
+    <select id="getSJSHistoryTransferCount" resultType="java.lang.Long" parameterType="java.util.HashMap">
+        SELECT COUNT(1) FROM gjs_sjs_history_transfer WHERE access_way = #{type, jdbcType=VARCHAR}
+    </select>
+
+</mapper>

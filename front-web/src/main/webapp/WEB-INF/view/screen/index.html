@@ -1,0 +1,338 @@
+<#assign controller="Home2"/>
+<#include 'layout/layout.html'/>
+
+<#macro content>
+<div style="background-color:#EEE;">
+    <div id="focus">
+        <div class="home_slide" style="height: 380px;">
+            <div class="fullSlide">
+                <div class="bd">
+                    <ul>
+                        <#list indexAdImgs as ad>
+                            <li style="background:url(${dojoUrl}/app/resources/image/customize/${ad.name}?v=${jsVersion}) center 0 no-repeat; display: block;"><a <#if ad.url>target="_blank" href="${basePath}/${ad.url}"</#if>></a></li>
+                        </#list>
+                    </ul>
+                </div>
+                <div class="hd">
+                    <ul>
+                    </ul>
+                </div>
+            </div>
+
+
+            <div class="section" id="loginform_div" style="display: none; top: -380px;">
+                <div class="home_login home_login_bg" style="border-top:none;"></div>
+                <div class="home_login" style="background: none;border-top:none;box-shadow:none;height: 380px;">
+                    <div class="hd" style="margin-top: 45px;">
+                        <h5>登录财猫网</h5>
+                    </div>
+                    <form id="loginform">
+                        <div class="bd pz_btn">
+                            <div class="group">
+                                <input type="text" id="username" name="username" placeholder="请输入注册手机号" class="input_text input_name" onkeydown="sub_form_click(event)"/>
+                            </div>
+                            <div class="group">
+                                <input type="password" id="password" name="password" placeholder="请输入您的密码" autocomplete="off" class="input_text input_pass" onkeydown="sub_form_click(event)" />
+                            </div>
+                            <button type="button" class="btn" id="login_button">登录</button>
+                        </div>
+                    </form>
+                    <script type="text/javascript">
+                        function sub_form_click(e){
+                            var evt;
+                            evt = e ? e : (window.event ? window.event : null);//兼容IE和FF
+                            if (evt.keyCode==13){
+                                document.getElementById('login_button').click();
+                            }
+                        }
+                    </script>
+                    <div class="ft">
+                        <span class="float_left"><a href="${basePath}/user/register.htm"> 注册</a></span>
+                        <span class="float_right"><a href="${basePath}/user/forgetloginpwd.htm">忘记密码 </a></span>
+                    </div>
+                    <div class="ad" style="display: none;">
+                        <img src="${dojoUrl}/app/resources/newindex/img/ad_19681.jpg" width="196" height="81" alt=""/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="flow">
+        <div class="section">
+            <img src="${dojoUrl}/app/resources/newindex/img/flow_bg.jpg?20150715" width="1000" height="70"></div> </div>
+    <div id="home_feature" style="background-color:#EEE;">
+        <div class="section case clear_fix">
+            <ul>
+                <li>
+                    <div class="case_in">
+                        <h5 class="font_orange">按天融资</h5>
+                        <p class="bg">
+                            <i class="icon icon_day"></i>
+                        </p>
+                        <p class="bor_b">短线投资，操作灵活</p>
+                        <p class="color">日息低至</p>
+                        <p class="bor_b font_56 font_orange">0.1%</p>
+                        <p>可投2-30天，资金放大5倍</p>
+                        <p class="pz_btn"><a class="btn" href="${baseUrl}/p1.htm">开始融资</a></p>
+                    </div>
+                </li>
+                <li>
+                    <div class="case_in">
+                        <h5 class="font_orange">按月融资</h5>
+                        <p class="bg">
+                            <i class="icon icon_month"></i>
+                        </p>
+                        <p class="bor_b">中长线投资，稳定收益 </p>
+                        <p class="color">月息低至</p>
+                        <p class="bor_b font_56 font_orange">1.2%</p>
+                        <p>可投1-6个月，资金放大5倍</p>
+                        <p class="pz_btn"><a class="btn" href="${baseUrl}/p2.htm">开始融资</a></p>
+                    </div>
+                </li>
+                <li class="relative">
+                    <div class="case_in">
+                        <h5 class="font_orange">超低月息</h5>
+                        <p class="bg">
+                            <i class="icon icon_low"></i>
+                        </p>
+                        <p class="bor_b">超惠活动，限时开抢</p>
+                        <p class="color">月息低至</p>
+                        <p class="bor_b font_56 font_orange">0.98%</p>
+                        <p>1倍杠杆，风险超低</p>
+                        <p class="pz_btn"><a class="btn" href="${baseUrl}/p10.htm">开始融资</a></p>
+                    </div>
+                    <i class="icon icon_limit">限时抢购</i>
+                </li>
+            </ul>
+        </div>
+
+        <style type="text/css">
+            .p2p-box{width: 1000px;height: auto;margin: 0 auto;margin-top: 20px;background-color: #fff;}
+            .top1{margin: 0 auto;width: 950px;height: 55px;border-bottom: 1px solid #D9D9D9;}
+            .top1 ul{float: left;}
+            .top1 ul li{float: left;line-height: 55px;font-size: 16px;width: 130px;padding-left: 20px;}
+            .top1 ul li a{color: #9F9F9F;}
+            .top1 ul li a:hover{color:#000000;}
+            .top1 ul .active {border-bottom: 2px solid #f89406;color: #EB4535;}
+            .top1 ul .active span{color: #EB4535;}
+            .top2{width:950px;height: 95px;border-bottom: 1px solid #D9D9D9;margin: 0 auto;}
+            .top2 .top2_left{float: left;width: 782px;height: 95px;}
+            .top2 .top2_left ul{float: left;padding-left:52px;padding-top: 20px;}
+            .top2 .top2_left ul li{color: #343434;}
+            .top2 .top2_left ul li a{color: #A0A0A0;}
+            .top2 .top2_left ul li span{color: #EC4636;}
+            .top2 .top2_left b{position: absolute;left: 0;top: 3px;height: 12px;background: #f0f0f0;width: 100px;z-index: 3;font-style: normal;text-decoration: none;font-weight: 400;}
+            .top2 .top2_left i {position: absolute;left: 0;top: 0;height: 12px;background: #ff6600;}
+            .top2 .top2_right{float: right;width: 106px;height: 95px;}
+            .top2 .top2_right ul a  {width: 106px;height: 35px;background-color: #EC4636;-webkit-border-radius:5px;text-align: center;margin-top:30px; display: block;}
+            .top2 .top2_right ul li a{color: #ffffff;line-height: 35px;}
+        </style>
+
+        <div class="p2p-box">
+            <div class="top1">
+                <ul>
+                    <li style="padding-left: 0px;" class="active"><a class="hov" href="javascript:void(0);"><span>可投项目(<span id="totalTargetA">0</span>)</span></a> </li>
+                    <li><a class="hov" href="javascript:void(0);"><span>满标项目(<span id="totalTargetB">0</span>)</span></a> </li>
+                </ul>
+                <div style="float: right;margin-top: 20px;">100%本息保障   5倍余额宝收益，最安全的股票抵押理财产品！</div>
+            </div>
+            <div id="targetBox">
+            <script type="text/x-tmpl">
+            <% for(var i = 0,l = data.length; i < l; i++){%>
+            <div class="top2">
+                <div class="top2_left">
+                    <ul style="padding-left: 0px;">
+                        <li style="font-size: 16px;"><%=data[i].targetName%></li>
+                        <li style="margin-top: 10px;"><strong style="font-size: 16px; font-weight: bold;"><%=data[i].targetAmount%>万元</strong></li>
+                    </ul>
+                    <ul>
+                        <li><a>年化收益率</a></li>
+                        <li style="margin-top: 10px;"><span><%=data[i].yearRate%>%</span></li>
+                    </ul>
+                    <ul>
+                        <li><a>借款期限</a></li>
+                        <li style="font-size: 16px; margin-top: 10px;"><%=data[i].liftTime/30%>个月</li>
+                    </ul>
+                    <ul>
+                        <li><a>进度</a></li>
+                        <li style="position: relative; width: 150px; margin-top: 10px;"><b><i style="width:<%=data[i].targetRate%>%"></i></b> <span style="position: relative; left: 110px; color: #343434;"><%=data[i].targetRate%>%</span> </li>
+                    </ul>
+                    <ul>
+                        <li><a>剩余金额</a></li>
+                        <li style="margin-top: 10px;"><span style="font-size: 16px; margin-top: 10px;">￥<%=data[i].targetOver%></span></li>
+                    </ul>
+                </div>
+                <div class="top2_right">
+                    <ul class="btn">
+                        <li><a href="${baseUrl}/p2p/targetDetail.htm?targetId=<%=data[i].targetId%>"><%=data[i].targetStatus == 0 ? "投资" : "查看"%></a> </li>
+                    </ul>
+                </div>
+            </div>
+            <%}%>
+            </script>
+            </div>
+        </div>
+
+        <div class="section dynamic clear_fix">
+            <div class="f_l left">
+                <h3><i class="icon icon_dyn01" style="margin-top: -9px;"></i>融资排行榜</h3>
+                <table class="">
+                    <thead>
+                    <tr>
+                        <td width="70" style="color: #9F9F9F;">排名</td>
+                        <td width="140">投资人</td>
+                        <td width="155">本金投入</td>
+                        <td width="132">杠杆倍数</td>
+                        <td width="84">融资金额</td>
+                    </tr>
+                    </thead>
+                    <tbody id="pzRanking">
+                    </tbody>
+                </table>
+            </div>
+            <div class="right f_l">
+                <h3><i class="icon icon_dyn02" style="margin-top: -9px;"></i>实时动态</h3>
+                <table class="">
+                    <thead>
+                    <tr>
+                        <td width="100">时间</td>
+                        <td width="115">投资人</td>
+                        <td width="90">融资金额</td>
+                    </tr>
+                    </thead>
+                    <tbody id="pzRealetime">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+
+
+        <div class="section merit" style="height:160px;">
+            <ul class="clear_fix">
+                <li>
+                    <dl>
+                        <dt class="merit_icon merit_icon01"></dt>
+                        <dd>
+                            <p><span class="font_merit font_green">融资快</span>
+                                立即开户<br>
+                                当天交易，快人一步
+                            </p>
+
+                        </dd>
+                    </dl>
+                </li>
+                <li>
+                    <dl>
+                        <dt class="merit_icon merit_icon02"></dt>
+                        <dd>
+                            <p><span class="font_merit font_green">费率低</span>
+                                融资利息全网最低<br>
+                                没有最低，只有更低
+                            </p>
+
+                        </dd>
+                    </dl>
+                </li>
+                <li>
+                    <dl>
+                        <dt class="merit_icon merit_icon03"></dt>
+                        <dd>
+                            <p><span class="font_merit font_green">安全高</span>
+                                资金银行托管<br>
+                                封闭管理，专款专用
+                            </p>
+
+                        </dd>
+                    </dl>
+                </li>
+                <li>
+                    <dl>
+                        <dt class="merit_icon merit_icon04"></dt>
+                        <dd>
+                            <p><span class="font_merit font_green">服务好</span>
+                                金融互联网公司打造<br>
+                                专业客服1对1跟踪服务
+                            </p>
+
+                        </dd>
+                    </dl>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div id="media">
+        <div class="section media">
+            <h3><span class="font_green">媒体报道</span></h3>
+            <ul class="clear_fix">
+                <li>
+                    <a href="http://www.ccstock.cn/stock/dashiyanpan/2015-06-12/A1434089638198.html " target="_blank" class="img f_l"><img src="${baseUrl}/app/resources/newindex/img/zqrb.png" alt="" width="140" height="106"></a>
+                    <h4><a href="http://www.ccstock.cn/stock/dashiyanpan/2015-06-12/A1434089638198.html " target="_blank">财猫金融解读股票市场：投资国运 A股牛市远未结束</a></h4>
+                    <h6><a href="http://www.ccstock.cn" target="_blank">证券日报网</a> 2015.06.12 14:03</h6>
+                    <p>当前A股正盘桓于5000点附近高速震荡，创业板个股出现部分回调，5月份新公布的PMI数据为50.2%，仅比上月微升0.1个百分点，市场唱空论调再度响起。财猫网分析团队认为，站在更长的时间维度上去观察，驱动本轮牛市的动力并未改变，...</p>
+                </li>
+                <li>
+                    <a href="http://zqrb.ccstock.cn/html/2015-06/11/content_82983.htm " target="_blank" class="img f_l"><img src="${baseUrl}/app/resources/newindex/img/zqrb.png" alt="" width="140" height="106"></a>
+                    <h4><a href="http://zqrb.ccstock.cn/html/2015-06/11/content_82983.htm " target="_blank">财猫COO高耀华解读：大盘股IPO数量有限 牛市逻辑未变</a></h4>
+                    <h6><a href="http://zqrb.ccstock.cn" target="_blank">证券日报网</a> 2015.06.11</h6>
+                    <p>在IPO提速情况下，大盘股发行或成常态。中国核电上市首日直奔涨停，并带动相关板块走强，据悉，后续还将陆续有大盘股发行上市。</p>
+                </li>
+                <li>
+                    <a href="http://iof.hexun.com/2015-06-19/176882876.html  " target="_blank" class="img f_l"><img src="${baseUrl}/app/resources/newindex/img/hx.png" alt="" width="140" height="106"></a>
+                    <h4><a href="http://iof.hexun.com/2015-06-19/176882876.html  " target="_blank">融资平台财猫网拒用户买中车 被送锦旗:感谢救我一命</a></h4>
+                    <h6><a href="http://www.hexun.com/" target="_blank">和讯</a> 2015.06.19 13:31</h6>
+                    <p>6月18日下午，互联网投资平台财猫网迎来一位“不速之客”，一位融资用户送来一面锦旗，上边写着“感谢救我一命”几个大字，落款是被拒买中国中车(601766,股吧)股民。</p>
+                </li>
+                <li>
+                    <a href="http://tech.huanqiu.com/news/2015-06/6629624.html" target="_blank" class="img f_l"><img src="${baseUrl}/app/resources/newindex/img/huanqiu.jpg" alt="" width="140" height="106"></a>
+                    <h4><a href="http://tech.huanqiu.com/news/2015-06/6629624.html" target="_blank">融资界黑马财猫网上线一个月融资总额过4亿</a></h4>
+                    <h6><a href="http://tech.huanqiu.com" target="_blank">环球网</a> 2015.06.08 17:18</h6>
+                    <p>A股火热带动股票融资市场，财猫网近日宣布融资额已突破4亿元大关，该平台上线仅仅一个月。虽不能与总融资动辄几十亿的其他老平台相比，但从首月业绩来看，财猫的潜力不可小觑。而记者采访的时候，财猫网的COO高耀华却表示，...</p>
+                </li>
+                <li>
+                    <a href="http://iof.hexun.com/2015-05-26/176192304.html" target="_blank" class="img f_l"><img src="${baseUrl}/app/resources/newindex/img/hx.png" alt="" width="140" height="106"></a>
+                    <h4><a href="http://iof.hexun.com/2015-05-26/176192304.html" target="_blank">股票融资平台资金紧俏 财猫上线3天融资过亿</a></h4>
+                    <h6><a href="http://iof.hexun.com/" target="_blank">和讯</a> 2015.05.26 17:28:36</h6>
+                    <p>2015年A股在结束数年调整之后，开启了一轮波澜壮阔的牛市行情，金融股、一带一路、中字头主导牛市第一轮升势，随后互联网金融、工业4.0、次新股以及创业板的集体暴发进一步将行情引向疯狂...</p>
+                </li>
+                <li>
+                    <a href="http://news.ccidnet.com/art/1032/20150527/5846851_1.html" target="_blank" class="img f_l"><img src="${baseUrl}/app/resources/newindex/img/sd.png" alt="" width="140" height="106"></a>
+                    <h4><a href="http://news.ccidnet.com/art/1032/20150527/5846851_1.html" target="_blank">股票融资平台资金紧俏 财猫上线3天融资过亿</a></h4>
+                    <h6><a href="http://news.ccidnet.com" target="_blank">赛迪网</a> 2015.05.27 11:16</h6>
+                    <p>2015年A股在结束数年调整之后，开启了一轮波澜壮阔的牛市行情，金融股、一带一路、中字头主导牛市第一轮升势，随后互联网金融、工业4.0、次新股以及创业板的集体暴发进一步将行情引向疯狂...</p>
+                </li>
+                <li>
+                    <a href="http://36kr.com/p/532609.html" target="_blank" class="img f_l"><img src="${baseUrl}/app/resources/newindex/img/36.png" alt="" width="140" height="106"></a>
+                    <h4><a href="http://36kr.com/p/532609.html" target="_blank">借股票融资和质押，财猫将扩展海外市场</a></h4>
+                    <h6><a href="http://36kr.com" target="_blank">36氪</a> 2015.05.06 23:13</h6>
+                    <p>随着A股的火爆，各种股票融资杠杆交易的网站多了起来。为了借这股浪潮扩展自己的业务规模并开发比特币应用的新场景，国内最大比特币交易平台之一“火币网”联合做A股融资杠杆交易的“财猫网”推出了用比特币作为抵押物进行A股融资的业务...</p>
+                </li>
+                <li>
+                    <a href="http://www.bjbusiness.com.cn/site1/bjsb/html/2015-05/11/content_296513.htm?div=-1" target="_blank" class="img f_l"><img src="${baseUrl}/app/resources/newindex/img/sb.png" alt="" width="140" height="106"></a>
+                    <h4><a href="http://www.bjbusiness.com.cn/site1/bjsb/html/2015-05/11/content_296513.htm?div=-1" target="_blank">国内投资者将可借财猫网投资海外</a></h4>
+                    <h6><a href="http://www.bjbusiness.com.cn" target="_blank">北京商报</a> 2015.05.11 08:13</h6>
+                    <p>避开汇率兑换，国内的投资者同样可以投资海外资本市场。国内最大比特币交易平台火币网CEO李林向北京商报记者表示，他们将利用收益互换的模式为国内投资者提供海外投资的渠道，国内投资者可以在不兑换外汇的情况下直接投资海外资本市场...</p>
+                </li>
+            </ul>
+        </div>
+        <div class="section partners" style="float: none;">
+            <h3> <span>合作伙伴</span> </h3>
+            <h4>Partners</h4>
+            <p class="part clear_fix">
+                <#list partnerImgs as p>
+                    <a target="_blank" href="${p.url}" style="margin-right: 16px; margin-bottom: 15px;"><img src="${dojoUrl}/app/resources/image/customize/${p.name}?version=${jsVersion}"></a>
+                </#list>
+            </p>
+            <p class="tip"><span class="font_orange"> 风险提示：</span>保护投资者利益是中国证监会工作的重中之重。股市有风险，投资需谨慎！</p>
+        </div>
+    </div>
+</div>
+
+
+</#macro>

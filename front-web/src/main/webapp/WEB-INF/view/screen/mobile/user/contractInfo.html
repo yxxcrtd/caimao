@@ -1,0 +1,112 @@
+<#assign bg="bg-gray"/>
+<#assign controller="contractInfo"/> 
+<#assign title="合约详情"/>
+<#assign header="合约详情"/>
+<#assign footer="3"/>
+<#include 'mobile/layout/layout.html'/>
+
+<#macro content>
+	<article class="content" style="padding-bottom:108px;">
+<!--操盘资金-->
+<aside class="bg-white trader-Top">
+<div class="trader-Top-1">
+<h6 class="am-ft-sm am-ft-tabText">总操盘资产</h6>
+<a id="repayUrlBtn" style="display:none" class="am-button btn2 am-button-lineRed">还款</a>
+<p class="am-ft-red"><big id="allAmount"></big><span class="am-ft-xl">元</span></p>
+</div>
+
+<ul class="trader-Top-2 listLateral">
+<li class="loan">
+<p><b id="loanAmount"></b> <span class="am-ft-sm">元</span></p>
+<p><span class="am-ft-sm am-ft-tabText">融资金额</span></p>
+<i class="arror"></i>
+</li>
+<li class="risk">
+<p><b id="cashAmount"></b> <span class="am-ft-sm">元</span></p>
+<p><span class="am-ft-sm am-ft-tabText">保证金</span></p>
+<i class="arror"></i>
+</li>
+</ul>
+</aside>
+<!--操盘资金-->
+
+<!--基本信息-->
+<aside class="am-pt-15">
+<h3 class="title-table">基本信息</h3>
+
+<table width="100%" border="0" cellspacing="0" class="table-about">
+  <tr>
+    <th>亏损警告线</th>
+    <td id="enableRatio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    <th>亏损平仓线</th>
+    <td id="exposureRatio">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  </tr>
+  <tr>
+    <th>发起时间</th>
+    <td id="beginInterestDate">&nbsp;</td>
+    <th>月利率</th>
+    <td id="interestRate">&nbsp;</td>
+  </tr>
+  <tr>
+    <th>开始日期</th>
+    <td id="contractBeginDate">&nbsp;</td>
+    <th>到期日</th>
+    <td id="contractEndDate">&nbsp;</td>
+  </tr>
+  <tr>
+    <th>投资方向</th>
+    <td>沪深A股</td>
+    <th>仓位要求</th>
+    <td>不限制</td>
+  </tr>
+  <tr>
+    <th>股票市值</th>
+    <td id="totalMarketValue"></td>
+    <th>维持率</th>
+    <td>6%</td>
+  </tr>
+</table>
+
+</aside>
+<!--基本信息-->
+
+<!--利息支付记录-->
+<aside class="am-pt-15">
+<h3 class="title-table">利息支付记录</h3>
+
+<table width="100%" border="0" cellspacing="0" class="table-list" id="interestList">
+  <tr>
+    <th class="tb-left">支付时间</th>
+    <th class="tb-center">支付金额</th>
+    <th class="tb-right">状态</th>
+  </tr>
+
+</table>
+
+
+</aside>
+<!-- 利息支付记录 -->
+
+
+</article>
+</#macro>
+
+<#macro footerContent>
+<!--按钮-->
+<div class="btn-page btn-page-center bg-white con-spacing15">
+<div class="am-grid">
+<div class="am-grid-item am-grid-item-50">
+<a id="extensionBtn" class="am-button am-button-red btn-disabled">
+        <span>展期</span>
+        </a>
+</div>
+<div class="am-grid-item am-grid-item-50">
+<a id="addBtn" class="am-button am-button-red btn-disabled">
+        <span>追加</span>
+        </a>
+</div>
+</div>
+    
+</div>
+<!--按钮-->
+</#macro>

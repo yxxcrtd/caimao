@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="YBKAccount">
+    <resultMap id="BaseResultMap" type="com.caimao.bana.api.entity.ybk.YBKAccountEntity">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="user_id" property="userId" jdbcType="BIGINT"/>
+        <result column="user_name" property="userName" jdbcType="VARCHAR"/>
+        <result column="phoneNo" property="phoneNo" jdbcType="VARCHAR"/>
+        <result column="card_type" property="cardType" jdbcType="INTEGER"/>
+        <result column="card_number" property="cardNumber" jdbcType="VARCHAR"/>
+        <result column="card_path" property="cardPath" jdbcType="VARCHAR"/>
+        <result column="card_opposite_path" property="cardOppositePath" jdbcType="VARCHAR"/>
+        <result column="bank_code" property="bankCode" jdbcType="VARCHAR"/>
+        <result column="bank_num" property="bankNum" jdbcType="VARCHAR"/>
+        <result column="province" property="province" jdbcType="VARCHAR"/>
+        <result column="city" property="city" jdbcType="VARCHAR"/>
+        <result column="street" property="street" jdbcType="VARCHAR"/>
+        <result column="contact_man" property="contactMan" jdbcType="VARCHAR"/>
+        <result column="contacter_phoneNo" property="contacterPhoneNo" jdbcType="VARCHAR"/>
+        <result column="bank_path" property="bankPath" jdbcType="VARCHAR"/>
+        <result column="sex" property="sex" jdbcType="INTEGER"/>
+        <result column="exchangeId_apply" property="exchangeIdApply" jdbcType="INTEGER"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="reason" property="reason" jdbcType="VARCHAR"/>
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="exchange_account" property="exchangeAccount" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,user_id,user_name,phoneNo,card_type,card_path,card_opposite_path,card_number,bank_code,bank_num,bank_path,
+        province,city,street,contact_man,contacter_phoneNo,sex,exchangeId_apply,status,reason,create_date,exchange_account
+    </sql>
+
+    <select id="queryListWithPage" resultMap="BaseResultMap" parameterType="com.caimao.bana.api.entity.req.ybk.FYBKQueryAccountListReq">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM ybk_account
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="exchangeIdApply !=null">
+                AND exchangeId_apply = #{exchangeIdApply}
+            </if>
+            <if test="status !=null">
+                AND status = #{status}
+            </if>
+        </trim>
+        ORDER BY id DESC
+    </select>
+
+    <select id="queryById" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM ybk_account
+        WHERE id = #{id}
+    </select>
+
+    <select id="queryByUserId" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List" /> FROM ybk_account WHERE user_id = #{userId}
+    </select>
+
+    <delete id="delete">
+        DELETE FROM ybk_account
+        WHERE id = #{id}
+    </delete>
+
+    <insert id="insert" parameterType="com.caimao.bana.api.entity.ybk.YBKAccountEntity">
+        INSERT INTO ybk_account
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null" >user_id,</if>
+            <if test="userName != null" >user_name,</if>
+            <if test="phoneNo != null" >phoneNo,</if>
+            <if test="cardType != null" >card_type,</if>
+            <if test="cardPath != null" >card_path,</if>
+            <if test="cardOppositePath != null" >card_opposite_path,</if>
+            <if test="cardNumber != null" >card_number,</if>
+            <if test="bankCode != null" >bank_code,</if>
+            <if test="bankNum != null" >bank_num,</if>
+            <if test="bankPath != null" >bank_path,</if>
+            <if test="province != null" >province,</if>
+            <if test="city != null" >city,</if>
+            <if test="street != null" >street,</if>
+            <if test="contactMan != null" >contact_man,</if>
+            <if test="contacterPhoneNo != null" >contacter_phoneNo,</if>
+            <if test="sex != null" >sex = #{sex},</if>
+            <if test="exchangeIdApply != null" >exchangeId_apply,</if>
+            <if test="status != null" >status,</if>
+            <if test="reason != null" >reason,</if>
+            <if test="createDate != null" >create_date,</if>
+            <if test="exchangeAccount != null" >exchange_account,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="userId != null" >#{userId},</if>
+            <if test="userName != null" >#{userName},</if>
+            <if test="phoneNo != null" >#{phoneNo},</if>
+            <if test="cardType != null" >#{cardType},</if>
+            <if test="cardPath != null" >#{cardPath},</if>
+            <if test="cardOppositePath != null" >#{cardOppositePath},</if>
+            <if test="cardNumber != null" >#{cardNumber},</if>
+            <if test="bankCode != null" >#{bankCode},</if>
+            <if test="bankNum != null" >#{bankNum},</if>
+            <if test="bankPath != null" >#{bankPath},</if>
+            <if test="province != null" >#{province},</if>
+            <if test="city != null" >#{city},</if>
+            <if test="street != null" >#{street},</if>
+            <if test="contactMan != null" >#{contactMan},</if>
+            <if test="contacterPhoneNo != null" >#{contacterPhoneNo},</if>
+            <if test="sex != null" >#{sex},</if>
+            <if test="exchangeIdApply != null" >#{exchangeIdApply},</if>
+            <if test="status != null" >#{status},</if>
+            <if test="reason != null" >#{reason},</if>
+            <if test="createDate != null" >#{createDate},</if>
+            <if test="exchangeAccount != null" >#{exchangeAccount},</if>
+        </trim>
+    </insert>
+
+    <update id="update">
+        UPDATE ybk_account
+        <set>
+            <if test="userId != null" >user_id = #{userId},</if>
+            <if test="userName != null" >user_name = #{userName},</if>
+            <if test="phoneNo != null" >phoneNo = #{phoneNo},</if>
+            <if test="cardType != null" >card_type = #{cardType},</if>
+            <if test="cardPath != null" >card_path = #{cardPath},</if>
+            <if test="cardOppositePath != null" >card_opposite_path = #{cardOppositePath},</if>
+            <if test="cardNumber != null" >card_number = #{cardNumber},</if>
+            <if test="bankCode != null" >bank_code = #{bankCode},</if>
+            <if test="bankNum != null" >bank_num = #{bankNum},</if>
+            <if test="bankPath != null" >bank_path = #{bankPath},</if>
+            <if test="province != null" >province = #{province},</if>
+            <if test="city != null" >city = #{city},</if>
+            <if test="street != null" >street = #{street},</if>
+            <if test="contactMan != null" >contact_man = #{contactMan},</if>
+            <if test="contacterPhoneNo != null" >contacter_phoneNo = #{contacterPhoneNo},</if>
+            <if test="sex != null" >sex = #{sex},</if>
+            <if test="exchangeIdApply != null" >exchangeId_apply = #{exchangeIdApply},</if>
+            <if test="status != null" >status = #{status},</if>
+            <if test="reason != null" >reason = #{reason},</if>
+            <if test="createDate != null" >create_date = #{createDate},</if>
+            <if test="exchangeAccount != null" >exchange_account = #{exchangeAccount},</if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+
+    <select id="queryApiAccountApplyList" resultType="com.caimao.bana.api.entity.res.ybk.FYbkAccountSimpleRes" parameterType="com.caimao.bana.api.entity.req.ybk.FYbkApiQueryAccountListReq">
+        SELECT a.id AS applyId, a.`user_name` AS userName, a.`phoneNo`,  b.bank_name AS bankName, a.`bank_code` AS bankCode, a.`bank_num` AS bankNum,
+        a.`exchangeId_apply` AS exchangeIdApply, e.`name` AS exchangeName, e.`short_name` AS exchangeShortName, a.`status`, a.`create_date` AS createDate ,
+        a.exchange_account AS exchangeAccount, a.card_type AS cardType, a.card_path AS cardPath, a.card_opposite_path as cardOppositePath,
+        a.card_number as cardNumber, a.bank_path AS bankPath, a.reason
+        FROM ybk_account AS a
+        LEFT JOIN ybk_exchange AS e ON a.exchangeId_apply = e.id
+        LEFT JOIN tpz_bank_type AS b ON a.`bank_code` = b.bank_no AND channel_id = "3"
+        WHERE a.`user_id` = #{userId}
+        <if test="exchangeId != null">
+            AND a.`exchangeId_apply` = #{exchangeId}
+        </if>
+        <if test="status != null">
+            AND a.`status` = #{status};
+        </if>
+        ORDER BY a.`create_date` DESC
+    </select>
+
+    <select id="queryNewAccountApplyList" resultType="com.caimao.bana.api.entity.res.ybk.FYbkNewAccountListRes" parameterType="com.caimao.bana.api.entity.req.ybk.FYbkNewAccountListReq">
+        SELECT a.`user_name` AS userName, a.`phoneNo`, e.`name` AS exchangeName, e.`short_name` AS exchangeShortName, a.`status`, a.`create_date` AS createDate
+        FROM ybk_account AS a
+        LEFT JOIN ybk_exchange AS e ON a.exchangeId_apply = e.id
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="exchangeId != null">
+                AND a.`exchangeId_apply` = #{exchangeId}
+            </if>
+                AND a.`status` != 4
+        </trim>
+        ORDER BY create_date DESC
+    </select>
+</mapper>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+	 <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1, user-scalable=false">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-touch-fullscreen" content="yes">
+<meta name="format-detection" content="telephone=no" />
+<link rel="stylesheet" type="text/css" href="css/reset.css">
+<link rel="stylesheet" type="text/css" href="css/open.css">
+</head>
+<body>
+
+		<div class='operMain'>
+			<div class="nameList">
+
+				<ul>
+				<li>
+				<input onchange="change()" id="pw1" type="text" class="psword" placeholder="请输入您的真实姓名">
+				<span><img class="delet-2" src="img/delet.png" alt=""></span>
+				</li>
+				<li>
+				<input onchange="change()" id="pw2" type="text" class="psword" placeholder="请输入您的身份证号">
+				<span><img class="delet-2" src="img/delet.png" alt=""></span>
+				</li>
+			</ul>
+			</div>
+		</div>
+		<a href="#" class='next'>下一步</a>
+</body>
+<script src='js/zepto.js'></script>
+<script src='js/fuc.js'></script>
+<script>
+    function change(){
+        if(document.getElementById('pw1').value!==""&& document.getElementById('pw2').value!==""){
+            $('.next').addClass('next-2').removeClass('next');
+        }else{
+        	 $('.next-2').addClass('next').removeClass('next-2');
+        };
+        $(".psword").each(function(){
+            if($(this).val()!==''){
+                $(this).siblings("span").css('display','block')
+            }else{
+                $(this).siblings("span").css('display','none')
+            }
+        });
+
+    }
+</script>
+</html>

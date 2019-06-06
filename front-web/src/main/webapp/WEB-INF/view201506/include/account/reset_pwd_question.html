@@ -1,0 +1,191 @@
+<form id="reset_pwd_question1" action="/user/findpwdquestion/check">
+    <div class="group m_t_10">
+        <div class="col_1">绑定的手机号</div>
+        <div class="col_2 m_t_8"><b>${umobile}</b></div>
+    </div>
+    <div class="group m_t_10">
+        <div class="col_1">验证码</div>
+        <div class="col_2">
+            <div class="">
+                <input type="text" autocomplete="off" name="check_code" id="reset_pwd_question_check_code" class="input_text f_l" style="width: 160px" validateType="empty:请输入校验码 authcode" placeholder="请输入校验码" maxlength="6">
+                <button type="button" id="reset_pwd_question_get_code" class="btn size_m  btn_blue f_l" style="width:106px; height: 40px">发送验证码</button>
+            </div>
+        </div>
+    </div>
+    <div class="group m_t_10">
+        <div class="col_1">安全密码</div>
+        <div class="col_2">
+            <input class="input_text" name="trade_pwd" id="reset_pwd_question_trade_pwd" type="password" validateType="empty:请输入安全密码 len:6:16 password" placeholder="请输入安全密码" maxlength="20"/>
+        </div>
+    </div>
+    <div class="group m_t_10">
+        <div class="col_1"></div>
+        <div class="col_2">
+            <button id="reset_pwd_question_submit" type="button"  class="btn size_m btn_blue">下一步</button>
+            <div id="resetPwdQuestionError1" class="error"></div>
+        </div>
+    </div>
+</form>
+
+<form id="reset_pwd_question2" action="/user/pwdquestion/set" class="p_l_40">
+    <div class="group m_t_10">
+        <div class="col_1">问题一</div>
+        <div class="col_2">
+            <select id="ques1" class="input_select question" name="question1"></select>
+        </div>
+    </div>
+    <div class="group m_t_10">
+        <div class="col_1">答案一</div>
+        <div class="col_2">
+            <div class="col_2"><input id="ans1" class="input_text" name="answer1" type="text" autocomplete="off" validateType="empty:请输入答案" maxlength="20"/></div>
+        </div>
+    </div>
+    <div class="group m_t_10">
+        <div class="col_1">问题二</div>
+        <div class="col_2">
+            <select id="ques2" class="input_select question" name="question2" ></select>
+        </div>
+    </div>
+    <div class="group m_t_10">
+        <div class="col_1">答案二</div>
+        <div class="col_2">
+            <div class="col_2"><input id="ans2" class="input_text" name="answer2" type="text" autocomplete="off" validateType="empty:请输入答案" maxlength="20"/></div>
+        </div>
+    </div>
+    <div class="group m_t_10">
+        <div class="col_1">问题三</div>
+        <div class="col_2">
+            <select id="ques3" class="input_select question" name="question3"></select>
+        </div>
+    </div>
+    <div class="group m_t_10">
+        <div class="col_1">答案三</div>
+        <div class="col_2">
+            <div class="col_2"><input id="ans3" class="input_text" name="answer3" type="text" autocomplete="off" validateType="empty:请输入答案" maxlength="20"/></div>
+        </div>
+    </div>
+    <div class="group m_t_10">
+        <div class="col_1"></div>
+        <div class="col_2"><button id="resetPwdQuestionSubmitObj2" type="button"  class="btn size_m btn_blue">保存</button></div>
+        <div id="resetPwdQuestionError2" class="error"></div>
+    </div>
+</form>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        //加载密保问题选项，互斥
+        $.get("/pwdquestion",function(response){
+            if(response.success){
+                var elements = $(".question");
+                selectArr = response.data;
+                elements.each(function(i){
+                    var html = '<option value="" selected="true">请选择</option>';
+                    for(var q in selectArr){
+                        html += '<option value="'+ selectArr[q].questionId +'">' + selectArr[q].questionTitle + '</option>';
+                    }
+                    $(this).html(html);
+                });
+                elements.change(function(){
+                    var cIndex = $(".question").index($(this)); //当前select选框索引值
+                    var selected = [];
+                    $(".question").each(function(){
+                        selected.push($(this).val());
+                    });
+                    //遍历所有select选框，重置所有问题
+                    $(".question").each(function(i){
+                        //跳过当前的select选框，因为该内容无需校正
+                        if (cIndex == i) return;
+                        var html="";
+                        var tValue = $(this).val();
+                        if(tValue==""){
+                            html = '<option value="" selected="true">请选择</option>'
+                        }else{
+                            html = '<option value="' + tValue + '" selected="true">'+ $(this).find("option:selected").text() + '</option>';
+                        }
+                        for(var q in selectArr){
+                            if($.inArray(selectArr[q].questionId, selected)==-1){
+                                html += '<option value="'+ selectArr[q].questionId +'" >' + selectArr[q].questionTitle + '</option>';
+                            }
+                        }
+                        $(this).html(html);
+                    });
+                });
+            }
+        });
+    });
+
+    var resetPwdQuestionFormObj1 = $('#reset_pwd_question1'),
+            resetPwdQuestionFormObj2 = $('#reset_pwd_question2'),
+            resetPwdQuestionCheckCode = $('#reset_pwd_question_check_code'),
+            resetPwdQuestionTradePwd = $('#reset_pwd_question_trade_pwd'),
+            resetPwdQuestionSubmit1 = $('#reset_pwd_question_submit'),
+            resetPwdQuestionGetCode = $('#reset_pwd_question_get_code'),
+            ques1 = $('#ques1'),
+            ans1 = $('#ans1'),
+            ques2 = $('#ques2'),
+            ans2 = $('#ans2'),
+            ques3 = $('#ques3'),
+            ans3 = $('#ans3'),
+            resetPwdQuestionSubmitObj2 = $('#resetPwdQuestionSubmitObj2'),
+            periodSeconds = 0;
+
+    $(resetPwdQuestionFormObj1).show();
+    $(resetPwdQuestionFormObj2).hide();
+
+    // 表单验证
+    formValidate.init(resetPwdQuestionFormObj1);
+    formValidate.init(resetPwdQuestionFormObj2);
+
+    // 获取验证码的方法
+    $(resetPwdQuestionGetCode).click(function() {
+        if (periodSeconds > 0) return false;
+        // 发送验证码
+        $.post('/sms/code', {biz_type: 7}, function (response) {
+            if (response.success) {
+                periodSeconds = 60;
+                $(resetPwdQuestionGetCode).addClass("btn_gray").removeClass("btn_blue");
+                var disableInterval = window.setInterval(function () {
+                    if (periodSeconds > 0) {
+                        $(resetPwdQuestionGetCode).html((--periodSeconds) + "秒后重试");
+                    } else {
+                        window.clearInterval(disableInterval);
+                        $(resetPwdQuestionGetCode).html("发送验证码");
+                        $(resetPwdQuestionGetCode).addClass("btn_blue").removeClass("btn_gray");
+                    }
+                }, 1000);
+            } else {
+                formValidate.showFormTips(resetPwdQuestionGetCode, response.msg);
+            }
+        });
+    });
+
+    // 第一个表单提交
+    $(resetPwdQuestionSubmit1).click(function() {
+        if (formValidate.validateForm(resetPwdQuestionFormObj1) == false) {
+            return false;
+        }
+        $.post("/user/findpwdquestion/check",{code : $(resetPwdQuestionCheckCode).val(), tradePwd : RSAUtils.encryptedString($(resetPwdQuestionTradePwd).val())},function(response){
+            if (response.success) {
+                $(resetPwdQuestionFormObj1).hide();
+                $(resetPwdQuestionFormObj2).show();
+            } else {
+                formValidate.showFormTips(resetPwdQuestionSubmit1, response.msg);
+            }
+        });
+    });
+
+    // 提交
+    $(resetPwdQuestionSubmitObj2).click(function() {
+        if (formValidate.validateForm(resetPwdQuestionFormObj2) == false) {
+            return false;
+        }
+        $.post("/user/pwdquestion/reset",{code : $(resetPwdQuestionCheckCode).val(), tradePwd : RSAUtils.encryptedString($(resetPwdQuestionTradePwd).val()),question1:$(ques1).val(),answer1:$(ans1).val(),question2:$(ques2).val(),answer2:$(ans2).val(),question3:$(ques3).val(),answer3:$(ans3).val()},function(response){
+            if (response.success) {
+                // TODO 关闭所有显示框，弹框提示成功
+                Alert.show("重置安全问题成功", "确认", function() {window.location.reload()});
+            } else {
+                formValidate.showFormTips(resetPwdQuestionSubmitObj2, response.msg);
+            }
+        });
+    });
+</script>

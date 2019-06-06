@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="GjsArticleCategory">
+
+    <!-- 表所有字段和属性 -->
+    <resultMap id="BaseResultMap" type="com.caimao.gjs.api.entity.GjsArticleCategoryEntity" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <!-- 表所有字段 -->
+    <sql id="Base_Column_List" >
+        id, 
+        name
+    </sql>
+
+    <!-- 根据ID查找 -->
+    <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select <include refid="Base_Column_List" /> from gjs_article_category where id = #{id, jdbcType=BIGINT}
+    </select>
+
+    <!-- 根据ID删除 -->
+    <delete id="deleteById" parameterType="java.lang.Long" >
+        delete from gjs_article_category where id = #{id, jdbcType=BIGINT}
+    </delete>
+
+    <!-- 分页查询 -->
+    <select id="queryGjsArticleCategoryAllList" resultMap="BaseResultMap">
+        select id, name from gjs_article_category
+    </select>
+
+    <!-- 插入 -->
+    <insert id="insert" parameterType="com.caimao.gjs.api.entity.GjsArticleCategoryEntity">
+        insert into gjs_article_category
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id, jdbcType=BIGINT},
+            </if>
+            <if test="name != null">
+                #{name, jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <!-- 修改 -->
+    <update id="update" parameterType="com.caimao.gjs.api.entity.GjsArticleCategoryEntity">
+        update gjs_article_category
+        <set>
+            <if test="name != null">
+                name = #{name, jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id, jdbcType=BIGINT}
+    </update>
+
+</mapper>

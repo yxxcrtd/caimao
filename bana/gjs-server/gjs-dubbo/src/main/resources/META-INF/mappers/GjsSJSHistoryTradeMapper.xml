@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="GjsSJSHistoryTrade">
+
+    <resultMap id="BaseResultMap" type="com.caimao.gjs.api.entity.history.GjsSJSHistoryTradeEntity">
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="trader_id" property="trader_id" jdbcType="VARCHAR" />
+        <result column="exch_date" property="exch_date" jdbcType="VARCHAR" />
+        <result column="exch_time" property="exch_time" jdbcType="VARCHAR" />
+        <result column="match_no" property="match_no" jdbcType="VARCHAR" />
+        <result column="order_no" property="order_no" jdbcType="VARCHAR" />
+        <result column="market_id" property="market_id" jdbcType="VARCHAR" />
+        <result column="prod_code" property="prod_code" jdbcType="VARCHAR" />
+        <result column="exch_type" property="exch_type" jdbcType="VARCHAR" />
+        <result column="match_price" property="match_price" jdbcType="DECIMAL" />
+        <result column="match_amount" property="match_amount" jdbcType="INTEGER" />
+        <result column="bs" property="bs" jdbcType="VARCHAR" />
+        <result column="offset_flag" property="offset_flag" jdbcType="VARCHAR" />
+        <result column="deli_flag" property="deli_flag" jdbcType="VARCHAR" />
+        <result column="exch_bal" property="exch_bal" jdbcType="DECIMAL" />
+        <result column="exch_fare" property="exch_fare" jdbcType="DECIMAL" />
+        <result column="margin" property="margin" jdbcType="DECIMAL" />
+        <result column="term_type" property="term_type" jdbcType="VARCHAR" />
+        <result column="local_order_no" property="local_order_no" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <!--所有列-->
+    <sql id="Base_Column_List">
+        id, trader_id, exch_date, exch_time, match_no, order_no, market_id, prod_code, exch_type, match_price, match_amount, bs, offset_flag, deli_flag, exch_bal, exch_fare, margin, term_type, local_order_no
+    </sql>
+
+    <!--根据开始时间和结束时间查询-->
+    <select id="querySJSHistoryTradeWithPage" resultMap="BaseResultMap" parameterType="com.caimao.gjs.api.entity.req.FQueryHistoryTradeReq">
+        SELECT <include refid="Base_Column_List" />
+        FROM gjs_sjs_history_trade
+        WHERE trader_id = #{traderId, jdbcType=VARCHAR}
+        <if test="startDate != null and  startDate != ''">
+            AND exch_date &gt;= #{startDate}
+        </if>
+        <if test="endDate != null and  endDate != ''">
+            AND exch_date &lt;= #{endDate}
+        </if>
+        ORDER BY exch_date desc,exch_time DESC
+    </select>
+
+    <!--添加-->
+    <insert id="insert" parameterType="com.caimao.gjs.api.entity.history.GjsSJSHistoryTradeEntity">
+        insert into gjs_sjs_history_trade
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="trader_id != null">trader_id,</if>
+            <if test="exch_date != null">exch_date,</if>
+            <if test="exch_time != null">exch_time,</if>
+            <if test="match_no != null">match_no,</if>
+            <if test="order_no != null">order_no,</if>
+            <if test="market_id != null">market_id,</if>
+            <if test="prod_code != null">prod_code,</if>
+            <if test="exch_type != null">exch_type,</if>
+            <if test="match_price != null">match_price,</if>
+            <if test="match_amount != null">match_amount,</if>
+            <if test="bs != null">bs,</if>
+            <if test="offset_flag != null">offset_flag,</if>
+            <if test="deli_flag != null">deli_flag,</if>
+            <if test="exch_bal != null">exch_bal,</if>
+            <if test="exch_fare != null">exch_fare,</if>
+            <if test="margin != null">margin,</if>
+            <if test="term_type != null">term_type,</if>
+            <if test="local_order_no != null">local_order_no,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="trader_id != null">#{trader_id, jdbcType=VARCHAR},</if>
+            <if test="exch_date != null">#{exch_date, jdbcType=VARCHAR},</if>
+            <if test="exch_time != null">#{exch_time, jdbcType=VARCHAR},</if>
+            <if test="match_no != null">#{match_no, jdbcType=VARCHAR},</if>
+            <if test="order_no != null">#{order_no, jdbcType=VARCHAR},</if>
+            <if test="market_id != null">#{market_id, jdbcType=VARCHAR},</if>
+            <if test="prod_code != null">#{prod_code, jdbcType=VARCHAR},</if>
+            <if test="exch_type != null">#{exch_type, jdbcType=VARCHAR},</if>
+            <if test="match_price != null">#{match_price, jdbcType=VARCHAR},</if>
+            <if test="match_amount != null">#{match_amount, jdbcType=VARCHAR},</if>
+            <if test="bs != null">#{bs, jdbcType=VARCHAR},</if>
+            <if test="offset_flag != null">#{offset_flag, jdbcType=VARCHAR},</if>
+            <if test="deli_flag != null">#{deli_flag, jdbcType=VARCHAR},</if>
+            <if test="exch_bal != null">#{exch_bal, jdbcType=VARCHAR},</if>
+            <if test="exch_fare != null">#{exch_fare, jdbcType=VARCHAR},</if>
+            <if test="margin != null">#{margin, jdbcType=VARCHAR},</if>
+            <if test="term_type != null">#{term_type, jdbcType=VARCHAR},</if>
+            <if test="local_order_no != null">#{local_order_no, jdbcType=VARCHAR},</if>
+        </trim>
+    </insert>
+
+    <!-- 后台管理用的查询 -->
+    <!-- 根据TraderId查询SJS历史交易列表 -->
+    <select id="querySJSHistoryTradeListByTraderIdForManage" resultMap="BaseResultMap" parameterType="java.lang.String">
+        SELECT <include refid="Base_Column_List" /> FROM gjs_sjs_history_trade WHERE trader_id = #{trader_id, jdbcType=VARCHAR}
+    </select>
+
+    <!-- 上金所09:00-11:30交易额 -->
+    <select id="getHistoryTradeTotalMoney1" resultType="java.lang.String">
+        SELECT SUM(ABS(exch_bal)) FROM gjs_sjs_history_trade WHERE exch_time BETWEEN '090000' AND '113000'
+    </select>
+
+    <!-- 上金所09:00-11:30交易次数 -->
+    <select id="getHistoryTradeTotalCount1" resultType="java.lang.Long">
+        SELECT COUNT(1) FROM gjs_sjs_history_trade WHERE exch_time BETWEEN '090000' AND '113000'
+    </select>
+
+    <!-- 上金所13:30-15:30交易额 -->
+    <select id="getHistoryTradeTotalMoney2" resultType="java.lang.String">
+        SELECT SUM(ABS(exch_bal)) FROM gjs_sjs_history_trade WHERE exch_time BETWEEN '133000' AND '153000'
+    </select>
+
+    <!-- 上金所13:30-15:30次数 -->
+    <select id="getHistoryTradeTotalCount2" resultType="java.lang.Long">
+        SELECT COUNT(1) FROM gjs_sjs_history_trade WHERE exch_time BETWEEN '133000' AND '153000'
+    </select>
+
+    <!-- 上金所20:00-02:30交易额 -->
+    <select id="getHistoryTradeTotalMoney3" resultType="java.lang.String">
+        SELECT SUM(ABS(exch_bal)) FROM gjs_sjs_history_trade WHERE exch_time &gt;= '200000' AND exch_time &lt;= '240000' OR exch_time &gt;= '000000' AND exch_time &lt;= '023000'
+    </select>
+
+    <!-- 上金所20:00-02:30交易次数 -->
+    <select id="getHistoryTradeTotalCount3" resultType="java.lang.Long">
+        SELECT COUNT(1) FROM gjs_sjs_history_trade WHERE exch_time &gt;= '200000' AND exch_time &lt;= '240000' OR exch_time &gt;= '000000' AND exch_time &lt;= '023000'
+    </select>
+
+</mapper>

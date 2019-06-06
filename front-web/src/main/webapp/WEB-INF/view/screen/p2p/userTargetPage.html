@@ -1,0 +1,102 @@
+<#assign controller="P2PUserTargetPage"/>
+<#include 'layout/layout.html'/>
+<link rel="stylesheet" type="text/css"
+      href="${dojoUrl}/app/resources/p2p/css/p2p.css" />
+<#macro content>
+    <div class="content">
+        <div class="grid1000 main clearfix">
+            <div class="conside" id="sidemenuctn" style="position: absolute;width: 145px;">
+            </div>
+            <!--框架-->
+            <script type="text/javascript">
+                function numberFormatS(number){
+                    if(number == null || number == '' || isNaN(number)) return 0;
+                    var o = number.toString().replace(/\b(0+)/g,'');
+                    return o.replace(/^(\d+)((\.\d+)?)$/,function(s,s1,s2){return s1.replace(/\d{1,3}(?=(\d{3})+$)/g,'$&,') + s2;});
+                }
+                function targetStatusText(targetStatus){
+                    var statusList = ["认购中", "还款中", "已还款", "流标", "撤销", "", "满标"];
+                    return statusList[targetStatus];
+                }
+            </script>
+            <style type="text/css">
+                #targetBoxX{border: 1px solid #CCC;}
+                #targetBoxX *{font-size: 14px;}
+                .targetCol{background: #f7f7f7;}
+                .targetCol td{padding: 10px 7px;;font-size: 12px !important;}
+            </style>
+            <div class="content-wrap" style="width: 820px;">
+                <div class="clearfix" style="margin: 10px 0;">
+                    <span class="cm-left filter-loan-th">状态：</span>
+                    <ul id="filterlist" class="cm-left listLateral list-filter">
+                        <li class="list-filter-item" data-type="0">
+                            <a href="javascript:void(0)" class="active">认购中</a>
+                        </li>
+                        <li class="list-filter-item" data-type="1">
+                            <a href="javascript:void(0)">还款中</a>
+                        </li>
+                        <li class="list-filter-item" data-type="2">
+                            <a href="javascript:void(0)">已还款</a>
+                        </li>
+                        <li class="list-filter-item" data-type="3">
+                            <a href="javascript:void(0)">流标</a>
+                        </li>
+                        <li class="list-filter-item" data-type="4">
+                            <a href="javascript:void(0)">撤销</a>
+                        </li>
+                        <li class="list-filter-item" data-type="6">
+                            <a href="javascript:void(0)">满标</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="tab" style="border: none;">
+                    <table style="width: 100%;">
+                        <tbody id="targetBoxX">
+                            <script type="text/x-tmpl">
+                                <% for(var i = 0,l = data.length; i < l; i++){%>
+                                <tr style="height: 40px;border-top: 1px solid #CCC;">
+                                <td style="font-size:14px;font-weight: bold;padding-left: 15px;height: 30px;" colspan="2"><%=data[i].targetName%></td>
+                                <td>使用期限：<%=data[i].liftTime%></td>
+                                <td colspan="2">年化利率：<%=(data[i].yearRate*10000/100)%>%</td>
+                                <td colspan="2">发布时间：<%=new Date(parseInt(data[i].created)).toLocaleDateString()%></td>
+                                <td><a href="${baseUrl}/p2p/targetDetail.htm?targetId=<%=data[i].targetId%>" target="_blank">查看详情</a></td>
+                                <td style="border-right: 1px solid #EAEAEA;"><div style="<%=(parseInt(data[i].investUserNum) == 0 && parseInt(data[i].targetStatus) == 0 && parseInt(data[i].isExt) == 0)?'display:block':'display:none'%>"><a class="cancelTargetBtn" targetId="<%=data[i].targetId%>">取消申请</a></div></td>
+                                </tr>
+                                <tr class="targetCol">
+                                    <td style="padding-left: 15px;">总金额</td>
+                                    <td>已投金额</td>
+                                    <td>投资人数</td>
+                                    <td>保证金</td>
+                                    <td>融资利息</td>
+                                    <td>标的利息</td>
+                                    <td>管理费用</td>
+                                    <td>借贷状态</td>
+                                    <td style="border-right: 1px solid #EAEAEA;">满标时间</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-left: 15px;height: 30px;">¥<%=numberFormatS(data[i].targetAmount / 100)%></td>
+                                    <td><%=numberFormatS(data[i].actualValue + data[i].caimaoValue / 100)%></td>
+                                    <td><%=data[i].investUserNum%></td>
+                                    <td>¥<%=numberFormatS(data[i].payMargin / 100)%></td>
+                                    <td>¥<%=numberFormatS(data[i].payPzInterest / 100)%></td>
+                                    <td>¥<%=numberFormatS(data[i].payTargetInterest / 100)%></td>
+                                    <td>¥<%=numberFormatS(data[i].payManageFee / 100)%></td>
+                                    <td><%=targetStatusText(data[i].targetStatus)%></td>
+                                    <td style="border-right: 1px solid #EAEAEA;"><%=data[i].targetFullDatetime?new Date(data[i].targetFullDatetime).toLocaleDateString():''%></td>
+                                </tr>
+                                <%}%>
+                            </script>
+                        </tbody>
+                        <tfoot>
+                        <tr><td colspan="100%" style="height: 10px;"></td></tr>
+                        </tfoot>
+                    </table>
+
+                </div>
+                <div class="pagination-holder clearfix">
+                    <div id="light-pagination" class="pagination"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</#macro>

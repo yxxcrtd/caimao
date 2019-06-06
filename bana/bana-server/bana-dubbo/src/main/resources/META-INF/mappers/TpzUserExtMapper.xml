@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="TpzUserExt">
+    <resultMap type="com.caimao.bana.api.entity.TpzUserExtEntity" id="BaseResultMap">
+        <id jdbcType="BIGINT" property="userId" column="user_id"/>
+        <result jdbcType="CHAR" property="gender" column="gender"/>
+        <result jdbcType="VARCHAR" property="birthday" column="birthday"/>
+        <result jdbcType="VARCHAR" property="userIntro" column="user_intro"/>
+        <result jdbcType="VARCHAR" property="userComefrom" column="user_comefrom"/>
+        <result jdbcType="VARCHAR" property="userQq" column="user_qq"/>
+        <result jdbcType="VARCHAR" property="userWeixin" column="user_weixin"/>
+        <result jdbcType="VARCHAR" property="userPhone" column="user_phone"/>
+        <result jdbcType="VARCHAR" property="userPhoto" column="user_photo"/>
+        <result jdbcType="VARCHAR" property="userSignature" column="user_signature"/>
+        <result jdbcType="VARCHAR" property="userOccupation" column="user_occupation"/>
+        <result jdbcType="VARCHAR" property="userEducation" column="user_education"/>
+        <result jdbcType="VARCHAR" property="invrEmpiric" column="invr_empiric"/>
+        <result jdbcType="INTEGER" property="prohiWithdraw" column="prohi_withdraw"/>
+        <result jdbcType="VARCHAR" property="idcardPositivePath" column="idcard_positive_path"/>
+        <result jdbcType="VARCHAR" property="idcardOppositePath" column="idcard_opposite_path"/>
+    </resultMap>
+    <sql id="Base_Column_List" >
+        user_id, gender, birthday, user_intro, user_comefrom, user_qq, user_weixin, user_phone, user_photo,
+        user_signature, user_occupation, user_education,invr_empiric,prohi_withdraw,idcard_positive_path,idcard_opposite_path
+    </sql>
+
+    <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from tpz_user_ext
+        where user_id = #{userId,jdbcType=BIGINT}
+    </select>
+
+    <insert id="save" parameterType="com.caimao.bana.api.entity.TpzUserExtEntity">
+        insert into tpz_user_ext
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="userId != 0" >
+                user_id,
+            </if>
+            <if test="gender != null" >
+                gender,
+            </if>
+            <if test="birthday != null" >
+                birthday,
+            </if>
+            <if test="userIntro != null" >
+                user_intro,
+            </if>
+            <if test="userComefrom != null" >
+                user_comefrom,
+            </if>
+            <if test="userQq != null" >
+                user_qq,
+            </if>
+            <if test="userWeixin != null" >
+                user_weixin,
+            </if>
+            <if test="userPhone != null" >
+                user_phone,
+            </if>
+            <if test="userPhoto != null" >
+                user_photo,
+            </if>
+            <if test="userSignature != null" >
+                user_signature,
+            </if>
+            <if test="userOccupation != null" >
+                user_occupation,
+            </if>
+            <if test="userEducation != null" >
+                user_education,
+            </if>
+            <if test="invrEmpiric != null" >
+                invr_empiric,
+            </if>
+            <if test="prohiWithdraw != null" >
+                prohi_withdraw,
+            </if>
+            <if test="idcardPositivePath != null" >
+                idcard_positive_path,
+            </if>
+            <if test="idcardOppositePath != null" >
+                idcard_opposite_path,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="userId != 0" >
+                #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="gender != null" >
+                #{gender,jdbcType=CHAR},
+            </if>
+            <if test="birthday != null" >
+                #{birthday,jdbcType=VARCHAR},
+            </if>
+            <if test="userIntro != null" >
+                #{userIntro,jdbcType=VARCHAR},
+            </if>
+            <if test="userComefrom != null" >
+                #{userComefrom,jdbcType=VARCHAR},
+            </if>
+            <if test="userQq != null" >
+                #{userQq,jdbcType=VARCHAR},
+            </if>
+            <if test="userWeixin != null" >
+                #{userWeixin,jdbcType=VARCHAR},
+            </if>
+            <if test="userPhone != null" >
+                #{userPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="userPhoto != null" >
+                #{userPhoto,jdbcType=VARCHAR},
+            </if>
+            <if test="userSignature != null" >
+                #{userSignature,jdbcType=VARCHAR},
+            </if>
+            <if test="userOccupation != null" >
+                #{userOccupation,jdbcType=VARCHAR},
+            </if>
+            <if test="userEducation != null" >
+                #{userEducation,jdbcType=VARCHAR},
+            </if>
+            <if test="invrEmpiric != null" >
+                #{invrEmpiric,jdbcType=VARCHAR},
+            </if>
+            <if test="prohiWithdraw != null" >
+                #{prohiWithdraw,jdbcType=INTEGER},
+            </if>
+            <if test="idcardPositivePath != null" >
+                #{idcardPositivePath,jdbcType=VARCHAR},
+            </if>
+            <if test="idcardOppositePath != null" >
+                #{idcardOppositePath,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updatePhotoByUserId" parameterType="com.caimao.bana.api.entity.TpzUserExtEntity">
+        update tpz_user_ext set user_photo = #{userPhoto}  where user_id = #{userId}
+    </update>
+
+    <update id="updateCardPath" parameterType="com.caimao.bana.api.entity.TpzUserExtEntity">
+        UPDATE tpz_user_ext
+        <set >
+            <if test="idcardPositivePath != null" >
+                idcard_positive_path = #{idcardPositivePath,jdbcType=VARCHAR},
+            </if>
+            <if test="idcardOppositePath != null" >
+                idcard_opposite_path = #{idcardOppositePath,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where user_id = #{userId,jdbcType=BIGINT}
+    </update>
+
+    <update id="update" parameterType="com.caimao.bana.api.entity.TpzUserExtEntity" >
+        update tpz_user_ext
+        <set >
+            <if test="gender != null" >
+                gender = #{gender,jdbcType=CHAR},
+            </if>
+            <if test="birthday != null" >
+                birthday = #{birthday,jdbcType=VARCHAR},
+            </if>
+            <if test="userIntro != null" >
+                user_intro = #{userIntro,jdbcType=VARCHAR},
+            </if>
+            <if test="userComefrom != null" >
+                user_comefrom = #{userComefrom,jdbcType=VARCHAR},
+            </if>
+            <if test="userQq != null" >
+                user_qq = #{userQq,jdbcType=VARCHAR},
+            </if>
+            <if test="userWeixin != null" >
+                user_Weixin = #{userWeixin,jdbcType=VARCHAR},
+            </if>
+            <if test="userPhone != null" >
+                user_phone = #{userPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="userPhoto != null" >
+                user_photo = #{userPhoto,jdbcType=VARCHAR},
+            </if>
+            <if test="userSignature != null" >
+                user_signature = #{userSignature,jdbcType=VARCHAR},
+            </if>
+            <if test="userOccupation != null" >
+                user_occupation = #{userOccupation,jdbcType=VARCHAR},
+            </if>
+            <if test="userEducation != null" >
+                user_education = #{userEducation,jdbcType=VARCHAR},
+            </if>
+            <if test="invrEmpiric != null" >
+                invr_empiric = #{invrEmpiric,jdbcType=VARCHAR},
+            </if>
+            <if test="prohiWithdraw != null" >
+                prohi_withdraw = #{prohiWithdraw,jdbcType=INTEGER},
+            </if>
+        </set>
+        where user_id = #{userId,jdbcType=BIGINT}
+    </update>
+
+</mapper>

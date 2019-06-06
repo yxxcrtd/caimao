@@ -1,0 +1,47 @@
+<#assign controller="Fund"/>
+<#include 'layout/layout.html'/>
+<#macro content>
+<div class="contents clearfix">
+  <div class="con-lside cm-left conside" id="sidemenuctn" style="position: inherit;">
+    </div>
+<!--右边start-->
+<div class="con-rside cm-right">
+
+<div class="frame-all grid-812">
+<div class="filter-loan">
+<div class="clearfix">
+<div class="cm-left filter-date">
+<span class="filter-loan-th">起止日期：</span>
+<div id="daterangectn" style="margin-left: 90px;"></div>
+<div class="filter-button"><a id="inquirybutton" href="javascript:void(0)" class="ui-button ui-button-sgray"><b class="ui-button-text am-ft-sm">查询</b></a></div>
+</div>
+
+<div id="datequickselectctn" class="cm-left second-left"></div>
+</div>
+
+<div class="clearfix am-mt-10">
+<span class="cm-left filter-loan-th">类型：</span>
+<ul id="filterlist" class="cm-left listLateral list-filter">
+	<li class="list-filter-item" data-type=""><a href="javascript:void(0)" class="active">全部</a></li>                 
+	<li class="list-filter-item" data-type="01"><a href="javascript:void(0)">充值</a></li>
+    <li class="list-filter-item" data-type="02"><a href="javascript:void(0)">取现</a></li>
+	<li class="list-filter-item" data-type="03"><a href="javascript:void(0)">借款</a></li>
+	<li class="list-filter-item" data-type="05"><a href="javascript:void(0)">还款</a></li>
+    <li class="list-filter-item" data-type="06"><a href="javascript:void(0)">利息</a></li>
+    <li class="list-filter-item" data-type="09"><a href="javascript:void(0)">交易转入</a></li>
+    <li class="list-filter-item" data-type="10"><a href="javascript:void(0)">交易转出</a></li>
+    <li class="list-filter-item" data-type="00"><a href="javascript:void(0)">其他</a></li>
+	</ul>
+</div>
+
+
+</div>
+</div>
+
+<div id="fundgrid"></div>
+
+</div>
+<!--右边end-->
+
+</div>
+</#macro>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="BanaActivityRecord">
+
+    <!--获取用户指定活动的活动列表-->
+    <select id="getUserActivityRecordList" resultType="com.caimao.bana.api.entity.activity.BanaActivityRecordEntity" parameterType="java.util.Map">
+        SELECT
+        id, act_id AS actId, user_id AS userId, amount, datetime
+        FROM bana_activity_record WHERE user_id = #{userId} AND act_id = #{actId}
+    </select>
+
+    <!--添加活动记录-->
+    <insert id="save" parameterType="com.caimao.bana.api.entity.activity.BanaActivityRecordEntity" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO bana_activity_record
+        (act_id, user_id, amount, datetime)
+        VALUES
+        (#{actId}, #{userId}, #{amount}, #{datetime})
+    </insert>
+
+</mapper>

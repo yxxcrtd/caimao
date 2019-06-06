@@ -1,0 +1,74 @@
+<#assign title="历史成交"/>
+<#assign header="历史成交"/>
+<#assign footer="0"/>
+<#assign bg="bg-gray"/>
+<#assign controller="historyDeal"/>
+<#include 'mobile/layout/layout.html'/>
+
+
+<#macro headerContent>
+	<!--tab-->
+	<#assign tabItem="4"/>
+	<#include 'mobile/component/tradeHeader.html'/>
+		
+	<!--tab-->
+	
+	<aside class="navi-container data-container bg-gray">
+	<div class="am-flexbox">
+	<div class="am-flexbox-item  select-container">
+	<a class="select-choice"><input class="am-ft-sm am-left-10 date"  type="text" id="startDate"  style="width:90%;border:none;"/></a>
+	</div>
+	<div class="am-flexbox-item am-ft-center" style="max-width:30px;">
+	<span class="am-ft-sm">至</span>
+	</div>
+	<div class="am-flexbox-item select-container">
+	<a  class="select-choice"><input class="am-ft-sm am-left-10 date" type="text" id="endDate" style="width:90%;border:none;"/></a>
+	</div>
+	</div>
+	</aside>
+	
+</#macro>
+
+<#macro content>
+
+<!--表单-->
+</article>
+
+<article class="content" style="padding-top:143px;">
+
+
+<div class="con-horizontal am-mt-15 clearfix">
+<!--左边-->
+<div class="horizontal-left">
+<table class="table-list lineTop-gray" width="100%" border="0" cellspacing="0" cellpadding="0" >
+        <tbody  id="lDealsTitle"><tr>
+          <th class="tb-left" >名称/代码</th>
+        </tr>
+      </tbody>
+      </table>
+</div>
+<!--左边-->
+
+<!--右边-->
+<div class="horizontal-wrapper" id="scrollTable" >
+<table border="0" cellspacing="0" class="table-list lineTop-gray" id="rDealsTitle" style="width:550px">
+  <tr> 
+    <th class="tb-center">成交编号</th>
+    <th class="tb-center">成交时间</th>
+    <th class="tb-center">方向</th>
+    <th class="tb-center">成交数量</th>
+    <th class="tb-right">成交金额</th>
+    <th class="tb-right">手续费</th>
+  </tr>
+
+
+</table>
+</div>
+<!--右边-->
+
+<!--右边的三角形，如滑动时不出现-->
+<span class="arrow-horizontal" id="arrowShape"></span>
+</div>
+</article>
+
+</#macro>

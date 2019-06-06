@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<#include "ybk/config.html"/>
+<head>
+	<meta charset="UTF-8">
+	<title>公告内容 -- 邮币卡</title>
+	<link rel="stylesheet" type="text/css" href="${staticUrl}/style/article/reset.css">
+	<link rel="stylesheet" type="text/css" href="${staticUrl}/style/article/details.css">
+	 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+	 <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1, user-scalable=false">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-touch-fullscreen" content="yes">
+<meta name="format-detection" content="telephone=no" />
+</head>
+<body>
+	<div class='warp' id='wrapper' style="padding-top: 25px; padding-bottom: 30px;">
+		<div id = "scroller">
+			<div class='main'>
+				<h1>${detail.title}</h1>
+				<h2> 
+					<p>${detail.created?string("yyyy-MM-dd HH:mm:ss")} </p>
+					<p>阅读:${detail.viewCount}</p>
+				</h2>
+				<div class='content' style="padding-bottom: 80px;">
+					<p>${detail.content}</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script src='${staticUrl}/js/article/zepto.js'></script>
+<script src='${staticUrl}/js/article/iscroll.js'></script>
+<script type="text/javascript">
+	var myScroll,
+	upIcon = $("#up-icon"),
+	downIcon = $("#down-icon");
+	function loaded(){
+		setTimeout(function(){
+			myScroll = new IScroll('#wrapper', {
+		        mouseWheel: false,
+		        scrollbars: true,
+		        interactiveScrollbars: true,
+		        shrinkScrollbars: 'scale',
+		        fadeScrollbars: true,
+		        bounceEasing: 'elastic',
+		        bounceTime: 1200,
+		        click: true/*,
+		        bounce: false*/
+		    });
+		},100);
+	}
+	window.addEventListener("load",loaded);
+</script>
+
+<script>
+	var _hmt = _hmt || [];
+	(function() {
+		var hm = document.createElement("script");
+		hm.src = "//hm.baidu.com/hm.js?a1539df98107c7df914ae2d77cd616c3";
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+</html>

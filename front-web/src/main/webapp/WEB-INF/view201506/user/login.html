@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+<#include "config.html"/>
+<head>
+    <meta charset="utf-8">
+    <title>登录-财猫网</title>
+    <!--基本布局样式-->
+    <link rel="stylesheet" type="text/css" href="${dojoUrl}/style/page/page.css?v=${jsVersion}" />
+    <script src="${dojoUrl}/js/userLogin.js?v=${jsVersion}"></script>
+    <script>
+        var homeUrl = '${homeUrl}';
+        var ybkUrl = '${ybkUrl}';
+        var jinUrl = '${jinUrl}';
+    </script>
+</head>
+<body>
+<#include 'include/page/head.html'/>
+<div class="login register">
+    <div class="register_in login_in">
+        <div class="w relative">
+            <img class="activity_img" src="${imgUrl}/images/login_bg.png"  width="630" height="516">
+            <div class="home_login home_login_bg"></div>
+            <div class="home_login">
+                <form action="/user/login" method="post" id="user_login">
+                    <div class="hd">
+                        <h5 class="align_center">登录财猫网</h5>
+                    </div>
+                    <div class="bd">
+                        <div class="group m_t_10">
+                            <input id="username" type="text" autocomplete="off" validateType="empty:手机号不能为空 phone" placeholder="请输入您的账号" class="input_text input_name" maxlength="11"/>
+                        </div>
+                        <div class="group">
+                            <input id="password" type="password" validateType="empty:密码不能为空 len:6:16 password" placeholder="请输入您的密码" class="input_text input_pass" maxlength="20"/>
+                        </div>
+                        <div id="captchaDiv"></div>
+                        <button class="btn btn_red size_full m_t_10" id="loginBtn" type="button">登录</button>
+                    </div>
+                    <div class="ft m_t_10">
+                        <span class="f_l"><a href="${baseUrl}/user/register.html"> 注册</a></span>
+                        <span class="f_r"><a href="/user/forget.html">忘记密码 </a></span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<#include 'include/page/foot.html'/>
+
+</body>
+</html>

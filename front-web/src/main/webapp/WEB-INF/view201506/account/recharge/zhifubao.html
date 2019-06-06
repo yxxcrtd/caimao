@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+<#include "config.html"/>
+<#assign curTopMenu="account"/>
+<#assign curLeftMenu="deposit"/>
+<head>
+    <meta charset="utf-8">
+    <title>支付宝转账-财猫网</title>
+    <meta name="keywords" content="融资，股票融资，投资融资，理财融资，融资平台，融资炒股，融资网，融资公司" />
+    <meta name="description" content="财猫网由金融服务、风险管理及互联网运营等业界一流的专业人士组成的超百人全职运营团队。提供股票融资服务，致力于为公众提供一个国际化、高收益、安全、专业的互联网资产交易平台"/>
+    <!--基本布局样式-->
+    <link rel="stylesheet" type="text/css" href="${dojoUrl}/style/page/page.css?v=${jsVersion}" />
+    <link rel="stylesheet" type="text/css" href="${dojoUrl}/style/page/recharge.css?v=${jsVersion}" />
+    <script type="text/javascript" src="${dojoUrl}/js/accountRecharge.js?v=${jsVersion}"></script>
+</head>
+<body>
+<#include 'include/page/head.html'/>
+<!--内容区-->
+<div id="main">
+    <div class="w sec_main">
+        <#include 'include/menu/account_left.html'/>
+        <div class="right_bar">
+            <div class="tabNav">
+                <ul>
+                    <li><a href="${basePath}/account/recharge/wangyin.htm">网银充值</a> </li>
+                    <li><a class="on" href="${basePath}/account/recharge/zhifubao.htm">支付宝转账</a> </li>
+                    <li><a href="${basePath}/account/recharge/yinhang.htm">银行转账</a> </li>
+                    <li><a href="${basePath}/account/recharge/history.htm">充值记录</a> </li>
+                </ul>
+            </div>
+            <div class="alipay transferBox" id="transferBox">
+                <dl class="alipayActivity">
+                    <dt><img src="${imgUrl}/bao.jpg"></dt>
+                    <dd><span>账户支付</span><em class="orange">手机转账0手续费</em></dd>
+                </dl>
+                <div class="formHere">
+                    <form id="alipayForm">
+                        <dl class="clear_fix formgroup">
+                            <dt>支付宝帐号</dt>
+                            <dd class="inputBox"><input type="text" autocomplete="off" class="textInput" id="cAccount" validateType="empty:请输入支付宝帐号" placeholder="请输入支付宝帐号" maxlength="100"/></dd>
+                        </dl>
+                        <dl class="clear_fix formgroup" style="position: relative">
+                            <dt class="attachTip noticeTip rechargeNumCh" id="cNumCh"></dt>
+                            <dt>充值金额</dt>
+                            <dd class="inputBox"><input maxlength="8" type="text" autocomplete="off" class="textInput" id="cNum" validateType="empty:请输入充值金额 money" placeholder="请输入充值金额"><label for="cNum">元</label></dd>
+                        </dl>
+                        <#if balance == null>
+                            <div>请先完成<a href="/account/safe.htm">实名认证</a></div>
+                            <#else>
+                                <a href="javascript:void(0);" class="btn btn_red" id="submitBtnAlipay">下一步</a>
+                        </#if>
+                    </form>
+                </div>
+            </div>
+            <div class="alipay transferBox" id="transferBoxConfirm" style="display: none">
+                <div class="alipayInfo">
+                    <dl>
+                        <dt>收款人支付宝账户</dt>
+                        <dd>zhifu@caimao.com</dd>
+                    </dl>
+                    <dl>
+                        <dt>账户名称</dt>
+                        <dd>北京朋乐投资管理有限公司</dd>
+                    </dl>
+                </div>
+                <div class="userAlipayInfo">
+                    <table border="0" cellpadding="0" cellspacing="1">
+                        <tr><td class="thead"><span>您的支付宝账户　</span></td><td>　<b class="bold black" id="FRechargeAccount"></b></td></tr>
+                        <tr><td class="thead"><span>转入金额　</span></td><td>　<i class="orange bold" id="FRechargeAmount">0</i> 元</td></tr>
+                    </table>
+                </div>
+                <div class="payInfo">
+                    <div class="left">
+                        <div class="code"><img src="${imgUrl}/recharge/alipay.png"></div>
+                        <p>快速转账，<i class="orange">0手续费</i></p>
+                    </div>
+                    <div class="right">
+                        <a href="https://shenghuo.alipay.com/send/payment/fill.htm?_tosheet=true&_pdType=afcabecbafgggffdhjch" target="_blank" class="btn btn_red">去支付</a>
+                    </div>
+                </div>
+                <p class="notice">2小时内到账，如需加急，请联系客服</p>
+            </div>
+        </div>
+    </div>
+</div>
+<#include 'include/page/foot.html'/>
+</body>
+</html>

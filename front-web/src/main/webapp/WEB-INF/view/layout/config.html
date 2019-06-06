@@ -1,0 +1,129 @@
+<#--front config start-->
+<#assign basePath=""/><#--freemarker html-->
+<#assign dojoUrl="http://127.0.0.1:8080"/><#--js,css,image-->
+<#assign resRelease=""/><#--"" or ".min"-->
+
+<#assign jsVersion="1.0.124"/><#--clear cache-->
+<#assign isDebug=0/><#--1为开发测试环境，0为生产环境-->
+<#--front config end-->
+
+<#--网站总体配置，图片一律放在app\resources\image\customize下;
+协议相关：protocolp0.html为注册协议，protocolp1.html为按日融资协议，protocolp2.html为按月融资协议，均放在screen下-->
+<#--网站标题-->
+<#assign title="财猫网"/>
+<#--网站名称-->
+<#assign webName="财猫网"/>
+<#--网站备案号-->
+<#assign webRecord="京ICP备15016693号"/>
+<#--网站favicon-->
+<#assign favicon="favicon.ico"/>
+<#--logo-->
+<#assign logoImg="logo.png"/>
+<#--公司-->
+<#assign company="北京朋乐投资管理有限公司"/>
+<#--微博-->
+<#assign weiboUrl="http://weibo.com/p/1005055576410959"/>
+<#--qq号-->
+<#assign QQ="800097600"/>
+<#--qq群-->
+<#assign QQQUN="284822493"/>
+<#--微信二维码-->
+<#assign wechatImg="weixin.jpg"/>
+<#--热线电话-->
+<#assign hotline="4000-898-000"/>
+<#--邮箱地址-->
+<#assign email="123@caimao.com"/>
+<#--地址-->
+<#assign address="北京市海淀区上地三街9号嘉华大厦A座301"/>
+<#assign addressEn="北京市海淀区上地三街9号嘉华大厦A座301"/>
+<#--物理地址-->
+<#assign phyAddress=[116.314506, 40.042311]/>
+<#--传真-->
+<#assign fax=""/>
+<#--邮编-->
+<#assign zipCode="100085"/>
+<#-- 总共注册会员数与投资总金额 -->
+<#assign totalRegisterNode="20,541"/>
+<#assign totalAmountNode="63,614,200"/>
+<#--网站顶部公告/通知，title指的是公告的标题，content指的是公告内容；此处请不要对title，content的文本内容加入换行符，比如回车键，否则前端会报错；如果您不需要显示公告，可以直接设置title为空即可-->
+<#assign siteNotice={"title": "", "content": ""} />
+<#assign siteNoticeNew="邀请好友融资返现活动针对不诚信用户的处理公告"/>
+<#--门户首页图片-->
+<#assign indexAdImgs=[{"name" : "index-banner13.jpg", "url":"activity0707.htm"}, {"name" : "index-banner12.jpg"}, {"name": "index-banner7.png"}, {"name": "index-banner11.jpg", "url": "p2p/targetPage.htm"}, {"name": "index-banner10.jpg", "url": "activity/brokerage"}, {"name": "index-banner3.png"}]/>
+<#--门户首页图片高度-->
+<#assign indexAdHeight=380/>
+<#--融资产品名称-->
+<#assign proDay="按日融资"/>
+<#assign proMonth="按月融资"/>
+<#assign proFree="免费体验"/>
+<#assign proContest="实盘大赛"/>
+<#assign proOffer="限时特惠"/>
+<#assign proP2P="投标赚钱"/>
+<#--合作伙伴-->
+<#assign partnerImgs=[{"name" : "h1.jpg", "url" : "http://www.foundersc.com"}, {"name" : "h2.jpg", "url" : "http://www.cmbc.com.cn"}, {"name" : "h3.jpg", "url" : "http://www.cebbank.com"}, {"name" : "h11.png", "url" : "http://www.icbc.com.cn/icbc"},{"name" : "h5.jpg", "url" : "http://www.htsc.com.cn"}, {"name" : "h6.jpg", "url" : "http://www.dfzq.com.cn"},{"name" : "h7.jpg", "url" : "http://www.cs.ecitic.com"}, {"name" : "h8.jpg", "url" : "http://www.zszq.com"}, {"name" : "h9.jpg", "url" : "http://www.cmbchina.com"}, {"name" : "h10.jpg", "url" : "http://www.hxb.com.cn"}]/>
+<#--登录页图-->
+<#assign loginBgImg="login_bg.png"/>
+<#assign loginImg="login.png"/>
+<#--注册页图-->
+<#assign regImg="reg.png"/>
+<#--支付宝账户-->
+<#assign alpayAccountID="zhifu@caimao.com"/>
+<#assign alpayAccountName="北京朋乐投资管理有限公司"/>
+<#assign alpayImg="alipay.png"/>
+<#--银行转账-->
+<#assign bankCards=[{"ID": "1109 1322 0310 301", "name": "北京朋乐投资管理有限公司", "bank": "招商银行西二旗支行", "img": "cmb.jpg"}]/>
+<#--产品：按日融资-->
+<#assign proDayAdImg="pro-day-ad.png"/>
+<#assign proDayUnit=1/><#--金额单位，1为元，0为分-->
+<#assign proDayCarry=1/><#--金额进位，1为下舍，0为四舍五入-->
+<#assign proDayLoanSelect="1000000, 2000000, 5000000, 10000000, 20000000, 30000000, 40000000, 50000000, 60000000, 70000000, 80000000, 100000000"/><#--可选实盘资金（单位：分）-->
+<#assign proDayDesc=[
+"我们提醒您：股市有风险，投资需谨慎！市场风险莫测，务请谨慎行事！",
+"亏损警告线：总资金触及警告线及以下时，只能卖出股票，不能买入。",
+"亏损平仓线：总资金触及平仓线及以下时，您的股票将随时可能被平仓。",
+"资金使用期限：最短2天，最长不限天数，默认每天自动延续，并扣息。",
+"20:00--23:00 为交易所结算时间，在此期间无法进行资产操作与融资。",
+"每天早上9点至10点交易量巨大，恒生通道拥堵造成系统反应缓慢甚至报错。为了不影响您的使用，建议您申请融资、追加融资、追加保证金在早上9点之前或提前一天操作。如果您在9~10点进行此类操作遇到问题请及时联系客服，我们会在当天帮您处理完毕。"
+]/>
+<#--产品：按月融资-->
+<#assign proMonthAdImg="pro-month-ad.png"/>
+<#assign proMonthUnit=0/><#--金额单位，1为元，0为分-->
+<#assign proMonthCarry=0/><#--金额进位，1为下舍，0为四舍五入-->
+<#assign proMonthDesc=[
+"我出资金，您来炒股，零风险，高收益！",
+"按月融资专为中线炒股高手提供操盘资金，杠杆比率为1-5倍，由操作人任选。",
+"操盘资金操作周期一个月起。我们按月收取账户管理费，当您投资盈利时，盈利全归您，风险保证金全额退还；当保证金不足时，须补充保证金，使保证金恢复到警戒线以下，否则会被限制买入及平仓。",
+"20:00--23:00 为交易所结算时间，在此期间无法进行资产操作与融资。",
+"每天早上9点至10点交易量巨大，恒生通道拥堵造成系统反应缓慢甚至报错。为了不影响您的使用，建议您申请融资、追加融资、追加保证金在早上9点之前或提前一天操作。如果您在9~10点进行此类操作遇到问题请及时联系客服，我们会在当天帮您处理完毕。"
+]/>
+<#--产品：免费体验-->
+<#assign proFreeAdImg="pro-free-ad.png"/>
+<#assign proFreeDesc=[
+"内容待定"
+]/>
+<#--产品：实盘大赛-->
+<#assign proContestAdImg="pro-contest-ad.png"/>
+
+<#--产品：三方支付, a: 通联，b: 易宝, c：汇付宝-->
+<#assign paymentPlatform="c"/>
+
+<#--当日交易时间截止点-->
+<#assign cutOffTime="14:50:00">
+
+<#--功能开关-->
+<#assign isProDay=true/><#--按日融资-->
+<#assign isProMonth=true/><#--按月融资-->
+<#assign isProFree=false/><#--免费体验-->
+<#assign isProContest=false/><#--实盘大赛-->
+<#assign isProOffer=false/><#--特惠(暂时不加)-->
+<#assign isProP2P=false/><#--投标-->
+<#assign isPopularize=true/><#--推广积分-->
+<#assign isAlipay=true/><#--支付宝充值-->
+<#assign isBankTransfer=true/><#--银行转账-->
+<#assign authentication=false/><#--上传身份证 -->
+<#assign isHeepayTest=false/><#--汇付宝充值是否用于测试 -->
+
+<#assign proDaySwitch=true/><#--按日融资开关-->
+<#assign proDayCloseMsg="今日融资额已领完"/><#--按日融资关闭提示-->
+<#assign proMonthSwitch=true/><#--按月融资开关-->
+<#assign proMonthCloseMsg="今日融资额已领完"/><#--按月融资关闭提示-->

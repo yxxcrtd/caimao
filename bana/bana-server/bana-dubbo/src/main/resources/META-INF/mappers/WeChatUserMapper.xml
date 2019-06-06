@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="WeChatUser" >
+  <select id="getWeChatUserByOpenid" resultType="com.caimao.bana.api.entity.WeChatUserEntity">
+    SELECT id, openid, nickname, sex, city, province, country, headimgurl AS headImgUrl, created
+    FROM wechat_user
+    WHERE openid = #{openid}
+  </select>
+
+  <update id="updateWeChatUser" parameterType="map">
+    UPDATE wechat_user
+    <trim prefix="SET" suffixOverrides=",">
+      <if test="_parameter.containsKey('nickname')">
+        nickname=#{nickname},
+      </if>
+      <if test="_parameter.containsKey('sex')">
+        sex=#{sex},
+      </if>
+      <if test="_parameter.containsKey('city')">
+        city=#{city},
+      </if>
+      <if test="_parameter.containsKey('province')">
+        province=#{province},
+      </if>
+      <if test="_parameter.containsKey('country')">
+        country=#{country},
+      </if>
+      <if test="_parameter.containsKey('headImgUrl')">
+        headimgurl=#{headImgUrl},
+      </if>
+    </trim>
+    <where>
+      openid=#{openid}
+    </where>
+  </update>
+
+  <insert id="createWeChatUser" parameterType="com.caimao.bana.api.entity.WeChatUserEntity" useGeneratedKeys="true" keyProperty="id">
+    INSERT INTO wechat_user (openid,nickname,sex,city,province,country,headimgurl,created)
+    VALUES (#{openid}, #{nickname}, #{sex}, #{city}, #{province}, #{country}, #{headImgUrl}, unix_timestamp())
+  </insert>
+
+  <insert id="createMarketForecast" parameterType="com.caimao.bana.api.entity.WeChatForecastEntity" useGeneratedKeys="true" keyProperty="id">
+    INSERT INTO wechat_forecast (forecast_date,wechat_user_id,forecast_type,created)
+    VALUES (#{forecastDate}, #{weChatUserId}, #{forecastType}, unix_timestamp())
+  </insert>
+
+  <select id="getUserMarketForecast" resultType="com.caimao.bana.api.entity.WeChatForecastEntity">
+    SELECT forecast_date AS forecastDate, wechat_user_id AS weChatUserId, forecast_type AS forecastType, created
+    FROM wechat_forecast
+    WHERE forecast_date = #{forecastDate} AND wechat_user_id = #{weChatUserId}
+  </select>
+
+  <select id="getMarketForecastByDate" resultType="hashmap">
+    SELECT forecast_type AS forecastType, COUNT(*) AS cnt
+    FROM wechat_forecast
+    WHERE forecast_date = #{forecastDate}
+    GROUP BY forecast_type
+  </select>
+
+  <insert id="createUserMarketForecastCount" parameterType="com.caimao.bana.api.entity.WeChatForecastCountEntity" useGeneratedKeys="true" keyProperty="id">
+    INSERT INTO wechat_forecast_count (wechat_user_id,correct_days,beat_rate,created, updated)
+    VALUES (#{weChatUserId}, #{correctDays}, #{beatRate}, unix_timestamp(), unix_timestamp())
+  </insert>
+
+  <update id="updateUserMarketForecastCount" parameterType="map">
+    UPDATE wechat_forecast_count
+    <trim prefix="SET" suffixOverrides=",">
+      <if test="_parameter.containsKey('correctDays')">
+        correct_days=#{correctDays},
+      </if>
+      <if test="_parameter.containsKey('beatRate')">
+        beat_rate=#{beatRate},
+      </if>
+      <if test="_parameter.containsKey('updated')">
+        updated=#{updated},
+      </if>
+    </trim>
+    <where>
+      wechat_user_id=#{weChatUserId}
+    </where>
+  </update>
+
+  <select id="getUserMarketForecastCount" resultType="com.caimao.bana.api.entity.WeChatForecastCountEntity">
+    SELECT wechat_user_id AS weChatUserId, correct_days AS correctDays, beat_rate AS beatRate, created, updated
+    FROM wechat_forecast_count
+    WHERE wechat_user_id = #{weChatUserId}
+  </select>
+
+  <select id="getTodayForecastSuccess" resultType="com.caimao.bana.api.entity.WeChatForecastEntity">
+    SELECT forecast_date AS forecastDate, wechat_user_id AS weChatUserId, forecast_type AS forecastType, created
+    FROM wechat_forecast
+    <where>
+      1 = 1
+      <if test="forecastDate != null">
+        AND `forecast_date`=#{forecastDate}
+      </if>
+      <if test="forecastType != null">
+        AND `forecast_type`=#{forecastType}
+      </if>
+    </where>
+    ORDER BY wechat_user_id ASC
+  </select>
+
+  <select id="getAllWeChatForecastCount" resultType="com.caimao.bana.api.entity.WeChatForecastCountEntity">
+    SELECT wechat_user_id AS weChatUserId, correct_days AS correctDays, beat_rate AS beatRate, created, updated
+    FROM wechat_forecast_count
+  </select>
+
+  <select id="getUserBeatCnt" resultType="Integer">
+    SELECT COUNT(*)
+    FROM wechat_forecast_count
+    WHERE correct_days &lt; ${correctDays}
+  </select>
+
+  <select id="getWeChatForecastCountCnt" resultType="Integer">
+    SELECT COUNT(*)
+    FROM wechat_forecast_count
+  </select>
+</mapper>

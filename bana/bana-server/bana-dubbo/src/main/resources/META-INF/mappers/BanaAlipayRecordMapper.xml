@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="AlipayRecord">
+    <resultMap id="BaseResultMap" type="com.caimao.bana.api.entity.AlipayRecordEntity" >
+        <id column="trade_id" property="tradeId" jdbcType="DECIMAL" />
+        <result column="amount" property="amount" jdbcType="BIGINT" />
+        <result column="real_name" property="realName" jdbcType="VARCHAR" />
+        <result column="finish_time" property="finishTime" jdbcType="DATE" />
+        <result column="create_time" property="createTime" jdbcType="DATE" />
+        <result column="rel_no" property="relNo" jdbcType="BIGINT" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        trade_id AS tradeId,
+        amount,
+        real_name AS realName,
+        finish_time AS finishTime,
+        create_time AS createTime,
+        rel_no AS relNo
+    </sql>
+
+    <insert id="saveTradeRecord" parameterType="com.caimao.bana.api.entity.AlipayRecordEntity">
+        INSERT INTO bana_alipay_record (`trade_id`, `amount`, `real_name`, `finish_time`, `create_time`)
+        VALUES (#{tradeId}, #{amount}, #{realName}, #{finishTime}, #{createTime});
+    </insert>
+
+    <select id="queryTradeRecord" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM bana_alipay_record
+        WHERE trade_id = #{tradeId}
+    </select>
+
+    <select id="queryTradeRecordForUpdate" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM bana_alipay_record
+        WHERE trade_id = #{tradeId} FOR UPDATE
+    </select>
+
+    <update id="updateTradeRecord" parameterType="hashmap">
+        UPDATE bana_alipay_record
+        SET rel_no = #{relNo}
+        where trade_id = #{tradeId}
+    </update>
+</mapper>

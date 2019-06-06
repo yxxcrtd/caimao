@@ -1,0 +1,47 @@
+连续预测正确天数 ${weChatForecastCount.getCorrectDays()} 天<br>
+击败了 ${weChatForecastCount.getBeatRate()}% 的用户<br>
+
+<form action="/activity/doStockMarketForecast" method="post">
+    <input type="radio" name="forecastType" value="1" checked> 看涨<br>
+    <input type="radio" name="forecastType" value="2"> 看平<br>
+    <input type="radio" name="forecastType" value="3"> 看跌<br>
+    <input type="submit" name="submit" value="提交">
+</form>
+
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript">
+    var imgUrl = "https://www.baidu.com/img/bdlogo.png";
+    var descContent = '我已经连续 ${weChatForecastCount.getCorrectDays()} 天看准了大盘走势！击败了 ${weChatForecastCount.getBeatRate()} % 的股友。哪位股神前来挑战？！';
+
+    wx.config({
+        debug: false,
+        appId: 'wxad6843828090a34d',
+        timestamp: ${weChatSign["timestamp"]},
+        nonceStr: '${weChatSign["nonceStr"]}',
+        signature: '${weChatSign["signature"]}',
+        jsApiList: [
+        // 所有要调用的 API 都要加到这个列表中
+        'onMenuShareTimeline',
+        'onMenuShareAppMessage'
+    ]
+    });
+
+    wx.ready(function () {
+        wx.onMenuShareAppMessage({
+            title: window.shareTitle,
+            desc: descContent,
+            link: window.lineLink,
+            imgUrl: imgUrl,
+            trigger: function (res) {},
+            success: function (res) {},
+            cancel: function (res) {}
+        });
+        wx.onMenuShareTimeline({
+            title: window.shareTitle,
+            link: window.lineLink,
+            imgUrl: imgUrl,
+            success: function () {},
+            cancel: function () {}
+        });
+    });
+</script>

@@ -1,0 +1,62 @@
+<div class="frame-all" style="margin-top: 0px">
+<div class="con-all">
+
+<!--表单-->
+<form class="ui-form ui-form-specialStep" role="form">
+<div class="ui-form-item ui-form-itemNobottom">
+<label class="ui-label">追加借款额：</label>
+<div class="ui-text"><b class="am-ft-orange am-ft-xxl am-ft-number" data-dojo-attach-point="loanAmountNode"></b> 元</div>
+</div>
+</form>
+
+
+<!--特殊的表单-->
+<div class="clearfix form-special">
+<div class="cm-left form-special-lside"><span class="am-ft-gray">追加后</span></div>
+<div class="cm-left form-special-rside lineLeft-gray-dashed">
+<table width="100%" border="0" cellspacing="0" class="table-assetsIndex">
+  <tbody>
+  <tr>
+    <th>融资成数：</th>
+    <td width="300"><b data-dojo-attach-point="ratioNode" class="am-ft-md"></b>
+    </td>
+    <th>月利率：</th>
+    <td><b class="am-ft-md" data-dojo-attach-point="interest_day_rateNode"></b>
+    </td>
+  </tr>
+  <tr>
+    <th>融资警示线：</th>
+    <td><b class="am-ft-xl am-ft-number"></b><span data-dojo-attach-point="warningLineNode" class="am-ft-md am-left-5"></span> 元</td>
+    <th>融资平仓线：</th>
+    <td><b class="am-ft-xl am-ft-number"></b><span data-dojo-attach-point="exposureRatioNode" class="am-ft-md am-left-5"></span> 元</td>
+  </tr>
+  <tr>
+    <th>总融资金额：</th>
+    <td><b class="am-ft-xl am-ft-number"></b><span data-dojo-attach-point="totalLoanNode" class="am-ft-md am-left-5"></span> 元</td>
+    <th>结息方式：</th>
+    <td><span class="am-ft-md" data-dojo-attach-point="interestModeNode"></span></td>
+  </tr>
+    <tr>
+    <th>到期日：</th>
+    <td><span class="am-ft-md" data-dojo-attach-point="deadDateNode"></span></td>
+    <th></th>
+    <td></td>
+  </tr>
+</tbody>
+</table>
+</div>
+</div>
+<!--特殊的表单-->
+<form class="ui-form" role="form">
+<div class="ui-form-item ui-form-item-gray">
+<label class="ui-label">安全密码：</label>
+<div data-dojo-attach-point="tradePwdNode"></div>
+</div>
+<div data-dojo-attach-point="prevBtnNode"></div>
+<div data-dojo-attach-point="nextBtnNode"></div>
+</form>
+
+
+</div>
+
+</div>

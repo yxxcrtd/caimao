@@ -1,0 +1,57 @@
+@charset "utf-8";
+
+/*表格（依赖base）*/
+.table{
+  width: 100%;
+  color: #666;
+   th,td{
+    text-align: left;
+     font-size: 14px;
+     border-top:1px solid #E6E6E6;
+     font-weight: 400;
+     font-family: "Arial",Microsoft Yahei ;
+    &:first-child{
+      padding-left:15px;
+    }
+  }
+  thead{
+    line-height: 38px;
+    th{ background-color:#F6F7FB;}
+  }
+  tbody{
+    line-height:43px;
+    b{
+      &.red{
+        color:#EC5243;
+      }
+      &.green{
+        color:#29B203;
+      }
+    }
+    tr:nth-child(even){
+      background-color: #F6F7FB;
+    }
+    tr:hover{
+      background-color: #eff1f7;
+      cursor: pointer;
+    }
+  }
+  .table_crumbs{
+
+    th,td{
+      line-height:28px;
+      border-top: none;
+    }
+    i{
+
+    }
+  }
+}
+
+.center{
+  td,th{
+    text-align: center;
+  }
+}
+
+

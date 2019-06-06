@@ -1,0 +1,184 @@
+@charset "utf-8";
+@import "variable";
+/*
+━━━━━━━
+mixin.scss
+掺合样式类
+BitUI
+━━━━━━━
+*/
+
+/*
+**clearFix
+**@include clearFix
+*/
+@mixin clearFix{
+  @if ie6{
+    *zoom:1;
+  }
+  &:after{
+    content: '.';
+    clear: both;
+    display: block;
+    height: 0;
+    visibility: hidden;
+  }
+}
+
+/*
+**clearFix
+**@extend %clearFix
+*/
+%clearFix{
+  @include clearFix
+}
+
+/*
+**btn 生成一个特定颜色的按钮
+**@include btn(边框色,背景色,焦点色)
+*/
+@mixin btn($brColor:none, $bgColor:$gray, $fColor:$bgColor){
+  outline: none ;
+  cursor: pointer ;
+
+  @if($bgColor == ''){
+    background-color: $white;
+  }@else if($bgColor == none){
+    background-color: transparent;
+  }@else{
+    background-color: $bgColor;
+  }
+
+  @if ($brColor == none){
+    border:1px solid transparent;
+  }@else{
+    border:1px solid $brColor;
+  }
+
+  &:hover,&:focus{
+    //background-image: none;
+    background-color: darken( $fColor , 5%);
+  }
+  &:active{
+    //background-image: none;
+    background-color: darken($fColor,5%);
+    box-shadow: inset 0 0 5px  darken($fColor,15%);
+  }
+}
+/*
+ input 生成一个特定颜色的文本框
+**@include input(边框颜色,背景色,焦点色)
+*/
+@mixin input($brColor:$gray, $bgColor:$white, $fColor:$brColor){
+
+  @if($bgColor == ''){
+    background-color: $white;
+  }@else if($bgColor == none){
+    background-color: transparent;
+  }@else{
+    background-color: $bgColor;
+  }
+
+  @if($brColor == ''){
+    border:1px solid $gray;
+  }
+  @else if ($brColor == none){
+    border:1px solid transparent;
+  }@else{
+    border:1px solid $brColor;
+  }
+  outline:0;
+  padding:0;
+  box-sizing: border-box;
+  box-shadow: inset 0 1px 1px lighten($gray, 10% );
+
+  @if($fColor != none) {
+    &:hover{
+      border-color: darken($fColor, 6%);
+    }
+    input:focus,&:focus, &.focus{
+      border-color: $fColor ;
+      box-shadow: inset 0 1px 1px transparent, 0 0 5px lighten($fColor, 5%);
+    }
+  }
+}
+/*
+*媒体选择器
+*@include mediaQuery('min/max', $viewport1, $viewport2){.class{...}}
+*/
+
+@mixin mediaQuery($constraint, $viewport1, $viewport2: null) {
+
+  @if $constraint == 'min' {
+
+    @media screen and ('min-width': $viewport1) {
+      @content;
+    }
+
+  } @else if $constraint == 'max' {
+
+    @media screen and ('max-width': $viewport1) {
+      @content;
+    }
+
+  } @else {
+
+    @media screen and ('min-width': $viewport1) and ('max-width': $viewport2) {
+      @content;
+    }
+
+  }
+}
+/*
+*响应式
+*@include res(xs/s/m/l){.class{...}}
+*/
+
+@mixin res($size:size_m){
+  @if($size == 'size_xs'){
+    @include mediaQuery('max',$screen-xs){
+      @content;
+    }
+  }
+  @if($size == 'size_s'){
+    @include mediaQuery('',$screen-xs,$screen-s - 1){
+      @content;
+    }
+  }
+  @if($size == 'size_m'){
+    @include mediaQuery('',$screen-s,$screen-l - 1){
+      @content;
+    }
+  }
+  @if($size == 'size_l'){
+    @include mediaQuery('min',$screen-l + 15){
+      @content;
+    }
+  }
+}
+
+/*
+*透明度
+*@include opacity($opacity)
+**/
+@mixin opacity($opacity) {
+  opacity: $opacity;
+  $opacity-ie: ($opacity * 100);
+  filter: alpha(opacity = $opacity-ie);
+}
+
+/*
+*背景图片
+*@include img($url,$position,$repeat)
+**/
+@mixin img($url, $position:0 0, $repeat:no-repeat){
+  background:url( $url + $versions ) $position $repeat;
+}
+
+
+@mixin css3($k,$v){
+  @each $prefix in webkit,moz,ms,o{
+    -#{$prefix}-#{$k}:#{$v};
+  }
+  #{$k}:#{$v}
+}

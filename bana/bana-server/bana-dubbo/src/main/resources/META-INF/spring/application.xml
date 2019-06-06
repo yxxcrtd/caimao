@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd">
+
+    <bean id="applicationContextUtils" class="com.caimao.bana.server.utils.ApplicationContextUtils"/>
+
+    <!-- 数据库逐渐生成策略 -->
+    <bean id="dbidGenerator" class="com.caimao.bana.server.utils.MemoryDbidGenerator">
+        <!-- 为什么要配置1我也不知道, 不过不影响id的生成 -->
+        <property name="serverId" value="1"/>
+    </bean>
+
+    <bean id="paramValidator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+        <property name="providerClass" value="org.hibernate.validator.HibernateValidator"/>
+    </bean>
+
+
+    <context:component-scan base-package="com.caimao.bana.server,com.huobi.commons.aop" annotation-config="true"/>
+
+    <context:property-placeholder
+            location="classpath*:/META-INF/conf/application.properties,
+            classpath*:/META-INF/conf/redis-conf.properties,
+            classpath*:/META-INF/conf/jdbc-conf.properties,
+            classpath*:/META-INF/conf/email-conf.properties,
+            classpath*:/META-INF/conf/dubbo.properties"/>
+
+    <bean id="messageSource"
+          class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="defaultEncoding" value="UTF-8"/>
+        <property name="basenames">
+            <list>
+                <value>errorMessages</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="getuiSendQueue" class="com.caimao.bana.server.service.getui.GetuiSendQueue">
+        <constructor-arg index="0" value="1000" />
+        <constructor-arg index="1" value="getuiSendListKey" />
+    </bean>
+    <bean id="getuiService" class="com.caimao.bana.server.service.getui.GetuiServiceImpl" init-method="init" />
+
+    <aop:aspectj-autoproxy />
+
+    <!-- 扫描发送短信组件 -->
+<!--     <context:component-scan base-package="com.huobi.common.sms" annotation-config="true"> -->
+<!--         <context:include-filter type="annotation" -->
+<!--                                 expression="org.springframework.stereotype.Service"/> -->
+<!--     </context:component-scan> -->
+</beans>

@@ -1,0 +1,107 @@
+<#assign bg="bg-gray"/> 
+<#assign controller="certification3"/>
+<#assign title="实名认证"/> 
+<#assign header="实名认证"/>
+<#assign footer="3"/>
+<#include 'mobile/layout/layout.html'/>
+
+<#macro content>
+<article class="content" style="padding-bottom:60px;" id="panel1" >
+
+
+<!--表单-->
+<aside class="con-frame">
+<ul class="datalist">
+<li class="datalist-item clearfix">
+<div class="am-grid datalist-line">
+        <div class="am-grid-item am-grid-item-25  am-ft-right">
+        <h4 class="am-ft-md  cm-left">真实姓名</h4>
+        </div>
+        <div class="am-grid-item am-grid-item-75 am-ft-left am-left-10">
+        <span class="ui-form-field">
+<input id="userName" type="text" class="text_input" maxlength="18" defaultvalue="输入姓名" value="" placeholder="输入姓名">
+</span>
+</div>
+</div>
+</li>
+
+<li class="datalist-item clearfix">
+<div class="am-grid datalist-line">
+        <div class="am-grid-item am-grid-item-25  am-ft-right">
+        <h4 class="am-ft-md  cm-left">证件类型</h4>
+        </div>
+        <div class="am-grid-item am-grid-item-75 am-ft-left am-left-10">
+        <span>大陆身份证</span>
+        </div>
+</div>
+</li>
+
+
+<li class="datalist-item clearfix">
+<div class="am-grid datalist-line">
+        <div class="am-grid-item am-grid-item-25  am-ft-right">
+        <h4 class="am-ft-md cm-left">证件号码</h4>
+        </div>
+        <div class="am-grid-item am-grid-item-75 am-ft-left am-left-10">
+        <span class="ui-form-field">
+<input id="idCardNumber" type="text" class="text_input" maxlength="18" defaultvalue="输入证件号码" value="" placeholder="输入证件号码">
+</span>
+<p class="f-right" id="cardRight"></p>
+</div>
+</div>
+</li>
+</ul>
+</aside>
+</article>
+
+<article class="content" style="padding-bottom:60px;display: none;" id="panel2">
+<!--提醒-->
+<p class="tx-warning con-spacing10">
+<span class="am-ft-tabText">要求：身份证文字内容清晰可见。</span></p>
+
+<form enctype="multipart/form-data" id="idFrom" type="post">
+
+<input type="hidden" name="userRealName" id="userRealName"/>
+<input type="hidden" name="idcard" id="idcard"/>
+
+<!--上传身份证-->
+<aside class="con-imgID am-pt-20">
+<a id="positiveBtn" class="bg-imgID">
+<p class="p1"><big>+</big></p>
+<p class="p2"><span>身份证正面</span></p>
+<div id="positivediv" style="display:none;"><img id="positiveShow"  /></div>
+</a>
+</aside>
+<input type="file" style="width: 0px;height:0px" name="positive" id="positive" accept="image/*"/>
+
+<!--上传身份证-->
+<aside class="con-imgID">
+<a id="oppositeBtn" class="bg-imgID">
+<p class="p1"><big>+</big></p>
+<p class="p2"><span>身份证反面</span></p>
+
+
+<div id="oppositediv" style="display:none;"><img id="oppositeShow"  /></div>
+</a>
+</aside>
+
+<input type="file" style="width: 0px;height:0px" name="opposite" id="opposite"  accept="image/*"/>
+
+</form>
+</article>
+
+
+</#macro>
+<#macro footerContent>
+<div class="btn-page btn-page-center bg-white con-spacing15">
+        <a class="am-button am-button-red" id="nextBtn">
+        <span>下一步</span>
+        </a>
+        
+        
+        <a class="am-button am-button-red" id="sureBtn" style="display: none;">
+        <span>确认</span>
+        </a>
+        
+</div>
+</#macro>

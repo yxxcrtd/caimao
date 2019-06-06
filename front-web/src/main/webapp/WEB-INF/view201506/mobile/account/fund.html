@@ -1,0 +1,55 @@
+<#assign bg="bg-gray"/> <#assign controller="fund"/> <#assign
+header="按月融资"/> <#include 'mobile/layout/layout.html'/>
+
+<article class="wrapper bg-white">
+	<!--顶部导航-->
+	<div class="am-header">
+		<a href="###" class="header-Link header-leftLink"><i
+			class="am-icon-arrow-left"></i></a>
+		<h1>融资</h1>
+	</div>
+	<!--顶部导航-->
+
+	<!--tab-->
+	<div class="navi-container bg-gray">
+		<ul class="listTab listTab-3 listLateral" id="tabList">
+			<li class="listTab-item active"><a>操盘中</a></li>
+			<li class="listTab-item"><a>已结束</a></li>
+			<li class="listTab-item"><a>审核中</a></li>
+		</ul>
+	</div>
+	<!--tab-->
+</article>
+<!--下部-->
+<article class="content" style="padding-top: 137px;">
+	<!-- 没有操作中的融资 流水 -->
+	<div id="panel1">
+		<div class="con-spacing15 con-prompt">
+			<!--提示-->
+			<p>
+				<span>您暂时还没有任何融资</span>
+			</p>
+
+
+			<!--提示-->
+
+
+			<!--按钮-->
+			<div class="btn-page btn-page-center con-spacing15">
+				<a href="../index/index.html" class="am-button am-button-red"> <span
+					class="am-ft-white">去融资</span>
+				</a>
+
+			</div>
+			<!--按钮-->
+
+		</div>
+	</div>
+	<!-- 没有操作中的融资 流水 结束 -->
+	<div id="panel2">
+		<div id="panelContent"></div>
+	</div>
+
+</article>
+
+<#include 'mobile/layout/footer.html'/>

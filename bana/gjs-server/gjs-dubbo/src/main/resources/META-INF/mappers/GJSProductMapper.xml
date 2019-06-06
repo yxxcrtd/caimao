@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="GJSProduct">
+    <resultMap id="BaseResultMap" type="com.caimao.gjs.api.entity.GJSProductEntity">
+        <id column="product_id" property="productId" jdbcType="BIGINT"/>
+        <result column="exchange" property="exchange" jdbcType="BIGINT"/>
+        <result column="prod_code" property="prodCode" jdbcType="VARCHAR"/>
+        <result column="prod_name" property="prodName" jdbcType="VARCHAR"/>
+        <result column="trade_type" property="tradeType" jdbcType="TINYINT"/>
+        <result column="is_goods" property="isGoods" jdbcType="TINYINT"/>
+        <result column="is_show" property="isShow" jdbcType="TINYINT"/>
+        <result column="price_unit" property="priceUnit" jdbcType="INTEGER"/>
+        <result column="hand_unit" property="handUnit" jdbcType="INTEGER"/>
+        <result column="price_change_unit" property="priceChangeUnit" jdbcType="INTEGER"/>
+        <result column="price_limit" property="priceLimit" jdbcType="INTEGER"/>
+        <result column="margin_ratio" property="marginRatio" jdbcType="INTEGER"/>
+        <result column="sort" property="sort" jdbcType="INTEGER"/>
+        <result column="fee_rate" property="feeRate" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="BaseColumnList">
+        product_id, exchange, prod_code, prod_name, trade_type, is_goods, is_show, price_unit, hand_unit, price_change_unit, price_limit, margin_ratio, sort, fee_rate
+    </sql>
+
+    <select id="queryExchangeGoods" resultMap="BaseResultMap">
+        SELECT
+        <include refid="BaseColumnList" />
+        FROM gjs_product
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            AND exchange = #{exchange}
+            AND is_show = 1
+        </trim>
+        ORDER BY sort DESC;
+    </select>
+
+    <update id="updateExchangeGoods" parameterType="com.caimao.gjs.api.entity.GJSProductEntity">
+        UPDATE gjs_product
+        <set>
+            <if test="sort != null">
+                sort = #{sort, jdbcType=INTEGER},
+            </if>
+        </set>
+        where product_id = #{productId, jdbcType=BIGINT}
+    </update>
+</mapper>

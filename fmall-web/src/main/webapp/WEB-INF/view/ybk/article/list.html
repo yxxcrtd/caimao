@@ -1,0 +1,60 @@
+<!doctype html>
+<#include "ybk/config.html" />
+<#assign topMenu="${list.categoryId}"/>
+<#if list.categoryId==1>
+	<#assign title="打新申购"/>
+<#elseif list.categoryId==2>
+	<#assign title="市场价格"/>
+<#elseif list.categoryId==3>
+	<#assign title="交易所公告"/>
+<#elseif list.categoryId==5>
+	<#assign title="邮币百科"/>
+</#if>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>${title}--邮币卡</title>
+    <script src="${staticUrl}/js/chart/lib.js?version=${jsVersion}"></script>
+	<link rel="stylesheet" href="${staticUrl}/style/style.css?version=${jsVersion}" />
+	<script src="${staticUrl}/js/ybk/global.js?version=${jsVersion}" type="text/javascript"></script>
+</head>
+<body>
+<#include "ybk/include/page/head.html" />
+
+<div class="main market">
+	<div class="clearfix">
+
+		<#include "ybk/include/menu/ybk_article_left.html" />
+		<div class="mod-right">
+			<div class="mod-rightcontent">
+				<div class="Content">
+					<ul class="title">
+						<#if (list.items?size > 0)>
+							<#list list.items as i>
+								<li>
+									<#if i.categoryId==2>
+										<a href="javascript:void(0);">${i.title}</a>
+										<#else>
+											<a href="/ybk/article/detail.html?id=${i.id}&exchangeId=${leftExchangeId}">${i.title}</a>
+									</#if>
+									<span>${i.created?string("yyyy-MM-dd")}</span>
+								</li>
+							</#list>
+						<#else>
+							<div class="goodsTable" id="emptyfill">
+								<dl class="emptyOptional">
+									<dt><img src="${imgUrl}/empty.jpg"></dt>
+									<dd>暂无数据</dd>
+								</dl>
+							</div>
+						</#if>
+					</ul>
+					${pageHtml}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<#include "ybk/include/page/foot.html" />
+</body>
+</html>

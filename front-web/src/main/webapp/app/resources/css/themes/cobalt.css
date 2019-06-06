@@ -1,0 +1,112 @@
+.cobalt .topbar1 {
+    line-height: 35px;
+    height: 34px;
+    background: #444444;
+    color: #fff;
+    border-bottom: 1px solid #eeeeee;
+    font-family: "宋体";
+}
+
+.cobalt .prel-right a {
+    color: #fff;
+}
+
+.cobalt .nav ul li a {
+    color: #15A6E7;
+}
+
+.cobalt .sign-list .sign-inner {
+    width: 62px;
+    height: 62px;
+    vertical-align: middle;
+    display: inline-block;
+    background: url(../../image/index/icon-index-pzw-cobalt.png) no-repeat;
+}
+
+.cobalt .title-profit-p2p {
+    width: 825px;
+    height: 55px;
+    background: url(../../image/pz/title-index-pzw-cobalt.png) no-repeat right bottom;
+    color: #15A6E7;
+    font-size: 24px;
+    padding-left: 40px;
+    padding-top: 5px;
+}
+
+.cobalt .quantity-center {
+    background-color: #15A6E7;
+    padding: 35px 0 55px 0;
+    width: 100%;
+    margin-top: 25px;
+    text-align: center;
+    color: #fff;
+}
+
+.cobalt .btm-sign-list h4 {
+    color: #15A6E7;
+}
+
+.cobalt .btm-sign-list .sign-inner {
+    width: 56px;
+    height: 63px;
+    vertical-align: middle;
+    display: inline-block;
+    background: url(../../image/index/icon-index-pzw-cobalt.png) no-repeat;
+}
+
+.cobalt .sign-list .sign-inner-02 {
+    background-position: -62px 0;
+}
+
+.cobalt .sign-list .sign-inner-03 {
+    background-position: -124px 0;
+}
+
+.cobalt .sign-list .sign-inner-04 {
+    background-position: -186px 0;
+}
+
+.cobalt .btm-sign-list .sign-inner-01 {
+    background-position: 0 -62px;
+}
+
+.cobalt .btm-sign-list .sign-inner-02 {
+    background-position: -56px -62px;
+}
+
+.cobalt .btm-sign-list .sign-inner-03 {
+    background-position: -112px -62px;
+}
+
+.cobalt .btm-sign-list .sign-inner-04 {
+    background-position: -168px -62px;
+}
+
+.cobalt .btm-sign-list .sign-inner-05 {
+    background-position: -224px -62px;
+}
+
+.cobalt .footer .footer-wrapper {
+    background: #3A59E4;
+    background-image: -moz-linear-gradient(top, #a0090b, #c22a2b);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #3A59E4), color-stop(1, #370F88));
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3A59E4', endColorstr='#3A59E4', GradientType='0');
+}
+
+.cobalt .sidetoolbar-item {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    font-size: 25px;
+    box-shadow: 0px 0px 1px 0px #666;
+    border: 1px solid #eaeaea;
+    color: #fff;
+    cursor: pointer;
+    line-height: 40px;
+    margin: 0 0 5px 0;
+    background-color: #15A6E7;
+}
+
+.cobalt .sidetoolbar-item:hover {
+    border: 1px solid #15A6E7;
+}

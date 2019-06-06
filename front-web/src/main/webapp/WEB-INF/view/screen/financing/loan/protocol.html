@@ -1,0 +1,39 @@
+<#assign controller="LoanProtocol"/>
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon" type="image/ico" href="${dojoUrl}/app/resources/image/favicon.ico">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="Expires" content="0" />
+<link rel="stylesheet" type="text/css"
+	href="${dojoUrl}/app/resources/css/app${resRelease}.css" />
+<title>团融网</title>
+</head>
+<body class="protocol-ctn">
+<script type="text/javascript">
+	var dojoConfig = {
+	        selectorEngine: 'acme',
+	        async: 1,
+	        tlmSiblingOfDojo: 0,
+	        isDebug: 1,
+	        baseUrl: '${basePath}',
+	        packages: [
+				{name: 'dojo', location: '${dojoUrl}/dojo'},
+				{name: 'dijit', location: '${dojoUrl}/dijit'},
+				{name: 'dojox', location: '${dojoUrl}/dojox'},
+				{name: 'app', location: 'app'}
+			],
+			controller: '${controller}'
+	    };
+</script>
+<#if resRelease = ".min">
+<script src="${basePath}/min/dojo.js"></script>
+<script src="${basePath}/min/${controller}.js"></script>
+<#else>
+<script src="${dojoUrl}/dojo/dojo.js"></script>
+</#if>
+<script>
+	require(['app']);
+</script>
+</body>
+</html>

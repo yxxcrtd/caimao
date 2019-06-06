@@ -1,0 +1,56 @@
+<#include 'mobile/layout/layout.html'/> 
+<#macro assignSet>
+	<#assign bg="bg-gray"/>  
+	<#assign footer="0"/> 
+	<#assign title="交易"/> 
+	<#assign header="交易" />
+</#macro>
+
+<#macro headerContent>
+<!--tab-->
+	<#assign tabItem="0"/>
+	<#include 'mobile/component/tradeHeader.html'/>
+<!--tab-->
+</#macro>
+
+<#macro content>
+<article class="content" style="padding-top:99px;">
+<!--表单-->
+<aside class="con-frame">
+<ul class="datalist">
+<li class="datalist-item clearfix">
+<a href="${basePath}/mobile/trade/buy.htm" class="am-grid datalist-line">
+        <div class="am-grid-item am-grid-item-75  am-ft-left">
+         <span class="am-ft-md am-ft-main">买入</span>
+        </div> 
+        <div class="am-grid-item am-grid-item-25 am-ft-right am-right-15">
+        <span class="type-ico am-icon-arrow-right"></span>
+        </div>
+</a>
+</li>
+<li class="datalist-item clearfix">
+<a href="${basePath}/mobile/trade/sell.htm" class="am-grid datalist-line">
+        <div class="am-grid-item am-grid-item-75  am-ft-left">
+         <span class="am-ft-md am-ft-main">卖出</span>
+        </div> 
+        <div class="am-grid-item am-grid-item-25 am-ft-right am-right-15">
+        <span class="type-ico am-icon-arrow-right"></span>
+        </div>
+</a>
+</li>
+<li class="datalist-item clearfix">
+<a href="${basePath}/mobile/trade/withdrawal.htm" class="am-grid datalist-line">
+        <div class="am-grid-item am-grid-item-75  am-ft-left">
+         <span class="am-ft-md am-ft-main">撤单</span>
+        </div> 
+        <div class="am-grid-item am-grid-item-25 am-ft-right am-right-15">
+        <span class="type-ico am-icon-arrow-right"></span>
+        </div>
+</a>
+</li>
+
+</ul>
+</aside>
+<!--表单-->
+</article>
+</#macro>

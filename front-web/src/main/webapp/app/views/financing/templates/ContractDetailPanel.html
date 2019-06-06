@@ -1,0 +1,64 @@
+<div>
+<div class="title-contract-special clearfix">
+<h4>合约详情1</h4>
+<span class="arrow"></span>
+</div>
+<div class="con-contract">
+<table width="100%" border="0" cellspacing="0" class="table-assetsIndex">
+  <tbody>
+  <tr>
+    <th>月利率：</th>
+    <td><span class="am-ft-md" data-dojo-attach-point="interestRateNode"></span>
+    </td>
+    <th>应付利息：</th>
+    <td><span class="am-ft-md am-ft-number am-ft-green" data-dojo-attach-point="accruedInterestNode"></span><span class="am-ft-md"> 元</span>
+    </td>
+    <th>已结利息：</th>
+    <td><span class="am-ft-md am-ft-number" data-dojo-attach-point="settledInterestNode"></span><span class="am-ft-md"> 元</span>
+    </td>
+  </tr>
+  <tr>
+    <th>每日利息：</th>
+    <td><span class="am-ft-md am-ft-number" data-dojo-attach-point="dayInterestNode"></span><span class="am-ft-md"> 元</span>
+    </td>
+    <th>下次结息日：</th>
+    <td colspan="3"><span class="am-ft-md" data-dojo-attach-point="settledDateNode"></span></td>
+    </tr>
+    <tr>
+    <th>保证金：</th>
+    <td><span class="am-ft-md am-ft-number" data-dojo-attach-point="netAssetNode"></span><span class="am-ft-md"> 元</span>
+    </td>
+    <th>融资成数：</th>
+    <td colspan="3"><span class="am-ft-md am-ft-orange" data-dojo-attach-point="ratioNode"></span></td>
+    </tr>
+    <tr>
+    <th>借款日期：</th>
+    <td><span class="am-ft-md" data-dojo-attach-point="beginDateNode"></span>
+    </td>
+    <th>到期日：</th>
+    <td colspan="3"><span class="am-ft-md" data-dojo-attach-point="endDateNode"></span><span class="am-left-20">剩余 <b class="am-ft-orange" data-dojo-attach-point="dayLeftNode"></b> 天</span>
+    <a href="${baseUrl}/financing/loan/extension.htm" target="_blank" data-dojo-attach-point="extendLinkNode"><div data-dojo-attach-point="extendBtnNode"></div></a></td>
+    </tr>
+</tbody>
+</table>
+</div>
+<div class="title-contract-special clearfix">
+<h4>出借人信息</h4>
+<span class="arrow"></span>
+</div>
+<div class="con-contract">
+<table width="100%" border="0" cellspacing="0" class="table-assetsIndex">
+  <tbody>
+  <tr>
+    <th>姓名：</th>
+    <td width="280"><span class="am-ft-md" data-dojo-attach-point="counterpartNameNode"></span>
+    <span class="am-ft-md" data-dojo-attach-point="counterpartCardNode"></span>
+    </td>
+    <th>平台用户号：</th>
+    <td><span class="am-ft-md" data-dojo-attach-point="counterpartAccountNode"></span>
+    </td>
+  </tr>
+</tbody>
+</table>
+</div>
+</div>

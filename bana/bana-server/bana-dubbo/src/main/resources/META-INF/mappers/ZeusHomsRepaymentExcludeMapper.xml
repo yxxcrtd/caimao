@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ZeusHomsRepaymentExclude">
+
+	<resultMap id="BaseResultMap" type="com.caimao.bana.api.entity.zeus.ZeusHomsRepaymentExcludeEntity" >
+        <result column="user_id" property="userId" jdbcType="BIGINT" />
+		<result column="user_real_name" property="userRealName" jdbcType="VARCHAR" />
+		<result column="mobile" property="mobile" jdbcType="VARCHAR" />
+		<result column="homs_combine_id" property="homsCombineId" jdbcType="VARCHAR" />
+        <result column="homs_fund_account" property="homsFundAccount" jdbcType="VARCHAR" />
+        <result column="created" property="created" jdbcType="DATE" />
+	</resultMap>
+
+	<sql id="Base_Column_List" >
+      user_id, user_real_name, mobile, homs_combine_id, homs_fund_account,created
+	</sql>
+
+    <!--获取指定的账户的排除列表（如果都为null，则查询所有的）-->
+    <select id="queryList" resultMap="BaseResultMap" parameterType="java.util.Map">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM zeus_homs_repayment_exclude
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="homsCombineId != null">
+                AND homs_combine_id = #{homsCombineId}
+            </if>
+            <if test="homsFundAccount != null">
+                AND homs_fund_account = #{homsFundAccount}
+            </if>
+        </trim>
+    </select>
+
+    <insert id="save" parameterType="com.caimao.bana.api.entity.zeus.ZeusHomsRepaymentExcludeEntity">
+        INSERT INTO zeus_homs_repayment_exclude
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test="userRealName != null">user_real_name,</if>
+            <if test="mobile != null">mobile,</if>
+            <if test="homsCombineId != null">homs_combine_id,</if>
+            <if test="homsFundAccount != null">homs_fund_account,</if>
+            <if test="created != null">created,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="userId != null">#{userId},</if>
+            <if test="userRealName != null">#{userRealName},</if>
+            <if test="mobile != null">#{mobile},</if>
+            <if test="homsCombineId != null">#{homsCombineId},</if>
+            <if test="homsFundAccount != null">#{homsFundAccount},</if>
+            <if test="created != null">#{created},</if>
+        </trim>
+    </insert>
+
+    <delete id="delete" parameterType="java.util.Map">
+        DELETE FROM zeus_homs_repayment_exclude
+        WHERE homs_combine_id = #{homsCombineId} AND homs_fund_account = #{homsFundAccount}
+    </delete>
+
+
+</mapper>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SJS_Snapshot">
+	<resultMap id="BaseResultMap" type="com.caimao.hq.api.entity.SJSSnapshot">
+		<id column="snapshot_id" property="snapshotId" jdbcType="BIGINT" />
+		<id column="exchange" property="exchange" jdbcType="VARCHAR" />
+		<id column="prod_code" property="prodCode" jdbcType="VARCHAR" />
+		<id column="board_code" property="boardCode" jdbcType="VARCHAR" />
+		<id column="prod_name" property="prodName" jdbcType="VARCHAR" />
+		<id column="min_time" property="minTime" jdbcType="VARCHAR" />
+		<id column="open_px" property="openPx" jdbcType="DOUBLE" />
+		<id column="last_px" property="lastPx" jdbcType="DOUBLE" />
+		<id column="px_change" property="pxChange" jdbcType="DOUBLE" />
+		<id column="px_change_rate" property="pxChangeRate" jdbcType="DOUBLE" />
+		<id column="high_px" property="highPx" jdbcType="DOUBLE" />
+		<id column="low_px" property="lowPx" jdbcType="DOUBLE" />
+		<id column="average_px" property="averagePx" jdbcType="DOUBLE" />
+		<id column="business_amount" property="businessAmount" jdbcType="DOUBLE" />
+		<id column="order_amount" property="orderAmount" jdbcType="DOUBLE" />
+		<id column="preclose_px" property="preclosePx" jdbcType="DOUBLE" />
+		<id column="bid_grp" property="bidGrp" jdbcType="VARCHAR" />
+		<id column="offer_grp" property="offerGrp" jdbcType="VARCHAR" />
+		<id column="business_balance" property="businessBalance" jdbcType="DOUBLE" />
+		<id column="last_weight" property="lastWeight" jdbcType="DOUBLE" />
+		<id column="high_limit" property="highLimit" jdbcType="DOUBLE" />
+		<id column="low_limit" property="lowLimit" jdbcType="DOUBLE" />
+		<id column="sequence_no" property="sequenceNo" jdbcType="DOUBLE" />
+		<id column="close_px" property="closePx" jdbcType="DOUBLE" />
+		<id column="last_amount" property="lastAmount" jdbcType="DOUBLE" />
+		<id column="trade_date" property="tradeDate" jdbcType="VARCHAR" />
+		<id column="trade_time" property="tradeTime" jdbcType="VARCHAR" />
+		<id column="business_balance_hand" property="businessBalanceHand" jdbcType="DOUBLE" />
+		<id column="opt_date" property="optDate" jdbcType="VARCHAR" />
+		<id column="status" property="status" jdbcType="VARCHAR" />
+		<id column="redis_key" property="redisKey" jdbcType="VARCHAR" />
+		<result column="last_settle" property="lastSettle" jdbcType="DOUBLE" />
+		<result column="settle" property="settle" jdbcType="DOUBLE" />
+		<result column="is_goods" property="isGoods" jdbcType="DOUBLE" />
+
+	</resultMap>
+	<insert id="insert" parameterType="com.caimao.hq.api.entity.SJSSnapshot"
+			useGeneratedKeys="true" keyProperty="snapshotId">
+		insert into gjs_sjs_snapshot(exchange,prod_code,board_code,prod_name,min_time,open_px,last_px,px_change,px_change_rate,high_px,low_px,average_px,business_amount,order_amount,preclose_px,bid_grp,offer_grp,business_balance,last_amount,trade_date,trade_time,business_balance_hand,last_weight,high_limit,low_limit,sequence_no,close_px,opt_date,status,redis_key,last_settle,settle,is_goods)
+		values(#{exchange},#{prodCode},#{boardCode},#{prodName},#{minTime},#{openPx},#{lastPx},#{pxChange},#{pxChangeRate},#{highPx},#{lowPx},#{averagePx},#{businessAmount},#{orderAmount},#{preclosePx},#{bidGrp},#{offerGrp},#{businessBalance},#{lastAmount},#{tradeDate},#{tradeTime},#{businessBalanceHand},#{lastWeight},#{highLimit},#{lowLimit},#{sequenceNo},#{closePx},#{optDate},#{status},#{redisKey},#{lastSettle},#{settle},#{isGoods})
+	</insert>
+
+	<insert id="insertBatch" parameterType="java.util.List">
+		insert into gjs_sjs_snapshot(exchange,prod_code,board_code,prod_name,min_time,open_px,last_px,px_change,px_change_rate,high_px,low_px,average_px,business_amount,order_amount,preclose_px,bid_grp,offer_grp,business_balance,last_amount,trade_date,trade_time,business_balance_hand,last_weight,high_limit,low_limit,sequence_no,close_px,opt_date,status,redis_key,last_settle,settle,is_goods)
+		values
+		<foreach collection="list" item="item" index="index" separator="," >
+			(#{item.exchange},#{item.prodCode},#{item.boardCode},#{item.prodName},#{item.minTime},#{item.openPx},#{item.lastPx},#{item.pxChange},#{item.pxChangeRate},#{item.highPx},#{item.lowPx},#{item.averagePx},#{item.businessAmount},#{item.orderAmount},#{item.preclosePx},#{item.bidGrp},#{item.offerGrp},#{item.businessBalance},#{item.lastAmount},#{item.tradeDate},#{item.tradeTime},#{item.businessBalanceHand},#{item.lastWeight},#{item.highLimit},#{item.lowLimit},#{item.sequenceNo},#{item.closePx},#{item.optDate},#{item.status},#{item.redisKey},#{item.lastSettle},#{item.settle},#{item.isGoods})
+		</foreach>
+
+	</insert>
+
+
+	<select id="selectNew" resultMap="BaseResultMap" parameterType="STRING">
+		  select * from (select * from gjs_sjs_snapshot order by min_time desc) as a  group by prod_code  order by min_time desc
+	</select>
+
+
+	<select id="tradeAmountQueryHistory" resultMap="BaseResultMap" parameterType="com.caimao.hq.api.entity.TradeAmountReq">
+		select  UNIX_TIMESTAMP(t.min_time) min_time,t.exchange,t.last_amount,t.prod_code,t.prod_name,t.last_px
+		from gjs_sjs_snapshot t
+		WHERE  t.exchange = #{exchange} and t.prod_code = #{prodCode}
+		<if test="beginDate != null and  beginDate != ''">
+			AND left(t.min_time,8)>= #{beginDate}
+		</if>
+		<if test="endDate != null and  endDate != ''">
+			AND left(t.min_time,8) <![CDATA[ <= ]]>#{endDate}
+		</if>
+		order by  t.min_time  desc
+		limit #{number}
+	</select>
+
+	<select id="query" resultMap="BaseResultMap" parameterType="com.caimao.hq.api.entity.SJSSnapshot">
+		select    t.*
+		from gjs_sjs_snapshot t
+		WHERE t.exchange = #{exchange}    and t.prod_code = #{prodCode}
+		<if test="tradeDate != null and  tradeDate != ''">
+			AND trade_date= #{tradeDate}
+		</if>
+		<if test="tradeTime != null and  tradeTime != ''">
+			AND trade_time= #{tradeTime}
+		</if>
+		limit 20000
+	</select>
+
+	<select id="selectDateNear5"  resultType="String" parameterType="com.caimao.hq.api.entity.TradeAmountReq">
+		Select  DISTINCT(left(t.min_time,8))  from gjs_sjs_snapshot t
+		WHERE t.exchange = #{exchange}  and  t.prod_code = #{prodCode}
+		ORDER BY t.min_time desc
+		limit 5
+	</select>
+</mapper>

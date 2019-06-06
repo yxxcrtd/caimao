@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="TpzBankType">
+    <resultMap id="BaseResultMap" type="com.caimao.bana.api.entity.TpzBankTypeEntity">
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="bank_no" property="bankNo" jdbcType="VARCHAR" />
+        <result column="bank_name" property="bankName" jdbcType="VARCHAR" />
+        <result column="is_enable" property="isEnable" jdbcType="CHAR" />
+        <result column="bank_addr_no" property="bankAddrNo" jdbcType="VARCHAR" />
+        <result column="is_quick_pay" property="isQuickPay" jdbcType="CHAR" />
+        <result column="channel_id" property="channelId" jdbcType="INTEGER" />
+        <result column="rates" property="rates" jdbcType="DECIMAL" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        id,bank_no, bank_name, is_enable, bank_addr_no,
+        is_quick_pay,channel_id,rates
+    </sql>
+
+    <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List" />
+        from tpz_bank_type
+        where bank_no = #{bankNo,jdbcType=VARCHAR}
+    </select>
+
+    <select id="queryBankList" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List" />
+        from tpz_bank_type
+        where channel_id = #{channelId,jdbcType=INTEGER}
+    </select>
+
+
+    <select id="getBankInfo" resultType="com.caimao.bana.api.entity.TpzBankTypeEntity">
+        SELECT
+        id, bank_no as bankNo, bank_name as bankName, is_enable as isEnable, bank_addr_no as bankAddrNo, is_quick_pay as isQuickPay, channel_id as channelId, rates
+        FROM tpz_bank_type WHERE bank_no = #{bankNo} AND channel_id = #{channelId}
+    </select>
+
+</mapper>

@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link href="${staticUrl}/style/personal.css" rel="stylesheet" media="screen">
+    <script src="${staticUrl}/js/lib.js"></script>
+    <script src="${staticUrl}/js/user.js"></script>
+    <script src="${staticUrl}/js/jsencrypt.js"></script>
+	<script>
+		var token = <#if token != "">"${token}"<#else/>null</#if>;
+        var PUBLICKEY = "${publicKey}";
+	</script>

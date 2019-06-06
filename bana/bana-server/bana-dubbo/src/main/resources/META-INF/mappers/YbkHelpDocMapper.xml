@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="YbkHelpDoc">
+
+    <resultMap id="BaseResultMap" type="com.caimao.bana.api.entity.ybk.YbkHelpDocEntity" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="category_id" property="categoryId" jdbcType="INTEGER" />
+        <result column="title" property="title" jdbcType="VARCHAR" />
+        <result column="content" property="content" jdbcType="LONGVARCHAR" />
+        <result column="is_show" property="isShow" jdbcType="VARCHAR" />
+        <result column="created" property="created" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, 
+        category_id, 
+        title, 
+        content, 
+        is_show, 
+        created
+    </sql>
+
+    <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select <include refid="Base_Column_List" /> from ybk_help_doc where id = #{id, jdbcType=BIGINT}
+    </select>
+
+    <delete id="deleteById" parameterType="java.lang.Long" >
+        delete from ybk_help_doc where id = #{id, jdbcType=BIGINT}
+    </delete>
+
+    <select id="queryYbkHelpDocWithPage" resultMap="BaseResultMap" parameterType="com.caimao.bana.api.entity.req.ybk.FQueryYbkHelpDocReq" >
+        select <include refid="Base_Column_List" /> from ybk_help_doc
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="categoryId !=null and categoryId != ''">
+                AND category_id = #{categoryId}
+            </if>
+            <if test="isShow !=null and isShow != ''">
+                AND is_show = #{is_show}
+            </if>
+        </trim>
+        ORDER BY created DESC
+    </select>
+
+    <insert id="insert" parameterType="com.caimao.bana.api.entity.ybk.YbkHelpDocEntity">
+        insert into ybk_help_doc
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="categoryId != null">
+                category_id,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+            <if test="isShow != null">
+                is_show,
+            </if>
+            <if test="created != null">
+                created,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id, jdbcType=BIGINT},
+            </if>
+            <if test="categoryId != null">
+                #{categoryId, jdbcType=INTEGER},
+            </if>
+            <if test="title != null">
+                #{title, jdbcType=VARCHAR},
+            </if>
+            <if test="content != null">
+                #{content, jdbcType=LONGVARCHAR},
+            </if>
+            <if test="isShow != null">
+                #{isShow, jdbcType=VARCHAR},
+            </if>
+            <if test="created != null">
+                #{created, jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="update" parameterType="com.caimao.bana.api.entity.ybk.YbkHelpDocEntity">
+        update ybk_help_doc
+        <set>
+            <if test="categoryId != null">
+                category_id = #{categoryId, jdbcType=INTEGER},
+            </if>
+            <if test="title != null">
+                title = #{title, jdbcType=VARCHAR},
+            </if>
+            <if test="content != null">
+                content = #{content, jdbcType=LONGVARCHAR},
+            </if>
+            <if test="isShow != null">
+                is_show = #{isShow, jdbcType=VARCHAR},
+            </if>
+            <if test="created != null">
+                created = #{created, jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id, jdbcType=BIGINT}
+    </update>
+
+</mapper>

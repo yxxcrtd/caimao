@@ -1,0 +1,54 @@
+<div class="layout_wrap" id="dialog_point">
+    <div class="layout layout02">
+        <h3 class="title">追加保证金<a href="javascript:void(0);" id="dialog_close"><i class="icons icon_close"></i></a>  </h3>
+
+        <form id="dialog_pz_fundin">
+            <input type="hidden" id="dialogContractNo" name="dialogContractNo" value="${contractNo}" />
+            <p class="group m_t_10">
+                <span class="col_1">可用余额</span>
+                <span class="col_2"><b class="font_red">${formatAmount(availableAmount, 2, "", 1)}</b>元  &nbsp; &nbsp;<a href="/account/recharge/wangyin.htm">充值</a></span>
+            </p>
+            <div class="group m_t_10">
+                <span class="col_1">追加金额 </span>
+            <span class="col_2">
+                <input class="input_text" name="zhuijiaamount" validateType="empty:请输入追加金额 money" id="dialogZhuijiaAmount" type="text" autocomplete="off" placeholder="请输入追加金额" maxlength="8" />
+            </span>
+            </div>
+            <div class="group m_t_20">
+                <button class="btn btn_red" type="button" id="dialogQuerenzhuijia">确认追加</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var formObj = $('#dialog_pz_fundin'),
+            inputContractNo = $('#dialogContractNo'),
+            inputAmount = $('#dialogZhuijiaAmount'),
+            btnSubmit = $('#dialogQuerenzhuijia');
+
+    formValidate.init(formObj);
+
+    // 追加的操作
+    $(btnSubmit).click(function() {
+        if (formValidate.validateForm(formObj) == false) {
+            return false;
+        }
+        // 合约ID，转入金额
+        var contractNo = $(inputContractNo).val();
+        var transAmount = $(inputAmount).val() * 100;
+        $.ajax({
+            url : "/pz/operation/in",
+            type : "POST",
+            data : {contract_no : contractNo, trans_amount : transAmount},
+            dataType : "json",
+            success : function(res) {
+                if (res.success == true) {
+                    Alert.show("追加保证金成功", "确认", function() {window.location.reload()});
+                } else {
+                    formValidate.showFormTips(btnSubmit, res.msg);
+                }
+            }
+        });
+    });
+</script>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ZeusHomsAccountAssets">
+
+	<resultMap id="BaseResultMap" type="com.caimao.bana.api.entity.zeus.ZeusHomsAccountAssetsEntity" >
+		<id column="id" property="id" jdbcType="BIGINT" />
+        <result column="user_id" property="userId" jdbcType="BIGINT" />
+		<result column="user_name" property="userName" jdbcType="VARCHAR" />
+		<result column="mobile" property="mobile" jdbcType="VARCHAR" />
+		<result column="contract_no" property="contractNo" jdbcType="BIGINT" />
+		<result column="homs_combine_id" property="homsCombineId" jdbcType="VARCHAR" />
+        <result column="homs_fund_account" property="homsFundAccount" jdbcType="VARCHAR" />
+		<result column="begin_amount" property="beginAmount" jdbcType="BIGINT" />
+		<result column="cur_amount" property="curAmount" jdbcType="BIGINT" />
+        <result column="current_cash" property="currentCash" jdbcType="BIGINT" />
+        <result column="enable_ratio" property="enableRatio" jdbcType="DOUBLE" />
+        <result column="enable_withdraw" property="enableWithdraw" jdbcType="BIGINT" />
+        <result column="exposure_ratio" property="exposureRatio" jdbcType="DOUBLE" />
+        <result column="loan_amount" property="loanAmount" jdbcType="BIGINT" />
+        <result column="total_asset" property="totalAsset" jdbcType="BIGINT" />
+        <result column="total_market_value" property="totalMarketValue" jdbcType="BIGINT" />
+        <result column="total_net_assets" property="totalNetAssets" jdbcType="BIGINT" />
+        <result column="total_profit" property="totalProfit" jdbcType="BIGINT" />
+        <result column="update_date" property="updateDate" jdbcType="VARCHAR" />
+
+	</resultMap>
+
+	<sql id="Base_Column_List" >
+      id, user_id, user_name, mobile, contract_no, homs_combine_id, homs_fund_account, begin_amount, cur_amount,
+      current_cash, enable_ratio, enable_withdraw, exposure_ratio, loan_amount,
+      total_asset, total_market_value, total_net_assets, total_profit, update_date
+	</sql>
+
+    <!--搜索使用的根据姓名或手机号模糊搜索-->
+    <select id="searchUserHomsAssetsListWithPage" resultMap="BaseResultMap" parameterType="com.caimao.bana.api.entity.req.FZeusHomsAccountAssetsReq">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM zeus_homs_account_assets
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="updateDate != null">
+                AND update_date = #{updateDate}
+            </if>
+            <if test="match != null">
+                AND (user_name LIKE "%"#{match}"%" OR mobile LIKE "%"#{match}"%")
+            </if>
+            <if test="type == 1">
+                AND (loan_amount * exposure_ratio) &gt; total_net_assets
+            </if>
+        </trim>
+        ORDER BY (total_net_assets - loan_amount) ASC
+    </select>
+
+    <!--保存homs操盘账户的资产信息-->
+    <insert id="save" parameterType="com.caimao.bana.api.entity.zeus.ZeusHomsAccountAssetsEntity">
+        INSERT INTO zeus_homs_account_assets
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test="userName != null">user_name,</if>
+            <if test="mobile != null">mobile,</if>
+            <if test="contractNo != null">contract_no,</if>
+            <if test="homsCombineId != null">homs_combine_id,</if>
+            <if test="homsFundAccount != null">homs_fund_account,</if>
+            <if test="beginAmount != null">begin_amount,</if>
+            <if test="curAmount != null">cur_amount,</if>
+            <if test="currentCash != null">current_cash,</if>
+            <if test="enableRatio != null">enable_ratio,</if>
+            <if test="enableWithdraw != null">enable_withdraw,</if>
+            <if test="exposureRatio != null">exposure_ratio,</if>
+            <if test="loanAmount != null">loan_amount,</if>
+            <if test="totalAsset != null">total_asset,</if>
+            <if test="totalMarketValue != null">total_market_value,</if>
+            <if test="totalNetAssets != null">total_net_assets,</if>
+            <if test="totalProfit != null">total_profit,</if>
+            <if test="updateDate != null">update_date,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="userId != null">#{userId},</if>
+            <if test="userName != null">#{userName},</if>
+            <if test="mobile != null">#{mobile},</if>
+            <if test="contractNo != null">#{contractNo},</if>
+            <if test="homsCombineId != null">#{homsCombineId},</if>
+            <if test="homsFundAccount != null">#{homsFundAccount},</if>
+            <if test="beginAmount != null">#{beginAmount},</if>
+            <if test="curAmount != null">#{curAmount},</if>
+            <if test="currentCash != null">#{currentCash},</if>
+            <if test="enableRatio != null">#{enableRatio},</if>
+            <if test="enableWithdraw != null">#{enableWithdraw},</if>
+            <if test="exposureRatio != null">#{exposureRatio},</if>
+            <if test="loanAmount != null">#{loanAmount},</if>
+            <if test="totalAsset != null">#{totalAsset},</if>
+            <if test="totalMarketValue != null">#{totalMarketValue},</if>
+            <if test="totalNetAssets != null">#{totalNetAssets},</if>
+            <if test="totalProfit != null">#{totalProfit},</if>
+            <if test="updateDate != null">#{updateDate},</if>
+        </trim>
+    </insert>
+
+    <!--根据条件查找记录-->
+    <select id="getHomsAssets" resultMap="BaseResultMap" parameterType="com.caimao.bana.api.entity.zeus.ZeusHomsAccountAssetsEntity">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM zeus_homs_account_assets
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="updateDate != null">
+                AND update_date = #{updateDate}
+            </if>
+            <if test="userName != null">
+                AND user_name = #{userName}
+            </if>
+            <if test="mobile != null">
+                AND mobile = #{mobile}
+            </if>
+            <if test="homsCombineId != null">
+                AND homs_combine_id = #{homsCombineId}
+            </if>
+            <if test="homsFundAccount != null">
+                AND homs_fund_account = #{homsFundAccount}
+            </if>
+        </trim>
+        LIMIT 1
+    </select>
+
+    <!--获取指定日期需要更新的资产的记录-->
+    <select id="queryNeedUpdateAssetsList" resultType="com.caimao.bana.api.entity.res.other.FHomsNeedUpdateAssetsRes">
+      SELECT user_id AS userId, `homs_fund_account` AS homsFundAccount, `homs_combine_id` AS homsCombineId, contract_no AS contractNo
+      FROM tpz_homs_account_loan
+      WHERE `contract_no` NOT IN (
+        SELECT contract_no FROM zeus_homs_account_assets WHERE update_date = #{updateDate}
+        );
+    </select>
+
+
+</mapper>

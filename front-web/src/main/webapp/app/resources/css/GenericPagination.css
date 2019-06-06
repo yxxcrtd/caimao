@@ -1,0 +1,38 @@
+.GenericPagination {
+	padding-top: 10px;
+}
+.GenericPaginationSize {
+	color: #959595;
+	font-size: 12px;
+	float: right;
+}
+
+.GenericPaginationSize .dijitButtonText {
+	color: #000;
+}
+
+.GenericPaginationSize span {
+	vertical-align: middle;
+}
+
+.GenericPaginationSize .dijitSelect {
+	margin: 0 5px;
+}
+
+.GenericPagination .dijitButtonContents {
+	width: 25px;
+}
+
+.GenericPaginationStepperContainer {
+	float: right;
+	margin-left: 10px;
+	font-size: 12px;
+}
+
+.GenericPaginationStepperContainer .genericButton {
+	margin-left: 5px;
+}
+
+.GenericPagination .dijitInputField {
+	padding: 1px 10px!important;
+}

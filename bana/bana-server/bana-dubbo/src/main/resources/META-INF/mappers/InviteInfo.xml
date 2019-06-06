@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="InviteInfo">
+    <select id="getRegCount" resultType="hashmap">
+        SELECT ref_user_id AS refUserId,COUNT(*) AS cnt FROM tpz_user GROUP BY ref_user_id
+    </select>
+
+    <select id="getPZCount" resultType="hashmap">
+        SELECT user_id FROM `tpz_loan_apply` WHERE user_id IN (SELECT user_id FROM tpz_user WHERE ref_user_id = ${userId}) AND verify_status = 1 GROUP BY user_id;
+    </select>
+
+    <select id="getPZAmountDay" resultType="Long">
+        SELECT FLOOR(SUM(loan_amount / 22))  FROM `tpz_loan_contract` WHERE user_id IN (SELECT user_id FROM tpz_user WHERE ref_user_id = ${userId}) AND interest_settle_days = 1;
+    </select>
+
+    <select id="getPZAmountDayHis" resultType="Long">
+        SELECT FLOOR(SUM(loan_amount / 22))  FROM `his_tpz_loan_contract` WHERE user_id IN (SELECT user_id FROM tpz_user WHERE ref_user_id = ${userId}) AND interest_settle_days = 1;
+    </select>
+
+    <select id="getPZAmountMonth" resultType="Long">
+        SELECT SUM(loan_amount)  FROM `tpz_loan_contract` WHERE user_id IN (SELECT user_id FROM tpz_user WHERE ref_user_id = ${userId}) AND interest_settle_days = 30;
+    </select>
+
+    <select id="getPZAmountMonthHis" resultType="Long">
+        SELECT SUM(loan_amount)  FROM `his_tpz_loan_contract` WHERE user_id IN (SELECT user_id FROM tpz_user WHERE ref_user_id = ${userId}) AND interest_settle_days = 30;
+    </select>
+
+    <select id="getUserListRef" resultType="hashmap">
+        SELECT user_id AS userId, ref_user_id AS refUserI FROM tpz_user WHERE ref_user_id != 0
+    </select>
+
+    <select id="getPZAmountDayByUserId" resultType="Long">
+        SELECT FLOOR(SUM(loan_amount / 22))  FROM `tpz_loan_contract` WHERE user_id = #{userId} AND interest_settle_days = 1;
+    </select>
+
+    <select id="getPZAmountDayHisByUserId" resultType="Long">
+        SELECT FLOOR(SUM(loan_amount / 22))  FROM `his_tpz_loan_contract` WHERE user_id = #{userId} AND interest_settle_days = 1;
+    </select>
+
+    <select id="getPZAmountMonthByUserId" resultType="Long">
+        SELECT SUM(loan_amount)  FROM `tpz_loan_contract` WHERE user_id = #{userId} AND interest_settle_days = 30;
+    </select>
+
+    <select id="getPZAmountMonthHisByUserId" resultType="Long">
+        SELECT SUM(loan_amount)  FROM `his_tpz_loan_contract` WHERE user_id = #{userId} AND interest_settle_days = 30;
+    </select>
+
+    <select id="getInterest" resultType="Long">
+        SELECT SUM(order_amount) FROM tpz_accrued_interest_bill WHERE user_id IN (SELECT user_id FROM tpz_user WHERE ref_user_id = ${userId})
+    </select>
+
+    <insert id="insertInviteInfo" parameterType="hashmap" useGeneratedKeys="true" keyProperty="userId">
+        INSERT INTO invite_info (user_id, reg_cnt, pz_cnt, pz_amount, interest_amount, commission_level, commission_rate, created, updated)
+        VALUES (#{userId}, #{regCnt}, #{pzCnt}, #{pzAmount}, #{interestAmount}, ${commissionLevel}, ${commissionRate}, unix_timestamp(), unix_timestamp())
+    </insert>
+
+    <select id="getInviteInfoForUpdate" resultType="com.caimao.bana.api.entity.InviteInfoEntity">
+        SELECT
+        user_id AS userId,
+        reg_cnt AS regCnt,
+        pz_cnt AS pzCnt,
+        pz_amount AS pzAmount,
+        interest_amount AS interestAmount,
+        commission_level AS commissionLevel,
+        commission_rate AS commissionRate,
+        commission_total AS commissionTotal,
+        invite_total AS inviteTotal,
+        created,
+        updated
+        FROM invite_info
+        WHERE user_id = #{userId} FOR UPDATE
+    </select>
+
+    <select id="getInviteInfo" resultType="com.caimao.bana.api.entity.InviteInfoEntity">
+        SELECT
+        user_id AS userId,
+        reg_cnt AS regCnt,
+        pz_cnt AS pzCnt,
+        pz_amount AS pzAmount,
+        interest_amount AS interestAmount,
+        commission_level AS commissionLevel,
+        commission_rate AS commissionRate,
+        commission_total AS commissionTotal,
+        invite_total AS inviteTotal,
+        created,
+        updated
+        FROM invite_info
+        WHERE user_id = #{userId}
+    </select>
+
+    <update id="updateInviteInfo" parameterType="map">
+        UPDATE invite_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="_parameter.containsKey('regCnt')">
+                reg_cnt=#{regCnt},
+            </if>
+            <if test="_parameter.containsKey('pzCnt')">
+                pz_cnt=#{pzCnt},
+            </if>
+            <if test="_parameter.containsKey('pzAmount')">
+                pz_amount=#{pzAmount},
+            </if>
+            <if test="_parameter.containsKey('interestAmount')">
+                interest_amount=#{interestAmount},
+            </if>
+            <if test="_parameter.containsKey('commissionLevel')">
+                commission_level=#{commissionLevel},
+            </if>
+            <if test="_parameter.containsKey('commissionRate')">
+                commission_rate=#{commissionRate},
+            </if>
+            <if test="_parameter.containsKey('commissionTotal')">
+                commission_total=#{commissionTotal},
+            </if>
+            <if test="_parameter.containsKey('inviteTotal')">
+                invite_total=#{inviteTotal},
+            </if>
+            <if test="_parameter.containsKey('updated')">
+                updated=#{updated},
+            </if>
+        </trim>
+        <where>
+            user_id=#{userId}
+        </where>
+    </update>
+
+    <select id="getBrokerageRankCnt" resultType="hashmap">
+        SELECT t2.`user_real_name` AS userRealName, t1.`pz_cnt` AS pzCnt, t1.`commission_total` AS commissionTotal, t2.`mobile`
+        FROM invite_info t1
+        LEFT JOIN tpz_user t2 ON t1.`user_id` = t2.`user_id`
+        WHERE t2.`user_id` &gt; 10000
+        ORDER BY pz_cnt DESC, pz_amount DESC
+        LIMIT 8;
+    </select>
+
+    <select id="getBrokerageRankMoney" resultType="hashmap">
+        SELECT t2.`user_real_name` AS userRealName, t1.`pz_cnt` AS pzCnt, t1.`commission_total` AS commissionTotal, t1.`pz_amount` AS pzAmount, t2.`mobile`
+        FROM invite_info t1
+        LEFT JOIN tpz_user t2 ON t1.`user_id` = t2.`user_id`
+        WHERE t2.`user_id` &gt; 10000
+        ORDER BY pz_amount DESC, pz_cnt DESC
+        LIMIT 8;
+    </select>
+</mapper>

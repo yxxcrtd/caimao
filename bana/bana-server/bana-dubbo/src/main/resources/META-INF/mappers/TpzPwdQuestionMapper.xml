@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="PwdQuestion" >
+  <resultMap id="BaseResultMap" type="com.caimao.bana.api.entity.PwdQuestionEntity" >
+    <id column="question_id" property="questionId" jdbcType="VARCHAR" />
+    <result column="question_title" property="questionTitle" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    question_id, question_title
+  </sql>
+  <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from tpz_pwd_question
+    where question_id = #{questionId,jdbcType=VARCHAR}
+  </select>
+  <select id="getPwdQuestionAll" resultMap="BaseResultMap"   >
+    select 
+    <include refid="Base_Column_List" />
+    from tpz_pwd_question
+  </select>
+  <delete id="deleteById" parameterType="java.lang.String" >
+    delete from tpz_pwd_question
+    where question_id = #{questionId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="save" parameterType="com.caimao.bana.api.entity.PwdQuestionEntity" >
+    insert into tpz_pwd_question
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="questionId != null  and  questionId  != ''" >
+        question_id,
+      </if>
+      <if test="questionTitle != null  and  questionTitle  != ''" >
+        question_title,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="questionId != null  and  questionId  != ''" >
+        #{questionId,jdbcType=VARCHAR},
+      </if>
+      <if test="questionTitle != null  and questionTitle   != ''" >
+        #{questionTitle,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.caimao.bana.api.entity.PwdQuestionEntity" >
+    update tpz_pwd_question
+    <set >
+      <if test="questionTitle != null  and  questionTitle  != ''" >
+        question_title = #{questionTitle,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where question_id = #{questionId,jdbcType=VARCHAR}
+  </update>
+</mapper>

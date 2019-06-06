@@ -1,0 +1,144 @@
+<!doctype html>
+<#include "gjs/config.html" />
+<#assign topMenu="article" />
+
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>资讯-财猫贵金属（财猫网）最安全的贵金属投资理财平台</title>
+<#include "gjs/include/page/head.html" />
+<body>
+<#include "gjs/include/menu/topNav.html" />
+<#include "gjs/include/menu/menu.html" />
+	
+
+	<div class="newsPage">
+		<div class="innerCont clearfix">
+			<div class="mod-left nav">
+				<ul>
+					<li class="on"><i></i><a href="list.html">经济要闻</a></li>
+					<li><i></i><a href="flash.html">实时快讯</a></li>
+				</ul>
+
+			</div>
+			<div class="mod-right">
+				<div class="mod-rightcontent newsList" id="newsList">
+					<div class="loading"><img src="${imgUrl}/loading.gif"></div>
+					<script type="text/x-tmpl">
+						<ul class="newsFlash">
+								<% for(var _this,i = 0, l = data.items.length; i < l; i++){
+									_this = data.items[i];
+								%>
+								<li><a href="detail.html?id=<%=_this.id%>"><%=_this.title%></a><em class="newsInfo"><span>浏览:<%=_this.viewCount%></span><span><%=_this.created%></span></em></li>
+								<%
+									}
+								%>
+							
+						</ul>
+						
+						<%if(data.pages > 1){%>
+
+						<div class="page">
+							<div class="mod-page mod-page-separate mod-page-small">
+									<%
+									var n = data.currentPage,
+										itemLength = 5;
+									%>
+									<%	if (n != 1) {	%>
+											<a href="?data.currentPage - 1" class="pageprv">上一页</a>
+									<%	} else {	%>
+											<a href="#" class="pageprv z-dis">上一页</a>
+									<%	}	%>
+									<%	if (data.pages > itemLength && !(n - Math.ceil(itemLength / 2) <= 0)){	%>
+											<a href="?1">1</a><i>...</i>
+									<%	}	%>
+									<%	if (data.pages > itemLength) {	%>
+									<%		if (n - Math.ceil(itemLength / 2) <= 0) {	%>
+									<%			for (var i = 0, j; i < itemLength; i++) {	%>
+									<%				j = i + 1;	%>
+									<%				if (j == n) {	%>
+														<a href="#" class="z-crt"><%=n%></a>
+									<%				} else {	%>
+														<a href="?<%=j%>"><%=j%></a>
+									<%				}	%>
+									<%			}	%>
+									<%		} else if (data.pages - Math.ceil(itemLength / 2) <= n) {	%>
+									<%			for (var i = 1; i < itemLength; i++) {	%>
+									<%				if (n === data.pages) {	%>
+									<%					i--;	%>
+									<%					break;	%>
+									<%				}	%>
+									<%				if (n + i === data.pages) break;	%>
+									<%			}	%>
+									<%			i++;	%>
+									<%			for (var j = itemLength - i; i < itemLength; i++) {	%>
+													<a href="?<%=n-j%>"><%=(n - j)%></a>
+									<%				j--;	%>
+									<%			}	%>
+												<a href="#" class="z-crt"><%=n%></a>
+
+									<%			for (var i = 1; i < itemLength; i++) {	%>
+									<%				if (n === data.pages) {	%>
+									<%					i--;	%>
+									<%					break;	%>
+									<%				}	%>
+													<a href="?<%=n+i%>"><%=(n + i)%></a>
+									<%				if (n + i === data.pages) break;	%>
+									<%			}	%>
+									<%		} else {	%>
+									<%			for (var i = -1 * Math.floor(itemLength / 2); i < Math.ceil(itemLength / 2); i++) {	%>
+									<%				if (i == 0) {	%>
+														<a href="#" class="z-crt"><%=n%></a>
+									<%				} else {	%>
+														<a href="?<%=n+i%>"><%=(n + i)%></a>
+									<%				}	%>
+									<%			}	%>
+									<%		}	%>
+									<%	} else {	%>
+									<%		for (var i = 1; i <= data.pages; i++) {	%>
+									<%			if (i == n) {	%>
+													<a href="#" class="z-crt"><%=n%></a>
+									<%			} else {	%>
+													<a href="?<%=i%>"><%=i%></a>
+									<%			}	%>
+									<%		}	%>
+									<%	}	%>
+									<%	if (data.pages > itemLength && !(data.pages - Math.ceil(itemLength / 2) <= n)){%>
+										<i>...</i><a href="?<%=data.pages%>"><%=data.pages%></a>
+									<%	}	%>
+									<%	if (n != data.pages) {	%>
+											<a href="?<%=data.currentPage*1 + 1%>" class="pagenxt">下一页</a>
+									<%	} else {	%>
+											<a href="#" class="pagenxt z-dis">下一页</a>
+									<%	};	%>
+							</div>
+						</div>
+						<%
+							}
+						%>
+					</script>
+				</div>
+
+					<script>
+						var fire = h.render.omnipotent(),
+							cur = location.search.replace("?","")*1 || 1;
+						h.plan("#newsList",fire.key);
+						h.option = h.api.notice_list(15,cur,fire);
+						h.request(h.option);
+					</script>
+			</div>
+		</div>
+
+		<div class="innerCont noticeBox">
+			<div class="notice">
+				<p>1.财猫贵金属的数据解读是计算机自动获取并通过程序运算进行的理论性解读，不代表实际影响。</p>
+				<p>2.我们会尽力保证数据发布速度与准确性，由于不可控因素导致数据未能及时发布敬请谅解。</p>
+				<p>3.您或许看到有些数据延迟或提前发布，这是由于数据公布机构有时未必会准时发布所导致。</p>
+				<p>4.我们尊重作品的版权，由于内容庞杂，如某些文章侵犯了您的权益，请与我们联系删除。</p>
+			</div>
+		</div>
+	</div>
+	
+<#include "gjs/include/page/foot.html" />
+	</body>
+</html>

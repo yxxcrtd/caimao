@@ -1,0 +1,355 @@
+<#assign controller="Recharge"/>
+<#include 'layout/layout.html'/>
+<#macro content>
+    <style>
+        .panel h2 {
+            font-size: 16px;
+        }
+
+        .panel .uc-bank {
+        }
+
+        .panel .uc-bank table {
+            width: 100%;
+        }
+
+        .panel .uc-bank tr td {
+            border: 1px solid #e6e6e6;
+            padding: 4px 10px;
+        }
+
+        .panel .panel-dashed-line {
+            height: 0;
+            border-top: 1px dashed #e6e6e6;
+            margin-top: 50px;
+            padding-top: 30px;
+        }
+
+        .panel-b40 {
+            padding: 0 40px;
+        }
+
+        .panel p {
+            line-height: 30px;
+            padding-bottom: 20px;
+        }
+
+        .btn-gray-lg {
+            display: block;
+            text-align: center;
+            height: 40px;
+            line-height: 40px;
+            width: 160px;
+            background: #F8F8F5;
+            font-size: 14px;
+            color: #676767;
+            border: 1px solid #D1D1D1;
+        }
+
+        .btn-gray-lg:hover {
+            background: #FFFFFF;
+        }
+    </style>
+    <input type="hidden" id="pageGoto" value="${to}">
+    <div class="content">
+        <div class="container">
+            <div id="sidemenuctn" class="conside">
+            </div>
+            <div class="content-wrap">
+                <div class="">
+                    <div class="recharge-content">
+                        <div class="tab" id="tab">
+                            <div class="head">
+                                <!-- <span><i></i>快捷支付</span> -->
+                                <span class="select"><i></i>网银充值</span>
+                                <#if isAlipay><span><i></i>支付宝转账</span></#if>
+                                <#if isBankTransfer><span><i></i>银行转账</span></#if>
+                                <span><i></i>充值记录</span>
+                            </div>
+                            <!-- <div class="panel" id="panel1">
+                            </div> -->
+                            <div class="panel" id="panel2">
+
+                            </div>
+                            <#if isAlipay>
+                                <div class="panel" id="panel3" style="display:none;">
+                                    <div id="alipay1" style="padding:20px 50px 50px;">
+                                        <div style="height:40px; line-height:40px; padding:10px 0 30px;">
+                                            <img src="${dojoUrl}/app/resources/image/bank/alipay.jpg"
+                                                 style="float:left; margin-left:-25px;">
+                                            <em style="color:#B20000;">支付宝转账（手机转账0手续费）</em>
+                                        </div>
+                                        <div style="padding-bottom:20px;">
+                                            <div class="padd-line" style="padding-bottom: 0px">
+                                                <div class="panel-l">支付宝账号：</div>
+                                                <div class="ui-form-item" style="padding-left: 130px;"
+                                                     id="alipayFldId">
+                                                </div>
+                                            </div>
+                                            <div class="padd-line" style="padding-bottom: 0px">
+                                                <div class="panel-l">充值金额：</div>
+                                                <div class="ui-form-item" style="padding-left: 130px;"
+                                                     id="alipayAmountId">
+                                                </div>
+                                            </div>
+                                            <div class="padd-line" style="padding-bottom: 0px"
+                                                 id="nextAlipayButton"></div>
+                                        </div>
+                                    </div>
+
+                                    <div id="alipay2" style="padding: 40px 0px 0px;display:none;">
+                                        <div style="padding:20px 0; background:#F8F8F8;">
+                                            <table width="100%">
+                                                <tbody>
+                                                <tr>
+                                                    <td align="right" width="200">收款人支付宝账户：</td>
+                                                    <td style="padding:0 20px;">${alpayAccountID}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td align="right">账户名称：</td>
+                                                    <td style="padding:0 20px;">${alpayAccountName}</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div style="padding:20px 0;">
+                                            <table width="100%">
+                                                <tbody>
+                                                <tr>
+                                                    <td align="right" width="200">您的支付宝账户：</td>
+                                                    <td style="padding:0 20px;">
+                                                        <div id="u_alipayName"></div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td align="right">转入金额：</td>
+                                                    <td style="padding:0 20px;"><em id="u_money"
+                                                                                    style="color:#B30606;"></em>元<a
+                                                            id="zfbprevbtn"
+                                                            style="margin-left:40px;display:none;">修改金额</a></td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div style="padding:0 0 60px;">
+                                            <table width="100%">
+                                                <tbody>
+                                                <tr>
+                                                    <td align="center" width="400" height="50" style="color:#999999;">
+                                                        手机支付宝扫一扫，快速转账，<em style="color:#B20606;">0手续费</em></td>
+                                                    <td align="center" style="color:#999999;">去支付宝网站付款</td>
+                                                </tr>
+                                                <tr>
+                                                    <td align="center">
+                                                        <img src="${dojoUrl}/app/resources/image/customize/${alpayImg}"
+                                                             style="display:block;width: 200px;">
+                                                    </td>
+                                                    <td align="center">
+                                                        <a href="https://shenghuo.alipay.com/send/payment/fill.htm?_tosheet=true&amp;_pdType=afcabecbafgggffdhjch"
+                                                           class="zfb" target="_blank"><img
+                                                                src="${dojoUrl}/app/resources/image/bank/alipay.jpg"
+                                                                style="display:block;padding: 70px 35px;cursor: pointer;border: 1px solid #ccc"></a>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div style="padding:10px 250px; background:#F8F8F8;">
+                                            <em style="color:#B20000;">2小时内到账，如需加急，请联系客服</em>
+                                        </div>
+                                    </div>
+                                    <div style="padding-left: 20px;">
+                                        <p>充值须知：<br/>
+                                        到账时间：财猫网收到汇款后，20分钟内到账<br/>
+                                        充值服务时间早8点到晚21点</p>
+                                    </div>
+                                </div>
+                            </#if>
+                            <#if isBankTransfer>
+                                <div class="panel" id="panel4" style="display:none;">
+                                    <div class="panel-b40">
+                                        <div class="padd-line ">
+                                            <h2>您可以通过网上银行或银行柜台向 ${company} 转账</h2>
+                                        </div>
+                                        <div class="uc-bank">
+                                            <table width="100%">
+                                                <tbody>
+
+                                                <#list bankCards as bc>
+                                                    <tr>
+                                                        <td width="180" valign="middle" align="center">
+                                                            <img src="${dojoUrl}/app/resources/image/customize/${bc.img}"
+                                                                 style="display:block">
+                                                        </td>
+                                                        <td>
+                                                            <div style="line-height:150%;">
+                                                                账号：${bc.ID}<br>
+                                                                户名：${bc.name}<br>
+                                                                开户行：${bc.bank}
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </#list>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="padd-line " style="padding-top:20px;">
+                                            <h2 style="border-bottom: 1px solid #ddd; margin-bottom: 20px;">
+                                                银行转账确认单（<span
+                                                    style="color: #ff0000;">请在线下转账或银行汇款完成后填写，以方便客服为您及时处理！</span>）</h2>
+                                            <!-- 银行转账确认单 -->
+                                            <div id="transferConfirm"></div>
+                                        </div>
+                                    </div>
+                                    <div style="padding-left: 20px;">
+                                        <p>充值须知：<br/>
+                                            到账时间：财猫网收到汇款后，20分钟内到账<br/>
+                                            充值服务时间早8点到晚21点</p>
+                                    </div>
+                                </div>
+
+                            </#if>
+                            <div class="panel" id="panel5" style="display:none;padding: 30px 10px;">
+                                <div class="frame-all frame-all-box" style="width: 800px;">
+                                    <div class="filter-loan">
+                                        <div class="clearfix">
+                                            <div class="cm-left filter-date">
+                                                <span class="filter-loan-th">起止日期：</span>
+
+                                                <div id="daterangectn" style="margin-left: 90px;"></div>
+                                                <div class="filter-button">
+                                                    <a id="inquirybutton" href="javascript:void(0)"
+                                                       class="ui-button ui-button-sgray"><b
+                                                            class="ui-button-text am-ft-sm">查询</b></a>
+                                                </div>
+                                            </div>
+                                            <div id="datequickselectctn" class="cm-left second-left"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clearfix am-pb-10">
+                                    <span class="cm-left filter-loan-th">状态：</span>
+                                    <ul id="filterlist" class="cm-left listLateral list-filter">
+                                        <li class="list-filter-item" data-type="all"><a
+                                                href="javascript:void(0)" class="active">全部</a></li>
+                                        <li class="list-filter-item" data-type="02"><a
+                                                href="javascript:void(0)">待处理</a></li>
+                                        <li class="list-filter-item" data-type="06"><a
+                                                href="javascript:void(0)">待确认</a></li>
+                                        <li class="list-filter-item" data-type="03"><a
+                                                href="javascript:void(0)">充值成功</a></li>
+                                        <li class="list-filter-item" data-type="04"><a
+                                                href="javascript:void(0)">充值失败</a></li>
+                                    </ul>
+                                </div>
+                                <div id="fundgrid"></div>
+
+                                <form name="form" id="againCharge-form" style="display:none" action="" method="post"
+                                      target="_blank">
+                                    <input type="hidden" name="pickupUrl" value="<%=pickupUrl%>"/>
+                                    <input type="hidden" name="receiveUrl" value="<%=receiveUrl%>"/>
+                                    <input type="hidden" name="inputCharset" value="<%=inputCharset%>"/>
+                                    <input type="hidden" name="version" value="<%=version%>"/>
+                                    <input type="hidden" name="issuerId" value="<%=issuerId%>"/>
+                                    <input type="hidden" name="language" value="<%=language%>"/>
+                                    <input type="hidden" name="signType" value="<%=signType%>"/>
+                                    <input type="hidden" name="merchantId" value="<%=merchantId%>"/>
+                                    <input type="hidden" name="orderAmount" value="<%=orderAmount %>"/>
+                                    <input type="hidden" name="orderCurrency" value="<%=orderCurrency%>"/>
+                                    <input type="hidden" name="orderDatetime" value="<%=orderDatetime%>"/>
+                                    <input type="hidden" name="orderNo" value="<%=orderNo%>"/>
+                                    <!-- 手续费 -->
+                                    <input type="hidden" name="ext1" value="<%=ext1%>"/>
+                                    <input type="hidden" name="ext2" value="<%=ext2%>"/>
+                                    <!-- 充值方式：0 -->
+                                    <input type="hidden" name="payType" value="<%=payType%>"/>
+                                    <!-- 银行编号  -->
+                                    <!--  <input type="hidden" name="issuerId" value="<%=issuerId%>" /> -->
+                                    <input type="hidden" name="pan" value="<%=pan %>"/>
+                                    <input type="hidden" name="signMsg" value="<%=strSignMsg %>"/>
+
+                                    <input type="submit" value="确认付款，到通联支付去啦"/>
+                                </form>
+
+                                <form name="form2" id="againCharge-form_yibao" style="display:none" action=""
+                                      method="post" target="_blank">
+                                    <!--ext1-->
+                                    <input type='hidden' name='p0_Cmd' value='<%=ext1 %>'/>
+                                    <!--merchantId -->
+                                    <input type='hidden' name='p1_MerId' value='<%=merchantId %>'/>
+                                    <!--orderNo -->
+                                    <input type='hidden' name='p2_Order' value='<%=orderNo %>'/>
+                                    <!--orderAmount -->
+                                    <input type='hidden' name='p3_Amt' value='<%=orderAmount %>'/>
+                                    <!--orderCurrency -->
+                                    <input type='hidden' name='p4_Cur' value='<%=orderCurrency %>'/>
+                                    <!--暂时默认为空 -->
+                                    <input type='hidden' name='p5_Pid' value=''/>
+                                    <!--暂时默认为空 -->
+                                    <input type='hidden' name='p6_Pcat' value=''/>
+                                    <!--暂时默认为空 -->
+                                    <input type='hidden' name='p7_Pdesc' value=''/>
+                                    <!--pickupUrl -->
+                                    <input type='hidden' name='p8_Url' value='<%=receiveUrl %>'/>
+                                    <!--默认为0 -->
+                                    <input type='hidden' name='p9_SAF' value='0'/>
+                                    <!--ext2 -->
+                                    <input type='hidden' name='pa_MP' value='<%=ext2 %>'/>
+                                    <!--pan -->
+                                    <input type='hidden' name='pd_FrpId' value='<%=pan %>'/>
+                                    <!--默认为1 -->
+                                    <input type="hidden" name="pr_NeedResponse" value="1"/>
+                                    <!--signMsg -->
+                                    <input type='hidden' name='hmac' value='<%=signMsg %>'/>
+                                    <input type='submit' value="PC支付(网银支付)"/>
+                                </form>
+
+                                <form name="form3" id="againCharge-form_heepay" style="display:none" action=""
+                                      method="post" target="_blank">
+                                    <!--必填--》当前接口版本号 1 -->
+                                    <input type='hidden' name='version' value=''/>
+                                    <!--选填--》是否使用手机触屏版，1=是，PC版请不用传本参数 -->
+                                    <input type='hidden' name='is_phone' value=''/>
+                                    <!--必填--》支付类型 -->
+                                    <input type='hidden' name='pay_type' value=''/>
+                                    <!--选填--》支付类型编码 -->
+                                    <input type='hidden' name='pay_code' value=''/>
+                                    <!--必填--》商户编号 -->
+                                    <input type='hidden' name='agent_id' value=''/>
+                                    <!--必填--》商户系统内部的定单号 -->
+                                    <input type='hidden' name='agent_bill_id' value=''/>
+                                    <!--必填--》订单总金额 -->
+                                    <input type='hidden' name='pay_amt' value=''/>
+                                    <!--必填--》支付后返回的商户处理页面 -->
+                                    <input type='hidden' name='notify_url' value=''/>
+                                    <!--必填--》支付后返回的商户显示页面 -->
+                                    <input type='hidden' name='return_url' value=''/>
+                                    <!--必填--》用户所在客户端的真实ip其中的“.”替换为“_” -->
+                                    <input type='hidden' name='user_ip' value='0'/>
+                                    <!--必填--》提交单据的时间 -->
+                                    <input type='hidden' name='agent_bill_time' value=''/>
+                                    <!--必填--》商品名称 -->
+                                    <input type='hidden' name='goods_name' value=''/>
+                                    <!--选填--》产品数量 -->
+                                    <input type="hidden" name="goods_num" value=""/>
+                                    <!--必填--》商户自定义 -->
+                                    <input type='hidden' name='remark' value=''/>
+                                    <#if isHeepayTest>
+                                        <!--选填--》是否测试，1=测试，非测试请不用传本参数 -->
+                                        <input type='hidden' name='is_test' value=''/>
+                                    </#if>
+                                    <!--选填--》支付说明-->
+                                    <input type='hidden' name='goods_note' value=''/>
+                                    <!--必填--》MD5签名结果-->
+                                    <input type='hidden' name='sign' value=''/>
+                                    <input type='submit' value="PC支付(网银支付)"/>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</#macro>

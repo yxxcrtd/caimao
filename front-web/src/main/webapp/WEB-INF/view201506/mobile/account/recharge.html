@@ -1,0 +1,300 @@
+<#include 'mobile/layout/layout.html'/>
+<#macro assignSet>
+    <#assign bg="bg-white"/>
+    <#assign controller="recharge"/>
+    <#assign header="充值"/>
+    <#assign title="充值"/>
+    <#assign footer="3"/>
+</#macro>
+<#macro headerContent>
+<div class="navi-container bg-gray">
+	<ul class="listTab listLateral">
+        <li class="listTab-item active" style="width: 33%;"><a>网银充值</a></li>
+		<li class="listTab-item" style="width: 33%;"><a>支付宝转账</a></li>
+		<li class="listTab-item" style="width: 33%;"><a>银联转账</a></li>
+	</ul>
+</div>
+</#macro>
+<#macro content>
+
+    <article class="content" style="padding-top: 95px; padding-bottom: 115px;" id="panel1">
+        <div class="con-spacing15 ">
+            <p class="am-mt-10">
+                <span class="am-ft-orange am-ft-sm"><!-- 单卡单笔5万，每日累计20万 --></span>
+            </p>
+            <!--表单-->
+            <ul class="am-list am-listCapital">
+                <li class="am-list-item clearfix">
+                    <h4 class="am-ft-md am-lh-30 cm-left">可用余额</h4>
+                    <div class="am-ft-md cm-right">
+                        <big class="am-ft-bignNum am-ft-orange am-right-5">
+                            <span id="avalaibleAmount"></span></big>元
+                    </div>
+                </li>
+                <li class="am-list-item">
+                    <h4 class="am-ft-md">充值金额</h4>
+                    <div class="am-flexbox ui-formContainer am-mt-10">
+                        <div class="am-flexbox-item">
+						<span class="ui-form-field am-left-15">
+                            <input id="charge_amount" class="text_input money" maxlength="18" defaultvalue="1000" value="" placeholder="1000">
+                        </span>
+                        </div>
+                        <div class="am-flexbox-item ft-item"> 元 </span>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div class="am-footerBtn">
+                <!--按钮-->
+                <div class="btn-page btn-page-center bg-white con-spacing15">
+                    <a class="am-button am-button-red" id="addBtn1"> <span class="am-ft-white">确认充值</span></a>
+                </div>
+            </div>
+        </div>
+
+    </article>
+
+
+    <article class="content" style="padding-top: 95px; padding-bottom: 115px;" id="panel2">
+        <aside class="am-pt-15">
+            <h3 class="title-table">支付宝转账提醒</h3>
+            <table width="100%" border="0" cellspacing="0" class="table-about">
+                <tr>
+                    <th rowspan="3" width="90">
+                        <img src="/app/resources/image/customize/${alpayImg}" width="120px" height="120px" />
+                    </th>
+                    <td>收款人支付宝账户： ${alpayAccountID}</td>
+                </tr>
+                <tr>
+                    <td>账户名称： ${alpayAccountName}</td>
+                </tr>
+            </table>
+
+            <!--表单-->
+            <div class="con-spacing15">
+                <ul class="am-list am-listCapital">
+                    <li class="am-list-item">
+                        <h4 class="am-ft-md">支付宝账户</h4>
+                        <div class="am-flexbox ui-formContainer am-mt-10">
+                            <div class="am-flexbox-item">
+						        <span class="ui-form-field am-left-15">
+                                    <input name="alipay_account" id="alipay_account" type="text" autocomplete="off" class="text_input" defaultvalue="" value="" placeholder="支付宝账户">
+                                </span>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="am-list-item">
+                        <h4 class="am-ft-md">充值金额</h4>
+                        <div class="am-flexbox ui-formContainer am-mt-10">
+                            <div class="am-flexbox-item">
+						        <span class="ui-form-field am-left-15">
+                                    <input name="alipay_amount" id="alipay_amount" type="text" autocomplete="off" class="text_input" defaultvalue="1000" value="" placeholder="1000">
+                                </span>
+                            </div>
+                            <div class="am-flexbox-item ft-item">
+                                <span class="">元 </span>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <div id="addBtn2" class="btn-page btn-page-center bg-white con-spacing15">
+                    <a class="am-button am-button-red"> <span class="am-ft-white">确定</span></a>
+                </div>
+            </div>
+            <!--表单-->
+
+            <div class="tx-warning con-spacing10">
+			<span class="am-ft-tabText am-ft-sm am-lh-18">
+                <span style="color: red;">请在支付宝转账完成后填写，以方便客服为您及时处理！</span><br/>
+                2小时内到账，如需加急，请联系客服<#include 'mobile/component/phonePanel.html'/>，我们会第一时间帮你存入账户
+			</span>
+            </div>
+        </aside>
+
+    </article>
+
+    <article class="content" id="panel3" style="padding-top: 95px; padding-bottom: 56px;">
+        <!--银行转账提醒-->
+        <aside class="am-pt-15">
+            <h3 class="title-table">银行转账提醒</h3>
+            <#if bankCards?exists>
+                <#list bankCards as bankCard>
+                    <table width="100%" border="0" cellspacing="0" class="table-about">
+                        <tr>
+                            <th rowspan="3" width="90">
+                                <div class="am-small-bankInfo small-bankInfo-${bankCard.ID}">
+                                    <p class="name">${bankCard.bankType}</p>
+                                </div>
+                            </th>
+                            <td>银行帐号： ${bankCard.bank}</td>
+                        </tr>
+                        <tr>
+                            <td>账户名称： ${bankCard.name}</td>
+                        </tr>
+                        <tr>
+                            <td>开户银行：  ${bankCard.deposit}</td>
+                        </tr>
+                    </table>
+                </#list>
+            </#if>
+
+            <div class="tx-warning con-spacing10">
+			<span class="am-ft-tabText am-ft-sm am-lh-18">转账成功后，请拨打客服热线<#include 'mobile/component/phonePanel.html'/>，我们会第一时间帮你存入账户
+			</span>
+            </div>
+        </aside>
+
+        <!--表单-->
+        <div class="con-spacing15">
+            <aside class="am-mt-20">
+                <h4 class="am-ft-md">入账银行</h4>
+                <div class="am-flexbox am-mt-10 select-container">
+                    <span class="select-choice">
+                        <input type="text" autocomplete="off" id="transfer_bank" name="transfer_bank" value="招商银行西二旗支行" class="" readonly="readonly" style="width: 100%; border: none;">
+                        <select class="am-ft-md am-left-15" style="display: none;" id="choseHoms">
+                            <option value="招商银行西二旗支行">招商银行西二旗支行</option>
+                        </select>
+                        <!--<i class="type-ico am-icon-arrow-bottom"></i>-->
+                    </span>
+                </div>
+            </aside>
+
+            <ul class="am-list am-listCapital">
+                <li class="am-list-item">
+                    <h4 class="am-ft-md">银行卡卡号</h4>
+                    <div class="am-flexbox ui-formContainer am-mt-10">
+                        <div class="am-flexbox-item">
+						<span class="ui-form-field am-left-15">
+                            <input name="transfer_bank_card" id="transfer_bank_card" type="text" autocomplete="off" class="text_input" defaultvalue="" value="" placeholder="">
+                        </span>
+                        </div>
+                    </div>
+                </li>
+                <li class="am-list-item">
+                    <h4 class="am-ft-md">转账金额</h4>
+                    <div class="am-flexbox ui-formContainer am-mt-10">
+                        <div class="am-flexbox-item">
+						<span class="ui-form-field am-left-15">
+                            <input name="transfer_amount" id="transfer_amount" type="text" autocomplete="off" class="text_input" defaultvalue="1000" value="" placeholder="1000">
+                        </span>
+                        </div>
+                        <div class="am-flexbox-item ft-item">
+                            <span class="">元 </span>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div id="addBtn3" class="btn-page btn-page-center bg-white con-spacing15">
+                <a class="am-button am-button-red"> <span class="am-ft-white">确定</span></a>
+            </div>
+        </div>
+        <!--表单-->
+
+        <div class="bg-gray con-spacing15 am-mt-15 lineTop-gray">
+            <dl class="dl-capitalInfo">
+                <dt class="dl-capitalInfo-item">
+                <div class="pt">
+                    <div class="text-left">
+                        <span class="am-ft-sm" style="color: red;;">请在线下转账或银行汇款完成后填写，以方便客服为您及时处理！</span>
+                    </div>
+                </div>
+                </dt>
+                <dt class="dl-capitalInfo-item">
+                <div class="pt">
+                    <div class="text-left">
+                        <span class="am-ft-sm">工作日17点30分前转账的，${default_title}承诺在资金到账后的半小时内完成充值</span>
+                    </div>
+                </div>
+                </dt>
+                <dt class="dl-capitalInfo-item">
+                <div class="pt">
+                    <div class="text-left">
+                        <span class="am-ft-sm">工作日17点30分以后转账的，${default_title}承诺在第二个工作日的早上9点完成充值</span>
+                    </div>
+                </div>
+                </dt>
+                <dt class="dl-capitalInfo-item">
+                <div class="pt">
+                    <div class="text-left">
+                        <span class="am-ft-sm">非工作日转账的，${default_title}承诺在下一工作日的早上9点完成充值</span>
+                    </div>
+                </div>
+                </dt>
+                <dt class="dl-capitalInfo-item">
+                <div class="pt">
+                    <div class="text-left">
+                        <span class="am-ft-sm">如未能及时充值，请联系客服：<#include 'mobile/component/phonePanel.html'/></span>
+                    </div>
+                </div>
+                </dt>
+            </dl>
+        </div>
+        <!--银行转账提醒-->
+    </article>
+
+</div>
+</#macro>
+
+
+
+<!-- 隐藏表单 -->
+<form id="recharge-form" action="" method="post" style="display: none;">
+    <!-- 充值金额 -->
+    <input type="hidden" name="orderAmount" id="orderAmount" />
+    <input type="hidden" name="orderCurrency" id="orderCurrency" />
+    <input type="hidden" name="orderNo" id="orderNo" />
+    <input type="hidden" name="signMsg" id="signMsg" />
+    <input type="hidden" name="inputCharset" id="inputCharset" />
+    <input type="hidden" name="pickupUrl" id="pickupUrl" />
+    <input type="hidden" name="receiveUrl" id="receiveUrl" />
+    <input type="hidden" name="version" id="version" />
+    <input type="hidden" name="language" id="language" />
+    <input type="hidden" name="signType" id="signType" />
+    <input type="hidden" name="merchantId" id="merchantId" />
+    <input type="hidden" name="payType" id="payType" />
+    <input type="hidden" name="orderDatetime" id="orderDatetime" />
+    <input type="hidden" name="issuerId" id="issuerId" />
+    <input type="hidden" name="pan" id="pan" />
+    <input type="hidden" name="ext1" id="ext1" />
+    <input type="hidden" name="ext2" id="ext2" />
+</form>
+
+<form name="form2" id="recharge-form_yibao" style="display:none" action="" method="post">
+    <input type='hidden' name='p0_Cmd' id="p0_Cmd" value='<%=ext1 %>'/>
+    <input type='hidden' name='p1_MerId' id="p1_MerId" value='<%=merchantId %>'/>
+    <input type='hidden' name='p2_Order' id="p2_Order" value='<%=orderNo %>'/>
+    <input type='hidden' name='p3_Amt' id="p3_Amt" value='<%=orderAmount %>'/>
+    <input type='hidden' name='p4_Cur' id="p4_Cur" value='<%=orderCurrency %>'/>
+    <input type='hidden' name='p5_Pid' id="p5_Pid" value=''/>
+    <input type='hidden' name='p6_Pcat' id="p6_Pcat" value=''/>
+    <input type='hidden' name='p7_Pdesc' id="p7_Pdesc" value=''/>
+    <input type='hidden' name='p8_Url' id="p8_Url" value='<%=receiveUrl %>'/>
+    <input type='hidden' name='p9_SAF' id="p9_SAF" value='0'/>
+    <input type='hidden' name='pa_MP' id="pa_MP" value='<%=ext2 %>'/>
+    <input type='hidden' name='pd_FrpId' id="pd_FrpId" value='<%=pan %>'/>
+    <input type="hidden" name="pr_NeedResponse" id="pr_NeedResponse" value="1"/>
+    <input type='hidden' name='hmac' id="hmac" value='<%=signMsg %>'/>
+    <input type='submit' value="PC支付(网银支付)"/>
+</form>
+
+<form name="form3" id="recharge-form_heepay" style="display:none" action="" method="post">
+    <input type='hidden' name='version' id="heepay_version" value=''/>
+    <input type='hidden' name='is_phone' id="is_phone" value='1'/>
+    <input type='hidden' name='pay_type' id="pay_type" value=''/>
+    <input type='hidden' name='pay_code' id="pay_code" value=''/>
+    <input type='hidden' name='agent_id' id="agent_id" value=''/>
+    <input type='hidden' name='agent_bill_id' id="agent_bill_id" value=''/>
+    <input type='hidden' name='pay_amt' id="pay_amt" value=''/>
+    <input type='hidden' name='notify_url' id="notify_url" value=''/>
+    <input type='hidden' name='return_url' id="return_url" value=''/>
+    <input type='hidden' name='user_ip' id="user_ip" value='0'/>
+    <input type='hidden' name='agent_bill_time' id="agent_bill_time" value=''/>
+    <input type='hidden' name='goods_name' id="goods_name" value=''/>
+    <input type="hidden" name="goods_num" id="goods_num" value=""/>
+    <input type='hidden' name='remark' id="remark" value=''/>
+    <input type='hidden' name='goods_note' id="goods_note" value=''/>
+    <input type='hidden' name='sign' id="sign" value=''/>
+    <input type='submit' value="PC支付(网银支付)"/>
+</form>
+<!-- 隐藏表单END -->
+

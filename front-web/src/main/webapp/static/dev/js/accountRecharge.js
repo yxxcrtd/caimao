@@ -1,0 +1,129 @@
+// @koala-prepend "./lib/jquery-1.11.1.min.js"
+// @koala-prepend "./common/utils.js"
+// @koala-prepend "./common/Data.js"
+// @koala-prepend "./lib/formValidate.js"
+// @koala-prepend "./v2/actionTip.js"
+
+$(function(){
+	var rechargeInput = $("#cNum");
+	buildDom("#cNum");
+	rechargeInput.keyup(function(){
+		var val = $(this).val();
+		val = CMUTILS.toFloat(val);
+		$(this).val(val);
+		$("#cNumCh").text(CMUTILS.getChangeNum(val)).show();
+		document.getElementById("cNum").close();
+	});
+	rechargeInput.focus(function(){
+		var val = $(this).val();
+		$(this).val(CMUTILS.removeCommas(val));
+		if(rechargeInput.val() > 0){
+			$("#cNumCh").show();
+		}
+	});
+	rechargeInput.blur(function(){
+		var val = $(this).val();
+		$(this).val(CMUTILS.addCommas(val));
+		$("#cNumCh").hide();
+	});
+	//选择银行
+	$("#bankSelectBox").find("li").click(function(){
+		$(this).addClass("on").siblings("li").removeClass("on");
+	});
+
+	var formAlipayDeposit = $('#alipayForm');
+	var btnAlipayDeposit = $('#submitBtnAlipay');
+	formValidate.init(formAlipayDeposit);
+	//支付宝
+	$(btnAlipayDeposit).click(function(){
+		if (formValidate.validateForm(formAlipayDeposit) == false) {
+			return true;
+		}
+		var number = $("#cAccount").val();
+		var amount = CMUTILS.removeCommas(rechargeInput.val());
+
+		$("#FRechargeAccount").html(number);
+		$("#FRechargeAmount").html(CMUTILS.addCommas(amount));
+		$.post("/account/charge/zhifubao",{order_abstract:number,charge_amount:amount},function(data){
+			if(data.success){
+				$("#transferBox").hide();
+				$("#transferBoxConfirm").show();
+			} else {
+				formValidate.showFormTips(btnAlipayDeposit, data.msg);
+			}
+		});
+	});
+
+	var formYinhang = $('#yinhangForm');
+	var btnYinhang = $('#submitBtnYinhang');
+	formValidate.init(formYinhang);
+	//银行转账
+	$(btnYinhang).click(function(){
+		if (formValidate.validateForm(formYinhang) == false) {
+			return false;
+		}
+		var number = $("#cRemark").val();
+		var amount = CMUTILS.removeCommas(rechargeInput.val());
+
+		$.post("/account/charge/yinhang",{remark:number,charge_amount:CMUTILS.accMul(amount, 100)},function(data){
+			if(data.success){
+				$("#transferBox").hide();
+				$("#transferBoxConfirm").show();
+			} else {
+				formValidate.showFormTips(btnYinhang, data.msg);
+			}
+		});
+	});
+
+	//网银充值
+	$("#submitBtn").click(function(){
+		var bankSelectBox = $("#bankSelectBox");
+		if(bankSelectBox.find(".on").length != 1){
+			formValidate.showFormTips('submitBtn', '请选择银行');
+		}
+		if (formValidate.validateInput(rechargeInput) == false) {
+			return false;
+		}
+		$("#FBankSelect").html(bankSelectBox.find(".on").html());
+		$("#FRechargeAmount").html(rechargeInput.val());
+		$("#FRechargeAmountConfirm").html(rechargeInput.val());
+		$("#transferBox").hide();
+		$("#transferBoxConfirm").show();
+	});
+
+	$("#submitBtnReturn").click(function(){
+		$("#transferBox").show();
+		$("#transferBoxConfirm").hide();
+	});
+
+	$("#submitBtnConfirm").click(function(){
+		var bank = $("#bankSelectBox").find(".on").attr("data-no");
+		var amount = CMUTILS.removeCommas(rechargeInput.val());
+		$.post("/account/charge/heepay",{charge_amount:CMUTILS.accMul(amount, 100) ,bank_no:bank},function(response){
+			if(response.success){
+				var rechargeForm = $("#recharge_form_heepay");
+				rechargeForm.attr("action",response.data.submitUrl);
+				$('input[name=version]').val(response.data.version);
+				$('input[name=is_phone]').val(response.data.isPhone);
+				$('input[name=pay_type]').val(response.data.payType);
+				$('input[name=pay_code]').val(response.data.payCode);
+				$('input[name=agent_id]').val(response.data.agentId);
+				$('input[name=agent_bill_id]').val(response.data.agentBillId);
+				$('input[name=pay_amt]').val(response.data.payAmt);
+				$('input[name=notify_url]').val(response.data.notifyUrl);
+				$('input[name=return_url]').val(response.data.returnUrl);
+				$('input[name=user_ip]').val(response.data.userIp);
+				$('input[name=agent_bill_time]').val(response.data.agentBillTime);
+				$('input[name=goods_name]').val(response.data.goodsName);
+				$('input[name=goods_num]').val(response.data.goodsNum);
+				$('input[name=remark]').val(response.data.remark);
+				$('input[name=goods_note]').val(response.data.goodsNote);
+				$('input[name=sign]').val(response.data.sign);
+				//rechargeForm.submit();
+				document.getElementById('recharge_form_heepay').submit();
+			} else {
+				formValidate.showFormTips('submitBtnConfirm', response.msg);
+			}
+		});
+	});
+});

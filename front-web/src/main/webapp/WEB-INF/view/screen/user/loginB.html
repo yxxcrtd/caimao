@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link charset="utf-8" rel="stylesheet" href="${dojoUrl}/app/resources/css/loginB.css" media="all">
+</head>
+<body>
+<div class="banner-login">
+<form id="loginform" class="login-modern">
+<div class="clearfix">
+<div class="cm-left"><h2 class="ui-form-title ">登录</h2></div>
+</div>
+<div id="login_error" class="sl-error sl-error-display" style="display: none;"></div>
+
+<div class="ui-form-item">
+<label class="ui-label">
+<span class="icon-login icon-login-userDEF">账户名：</span>
+</label>
+<input id="username" type="text" class="ui-input ui-input-normal" value="" maxlength="100" placeholder="手机号">
+</div>
+
+<div class="ui-form-item">
+<label class="ui-label">
+<span class="icon-login icon-login-securityON">密码：</span>
+</label>
+<input id="password" type="password" class="ui-input ui-input-normal" value="" maxlength="100" placeholder="密码">
+</div>
+
+
+<div class="ui-form-item identifying-code">
+<label class="ui-label">
+<span class="icon-login icon-login-verification">验证码：</span>
+</label>
+<input id="captcha" type="text" class="ui-input ui-input-normal " value="" maxlength="100" placeholder="验证码">
+<img id="captchaimg" class="identifying-code-img" alt="验证码" title="点击刷新" src="${basePath}/code?_=${.now?long}"/>
+</div>
+
+
+
+<div class="am-mt-10"><input id="login_button" type="button" value="立即登录" class="ui-button-login"></div>
+
+<p class="ui-form-other am-mt-10">
+<a id="forgetpwdlink" href="${basePath}/user/forgetloginpwd.htm" target="_blank" class="am-ft-md">忘记密码</a>
+<a id="forgetpwdlink" href="${basePath}/user/register.htm" target="_blank" class="am-ft-md" style="float: right;">注册</a>
+</p>
+
+</form>
+</div>
+<script type="text/javascript">
+	var dojoConfig = {
+	        selectorEngine: 'acme',
+	        async: 1,
+	        tlmSiblingOfDojo: 0,
+	        isDebug: 1,
+	        baseUrl: '${basePath}',
+	        packages: [
+				{name: 'dojo', location: '${dojoUrl}/dojo'},
+				{name: 'dijit', location: '${dojoUrl}/dijit'},
+				{name: 'dojox', location: '${dojoUrl}/dojox'},
+				{name: 'app', location: 'app'}
+			],
+			controller: 'LoginFrame'
+	    };
+</script>
+<script src="${dojoUrl}/dojo/dojo.js"></script>
+<script>
+	require(['app']);
+</script>
+</body>
+</html>

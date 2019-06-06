@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<#include "gjs/config.html" />
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>转出</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1, user-scalable=false">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no"/>
+    <link rel="stylesheet" href="${staticUrl}/app/intoOut/css/reset.css" />
+    <link rel="stylesheet" href="${staticUrl}/app/intoOut/css/open.css" />
+</head>
+<body>
+<div class="wrapper">
+    <div class='intoMain'>
+        <ul class='intoTab'>
+            <li><a href="#" id="into">转入</a></li>
+            <li class="high"><a href="out.html" class="wordHigh" id="out">转出</a></li>
+            <li><a href="queryFunds.html" id="query">转账查询</a></li>
+        </ul>
+        <h1 class='bank' id="bank"></h1>
+        <p class='word-1' id="workTime">转出时间为</p>
+
+
+        <p class="cardholder"><input type="number" placeholder="输入转出金额" id="money"></p>
+        <p class="cardholder cardholder2"><input type="password" placeholder="输入资金密码" id="pwd1"></p>
+        <p class="cardholder" style="display:none"><input type="password" placeholder="输入银行卡密码" id="pwd2" value="222"></p>
+        <div class="bankNotice" id="notice">&nbsp;</div>
+        <a href="#" class='next-2 next-3' id="submit">确定</a>
+    </div>
+</div>
+<script src='${staticUrl}/app/kaihu/js/zepto.js'></script>
+<script>
+    ;(function(){
+        var token = $_GET("token"),
+            newMen = 0,
+            exchange = $_GET("exchange") || "NJS",
+            bank = document.querySelector("#bank"),
+            money = document.querySelector("#money"),
+            pwd1 = document.querySelector("#pwd1"),
+            pwd2 = document.querySelector("#pwd2"),
+            into = document.querySelector("#into"),
+            out = document.querySelector("#out"),
+            workTime = document.querySelector("#workTime"),
+            query = document.querySelector("#query"),
+            requesting = 0,
+            submit = $("#submit"),
+            bankList = {
+                "NJS" : {
+                    "003" : {"bankName":"招商银行","bankNo":"003","needCardPwd":"0"},
+                    "005" : {"bankName":"建设银行","bankNo":"005","needCardPwd":"0"},
+                    "012" : {"bankName":"中信银行","bankNo":"012","needCardPwd":"0"},
+                    "013" : {"bankName":"华夏银行","bankNo":"013","needCardPwd":"0"},
+                    "014" : {"bankName":"平安银行","bankNo":"014","needCardPwd":"0"},
+                    "019" : {"bankName":"光大银行","bankNo":"019","needCardPwd":"0"},
+                    "408" : {"bankName":"中国银行","bankNo":"408","needCardPwd":"1"},
+                    "410" : {"bankName":"兴业银行","bankNo":"410","needCardPwd":"0"},
+
+                    "BOC" : {"bankName":"中国银行","bankNo":"BOC"},
+                    "ICBC" : {"bankName":"工商银行","bankNo":"ICBC"},
+                    "ABC" : {"bankName":"农业银行","bankNo":"ABC"},
+                    "CCB" : {"bankName":"建设银行","bankNo":"CCB"},
+                    "PSBC" : {"bankName":"邮政储蓄","bankNo":"PSBC"},
+                    "BOCM" : {"bankName":"交通银行","bankNo":"BOCM"},
+                    "CMB" : {"bankName":"招商银行","bankNo":"CMB"},
+                    "CNCB" : {"bankName":"中信银行","bankNo":"CNCB"},
+                    "CEB" : {"bankName":"光大银行","bankNo":"CEB"},
+                    "PAB" : {"bankName":"平安银行","bankNo":"PAB"},
+                    "CIB" : {"bankName":"兴业银行","bankNo":"CIB"},
+                    "CMBC" : {"bankName":"民生银行","bankNo":"CMBC"},
+                    "HXB" : {"bankName":"华夏银行","bankNo":"HXB"},
+                    "GDB" : {"bankName":"广发银行","bankNo":"GDB"},
+                    "SPDB" : {"bankName":"浦发银行","bankNo":"SPDB"},
+                    "CZB" : {"bankName":"浙商银行","bankNo":"CZB"}
+                },
+                "SJS" : {"005":{"bankName":"建设银行","bankNo":"005","needCardPwd":"0"}}
+            },timer,info;
+        exchange = exchange.toUpperCase();
+        into.href = "into.html?exchange="+exchange+"&token="+token;
+        out.href = "out.html?exchange="+exchange+"&token="+token;
+        query.href = "queryFunds.html?exchange="+exchange+"&token="+token;
+        if(exchange == "NJS"){
+            workTime.innerHTML = "转出时间为周一到周五09：00--15:30（中信银行为：09:00--22:00）";
+        }else{
+            workTime.innerHTML = "转出时间为周一到周五08:50-16:00   晚20:00--02:30";
+        }
+        $.ajax({
+            type : "GET",
+            url : "${httpUrl}/api/gjs_account/queryGJSAccount?token=" + token,
+            success : function(data){
+                if(data.success){
+                    info = data.data[exchange];
+                    info.openBankName = info.openBankName || "SPDB";
+                    newMen = (info.bankId == 212 ? 1 : 0);
+                    bank.innerHTML = '<img style="width:60px;" src="${imgUrl}/bank/'+exchange.toLowerCase()+(newMen ? info.openBankName : info.bankId)+'.jpg"/><p>'+
+                            bankList[exchange][(newMen ? info.openBankName : info.bankId)].bankName+
+                            '（尾号：'+info.bankCard+'）</p>';
+                if(exchange == "NJS" && info.bankId == "408"){
+                    pwd2.parentNode.style.display = "block";
+                    pwd2.value = "";
+                }
+
+                }else{
+
+                }
+            }
+        });
+        submit.click(function(){
+            if(money.value != "" && pwd1.value != "" && pwd2.value != ""){
+                if(requesting){
+                    showerror("请求正在发送，请不要重复提交")
+                    return;
+                }
+                requesting = 1;
+                submit.html("请求中，请稍后");
+                $.ajax({
+                    type : "POST",
+                    url : "${httpUrl}/api/gjs_account/doTransferOut",
+                    data : {
+                        token : token,
+                        exchange : exchange,
+                        fundsPwd : pwd1.value,
+                        bankPwd : pwd2.value,
+                        money : money.value
+                    },
+                    success : function(data){
+                        requesting = 0;
+                        if(data.success){
+                            if(data.data.result){
+                                window.location.href = "payOk.html?exchange="+exchange+"&token="+token+"&money="+money.value+"&bankName="+encodeURIComponent(bankList[exchange][info.bankId].bankName)+"&bankCard="+info.bankCard;
+                            }
+                        }else{
+                            showerror(data.msg)
+                            submit.html("确定");
+                        }
+                    }
+                });
+            }else{
+                showerror("有的表单项遗漏了，请填写完整！")
+            }
+        })
+        function showerror(text){
+            timer && clearTimeout(timer);
+            timer = null;
+            notice.innerHTML = text;
+            notice.style.color = "#f00";
+            timer = setTimeout(function(){
+                notice.style.color = "#eee";
+            },4000)
+        }
+    })();
+</script>
+</body>
+</html>

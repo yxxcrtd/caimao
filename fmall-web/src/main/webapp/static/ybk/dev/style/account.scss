@@ -1,0 +1,745 @@
+@charset "utf-8";
+@import 'style';
+
+$red :#EB4636;
+$redD:#D83627;
+@mixin btn($brColor:none, $bgColor:#EB4636, $fColor:#fff){
+  outline: none ;
+  @if($bgColor == ''){
+    background-color: #fff;
+  }@else if($bgColor == none){
+    background-color: transparent;
+  }@else{
+    background-color: $bgColor;
+  }
+  @if ($brColor == none){
+    border:1px solid transparent;
+  }@else{
+    border:1px solid $brColor;
+  }
+  &:hover,&:focus{
+    //background-image: none;
+    background-color: darken( $fColor , 5%);
+  }
+  &:active{
+    //background-image: none;
+    background-color: darken($fColor,5%);
+    box-shadow: inset 0 0 15px  darken($fColor,20%);
+  }
+}
+.btn{
+  @include btn($red, $red,$redD);
+  width: 158px;
+  display: inline-block;
+  text-align: center;
+  height:34px;
+  line-height: 34px;
+  color: #fff;
+  cursor: pointer;
+  font-family: "Microsoft Yahei", Arial;
+  font-size: 14px;
+  &:hover{color:#fff;}
+}
+.m_t_10{
+  margin-top: 10px;
+}
+.f_l{
+  float: left;
+}
+
+.icons{
+  background: url($path + "account/common_icons.png");
+  display: inline-block;
+}
+.my_account{
+  @extend .clearfix;
+  width: 1200px;
+  margin:20px auto 50px;
+  .acc_left{
+    float: left;
+    width: 860px;
+    ul{
+      li{
+        padding: 0 33px;
+        margin-bottom: 10px;
+        background-color: #fff;
+        dl{
+          height: 142px;
+          @extend .clearfix;
+          &.bor{
+            border-bottom: 1px dashed #D4D3D3;
+          }
+          dt{
+            float: left;
+            padding-top: 50px;
+            a{
+              font-size: 20px;
+              line-height: 44px;
+              color: #4d4d4d;
+              font-weight: 600;
+              padding-right: 10px;
+              &:hover{ color: #4d4d4d;}
+              img{
+                padding-right:20px;
+              }
+            }
+            span{
+              line-height: 44px;
+              color:#ccc;
+              font-size: 16px;
+              &.red{
+                color: $red;
+              }
+              &.blue{
+                color: #66BC81;
+              }
+            }
+          }
+          dd{
+            float: right;
+            color: #777;
+            font-size: 14px;
+            .table{
+              display: table;
+              height: 142px;
+              .table_cell{
+                display: table-cell;
+                vertical-align: middle;
+                line-height: 32px;
+                text-align: right;
+                .failure{
+                  color: $red;
+                  width:250px;
+                  line-height: 22px;
+                  display: inline-block;
+                }
+                .btn{
+                  margin-left: 10px;
+                }
+                .btn_tip{
+                  @include btn($red, #fff);
+                  color: $red;
+                  position: relative;
+                  &:hover,&:focus{
+                    background-color: #fff;
+                    border-color: $redD;
+                  }
+                  .tips{
+                    display:none;
+                    position: absolute;
+                    left:10px;
+                    top:-62px;
+                    width:193px;
+                    padding: 5px;
+                    text-align: left;
+                    line-height: 18px;
+                    font-size: 12px;
+                    color:#888;
+                    background-color: #fff;
+                    border: 1px solid #ccc;
+                    i{
+                      position: absolute;
+                      bottom: -8px;
+                      width: 0;
+                      height: 0;
+                      left: 15px;
+                      border-left: 8px solid transparent;
+                      border-right: 8px solid transparent;
+                      border-top: 8px solid #ccc;
+                    }
+                   i:before,i:after{
+                     content: '';
+                     position: absolute;
+                     width: 0;
+                     height: 0;
+                     border-left: 8px solid transparent;
+                     border-right: 8px solid transparent;
+                     border-top: 8px solid #FFF;
+                     top: -9px;
+                     left: -8px;
+                    }
+                    i:before {
+                      border-top-color: rgba(230, 230, 230, 0.2);
+                      left: -7px;
+                      top: -6px;}
+                  }
+                  &:hover{
+                    .tips{
+  display: block;
+}
+                  }
+                }
+              }
+            }
+          }
+        }
+        &.more{
+          border: 1px solid #fff;
+          padding: 24px 30px;
+          overflow: hidden;
+          cursor: pointer;
+          span{
+            float: left;
+            width: 18px;
+            height: 98px;
+            border: 2px solid #E8F2F8;
+            border-left: 0;
+            &:first-child{
+              border-left: 2px solid #E8F2F8;
+              border-right: 0;
+            }
+          }
+          a{
+            float: left;
+            width: 758px;
+            padding: 20px 0;
+            text-align: center;
+            font-size: 14px;
+            color:#1997E5;
+            i{
+              display: block;
+              width: 34px;
+              height: 34px;
+              margin: 0 auto 8px;
+              background-position: 0 0;
+            }
+          }
+          &:hover{
+            background-color:#F6FBFF;
+            border-color: #C3D3DF;
+          }
+        }
+      }
+    }
+  }
+  .acc_right{
+    float: right;
+    width: 322px;
+    border-top:4px solid $red;
+    .hint,.open_jys{
+      padding: 0 23px 25px;
+      background-color:#F5F5F5;
+      color: #4d4d4d;
+      h3{
+        font-size: 14px;
+        border-bottom: 1px dashed #D4D3D3;
+        padding-top: 24px;
+        height: 35px;
+        margin-bottom: 18px;
+      }
+    }
+    .hint{
+      h3{
+        font-weight: bold;
+      }
+      .hint_in{
+        b{
+          display: block;
+          font-size: 14px;
+          padding-top:15px;font-weight: bold;
+        }
+        p{
+          color:#888;
+        }
+      }
+    }
+    .open_jys{
+      margin-top: 10px;
+      .open_in{
+        padding-left: 6px;
+        a.btn{
+          @include btn($red, none);
+          width: 98px;
+          color: $red;
+        }
+      }
+      label{
+        display: block;
+        margin-bottom: 20px;
+        position: relative;
+        cursor: pointer;
+        padding-left:5px;
+        i {
+          width:17px;
+          height:13px;
+          cursor: pointer;
+          position: absolute;
+          top:2px;
+          left: 0;
+          background-position: -17px -35px;
+        }
+        input[type=checkbox] {
+          visibility: hidden;
+        }
+        input[type=checkbox]:checked + i {
+          background-position: 0 -35px;
+        }
+      }
+    }
+  }
+
+}
+
+
+.account{
+  background-color: #fff;
+  padding:0 100px 100px;
+  width: 1000px;
+  margin:20px auto;
+  .ready{
+    text-align:center;font-size:16px;padding:100px 0;
+  }
+  .group{
+    margin: auto;
+    width:650px;
+    font-size: 14px;
+    color: #4d4d4d;
+    line-height: 40px;
+    margin-bottom:20px;
+    .col_01{
+      display: inline-block;
+      width:113px;
+      text-align: right;
+      padding-right: 10px;
+    }
+    .col_02{
+      display: inline-block;
+      width:460px;
+      color: #D8D8D8;
+      input,select{
+        width: 290px;
+        height: 38px;
+        outline:0;
+        padding:0 0 0 8px;
+        box-sizing: border-box;
+        border: 1px solid #DAD9D9;
+        &:focus{
+          border-color:#47A9EE;
+        }
+        &.error{
+          border-color: #EB5142;
+        }
+      }
+      .v_info{
+        visibility: hidden;
+        color:#EB5142;
+        i{
+          display: inline-block;
+          width: 25px;
+          height: 25px;
+          background: url($path + "info_icon.png") no-repeat 0 0;
+          margin-bottom: -7px;
+          margin-left: 5px;
+          &.error{
+            background-position: 0 -27px;
+          }
+        }
+      }
+
+    }
+    .col_2{
+      display: inline-block;
+      width:520px;
+      .select_bank{
+        @extend .clearfix;
+        li{
+         float: left;cursor:pointer;
+          border: 1px solid #eee;
+          margin-right:15px;
+          margin-bottom: 10px;
+          width: 140px;
+          height: 38px;
+          line-height:38px;
+          text-align: center;
+          position: relative;
+          overflow: hidden;
+          img{
+            width: 100px;
+            vertical-align:middle;
+          }
+          i{
+            width:16px;
+            height: 19px;
+            background-position:0 -50px;
+            position: absolute;
+            right: 0;
+            top:0;
+          }
+          &:hover{
+            border-color: #5376BE;
+          }
+          &.cur{
+             border-color: #5376BE;
+            /* background: url($path + "account/select_bank_cur.png") no-repeat 0 0; */
+          }
+        }
+      }
+      .select_jys{
+        li{
+          width: 118px;
+          height: 34px;
+          &:hover,&.cur{
+            background: none;
+            border: 1px solid #5376BE;
+          }
+        }
+      }
+    }
+    .verify{
+      input{
+        width:150px;
+      }
+      a{
+        display: inline-block;
+        width: 120px;
+        text-align: center;
+        background-color:#47A9EE;
+        color: #fff;
+        margin-left: 15px;
+      }
+    }
+  }
+  .tit_top{
+    padding-top: 30px;
+    font-size: 14px;
+    color: #4d4d4d;
+  }
+  .tit{
+    padding-top: 50px;
+    border-bottom: 2px solid #E4E4E4;
+    margin-bottom: 60px;
+    ul{
+      @extend .clearfix;
+      width: 720px;
+      margin: auto;
+      height: 35px;
+      li{
+        font-size: 16px;
+        color: #888;
+        width: 33.33%;
+        float: left;
+        text-align: center;
+        height: 35px;
+        line-height: 24px;
+        i{
+          width: 24px;
+          height: 24px;
+          border-radius:24px;
+          color: #fff;
+          display: inline-block;
+          background-color: #999999;
+          text-align: center;
+          margin-right:6px;
+        }
+        &.cur{
+          border-bottom: 2px solid $red;
+          color:#4d4d4d;
+          i{
+            background-color: $red;
+          }
+        }
+        &.complete{
+          border-bottom: 2px solid #FFAEA6;
+          i{
+            background-color: #FFAEA6;
+          }
+        }
+      }
+    }
+  }
+  .bourse{
+    color: #484848;
+    width: 550px;
+    margin: auto;
+    overflow: hidden;
+    font-size: 14px;
+    padding-top: 10px;
+    p{
+      @extend .clearfix;
+      margin-bottom: 20px;
+      label{
+        float: left;
+        width: 32%;
+        color: #999;
+        margin-bottom: 20px;
+        position: relative;
+        cursor: pointer;
+        padding-left:5px;
+        span {
+          width:12px;
+          height:13px;
+          cursor: pointer;
+          position: absolute;
+          top:4px;
+          left: 0;
+          background: url($path + "checked_bg.png") 0 100%;
+        }
+        input[type=checkbox] {
+          visibility: hidden;
+        }
+        input[type=checkbox]:checked + span {
+          background: url($path + "checked_bg.png") 0 0;
+        }
+      }
+    }
+  }
+  .upload{
+    width: 740px;
+    @extend .clearfix;
+    text-align: center;
+    margin: auto;
+    font-size: 14px;
+    li{
+      float: left;
+      display: inline-block;
+      border: 1px solid #D8D8D8;
+      width: 360px;
+      height: 198px;
+      background-color: #FAFAFA;
+      margin-bottom:20px;
+      &:first-child{
+        margin-right: 10px;
+      }
+      p{
+       padding: 18px 0;
+      }
+      .load_in{
+        padding-left: 18px;
+        @extend .clearfix;
+        .form{
+          position: relative;
+          float: left;
+          overflow: hidden;
+          width: 155px;
+          height: 92px;line-height:92px;
+          border: 1px dashed #E4E9F3;
+          background-color: #EEF1F5;
+          margin-right: 10px;
+          border-radius: 5px;
+          .submit{position: relative;z-index:3;height:32px;padding:0 10px;overflow:hidden;font-size:14px;color:#5376BE;}
+          input{z-index:5;position:absolute;top:0;right:-1px;font-size:100px;cursor:pointer;opacity:0;filter:alpha(opacity=0);}
+          &:hover .submit{color:#5376BE;}
+        }
+        .showSample{
+          z-index:2;left:0;top:0;position: absolute;line-height:92px;text-align:center;width: 155px;height: 92px;
+          img{max-width:155px;max-height:92px;border-radius:5px;vertical-align:middle;}
+        }
+
+        .submit{
+          color: #5376BE;
+          i{
+            width: 16px;
+            height: 16px;
+            margin-bottom:-3px;
+          }
+        }
+        .submiting{
+          cursor: default;
+          i{
+             background-position:-35px -38px;
+          }
+        }
+        .submit_compete{
+          cursor: default;top:55px;
+          i{
+            background-position:-56px -38px;
+          }
+        }
+        .example{
+          float: left;
+          width: 145px;
+          height: 82px;
+          padding-top: 10px;
+          background-color: #262626;
+          border-radius: 5px;
+          cursor: pointer;
+          b{
+            display: block;
+            width: 112px;
+            padding-top: 10px;
+            height: 60px;
+            color: #fff;
+            margin: auto;
+            background: url($path + "account/front_bg.png") 50% 50%;
+            &.back{
+              background: url($path + "account/back_bg.png") 50% 50%;
+            }
+            &.bank_bg{
+              background: url($path + "account/bank_front_bg.png") 50% 50%;
+            }
+            i{
+              width:36px;
+              height: 36px;
+              background-position: -34px 0;
+              display: block;
+              margin:auto;
+            }
+          }
+          .popups{
+            display: none;
+            position: fixed;
+            top:270px;
+            left:50%;
+            margin-left: -194px;
+            width:388px;
+            height: 246px;
+          }
+          .front_popups{
+            background: url($path + "account/front.png");
+          }
+          .back_popups{
+            background: url($path + "account/back.png");
+          }
+          .bank_popups{
+            background: url($path + "account/bank_front.png");
+          }
+        }
+      }
+    }
+    .uploadify{
+      display: block;
+      cursor:pointer;
+      position: relative;
+      text-align:center;
+      border-top:1px dashed #DFDFDF;
+      background-color:#F8F8F8 ;
+      //color: #47A9EE;
+      &:hover{
+        background-color:#47A9EE ;
+        color: #fff;
+      }
+    }
+    .uploadify .uploadify-button {
+      width:333px;height:40px;line-height:40px;font-size:16px;cursor:pointer;
+      background-color: #F8F8F8;
+      background-image: linear-gradient(bottom, #F8F8F8 100%, #F8F8F8 100%);
+      background-image: -o-linear-gradient(bottom, #F8F8F8 100%, #F8F8F8 100%);
+      background-image: -moz-linear-gradient(bottom, #F8F8F8 100%, #F8F8F8 100%);
+      background-image: -webkit-linear-gradient(bottom, #F8F8F8 100%, #F8F8F8 100%);
+      background-image: -ms-linear-gradient(bottom, #F8F8F8 100%, #F8F8F8 100%);
+      color: #47A9EE;
+      font: bold 12px Arial, Helvetica, sans-serif;
+      text-align: center;
+      text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
+      width: 100%;
+    }
+    .uploadify .uploadify-button span{display:inline-block;height:40px;line-height:40px;}
+    .uploadify:hover .uploadify-button {
+      color:#fff;
+      background-color: #47A9EE;
+      background-image: linear-gradient(top, #47A9EE 100%, #47A9EE 100%);
+      background-image: -o-linear-gradient(top, #47A9EE 100%, #47A9EE 100%);
+      background-image: -moz-linear-gradient(top, #47A9EE 100%, #47A9EE 100%);
+      background-image: -webkit-linear-gradient(top, #47A9EE 100%, #47A9EE 100%);
+      background-image: -ms-linear-gradient(top, #47A9EE 100%, #47A9EE 100%);
+    }
+  }
+  .select_tit{
+    height: 60px;
+    a{
+      font-size: 16px;
+      color: #999;
+      margin-right: 80px;
+      display: inline-block;
+      &.cur,&:hover{
+        color:#EB4636;
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+.openAccountTable{
+    width: 1176px;
+    margin:20px auto;
+    padding: 0 12px 100px;
+    background-color: #fff;
+   .openAccountTableAuto{
+    width: 100%;
+    height : 510px;
+    overflow-x: auto;
+     thead{
+     position: absolute;
+     left: 0;
+     top:0;
+     width: 100%;
+     height: 65px;
+     overflow-x: auto;
+   }
+     tbody{
+      position: absolute;
+      left: 0;
+      top:65px;
+      width: 100%;
+      height:440px;
+      overflow-x: auto;
+    }
+  }
+    table{
+      border-right:1px solid #fff;
+      border-bottom:1px solid #fff;
+      color: #888;
+      position: relative;
+      width: 100%;
+      height: 510px;
+      th,td{
+        border-left:1px solid #fff;
+        border-top:1px solid #fff;
+        div{
+          padding: 0 15px;
+        }
+        .col_1{
+          width:156px;
+        }
+        .col_2{
+          width:160px;
+        }
+        .col_3{
+           width:100px;
+         }
+        .col_4{
+          width:220px;
+        }
+        .col_5{
+          width:110px;
+        }
+        .col_6{
+          width:128px;
+        }
+        .col_7{
+          width:100px;
+        }
+        .col_8{
+          width:125px;
+        }
+        .col_9{
+          width:145px;
+        }
+      }
+      th{
+        height: 60px;
+        font-weight: bold;
+        font-size: 14px;
+      }
+      tbody{
+        tr{
+          height: 70px;
+          background-color: #F6F7FB;
+          &:nth-child(even){
+            background-color: #EFF3FB;
+          }
+          td{
+            font-size: 14px;
+            color: #4d4d4d;
+          }
+        }
+      }
+    }
+    .openAccountTableBtn{
+      text-align: center;
+      .btn{
+        margin-top:30px;
+        &:hover{color: #fff}
+      }
+    }
+}

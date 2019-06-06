@@ -1,0 +1,70 @@
+<div class="header">
+    <#if login == "true" || !login??>
+        <div class="topbar1">
+            <div class="grid1050 pre">
+                <div class="prel-left">
+                    	<i class="fa phone-icon">&#xf095;</i>服务热线:<em class="num-replace">${hotline}</em> 
+                </div>
+                <#if weiboUrl><li class="menu"><a target="_blank" href="${weiboUrl}"><i class="icon icon-sina"></i></a></li></#if>
+                <#if wechatImg><li class="menu"><a><i class="icon icon-weixin"></i></a>
+                <img class="header-weixin" src="${dojoUrl}/app/resources/image/customize/${wechatImg}"></img>
+                </li></#if>
+                
+                <div class="prel-right">
+                    <div id="usertopbar"></div>
+                </div>
+            </div>
+        </div>
+    </#if>
+    <#if header = "2">
+        <div class="hbottom">
+            <div class="grid1000">
+                <div class="logo"><img src="${dojoUrl}/app/resources/image/common/logo.png"></div>
+                <div class="page-name">${name}</div>
+            </div>
+        </div>
+    <#else>
+        <div class="nav" id="header-nav">
+            <div class="grid1050 pre">
+                <a href="/index.htm" class="logo-index" <#if logoImg>style="background: url(${dojoUrl}/app/resources/image/customize/${logoImg}) no-repeat left top;"</#if>></a>
+                <ul>
+                    <li><a href="${basePath}/index.htm">首 页</a></li>
+                    <li><a href="${basePath}/trade/buy.htm">交 易</a></li>
+                    <li>
+                    <li class="nav-hoveritem">
+                        <a href="javascript:void(0);">融&nbsp;&nbsp;资</a>
+                        <i class="fa fa-caret-down"></i>
+                        <dl>
+                        <#if isProDay>
+                            <dd><a href="${basePath}/p1.htm">${proDay}</a></dd>
+                        </#if>
+                        <#if isProMonth>
+                            <dd><a href="${basePath}/p2.htm">${proMonth}</a></dd>
+                        </#if>
+                        <#if isProFree>
+                            <dd><a href="${basePath}/p3.htm">${proFree}</a></dd>
+                        </#if>
+                        <#if isProContest>
+                            <dd><a href="${basePath}/p4.htm">${proContest}</a></dd>
+                        </#if>
+
+                        </dl>
+                    </li>
+
+                    <#if isProP2P>
+		            <li><a href="${basePath}/tender.htm">${proP2P}</a></li>
+		            </#if>
+                    <li><a href="${basePath}/home/index.htm">账 户</a></li>
+                    <li><a href="${basePath}/download.htm">下 载</a></li>
+                    <li class="nav-hoveritem"><a>帮助中心</a><i class="fa fa-caret-down"></i>
+	                    <dl>
+	                        <dd><a href="${basePath}/help.htm">帮助中心</a></dd>
+	                        <dd><a href="${basePath}/guide.htm">新手指引</a></dd>
+	                    </dl>
+	                </li>
+
+                </ul>
+            </div>
+        </div>
+    </#if>
+</div>

@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="GujiShareRecord">
+
+    <!-- 表所有字段和属性 -->
+    <resultMap id="BaseResultMap" type="com.caimao.bana.api.entity.guji.GujiShareRecordEntity" >
+        <result column="share_id" property="shareId" jdbcType="BIGINT" />
+        <result column="wx_id" property="wxId" jdbcType="BIGINT" />
+        <result column="open_id" property="openId" jdbcType="VARCHAR" />
+        <result column="stock_type" property="stockType" jdbcType="VARCHAR" />
+        <result column="stock_code" property="stockCode" jdbcType="VARCHAR" />
+        <result column="stock_name" property="stockName" jdbcType="VARCHAR" />
+        <result column="stock_price" property="stockPrice" jdbcType="VARCHAR" />
+        <result column="target_price" property="targetPrice" jdbcType="VARCHAR" />
+        <result column="positions" property="positions" jdbcType="INTEGER" />
+        <result column="pre_positions" property="prePositions" jdbcType="INTEGER" />
+        <result column="oper_type" property="operType" jdbcType="INTEGER" />
+        <result column="reason" property="reason" jdbcType="VARCHAR" />
+        <result column="favour" property="favour" jdbcType="INTEGER" />
+        <result column="is_public" property="isPublic" jdbcType="TIMESTAMP" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <!--其他的字段-->
+        <result column="nickname" property="nickname" jdbcType="VARCHAR" />
+        <result column="headimgurl" property="headimgurl" jdbcType="VARCHAR" />
+        <result column="subscribe" property="subscribe" jdbcType="INTEGER" />
+        <result column="certification_auth" property="certificationAuth" jdbcType="VARCHAR" />
+        <result column="auth_status" property="authStatus" jdbcType="INTEGER" />
+    </resultMap>
+
+
+    <!-- 表所有字段 -->
+    <sql id="Base_Column_List" >
+        share_id, 
+        wx_id, 
+        open_id, 
+        stock_type, 
+        stock_code, 
+        stock_name, 
+        stock_price,
+        target_price,
+        positions, 
+        pre_positions, 
+        oper_type, 
+        reason, 
+        favour, 
+        is_public, 
+        create_time
+    </sql>
+    <sql id="Base_Column_List_All" >
+        s.share_id,
+        s.wx_id,
+        s.open_id,
+        s.stock_type,
+        s.stock_code,
+        s.stock_name,
+        s.stock_price,
+        s.target_price,
+        s.positions,
+        s.pre_positions,
+        s.oper_type,
+        s.reason,
+        s.favour,
+        s.is_public,
+        s.create_time,
+        u.nickname,
+        u.headimgurl,
+        u.subscribe,
+        u.certification_auth,
+        u.auth_status
+    </sql>
+
+    <select id="selectById" resultMap="BaseResultMap" parameterType="Long">
+        select <include refid="Base_Column_List" />
+        from guji_share_record
+        WHERE share_id = #{id, jdbcType=BIGINT}
+    </select>
+
+    <!-- 查询指定人指定的股票推荐列表 -->
+    <select id="selectByWxIdAndCode" resultMap="BaseResultMap" parameterType="java.util.Map" >
+        select <include refid="Base_Column_List_All" />
+        from guji_share_record as s, guji_user as u
+        WHERE s.wx_id = u.wx_id AND s.wx_id = #{wxId, jdbcType=BIGINT} AND s.stock_code = #{stockCode, jdbcType=VARCHAR}
+        ORDER BY s.create_time DESC
+    </select>
+
+    <!--查询大厅中用户推荐的股票列表-->
+    <select id="selectHallListWithPage" resultMap="BaseResultMap" parameterType="com.caimao.bana.api.entity.req.guji.FQueryGujiHallShareListReq">
+        SELECT <include refid="Base_Column_List_All" />
+        FROM guji_share_record AS s, guji_user AS u
+        WHERE s.wx_id = u.wx_id AND u.public_recom = 1 AND s.is_public = 1
+        ORDER BY s.create_time DESC
+    </select>
+
+    <!--查询我关注用户推荐的股票动态-->
+    <select id="selectMyFollowListWithPage" resultMap="BaseResultMap" parameterType="com.caimao.bana.api.entity.req.guji.FQueryGujiFollowShareListReq">
+        SELECT <include refid="Base_Column_List_All" />
+        FROM guji_share_record AS s, guji_user AS u, guji_focus_record as f
+        WHERE s.wx_id = u.wx_id AND s.wx_id = f.focus_wx_id AND f.open_id = #{openId, jdbcType=VARCHAR}
+        ORDER BY s.create_time DESC
+    </select>
+
+    <!--后台查询用户推荐的股票信息-->
+    <select id="queryAdminShareListWithPage" resultMap="BaseResultMap" parameterType="com.caimao.bana.api.entity.req.guji.FQueryAdminShareListReq">
+        SELECT <include refid="Base_Column_List_All" />
+        FROM guji_share_record AS s, guji_user AS u
+        WHERE s.wx_id = u.wx_id AND s.open_id = u.open_id
+        <if test="stockType != null">
+            AND s.stock_type = #{stockType, jdbcType=VARCHAR}
+        </if>
+        <if test="operType != null">
+            AND s.oper_type = #{operType, jdbcType=VARCHAR}
+        </if>
+        <if test="stockCode != null">
+            AND s.stock_code = #{stockCode, jdbcType=VARCHAR}
+        </if>
+        <if test="nickName != null">
+            <![CDATA[ and u.nickname like concat('%', #{nickName}, '%')]]>
+        </if>
+        ORDER BY s.create_time DESC
+    </select>
+
+    <update id="addLikeNum" parameterType="java.lang.Long">
+        UPDATE guji_share_record SET favour = favour + 1 WHERE share_id = #{shareId, jdbcType=BIGINT}
+    </update>
+
+    <!-- 插入 -->
+    <insert id="insert" parameterType="com.caimao.bana.api.entity.guji.GujiShareRecordEntity">
+        insert into guji_share_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="shareId != null">
+                share_id,
+            </if>
+            <if test="wxId != null">
+                wx_id,
+            </if>
+            <if test="openId != null">
+                open_id,
+            </if>
+            <if test="stockType != null">
+                stock_type,
+            </if>
+            <if test="stockCode != null">
+                stock_code,
+            </if>
+            <if test="stockName != null">
+                stock_name,
+            </if>
+            <if test="stockPrice != null">
+                stock_price,
+            </if>
+            <if test="targetPrice != null">
+                target_price,
+            </if>
+            <if test="positions != null">
+                positions,
+            </if>
+            <if test="prePositions != null">
+                pre_positions,
+            </if>
+            <if test="operType != null">
+                oper_type,
+            </if>
+            <if test="reason != null">
+                reason,
+            </if>
+            <if test="favour != null">
+                favour,
+            </if>
+            <if test="isPublic != null">
+                is_public,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="shareId != null">
+                #{shareId, jdbcType=BIGINT},
+            </if>
+            <if test="wxId != null">
+                #{wxId, jdbcType=BIGINT},
+            </if>
+            <if test="openId != null">
+                #{openId, jdbcType=VARCHAR},
+            </if>
+            <if test="stockType != null">
+                #{stockType, jdbcType=VARCHAR},
+            </if>
+            <if test="stockCode != null">
+                #{stockCode, jdbcType=VARCHAR},
+            </if>
+            <if test="stockName != null">
+                #{stockName, jdbcType=VARCHAR},
+            </if>
+            <if test="stockPrice != null">
+                #{stockPrice, jdbcType=VARCHAR},
+            </if>
+            <if test="targetPrice != null">
+                #{targetPrice, jdbcType=VARCHAR},
+            </if>
+            <if test="positions != null">
+                #{positions, jdbcType=INTEGER},
+            </if>
+            <if test="prePositions != null">
+                #{prePositions, jdbcType=INTEGER},
+            </if>
+            <if test="operType != null">
+                #{operType, jdbcType=VARCHAR},
+            </if>
+            <if test="reason != null">
+                #{reason, jdbcType=VARCHAR},
+            </if>
+            <if test="favour != null">
+                #{favour, jdbcType=INTEGER},
+            </if>
+            <if test="isPublic != null">
+                #{isPublic, jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime, jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <!-- 修改 -->
+    <update id="update" parameterType="com.caimao.bana.api.entity.guji.GujiShareRecordEntity">
+        update guji_share_record
+        <set>
+            <if test="wxId != null">
+                wx_id = #{wxId, jdbcType=VARCHAR},
+            </if>
+            <if test="openId != null">
+                open_id = #{openId, jdbcType=VARCHAR},
+            </if>
+            <if test="stockType != null">
+                stock_type = #{stockType, jdbcType=VARCHAR},
+            </if>
+            <if test="stockCode != null">
+                stock_code = #{stockCode, jdbcType=VARCHAR},
+            </if>
+            <if test="stockName != null">
+                stock_name = #{stockName, jdbcType=VARCHAR},
+            </if>
+            <if test="stockPrice != null">
+                stock_price = #{stockPrice, jdbcType=VARCHAR},
+            </if>
+            <if test="targetPrice != null">
+                target_price = #{targetPrice, jdbcType=VARCHAR},
+            </if>
+            <if test="positions != null">
+                positions = #{positions, jdbcType=INTEGER},
+            </if>
+            <if test="prePositions != null">
+                pre_positions = #{prePositions, jdbcType=INTEGER},
+            </if>
+            <if test="operType != null">
+                oper_type = #{operType, jdbcType=VARCHAR},
+            </if>
+            <if test="reason != null">
+                reason = #{reason, jdbcType=VARCHAR},
+            </if>
+            <if test="favour != null">
+                favour = #{favour, jdbcType=INTEGER},
+            </if>
+            <if test="isPublic != null">
+                is_public = #{isPublic, jdbcType=BIGINT},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime, jdbcType=VARCHAR},
+            </if>
+        </set>
+        where share_id = #{shareId, jdbcType=BIGINT}
+    </update>
+
+    <delete id="delete" parameterType="Long">
+        DELETE FROM guji_share_record WHERE share_id = #{id, jdbcType=BIGINT}
+    </delete>
+
+</mapper>

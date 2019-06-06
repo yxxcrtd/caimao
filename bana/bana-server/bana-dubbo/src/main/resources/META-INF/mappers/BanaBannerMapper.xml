@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="BanaBanner" >
+    <resultMap id="BaseResultMap" type="com.caimao.bana.api.entity.content.BanaBannerEntity" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="app_type" property="appType" jdbcType="VARCHAR" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="pc_pic" property="pcPic" jdbcType="VARCHAR" />
+        <result column="app_pic" property="appPic" jdbcType="VARCHAR" />
+        <result column="pc_jump_url" property="pcJumpUrl" jdbcType="VARCHAR" />
+        <result column="app_jump_url" property="appJumpUrl" jdbcType="VARCHAR" />
+        <result column="is_show" property="isShow" jdbcType="INTEGER" />
+        <result column="sort" property="sort" jdbcType="INTEGER" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        id, app_type, name, pc_pic, app_pic, pc_jump_url, app_jump_url, is_show, sort, create_time
+    </sql>
+
+    <select id="select" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select
+        <include refid="Base_Column_List" />
+        from bana_banner
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <select id="queryListWithPage" resultMap="BaseResultMap" parameterType="com.caimao.bana.api.entity.req.content.FQueryBannerListReq" >
+        select
+        <include refid="Base_Column_List" />
+        from bana_banner
+        <where>
+            <if test="appType != null and appType != ''">
+                AND app_type = #{appType}
+            </if>
+            <if test="isShow != null and isShow != ''">
+                AND is_show = #{isShow}
+            </if>
+        </where>
+        ORDER BY sort ASC
+    </select>
+
+    <delete id="delete" parameterType="java.lang.Integer" >
+        delete from bana_banner
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insert" parameterType="com.caimao.bana.api.entity.content.BanaBannerEntity" >
+        insert into bana_banner
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="appType != null" >
+                app_type,
+            </if>
+            <if test="name != null" >
+                name,
+            </if>
+            <if test="pcPic != null" >
+                pc_pic,
+            </if>
+            <if test="appPic != null" >
+                app_pic,
+            </if>
+            <if test="pcJumpUrl != null" >
+                pc_jump_url,
+            </if>
+            <if test="appJumpUrl != null" >
+                app_jump_url,
+            </if>
+            <if test="isShow != null" >
+                is_show,
+            </if>
+            <if test="sort != null" >
+                sort,
+            </if>
+            <if test="createTime != null" >
+                create_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="appType != null" >
+                #{appType,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null" >
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="pcPic != null" >
+                #{pcPic,jdbcType=VARCHAR},
+            </if>
+            <if test="appPic != null" >
+                #{appPic,jdbcType=VARCHAR},
+            </if>
+            <if test="pcJumpUrl != null" >
+                #{pcJumpUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="appJumpUrl != null" >
+                #{appJumpUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="isShow != null" >
+                #{isShow,jdbcType=INTEGER},
+            </if>
+            <if test="sort != null" >
+                #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="update" parameterType="com.caimao.bana.api.entity.content.BanaBannerEntity" >
+        update bana_banner
+        <set >
+            <if test="appType != null" >
+                app_type = #{appType,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null" >
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="pcPic != null" >
+                pc_pic = #{pcPic,jdbcType=VARCHAR},
+            </if>
+            <if test="appPic != null" >
+                app_pic = #{appPic,jdbcType=VARCHAR},
+            </if>
+            <if test="pcJumpUrl != null" >
+                pc_jump_url = #{pcJumpUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="appJumpUrl != null" >
+                app_jump_url = #{appJumpUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="isShow != null" >
+                is_show = #{isShow,jdbcType=INTEGER},
+            </if>
+            <if test="sort != null" >
+                sort = #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null" >
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+</mapper>

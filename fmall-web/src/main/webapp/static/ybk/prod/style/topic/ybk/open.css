@@ -1,0 +1,85 @@
+body{
+	background: #eeeeee;
+	font-size: 10px;
+	font-family:'Microsoft YaHei',Lucida Grande,Lucida Sans Unicode,\5B8B\4F53;
+}
+ul,li{
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.wrapper{
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    background: url(../../../../../ybk/img/topic/ybk/download/bg.png) no-repeat;
+    background-size: 100% 100%;
+    float: left;
+}
+
+.loadBtn{
+	display: block;
+	width: 76%;
+	margin-left: 12%;
+	border: 1px solid #fff;
+	border-radius: 50px;
+	text-align: center;
+	font-size: 2em;
+	height: 2em;
+	line-height: 2em;
+	color: #fff;
+	margin-top: 5%;
+	float: left;
+}
+.mask{
+	position: absolute;
+    z-index: 4;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.7); 
+    float: left;
+	display: none;
+}
+.mask dl{
+	position: absolute;
+	z-index: 9;
+	width: 60%;
+	margin-left: 20%;
+	opacity: 1;
+}
+.mask dl dt{
+	width: 100%;
+	float: left;
+}
+.mask dl dt img{
+	margin-left: 50%;
+	width: 50%;
+}
+.mask dl dd{
+	margin: 0;
+	width: 100%;
+	background: url(../../../../../../static/ybk/img/topic/ybk/download/dialogBox.png) no-repeat;
+	background-size: 100% 100%;
+	margin-top: -1em;
+	float: left;
+		padding: 2em 0 3em 0;
+	box-sizing:initial;
+}
+.mask dl dd p{
+	width: 100%;
+	text-align: center;
+	height: 2em;
+	margin:0;
+	line-height: 3em;
+
+	font-size: 1.3em;
+	float: left;
+
+}

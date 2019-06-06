@@ -1,0 +1,37 @@
+@charset 'utf-8';
+@mixin autoLayoutFixLeft($w:200px){
+	.mod-left{position:relative;float:left;width:$w;margin-right:-$w;}
+	.mod-right{float:right;width:100%;}
+	.mod-rightcontent{margin-left:$w;}
+	/*****
+		<div class="clearfix">
+		    <div class="mod-left">
+		    	left
+		    </div>
+		    <div class="mod-right">
+		        <div class="mod-rightcontent">
+		        	right
+		        </div>
+		    </div>
+		</div>
+	*****/
+ }
+
+
+@mixin autoLayoutFixRight($w:200px){
+	.mod-right{position:relative;float:left;width:$w;margin-right:-$w;}
+	.mod-left{float:left;width:100%;}
+	.mod-leftcontent{margin-right:$w;}
+	/*****
+		<div class="clearfix">
+		    <div class="mod-left">
+		        <div class="mod-leftcontent">
+		        	left
+		        </div>
+		    </div>
+		    <div class="mod-right">
+				right
+		    </div>
+		</div>
+	*****/
+ }

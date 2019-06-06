@@ -1,0 +1,69 @@
+.header {
+	width: 100%;
+	height: 75px;
+	background: #fff;
+	zoom: 1;
+}
+
+.header a:hover {
+	color: #cf601c;
+}
+
+.headerInner {
+	width: 990px;
+	margin: 0 auto;
+}
+
+.headerLeft {
+	float: left;
+	width: 330px;
+	padding: 18px 0;
+	position: relative;
+}
+
+.headerRight {
+	float: right;
+}
+
+.headerLogo {
+	width: 140px;
+	height: 40px;
+	position: absolute;
+	left: 15px;
+}
+
+.headerVIP {
+	position: absolute;
+	left: 185px;
+	font-size: 18px;
+	color: #666;
+	border-left: 1px #a8a8a8 solid;
+	height: 35px;
+	line-height: 35px;
+	padding-left: 20px;
+	margin-top: 2px;
+}
+
+.headerSplitter {
+	border-right: 1px solid #AAA;
+	height: 40px;
+	margin: 0 20px;
+	box-shadow: 1px 0px 0px 0px #ECECEC;
+}
+
+.headerRight ul {
+	margin: 0;
+	padding: 0;
+}
+
+.headerRight li {
+	cursor: pointer;
+	float: left;
+	list-style: none;
+	display: inline-block;
+	font-size: 16px;
+	height: 30px;
+	line-height: 30px;
+	padding: 20px 20px 0 20px;
+	position: relative;
+}

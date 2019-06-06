@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="TpzHomsAccount">
+    <select id="queryHomsAccount" resultType="com.caimao.bana.api.entity.TpzHomsAccountEntity">
+        SELECT
+        id,
+        broker_id AS brokerId,
+        fund_account AS fundAccount,
+        homs_fund_account AS homsFundAccount,
+        homs_manage_id AS homsManageId,
+        fund_account_name AS fundAccountName,
+        expire_date AS expireDate,
+        fund_priority AS fundPriority,
+        account_status AS accountStatus,
+        fund_user_id AS fundUserId,
+        create_datetime AS createDatetime,
+        update_datetime AS updateDatetime
+        FROM tpz_homs_account
+    </select>
+
+    <select id="queryAbnormalBizTypeAccountJour" resultType="com.caimao.bana.api.entity.TpzHomsAccountJourEntity" parameterType="hashmap">
+        SELECT
+        id,
+        user_id AS userId,
+        pz_account_id AS pzAccountId,
+        homs_fund_account AS homsFundAccount,
+        homs_combine_id AS homsCombineId,
+        homs_manage_id AS homsManageId,
+        trans_amount AS transAmount,
+        trans_datetime AS transDatetime,
+        post_amount AS postAmount,
+        seq_flag AS seqFlag,
+        account_biz_type AS accountBizType,
+        ref_serial_no AS refSerialNo,
+        remark,
+        work_date AS workDate
+        FROM tpz_homs_account_jour
+        WHERE trans_datetime &gt;= #{dateStart} AND  account_biz_type = #{accountBizType}  AND (LENGTH(ref_serial_no) &gt; 10 OR ref_serial_no IS NULL)
+    </select>
+
+    <select id="queryAbnormalAccountJour" resultType="com.caimao.bana.api.entity.TpzHomsAccountJourEntity" parameterType="hashmap">
+        SELECT
+        id,
+        user_id AS userId,
+        pz_account_id AS pzAccountId,
+        homs_fund_account AS homsFundAccount,
+        homs_combine_id AS homsCombineId,
+        homs_manage_id AS homsManageId,
+        trans_amount AS transAmount,
+        trans_datetime AS transDatetime,
+        post_amount AS postAmount,
+        seq_flag AS seqFlag,
+        account_biz_type AS accountBizType,
+        ref_serial_no AS refSerialNo,
+        remark,
+        work_date AS workDate
+        FROM tpz_homs_account_jour
+        WHERE trans_datetime &gt;= #{dateStart} AND (LENGTH(ref_serial_no) &gt; 10 OR ref_serial_no IS NULL)
+    </select>
+
+    <select id="queryRecordByContractInfo" resultType="com.caimao.bana.api.entity.TpzHomsAccountJourEntity" parameterType="hashmap">
+        SELECT
+        id,
+        user_id AS userId,
+        pz_account_id AS pzAccountId,
+        homs_fund_account AS homsFundAccount,
+        homs_combine_id AS homsCombineId,
+        homs_manage_id AS homsManageId,
+        trans_amount AS transAmount,
+        trans_datetime AS transDatetime,
+        post_amount AS postAmount,
+        seq_flag AS seqFlag,
+        account_biz_type AS accountBizType,
+        ref_serial_no AS refSerialNo,
+        remark,
+        work_date AS workDate
+        FROM tpz_homs_account_jour
+        WHERE user_id = #{userId} AND
+        trans_amount = #{transAmount} AND
+        account_biz_type = '09'  AND
+        remark = '借款成功' AND
+        trans_datetime &gt;= #{dateStart}
+        ORDER BY trans_datetime ASC LIMIT 1
+    </select>
+</mapper>

@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="TpzPushMsg">
+	<resultMap id="BaseResultMap" type="com.caimao.bana.api.entity.content.TpzPushMsgEntity" >
+		<id column="push_msg_id" property="pushMsgId" jdbcType="BIGINT" />
+		<result column="push_model" property="pushModel" jdbcType="CHAR" />
+		<result column="push_type" property="pushType" jdbcType="VARCHAR" />
+		<result column="push_msg_kind" property="pushMsgKind" jdbcType="CHAR" />
+		<result column="push_msg_title" property="pushMsgTitle" jdbcType="VARCHAR" />
+		<result column="push_msg_digest" property="pushMsgDigest" jdbcType="VARCHAR" />
+		<result column="push_extend" property="pushExtend" jdbcType="VARCHAR" />
+		<result column="push_user_id" property="pushUserId" jdbcType="VARCHAR" />
+		<result column="create_datetime" property="createDatetime" jdbcType="TIMESTAMP" />
+		<result column="is_read" property="isRead" jdbcType="CHAR" />
+	</resultMap>
+	<resultMap id="F830904ResMap" type="com.caimao.bana.api.entity.res.F830904Res">
+		<id column="push_msg_id" property="pushMsgId" jdbcType="BIGINT" />
+		<result column="push_model" property="pushModel" jdbcType="CHAR" />
+		<result column="push_type" property="pushType" jdbcType="VARCHAR" />
+		<result column="push_msg_kind" property="pushMsgKind" jdbcType="CHAR" />
+		<result column="push_msg_title" property="pushMsgTitle" jdbcType="VARCHAR" />
+		<result column="push_msg_digest" property="pushMsgDigest" jdbcType="VARCHAR" />
+		<result column="push_extend" property="pushExtend" jdbcType="VARCHAR" />
+		<result column="push_user_id" property="pushUserId" jdbcType="VARCHAR" />
+		<result column="create_datetime" property="createDatetime" jdbcType="TIMESTAMP" />
+		<result column="is_read" property="isRead" jdbcType="CHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		push_msg_id, push_model, push_type, push_msg_kind, push_msg_title,
+		push_msg_digest,
+		push_extend, push_user_id, create_datetime, is_read
+	</sql>
+	<sql id="where_condition">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="pushUserId != null and  pushUserId != ''">
+				AND t.push_user_id = #{pushUserId}
+			</if>
+			<if test="isRead != null and  isRead != ''">
+				AND t.is_read = #{isRead}
+			</if>
+			<if test="pushModel != null and  pushModel != ''">
+				AND t.push_model = #{pushModel}
+			</if>
+			<if test="pushType != null and  pushType != ''">
+				AND t.push_type = #{pushType}
+			</if>
+			<if test="pushTypes != null and pushTypes.size() > 0">
+				<foreach collection="pushTypes" item="p" open="AND t.push_type IN(" separator="," close=")">
+					#{p}
+				</foreach>
+			</if>
+			<if test="createDatetimeBegin != null and  createDatetimeBegin != ''">
+				AND t.create_datetime &gt;= #{createDatetimeBegin}
+			</if>
+			<if test="createDatetimeEnd != null and  createDatetimeEnd != ''">
+				AND t.create_datetime &lt;= #{createDatetimeEnd}
+			</if>
+		</trim>
+	</sql>
+	<select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from tpz_push_msg
+		where push_msg_id = #{pushMsgId,jdbcType=BIGINT}
+	</select>
+	<select id="getQueryPushMsg" resultMap="BaseResultMap"
+			parameterType="com.caimao.bana.api.entity.req.F830904Req">
+		select
+		<include refid="Base_Column_List" />
+		from tpz_push_msg
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="pushUserId != null">
+				push_user_id = #{pushUserId,jdbcType=VARCHAR}
+			</if>
+			<if test="createDatetimeBegin != null and  createDatetimeBegin != ''">
+				<![CDATA[ AND create_datetime >= "#{createDatetimeBegin}" ]]>
+			</if>
+			<if test="createDatetimeEnd != null and  createDatetimeEnd != ''">
+				<![CDATA[ AND create_datetime <=  "#{createDatetimeEnd}" ]]>
+			</if>
+			<if test="isRead != null and  isRead != ''">
+				and is_read = #{isRead,jdbcType=CHAR}
+			</if>
+			<if test="">
+				order by #{orderColumn,jdbcType=VARCHAR}  #{orderDir,jdbcType=VARCHAR}
+			</if>
+			limit #{start,jdbcType=BIGINT},#{limit,jdbcType=BIGINT}
+		</trim>
+	</select>
+	<delete id="deleteById" parameterType="java.lang.Long">
+		delete from tpz_push_msg
+		where push_msg_id = #{pushMsgId,jdbcType=BIGINT}
+	</delete>
+	<insert id="save" parameterType="com.caimao.bana.api.entity.content.TpzPushMsgEntity">
+		insert into tpz_push_msg
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="pushMsgId != 0">
+				push_msg_id,
+			</if>
+			<if test="pushModel != null and  pushModel != ''">
+				push_model,
+			</if>
+			<if test="pushType != null and pushType  != ''">
+				push_type,
+			</if>
+			<if test="pushMsgKind != null and  pushMsgKind != ''">
+				push_msg_kind,
+			</if>
+			<if test="pushMsgTitle != null and pushMsgTitle  != ''">
+				push_msg_title,
+			</if>
+			<if test="pushMsgDigest != null and pushMsgDigest  != ''">
+				push_msg_digest,
+			</if>
+			<if test="pushExtend != null and pushExtend  != ''">
+				push_extend,
+			</if>
+			<if test="pushUserId != null and pushUserId  != ''">
+				push_user_id,
+			</if>
+			<if test="createDatetime != null and  createDatetime != ''">
+				create_datetime,
+			</if>
+			<if test="isRead != null and  isRead != ''">
+				is_read,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="pushMsgId != 0">
+				#{pushMsgId,jdbcType=BIGINT},
+			</if>
+			<if test="pushModel != null and pushModel  != ''">
+				#{pushModel,jdbcType=CHAR},
+			</if>
+			<if test="pushType != null and pushType  != ''">
+				#{pushType,jdbcType=VARCHAR},
+			</if>
+			<if test="pushMsgKind != null and  pushMsgKind != ''">
+				#{pushMsgKind,jdbcType=CHAR},
+			</if>
+			<if test="pushMsgTitle != null and pushMsgTitle  != ''">
+				#{pushMsgTitle,jdbcType=VARCHAR},
+			</if>
+			<if test="pushMsgDigest != null and  pushMsgDigest != ''">
+				#{pushMsgDigest,jdbcType=VARCHAR},
+			</if>
+			<if test="pushExtend != null and pushExtend  != ''">
+				#{pushExtend,jdbcType=VARCHAR},
+			</if>
+			<if test="pushUserId != null and  pushUserId != ''">
+				#{pushUserId,jdbcType=VARCHAR},
+			</if>
+			<if test="createDatetime != null and  createDatetime != ''">
+				#{createDatetime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="isRead != null and  isRead != ''">
+				#{isRead,jdbcType=CHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="update" parameterType="com.caimao.bana.api.entity.content.TpzPushMsgEntity">
+		update tpz_push_msg
+		<set>
+			<if test="pushModel != null and  pushModel != ''">
+				push_model = #{pushModel,jdbcType=CHAR},
+			</if>
+			<if test="pushType != null and pushType  != ''">
+				push_type = #{pushType,jdbcType=VARCHAR},
+			</if>
+			<if test="pushMsgKind != null and pushMsgKind  != ''">
+				push_msg_kind = #{pushMsgKind,jdbcType=CHAR},
+			</if>
+			<if test="pushMsgTitle != null and pushMsgTitle  != ''">
+				push_msg_title = #{pushMsgTitle,jdbcType=VARCHAR},
+			</if>
+			<if test="pushMsgDigest != null and pushMsgDigest  != ''">
+				push_msg_digest = #{pushMsgDigest,jdbcType=VARCHAR},
+			</if>
+			<if test="pushExtend != null and  pushExtend != ''">
+				push_extend = #{pushExtend,jdbcType=VARCHAR},
+			</if>
+			<if test="pushUserId != null and pushUserId  != ''">
+				push_user_id = #{pushUserId,jdbcType=VARCHAR},
+			</if>
+			<if test="createDatetime != null and createDatetime  != ''">
+				create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="isRead != null and isRead  != ''">
+				is_read = #{isRead,jdbcType=CHAR},
+			</if>
+		</set>
+		where push_msg_id = #{pushMsgId,jdbcType=BIGINT}
+	</update>
+	<select id="queryF830904ResWithPage" resultMap="F830904ResMap" parameterType="com.caimao.bana.api.entity.req.F830904Req" >
+		select
+		<include refid="Base_Column_List" />
+		from tpz_push_msg t
+		<include refid="where_condition"/>
+		<trim prefix="ORDER BY ">
+			<if test="orderColumn != null and  orderColumn != ''">
+				${orderColumn} ${orderDir}
+			</if>
+		</trim>
+	</select>
+
+	<update id="updateByType" parameterType="com.caimao.bana.api.entity.content.TpzPushMsgEntity">
+		update tpz_push_msg
+		set push_msg_title = #{pushMsgTitle},
+		push_msg_digest = #{pushMsgDigest},
+		create_datetime = #{createDatetime},
+		is_read = #{isRead}
+		where push_type = #{pushType}
+		and push_user_id = #{pushUserId}
+	</update>
+
+	<select id="getTodayPushRiskMsg" resultType="hashmap">
+		SELECT push_user_id
+		FROM tpz_push_msg
+		WHERE push_type = 9 AND create_datetime &gt;= curdate() AND create_datetime &lt; date_add(curdate(), interval 1 day)
+		GROUP BY push_user_id
+	</select>
+
+	<!--获取指定用户未读的消息数量-->
+	<select id="getNotReadNum" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM tpz_push_msg WHERE push_user_id = #{userId} AND is_read = 0;
+	</select>
+
+	<!--获取指定用户未读的消息数量-->
+	<select id="getNotReadNumType" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM tpz_push_msg
+		WHERE push_user_id = #{userId} AND is_read = 0
+		<if test="pushTypes != null and pushTypes.size() > 0">
+			<foreach collection="pushTypes" item="p" open="AND push_type IN(" separator="," close=")">
+				#{p}
+			</foreach>
+		</if>
+	</select>
+
+	<!--查询指定用户的消息列表-->
+	<select id="queryMsgListWithPage" resultMap="BaseResultMap" parameterType="com.caimao.bana.api.entity.req.content.FMsgQueryListReq" >
+		select
+		<include refid="Base_Column_List" />
+		from tpz_push_msg t
+		<include refid="where_condition"/>
+		ORDER BY create_datetime DESC
+
+	</select>
+
+	<update id="msgReadAll">
+		update tpz_push_msg
+		SET is_read = 1
+		where push_user_id = #{pushUserId,jdbcType=BIGINT}
+	</update>
+
+	<select id="getLastRiskMsg" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from tpz_push_msg
+		where push_user_id = #{userId,jdbcType=BIGINT} AND push_type = 9
+		order by create_datetime DESC LIMIT 1
+	</select>
+
+
+	<delete id="clearMsg" parameterType="java.lang.Long">
+		DELETE FROM tpz_push_msg WHERE push_user_id = #{userId,jdbcType=BIGINT}
+	</delete>
+
+	<delete id="del" parameterType="java.util.HashMap">
+		DELETE FROM tpz_push_msg WHERE push_user_id = #{userId,jdbcType=BIGINT} AND push_msg_id = #{pushMsgId,jdbcType=BIGINT}
+	</delete>
+
+
+
+</mapper>

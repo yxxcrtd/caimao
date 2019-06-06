@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<#include "gjs/config.html" />
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>开户</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no"/>
+    <link rel="stylesheet" href="${staticUrl}/app/kaihu/css/reset.css" />
+    <link rel="stylesheet" href="${staticUrl}/app/kaihu/css/open.css" />
+    <style>
+        select,input{outline:0 none;}
+    </style>
+</head>
+<body>
+
+<div class='operMain'>
+    <div class="nameList">
+
+        <ul>
+            <li>
+                <input id="pw1" type="text" class="psword" placeholder="请输入您的真实姓名">
+                <span><img class="delet-2" src="${imgUrl}/delet.png" alt=""></span>
+            </li>
+            <li>
+                <input id="pw2" type="text" class="psword" placeholder="请输入您的身份证号">
+                <span><img class="delet-2" src="${imgUrl}/delet.png" alt=""></span>
+            </li>
+        </ul>
+    </div>
+</div>
+<a href="#" class='next' id="next">下一步</a>
+<div id="debug" style="font-family:arial"></div>
+</body>
+<script src='${staticUrl}/app/kaihu/js/zepto.js'></script>
+<script src='${staticUrl}/app/kaihu/js/fuc.js'></script>
+<script>
+    var ischeck = 0,
+        next = $("#next"),
+        exchange = $_GET("exchange"),
+        re = $_GET("re"),
+        token = $_GET("token"),
+        tmpData = localStorage.getItem("MOAD"),
+        realName = document.getElementById('pw1'),
+        idCard = document.getElementById('pw2');
+    if(re){
+        tmpData = JSON.parse(tmpData);
+        realName.value = tmpData.realName;
+        idCard.value = tmpData.idCard;
+    }
+    !re && localStorage.clear();
+    function change() {
+        if (realName.value !== "" && idCard.value !== "") {
+            ischeck = 1;
+            next.addClass('next-2').removeClass('next');
+        } else {
+            ischeck = 0;
+            next.addClass('next').removeClass('next-2');
+        }
+        ;
+        $(".psword").each(function () {
+            if ($(this).val() !== '') {
+                $(this).siblings("span").css('display', 'block')
+            } else {
+                $(this).siblings("span").css('display', 'none')
+            }
+        });
+        setTimeout(change,300);
+    }
+    // document.querySelector("#debug").innerHTML = "localStorage => "+window['localStorage'] +"<br>userAgent => "+ navigator.userAgent +"<br>vendor => " + navigator.vendor +"<br>appName => " + navigator.appName +"<br>appCodeName => " + navigator.appCodeName +"<br>appVersion => " + navigator.appVersion;
+    next.click(function(){
+        if(!ischeck)return;
+        if(re){
+            tmpData.realName = realName.value;
+            tmpData.idCard = idCard.value;
+            localStorage.setItem("MOAD",JSON.stringify(tmpData));
+        }else{
+           localStorage.setItem("MOAD",JSON.stringify({exchange:exchange,token:token,realName:realName.value,idCard:idCard.value}));
+        }
+        location.href = "bank.html?exchange="+exchange+"&token="+token;
+    })
+    change();
+</script>
+</html>

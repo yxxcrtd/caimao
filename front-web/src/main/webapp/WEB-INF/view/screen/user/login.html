@@ -1,0 +1,55 @@
+<#assign name="登录"/>
+<#assign controller="Login"/>
+<#assign login="false"/>
+<#include 'layout/layout.html'/>
+<#macro content>
+    <div class="con-login-bg stretch bg-img-stretch" style="background: #f8cf62">
+        <div class="container">
+            <div class="contents content table">
+                <div class="con-login clearfix grid-1000 center">
+                    <div id="login-image" style="display: none;"></div>
+                    <div style="width: 322px;height: 281px;margin: 0 auto;">
+                        <div class="login-wrapper">
+                            <form id="loginform" class="login-modern">
+                                <h2 class="ui-form-title ">登录财猫网</h2>
+                                <div id="login_error" class="sl-error sl-error-display"></div>
+                                <div class="ui-form-item">
+                                    <label for="username" class="ui-label">
+                                        <i class="fa fa-lg">&#xf007;</i>
+                                    </label>
+                                    <input id="username" autocomplete="on" type="text"
+                                           class="ui-input ui-input-normal"
+                                           placeholder="手机号" />
+                                </div>
+                                <div class="ui-form-item">
+                                    <label for="password" class="ui-label">
+                                        <i class="fa fa-lg">&#xf023;</i>
+                                    </label>
+                                    <input id="password" type="password"
+                                           class="ui-input ui-input-normal"
+                                           placeholder="密码" />
+                                </div>
+                                <p class="ui-form-other ui-form-other-fg">
+
+                                </p>
+                                <div id="captchactn"></div>
+                                <div class="clear"></div>
+                                <div class="am-mt-5">
+                                    <input type="button" value="登 录" class="ui-button-login"
+                                           id="login_button" />
+                                    <div data-dojo-attach-point="loadingNode" class="ui-button-loading-extra" style="display: none;">
+                                        <img src="${dojoUrl}/app/resources/image/loading.gif">
+                                    </div>
+                                </div>
+                                <p class="ui-form-other">
+                                    <span><a href="${basePath}/user/register.htm">免费注册</a></span>
+                                    <span><a style="position: absolute; right: 0;" href="${basePath}/user/forgetloginpwd.htm">忘记登录密码？</a></span>
+                                </p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</#macro>

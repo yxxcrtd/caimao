@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="TpzInterestBill">
+	<resultMap id="BaseResultMap"
+		type="com.caimao.bana.api.entity.TpzInterestBillEntity">
+		<id column="order_no" property="orderNo" jdbcType="BIGINT" />
+		<result column="user_id" property="userId" jdbcType="BIGINT" />
+		<result column="contract_no" property="contractNo" jdbcType="BIGINT" />
+		<result column="order_amount" property="orderAmount" jdbcType="BIGINT" />
+		<result column="bill_abstract" property="billAbstract"
+			jdbcType="VARCHAR" />
+		<result column="loan_amount" property="loanAmount" jdbcType="BIGINT" />
+		<result column="interest_rate" property="interestRate"
+			jdbcType="DECIMAL" />
+		<result column="interest_settle_flag" property="interestSettleFlag"
+			jdbcType="CHAR" />
+		<result column="work_date" property="workDate" jdbcType="VARCHAR" />
+		<result column="create_datetime" property="createDatetime"
+			jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		order_no, user_id, contract_no, order_amount,
+		bill_abstract, loan_amount,
+		interest_rate,
+		interest_settle_flag,
+		work_date, create_datetime
+	</sql>
+	<select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from tpz_interest_bill
+		where order_no = #{orderNo,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteById" parameterType="java.lang.Long">
+		delete from
+		tpz_interest_bill
+		where order_no = #{orderNo,jdbcType=BIGINT}
+	</delete>
+	<insert id="save" parameterType="com.caimao.bana.api.entity.TpzInterestBillEntity">
+		insert into tpz_interest_bill
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="orderNo != 0">
+				order_no,
+			</if>
+			<if test="userId != null">
+				user_id,
+			</if>
+			<if test="contractNo != null">
+				contract_no,
+			</if>
+			<if test="orderAmount != null">
+				order_amount,
+			</if>
+			<if test="billAbstract != null">
+				bill_abstract,
+			</if>
+			<if test="loanAmount != null">
+				loan_amount,
+			</if>
+			<if test="interestRate != null">
+				interest_rate,
+			</if>
+			<if test="interestSettleFlag != null">
+				interest_settle_flag,
+			</if>
+			<if test="workDate != null">
+				work_date,
+			</if>
+			<if test="createDatetime != null">
+				create_datetime,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="orderNo != 0">
+				#{orderNo,jdbcType=BIGINT},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=BIGINT},
+			</if>
+			<if test="contractNo != null">
+				#{contractNo,jdbcType=BIGINT},
+			</if>
+			<if test="orderAmount != null">
+				#{orderAmount,jdbcType=BIGINT},
+			</if>
+			<if test="billAbstract != null">
+				#{billAbstract,jdbcType=VARCHAR},
+			</if>
+			<if test="loanAmount != null">
+				#{loanAmount,jdbcType=BIGINT},
+			</if>
+			<if test="interestRate != null">
+				#{interestRate,jdbcType=DECIMAL},
+			</if>
+			<if test="interestSettleFlag != null">
+				#{interestSettleFlag,jdbcType=CHAR},
+			</if>
+			<if test="workDate != null">
+				#{workDate,jdbcType=VARCHAR},
+			</if>
+			<if test="createDatetime != null">
+				#{createDatetime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="update" parameterType="com.caimao.bana.api.entity.TpzInterestBillEntity">
+		update tpz_interest_bill
+		<set>
+			<if test="userId != null">
+				user_id = #{userId,jdbcType=BIGINT},
+			</if>
+			<if test="contractNo != null">
+				contract_no = #{contractNo,jdbcType=BIGINT},
+			</if>
+			<if test="orderAmount != null">
+				order_amount = #{orderAmount,jdbcType=BIGINT},
+			</if>
+			<if test="billAbstract != null">
+				bill_abstract = #{billAbstract,jdbcType=VARCHAR},
+			</if>
+			<if test="loanAmount != null">
+				loan_amount = #{loanAmount,jdbcType=BIGINT},
+			</if>
+			<if test="interestRate != null">
+				interest_rate = #{interestRate,jdbcType=DECIMAL},
+			</if>
+			<if test="interestSettleFlag != null">
+				interest_settle_flag =
+				#{interestSettleFlag,jdbcType=CHAR},
+			</if>
+			<if test="workDate != null">
+				work_date = #{workDate,jdbcType=VARCHAR},
+			</if>
+			<if test="createDatetime != null">
+				create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where order_no = #{orderNo,jdbcType=BIGINT}
+	</update>
+	<!-- user definw -->
+	<resultMap id="F830201ResMap" type="com.caimao.bana.api.entity.res.F830201Res">
+		<id column="order_no" property="orderNo" jdbcType="BIGINT" />
+		<result column="order_amount" property="orderAmount" jdbcType="BIGINT" />
+		<result column="bill_abstract" property="billAbstract"
+			jdbcType="VARCHAR" />
+		<result column="loan_amount" property="loanAmount" jdbcType="BIGINT" />
+		<result column="interest_rate" property="interestRate"
+			jdbcType="DECIMAL" />
+		<result column="interest_settle_flag" property="interestSettleFlag"
+			jdbcType="CHAR" />
+		<result column="work_date" property="workDate" jdbcType="VARCHAR" />
+	</resultMap>
+	<select id="queryF830201ResWithPage" resultMap="F830201ResMap"
+		parameterType="com.caimao.bana.api.entity.req.F830201Req">
+		select order_no, order_amount, bill_abstract, loan_amount,
+		interest_rate, interest_settle_flag, work_date
+		from tpz_interest_bill
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="contractNo != null and  contractNo != 0">
+				AND contract_no = #{contractNo}
+			</if>
+			<if test="orderNo != null and  orderNo != 0">
+				AND order_no = #{orderNo}
+			</if>
+			<if test="transDatetimeBegin != null and  transDatetimeBegin != ''">
+				AND work_date &gt;= #{transDatetimeBegin}
+			</if>
+			<if test="transDatetimeEnd != null and  transDatetimeEnd != ''">
+				AND work_date &lt;= #{transDatetimeEnd}
+			</if>
+		</trim>
+		<trim prefix="ORDER BY ">
+			<if test="orderColumn != null and  orderColumn != ''">
+				${orderColumn} ${orderDir}
+			</if>
+		</trim>
+	</select>
+</mapper>

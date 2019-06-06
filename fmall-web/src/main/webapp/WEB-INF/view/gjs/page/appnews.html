@@ -1,0 +1,48 @@
+<!doctype html>
+<#include "gjs/config.html" />
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1, user-scalable=false">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-touch-fullscreen" content="yes">
+		<meta name="format-detection" content="telephone=no"/>
+		<title></title>
+		<link rel="stylesheet" href="${staticUrl}/style/app.css" />
+		<script src="${staticUrl}/js/lib.js"></script>
+	</head>
+<body>
+	<div id="cont">
+		<div class="fixedBox"><img src="${imgUrl}/loading.gif" /></div>
+		<script type="text/x-tmpl">
+			<%
+				var userInfo = user.split(",");
+			%>
+			<h1><%=title%></h1>
+			<h2><img src="/static/gjs<%=userInfo[2]%>"><strong><%=userInfo[1]%></strong><span>|</span><i><%=created%></i></h2>
+			<div class="content">
+				<i><%=content%>
+			</div>
+		</script>
+	</div>
+	<script>
+		var r = request(),
+			id = $_GET("id"),
+			title = document.querySelector("title"),
+			box = document.querySelector("#cont"),
+			html = box.querySelector("script").innerHTML;
+		r.ajax({
+			url : "${httpUrl}/api/content/gjs_article",
+			data : {id : id},
+			type : "GET",
+			success : function(d){
+
+				if(d.success){
+					title.innerHTML = d.data.title;
+					box.innerHTML = rentmpl(html,d.data)
+				}
+			}
+		})
+	</script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+<#include "config.html"/>
+<#assign curTopMenu="invest"/>
+<#assign curLeftMenu="index"/>
+<head>
+    <meta charset="utf-8">
+    <title>开始投资-财猫网</title>
+    <!--基本布局样式-->
+    <link rel="stylesheet" type="text/css" href="${dojoUrl}/style/page/page.css?v=${jsVersion}" />
+    <link rel="stylesheet" type="text/css" href="${dojoUrl}/style/page/p2p.css?v=${jsVersion}" />
+    <script src="${dojoUrl}/js/p2pIndex.js?v=${jsVersion}"></script>
+</head>
+
+<body>
+<!--顶部条-->
+<#include "include/page/head.html" />
+
+<!--内容区-->
+<div id="main">
+    <div class="w sec_main">
+        <!--左右布局-->
+        <#include "include/menu/p2p_left.html" />
+
+        <div class="right_bar">
+            <div class="tabNav">
+                <ul>
+                    <li><a <#if targetStatus != 1>class="on"</#if> href="/p2p/index.html">可投项目(${loanUnfullCount})</a></li>
+                    <li><a <#if targetStatus == 1>class="on"</#if> href="/p2p/index.html?targetStatus=1">满标项目(${loanFullCount})</a></li>
+                </ul>
+            </div>
+            <div class="">
+                <table class="targetList table" id="targetList">
+                    <thead>
+                    <tr>
+                        <td class="list-name"><span>名称</span></td>
+                        <td class="list-rate"><span class="rank <#if loan.orderColumn == "yearRate">${loan.orderDir?lower_case}</#if>" act="changeRank" data-val="yearRate"><a href="/p2p/index.html?targetStatus=${targetStatus}&order=yearRate&asc=<#if loan.orderDir == "ASC">0<#else/>1</#if>">年化收益率</a></span></td>
+                        <td class="list-time"><span class="rank <#if loan.orderColumn == "liftTime">${loan.orderDir?lower_case}</#if>" act="changeRank" data-val="liftTime"><a href="/p2p/index.html?targetStatus=${targetStatus}&order=liftTime&asc=<#if loan.orderDir == "ASC">0<#else/>1</#if>">借款期限</a></span></td>
+                        <td class="list-progress"><span class="rank <#if loan.orderColumn == "targetRate">${loan.orderDir?lower_case}</#if>" act="changeRank" data-val="targetRate"><a href="/p2p/index.html?targetStatus=${targetStatus}&order=targetRate&asc=<#if loan.orderDir == "ASC">0<#else/>1</#if>">进度</a></span></td>
+                        <td colspan="2" class="list-left"><span class="rank <#if loan.orderColumn == "targetOver">${loan.orderDir?lower_case}</#if>"><a href="/p2p/index.html?targetStatus=${targetStatus}&order=targetOver&asc=<#if loan.orderDir == "ASC">0<#else/>1</#if>">剩余金额</a></span></td>
+                    </tr>
+                    </thead>
+                    <tbody id="targetBox">
+                    <#if loan.items>
+                        <#list loan.items as i>
+                            <tr>
+                                <td class="list-name">${i.targetName} <i>${formatAmount(i.targetAmount, 2, "w", 1)}</i>元</td>
+                                <td class="list-rate">${i.yearRate*100}%</td>
+                                <td class="list-time">${i.liftTime}天</td>
+                                <td class="list-progress"><b><i style="width:${i.targetRate?number*100}%"></i></b><span>${i.targetRate?number*100}%</span></td>
+                                <td class="list-left">￥${formatAmount(i.targetOver, 2, "", 1)}</td>
+                                <td class="list-ctrl"><a class="btn" href="/p2p/targetDetail.html?target_id=${i.targetId}">投资</a> </td>
+                            </tr>
+                        </#list>
+                    <#else/>
+                        <tr class="table_crumbs">
+                            <td colspan="6">
+                                <i class="icons icon_info_null"></i>
+                                <p>可投项目为空，敬请期待！</p>
+                            </td>
+                        </tr>
+                    </#if>
+                    </tbody>
+                </table>
+            </div>
+
+            ${pageHtml}
+
+        </div>
+    </div>
+</div>
+<!--弹层-->
+
+<!--底部-->
+<#include "include/page/foot.html" />
+
+
+</body>
+</html>

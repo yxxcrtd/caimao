@@ -1,0 +1,153 @@
+<!doctype html>
+<#include "config.html"/>
+<#assign curTopMenu="invest"/>
+<#assign curLeftMenu="myInvest"/>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>投资信息-财猫网</title>
+    <!--基本布局样式-->
+    <link rel="stylesheet" type="text/css" href="${dojoUrl}/style/page/page.css?v=${jsVersion}" />
+    <link rel="stylesheet" type="text/css" href="${dojoUrl}/style/page/p2p.css?v=${jsVersion}" />
+    <script src="${dojoUrl}/js/p2pTargetDetail.js?v=${jsVersion}"></script>
+</head>
+
+
+<!--顶部条-->
+<#include "include/page/head.html" />
+
+<script type="text/javascript">
+    // 记录必要的一些变量
+    var targetId = '${target.targetId}';
+    var yearRate = '${target.yearRate}';
+    var targetStatus = '${target.targetStatus}';
+    var overplus = ${target.targetLiftTime};
+    var maxTZAmount = 0;
+</script>
+
+<!--内容区-->
+<div id="main">
+    <div class="w sec_main">
+        <!--左右布局-->
+        <#include "include/menu/p2p_left.html" />
+
+        <!--投资可投项目-->
+        <div class="right_bar">
+            <div class="targetInfo">
+                <div class="clear_fix">
+                    <div class="targetHere">
+                        <#if target.p2pType == 1>
+                            <strong>${target.customTitle}</strong>
+                            <#else/>
+                            <strong>${target.loanUserName}借款<b>${formatAmount(target.targetAmount, 2, "w", 1)}元</b><span></span>市值<b>${formatAmount(target.targetAmount * 1.2, 2, "w", 1)}元</b>股票做质押</strong>
+                        </#if>
+                        <dl>
+                            <dt>还款方式:</dt>
+                            <dd>按月还息，到期还本</dd>
+                        </dl>
+                        <dl>
+                            <dt>借款时间:</dt>
+                            <dd>${target.created?date} - ${dateCal(target.created, target.liftTime)?date}<b>(${target.liftTime}天)</b></dd>
+                        </dl>
+                        <dl>
+                            <dt>总借款:</dt>
+                            <dd><i class="bold">${formatAmount(target.targetAmount, 2, "", 1)}元</i></dd>
+                        </dl>
+                        <dl>
+                            <dt>年息收益:</dt>
+                            <dd class="rates orange">${target.yearRate*100}%</dd>
+                        </dl>
+                        <dl>
+                            <dt>借款进度:</dt>
+                            <dd class="linestep"><em><i style="width:${target.targetRate?number*100}%"></i></em><b class="blue bold">${target.targetRate?number*100}％</b>
+                                (已有${target.investUserNum}人投资${formatAmount(target.actualValue, 2, "", 1)}元)</dd>
+                        </dl>
+                        <dl>
+                            <dt class="btnline">财猫领投:</dt>
+                            <dd>${formatAmount(target.caimaoValue, 2, "", 1)}元 <a href="javascript:void(0);" class="btn btn_red">领投</a></dd>
+                        </dl>
+                        <dl>
+                            <dt>投资金额:</dt>
+                            <dd>
+                                <input type="hidden" id="touzijine"/>
+                                <span id="lijitouzi" style="display: none;"></span>
+                                <b>${formatAmount(investInfo.investValue, 2, "", 1)} 元</b>
+                            </dd>
+
+                        </dl>
+
+                    </div>
+                    <div class="lender">
+                        <div class="basicInfo">
+                            <strong>借款人信息</strong>
+                            <#if target.p2pType == 1>
+                                <dl>
+                                    <dt>手机号:</dt>
+                                    <dd class="bold">${target.customMobile}</dd>
+                                </dl>
+                                <dl>
+                                    <dt>借款人:</dt>
+                                    <dd class="bold">${target.customUsername}</dd>
+                                </dl>
+                                <#else/>
+                                <dl>
+                                    <dt>手机号:</dt>
+                                    <dd class="bold">${target.mobile}</dd>
+                                </dl>
+                                <dl>
+                                    <dt>借款人:</dt>
+                                    <dd class="bold">${target.loanUserName}</dd>
+                                </dl>
+                            </#if>
+                            <dl>
+                                <dt>身份认证:</dt>
+                                <dd class="green">已认证</dd>
+                            </dl>
+                            <i class="seal"></i>
+                        </div>
+                        <em>项目介绍</em>
+                        <#if target.p2pType == 1>
+                            <p>${target.customContent}</p>
+                            <#else/>
+                            <p>项目总额${formatAmount(target.targetAmount, 2, "w", 1)}元，本项目借款人主要用于股票融资，提供${formatAmount(target.targetAmount * 1.2, 2, "w", 1)}市值的股票抵押物。</p>
+                            <p>项目年息收益<b class="red">${target.yearRate*100}%</b>。</p>
+                            <p>项目借款完成后，本站提供${formatAmount(target.targetAmount, 2, "w", 1)}元的股票账户给借款人操盘，该账户只能股票买卖。</p>
+                            <p>平台对股票账户进行实时监管，一旦账户资金低于${formatAmount(target.targetAmount * 1.1, 2, "w", 1)}则强制平仓，以保证本金及收益安全，投资无风险。</p>
+                        </#if>
+
+                        <span id="daojishi">项目结束倒计时</span>
+
+                    </div>
+                </div>
+
+                <div class="bidList">
+                    <p><b>已收利息:<i>￥${formatAmount(investInfo.payInterest, 2, "", 1)}</i></b><b>待收利息: <i class="red">￥${formatAmount((investInfo.yearValue / 12 * (investInfo.liftTime / 30) - investInfo.payInterest), 2, "", 1)}</i></b></p>
+                    <dl>
+                        <dt><span>发息时间</span><span>金额</span><span> </span><span> </span></dt>
+                        <#if interestList.items>
+                            <#list interestList.items as i>
+                                <dd>
+                                    <span>${i.createTime?datetime}</span>
+                                    <span class="red">${formatAmount(i.interestValue, 2, "", 1)}元</span>
+                                    <span> </span>
+                                    <span> </span>
+                                </dd>
+                            </#list>
+                        </#if>
+                    </dl>
+                </div>
+                ${pageHtml}
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+<!--底部-->
+<#include "include/page/foot.html" />
+
+
+</body>
+</html>

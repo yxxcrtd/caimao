@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<#include "gjs/config.html" />
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>开户</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1, user-scalable=false">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no"/>
+    <link rel="stylesheet" href="${staticUrl}/app/kaihu/css/reset.css" />
+    <link rel="stylesheet" href="${staticUrl}/app/kaihu/css/open.css" />
+</head>
+<body>
+<div class='operMain'>
+    <div class="complete">
+        <dl>
+            <dt><img src="${imgUrl}/right.png" alt=""></dt>
+            <dd>
+                <h1>恭喜,开户成功!</h1>
+
+                <p>尊敬的财猫用户，您已在南交所开户成功，</p>
+
+                <p>交易账号为<span id="code"></span></p>
+            </dd>
+        </dl>
+        <a href="" class='btn btn2' id="btn22">完成</a>
+    </div>
+    <div id="testBox"></div>
+</div>
+<script src='${staticUrl}/app/kaihu/js/zepto.js'></script>
+<script src='${staticUrl}/app/kaihu/js/fuc.js'></script>
+<script>
+    (function(){
+        var code = document.querySelector("#code");
+        code.innerHTML = $_GET("result");
+        //document.querySelector("#btn22").href = "/gjs/appHtml/intoOut/into.html?exchange="+$_GET("exchange").toUpperCase()+"&token="+$_GET("token");
+        document.querySelector("#btn22").href = "caimaogjsapp://?action=trade";
+        document.querySelector("#btn21").href = "/gjs/article/contentExt.html?action=bindbank&exchange="+$_GET("exchange").toLowerCase()+"&bank="+$_GET("bank");
+    })()
+
+    ;(function(){
+        var testBox = document.querySelector("#testBox"),
+            arg = location.search.replace("?",""),
+            upload = $_GET("action"),
+            pics = $_GET("pcilist"),
+            str = '';
+        if(upload == "upload"){
+            testBox.innerHTML = '<a href="caimaogjsapp://?action=upload" style="background:#f60;color:#fff;display:block;margin:10px;height:40px;line-height:40px;font-size:18px;text-align:center;">上传身份证</a>'
+        }
+        if(pics){
+            pics = decodeURIComponent(pics).split("-_-#");
+            for(var i = 0, l = pics.length; i < l; i++){
+                str += "<img style='width:200px;' title='"+pics[i]+"' alt='"+pics[i]+"' src='"+pics[i]+"' />";
+            }
+            testBox.innerHTML = "<div style='text-align:center;padding:10px;'>"+str+"</div>";
+        }
+    })();
+</script>
+</body>
+</html>

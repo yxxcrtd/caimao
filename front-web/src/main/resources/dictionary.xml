@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dictionary>
+	<entry code="entrust_direction" name="买卖方向">
+        <item code="1" name="买入" order="1"/>
+        <item code="2" name="卖出" order="2"/>
+	</entry>
+	
+	<entry code="entrust_status" name="委托状态">
+        <item code="1" name="未报" order="1"/>
+        <item code="2" name="待报" order="2"/>
+        <item code="3" name="正报" order="3"/>
+        <item code="4" name="已报" order="4"/>
+        <item code="5" name="废单" order="5"/>
+        <item code="6" name="部成" order="6"/>
+        <item code="7" name="已成" order="7"/>
+        <item code="8" name="部撤" order="8"/>
+        <item code="9" name="已撤" order="9"/>
+        <item code="a" name="待撤" order="10"/>
+        <item code="A" name="未撤" order="11"/>
+        <item code="B" name="待撤" order="12"/>
+        <item code="C" name="正撤" order="13"/>
+        <item code="D" name="撤认" order="14"/>
+        <item code="E" name="撤废" order="15"/>
+        <item code="F" name="已撤" order="16"/>
+	</entry>
+	
+</dictionary>

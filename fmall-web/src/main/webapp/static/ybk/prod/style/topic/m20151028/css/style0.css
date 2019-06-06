@@ -1,0 +1,480 @@
+/* reset */
+* {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+    font-size: 100%;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    position: relative;
+    word-break: break-all;
+    background: #000;
+}
+a {
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent; -webkit-touch-callout: none; -webkit-user-select: none;
+}
+
+img {
+    -ms-interpolation-mode: bicubic;
+    vertical-align: middle;
+}
+
+img:not([src*="/"]) {
+    display: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+th, td, caption {
+    vertical-align: middle;
+}
+
+textarea {
+    resize: none;
+}
+
+input, button, select, textarea {
+    outline: none;
+    border-radius: 0;
+    font-family: inherit;
+    font-size: inherit;
+}
+
+ul, ol, li {
+    list-style: none;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    background-color: #fff;
+    overflow: hidden;
+}
+
+.f-hide {
+    display: none !important;
+}
+
+
+
+/* swipe */
+.swipe {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.swipe li {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    background-color: #fff;
+}
+
+.swipe li.cur {
+    z-index: 10;
+    display: block;
+}
+
+.swipe li.action {
+    z-index: 11;
+    display: block;
+}
+
+.animated {
+    -webkit-transition: .3s;
+}
+
+.swipe li > div {
+    width: 100%;
+    height: 100%;
+    min-height: 1600px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    display: -webkit-box;
+    -webkit-box-pack: center;
+    -webkit-box-align: center;
+}
+.swipe img {
+    max-width: 640px;
+}
+
+.swipe .top {
+    -webkit-box-align: start;
+}
+
+.swipe .middle {
+    -webkit-box-align: center;
+}
+
+.swipe .bottom {
+    -webkit-box-align: end;
+}
+
+.arrow_v {
+    position: fixed;
+    bottom: 10px;
+    left: 51%;
+    z-index: 12;
+    width: 80px;
+    height: 80px;
+    margin-left: -40px;
+}
+.arrow_v p {
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    margin: -14px 0 0 -25px;
+    width: 52px;
+    height: 28px;
+    background-image: url(../img/11.png);
+    background-repeat: no-repeat;
+}
+
+.arrow_v p.move {-webkit-animation: arrowUp 1.5s infinite ease-in-out;}
+
+@-webkit-keyframes arrowUp {
+    0%, 30% {
+        opacity: 0;
+        -webkit-transform: translate(0, -8px);
+    }
+    60% {
+        opacity: 1;
+        -webkit-transform: translate(0, 0);
+    }
+    100% {
+        opacity: 0;
+        -webkit-transform: translate(0, 10px);
+    }
+}
+.page .a-fadeoutB{
+    width:100%;height:25px;bottom:5%;
+    position:absolute;
+    animation:fadeoutB 1s infinite;
+}
+.page .next{
+    width:42px;height:25px;display:block;margin:0 auto;
+    background:url(../img/11.png);
+}
+@keyframes fadeoutB{
+    0%{opacity:1;transform:translateY(0);}
+    100%{opacity:0;transform:translateY(30px);}
+}
+.index-1{
+        width: 300px;
+    position: absolute;
+    top: 50px;
+    margin-left: -150px;
+    left:50%;
+}
+.page .index-1{
+animation:mymove2 1s;
+
+}
+@keyframes mymove2
+{
+from {left:-100%;}
+to {left:50%;}
+}
+.page .index-2{
+animation:mymove 1s;
+
+}
+@keyframes mymove
+{
+from {right:-50%;}
+to {right:0;}
+}
+.index-1 img{
+    width: 130px;
+
+}
+.word{
+    position: absolute;
+        top: 0;
+    right: -10%;
+    width: 35%;
+}
+.index-2{
+        width:100%;
+    position: absolute;
+    top: 140px;
+}
+.index-2 img{
+    display: block;
+    width: 80%;
+    margin-left: 10%;
+}
+.index-2  .t1{
+    width: 76%;
+    margin-left: 12%;
+}
+.index-2  .t2{
+    margin-top: 30px;
+}
+.index-3{
+    width: 450px;
+    height: 450px;
+    border-radius: 200px;
+    background: url(../img/h6.png) no-repeat;
+    background-size: 100% 100%;
+     position: absolute;
+     left: 50%;
+     top: 350px;
+     margin-left: -225px;
+}
+.index-3 .phone{
+    width: 100%;
+        margin-top: 45px;
+}
+.index-4{
+    width: 100%;
+    position: absolute;
+    bottom: 20px;
+}
+.btn{
+    width: 50%;
+    margin-left: 25%;
+    display: block;
+    height: 80px;
+    background: url(../img/btn.png);
+    background-size: 100% 100%;
+}
+.cur .page .page02-1{
+    left: 0;
+}
+
+.cur .page .page02-2{
+    right: 0;
+}
+
+.page02-1{
+     width:100%;
+    position: absolute;
+    top: 50px;
+    left: -100%;
+    transition: left 1s;
+}
+.page02-1 img{
+    width: 60%;
+    margin-left: 20%;
+}
+.page02-2{
+     width:100%;
+    position: absolute;
+    top: 230px;
+    right: -100%;
+    transition: right 1s;
+    transition-delay: 1s;
+}
+.page02-2 img{
+    width: 90%;
+    margin-left: 5%;
+}
+.page02-3{
+    width: 450px;
+    height: 450px;
+    border-radius: 200px;
+    background: url(../img/7.png) no-repeat;
+    background-size: 100% 100%;
+     position: absolute;
+     left: 50%;
+     top: 380px;
+     margin-left: -225px;
+}
+.vedio{
+    width: 80%;
+    margin-left: -30px;
+    margin-top: -20px;
+}
+.money{
+    width: 25%;
+    margin-top: 345px;
+    margin-left: -30px;
+}
+.huojian{
+    position: absolute;
+    right: 8%;
+    top: 13%;
+    width: 15%;
+}
+.page02-4{
+    width: 100%;
+    position: absolute;
+    bottom: 20px;
+}
+.btn2{
+    width: 50%;
+    margin-left: 25%;
+    display: block;
+    height: 80px;
+    background: url(../img/5.png);
+    background-size: 100% 100%;
+}
+.cur .page .page03-1{
+    left: 0;
+}
+
+.page03-1{
+     width:100%;
+    position: absolute;
+    top: 50px;
+    left:-100%;
+    transition: left 1s;
+   
+}
+.page03-1 img{
+    width: 60%;
+    margin-left: 20%;
+}
+.t4{
+    margin-top: 30px;
+}
+.page03-2{
+    width: 450px;
+    height: 450px;
+    border-radius: 200px;
+    background: url(../img/3bg.png) no-repeat;
+    background-size: 100% 100%;
+     position: absolute;
+     left: 50%;
+     top: 280px;
+     margin-left: -225px;
+}
+.page03-2 img{
+    position: absolute;
+}
+.xin1{
+    width: 25%;
+}
+.xin2{
+    left: 78%;
+    top: 27%;
+    width: 20%;
+}
+.xin3{
+    top: 31%;
+    left: 12%;
+    width: 17%;
+}
+.B1{
+        right: 4%;
+    bottom: 4%;
+    width: 25%;
+}
+.B2{
+    right: 0;
+    bottom: 24%;
+    width: 15%;
+}
+.pel{
+    width: 87%;
+    left: -4%;
+    top: 5%;
+}
+.page03-3{
+    width: 100%;
+    position: absolute;
+    bottom: 20px;
+}
+.btn3{
+    width: 50%;
+    margin-left: 25%;
+    display: block;
+    height: 80px;
+    background: url(../img/btn3.png);
+    background-size: 100% 100%;
+}
+.cur .page .page04-1{
+    opacity: 1;
+}
+.page04-1{
+     width:100%;
+    position: absolute;
+     top: 50px;
+     opacity: .1;
+    transition: opacity 1s;
+}
+.page04-1 img{
+    width: 60%;
+    margin-left: 20%;
+}
+.page04-1 .t6{
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 30px
+}
+.page04-2{
+    width: 450px;
+    height: 450px;
+    border-radius: 200px;
+    background: url(../img/bg4.png) no-repeat;
+    background-size: 100% 100%;
+     position: absolute;
+     left: 50%;
+     top: 300px;
+     margin-left: -225px;
+}
+.page04-2 img{
+    position: absolute;
+}
+.page04-img{
+    width: 120%;
+    left: -6%;
+}
+.page04-pel{
+        width: 50%;
+    left: 22%;
+    top: 5%;
+}
+.page04-3{
+    width: 100%;
+    position: absolute;
+    bottom: 20px;
+}
+@media screen and (min-height:1000px) {
+   .index-4{
+    width: 100%;
+    position: absolute;
+    bottom: 10%;
+}
+.page02-4{
+    width: 100%;
+    position: absolute;
+    bottom: 10%;
+}
+    .page04-3{
+    width: 100%;
+    position: absolute;
+    bottom: 10%;
+}
+.page03-3{
+    width: 100%;
+    position: absolute;
+    bottom: 10%;
+}
+}

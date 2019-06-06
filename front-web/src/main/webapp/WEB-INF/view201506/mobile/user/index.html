@@ -1,0 +1,120 @@
+<#assign bg="bg-gray"/>
+<#assign controller="selfIndex"/> 
+<#assign title="个人中心"/>
+<#assign header="个人中心"/>
+<#assign footer="3"/>
+<#include 'mobile/layout/layout.html'/>
+
+<#macro headerContent>
+	<!--头部-->
+	<aside class="top-personCenter clearfix">
+		<a id="logout" class="type-icon icon-more">注销</a>
+		<div class="cm-left">
+			<p class="headPortrait">
+				<img src="${basePath}/mobile/images/headPortrait/img-head01.jpg" />
+			</p>
+		</div>
+		<div class="cm-right">
+			<h2 class="am-user am-user-authenticate">
+				<span id="mobile" style="color:rgba(255,255,255,.8)"></span>
+			</h2>
+			<p class="">
+				<span class="am-ft-sm">账户余额</span><b class="am-ft-xl am-left-15"><span
+					id="avalaibleAmount"></span>元</b>
+			</p>
+			<div class="btn">
+				<a href="${basePath}/mobile/account/recharge.htm" class="btn-main-white"><span>充值</span></a>
+				<a href="${basePath}/mobile/account/withdraw.htm" class="btn-main-whiteLine"><span>提现</span></a>
+			</div>
+		</div>
+	</aside>
+	<!--头部-->
+
+	<!--金额-->
+	<dl class="dl-moneyMain bg-white">
+		<dt>
+			<p>
+				<b><span id="loanAmount"></span>元</b>
+			</p>
+			<p>
+				<span class="am-ft-sm am-ft-tabText">借款总额</span>
+			</p>
+		</dt>
+		<dt>
+			<p>
+				<b><span id="loanAmount2"></span>元</b>
+			</p>
+			<p>
+				<span class="am-ft-sm am-ft-tabText">保证金总额</span>
+			</p>
+		</dt>
+		<dt>
+			<p>
+				<b><span id="freezeAmount"></span>元</b>
+			</p>
+			<p>
+				<span class="am-ft-sm am-ft-tabText">冻结金额</span>
+			</p>
+		</dt>
+	</dl>
+	<!--金额-->
+</#macro>
+<#macro content>
+	<article class="content" style="padding-top:215px;">
+	<!--框架-->
+	<aside class="con-frame">
+		<ul class="datalist">
+			<li class="datalist-item clearfix"><span
+				class="cm-left iconMain"><i class="icon-Main iconMain-gr"></i></span>
+				<a href="${basePath}/mobile/user/info.htm" class="cm-right listMain line"> <span
+					class="am-ft-main">用户资料</span> <span
+					class="type-ico am-icon-arrow-right"></span>
+			</a></li>
+			
+			<li class="datalist-item clearfix">
+			<span class="cm-left iconMain"><i class="icon-Main iconMain-pz"></i></span>
+			<a href="${basePath}/mobile/user/contracts.htm" class="cm-right listMain line">
+			<span class="am-ft-main">我的融资</span>
+			<span class="type-ico am-icon-arrow-right"></span>
+			</a>
+			</li>
+            <#if isProP2P>
+			<li class="datalist-item clearfix"><span
+				class="cm-left iconMain"><i class="icon-Main iconMain-ZQ"></i></span>
+				<a href="${basePath}/mobile/account/moneyCapital.htm" class="cm-right listMain line"> <span
+					class="am-ft-main">我的投标</span> <span
+					class="type-ico am-icon-arrow-right"></span>
+			</a></li>
+            </#if>
+			
+
+			<li class="datalist-item clearfix"><span
+				class="cm-left iconMain"><i class="icon-Main iconMain-MX"></i></span>
+				<a href="${basePath}/mobile/account/fundList.htm" class="cm-right listMain line"> <span
+					class="am-ft-main">资金明细</span> <span
+					class="type-ico am-icon-arrow-right"></span>
+			</a></li>
+		</ul>
+	</aside>
+	<!--框架-->
+
+	<!--框架-->
+	<aside class="con-frame">
+		<ul class="datalist">
+			<li class="datalist-item clearfix"><span
+				class="cm-left iconMain"><i class="icon-Main iconMain-sz"></i></span>
+				<a href="${basePath}/mobile/user/personSet.htm" class="cm-right listMain line"> <span
+					class="am-ft-main">账户设置</span> <span
+					class="type-ico am-icon-arrow-right"></span>
+			</a></li>
+		</ul>
+	</aside>
+	<!--框架-->
+
+	<!--框架，未绑定银行卡时-->
+	<aside class="con-frame con-spacing10" id="cardInfo">
+	</aside>
+	<!--框架-->
+
+</article>
+</#macro>

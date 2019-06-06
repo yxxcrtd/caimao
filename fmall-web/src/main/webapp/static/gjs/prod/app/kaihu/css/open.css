@@ -1,0 +1,380 @@
+body{
+	background: #eeeeee;
+	font-size: 10px;
+	font-family:'Microsoft YaHei',Lucida Grande,Lucida Sans Unicode,\5B8B\4F53;
+}
+ul,li{
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.wrapper{
+    position: absolute;
+    z-index: 1;
+    top: 1em;
+    bottom: 0;
+    left: 0;
+    min-height:480px;
+    width: 100%;
+    overflow: hidden;
+    background: #fff;
+    min-height:460px;
+}
+.operMain {
+	width: 100%;
+	border-top: 1px solid #e5e5e5;
+}
+.operMain img{
+	width: 100%;
+}
+.operMain .words-1{
+	background: #568eff;
+	width: 100%;
+	height: 5em;
+	float: left;
+}
+.operMain .words-1 h1,.operMain .words-1 h2{
+color: #fff;
+text-align: center;
+margin: 0 auto;
+font-weight: 400;
+}
+.operMain .words-1 h1{
+	margin-top: .1em;
+	font-size: 2.5em;
+	font-weight: 400;
+}
+.guide{
+	width: 70%;
+	height: 2em;
+	line-height: 1.8em;
+	margin-left: 15%;
+	display: block;
+	border: 1px solid #568eff;
+	margin-top: 5em;
+	border-radius: 3px;
+	text-align: center;
+	color: #568eff;
+	font-size: 2em;
+	font-weight: 400;
+	text-indent: 1em;
+	background: url(../img/horn.png) no-repeat;
+	background-position: 25% center;
+	clear: both;
+}
+.nameList{
+	width: 100%;
+	background: #fff;
+	margin-top: 1em;
+	border-top: 1px solid #e5e5e5;
+}
+.nameList input{
+	width: 95%;
+	margin-left: 5%;
+	font-size: 1.8em;
+	color: #000;
+	height: 2.5em;
+	line-height: 2.5em;
+	border: none;
+}
+.nameList input:first-child{
+	border-bottom: 1px solid #e5e5e5;
+}
+.next{
+	background: #d4d4d4;
+	width: 100%;
+	color: #fff;
+	margin-top: 2em;
+	height: 2em;
+	line-height: 2em;
+	float: left;
+	text-align: center;
+	font-size: 2em;
+}
+.next-2{
+	background: #568eff;
+	width: 100%;
+	color: #fff;
+	margin-top: 2em;
+	height: 2em;
+	line-height: 2em;
+	float: left;
+	text-align: center;
+	font-size: 2em;
+}
+
+.cardholder{
+	width: 100%;
+	text-indent: 5%;
+	font-size: 1.8em;
+	color: #9e9e9e;
+	height: 2.5em;
+	line-height: 2.5em;
+	background: #fff;
+	border-bottom: 1px solid #e5e5e5;
+	border-top: 1px solid #e5e5e5;
+}
+.cardholder span{
+	color: #000;
+	margin-left: 1em;
+}
+.words-2{
+	 margin-left: 5%;
+	 color: #969696;
+}
+.bankList{
+	width: 100%;
+	background: #fff;
+	margin-top: 1em;
+	border-top: 1px solid #e5e5e5;
+}
+.bankList p{
+	width: 95%;
+	margin: 0;
+	font-size: 1.7em;
+	margin-left: 5%;
+	height: 2.5em;
+	line-height: 2.5em;
+	color: #9e9e9e;
+}
+.bankList p span{
+	margin-left: 2.1em;
+	color: #d4d4d4;
+}
+.bankList p input{
+	border: none;
+	height: 2em;
+	line-height:2em;
+	margin-left: 2.1em;
+	color: #000;
+}
+.bankList p ::-webkit-input-placeholder { /* WebKit browsers */
+    color:    #d4d4d4;
+}
+.bankList select{
+	width: 55%;
+	background-position: 95% center;
+	background-size: .7em;
+	font-size: 1em;
+	border:none;
+		margin-left: 2.1em;
+	color: #000;
+	-moz-appearance: none;
+    -webkit-appearance:none;
+            appearance:none; 
+}
+.bankList select option{
+	color: #000;
+}
+.words-3{
+		 margin: 0;
+	 margin-left: 5%;
+	 margin-top: .7em;
+	 color: #969696;
+	 font-size: 1.8em;
+	
+}
+.words-4 {
+	margin-left: 1.5em;
+}
+.words-4 input{
+	margin-top: .15em;
+	margin-right: .2em;
+	float: left;
+}
+.words-4 span{
+	color: #568eff;
+}
+.load{
+	 position: absolute;
+    z-index: 2;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    background: #eeeeee;
+    display: none;
+}
+.load p{
+	width: 100%;
+	text-align: center;
+	font-size: 1.6em;
+	margin-top: 7em;
+	background: url(../img/icon.png) no-repeat;
+	background-position: 3em center;
+	text-indent: 1em;
+	background-size:1.5em 1.5em;
+}
+.load span{
+	width: 100%;
+	display: block;
+	font-size: 1.5em;
+	margin-top: 2em;
+	text-align: center;
+	color: #afafaf;
+
+}
+.load img{
+	margin: 0 auto;
+	width: 10%;
+}
+.complete dl{
+	width: 100%;
+}
+.complete dl dt img{
+width: 20%;
+height: 20%;
+display: block;
+margin: 0 auto;
+margin-top: 6em;
+}
+.complete dl dd{
+	width: 100%;
+	margin: 0;
+}
+.complete dl dd p{
+	width: 100%;
+	text-align: center;
+	margin: 0;
+	color: #969696;
+	line-height: 2em;
+	font-size: 1.3em;
+}
+.complete dl dd p span{
+	color: #568eff;
+	margin-left: .3em;
+}
+.complete dl dd h1{
+	width: 100%;
+	text-align: center;
+	margin: 0;
+	margin-top: 1em;
+}
+.complete h2{
+	width: 100%;
+	text-align: center;
+	color: #568eff;
+}
+.btn{
+	width: 80%;
+	margin-left: 10%;
+	display: block;
+	text-align: center;
+	font-size: 1.8em;
+	padding: .3em;
+	border-radius: 2px;
+}
+.btn1{
+		margin-top: 1.2em;
+		background: #568eff;
+		color: #fff;
+}
+.btn2{
+		margin-top: 1em;
+		color: #568eff;
+		border: 1px solid #568eff;
+}
+.btn3{
+	width: 100%;
+	display: block;
+	text-align: center;
+	font-size: 1.6em;
+	margin-top: 3em;
+	color: #568eff;
+}
+.helpList{
+	width: 100%;
+	padding: 1em 0 1em 0;
+	border-bottom: 1px solid #e5e5e5;
+}
+.helpList li{
+	width: 90%;
+	margin-left: 5%;
+}
+.bt{
+	font-size: 1.8em;
+	padding-bottom: .5em;
+	font-weight: bold;
+}
+.nameList ul li{
+	width: 100%;
+	position: relative;
+}
+.nameList ul li span .delet{
+	width: 1.5em;
+	height: 1.5em;
+	position: absolute;
+	right:4em;
+	top: 1em;
+
+}
+.nameList ul li span .delet-2{
+	width: 1.5em;
+	height: 1.5em;
+	position: absolute;
+	right:1em;
+	top: 1em;
+
+}
+.nameList ul li span{
+	display: none;
+}
+.nameList ul li span .eye{
+	width: 2.5em;
+	height: 1.5em;
+	position: absolute;
+	right:1em;
+	top: 1em;
+
+}
+
+
+@-webkit-keyframes rotate {
+  0%,
+  100% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@-moz-keyframes rotate {
+  0%,
+  100% {
+    -moz-transform: rotate(0deg);
+  }
+  100% {
+    -moz-transform: rotate(360deg);
+  }
+}
+@-o-keyframes rotate {
+  0%,
+  100% {
+    -o-transform: rotate(0deg);
+  }
+  100% {
+    -o-transform: rotate(360deg);
+  }
+}
+@-ms-keyframes rotate {
+  0%,
+  100% {
+    -ms-transform: rotate(0deg);
+  }
+  100% {
+    -ms-transform: rotate(360deg);
+  }
+}
+@keyframes rotate {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.loading{
+  animation: rotate .2s linear infinite;
+}

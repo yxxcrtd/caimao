@@ -1,0 +1,161 @@
+<#assign bodyCls="bg-gray"/>
+<#assign controller="P4"/>
+<#include 'layout/layout.html'/>
+<#macro content>
+    <div class="banner-match"></div>
+    <div class="bg-competition" id="tofocus" style="background-image:url(${dojoUrl}/app/resources/image/customize/${proContestAdImg});">
+        <!--内容start-->
+        <div class="contents bg-white">
+            <!--标题-->
+            <ul class="list-titleCompetition listLateral" id="tabctn">
+                <li class="list-titleCompetition-item bg-red">
+                    <span></span>
+                </li>
+                <li class="list-titleCompetition-item">
+                    <span></span>
+                </li>
+            </ul>
+            <div id="panel1">
+                <!--流程-->
+                <div class="con-spaceCompetition">
+                    <div class="con-processCompetition">
+                        <dl>
+                            <dt class="dt01">
+                            <p><span class="am-ft-lg startDate"></span></p>
+                            <p><span class="am-ft-orange am-ft-xxxl">开始比赛</span></p>
+                            </dt>
+                            <dt class="dt02">
+                            <p><span class="am-ft-gray">即时报名，即时比赛，每人最多交易一个月！</span></p>
+                            </dt>
+                            <dt class="dt03">
+                            <p><span class="endDate"></span></p>
+                            <p><span class="am-ft-orange am-ft-xxxl">停止报名</span></p>
+                            </dt>
+                            <dt class="dt04">
+                            <p><span class="am-ft-gray">最终盈利多者获胜！</span></p>
+                            </dt>
+                            <dt class="dt05">
+                            <p><span class="publishDate"></span></p>
+                            <p><span class="am-ft-orange am-ft-xxxl">公布战绩，发放奖金</span></p>
+                            </dt>
+                        </dl>
+                    </div>
+                </div>
+                <!--流程-->
+
+                <!--奖金-->
+                <div class="con-spaceCompetition">
+                    <dl class="dl-bonus">
+                        <dt class="NO1">
+                            <b class="tx-number">￥<label class="bonus-number-1"></label></b>
+                        <p><span class="am-ft-gray">(现金奖励)</span></p>
+                        </dt>
+                        <dt class="NO2">
+                            <b class="tx-number">￥<label class="bonus-number-2"></label></b>
+                        <p><span class="am-ft-gray">(现金奖励)</span></p>
+                        </dt>
+                        <dt class="NO3">
+                            <b class="tx-number">￥<label class="bonus-number-3"></label></b>
+                        <p><span class="am-ft-gray">(现金奖励)</span></p>
+                        </dt>
+                    </dl>
+                </div>
+                <!--奖金-->
+
+                <!--左右-->
+                <div class="con-detailCompetition clearfix">
+                    <!--左边-->
+                    <div class="cm-left detailCompetition-lside">
+                        <h3>比赛排行</h3>
+                        <table width="100%" border="0" cellspacing="0">
+                            <tbody class="rank-ctn"><tr>
+                                <th class="td-center">&nbsp;</th>
+                                <th class="td-left">用户名</th>
+                                <th class="td-right">总资产</th>
+                            </tr>
+                            </tbody></table>
+                    </div>
+
+                    <!--右边-->
+                    <div class="cm-right detailCompetition-rside">
+                        <div id="enroll-panel1"></div>
+                    </div>
+                </div>
+                <!--左右-->
+            </div>
+            <!--标题-->
+
+            <div id="panel2" style="display: none;">
+                <!--流程-->
+                <div class="con-spaceCompetition">
+                    <div class="con-processCompetition">
+                        <dl>
+                            <dt class="dt01">
+                            <p><span class="am-ft-lg startDate"></span></p>
+                            <p><span class="am-ft-orange am-ft-xxxl">开始比赛</span></p>
+                            </dt>
+                            <dt class="dt02">
+                            <p><span class="am-ft-gray">即时报名，即时比赛，每人最多交易一个月！</span></p>
+                            </dt>
+                            <dt class="dt03">
+                            <p><span class="endDate"></span></p>
+                            <p><span class="am-ft-orange am-ft-xxxl">停止报名</span></p>
+                            </dt>
+                            <dt class="dt04">
+                            <p><span class="am-ft-gray">最终盈利多者获胜！</span></p>
+                            </dt>
+                            <dt class="dt05">
+                            <p><span class="publishDate"></span></p>
+                            <p><span class="am-ft-orange am-ft-xxxl">公布战绩，发放奖金</span></p>
+                            </dt>
+                        </dl>
+                    </div>
+                </div>
+                <!--流程-->
+
+                <!--奖金-->
+                <div class="con-spaceCompetition">
+                    <dl class="dl-bonus">
+                        <dt class="NO1">
+                            <b class="tx-number">￥<label class="bonus-number-1"></label></b>
+                        <p><span class="am-ft-gray">(现金奖励)</span></p>
+                        </dt>
+                        <dt class="NO2">
+                            <b class="tx-number">￥<label class="bonus-number-2"></label></b>
+                        <p><span class="am-ft-gray">(现金奖励)</span></p>
+                        </dt>
+                        <dt class="NO3">
+                            <b class="tx-number">￥<label class="bonus-number-3"></label></b>
+                        <p><span class="am-ft-gray">(现金奖励)</span></p>
+                        </dt>
+                    </dl>
+                </div>
+                <!--奖金-->
+
+                <!--左右-->
+                <div class="con-detailCompetition clearfix">
+                    <!--左边-->
+                    <div class="cm-left detailCompetition-lside">
+                        <h3>比赛排行</h3>
+                        <table width="100%" border="0" cellspacing="0">
+                            <tbody class="rank-ctn"><tr>
+                                <th class="td-center">&nbsp;</th>
+                                <th class="td-left">用户名</th>
+                                <th class="td-right">总资产</th>
+                            </tr>
+                            </tbody></table>
+                    </div>
+
+                    <!--右边-->
+                    <div class="cm-right detailCompetition-rside">
+                        <div id="enroll-panel2"></div>
+                    </div>
+                </div>
+                <!--左右-->
+            </div>
+
+
+        </div>
+        <!--内容end-->
+    </div>
+</#macro>

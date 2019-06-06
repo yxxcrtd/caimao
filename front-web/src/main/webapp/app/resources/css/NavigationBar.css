@@ -1,0 +1,48 @@
+.navigationBar {
+	margin: 0 auto;
+	height: 39px;
+	background-color: #cf601c;
+	border-bottom: 1px #b92b31 solid;
+}
+
+.navigationBar a {
+	cursor: pointer;
+}
+
+.navigationBarInner {
+	width: 990px;
+	margin: 0 auto;
+}
+
+.navigationBar ul {
+	padding: 5px 0;
+	margin: 0;
+}
+
+.navigationBar li {
+	float: left;
+	list-style: none;
+	display: inline-block;
+	width: 110px;
+	text-align: center;
+	line-height: 30px;
+	height: 30px;
+	font-size: 14px;
+	font-weight: bold;
+	margin: 0 15px;
+}
+
+.navigationBar li a:hover {
+	color: #666;
+	background-color: #fff;
+	border-radius: 3px;
+}
+
+.navigationBar li a {
+	color: #fff;
+	display: block;
+	width: 110px;
+	height: 30px;
+	-webkit-transition: all 0.2s;
+	transition: all 0.2s;
+}

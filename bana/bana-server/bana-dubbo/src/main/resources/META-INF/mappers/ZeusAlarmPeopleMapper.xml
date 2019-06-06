@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ZeusAlarmPeople">
+
+    <resultMap id="BaseResultMap" type="com.caimao.bana.api.entity.zeus.ZeusAlarmPeopleEntity">
+        <id column="key" property="key" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="emails" property="emails" jdbcType="VARCHAR"/>
+        <result column="smss" property="smss" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        `key`, `name`, emails, smss
+    </sql>
+
+    <select id="list" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from zeus_alarm_people
+        order by `key` DESC
+    </select>
+
+    <select id="getByKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from zeus_alarm_people
+        WHERE `key` = #{key}
+    </select>
+
+    <delete id="del" parameterType="java.lang.String">
+        DELETE FROM zeus_alarm_people
+        WHERE `key` = #{key}
+    </delete>
+
+    <insert id="save" parameterType="com.caimao.bana.api.entity.zeus.ZeusAlarmPeopleEntity">
+        insert into zeus_alarm_people
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="key != null">`key`,</if>
+            <if test="name != null">`name`,</if>
+            <if test="emails != null">emails,</if>
+            <if test="smss != null">smss,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="key != null">#{key},</if>
+            <if test="name != null">#{name},</if>
+            <if test="emails != null">#{emails},</if>
+            <if test="smss != null">#{smss},</if>
+        </trim>
+    </insert>
+
+    <update id="update" parameterType="com.caimao.bana.api.entity.zeus.ZeusAlarmPeopleEntity">
+        update zeus_alarm_people
+        <set >
+            <if test="key != null" >
+                `key` = #{key,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null" >
+                `name` = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="emails != null" >
+                emails = #{emails,jdbcType=VARCHAR},
+            </if>
+            <if test="smss != null" >
+                smss = #{smss,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where `key` = #{key,jdbcType=VARCHAR}
+    </update>
+
+</mapper>

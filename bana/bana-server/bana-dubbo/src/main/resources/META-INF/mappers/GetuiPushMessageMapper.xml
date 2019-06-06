@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="GetuiPushMessage">
+
+    <!-- 表所有字段和属性 -->
+    <resultMap id="BaseResultMap" type="com.caimao.bana.api.entity.getui.GetuiPushMessageEntity" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="recv_id" property="recvId" jdbcType="VARCHAR" />
+        <result column="device_token" property="deviceToken" jdbcType="VARCHAR" />
+        <result column="user_id" property="userId" jdbcType="VARCHAR" />
+        <result column="recv_id_type" property="recvIdType" jdbcType="INTEGER" />
+        <result column="task_index" property="taskIndex" jdbcType="INTEGER" />
+        <result column="device_type" property="deviceType" jdbcType="VARCHAR" />
+        <result column="action_type" property="actionType" jdbcType="VARCHAR" />
+        <result column="source" property="source" jdbcType="VARCHAR" />
+        <result column="title" property="title" jdbcType="VARCHAR" />
+        <result column="content" property="content" jdbcType="LONGVARCHAR" />
+        <result column="url" property="url" jdbcType="VARCHAR" />
+        <result column="status" property="status" jdbcType="VARCHAR" />
+        <result column="try_times" property="tryTimes" jdbcType="INTEGER" />
+        <result column="time_push" property="timePush" jdbcType="TIMESTAMP" />
+        <result column="time_create" property="timeCreate" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <!-- 表所有字段 -->
+    <sql id="Base_Column_List" >
+        id, 
+        recv_id,
+        device_token,
+        user_id, 
+        recv_id_type, 
+        task_index, 
+        device_type, 
+        action_type, 
+        source, 
+        title, 
+        content, 
+        url, 
+        status, 
+        try_times, 
+        time_push, 
+        time_create
+    </sql>
+
+    <!-- 根据ID查找 -->
+    <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select <include refid="Base_Column_List" /> from getui_push_message where id = #{id, jdbcType=BIGINT} FOR UPDATE
+    </select>
+
+    <!-- 根据ID删除 -->
+    <delete id="deleteById" parameterType="java.lang.Long" >
+        delete from getui_push_message where id = #{id, jdbcType=BIGINT}
+    </delete>
+
+    <!--获取未发送的推送消息-->
+    <select id="queryNoSendList" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        SELECT <include refid="Base_Column_List" /> FROM getui_push_message WHERE status = 1 LIMIT 0, #{limit}
+    </select>
+
+
+    <!-- 插入 -->
+    <insert id="insert" parameterType="com.caimao.bana.api.entity.getui.GetuiPushMessageEntity" useGeneratedKeys="true" keyProperty="id">
+        insert into getui_push_message
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="recvId != null">
+                recv_id,
+            </if>
+            <if test="deviceToken != null">
+                device_token,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="recvIdType != null">
+                recv_id_type,
+            </if>
+            <if test="taskIndex != null">
+                task_index,
+            </if>
+            <if test="deviceType != null">
+                device_type,
+            </if>
+            <if test="actionType != null">
+                action_type,
+            </if>
+            <if test="source != null">
+                source,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+            <if test="url != null">
+                url,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="tryTimes != null">
+                try_times,
+            </if>
+            <if test="timePush != null">
+                time_push,
+            </if>
+            <if test="timeCreate != null">
+                time_create,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id, jdbcType=BIGINT},
+            </if>
+            <if test="recvId != null">
+                #{recvId, jdbcType=VARCHAR},
+            </if>
+            <if test="deviceToken != null">
+                #{deviceToken, jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                #{userId, jdbcType=VARCHAR},
+            </if>
+            <if test="recvIdType != null">
+                #{recvIdType, jdbcType=INTEGER},
+            </if>
+            <if test="taskIndex != null">
+                #{taskIndex, jdbcType=INTEGER},
+            </if>
+            <if test="deviceType != null">
+                #{deviceType, jdbcType=VARCHAR},
+            </if>
+            <if test="actionType != null">
+                #{actionType, jdbcType=VARCHAR},
+            </if>
+            <if test="source != null">
+                #{source, jdbcType=VARCHAR},
+            </if>
+            <if test="title != null">
+                #{title, jdbcType=VARCHAR},
+            </if>
+            <if test="content != null">
+                #{content, jdbcType=LONGVARCHAR},
+            </if>
+            <if test="url != null">
+                #{url, jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status, jdbcType=INTEGER},
+            </if>
+            <if test="tryTimes != null">
+                #{tryTimes, jdbcType=INTEGER},
+            </if>
+            <if test="timePush != null">
+                #{timePush, jdbcType=TIMESTAMP},
+            </if>
+            <if test="timeCreate != null">
+                #{timeCreate, jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <!-- 修改 -->
+    <update id="update" parameterType="com.caimao.bana.api.entity.getui.GetuiPushMessageEntity">
+        update getui_push_message
+        <set>
+            <if test="recvId != null">
+                recv_id = #{recvId, jdbcType=VARCHAR},
+            </if>
+            <if test="deviceToken != null">
+                device_token = #{deviceToken, jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId, jdbcType=VARCHAR},
+            </if>
+            <if test="recvIdType != null">
+                recv_id_type = #{recvIdType, jdbcType=INTEGER},
+            </if>
+            <if test="taskIndex != null">
+                task_index = #{taskIndex, jdbcType=INTEGER},
+            </if>
+            <if test="deviceType != null">
+                device_type = #{deviceType, jdbcType=VARCHAR},
+            </if>
+            <if test="actionType != null">
+                action_type = #{actionType, jdbcType=VARCHAR},
+            </if>
+            <if test="source != null">
+                source = #{source, jdbcType=VARCHAR},
+            </if>
+            <if test="title != null">
+                title = #{title, jdbcType=VARCHAR},
+            </if>
+            <if test="content != null">
+                content = #{content, jdbcType=LONGVARCHAR},
+            </if>
+            <if test="url != null">
+                url = #{url, jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status, jdbcType=INTEGER},
+            </if>
+            <if test="tryTimes != null">
+                try_times = #{tryTimes, jdbcType=INTEGER},
+            </if>
+            <if test="timePush != null">
+                time_push = #{timePush, jdbcType=TIMESTAMP},
+            </if>
+            <if test="timeCreate != null">
+                time_create = #{timeCreate, jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id, jdbcType=BIGINT}
+    </update>
+
+</mapper>

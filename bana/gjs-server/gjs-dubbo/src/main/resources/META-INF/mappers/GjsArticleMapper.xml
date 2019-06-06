@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="GjsArticle">
+
+    <resultMap id="BaseResultMap" type="com.caimao.gjs.api.entity.article.GjsArticleEntity" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="category_id" property="categoryId" jdbcType="INTEGER" />
+        <result column="source_name" property="sourceName" jdbcType="VARCHAR" />
+        <result column="source_url" property="sourceUrl" jdbcType="VARCHAR" />
+        <result column="is_hot" property="isHot" jdbcType="INTEGER" />
+        <result column="title" property="title" jdbcType="VARCHAR" />
+        <result column="summary" property="summary" jdbcType="VARCHAR" />
+        <result column="content" property="content" jdbcType="LONGVARCHAR" />
+        <result column="sort" property="sort" jdbcType="INTEGER" />
+        <result column="view_count" property="viewCount" jdbcType="INTEGER" />
+        <result column="is_show" property="isShow" jdbcType="INTEGER" />
+        <result column="created" property="created" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, category_id, source_name, source_url, is_hot, title, summary, content, sort, view_count, is_show, created
+    </sql>
+
+    <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from gjs_article
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="queryArticleWithPage" resultMap="BaseResultMap" parameterType="com.caimao.gjs.api.entity.req.FQueryArticleReq" >
+        select
+        <include refid="Base_Column_List" />
+        from gjs_article
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="categoryId !=null and categoryId != ''">
+                AND category_id = #{categoryId}
+            </if>
+            <if test="isShow != null and isShow != ''">
+                AND is_show = #{isShow}
+            </if>
+            <if test="isHot == 0">
+                AND is_hot = 0
+            </if>
+            <if test="isHot == 1">
+                AND is_hot = 1
+            </if>
+            <if test="dateStart != null and dateStart != ''">
+                AND created &gt;= #{dateStart}
+            </if>
+            <if test="dateEnd != null and dateEnd != ''">
+                AND created &lt;= #{dateEnd}
+            </if>
+            AND is_show = 0
+        </trim>
+        ORDER BY sort desc, created DESC
+    </select>
+    <!-- 产品需求，只按照时间排序（倒序）：ORDER BY sort desc, created DESC -->
+
+    <!-- 后台管理的文章列表 -->
+    <select id="queryArticleForManageWithPage" resultType="com.caimao.gjs.api.entity.res.FQueryGjsArticleRes" parameterType="com.caimao.gjs.api.entity.req.FQueryArticleReq" >
+        select
+        id,
+        category_id AS categoryId,
+        source_name AS sourceName,
+        source_url as sourceUrl,
+        is_hot AS isHot,
+        title,
+        summary,
+        sort,
+        view_count AS viewCount,
+        is_show AS isShow,
+        created
+        from gjs_article
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="categoryId !=null and categoryId != ''">
+                AND category_id = #{categoryId}
+            </if>
+            <if test="isShow == 0">
+                AND is_show = 0
+            </if>
+            <if test="isShow == 1">
+                AND is_show = 1
+            </if>
+            <if test="isHot == 0">
+                AND is_hot = 0
+            </if>
+            <if test="isHot == 1">
+                AND is_hot = 1
+            </if>
+            <if test="dateStart != null and dateStart != ''">
+                AND created &gt;= #{dateStart}
+            </if>
+            <if test="dateEnd != null and dateEnd != ''">
+                AND created &lt;= #{dateEnd}
+            </if>
+        </trim>
+        ORDER BY sort desc, created DESC
+    </select>
+
+    <select id="queryArticleByTitleAndSourceUrl" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from gjs_article
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="title !=null and title != ''">
+                AND title = #{title}
+            </if>
+            <if test="source_url != null and source_url != ''">
+                AND source_url = #{sourceUrl}
+            </if>
+        </trim>
+    </select>
+
+    <delete id="deleteById" parameterType="java.lang.Long" >
+        delete from gjs_article
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+
+    <insert id="insert" parameterType="com.caimao.gjs.api.entity.article.GjsArticleEntity" >
+        insert into gjs_article
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="categoryId != null" >
+                category_id,
+            </if>
+            <if test="sourceName != null" >
+                source_name,
+            </if>
+            <if test="sourceUrl != null" >
+                source_url,
+            </if>
+            <if test="isHot != null" >
+                is_hot,
+            </if>
+            <if test="title != null" >
+                title,
+            </if>
+            <if test="summary != null" >
+                summary,
+            </if>
+            <if test="sort != null" >
+                sort,
+            </if>
+            <if test="viewCount != null" >
+                view_count,
+            </if>
+            <if test="isShow != null" >
+                is_show,
+            </if>
+            <if test="created != null" >
+                created,
+            </if>
+            <if test="content != null" >
+                content,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="categoryId != null" >
+                #{categoryId,jdbcType=INTEGER},
+            </if>
+            <if test="sourceName != null" >
+                #{sourceName,jdbcType=VARCHAR},
+            </if>
+            <if test="sourceUrl != null" >
+                #{sourceUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="isHot != null" >
+                #{isHot,jdbcType=INTEGER},
+            </if>
+            <if test="title != null" >
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="summary != null" >
+                #{summary,jdbcType=VARCHAR},
+            </if>
+            <if test="sort != null" >
+                #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="viewCount != null" >
+                #{viewCount,jdbcType=INTEGER},
+            </if>
+            <if test="isShow != null" >
+                #{isShow,jdbcType=BIT},
+            </if>
+            <if test="created != null" >
+                #{created,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null" >
+                #{content,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="update" parameterType="com.caimao.gjs.api.entity.article.GjsArticleEntity" >
+        update gjs_article
+        <set >
+            <if test="categoryId != null" >
+                category_id = #{categoryId,jdbcType=INTEGER},
+            </if>
+            <if test="sourceName != null" >
+                source_name = #{sourceName,jdbcType=VARCHAR},
+            </if>
+            <if test="sourceUrl != null" >
+                source_url = #{sourceUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="isHot != null" >
+                is_hot = #{isHot,jdbcType=INTEGER},
+            </if>
+            <if test="title != null" >
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="summary != null" >
+                summary = #{summary,jdbcType=VARCHAR},
+            </if>
+            <if test="sort != null" >
+                sort = #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="viewCount != null" >
+                view_count = #{viewCount,jdbcType=INTEGER},
+            </if>
+            <if test="isShow != null" >
+                is_show = #{isShow,jdbcType=BIT},
+            </if>
+            <if test="created != null" >
+                created = #{created,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null" >
+                content = #{content,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+
+</mapper>

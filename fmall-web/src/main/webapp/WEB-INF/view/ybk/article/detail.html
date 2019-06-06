@@ -1,0 +1,65 @@
+<!doctype html>
+<#include "ybk/config.html" />
+<#assign topMenu="${detail.categoryId}"/>
+<#if detail.categoryId==1>
+	<#assign title="打新申购"/>
+<#elseif detail.categoryId==2>
+	<#assign title="市场价格"/>
+<#elseif detail.categoryId==3>
+	<#assign title="交易所公告"/>
+<#elseif detail.categoryId==5>
+	<#assign title="邮币百科"/>
+</#if>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>${title}--邮币卡</title>
+		<script src="${staticUrl}/js/chart/lib.js?version=${jsVersion}"></script>
+		<link rel="stylesheet" href="${staticUrl}/style/style.css" />
+		<script src="${staticUrl}/js/ybk/global.js?version=${jsVersion}" type="text/javascript"></script>
+	</head>
+	<body>
+		<#include "ybk/include/page/head.html" />
+
+		<div class="details">
+			<p class="route">
+				<a href="/ybk/article/list.html?categoryId=${detail.categoryId}&exchangeId=${exchangeId}">${title}</a>>正文
+			</p>
+			<div class="article">
+				<h1>${detail.title}</h1>
+				<h2>来源：<span>${detail.exchangeName}</span> 时间：<span>${detail.created?string("yyyy-MM-dd HH:mm:ss")}</span> 阅读：<span>${detail.viewCount}</span></h2>
+				<div class="mainContBox">${detail.content}</div>
+				<!--
+				<#if preId>
+					<button class="btn1" onclick="openPreOrNext(${preId})">上一篇</button>
+				</#if>
+				<#if nextId>
+					<button <#if !preId>class="btn1"</#if> onclick="openPreOrNext(${nextId})">下一篇</button>
+				</#if >
+				<script>
+					function openPreOrNext(id){
+						window.location.href="/ybk/article/detail.html?id="+id;
+					}
+				</script>-->
+				<dl class="othernews">
+					<dt>上一篇：
+						<#if pre>
+							<a href="/ybk/article/detail.html?id=${pre.id}&exchangeId=${exchangeId}">${pre.title}</a>
+						<#else>
+							已经是第一篇
+						</#if>
+					</dt>
+					<dd>下一篇：
+						<#if next>
+							<a href="/ybk/article/detail.html?id=${next.id}&exchangeId=${exchangeId}">${next.title}</a>
+							<#else>
+								已经是最后一篇
+						</#if>
+					</dd>
+				</dl>
+			</div>
+		</div>
+
+		<#include "ybk/include/page/foot.html" />
+	</body>
+</html>

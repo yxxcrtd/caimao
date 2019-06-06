@@ -1,0 +1,31 @@
+
+<div id="footer" style="display: block;">
+    <div class="section clear_fix">
+        <p class="f_l">
+            <i class="icon icon_log"></i>版权所有 © ${company} 丨 ${webRecord}
+        </p>
+        <div class="f_r right" style="position: relative;padding-right: 175px;">
+            <a href="${basePath}/company-intro.htm" style="padding: 0px 5px;">关于我们</a>
+            <a href="${basePath}/qa-help.htm" style="padding: 0px 5px;">帮助中心</a>
+            <a href="${basePath}/download.htm" style="padding: 0px 5px;">客户端下载</a>
+            <a href="javascript:void(0);" onclick="document.cookie='visit_device=mobile; path=/';window.location.href = '/';" style="padding: 0 5px;display: none;" id="visit_mobile">访问手机版</a>
+            <a class="no" href="http://shang.qq.com/wpa/qunwpa?idkey=7b41227877e314ebc4dfc01ce9965b1e99df606687bc297ebd9c3efc6187fa76" target="_blank" style="padding:0;position: absolute;top: -20px;border: none;">
+                <i class="icon icon_qq" style="margin-bottom:-1px;height:23px;"></i> 官方QQ群 ${QQQUN}</a>
+            <a class="no" href="http://shang.qq.com/wpa/qunwpa?idkey=dd3c477ac7c7958279fb382cc574581f2a8c6e4d0ca4bf30c481fcbb6330ad65" target="_blank" style="padding:0;position: absolute;top: 10px;border: none;">
+                <i class="icon icon_qq" style="margin-bottom:-1px;height:23px;"></i> 理财QQ群 312993436</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    if (document.cookie.indexOf('visit_device') != -1) {
+        document.getElementById("visit_mobile").style.display="block";
+    }
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?40c3749d7e01ea226451c05cc78ee57f";
+        var s = document.getElementById("footer");
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>

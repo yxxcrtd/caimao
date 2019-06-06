@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon" type="image/ico" href="${dojoUrl}/app/resources/image/favicon.ico">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="Expires" content="0" />
+<#include 'layout/css.html'/>
+<title>${title}</title>
+</head>
+<body class="claro ${backgroundColor}">
+	<#include 'layout/topbar.html'/> <#if subContent??> <@subContent/>
+	</#if> <#if content??> <@content/> </#if>
+	<#include 'layout/foot.html'/>
+	<#include 'layout/js.html'/>
+</body>
+</html>

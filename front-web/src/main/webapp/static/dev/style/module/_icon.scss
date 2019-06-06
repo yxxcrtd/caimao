@@ -1,0 +1,298 @@
+@charset "utf-8";
+@import "variable";
+/*━━━━━━━
+icon.scss
+图标库
+BitUI
+━━━━━━━*/
+.icons{
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  @include img($imgURL+'images/icons_sprite.png');
+  vertical-align: middle;
+  margin-top: -3px;
+}
+
+.merit_icon{
+  display:block;
+  width:75px;
+  height:100px;
+  @include img($imgURL+'images/merit_icon.png');
+  vertical-align: middle;
+}
+.icon_info{
+  background-position: -23px -1px;
+}
+.icon_logo{
+  background-position:-120px  -26px;
+  width:125px;
+}
+.icon_logo_p{
+  background-position:-245px  -25px;
+  width:111px;
+}
+.icon_qqs{
+  background-position: 0 -20px;
+}
+.icon_tel{
+  background-position:-22px -21px;
+}
+.icon_telephone{
+  background-position:-18px -57px;
+}
+.icon_weixin{
+  background-position:0 -58px;
+}
+.icon_weixin_b{
+  background-position:-84px -60px;
+}
+.icon_weibo{
+  background-position:0 -98px;
+}
+.icon_weibo_b{
+  background-position:-84px -100px;
+}
+.icon_app{
+  background-position:0 -157px;
+}
+
+.icon_notice{
+  background-position:-18px -38px;
+}
+.icon_notices{
+  background-position:-306px 0;
+}
+.icon_login_compete{
+  background-position:-351px 0;
+}
+.icon_dynamic{
+  background-position:-376px -215px;
+}
+.icon_dynamic_gary{
+  background-position:-374px -239px;
+}
+
+.icon_dyn01{
+  background-position: -83px -38px;
+}
+.icon_dyn02{
+  background-position: 0 3px;
+}
+
+
+.icon_account{
+  background-position:-40px 0;
+}
+.icon_recharge{
+  background-position:-40px -20px;
+}
+.icon_withdraw{
+  background-position:-40px -40px;
+}
+.icon_fund{
+  background-position:-40px -60px;
+}
+.icon_secure{
+  background-position:-40px -80px;
+}
+.icon_message{
+  background-position:-40px -100px;
+}
+.icon_promotion{
+  background-position:-40px -180px;
+}
+.icon_day{
+   background-position:-226px -140px;
+ }
+.icon_month{
+  background-position:-173px -140px;
+}
+.icon_mine{
+  background-position:-120px -140px;
+}
+.icon_p_day{
+background-position:-40px -120px;
+}
+.icon_p_month{
+  background-position:-41px -140px;
+}
+.icon_p_mine{
+  background-position:-41px -160px;
+}
+.icon_invest{
+  background-position:-40px -180px ;
+}
+.icon_my_invest{
+  background-position:-40px -200px ;
+}
+.icon_nav_hot{
+  background-position: -278px 0;
+  width: 23px;
+}
+.icon_complete{
+  background-position:-120px 0;
+  width: 25px;
+  height: 25px;
+  margin-right: 15px;
+}
+.icon_complete_no{
+  background-position:-151px 0;
+  width: 25px;
+  height: 25px;
+  margin-right: 15px;
+}
+.icon_low{
+  width:267px;
+  background-position:-120px -80px;
+  margin-top:5px;
+}
+.icon_medium{
+  width:267px;
+  background-position:-120px -100px;
+  margin-top:5px;
+}
+.icon_high{
+  width:267px;
+  background-position:-120px -120px;
+  margin-top:5px;
+}
+
+.icon_bei{
+  margin-top:8px;
+  width:24px;
+  height: 21px;
+  background-position: -84px -192px;
+  text-indent: -999999em;
+}
+.icon_no_money{
+  width: 22px;
+  height: 50px;
+  background-position:-377px 0;
+}
+.icon_input_money{
+  width: 35px;
+  height: 23px;
+  background-position: -84px 0;
+}
+.icon_close{
+  background-position: 0 -120px;
+}
+.icon_info_null{
+  width:80px;
+  height:88px;
+  background-position:-278px -138px;
+}
+.icon_level{
+  width:22px;
+  height: 26px;
+  background-position:-18px -80px;
+  margin-right: 5px;
+}
+.icon_copy{
+  background-position:-176px 10px;
+}
+.icon_btn_phone{
+  background-position:-44px -240px;
+}
+.icon_btn_custom{
+  background-position: 0 -240px;
+}
+.icon_btn_tel{
+  background-position:-88px -240px;
+}
+.icon_btn_top{
+  background-position:-132px -240px;
+}
+li:hover,li.hov{
+  .icon_bei{
+    background-position: -84px -214px;
+  }
+}
+
+.icon_offers{
+  width:74px;
+  height:74px;
+  background-position:-184px -208px;
+}
+span:hover{
+  .icon_weixin{
+    background-position:0 -38px;
+  }
+  .icon_weibo{
+    background-position:0 -78px;
+  }
+}
+a:hover,a.hov{
+  .icon_weixin_b{
+    background-position:-83px -79px;
+  }
+  .icon_weibo_b{
+    background-position:-83px -120px;
+  }
+  .icon_account{
+    background-position:-60px 0;
+  }
+  .icon_recharge{
+    background-position:-60px -20px;
+  }
+  .icon_withdraw{
+    background-position:-60px -40px;
+  }
+  .icon_fund{
+    background-position:-60px -60px;
+  }
+  .icon_secure{
+    background-position:-60px -80px;
+  }
+  .icon_message{
+    background-position:-60px -100px;
+  }
+  .icon_promotion{
+    background-position:-60px -180px;
+  }
+  .icon_p_day{
+    background-position:-60px -120px;
+  }
+  .icon_p_month{
+    background-position:-60px -140px;
+  }
+  .icon_p_mine{
+    background-position:-60px -160px;
+  }
+  .icon_invest{
+    background-position:-60px -180px ;
+  }
+  .icon_my_invest{
+    background-position:-60px -200px ;
+  }
+  .icon_app{
+    background-position:0 -181px;
+  }
+}
+
+
+.merit_icon01{
+  background-position: 0 18px;
+}
+.merit_icon02{
+  background-position: -75px 18px;
+}
+.merit_icon03{
+  background-position:-150px 18px;
+}
+.merit_icon04{
+  background-position:-225px 18px;
+}
+.merit_icon05{
+  background-position: -300px 18px;
+}
+
+.invest_null{
+  display: block;
+  width:152px;
+  height: 158px;
+  margin: auto;
+  margin-top: 30px;
+  @include img($imgURL+'images/invest_null.png');
+}

@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="sms_send_log" >
+  <resultMap id="BaseResultMap" type="com.caimao.bana.api.entity.SmsSendLogEntity" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="country_code" property="countryCode" jdbcType="CHAR" />
+    <result column="phone" property="phone" jdbcType="CHAR" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="send_status" property="sendStatus" jdbcType="BIT" />
+    <result column="retry_count" property="retryCount" jdbcType="BIT" />
+    <result column="create_time" property="createTime" jdbcType="INTEGER" />
+    <result column="update_time" property="updateTime" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_id, country_code, phone, content, send_status, retry_count, create_time, 
+    update_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.caimao.bana.api.entity.SmsSendLogEntity" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sms_send_log
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sms_send_log
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sms_send_log
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.caimao.bana.api.entity.SmsSendLogEntity" >
+    delete from sms_send_log
+  </delete>
+  <insert id="createSmsSendLog" parameterType="com.caimao.bana.api.entity.SmsSendLogEntity" >
+    insert into sms_send_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="countryCode != null" >
+        country_code,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="sendStatus != null" >
+        send_status,
+      </if>
+      <if test="retryCount != null" >
+        retry_count,
+      </if>
+      <if test="true" >
+        create_time,
+      </if>
+      <if test="true" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="countryCode != null" >
+        #{countryCode,jdbcType=CHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=CHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="sendStatus != null" >
+        #{sendStatus,jdbcType=BIT},
+      </if>
+      <if test="retryCount != null" >
+        #{retryCount,jdbcType=BIT},
+      </if>
+      <if test="true" >
+        UNIX_TIMESTAMP(),
+      </if>
+      <if test="true" >
+        UNIX_TIMESTAMP(),
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.caimao.bana.api.entity.SmsSendLogEntity" resultType="java.lang.Integer" >
+    select count(*) from sms_send_log
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sms_send_log
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=BIGINT},
+      </if>
+      <if test="record.countryCode != null" >
+        country_code = #{record.countryCode,jdbcType=CHAR},
+      </if>
+      <if test="record.phone != null" >
+        phone = #{record.phone,jdbcType=CHAR},
+      </if>
+      <if test="record.content != null" >
+        content = #{record.content,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sendStatus != null" >
+        send_status = #{record.sendStatus,jdbcType=BIT},
+      </if>
+      <if test="record.retryCount != null" >
+        retry_count = #{record.retryCount,jdbcType=BIT},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=INTEGER},
+      </if>
+    </set>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sms_send_log
+    set id = #{record.id,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=BIGINT},
+      country_code = #{record.countryCode,jdbcType=CHAR},
+      phone = #{record.phone,jdbcType=CHAR},
+      content = #{record.content,jdbcType=VARCHAR},
+      send_status = #{record.sendStatus,jdbcType=BIT},
+      retry_count = #{record.retryCount,jdbcType=BIT},
+      create_time = #{record.createTime,jdbcType=INTEGER},
+      update_time = #{record.updateTime,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.caimao.bana.api.entity.SmsSendLogEntity" >
+    update sms_send_log
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="countryCode != null" >
+        country_code = #{countryCode,jdbcType=CHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=CHAR},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="sendStatus != null" >
+        send_status = #{sendStatus,jdbcType=BIT},
+      </if>
+      <if test="retryCount != null" >
+        retry_count = #{retryCount,jdbcType=BIT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.caimao.bana.api.entity.SmsSendLogEntity" >
+    update sms_send_log
+    set user_id = #{userId,jdbcType=BIGINT},
+      country_code = #{countryCode,jdbcType=CHAR},
+      phone = #{phone,jdbcType=CHAR},
+      content = #{content,jdbcType=VARCHAR},
+      send_status = #{sendStatus,jdbcType=BIT},
+      retry_count = #{retryCount,jdbcType=BIT},
+      create_time = #{createTime,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,382 @@
+@charset "utf-8";
+
+@import 'style';
+@import "table";
+
+@mixin btn($brColor:none, $bgColor:#EB4636, $fColor:#fff){
+  outline: none ;
+  @if($bgColor == ''){
+    background-color: #fff;
+  }@else if($bgColor == none){
+    background-color: transparent;
+  }@else{
+    background-color: $bgColor;
+  }
+  @if ($brColor == none){
+    border:1px solid transparent;
+  }@else{
+    border:1px solid $brColor;
+  }
+  &:hover,&:focus{
+    //background-image: none;
+    background-color: darken( $fColor , 5%);
+  }
+  &:active{
+    //background-image: none;
+    background-color: darken($fColor,5%);
+    box-shadow: inset 0 0 15px  darken($fColor,20%);
+  }
+}
+
+.f_l{
+  float: left;
+}
+
+.trade_table{
+  padding:0 30px;
+  .table {
+    td{
+      font-weight:600;
+      b{
+        font-weight:600;
+      }
+      i{
+        color: #fff;
+        display: inline-block;
+        margin-right: 5px;
+        width: 14px;
+        height: 14px;
+        line-height: 14px;
+        text-align: center;
+        font-size: 12px;
+        background-color:#D4D4D4;
+      }
+    }
+  }
+}
+
+
+  .group{
+    margin: auto;
+    width:550px;
+    font-size: 14px;
+    color: #808080;
+    line-height: 40px;
+    margin-bottom:15px;
+    .col_01{
+      display: inline-block;
+      width:85px;
+    }
+    .col_02{
+      display: inline-block;
+      width:460px;
+      color: #D8D8D8;
+      input,select{
+        width: 290px;
+        height: 38px;
+        outline:0;
+        padding:0 0 0 8px;
+        box-sizing: border-box;
+        border: 1px solid #DAD9D9;
+        &:focus{
+          border-color:#47A9EE;
+        }
+        &.error{
+          border-color: #EB5142;
+        }
+      }
+      .v_info{
+        visibility: hidden;
+        color:#EB5142;
+        i{
+          display: inline-block;
+          width: 25px;
+          height: 25px;
+          background: url($path + "info_icon.png") no-repeat 0 0;
+          margin-bottom: -7px;
+          margin-left: 5px;
+          &.error{
+            background-position: 0 -27px;
+          }
+        }
+      }
+
+    }
+    .col_2{
+      display: inline-block;
+      width: 400px;
+      .select_bank{
+        li{
+          display:inline-block;
+          border: 1px solid #eee;
+          margin-right:6px;
+          margin-bottom: 10px;
+          width: 116px;
+          height: 38px;
+          img{
+            width: 100px;
+            height:22px;
+            padding:8px;
+          }
+          &:hover{
+            border-color: #47A9EE;
+          }
+          &.cur{
+            border: 0;
+            background: url($path + "select_bank_cur.png") no-repeat 0 0;
+          }
+        }
+      }
+
+    }
+    .verify{
+      input{
+        width:150px;
+      }
+      a{
+        display: inline-block;
+        width: 120px;
+        text-align: center;
+        background-color:#47A9EE;
+        color: #fff;
+        margin-left: 15px;
+      }
+    }
+  }
+  .btn,a.btn{
+    @include btn(none, #47A9EE,#1C85CF);
+    width: 108px;
+    display: inline-block;
+    text-align: center;
+    height:38px;
+    line-height: 36px;
+    color: #fff;
+    cursor: pointer;
+    margin-top: 20px;
+    font-family: "Microsoft Yahei", 微软雅黑, Arial;
+    font-size: 14px;
+  }
+  .btn_blue{
+    @extend a.btn;
+    @include btn(none, #47A9EE,#1C85CF);
+    margin-left:80px;
+  }
+  .btn_last{
+    @extend a.btn;
+    @include btn(none, none);
+    color:#999999;
+    margin-right:20px;
+  }
+
+
+.account{
+  background-color: #fff;
+  padding-bottom: 100px;
+  padding-top: 60px;
+  width: 1200px;
+  margin: auto;
+  form{
+    margin-top: 60px;
+  }
+  .tit{
+    border-bottom: 2px solid #E4E4E4;
+    margin-bottom: 60px;
+    ul{
+      @extend .clearfix;
+      width: 850px;
+      margin: auto;
+      height: 45px;
+      li{
+        font-size: 18px;
+        color: #999999;
+        padding: 0 15px;
+        margin: 0 24px;
+        float: left;
+        height: 45px;
+        line-height: 30px;
+        i{
+          font-size: 20px;
+          width: 30px;
+          height: 30px;
+          border-radius: 30px;
+          color: #fff;
+          display: inline-block;
+          background-color: #999999;
+          text-align: center;
+          margin-right: 18px;
+        }
+        &.cur{
+          border-bottom: 2px solid #EB4636;
+          color:#333;
+          i{
+            background-color: #EB4636;
+          }
+        }
+      }
+    }
+  }
+  .bourse{
+    color: #484848;
+    width: 550px;
+    margin: auto;
+    overflow: hidden;
+    font-size: 14px;
+    padding-top: 10px;
+    p{
+      @extend .clearfix;
+      margin-bottom: 20px;
+      label{
+        float: left;
+        width: 32%;
+        color: #999;
+        margin-bottom: 20px;
+        position: relative;
+        cursor: pointer;
+        padding-left:5px;
+        span {
+          width:12px;
+          height:13px;
+          cursor: pointer;
+          position: absolute;
+          top:4px;
+          left: 0;
+          background: url($path + "checked_bg.png") 0 100%;
+        }
+        input[type=checkbox] {
+          visibility: hidden;
+        }
+        input[type=checkbox]:checked + span {
+          background: url($path + "checked_bg.png") 0 0;
+        }
+      }
+    }
+  }
+  .upload{
+    width: 850px;
+    @extend .clearfix;
+    text-align: center;
+    margin: auto;
+    line-height: 44px;
+    font-size: 14px;
+    li{
+      float: left;
+      margin: 0 45px 60px;
+      display: inline-block;
+      border: 1px solid #D8D8D8;
+      width: 333px;
+      span{
+        &.spanbox{
+          width:333px;height:150px;display:block;overflow: hidden;text-align:center;
+        }
+        &.pics{line-height:150px;}
+        img{max-height:150px;vertical-align:middle}
+      }
+      i{
+        width: 40px;
+        height: 36px;
+        display: block;
+        margin:40px auto 0;
+        background: url($path + "info_icon.png") no-repeat 0 bottom;
+      }
+      .uploadify{
+        display: block;
+        cursor:pointer;
+        position: relative;
+        text-align:center;
+        border-top:1px dashed #DFDFDF;
+        background-color:#F8F8F8 ;
+        //color: #47A9EE;
+        &:hover{
+          background-color:#47A9EE ;
+          color: #fff;
+        }
+      }
+    }
+    
+  .uploadify .uploadify-button {
+    width:333px;height:40px;line-height:40px;font-size:16px;cursor:pointer;
+    background-color: #F8F8F8;
+    background-image: linear-gradient(bottom, #F8F8F8 100%, #F8F8F8 100%);
+    background-image: -o-linear-gradient(bottom, #F8F8F8 100%, #F8F8F8 100%);
+    background-image: -moz-linear-gradient(bottom, #F8F8F8 100%, #F8F8F8 100%);
+    background-image: -webkit-linear-gradient(bottom, #F8F8F8 100%, #F8F8F8 100%);
+    background-image: -ms-linear-gradient(bottom, #F8F8F8 100%, #F8F8F8 100%);
+    color: #47A9EE;
+    font: bold 12px Arial, Helvetica, sans-serif;
+    text-align: center;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
+    width: 100%;
+  }
+  .uploadify .uploadify-button span{display:inline-block;height:40px;line-height:40px;}
+  .uploadify:hover .uploadify-button {
+    color:#fff;
+    background-color: #47A9EE;
+    background-image: linear-gradient(top, #47A9EE 100%, #47A9EE 100%);
+    background-image: -o-linear-gradient(top, #47A9EE 100%, #47A9EE 100%);
+    background-image: -moz-linear-gradient(top, #47A9EE 100%, #47A9EE 100%);
+    background-image: -webkit-linear-gradient(top, #47A9EE 100%, #47A9EE 100%);
+    background-image: -ms-linear-gradient(top, #47A9EE 100%, #47A9EE 100%);
+  }
+  }
+  .select_tit{
+    height: 60px;
+      a{
+        font-size: 16px;
+        color: #999;
+        margin-right: 80px;
+        display: inline-block;
+        &.cur,&:hover{
+          color:#EB4636;
+          font-weight: bold;
+        }
+      }
+  }
+}
+.message{
+  padding-bottom: 100px;
+  padding-top: 33px;
+  .group{
+    margin:0 0 20px 33px;
+    .btn_blue{
+      width: 110px;
+      margin: 0;
+    }
+  }
+}
+.four{
+  .layout_wrap {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 8;
+    display: none;
+  .layout{
+    position: fixed;
+    width:850px;
+    padding: 40px 0;
+    text-align: center;
+    color: #666;
+    line-height: 32px;
+    top:50%;
+    left: 50%;
+    margin-left: -425px;
+    font-size: 14px;
+    background-color: #fff;
+    h3{
+      color: #333;
+      font-size: 16px;
+      i{
+        display: inline-block;
+        width: 25px;
+        height: 25px;
+        background: url($path + "info_icon.png") no-repeat 0 0;
+        margin-right: 5px;
+        margin-bottom: -5px;
+      }
+    }
+  }
+  }
+}

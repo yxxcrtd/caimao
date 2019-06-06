@@ -1,0 +1,81 @@
+<#assign bg="bg-white"/>
+<#assign controller="withDraw"/>
+<#assign header="提现"/> 
+<#assign title="提现"/>
+<#assign footer="3"/>
+<#include 'mobile/layout/layout.html'/>
+
+<#macro content>
+    <article class="content" style="padding-bottom:105px;">
+        <p class="tx-warning con-spacing10" id="bankCardMsg" style="display:none;"></p>
+
+        <!--表单-->
+        <aside class="con-frame">
+            <ul class="datalist">
+                <li class="datalist-item clearfix">
+                    <div class="am-grid datalist-line">
+                        <div class="am-grid-item am-grid-item-25  am-ft-right">
+                            <h4 class="am-ft-md cm-left">账户余额</h4>
+                        </div>
+                        <div class="am-grid-item am-grid-item-75 am-ft-right am-right-15">
+                            <big class="am-ft-bignNum am-ft-orange am-right-5" id="avalaibleAmount"></big>元
+                        </div>
+                    </div>
+                </li>
+                <li class="datalist-item clearfix">
+                    <div class="am-grid datalist-line">
+                        <div class="am-grid-item am-grid-item-25  am-ft-right">
+                            <h4 class="am-ft-md cm-left">取现金额</h4>
+                        </div>
+                        <div class="am-grid-item am-grid-item-75 am-ft-right am-right-15">
+        <span class="ui-form-field">
+            <input name="" type="text" autocomplete="off" id="withdraw_amount" class="text_input money" maxlength="18" defaultvalue="" value="" placeholder="输入金额">
+        </span>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </aside>
+
+
+        <aside class="con-frame con-spacing10" id="bankCardInfo">
+        </aside>
+
+
+        <aside class="con-frame">
+            <ul class="datalist">
+                <li class="datalist-item clearfix">
+                    <div class="am-grid datalist-line">
+                        <div class="am-grid-item am-grid-item-25  am-ft-right">
+                            <h4 class="am-ft-md cm-left">安全密码</h4>
+                        </div>
+                        <div class="am-grid-item am-grid-item-75 am-ft-right am-right-15">
+        <span class="ui-form-field">
+            <input name="" type="password" id="trade_pwd" class="text_input" maxlength="18" maxlength="18" defaultvalue="" value="" placeholder="安全密码">
+        </span>
+                        </div>
+                    </div>
+
+                </li>
+            </ul>
+        </aside>
+        <!--表单-->
+        <div class="am-footer am-footerBtn" style="bottom: auto;">
+            <!--按钮-->
+            <div id="addBtn1"
+                 class="btn-page btn-page-center bg-white con-spacing15">
+                <a  class="am-button am-button-red"> <span
+                        class="am-ft-white">确定提现</span>
+                </a>
+
+            </div>
+        </div>
+        <!--按钮-->
+
+
+    </article>
+
+
+
+
+</#macro>

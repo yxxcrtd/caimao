@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+<#include "config.html"/>
+<#assign curTopMenu="account"/>
+<#assign curLeftMenu="fundsDetail"/>
+<head>
+    <meta charset="utf-8">
+    <title>资金明细-财猫网</title>
+    <meta name="keywords" content="融资，股票融资，投资融资，理财融资，融资平台，融资炒股，融资网，融资公司" />
+	<meta name="description" content="财猫网由金融服务、风险管理及互联网运营等业界一流的专业人士组成的超百人全职运营团队。提供股票融资服务，致力于为公众提供一个国际化、高收益、安全、专业的互联网资产交易平台"/>
+    <!--基本布局样式-->
+    <link rel="stylesheet" type="text/css" href="${dojoUrl}/style/page/page.css?v=${jsVersion}" />
+    <script type="text/javascript" src="${dojoUrl}/js/global.js?v=${jsVersion}"></script>
+</head>
+<body>
+<#include 'include/page/head.html'/>
+<!--内容区-->
+<div id="main">
+    <div class="w sec_main">
+        <#include 'include/menu/account_left.html'/>
+        <div class="right_bar">
+            <div class="record">
+                <div class="table_tit m_t_20">
+                    <form method="get">
+						<span>
+                           类型
+                            <select name="bizType" class="input_select">
+                                <option value="all"<#if bizType == "all"> selected</#if>>全部</option>
+                                <option value="01"<#if bizType == "01"> selected</#if>>充值</option>
+                                <option value="02"<#if bizType == "02"> selected</#if>>取现</option>
+                                <option value="03"<#if bizType == "03"> selected</#if>>借款</option>
+                                <option value="05"<#if bizType == "05"> selected</#if>>还款</option>
+                                <option value="06"<#if bizType == "06"> selected</#if>>结息</option>
+                                <option value="09"<#if bizType == "09"> selected</#if>>交易转入</option>
+                                <option value="10"<#if bizType == "10"> selected</#if>>交易转出</option>
+                                <option value="00"<#if bizType == "00"> selected</#if>>其它</option>
+                           </select>
+                        </span>
+                        <span>
+                            时间
+                             <select name="dateStep" class="input_select">
+                                 <option value="0"<#if dateStep == 0> selected</#if>>全部</option>
+                                 <option value="1"<#if dateStep == 1> selected</#if>>今天</option>
+                                 <option value="7"<#if dateStep == 7> selected</#if>>一周</option>
+                                 <option value="90"<#if dateStep == 90> selected</#if>>三个月</option>
+                                 <option value="180"<#if dateStep == 180> selected</#if>>半年</option>
+                             </select>
+                        </span>
+                        <span>
+                            <button type="submit" class="btn btn_red">查询</button>
+                        </span>
+                    </form>
+                </div>
+                <table class="table m_t_20 table_striped table_hover">
+                    <colgroup>
+                        <col style="width:200px;">
+                        <col style="width:130px;">
+                        <col style="width:200px;">
+                        <col style="width:130px;">
+                        <col style="width:150px;">
+                        <col style="width:150px;">
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th>单号</th>
+                        <th>用户姓名</th>
+                        <th>发生时间</th>
+                        <th>类型</th>
+                        <th>发生金额（元）</th>
+                        <th>变动后金额（元）</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <#if dataList.items>
+                        <#list dataList.items as i>
+                            <tr>
+                                <td>${i.id}</td>
+                                <td>${i.userRealName}</td>
+                                <td>${i.transDatetime?string('yyyy-MM-dd HH:mm:ss')}</td>
+                                <td>${dictStr("accountBizType", i.accountBizType, 0)}</td>
+                                <td><b class="<#if i.seqFlag == 1>font_cyan<#else>font_red</#if>">${formatAmount(i.transAmount, 2, "", 1)}</b></td>
+                                <td>${formatAmount(i.postAmount, 2, "", 1)}</td>
+                            </tr>
+                        </#list>
+                        <#else>
+                            <tr class="table_crumbs">
+                                <td colspan="100%">
+                                    <i class="icons icon_info_null"></i>
+                                    <p>明细记录为空</p>
+                                </td>
+                            </tr>
+                    </#if>
+                    </tbody>
+                </table>
+            </div>
+            ${pageHtml}
+        </div>
+    </div>
+</div>
+<#include 'include/page/foot.html'/>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<div class="frame-all">
+    <div>
+        <form class="ui-form ui-form-bankInfo" role="form" data-dojo-attach-point="formNode">
+
+            <div class="padd-line">
+                <div class="bg-fast-payment">
+                    <span class="color-orange" style="font-size: 14px;">单卡单笔5万，每日累计20万</span>
+                </div>
+            </div>
+
+            <div class="ui-form-item"  style="padding-left: 130px;">
+                <label class="ui-label">账户余额：</label>
+                <div class="ui-text">
+                    <b data-dojo-attach-point="amountNode"></b> 元
+                </div>
+            </div>
+
+            <div class="ui-form-item"  style="padding-left: 130px;">
+                <label class="ui-label">手续费：</label>
+                <div class="ui-text">
+                    <b data-dojo-attach-point="tipNode"></b> 元
+                </div>
+            </div>
+
+            <div data-dojo-attach-point="actionNode" style="display: none">
+                <div class="ui-form-item lineTop-gray-dashed ui-form-item-gray">
+                    <label class="ui-label">充值金额：</label>
+
+                    <div data-dojo-attach-point="amountNode"></div>
+                </div>
+
+                <div class="ui-form-item">
+                    <label class="ui-label">手续费：</label>
+
+                    <div class="ui-text">
+                        <b data-dojo-attach-point="tipNode"></b> 元
+                    </div>
+                </div>
+
+                <div data-dojo-attach-point="nextBtnNode"></div>
+            </div>
+        </form>
+    </div>
+</div>

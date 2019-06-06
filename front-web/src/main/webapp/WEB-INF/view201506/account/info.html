@@ -1,0 +1,124 @@
+<!doctype html>
+<html>
+<#include "config.html"/>
+<#assign curTopMenu="account"/>
+<#assign curLeftMenu="myInfo"/>
+<head>
+    <meta charset="utf-8">
+    <title>个人资料-财猫网</title>
+    <meta name="keywords" content="融资，股票融资，投资融资，理财融资，融资平台，融资炒股，融资网，融资公司" />
+	<meta name="description" content="财猫网由金融服务、风险管理及互联网运营等业界一流的专业人士组成的超百人全职运营团队。提供股票融资服务，致力于为公众提供一个国际化、高收益、安全、专业的互联网资产交易平台"/>
+    <!--基本布局样式-->
+    <link rel="stylesheet" type="text/css" href="${dojoUrl}/style/page/page.css?v=${jsVersion}" />
+    <script type="text/javascript" src="${dojoUrl}/js/info.js?v=${jsVersion}"></script>
+    <style>
+    .uploadify{position: relative;top: 65px;left: 20px;}
+    .uploadify-queue{display:none;}
+    </style>
+</head>
+<body>
+<#include 'include/page/head.html'/>
+<!--内容区-->
+<div id="main">
+    <div class="w sec_main">
+        <#include 'include/menu/account_left.html'/>
+        <div class="right_bar">
+           <h3 class="title m_b_30"><span>个人资料</span></h3>
+            <div class="mess_top">
+                    <div class="f_l sele">
+                        <p class="mess_img">
+                            <img src="${imgUrl}/mess_img159.png" alt=""/>
+                            <a href="javascript:void(0);">+选择图片</a>
+                            <span>支持jpg、gif或png格式<br>图片大小500k以内</span>
+                            <a href="javascript:void(0);" id="selectBtn"></a>
+                        </p>
+                        <p class=""><a id="imgSave" class="btn btn_gray size_m" href="" onclick="return false;">保存</a></p>
+                    </div>
+                    <div class="sele_img f_l">
+                    	<div id="imageArea" class="f_l hide" style="width:300px;">
+                    		<img id="iselect" src=''/>
+                    	</div>
+                    	<span>
+                    		<b>头像预览</b>
+                        	<p style="width:159px;height:159px;overflow:hidden;">
+                            	<#assign userPhoto="/avatars/"+extra.userPhoto />
+                            	<img id="jsImg159" src='${(extra.userPhoto?? && extra.userPhoto!="")?string(userPhoto,imgUrl+"/mess_img_159.png")}'/>
+                        	</p>
+                        </span>
+                        <#if extra.userPhoto?? && extra.userPhoto!="">
+                        	<#assign filePrefix = userPhoto?substring(0,userPhoto?last_index_of(".")) />
+                        	<#assign fileLast = userPhoto?substring(userPhoto?last_index_of("."),userPhoto?length) />
+                        </#if>
+                        <span  class="m_t_110">
+                        	<p style="width:90px;height:90px;overflow:hidden;" />
+                            	<img id="jsImg90" src='${(extra.userPhoto?? && extra.userPhoto!="")?string(filePrefix+"_90"+fileLast,imgUrl+"/mess_img90.png")}'/>
+                       		</p>
+                        </span>
+                        <span  class="m_t_170">
+                        	<p style="width:30px;height:30px;overflow:hidden;">
+                            	<img id="jsImg30" src='${(extra.userPhoto?? && extra.userPhoto!="")?string(filePrefix+"_30"+fileLast,imgUrl+"/mess_img30.jpg")}'/>
+                        	</p>
+                        </span>
+                    </div>
+            </div>
+            <div class="mess_down">
+                <form id="infoFrom">
+                    <div class="group group_half ">
+                        <div class="col_1">昵称</div>
+                        <div class="col_2"><input class="input_text" id="jsNick" validateType="empty:请输入昵称 nickname" placeholder="中文、数字或字母组成，不可有特殊字符" type="text" autocomplete="off"  value="${extra.userNickName}" maxlength="10"/></div>
+                    </div>
+                    <div class="group group_half ">
+                        <div class="col_1">籍贯</div>
+                        <div class="col_2"><input class="input_text"  id="jsFrom" validateType="empty:请输入籍贯" placeholder="请以籍贯为准" type="text" autocomplete="off"  value="${extra.userComefrom}" maxlength="20"/></div>
+                    </div>
+                    <div class="group group_half ">
+                        <div class="col_1">居住地</div>
+                        <div class="col_2"><input class="input_text"  id="jsAddress" validateType="empty:请输居住地" placeholder="请输入家庭地址" type="text" autocomplete="off"  value="${extra.address}" maxlength="50"/></div>
+                    </div>
+                    <div class="group group_half ">
+                        <div class="col_1">职业</div>
+                        <div class="col_2"><input class="input_text" id="jsOccu" validateType="empty:请输入职业" placeholder="请输入职业" type="text" autocomplete="off" value="${extra.userOccupation}" maxlength="10"/></div>
+                    </div>
+                    <div class="group group_half ">
+                        <div class="col_1">教育程度</div>
+                        <div class="col_2">
+                            <select name="" id="jsEdu" class="input_select" validateType="empty:请选择教育程度">
+                                <option value="">--</option>
+                                <#if !extra.userEducation??>
+                                    <option value="">--</option>
+                                </#if>
+                                <option <#if (((extra.userEducation)!'') == '高中')>selected="selected"</#if> value="高中">高中</option>
+                                <option <#if (((extra.userEducation)!'') == '大学')>selected="selected"</#if> value="大学">大学</option>
+                                <option <#if (((extra.userEducation)!'') == '硕士')>selected="selected"</#if> value="硕士">硕士</option>
+                                <option <#if (((extra.userEducation)!'') == '博士')>selected="selected"</#if> value="博士">博士</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="group group_half">
+                        <div class="col_1">投资经验</div>
+                        <div class="col_2">
+                            <select name="" id="jsInve" validateType="empty:请选择投资经验" class="input_select" value="${extra.userNickName}" >
+                                <option value="">--</option>
+                                <#if !extra.invrEmpiric??>
+                                    <option>--</option>
+                                </#if>
+                                <option <#if (((extra.invrEmpiric)!'') == '1年')>selected="selected"</#if> value="1年">1年</option>
+                                <option <#if (((extra.invrEmpiric)!'') == '2-5年')>selected="selected"</#if> value="2-5年">2-5年</option>
+                                <option <#if (((extra.invrEmpiric)!'') == '5-10年')>selected="selected"</#if> value="5-10年">5-10年</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="group group_half m_t_30">
+                        <div class="col_1"></div>
+                        <div class="col_2"><a href="javascript:;" id="infoBtn" class="btn size_m btn_blue">保存</a></div>
+                    </div>
+                    <div style="clear: both"></div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+<#include 'include/page/foot.html'/>
+</body>
+</html>

@@ -1,0 +1,58 @@
+	<div class="top">
+		<div class="innerCont clearfix">
+			<div class="topnav">
+				<a href="${homeUrl}">财猫主站</a><!--
+				--><a href="${ybkUrl}">财猫邮币卡</a><!--
+				--><a href="${gjsUrl}" style="color: red;">财猫贵金属</a>
+			</div>
+			<div class="user"><a href="${homeUrl}/tpl?tpl=/gjs/article/download" target="_blank" class="appdownload" id="appdownload"><i></i>APP下载</a><strong id="user"></strong><div class="qrcode" id="qrcode"><img src="${imgUrl}/qrcode_android.png?version=${jsVersion}" ><p style="
+    text-align: center;
+          ">
+                <a href="/static/gjs/img/app/gjs.apk" target="_blank" stoped="1">Android点击下载</a> <br/>
+                <a href="itms-services://?action=download-manifest&url=https:/jin.caimao.com/static/gjs/img/app/gjs.plist" target="_blank" stoped="1">iOS点击下载</a>
+            </p></div></div>
+		</div>
+	</div>
+	<script>
+		userInfo("#user","${homeUrl}");
+	</script>
+	<script>
+		(function(){
+			var isShow = 0,
+				qrcode = document.querySelector("#qrcode"),
+			addEvent = document.addEventListener ?
+					function(o, t, f) {
+						o.addEventListener(t, f, false)
+				} : function(o, t, f) {
+					o.attachEvent('on' + t, f)
+				}
+			addEvent(document,'click',function(e){
+				var tar = e.target || window.event.srcElement;
+				if(tar.getAttribute("stoped"))return;
+				if(isShow){
+					isShow = false;
+					qrcode.style.display = "none";
+				}
+
+			});
+			addEvent(document.querySelector("#appdownload"),'click',function(e){
+				var tar = e.target || window.event.srcElement;
+				return;
+				if(tar.getAttribute("stoped"))return;
+				if (e && e.stopPropagation) {
+					e.stopPropagation();
+					e.preventDefault();
+				} else {
+					window.event.cancelBubble = true;
+					window.event.returnValue = false;
+				}
+				if(isShow){
+					isShow = false;
+					qrcode.style.display = "none";
+				}else{
+					isShow = true;
+					qrcode.style.display = "block";
+				}
+			});
+		})();
+		</script>

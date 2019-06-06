@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ProdDicount" >
+  <resultMap id="BaseResultMap" type="com.caimao.bana.api.entity.ProdDicountEntity" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="prod_id" property="prodId" jdbcType="BIGINT" />
+    <result column="dicount_name" property="dicountName" jdbcType="VARCHAR" />
+    <result column="begin_datetime" property="beginDatetime" jdbcType="TIMESTAMP" />
+    <result column="dicount_total_amount" property="dicountTotalAmount" jdbcType="BIGINT" />
+    <result column="dicount_use_amount" property="dicountUseAmount" jdbcType="BIGINT" />
+    <result column="prod_status" property="prodStatus" jdbcType="CHAR" />
+    <result column="dicount_user_num" property="dicountUserNum" jdbcType="INTEGER" />
+    <result column="interest_rate" property="interestRate" jdbcType="DECIMAL" />
+    <result column="prod_amount_min" property="prodAmountMin" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, prod_id, dicount_name, begin_datetime, dicount_total_amount, dicount_use_amount, 
+    prod_status, dicount_user_num, interest_rate, prod_amount_min
+  </sql>
+  <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tpz_prod_dicount
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Long" >
+    delete from tpz_prod_dicount
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="save" parameterType="com.caimao.bana.api.entity.ProdDicountEntity" >
+    insert into tpz_prod_dicount
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != 0" >
+        id,
+      </if>
+      <if test="prodId != null" >
+        prod_id,
+      </if>
+      <if test="dicountName != null" >
+        dicount_name,
+      </if>
+      <if test="beginDatetime != null" >
+        begin_datetime,
+      </if>
+      <if test="dicountTotalAmount != null" >
+        dicount_total_amount,
+      </if>
+      <if test="dicountUseAmount != null" >
+        dicount_use_amount,
+      </if>
+      <if test="prodStatus != null" >
+        prod_status,
+      </if>
+      <if test="dicountUserNum != null" >
+        dicount_user_num,
+      </if>
+      <if test="interestRate != null" >
+        interest_rate,
+      </if>
+      <if test="prodAmountMin != null" >
+        prod_amount_min,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != 0" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="prodId != null" >
+        #{prodId,jdbcType=BIGINT},
+      </if>
+      <if test="dicountName != null" >
+        #{dicountName,jdbcType=VARCHAR},
+      </if>
+      <if test="beginDatetime != null" >
+        #{beginDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dicountTotalAmount != null" >
+        #{dicountTotalAmount,jdbcType=BIGINT},
+      </if>
+      <if test="dicountUseAmount != null" >
+        #{dicountUseAmount,jdbcType=BIGINT},
+      </if>
+      <if test="prodStatus != null" >
+        #{prodStatus,jdbcType=CHAR},
+      </if>
+      <if test="dicountUserNum != null" >
+        #{dicountUserNum,jdbcType=INTEGER},
+      </if>
+      <if test="interestRate != null" >
+        #{interestRate,jdbcType=DECIMAL},
+      </if>
+      <if test="prodAmountMin != null" >
+        #{prodAmountMin,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.caimao.bana.api.entity.ProdDicountEntity" >
+    update tpz_prod_dicount
+    <set >
+      <if test="prodId != null" >
+        prod_id = #{prodId,jdbcType=BIGINT},
+      </if>
+      <if test="dicountName != null" >
+        dicount_name = #{dicountName,jdbcType=VARCHAR},
+      </if>
+      <if test="beginDatetime != null" >
+        begin_datetime = #{beginDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dicountTotalAmount != null" >
+        dicount_total_amount = #{dicountTotalAmount,jdbcType=BIGINT},
+      </if>
+      <if test="dicountUseAmount != null" >
+        dicount_use_amount = #{dicountUseAmount,jdbcType=BIGINT},
+      </if>
+      <if test="prodStatus != null" >
+        prod_status = #{prodStatus,jdbcType=CHAR},
+      </if>
+      <if test="dicountUserNum != null" >
+        dicount_user_num = #{dicountUserNum,jdbcType=INTEGER},
+      </if>
+      <if test="interestRate != null" >
+        interest_rate = #{interestRate,jdbcType=DECIMAL},
+      </if>
+      <if test="prodAmountMin != null" >
+        prod_amount_min = #{prodAmountMin,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+<!--   <resultMap id="F830916ResMap" type="com.hsnet.pz.biz.base.dto.res.F830916Res" > -->
+<!-- 	    <id column="id" property="id" jdbcType="BIGINT" /> -->
+<!-- 	    <result column="prod_id" property="prodId" jdbcType="BIGINT" /> -->
+<!-- 	    <result column="dicount_name" property="dicountName" jdbcType="VARCHAR" /> -->
+<!-- 	    <result column="begin_datetime" property="beginDatetime" jdbcType="TIMESTAMP" /> -->
+<!-- 	    <result column="dicount_total_amount" property="dicountTotalAmount" jdbcType="BIGINT" /> -->
+<!-- 	    <result column="dicount_use_amount" property="dicountUseAmount" jdbcType="BIGINT" /> -->
+<!-- 	    <result column="prod_status" property="prodStatus" jdbcType="CHAR" /> -->
+<!-- 	    <result column="dicount_user_num" property="dicountUserNum" jdbcType="INTEGER" /> -->
+<!-- 	    <result column="interest_rate" property="interestRate" jdbcType="DECIMAL" /> -->
+<!-- 	    <result column="prod_amount_min" property="prodAmountMin" jdbcType="BIGINT" /> -->
+<!-- 	    <result column="prod_note" property="prodNote" jdbcType="CHAR" /> -->
+<!-- 	</resultMap> -->
+  
+<!--   <select id="queryF830916ResWithPage" parameterType="com.hsnet.pz.biz.base.dto.req.F830916Req" resultMap="F830916ResMap"> -->
+<!--   	select  -->
+<!--     d.id, d.prod_id, d.dicount_name, d.begin_datetime, d.dicount_total_amount, d.dicount_use_amount,  -->
+<!--     d.prod_status, d.dicount_user_num, d.interest_rate, d.prod_amount_min, p.prod_note -->
+<!--     from tpz_prod_dicount d,tpz_prod p -->
+<!--     where d.prod_id=p.prod_id -->
+<!--     AND d.prod_status = #{prodStatus} -->
+<!--   </select> -->
+  
+<!--   <resultMap id="F831942ResMap" type="com.hsnet.pz.biz.base.dto.res.F831942Res" > -->
+<!-- 	    <id column="id" property="id" jdbcType="BIGINT" /> -->
+<!-- 	    <result column="prod_id" property="prodId" jdbcType="BIGINT" /> -->
+<!-- 	    <result column="dicount_name" property="dicountName" jdbcType="VARCHAR" /> -->
+<!-- 	    <result column="begin_datetime" property="beginDatetime" jdbcType="TIMESTAMP" /> -->
+<!-- 	    <result column="dicount_total_amount" property="dicountTotalAmount" jdbcType="BIGINT" /> -->
+<!-- 	    <result column="dicount_use_amount" property="dicountUseAmount" jdbcType="BIGINT" /> -->
+<!-- 	    <result column="prod_status" property="prodStatus" jdbcType="CHAR" /> -->
+<!-- 	    <result column="dicount_user_num" property="dicountUserNum" jdbcType="INTEGER" /> -->
+<!-- 	    <result column="interest_rate" property="interestRate" jdbcType="DECIMAL" /> -->
+<!-- 	    <result column="prod_amount_min" property="prodAmountMin" jdbcType="BIGINT" /> -->
+<!-- 	</resultMap> -->
+  
+<!--   <select id="queryF831942ResWithPage" parameterType="com.hsnet.pz.biz.base.dto.req.F831942Req" resultMap="F831942ResMap"> -->
+<!--   	select  -->
+<!--     <include refid="Base_Column_List" /> -->
+<!--      from tpz_prod_dicount -->
+<!--     <if test="prodStatus != null and  prodStatus != ''" > -->
+<!--       where prod_status =  #{prodStatus} -->
+<!--       </if> -->
+<!--   </select> -->
+  
+  <update id="updateUse" parameterType="com.caimao.bana.api.entity.ProdDicountEntity" >
+    update tpz_prod_dicount
+     set  dicount_use_amount = dicount_use_amount + #{dicountUseAmount},
+        dicount_user_num = dicount_user_num+1
+    where prod_id = #{prodId}
+  </update>
+  
+  <select id="getByProd" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tpz_prod_dicount
+    where prod_id = #{value}
+  </select>
+  
+  <select id="getCount" resultType="java.lang.Integer" parameterType="java.lang.Long" >
+    select count(1)
+    from tpz_prod_dicount
+    where prod_id = #{value}
+  </select>
+  
+</mapper>

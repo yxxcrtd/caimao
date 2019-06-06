@@ -1,0 +1,101 @@
+<#assign controller="Withdraw"/> <#include 'layout/layout.html'/>
+<#macro content>
+<div class="content">
+	<div class="container">
+		<div id="sidemenuctn" class="conside"></div>
+		<div class="content-wrap">
+			<div class="padd-space">
+				<div class="tab" id="tab" style="margin-top: 10px;">
+					<div class="head">
+						<span class="select"><i></i>我要提现</span> <span id="withdrawrecord"><i></i>提现记录</span>
+					</div>
+					<div class="panel" id="panelctn">
+                        <div id="panel1">
+						<div class="padd-line">
+							<div class="panel-l">可用余额：</div>
+							<em class="num color-orange" id="accountBalance"></em>元
+						</div>
+
+						<div class="padd-line" style="padding-bottom: 0px">
+							<div class="panel-l">取现金额：</div>
+							<div class="panel-r">
+								<div id="withdraw-amount-fld"></div>
+								<!--  <em>限额50000元/次，每日限3次</em> -->
+							</div>
+						</div>
+
+						<div class="padd-line">
+							<div class="panel-l">银行卡：</div>
+							<div class="panel-r">
+								<div id="bankCardNo"></div>
+							</div>
+						</div>
+
+						<div class="padd-line" style="padding-bottom: 0px">
+							<div class="panel-l">安全密码：</div>
+							<div class="panel-r">
+								<div id="trade-pwd-fld"></div>
+							</div>
+						</div>
+
+
+						<div class="padd-line">
+							<div class="panel-l">&nbsp;</div>
+							<div class="panel-r">
+								<!--不可用 btn-disable-->
+								<div id='nextBtn'></div>
+							</div>
+						</div>
+							<div style="margin-left: 20px;">
+								<p style="line-height: 30px;">1. 正常提现24小时到账；</p>
+								<p style="line-height: 30px;">2. 周五、周六、周日提现周一到账；</p>
+								<p style="line-height: 30px;">3. 5万以上提现到账较慢，如果您需要快速到账，请分多笔5万以下进行提现。</p>
+							</div>
+                        </div>
+					</div>
+
+					<div class="panel" style="display: none; padding: 10px;">
+						<div class="frame-all frame-all-box" style="width: 800px;">
+							<div class="filter-loan">
+								<div class="clearfix">
+									<div class="cm-left filter-date">
+										<span class="filter-loan-th">起止日期：</span>
+										<div id="daterangectn" style="margin-left: 90px;"></div>
+										<div class="filter-button">
+											<a id="inquirybutton" href="javascript:void(0)"
+												class="ui-button ui-button-sgray"><b
+												class="ui-button-text am-ft-sm">查询</b></a>
+										</div>
+									</div>
+
+									<div id="datequickselectctn" class="cm-left second-left"></div>
+								</div>
+
+							</div>
+						</div>
+						<div class="clearfix" style="margin-bottom: 10px;">
+							<span class="cm-left filter-loan-th">状态：</span>
+							<ul id="filterlist" class="cm-left listLateral list-filter">
+								<li class="list-filter-item" data-type="all"><a
+									href="javascript:void(0)" class="active">全部</a></li>
+								<li class="list-filter-item" data-type="02"><a
+									href="javascript:void(0)" >待处理</a></li>
+								<li class="list-filter-item" data-type="03"><a
+									href="javascript:void(0)">成功</a></li>
+								<li class="list-filter-item" data-type="04"><a
+									href="javascript:void(0)">失败</a></li>
+								<li class="list-filter-item" data-type="05"><a
+									href="javascript:void(0)">已取消</a></li>
+							</ul>
+						</div>
+						<div id="fundgrid"></div>
+
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</#macro>

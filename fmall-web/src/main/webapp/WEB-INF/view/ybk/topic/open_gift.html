@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<#include "ybk/config.html" />
+<#assign topMenu="index" />
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>开户送礼--邮币卡</title>
+	<link rel="stylesheet" href="${staticUrl}/style/topic/open_gift/ubkact.css">
+    <link rel="stylesheet" href="${staticUrl}/style/lead.css" />
+    <script src="${staticUrl}/js/ybk/global.js?version=${jsVersion}" type="text/javascript"></script>
+    <script src="${staticUrl}/js/chart/lib.js?version=${jsVersion}" type="text/javascript"></script>
+</head>
+<body>
+<#include "ybk/include/page/head.html" />
+	<div class='ubkActWarp'>
+		<div class='ubkActMain'>
+			<div class='ubkActBanner'>
+				<img src="${staticUrl}/style/topic/open_gift/img/ubkactbanner.png" alt="">
+			</div>
+			<div class='ubkActMain1 clearFix'>
+				<img src="${staticUrl}/style/topic/open_gift/img/xuanfu.png" alt="" class="xuanfu">
+				<div class='ubkActMain1-1'></div>
+				<div class='ubkActMain1-2'><ul class='ubkactlist'>
+					<li>交易所</li>
+					<li>要求</li>
+					<li>奖励</li>
+					<li class='widMin'>价值￥</li>
+					<li>截止时间</li>
+				</ul>
+				<div id="list">
+					<script type="text/x-tmpl">
+						<%
+							for(var _this,i = 0, l = data.length; i < l; i++){
+							_this = data[i];
+						%>
+
+							<ul class="ubkactlist2">
+								<li><%=_this.exchangeName%></li>
+								<li><%=_this.ask%></li>
+								<li><%=_this.reward%></li>
+								<li class="widMin"><%=_this.rewardValue%></li>
+								<li><%=totime(_this.endDatetime,"y-m-d")%></li>
+								<li class="listBtn"><a href="<%=_this.activityUrl%>" target="_blank">详情</a><a href="/ybk/open_account.html" target="_blank">开户</a></li>
+							</ul>
+						<%}%>
+					</script>
+				</div>
+				<script>
+				(function(){
+				var r = request(),
+					list = document.getElementById("list"),
+					html = list.getElementsByTagName("script")[0].innerHTML,
+					url = "/api/ybk/content/query_activity_list?limit=10";
+				r.ajax({
+					url : url,
+					type : "GET",
+					success : function(d){
+						if(d.success){
+							list.innerHTML = rentmpl(html,{
+								data : d.data.items
+							})
+						}
+					}
+				})
+			})()
+				</script>
+				</div>
+				<div class="ubkActMain1-3"></div>
+			</div>
+			<div class="qqBtnBox">
+				<a rel="nofollow" href="http://wpa.b.qq.com/cgi/wpa.php?ln=1&uin=800097600&1445239347032" target="_blank" class='qqBtn'><img src="${staticUrl}/style/topic/open_gift/img/qqbtnbg.png" alt=""></a>
+			</div>
+			<div class="ubkActMain2">
+				<img src="${staticUrl}/style/topic/open_gift/img/title1.png" alt="">
+				<p>财猫邮币卡，红杉资本投资，清华团队领衔，是一家有诚意的邮币卡电子盘平台。作为国内首屈一指的行业领袖，财猫邮币卡现携手南京文交所、中艺所、金马甲、福丽特等交易所推出“开户送礼品”活动。  </p>
+			</div>
+<!-- 			<div class="ubkActMain2">
+	<img src="${staticUrl}/style/topic/open_gift/img/title2.png" alt="">
+		<p>1.即日起，只要在财猫邮币卡进行相关文交所的开户即可享受活动奖励。</p>
+		<p>2.现金奖励每周发放；藏品奖会在20个工作日内发放到各文交所的交易账号中。</p>
+		<p>3.开户送礼品活动每周会有更新，敬请持续关注。</p>
+</div> -->
+			<div class="ubkActMain3 clearFix">
+				<div class="ubkActMain3-1">
+					<img src="${staticUrl}/style/topic/open_gift/img/title2.png" alt="">
+					<p>1.即日起，只要在财猫邮币卡进行相关文交所的开户即可享受活动奖励。</p>
+					<p>2.现金奖励每周发放；藏品奖会在20个工作日内发放到各文交所的交易账号中。</p>
+					<p>3.开户送礼品活动每周会有更新，敬请持续关注。</p>
+				</div>
+			<div class="ubkActMain3-2">
+				<ul class='nameList'>
+					<li class="widMin2">姓名</li>
+					<li>手机号</li>
+					<li class='widMax'>开户</li>
+					<li>时间</li>
+				</ul>
+				<div class="ubkuser">
+				<div class="listBox2" id="userList">
+				<script type="text/x-tmpl">
+						<%
+							for(var _this,i = 0, l = data.length; i < l; i++){
+							_this = data[i];
+						%>
+					<ul class="nameList2">
+						<li class="widMin2"><%=_this.userName || "&nbsp;"%></li>
+						<li ><%=_this.phoneNo || "&nbsp;"%></li>
+						<li class="widMax"><%=sta[_this.status]%></li>
+						<li><%=totime(_this.createDate,"y-m-d")%></li>
+					</ul>
+					<%
+						}
+					%>
+				</script>
+				</div></div>
+			</div>
+				<script>
+				(function(){
+
+				var r = request(),
+					list = document.getElementById("userList"),
+					html = list.getElementsByTagName("script")[0].innerHTML,
+					url = "/api/ybk/content/new_account_list",
+					lens,n = 0,
+					timer = 1000,
+					sta = ["状态","待审核","审核中","开通成功","不予通过"];
+				get();
+				function doLoop(){
+					var fn;
+					list.className = "listBox";
+					list.style.top = (n * -23) + "px";
+					fn = (n != lens) ? function(){setTimeout(doLoop,timer)} : get;
+					n += 1;
+					fn();
+				}
+				function get(){
+				r.ajax({
+					url : url,
+					type : "GET",
+					success : function(d){
+						if(d.success){
+							lens = d.data.items.length;
+							list.innerHTML = "";
+							list.className = "listBox2";
+							list.style.top = 0;
+							list.innerHTML = rentmpl(html,{
+								data : d.data.items.concat(d.data.items),
+								sta : sta
+							})
+							n = 0;
+							setTimeout(doLoop,timer)
+						}
+					}
+				})
+				}
+				})()
+				</script>
+			</div> 
+			<div style="clear:both"></div>
+			<h1 class="ubkActMainF">本次活动最终解释权归财猫邮币卡所有</h1>
+		</div>
+		<p class="ubkActFooter">
+			京ICP备15016693号-2 2013-2015©版权所有
+		</p>
+	</div>
+
+<script>
+	var _hmt = _hmt || [];
+	(function() {
+		var hm = document.createElement("script");
+		hm.src = "//hm.baidu.com/hm.js?a1539df98107c7df914ae2d77cd616c3";
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+</body>
+
+</html>

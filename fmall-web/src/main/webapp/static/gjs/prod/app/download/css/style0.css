@@ -1,0 +1,660 @@
+/* reset */
+* {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+    font-size: 100%;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    position: relative;
+    word-break: break-all;
+}
+a {
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent; -webkit-touch-callout: none; -webkit-user-select: none;
+}
+
+img {
+    -ms-interpolation-mode: bicubic;
+    vertical-align: middle;
+}
+
+img:not([src*="/"]) {
+    display: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+th, td, caption {
+    vertical-align: middle;
+}
+
+textarea {
+    resize: none;
+}
+
+input, button, select, textarea {
+    outline: none;
+    border-radius: 0;
+    font-family: inherit;
+    font-size: inherit;
+}
+
+ul, ol, li {
+    list-style: none;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.f-hide {
+    display: none !important;
+}
+
+
+
+/* swipe */
+.swipe {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.swipe li {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+              background: url("../img/loadbg.png")no-repeat;
+    background-size:100% 100%;
+}
+.swipe li:first-child{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+              background: url("../img/loadindexbg.png")no-repeat;
+    background-size:100% 100%;
+}
+
+
+.swipe li.cur {
+    z-index: 10;
+    display: block;
+}
+
+.swipe li.action {
+    z-index: 11;
+    display: block;
+}
+
+.animated {
+    -webkit-transition: .3s;
+}
+
+.swipe li > div {
+    width: 100%;
+    height: 100%;
+   
+    background-position: center center;
+    background-repeat: no-repeat;
+    display: -webkit-box;
+    -webkit-box-pack: center;
+    -webkit-box-align: center;
+}
+/*.swipe img {
+    max-width: 640px;
+}*/
+
+.swipe .top {
+    -webkit-box-align: start;
+}
+
+.swipe .middle {
+    -webkit-box-align: center;
+}
+
+.swipe .bottom {
+    -webkit-box-align: end;
+}
+
+
+#hehe{
+
+}
+.index-1{
+        width: 25%;
+        margin-left: 5%;
+    position: absolute;
+    top: 10px;
+}
+
+.index-1 img{
+    width: 100%;
+    
+}
+
+.index-2{
+        width:60%;
+    position: absolute;
+    top: 60px;
+     margin-left: 22%;
+     animation-delay:1s !important;
+}
+.index-2 img{
+    display: block;
+    width: 90%;
+   
+}
+
+.index-3{
+    width: 90%;
+     position: fixed;
+     bottom: 100px;
+    left: 50%;
+      animation-delay:2s !important;
+}
+.index-4{
+    width: 100%;
+     position: absolute;
+     top: 240px;
+}
+.index-4 img{
+    width: 40%;
+    margin-left: 30%;
+   
+}
+
+
+.page02-1{
+        width: 25%;
+        margin-left: 5%;
+    position: absolute;
+    top: 10px;
+}
+.page02-1 img{
+       width: 100%;
+}
+.page02-2{
+        width:60%;
+    position: absolute;
+    top: 105px;
+     margin-left: 22%;
+     animation-delay:1s !important;
+}
+.page02-2 img{
+    width: 100%;
+}
+.page02-3{
+    width: 100%;
+     position: absolute;
+     top: 210px;
+     animation-delay:2s !important;
+}
+.page02-3 img:nth-child(1){
+    width: 40%;
+    position: absolute;
+    left: 30%;
+    animation-delay:2s !important;
+}
+.page02-3 img:nth-child(2){
+        width: 20%;
+    position: absolute;
+    left: 40.5%;
+    top: 35px;
+    animation-delay: 2.5s !important;
+}
+
+.page02-4{
+      width: 90%;
+     position: fixed;
+     bottom: 100px;
+    left: 50%;
+      animation-delay:3s !important;
+}
+
+.page03-1{
+             width: 25%;
+        margin-left: 5%;
+    position: absolute;
+    top: 10px;
+}
+.page03-1 img{
+      width: 100%;
+}
+
+.page03-2{
+        width: 70%;
+    position: absolute;
+    top: 105px;
+    margin-left: 18%;
+    animation-delay: 1s !important;
+
+}
+.page03-2 img{
+    width: 100%;
+}
+.page03-3{
+    width: 100%;
+     position: absolute;
+     top: 210px;
+     animation-delay:2s !important;
+}
+.page03-3 img:nth-child(1){
+    width: 40%;
+    position: absolute;
+    left: 30%;
+    animation-delay:2s !important;
+}
+.dwMarker{
+  width: 1px;
+  height: 1px;
+  position: relative;
+  left: 50%;
+  top: -15px;
+  margin-left: -8px;
+}
+.page03-3 .dwMarker img{
+        width: 100px;
+    position: absolute;
+    left: 3000px;
+    top: -3000px;
+   transition: all 1s;
+   transition-delay: 2s;
+}
+.cur .page .page03-3 .dwMarker img{
+    left: 0;
+    top: 0;
+}
+
+.page03-4{
+     width: 90%;
+     position: fixed;
+     bottom: 100px;
+    left: 50%;
+      animation-delay:3s !important;
+}
+
+
+.page04-1{
+             width: 25%;
+        margin-left: 5%;
+    position: absolute;
+    top: 10px;
+}
+.page04-1 img{
+    width:100%;
+}
+
+.page04-2{
+      width:60%;
+    position: absolute;
+    top: 105px;
+     margin-left: 22%;
+     animation-delay:1s !important;
+}
+.page04-2 img{
+       width: 100%;
+}
+.page04-3{
+    width: 100%;
+     position: absolute;
+     top: 210px;
+     animation-delay:2s !important;
+}
+.page04-3 img:nth-child(1){
+    width: 40%;
+    position: absolute;
+    left: 30%;
+    animation-delay:2s !important;
+}
+.page04-3 img:nth-child(2){
+        width: 18%;
+    position: absolute;
+    left: 42%;
+    top: -21px;
+    animation-delay: 2.5s !important;
+}
+.page04-3 img:nth-child(3){
+       width: 2.5%;
+    position: absolute;
+    left: 40.5%;
+    top: 55px;
+    animation-delay: 3.5s !important;
+}
+.page04-3 img:nth-child(4){
+        position: absolute;
+    left: 43.5%;
+    top: 56px;
+    animation-delay: 4s !important;
+    width: 8.5%;
+}
+.page04-3 img:nth-child(5){
+      position: absolute;
+    left: 52%;
+    top: 56px;
+    animation-delay: 4.5s !important;
+    width: 8.5%;
+}
+
+.page04-4{
+      width: 90%;
+     position: fixed;
+     bottom: 100px;
+    left: 50%;
+   
+      animation-delay:3s !important;
+}
+
+
+
+.xiala1{
+        position: fixed;
+    bottom: 50px;
+    left: 50%;
+    margin: -18px 0 0 -20px;
+    width: 40px;
+    height: 17px;
+    background-repeat: no-repeat;
+    -webkit-animation: arrowUp 1.5s infinite ease-in-out;
+}
+.loadBtn{
+    display: block;
+    width: 142.5px;
+    height: 45px;
+    background: url(../img/gjsloadbtn.png);
+    background-size: 100% 100%;
+    border-radius: 3px;
+    text-align: center;
+    line-height: 30px;
+    color: #fff;
+     margin-left: -71px;
+}
+.loadBtn2{
+    display: block;
+    width: 142.5px;
+    height: 45px;
+    background: url(../img/gjsloadbtn2.png);
+    background-size: 100% 100%;
+    border-radius: 3px;
+    text-align: center;
+    line-height: 30px;
+    color: #fff;
+     margin-left: -71px;
+}
+
+@-webkit-keyframes arrowUp {
+    0%, 30% {
+        opacity: 0;
+        -webkit-transform: translate(0, 10px);
+    }
+    60% {
+        opacity: 1;
+        -webkit-transform: translate(0, 0);
+    }
+    100% {
+        opacity: 0;
+        -webkit-transform: translate(0, -8px);
+    }
+}
+
+
+
+
+@media screen and (max-width: 320px){ 
+
+.page02-2{
+        width:60%;
+    position: absolute;
+    top: 60px;
+     margin-left: 22%;
+     animation-delay:1s !important;
+}
+.page02-3{
+    width: 100%;
+     position: absolute;
+     top: 150px;
+     animation-delay:2s !important;
+}
+.index-3{
+    width: 90%;
+     position: fixed;
+     bottom: 100px;
+    left: 50%;
+      animation-delay:2s !important;
+}
+.page03-2{
+        width:60%;
+    position: absolute;
+    top: 60px;
+     margin-left: 22%;
+     animation-delay:1s !important;
+}
+.page03-3{
+    width: 100%;
+     position: absolute;
+     top: 150px;
+     animation-delay:2s !important;
+}
+
+.xiala1{
+        position: fixed;
+    bottom: 50px;
+    left: 50%;
+    margin: -25px 0 0 -20px;
+    width: 40px;
+    height: 17px;
+    background-repeat: no-repeat;
+    -webkit-animation: arrowUp 1.5s infinite ease-in-out;
+}
+.loadBtn{
+    display: block;
+    width: 95px;
+    height: 30px;
+    background: url(../img/gjsloadbtn.png);
+    background-size: 100% 100%;
+    border-radius: 3px;
+    text-align: center;
+    line-height: 30px;
+    color: #fff;
+     margin-left: -47.5px;
+}
+.loadBtn2{
+    display: block;
+    width: 95px;
+    height: 30px;
+    background: url(../img/gjsloadbtn2.png);
+    background-size: 100% 100%;
+    border-radius: 3px;
+    text-align: center;
+    line-height: 30px;
+    color: #fff;
+     margin-left: -47.5px;
+}
+
+.page04-3 img:nth-child(1){
+    width: 40%;
+    position: absolute;
+    left: 30%;
+    animation-delay:2s !important;
+}
+.page04-3 img:nth-child(2){
+        width: 18%;
+    position: absolute;
+    left: 42%;
+    top: -17px;
+    animation-delay: 2.5s !important;
+}
+.page04-3 img:nth-child(3){
+       width: 2.5%;
+    position: absolute;
+    left: 40.5%;
+    top: 45px;
+    animation-delay: 3.5s !important;
+}
+.page04-3 img:nth-child(4){
+        position: absolute;
+    left: 43.5%;
+    top: 46px;
+    animation-delay: 4s !important;
+    width: 8.5%;
+}
+.page04-3 img:nth-child(5){
+      position: absolute;
+    left: 52%;
+    top: 46px;
+    animation-delay: 4.5s !important;
+    width: 8.5%;
+}
+
+.page04-1{
+             width: 25%;
+        margin-left: 5%;
+    position: absolute;
+    top: 10px;
+}
+.page04-1 img{
+    width:100%;
+}
+
+.page04-2{
+      width:60%;
+    position: absolute;
+    top: 60px;
+     margin-left: 22%;
+     animation-delay:1s !important;
+}
+
+.page04-3{
+    width: 100%;
+     position: absolute;
+     top: 150px;
+     animation-delay:2s !important;
+}
+.page04-4{
+      width: 90%;
+     position: fixed;
+     bottom: 100px;
+    left: 50%;
+   
+      animation-delay:3s !important;
+}
+
+.dwMarker{
+  width: 1px;
+    height: 1px;
+    position: relative;
+    left: 50%;
+    top: -27px;
+    margin-left: -8px;
+}
+
+
+.index-4{
+    width: 100%;
+     position: fixed;
+     bottom: 100px;
+}
+}
+
+@media screen and (min-width: 400px){
+  .dwMarker{
+  width: 1px;
+    height: 1px;
+    position: relative;
+    left: 50%;
+    top: -6px;
+    margin-left: -10px;
+}
+.index-4{
+    width: 100%;
+     position: absolute;
+     top: 290px;
+}
+}
+@media screen and (min-width: 374px){
+
+.index-4{
+    width: 100%;
+     position: absolute;
+     top: 290px;
+}
+}
+
+
+
+.mask{
+  position: absolute;
+    z-index: 10;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.7); 
+    float: left;
+  display: none;
+}
+.mask dl{
+  position: absolute;
+  font-size:14px;
+  z-index: 9;
+  width: 60%;
+  margin-left: 20%;
+  opacity: 1;
+}
+.mask dl dt{
+  width: 100%;
+  float: left;
+}
+.mask dl dt img{
+  margin-left: 50%;
+  width: 50%;
+}
+.mask dl dd{
+  margin: 0;
+  width: 100%;
+  background: url(../../../../img/download/dialogBox.png) no-repeat;
+  background-size: 100% 100%;
+  margin-top: -1em;
+  float: left;
+    padding: 2em 0 3em 0;
+  box-sizing:initial;
+}
+.mask dl dd p{
+  width: 100%;
+  text-align: center;
+  height: 2em;
+  margin:0;
+  line-height: 3em;
+
+  font-size: 0.9em;
+  float: left;
+
+}

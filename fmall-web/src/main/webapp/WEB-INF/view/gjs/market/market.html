@@ -1,0 +1,112 @@
+<!doctype html>
+<#include "gjs/config.html" />
+<#assign topMenu="market" />
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>行情-财猫贵金属（财猫网）最安全的贵金属投资理财平台</title>
+
+<#include "gjs/include/page/head.html" />
+<body>
+<#include "gjs/include/menu/topNav.html" />
+<#include "gjs/include/menu/menu.html" />
+	<div class="goods">
+		<div class="innerCont">
+			<div class="body">
+				<ul class="tab" id="tab">
+					<script type="text/x-tmpl">
+						<li <% if(tab == 1){%>class="on"<%}%> onclick=location.href="market.html?tab=1">我的自选</li>
+						<li <% if(tab == 2){%>class="on"<%}%> onclick=location.href="market.html?tab=2">南方稀贵金属交易所</li>
+						<li <% if(tab == 3){%>class="on"<%}%> onclick=location.href="market.html?tab=3">上海黄金交易所</li>
+					</script>
+				</ul>
+				<div class="tableBox" id="queryGoodsList">
+					<div class="loading"><img src="${imgUrl}/loading.gif"></div>
+					<script type="text/x-tmpl">
+					<table class="table table_hover table_striped">
+						<colgroup>
+							<col style="width:180px"></col>
+							<col></col>
+							<col></col>
+							<col></col>
+							<col></col>
+							<col></col>
+							<col></col>
+							<col></col>
+							<col style="width:180px"></col>
+						</colgroup>
+						<thead>
+							<th>商品</th>
+							<th class="center">代码</th>
+							<th class="right">最新价</th>
+							<th class="right">涨跌幅</th>
+							<th class="right">今开盘</th>
+							<th class="right">昨收盘</th>
+							<th class="right">成交量</th>
+							<th class="right">成交金额</th>
+							<th class="right">最高价/最低价</th>
+						</thead>
+						<tbody>
+								<%
+								var exchangeArr = {
+                                    "NJS" : "南",
+                                    "SJS" : "上"
+                                };
+									if(data.length){
+								 for(var _this,i = 0, l = data.length; i < l; i++){
+									_this = data[i];%>
+								<tr onclick="location.href='chart.html?code=<%=_this.prodCode+'.'+_this.exchange%>&tab=<%=tab%>'">
+									<td><%if(tab == 1 || !tab){%>[<%=exchangeArr[_this.exchange]%>] <%}%><%=_this.prodName%></td>
+									<td class="center"><%=_this.prodCode%></td>
+									<td class="right"><b <%if(_this.pxChangeRate < 0){%>class="green"<%}else{%>class="red"<%}%>><%=cutFixed(_this.lastPx,2)%></b></td>
+									<td class="right"><b <%if(_this.pxChangeRate < 0){%>class="green"<%}else{%>class="red"<%}%>><%=cutFixed(_this.pxChangeRate,2)%>%</b> </td>
+									<td class="right"><b <%if(_this.openPx < _this.preclosePx){%>class="green normal"<%}else{%>class="red normal"<%}%>><%=cutFixed(_this.openPx,2)%></b></td>
+									<td class="right"><%=cutFixed(_this.preclosePx,2)%></td>
+									<td class="right"><%=shortIndex(_this.businessAmount*1,2)%></td>
+									<td class="right"><%=shortIndex(_this.businessBalance*1,2)%></td>
+									<td class="right"><b <%if(_this.highPx < _this.preclosePx){%>class="green normal"<%}else{%>class="red normal"<%}%>><%=_this.highPx%></b> / <b <%if(_this.lowPx < _this.preclosePx){%>class="green normal"<%}else{%>class="red normal"<%}%>><%=_this.lowPx%></b></td>
+								</tr>
+								<%}}else{%>
+									<tr class="emptyMarket"><td colspan="9"><div>暂无数据</div></td></tr>
+								<%}%>
+							
+						</tbody>
+					</table>
+					</script>
+				</div>
+				<script>
+					var exchange = ['tab','','NJS','SJS'],
+						tab = location.search.replace(/[^\d]/g,'')*1 || 1;
+					if(tab > 1){
+						h.plan("#queryGoodsList",h.render.queryGoodsList.key);
+						h.option = h.api.query_goods_list(exchange[tab],h.render.queryGoodsList);
+						h.request(h.option);
+					}else if(isLogin){
+						h.plan("#queryGoodsList",h.render.queryGoodsList.key);
+						h.option = h.api.query_fav_goods(token,h.render.queryGoodsList);
+						h.request(h.option);
+					}else{
+						h.plan("#queryGoodsList",h.render.queryLocalGoods.key);
+						h.render.queryLocalGoods.callback();
+					}
+					marketTab('#tab',tab);
+				</script>
+				<div class="page">
+					<!-- <div class="mod-page mod-page-separate mod-page-small">
+						<a href="#" class="pageprv z-dis">上一页</a>
+						<a href="#">1</a>
+						<a href="#" class="z-crt">2</a>
+						<a href="#">3</a>
+						<a href="#">4</a>
+						<i>...</i>
+						<a href="#">10</a>
+						<a href="#" class="pagenxt">下一页</a>
+					</div> -->
+				</div>
+			</div>
+		</div>
+	</div>
+
+<#include "gjs/include/page/foot.html" />
+	</body>
+</html>

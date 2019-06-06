@@ -1,0 +1,549 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="P2PLoanRecord">
+    <resultMap id="BaseResultMap" type="com.caimao.bana.api.entity.p2p.P2PLoanRecordEntity" >
+        <id column="target_id" property="targetId" jdbcType="BIGINT" />
+        <result column="target_user_id" property="targetUserId" jdbcType="BIGINT" />
+        <result column="target_name" property="targetName" jdbcType="CHAR" />
+        <result column="target_prod_id" property="targetProdId" jdbcType="BIGINT" />
+        <result column="target_prod_lever" property="targetProdLever" jdbcType="TINYINT" />
+        <result column="target_prod_rate" property="targetProdRate" jdbcType="DECIMAL" />
+        <result column="lift_time" property="liftTime" jdbcType="INTEGER" />
+        <result column="interest_settle_days" property="interestSettleDays" jdbcType="INTEGER" />
+        <result column="target_amount" property="targetAmount" jdbcType="BIGINT" />
+        <result column="caimao_value" property="caimaoValue" jdbcType="BIGINT" />
+        <result column="year_rate" property="yearRate" jdbcType="DECIMAL" />
+        <result column="manage_rate" property="manageRate" jdbcType="DECIMAL" />
+        <result column="actual_value" property="actualValue" jdbcType="BIGINT" />
+        <result column="invest_user_num" property="investUserNum" jdbcType="INTEGER" />
+        <result column="pay_margin" property="payMargin" jdbcType="BIGINT" />
+        <result column="pay_pz_interest" property="payPzInterest" jdbcType="BIGINT" />
+        <result column="pay_target_interest" property="payTargetInterest" jdbcType="BIGINT" />
+        <result column="pay_manage_fee" property="payManageFee" jdbcType="BIGINT" />
+        <result column="sent_interest" property="sentInterest" jdbcType="BIGINT" />
+        <result column="created" property="created" jdbcType="TIMESTAMP" />
+        <result column="target_full_datetime" property="targetFullDatetime" jdbcType="TIMESTAMP" />
+        <result column="target_status" property="targetStatus" jdbcType="TINYINT" />
+        <result column="contract_id" property="contractId" jdbcType="BIGINT" />
+        <result column="last_update" property="lastUpdate" jdbcType="TIMESTAMP" />
+        <result column="interest_settle_days" property="interestSettleDays" jdbcType="INTEGER" />
+        <result column="is_ext" property="isExt" jdbcType="TINYINT" />
+        <result column="ext_target_id" property="extTargetId" jdbcType="BIGINT" />
+        <result column="is_repayment" property="isRepayment" jdbcType="TINYINT" />
+        <result column="contract_no" property="contractNo" jdbcType="BIGINT" />
+        <result column="owner_target_id" property="ownerTargetId" jdbcType="BIGINT" />
+        <result column="custom_title" property="customTitle" jdbcType="VARCHAR" />
+        <result column="custom_content" property="customContent" jdbcType="VARCHAR" />
+        <result column="custom_mobile" property="customMobile" jdbcType="VARCHAR" />
+        <result column="custom_username" property="customUsername" jdbcType="VARCHAR" />
+        <result column="p2p_type" property="p2pType" jdbcType="INTEGER" />
+    </resultMap>
+    <sql id="FP2PQueryUserPageLoanRes_Column_List" >
+        target_id AS targetId,
+        target_user_id AS targetUserId,
+        target_name AS targetName,
+        target_prod_id AS targetProdId,
+        target_prod_lever AS targetProdLever,
+        target_prod_rate AS targetProdRate,
+        lift_time AS liftTime,
+        target_amount AS targetAmount,
+        caimao_value AS caimaoValue,
+        year_rate AS yearRate,
+        manage_rate AS manageRate,
+        actual_value AS actualValue,
+        invest_user_num AS investUserNum,
+        pay_pz_interest AS payPzInterest,
+        pay_target_interest AS payTargetInterest,
+        interest_settle_days AS interestSettleDays,
+        pay_manage_fee AS payManageFee,
+        sent_interest AS sentInterest,
+        target_full_datetime AS targetFullDatetime,
+        target_status AS targetStatus,
+        contract_id AS contractId,
+        ROUND((actual_value + caimao_value) / (target_amount), 4) AS targetRate,
+        (target_amount - caimao_value - actual_value) AS targetOver,
+        pay_margin AS payMargin,
+        is_ext AS isExt,
+        ext_target_id AS extTargetId,
+        is_repayment AS isRepayment,
+        contract_no AS contractNo,
+        owner_target_id AS ownerTargetId,
+        created,
+        custom_title AS customTitle,
+        custom_content AS customContent,
+        custom_mobile AS customMobile,
+        custom_username AS customUsername,
+        p2p_type AS p2pType
+    </sql>
+
+    <insert id="save" parameterType="com.caimao.bana.api.entity.p2p.P2PLoanRecordEntity" useGeneratedKeys="true" keyProperty="targetId">
+        insert into p2p_loan_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="targetId !=null">
+                target_id,
+            </if>
+            <if test="targetUserId !=null">
+                target_user_id,
+            </if>
+            <if test="targetName !=null">
+                target_name,
+            </if>
+            <if test="targetProdId !=null">
+                target_prod_id,
+            </if>
+            <if test="targetProdLever !=null">
+                target_prod_lever,
+            </if>
+            <if test="targetProdRate !=null">
+                target_prod_rate,
+            </if>
+            <if test="liftTime !=null">
+                lift_time,
+            </if>
+            <if test="targetAmount !=null">
+                target_amount,
+            </if>
+            <if test="caimaoValue !=null">
+                caimao_value,
+            </if>
+            <if test="yearRate !=null">
+                year_rate,
+            </if>
+            <if test="manageRate !=null">
+                manage_rate,
+            </if>
+            <if test="actualValue !=null">
+                actual_value,
+            </if>
+            <if test="investUserNum !=null">
+                invest_user_num,
+            </if>
+            <if test="payMargin !=null">
+                pay_margin,
+            </if>
+            <if test="payPzInterest !=null">
+                pay_pz_interest,
+            </if>
+            <if test="payTargetInterest !=null">
+                pay_target_interest,
+            </if>
+            <if test="payManageFee !=null">
+                pay_manage_fee,
+            </if>
+            <if test="sentInterest !=null">
+                sent_interest,
+            </if>
+            <if test="created !=null">
+                created,
+            </if>
+            <if test="lastUpdate !=null">
+                last_update,
+            </if>
+            <if test="targetFullDatetime !=null">
+                target_full_datetime,
+            </if>
+            <if test="targetStatus !=null">
+                target_status,
+            </if>
+            <if test="contractId !=null">
+                contract_id,
+            </if>
+            <if test="isExt !=null">
+                is_ext,
+            </if>
+            <if test="extTargetId !=null">
+                ext_target_id,
+            </if>
+            <if test="isRepayment !=null">
+                is_repayment,
+            </if>
+            <if test="contractNo !=null">
+                contract_no,
+            </if>
+            <if test="ownerTargetId !=null">
+                owner_target_id,
+            </if>
+            <if test="customTitle !=null">
+                custom_title,
+            </if>
+            <if test="customContent !=null">
+                custom_content,
+            </if>
+            <if test="customMobile !=null">
+                custom_mobile,
+            </if>
+            <if test="customUsername !=null">
+                custom_username,
+            </if>
+            <if test="p2pType !=null">
+                p2p_type,
+            </if>
+        </trim>
+            <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="targetId !=null">
+                #{targetId},
+            </if>
+            <if test="targetUserId !=null">
+                #{targetUserId},
+            </if>
+            <if test="targetName !=null">
+                #{targetName},
+            </if>
+            <if test="targetProdId !=null">
+                #{targetProdId},
+            </if>
+            <if test="targetProdLever !=null">
+                #{targetProdLever},
+            </if>
+            <if test="targetProdRate !=null">
+                #{targetProdRate},
+            </if>
+            <if test="liftTime !=null">
+                #{liftTime},
+            </if>
+            <if test="targetAmount !=null">
+                #{targetAmount},
+            </if>
+            <if test="caimaoValue !=null">
+                #{caimaoValue},
+            </if>
+            <if test="yearRate !=null">
+                #{yearRate},
+            </if>
+            <if test="manageRate !=null">
+                #{manageRate},
+            </if>
+            <if test="actualValue !=null">
+                #{actualValue},
+            </if>
+            <if test="investUserNum !=null">
+                #{investUserNum},
+            </if>
+            <if test="payMargin !=null">
+                #{payMargin},
+            </if>
+            <if test="payPzInterest !=null">
+                #{payPzInterest},
+            </if>
+            <if test="payTargetInterest !=null">
+                #{payTargetInterest},
+            </if>
+            <if test="payManageFee !=null">
+                #{payManageFee},
+            </if>
+            <if test="sentInterest !=null">
+                #{sentInterest},
+            </if>
+            <if test="created !=null">
+                #{created},
+            </if>
+            <if test="lastUpdate !=null">
+                #{lastUpdate},
+            </if>
+            <if test="targetFullDatetime !=null">
+                #{targetFullDatetime},
+            </if>
+            <if test="targetStatus !=null">
+                #{targetStatus},
+            </if>
+            <if test="contractId !=null">
+                #{contractId},
+            </if>
+            <if test="isExt !=null">
+                #{isExt},
+            </if>
+            <if test="extTargetId !=null">
+                #{extTargetId},
+            </if>
+            <if test="isRepayment !=null">
+                #{isRepayment},
+            </if>
+            <if test="contractNo !=null">
+                #{contractNo},
+            </if>
+            <if test="ownerTargetId !=null">
+                #{ownerTargetId},
+            </if>
+            <if test="customTitle !=null">
+                #{customTitle},
+            </if>
+                <if test="customContent !=null">
+                    #{customContent},
+                </if>
+                <if test="customMobile !=null">
+                    #{customMobile},
+                </if>
+                <if test="customUsername !=null">
+                    #{customUsername},
+                </if>
+                <if test="p2pType !=null">
+                    #{p2pType},
+                </if>
+        </trim>
+    </insert>
+
+        <select id="queryFP2PQueryUserPageLoanResWithPage" resultType="com.caimao.bana.api.entity.res.FP2PQueryUserPageLoanRes" parameterType="com.caimao.bana.api.entity.req.FP2PQueryUserPageLoanReq" >
+                SELECT
+                <include refid="FP2PQueryUserPageLoanRes_Column_List" />
+                FROM p2p_loan_record
+                WHERE target_user_id = #{userId}
+                <if test="targetStatus != null">
+                        AND target_status = #{targetStatus}
+                </if>
+                <if test="startDate != null and  startDate != ''">
+                        AND created &gt;= #{startDate}
+                </if>
+                <if test="endDate != null and  endDate != ''">
+                        AND created &lt;= #{endDate}
+                </if>
+                <trim prefix="ORDER BY ">
+                        <if test="orderColumn != null and  orderColumn != ''">
+                                ${orderColumn} ${orderDir}
+                        </if>
+                </trim>
+        </select>
+
+        <select id="queryUserLoanRecord" parameterType="hashmap" resultType="com.caimao.bana.api.entity.p2p.P2PLoanRecordEntity">
+                SELECT
+                <include refid="FP2PQueryUserPageLoanRes_Column_List" />
+                FROM p2p_loan_record
+                WHERE target_user_id = #{userId} AND target_id = #{loanId}
+        </select>
+
+        <select id="queryFP2PQueryPageLoanResWithPage" resultType="com.caimao.bana.api.entity.res.FP2PQueryPageLoanRes" parameterType="com.caimao.bana.api.entity.req.FP2PQueryPageLoanReq" >
+                SELECT
+                <include refid="FP2PQueryUserPageLoanRes_Column_List" />
+                FROM p2p_loan_record
+                WHERE 1=1
+                <if test="targetStatus != null">
+                        AND target_status = #{targetStatus}
+                </if>
+                <trim prefix="ORDER BY ">
+                        <if test="orderColumn != null and  orderColumn != ''">
+                                ${orderColumn} ${orderDir}
+                        </if>
+                </trim>
+        </select>
+
+    <select id="queryFP2PQueryPageLoanFullResWithPage" resultType="com.caimao.bana.api.entity.res.FP2PQueryPageLoanRes" parameterType="com.caimao.bana.api.entity.req.FP2PQueryPageLoanReq" >
+        SELECT
+        <include refid="FP2PQueryUserPageLoanRes_Column_List" />
+        FROM p2p_loan_record
+        WHERE target_status IN (1,2,6,7)
+        <trim prefix="ORDER BY ">
+            <if test="orderColumn != null and  orderColumn != ''">
+                ${orderColumn} ${orderDir} ,target_id DESC
+            </if>
+        </trim>
+    </select>
+
+        <select id="queryLoanRecord" parameterType="hashmap" resultType="com.caimao.bana.api.entity.p2p.P2PLoanRecordEntity">
+                SELECT
+                <include refid="FP2PQueryUserPageLoanRes_Column_List" />
+                FROM p2p_loan_record
+                WHERE target_id = #{loanId}
+        </select>
+        
+        <select id="queryLoanRecordAndLock" parameterType="long" resultType="com.caimao.bana.api.entity.p2p.P2PLoanRecordEntity">
+                SELECT
+                <include refid="FP2PQueryUserPageLoanRes_Column_List" />
+                FROM p2p_loan_record
+                WHERE target_id = #{loanId} FOR UPDATE 
+        </select>
+        
+        <select id="queryFP2PQueryPageLoanAndUserResWithPage" resultType="com.caimao.bana.api.entity.res.FP2PQueryPageLoanAndUserRes" parameterType="com.caimao.bana.api.entity.req.FP2PQueryPageLoanAndUserReq" >
+                SELECT
+                l.target_id AS targetId,
+                l.target_user_id AS targetUserId,
+                l.target_name AS targetName,
+                l.target_prod_id AS targetProdId,
+                l.target_prod_lever AS targetProdLever,
+                l.target_prod_rate AS targetProdRate,
+                l.lift_time AS liftTime,
+                l.target_amount AS targetAmount,
+                l.caimao_value AS caimaoValue,
+                l.year_rate AS yearRate,
+                l.manage_rate AS manageRate,
+                l.actual_value AS actualValue,
+                l.invest_user_num AS investUserNum,
+                l.pay_margin AS payMargin,
+                l.pay_target_interest AS payTargetInterest,
+                l.pay_manage_fee AS payManageFee,
+                l.sent_interest AS sentInterest,
+                l.created AS created,
+                l.target_full_datetime AS targetFullDatetime,
+                l.target_status AS targetStatus,
+                l.contract_id AS contractId,
+                l.is_ext AS isExt,
+                l.ext_target_id AS extTargetId,
+                l.is_repayment AS isRepayment,
+                l.contract_no AS contractNo,
+                l.owner_target_id AS ownerTargetId,
+                u.user_real_name AS userName,
+                u.mobile AS mobile
+                FROM p2p_loan_record l,tpz_user u
+                WHERE l.target_user_id = u.user_id
+                <if test="targetStatus != null">
+                        AND l.target_status = #{targetStatus}
+                </if>
+                 <if test="userName != null and userName != ''">
+                        AND u.user_real_name like concat('%', #{userName,jdbcType=VARCHAR}, '%')      
+                </if>
+                 <if test="mobile != null and mobile != ''">
+                        AND u.mobile = #{mobile}
+                </if>
+                <if test="targetId != null">
+                        AND l.target_id = #{targetId}
+                </if>
+                <if test="beginDateTime != null">
+                    <![CDATA[AND l.created > #{beginDateTime}]]>
+                </if>
+                <if test="endDateTime != null">
+                    <![CDATA[AND l.created <= #{endDateTime}]]>
+                </if>
+                <trim prefix="ORDER BY ">
+                        <if test="orderColumn != null and  orderColumn != ''">
+                                ${orderColumn} ${orderDir}
+                        </if>
+                </trim>
+        </select>
+        
+        <select id="getLoanRecordList" resultType="com.caimao.bana.api.entity.p2p.P2PLoanRecordEntity">
+		SELECT
+		<include refid="FP2PQueryUserPageLoanRes_Column_List" />
+		FROM p2p_loan_record
+		WHERE is_ext = 0
+		<if test="targetStatus!=null"> and target_status=#{targetStatus}</if>
+		limit #{start},#{length}
+	</select>
+	<!-- 回写contract_id 和 status -->
+	<update id="update" parameterType="com.caimao.bana.api.entity.p2p.P2PLoanRecordEntity">
+		update p2p_loan_record
+		<set>
+			<if test="contractId != null">
+				contract_id = #{contractId,jdbcType=BIGINT},
+			</if>
+			<if test="targetStatus != null">
+				target_status = #{targetStatus},
+			</if>
+			<if test="lastUpdate!=null">
+				last_update=now(),
+			</if>
+		</set>
+		where target_id = #{targetId,jdbcType=BIGINT}
+	</update>
+
+    <update id="updateExt" parameterType="com.caimao.bana.api.entity.p2p.P2PLoanRecordEntity">
+        update p2p_loan_record
+        SET ext_target_id = #{extTargetId}
+        where target_id = #{targetId,jdbcType=BIGINT}
+    </update>
+	
+	<update id="updateActualAndUserNum" parameterType="com.caimao.bana.api.entity.p2p.P2PLoanRecordEntity">
+		update p2p_loan_record
+		<set>
+			<if test="actualValue != null">
+				actual_value = #{actualValue,jdbcType=BIGINT},
+				invest_user_num = invest_user_num+1,
+			</if>
+			<if test="targetFullDatetime != null">
+				target_full_datetime = #{targetFullDatetime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="targetStatus != null">
+				target_status = #{targetStatus,jdbcType=TINYINT},
+			</if>
+		</set>
+		where target_id = #{targetId,jdbcType=BIGINT}
+	</update>
+
+    <!--更新财猫的出资数量，让标的填满-->
+    <update id="updateCaimaoValue" parameterType="com.caimao.bana.api.entity.p2p.P2PLoanRecordEntity">
+        update p2p_loan_record
+        <set>
+            <if test="caimaoValue != null">
+                caimao_value = #{caimaoValue,jdbcType=BIGINT},
+            </if>
+            <if test="targetStatus != null">
+                target_status = #{targetStatus,jdbcType=TINYINT},
+            </if>
+            <if test="targetFullDatetime != null">
+                target_full_datetime = #{targetFullDatetime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where target_id = #{targetId,jdbcType=BIGINT}
+    </update>
+
+	<!-- 筛选出将要流标的列表 -->
+	<select id="getFailedLoanRecordList" resultType="com.caimao.bana.api.entity.p2p.P2PLoanRecordEntity">
+		SELECT <include refid="FP2PQueryUserPageLoanRes_Column_List" />
+        FROM p2p_loan_record 
+        WHERE now() >DATE_ADD(created,INTERVAL #{liftDays} DAY)  and target_status=0 
+    </select>
+    <!-- 改变订单状态 -->
+    <update id="updateStatus" parameterType="map">
+    	update p2p_loan_record set target_status=#{targetStatus} where target_id=#{targetId}
+    </update>
+    <!-- 获取已发送配置申请并审核通过的p2p借贷列表 -->
+    <select id="getFullCheckedLoanRecordList" resultType="com.caimao.bana.api.entity.p2p.P2PLoanRecordEntity">
+    	SELECT lr.target_id AS targetId,la.`verify_datetime` AS lastUpdate,lr.lift_time as liftTime  
+    	FROM p2p_loan_record lr,tpz_loan_apply la
+		WHERE lr.`target_status`=7 AND lr.`contract_id`=la.order_no AND la.verify_status=1;
+    </select>
+
+    <select id="getByContractNo" parameterType="java.lang.Long" resultType="com.caimao.bana.api.entity.p2p.P2PLoanRecordEntity">
+        SELECT
+        <include refid="FP2PQueryUserPageLoanRes_Column_List" />
+        FROM p2p_loan_record
+        WHERE contract_no = #{contractNo}
+    </select>
+    <select id="queryLoanCount" resultType="int" parameterType="com.caimao.bana.api.enums.EP2PLoanStatus">
+        SELECT count(*)
+        FROM p2p_loan_record
+        WHERE target_status = #{p2pLoanStatus};
+    </select>
+
+    <select id="queryLoanFullCount" resultType="int">
+        SELECT count(*)
+        FROM p2p_loan_record
+        WHERE target_status IN (1,2,6,7);
+    </select>
+
+    <select id="getNeedExtTargetList" resultMap="BaseResultMap">
+        SELECT
+        <include refid="FP2PQueryUserPageLoanRes_Column_List" />
+        FROM p2p_loan_record
+        WHERE target_status = 2 AND is_repayment = 0 AND contract_no > 0 AND p2p_type = 0
+    </select>
+
+    <select id="getExtTargetFullList" resultType="com.caimao.bana.api.entity.p2p.P2PLoanRecordEntity">
+        SELECT target_id AS targetId
+        FROM p2p_loan_record
+        WHERE is_ext = 1 AND target_status = 6 AND p2p_type = 0
+    </select>
+
+    <update id="updateP2PLoanContractNo" parameterType="hashmap" >
+        UPDATE p2p_loan_record
+        SET contract_no = #{contractNo}
+        WHERE contract_id = #{orderNo}
+    </update>
+
+    <select id="getRepayContractList" resultType="com.caimao.bana.api.entity.p2p.P2PLoanRecordEntity">
+        SELECT t1.`target_id` AS targetId
+        FROM p2p_loan_record t1
+        LEFT JOIN his_tpz_loan_contract t2 ON t1.`contract_no` = t2.`contract_no`
+        WHERE t2.`contract_no` IS NOT NULL AND t1.`is_repayment` = 0
+    </select>
+
+    <update id="updateIsRepayment">
+        UPDATE p2p_loan_record
+        SET is_repayment = 1
+        WHERE target_id = #{targetId}
+    </update>
+
+    <select id="queryExtCnt" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM p2p_loan_record
+        WHERE owner_target_id = #{targetId} AND target_status IN (0,1,2,6,7)
+    </select>
+</mapper>

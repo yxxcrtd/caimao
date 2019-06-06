@@ -1,0 +1,215 @@
+<!doctype html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title></title>
+		<link rel="stylesheet" href="../prod/style/style.css" />
+		<script src="../prod/js/chart/lib.js"></script>
+		<script src="../prod/js/chart/layout.js"></script>
+		<script src="../prod/js/chart/chart.js"></script>
+		<script src="../prod/js/ybk/switchbtn.js"></script>
+		<script src="../prod/js/ybk/user.fav.js"></script>
+	</head>
+	<body>
+
+		<div class="top">
+			<div class="innerCont clearfix">
+				<div class="topnav">
+					<a href="">财猫主站</a><!--
+					--><a href="">财猫邮币卡</a><!--
+					--><a href="">财猫贵金属</a><!--
+					--><a href="">财猫原油</a><!--
+					--><a href="">财猫美股</a><!--
+					--><a href="">财猫大牛股</a>
+				</div>
+				<div class="user"><a href="" class="appdownload" id="appdownload"><i></i>APP下载</a><a href="">登录</a><span>|</span><a href="">注册</a><div class="qrcode" id="qrcode"><img src="../img/qrcode_android.png" ><img src="../img/qrcode_apple.png"></div></div>
+			</div>
+		</div>
+		<script>
+        (function(){
+            var isShow = 0,
+                qrcode = document.querySelector("#qrcode"),
+            addEvent = document.addEventListener ?
+                    function(o, t, f) {
+                        o.addEventListener(t, f, false)
+                } : function(o, t, f) {
+                    o.attachEvent('on' + t, f)
+                }
+            addEvent(document,'click',function(e){
+                if(isShow){
+                    isShow = false;
+                    qrcode.style.display = "none";
+                }
+            });
+            addEvent(document.querySelector("#appdownload"),'click',function(e){
+                Event.stop(e);
+                if(isShow){
+                    isShow = false;
+                    qrcode.style.display = "none";
+                }else{
+                    isShow = true;
+                    qrcode.style.display = "block";
+                }
+            });
+        })();
+		</script>
+		<div class="menuline">
+			<div class="innerCont clearfix">
+				<div class="logo"><a href=""><img src="../img/logo.png"></a></div>
+				<div class="menu">
+					<a href="" class="on">首页<i><span>◆</span></i></a><!--
+					--><a href="">行情中心<i><span>◆</span></i></a><!--
+					--><a href="">打新申购<i><span>◆</span></i></a><!--
+					--><a href="">交易所公告<i><span>◆</span></i></a><!--
+					--><a href="">快速开户<b>hot!</b><i><span>◆</span></i></a><!--
+					--><a href="">个人中心<i><span>◆</span></i></a>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="main market">
+			<div class="clearfix">
+				<div class="mod-left">
+					<div class="goodsnav">
+						<div class="search"><input type="text" stop="1"></div>
+						<ul class="nav">
+							<li>我的自选</li>
+							<li>全部交易所</li>
+							<li>中南邮票交易所</li>
+							<li>南京交易所</li>
+							<li>南方交易所</li>
+						</ul>
+					</div>
+				</div>
+				<div class="mod-right">
+					<div class="mod-rightcontent">
+						<div class="goodsChart">
+                            <div class="goodsInfo" id="curInfo" style="display:none">
+                                <script type="text/x-tmpl">
+                                    <table>
+                                        <tr>
+                                            <td>交易所</td>
+                                            <td>藏品代码</td>
+                                            <td>藏品简称</td>
+                                            <td>最新价</td>
+                                            <td>涨跌幅</td>
+                                            <td>昨收盘</td>
+                                            <td>今开盘</td>
+                                            <td>成交量</td>
+                                            <td>成交金额</td>
+                                            <td>最高价</td>
+                                            <td>最低价</td>
+                                        </tr>
+                                        <tr>
+                                            <td><%=data.exchangeName%></td>
+                                            <td><%=data.code%></td>
+                                            <td><%=data.name%></td>
+                                            <td><%=(data.currentPrice/100).toFixed(2)%></td>
+                                            <td><%=(data.changeRate/100).toFixed(2)%>%</td>
+                                            <td><%=(data.closePrice/100).toFixed(2)%></td>
+                                            <td><%=(data.openPrice/100).toFixed(2)%></td>
+                                            <td><%=shortIndex(data.totalAmount/100,2,10000,['万','亿','兆'])%></td>
+                                            <td><%=shortIndex(data.totalMoney/100,2,10000,['万','亿','兆'])%></td>
+                                            <td><%=(data.highPrice/100).toFixed(2)%></td>
+                                            <td><%=(data.lowPrice/100).toFixed(2)%></td>
+                                        </tr>
+                                    </table>
+                                </script>
+							</div>
+							<div class="chartBox">
+								<dl class="ctrl">
+									<dt><div id="btnBox"><a href="" stop="1" act="kt" data-val="timeShare">分时</a><a href="" stop="1" act="kt" data-val="k">日k</a></div></dt>
+									<dd><a href="" id="addFav"></a><a href="">返回列表</a></dd>
+								</dl>
+								<div class="chart" id="chart"></div>
+								<div class="ind" id="indBtn">
+									<span act="actionSetInd" data-val="0/MACD">MACD</span>
+									<span act="actionSetInd" data-val="0/KDJ">KDJ</span>
+									<span act="actionSetInd" data-val="0/RSI">RSI</span>
+								</div>
+							</div>
+                            <script>
+                                var fav = fav(),
+                                        favBtn = document.querySelector("#addFav");
+                                switchbtn("#btnBox",'a');
+                                switchbtn("#indBtn",'span');
+                                CFG.user.ex = 'shybk';
+                                CFG.user.stockID = '612005';
+                                CFG.user.timeShare = 1;
+                                singleLayout(chart('chart'))
+                                function checkFav(){
+                                    if(fav.isfav(CFG.user.stockID,CFG.user.ex)){
+                                        favBtn.innerHTML = "取消自选";
+                                        favBtn.className = "cancel";
+                                    }else{
+                                        favBtn.innerHTML = "加入自选";
+                                        favBtn.className = "";
+                                    }
+                                }
+                                Event.add(favBtn,"click",function(e){
+                                    Event.stop(e);
+                                    fav.isfav(CFG.user.stockID,CFG.user.ex) ? fav.del(CFG.user.stockID,CFG.user.ex) : fav.add(CFG.user.stockID,CFG.user.ex);
+                                    checkFav();
+                                });
+                                checkFav();
+                                (function(){
+                                    var curInfo = document.querySelector("#curInfo"),
+                                        html = curInfo.querySelector("script").innerHTML,
+                                        req = request();
+
+                                    !function(){
+                                        var __this = arguments.callee,__arguments = arguments;
+                                        req.ajax({
+                                            url : '/api/ybk/get_collection_info',
+                                            type : 'GET',
+                                            data : {
+                                                exchange_short_name : CFG.user.ex,
+                                                code : CFG.user.stockID
+                                            },
+                                            success : function(d){
+                                                if(d.success){
+                                                    curInfo.style.display = "block";
+                                                    curInfo.innerHTML = rentmpl(html,{
+                                                        data : d.data
+                                                    });
+                                                }
+                                            }
+                                        })
+                                        return setTimeout(function() {
+                                                __this.apply(this,__arguments)
+                                            }, 60000);
+                                    }()
+                                })()
+                            </script>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="bottom">
+			<div class="bottomnav">
+				<a href="">关于我们</a><!--
+				--><span>|</span><!--
+				--><a href="">服务条款</a><!--
+				--><span>|</span><!--
+				--><a href="">帮助中心</a><!--
+				--><span>|</span><!--
+				--><a href="">客户端下载</a>
+			</div>
+			<div class="contact">
+				<div class="inner">
+					<em class="qq"><i></i>官方QQ群 4006660888</em><!--
+					--><span>|</span><!--
+					--><em class="phone"><i></i>24小时服务电话 4000-898-000</em>
+				</div>
+			</div>
+			<div class="copyright">
+				<p class="notice">声明：所有用户观点不代表财猫网认同。本站禁止推销、非法理财、私下收费等行为，请用户甄别。投资有风险，入市需谨慎！</p>
+				<p>京公网安备　11010102000845  京ICP备13000642号  2013-2015©版权所有</p>
+			</div>
+		</div>
+
+	</body>
+</html>

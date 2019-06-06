@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="TpzUserBankCard">
+    <!--<resultMap id="baseResultMap" type="com.caimao.bana.api.entity.TpzUserBankCardEntity">-->
+        <!--<id column="id" property="id" jdbcType="BIGINT" />-->
+        <!---->
+    <!--</resultMap>-->
+
+    <select id="queryUserBankCardList" resultType="com.caimao.bana.api.entity.TpzUserBankCardEntity">
+        SELECT
+        id AS id, user_id AS userId, bank_no AS bankNo, bank_code AS bankCode, bank_name AS bankName, bank_card_no AS bankCardNo, bank_card_name AS bankCardName, idcard_kind AS idcardKind, idcard AS idcard, province, city, open_bank AS openBank, is_default AS isDefault, bank_card_status AS bankCardStatus, transfer_status AS transferStatus, trans_amount AS transAmount, error_count AS errorCount, cur_datetime AS curDatetime, remark AS remark, is_quick_pay AS isQuickPay, bind_agreements AS bindAgreements, create_datetime AS createDatetime, update_datetime AS updateDatetime, bank_address AS bankAddress
+        FROM tpz_user_bank_card WHERE user_id = #{userId} AND bank_card_status = #{bankCardStatus}
+    </select>
+
+    <select id="getBankCardById" resultType="com.caimao.bana.api.entity.TpzUserBankCardEntity">
+        SELECT
+        id AS id, user_id AS userId, bank_no AS bankNo, bank_code AS bankCode, bank_name AS bankName, bank_card_no AS bankCardNo, bank_card_name AS bankCardName, idcard_kind AS idcardKind, idcard AS idcard, province, city, open_bank AS openBank, is_default AS isDefault, bank_card_status AS bankCardStatus, transfer_status AS transferStatus, trans_amount AS transAmount, error_count AS errorCount, cur_datetime AS curDatetime, remark AS remark, is_quick_pay AS isQuickPay, bind_agreements AS bindAgreements, create_datetime AS createDatetime, update_datetime AS updateDatetime, bank_address AS bankAddress
+        FROM tpz_user_bank_card WHERE id = #{id} FOR UPDATE
+    </select>
+
+    <select id="getBindBankByCardNo" resultType="com.caimao.bana.api.entity.TpzUserBankCardEntity">
+        SELECT
+        id AS id, user_id AS userId, bank_no AS bankNo, bank_code AS bankCode, bank_name AS bankName, bank_card_no AS bankCardNo, bank_card_name AS bankCardName, idcard_kind AS idcardKind, idcard AS idcard, province, city, open_bank AS openBank, is_default AS isDefault, bank_card_status AS bankCardStatus, transfer_status AS transferStatus, trans_amount AS transAmount, error_count AS errorCount, cur_datetime AS curDatetime, remark AS remark, is_quick_pay AS isQuickPay, bind_agreements AS bindAgreements, create_datetime AS createDatetime, update_datetime AS updateDatetime, bank_address AS bankAddress
+        FROM tpz_user_bank_card WHERE bank_card_no = #{bankCardNo}
+    </select>
+
+    <select id="update">
+        UPDATE
+        tpz_user_bank_card SET
+        user_id = #{userId}, bank_no = #{bankNo}, bank_code = #{bankCode}, bank_name = #{bankName}, bank_card_no = #{bankCardNo}, bank_card_name = #{bankCardName}, idcard_kind = #{idcardKind}, idcard = #{idcard}, province = #{province}, city = #{city}, open_bank = #{openBank}, is_default = #{isDefault}, bank_card_status = #{bankCardStatus}, transfer_status = #{transferStatus}, trans_amount = #{transAmount}, error_count = #{errorCount}, cur_datetime = #{curDatetime}, remark = #{remark}, is_quick_pay = #{isQuickPay}, bind_agreements = #{bindAgreements}, create_datetime = #{createDatetime}, update_datetime = #{updateDatetime}, bank_address = #{bankAddress}
+        WHERE id = #{id}
+    </select>
+
+    <update id="updateUserBank">
+        UPDATE
+		tpz_user_bank_card SET is_default = '0' ,bank_card_status = '3'
+		WHERE
+		user_id=#{userId,jdbcType=BIGINT} AND bank_card_status='1'
+    </update>
+
+    <insert id="save">
+        INSERT INTO tpz_user_bank_card
+        (id, user_id, bank_no, bank_code, bank_name, bank_card_no, bank_card_name, idcard_kind, idcard, province, city, open_bank, is_default, bank_card_status, transfer_status, trans_amount, error_count, cur_datetime, remark, is_quick_pay, bind_agreements, create_datetime, update_datetime, bank_address)
+        VALUES
+        (#{id}, #{userId}, #{bankNo}, #{bankCode}, #{bankName}, #{bankCardNo}, #{bankCardName}, #{idcardKind}, #{idcard}, #{province}, #{city}, #{openBank}, #{isDefault}, #{bankCardStatus}, #{transferStatus}, #{transAmount}, #{errorCount}, #{curDatetime}, #{remark}, #{isQuickPay}, #{bindAgreements}, #{createDatetime}, #{updateDatetime}, #{bankAddress})
+    </insert>
+
+</mapper>

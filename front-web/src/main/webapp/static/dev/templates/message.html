@@ -1,0 +1,183 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>账户-个人资料</title>
+    <link href="../style/page/page.css" rel="stylesheet">
+</head>
+
+<body>
+<!--顶部条-->
+<div id="top">
+    <div class="w top_in">
+        <div class="f_l left">
+            <span>总资产：<b>400,000</b>元</span>
+            <span>股票市值：<b>400,000</b>元</span>
+            <span>可用：<b>400,000</b>元</span>
+            <span>警告线：<b>400,000</b>元</span>
+            <span>平仓线：<b>400,000</b>元</span>
+        </div>
+        <div class="f_r right">
+            <!--消息框位灰色时  直接去掉icon_info即可-->
+            <span class="font_red"><i class="icons icon_info"></i>6</span>
+            <span>您好，马建军 </span>
+            <a href="#">退出</a>
+        </div>
+    </div>
+    <!--登录前状态
+    <div class="w top_in">-->
+    <!--<div class="f_l left">-->
+    <!--</div>-->
+    <!--<div class="f_r right">-->
+    <!--您好！欢迎来到财猫网！-->
+    <!--<a href="#"> 登录</a> | <a href="#"> 注册</a>-->
+    <!--</div>-->
+    <!--</div>-->
+</div>
+
+<!--头部-->
+<div id="header">
+    <div class="w header_in">
+        <div class="f_l left">
+            <h1 class="icons icon_logo"><a href="#">财猫网</a></h1><p class="icons icon_logo_p">招招有财</p>
+        </div>
+        <div class="f_r right">
+            <ul>
+                <li><a href="#">首页 <b></b></a></li>
+                <li><a href="#">交易<b></b></a></li>
+                <li><a href="#">融资<b></b></a></li>
+                <li><a class="hov" href="#">账户<b></b></a></li>
+                <li><a href="#">下载<b></b></a></li>
+                <li><a href="#">新手引导<b></b></a></li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+<!--notice-->
+<div id="notice">
+    <div class="w">
+        <i class="icons icon_notice"></i><a href="">财猫上线一周年网庆，充值送宝马，你敢来吗？</a><span>我知道了</span>
+    </div>
+</div>
+<!--内容区-->
+<div id="main">
+    <div class="w sec_main">
+        <!--左右布局-->
+        <div class="left_bar">
+            <ul>
+                <li><a href="#"><i class="icons icon_account"></i>我的账户</a></li>
+                <li><a href=""><i class="icons icon_recharge"></i>我要充值</a></li>
+                <li><a href=""><i class="icons icon_withdraw"></i>我要提现</a></li>
+                <li><a href=""><i class="icons icon_fund"></i>资金明细</a></li>
+                <li><a href=""><i class="icons icon_secure"></i>账户安全</a></li>
+                <li><a class="hov" href=""><i class="icons icon_message"></i>个人资料</a></li>
+                <li><a href=""><i class="icons icon_promotion"></i>推广赚钱</a></li>
+            </ul>
+        </div>
+        <div class="right_bar">
+            <h3 class="title m_b_30"><span>个人资料</span></h3>
+            <div class="mess_top">
+                <div class="f_l sele">
+                    <p class="mess_img">
+                        <img src="../../img/images/mess_img159.png" alt=""/>
+                        <a href="#">+选择图片</a>
+                        <span>支持jpg、gif或png格式<br>图片大小500k以内</span>
+                    </p>
+                    <p class=""><a class="btn btn_gray size_m" href="">保存</a></p>
+                </div>
+                <div class="sele_img f_l">
+                        <span>
+                            <b>头像预览</b>
+                            <img src="../../img/images/mess_img_159.png" alt=""/>
+                        </span>
+                        <span class="m_t_110">
+                            <img src="../../img/images/mess_img90.png" alt=""/>
+                        </span>
+                        <span class="m_t_170">
+                             <img src="../../img/images/mess_img30.jpg" alt=""/>
+                        </span>
+                </div>
+            </div>
+            <div class="mess_down">
+                <div class="group group_half ">
+                    <div class="col_1">昵称</div>
+                    <div class="col_2">
+                        <input class="input_text" placeholder="中文、数字或字母组成，不可有特殊字符" type="text" data-type="*" data-msg-null="请输入昵称"/>
+                        <!--错误提示-->
+                        <div class="v_info">请填写昵称</div>
+                    </div>
+
+                </div>
+                <div class="group group_half ">
+                    <div class="col_1">籍贯</div>
+                    <div class="col_2"><input class="input_text"  placeholder="请以身份证籍贯为准" type="text" data-type="*" data-msg-null="请输入籍贯"/></div>
+                </div>
+                <div class="group group_half ">
+                    <div class="col_1">居住地</div>
+                    <div class="col_2"><input class="input_text" placeholder="请输入家庭地址" type="text" data-type="*" data-msg-null="请选择居住地"/></div>
+                </div>
+                <div class="group group_half ">
+                    <div class="col_1">职业</div>
+                    <div class="col_2">
+                        <label>
+                            <select name="" class="input_select" data-type="*" data-msg-null="请选择职业">
+                            <option value="国企职工">国企职工</option>
+                            <option value="私营业主">私营业主</option>
+                          </select>
+                        </label>
+                    </div>
+                </div>
+                <div class="group group_half ">
+                    <div class="col_1">教育程度</div>
+                    <div class="col_2">
+                        <label>  <select name="" class="input_select" data-type="*" data-msg-null="请选择教育程度">
+                            <option value="高中">高中</option>
+                            <option value="大专">大专</option>
+                            <option value="本科">本科</option>
+                            <option value="硕士">硕士</option>
+                            <option value="其他">其他</option>
+                        </select></label>
+                    </div>
+
+                </div>
+                <div class="group group_half ">
+                    <div class="col_1">投资经验</div>
+                    <div class="col_2">
+                        <label>
+                            <select  name=""  class="input_select" data-type="*" data-msg-null="请选择投资经验">
+                            <option value="1-3年">1-3年</option>
+                            <option value="1-3年">1-3年</option>
+                            <option value="6-10年">6-10年</option>
+                            <option value="10年以上">10年以上</option>
+                            <option value="0年以上">20年以上</option>
+                        </select>
+                        </label>
+                    </div>
+                </div>
+                <div class="group group_half m_t_30">
+                    <div class="col_1"></div>
+                    <div class="col_2"><a href="" class="btn size_m btn_blue">保存</a></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!--底部-->
+<div id="footer">
+    <div class="w">
+        <p class="nav_sub"><a href="">关于我们</a>|<a href="">服务条款</a>|<a href="">帮助中心</a></p>
+        <p class="server"> <i class="icons icon_qqs"></i>官方QQ群4006660888  <i class="icons icon_telephone"></i>24小时服务电话4000-898-000</p>
+        <p class="server2">
+            <a class="weixin"><i class="icons icon_weixin_b"><span></span></i></a>
+            <a href="#"><i class="icons icon_weibo_b"> </i></a>
+        </p>
+        <p>版权所有 © 北京朋乐投资管理有限公司 丨 京ICP备15016693号</p>
+    </div>
+</div>
+</body>
+</html>

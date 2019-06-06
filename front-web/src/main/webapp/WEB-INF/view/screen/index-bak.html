@@ -1,0 +1,157 @@
+
+<#assign controller="Home2"/>
+<#include 'layout/layout.html'/>
+
+<#macro content>
+
+    <!-- 图片切换 start -->
+    <div class="banner" style="height: ${indexAdHeight}px">
+
+        <div class="banner-slider">
+            <div class="fullSlide">
+                <div class="bd">
+                    <ul>
+                        <#list indexAdImgs as ad>
+                            <li style="background:url(${dojoUrl}/app/resources/image/customize/${ad.name}) center 0 no-repeat; display: block;">
+                                <a <#if ad.url>target="_blank" href="${basePath}/${ad.url}"</#if>></a></li>
+                        </#list>
+
+                    </ul>
+                </div>
+                <div class="hd">
+                    <ul>
+                    </ul>
+                </div>
+            </div>
+            <div class="home_login" id="loginform_div" style="position: absolute;top: 10px;right: 50%;margin-right: -540px;background-color: #fff;display: none;">
+                <div class="hd">
+                    <h5>登录财猫网</h5>
+                </div>
+                <div class="bd">
+                    <form id="loginform">
+                        <div class="group" style="border:none !important;">
+                            <input type="text" class="input_text"  id="username" autocomplete="off" placeholder="用户名/手机号" onkeydown="sub_form_click(event)"/>
+                        </div>
+                        <div class="group" style="border:none !important;">
+                            <input id="password" autocomplete="off" type="password" placeholder="密码" class="input_text" onkeydown="sub_form_click(event)"/>
+                        </div>
+                        <button type="button" class="btn" id="login_button">登录</button>
+                    </form>
+                </div>
+                <div class="ft">
+                    <span class="float_left"><a href="${basePath}/user/register.htm">注册</a></span>
+                    <span class="float_right"><a href="${basePath}/user/forgetloginpwd.htm">忘记密码</a></span>
+                </div>
+            </div>
+            <script type="text/javascript">
+                function sub_form_click(e){
+                    var evt;
+                    evt = e ? e : (window.event ? window.event : null);//兼容IE和FF
+                    if (evt.keyCode==13){
+                        document.getElementById('login_button').click();
+                    }
+                }
+            </script>
+            <!--<form id="loginform" class="index-login">
+                <div class="inputctn">
+                    <label for="username" class="username">
+                        <i class="fa fa-lg input-label"></i>
+                    </label>
+                    <input class="input-extra" id="username" autocomplete="off" type="text" placeholder="用户名/手机号">
+                </div>
+                <div class="inputctn" style="left: 254px;">
+                    <label for="password" class="password">
+                        <i class="fa fa-lg input-label"></i>
+                    </label>
+                    <input class="input-extra" id="password" autocomplete="off" type="password" placeholder="密码">
+                </div>
+                <div class="login-btn" id="login_button">
+
+                </div>
+            </form>-->
+        </div>
+        <!-- 图片切换 end -->
+
+    </div>
+    <!-- 图片切换 end -->
+    <div class="index-wrapper">
+        <!-- 我们的优势 start -->
+        <div class="sign-list grid-1050">
+            <div class="grid-1050 con-link">
+                <div class="home_feature">
+                    <dl class="case">
+                        <dt><strong>让您的操盘资金扩大5倍，盈利全归您！</strong></dt>
+                        <dd class="day" style="background: #f8f8f8">
+                            <div>
+                                <h3>按日融资</h3>
+                                <p>10000元起融，日息低至0.1％</p>
+                                <p class="text_1">8倍杠杆  8倍利润</p>
+                            </div>
+                            <a href="${baseUrl}/p1.htm" class="home_feature_btn">开始融资</a>
+                        </dd>
+                        <dd class="month" style="background: #f8f8f8">
+                            <div>
+                                <h3>按月融资</h3>
+                                <p>10000元起融，月息低至1.2％</p>
+                                <p class="text_1">5倍杠杆  5倍利润</p>
+                            </div>
+                            <a href="${baseUrl}/p2.htm" class="home_feature_btn">开始融资</a>
+                        </dd>
+                        <dd class="month" style="background: #f8f8f8">
+                            <div>
+                                <h3>按月融资（低息）</h3>
+                                <p>10000元起融，月息低至0.5％</p>
+                                <p class="text_1">1倍杠杆  稳定收益</p>
+                            </div>
+                            <a href="${baseUrl}/p10.htm" class="home_feature_btn">开始融资</a>
+                        </dd>
+                    </dl>
+                    <ul class="merit">
+                        <li>
+                            <div><i class="h_icon_1"></i></div>
+                            <h3>快速融资</h3>
+                            <p>1分钟快速注册</p>
+                            <p>保证金到账后T+0完成融资</p>
+                            <p>当天开通炒股账户</p>
+                        </li>
+                        <li>
+                            <div><i class="h_icon_2"></i></div>
+                            <h3>高安全性</h3>
+                            <p>资金银行托管</p>
+                            <p>封闭管理，专款专用</p>
+                            <p>多级风控管理体系</p>
+                        </li>
+                        <li>
+                            <div><i class="h_icon_3"></i></div>
+                            <h3>更低费率</h3>
+                            <p>融资利息全网最低</p>
+                            <p>没有最低，只有更低</p>
+                        </li>
+                        <li>
+                            <div><i class="h_icon_4"></i></div>
+                            <h3>专业服务</h3>
+                            <p>顶尖金融互联网公司专业打造</p>
+                            <p>全方位全天候客服1对1跟踪服务</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+        <div class="grid-1050 con-link">
+            <!--标题-->
+            <div class="title-common clearfix">
+                <h3 class="cm-left">合作伙伴</h3>
+            </div>
+            <!--内容-->
+            <p style="text-align: center;">
+                <#list partnerImgs as p>
+                    <a target="_blank" href="${p.url}" style="margin-right: 16px; margin-bottom: 15px;"><img src="${dojoUrl}/app/resources/image/customize/${p.name}?version=${jsVersion}" style="width: auto"></a>
+                </#list>
+            </p>
+        </div>
+    </div>
+
+
+
+</#macro>

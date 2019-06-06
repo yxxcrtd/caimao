@@ -1,0 +1,46 @@
+/** RESET **/
+body { font-family: 'Microsoft YaHei',Lucida Grande,Lucida Sans Unicode,\5B8B\4F53; -webkit-text-size-adjust: none; color: #6a6a6a; _font: 12px/1.5 \5B8B\4F53; }
+
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, p, form, input, textarea { padding: 0; margin: 0; }
+
+ol, ul { list-style: none; }
+
+li { list-style-type: none; }
+
+table { margin: 0 auto; border-collapse: collapse; border-spacing: 0; }
+
+img { vertical-align: top; border: 0; }
+
+caption, th { text-align: left; }
+
+h1, h2, h3, h4, h5, h6, button, input, select, textarea { font-size: 100%; font-weight: 400; }
+
+i, u, em, b, strong { font-style: normal; text-decoration: none; font-weight: 400; }
+
+input, textarea, button, select, button { outline: none; resize: none; font-family: \5B8B\4F53; }
+
+a { color: #666; text-decoration: none; -webkit-transition: color 0.4s ease; -moz-transition: color 0.4s ease; -o-transition: color 0.4s ease; transition: color 0.4s ease; -webkit-transition: background-color 0.4s ease; -moz-transition: background-color 0.4s ease; -o-transition: background-color 0.4s ease; transition: background-color 0.4s ease; }
+a:visited { text-decoration: none; }
+a:hover { color: #5376be; text-decoration: none; -webkit-transition: color 0.4s ease; -moz-transition: color 0.4s ease; -o-transition: color 0.4s ease; transition: color 0.4s ease; -webkit-transition: background-color 0.4s ease; -moz-transition: background-color 0.4s ease; -o-transition: background-color 0.4s ease; transition: background-color 0.4s ease; }
+
+.clearfix { *zoom: 1; }
+.clearfix:after { clear: both; height: 0; overflow: hidden; display: block; visibility: hidden; content: "."; }
+
+html { background: #dfdfdf; }
+
+body { background: #eeeeee; color: #666; min-width: 1200px; font-size: 14px; }
+
+.overflowdot { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+.bannerFocus { height: 200px; background: #5376be; position: relative; z-index: 2; width:1200px;margin:0 auto;}
+.bannerFocus .focus { position: relative; z-index: 2; width: 948px; height: 200px; float:left;overflow: hidden;}
+.bannerFocus .focus ul { position: absolute; top: 0; left:50%;width:0; z-index: 2; }
+.bannerFocus .focus li { position: absolute; left: 0; top: 0; width: 100%; height: 200px; z-index: 2; -webkit-transition: opacity 0.5s ease; -moz-transition: opacity 0.5s ease; -o-transition: opacity 0.5s ease; transition: opacity 0.5s ease; background-repeat: no-repeat; background-position: center top; opacity: 0; }
+.bannerFocus .focus li.on { z-index: 3; opacity: 1; }
+.bannerFocus .focus li a { display: block; width: 100%; height: 200px; }
+.bannerFocus .focus li { left: -960px; width: 1920px; } 
+.bannerFocus .focus .btn { position: absolute; left: 50%; width: 0; bottom: 34px; z-index: 4; }
+.bannerFocus .focus .btn div { width: 1200px; position: absolute; left: -600px; text-align: center; }
+.bannerFocus .focus .btn span { display: inline-block; margin: 0 4px; width: 12px; height: 12px; background: rgba(255, 255, 255, 0.5); cursor: pointer; -webkit-transition: background 0.5s ease; -moz-transition: background 0.5s ease; -o-transition: background 0.5s ease; transition: background 0.5s ease; }
+.bannerFocus .focus .btn span:hover, .bannerFocus .focus .btn span.on { background: white; }
+.bannerFocus .qrcode{width:252px;float:left;height:200px;overflow: hidden;}

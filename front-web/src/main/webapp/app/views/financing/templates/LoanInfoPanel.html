@@ -1,0 +1,83 @@
+<div class="con-all">
+
+	<!--表单-->
+	<form class="ui-form ui-form-specialStep" role="form">
+		<div class="ui-form-item ui-form-itemText">
+			<label class="ui-label">可用保证金：</label>
+			<div class="ui-text">
+				<b class="am-ft-orange am-ft-xxl am-ft-number"
+					data-dojo-attach-point="availableAmountNode"></b> 元
+			</div>
+		</div>
+
+
+
+		<div class="ui-form-item  ui-form-itemNobottom ui-form-item-gray">
+			<label class="ui-label">融资金额：</label>
+			<div data-dojo-attach-point="loanAmountNode"></div>
+			<p class="ui-prompt-gray">
+				此借款最小金额限制为<span data-dojo-attach-point="productMinLoanNode"></span>元</span>，最大可借<span
+					data-dojo-attach-point="maxLoanAmountNode"></span>元<br />如您需要超过<span
+					data-dojo-attach-point="productMaxLoanNode"></span>的融资，请联系客户服务热线
+			</p>
+		</div>
+	</form>
+
+	<!--特殊的表单-->
+	<div class="clearfix form-special">
+		<div class="cm-left form-special-rside">
+			<table width="100%" border="0" cellspacing="0"
+				class="table-assetsIndex">
+				<tbody>
+					<tr>
+						<th>融资成数：</th>
+						<td width="300"><b class="am-ft-md"
+							data-dojo-attach-point="percentageNode"></b> <a
+							class="am-left-10 am-ft-sm"
+							data-dojo-attach-point="ratioLinkNode" target="_blank">各融资成数的有关约定</a>
+						</td>
+						<th>月利率：</th>
+						<td><b class="am-ft-md" data-dojo-attach-point="rateNode"></b>
+						</td>
+					</tr>
+					<tr>
+						<th>融资警示线：</th>
+						<td><b class="am-ft-xl am-ft-number"
+							data-dojo-attach-point="warningLineNode"></b><span
+							class="am-ft-md am-left-5"> 元 </span></td>
+						<th>融资平仓线：</th>
+						<td><b class="am-ft-xl am-ft-number"
+							data-dojo-attach-point="exposureNode"></b><span
+							class="am-ft-md am-left-5"> 元 </span></td>
+					</tr>
+					<tr>
+						<th>融资期限：</th>
+						<td><b class="am-ft-md" data-dojo-attach-point="deadDateNode"></b>
+							天<span class="am-ft-sm am-ft-gray am-left-10">满<span
+								data-dojo-attach-point="repayStartNode"></span>天可提前还款
+						</span></td>
+						<th></th>
+						<td></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<!--特殊的表单-->
+
+
+	<form class="ui-form am-mt-20" role="form">
+		<div class="ui-form-item">
+			<div class="rside-item">
+				<input name="" type="checkbox" value="" class="ui-checkbox"
+					id="protocolcheck"><span class="am-ft-md">我已阅读并同意</span><a
+					id="protocoltoggle">《融资协议》</a>
+			</div>
+		</div>
+		<div id="protocolcontent" data-dojo-attach-point="protocolNode" class="protocol-content" style="display: none;">
+		</div>
+		<div data-dojo-attach-point="nextBtnNode"></div>
+		
+	</form>
+
+</div>

@@ -1,0 +1,139 @@
+.dojoxGrid {
+	font: 12px/1.5 tahoma,arial,"Hiragino Sans GB","Microsoft Yahei",\5b8b\4f53;
+	color: #666666;
+	font-size: 14px;
+	background-color: rgba(0,0,0,0)!important;
+}
+
+.claro .dojoxGridMasterHeader {
+	background: #f7f7f7!important;
+	border: 0!important;
+	font-size: 14px;
+	filter: none;
+}
+
+.dojoxGridMasterView {
+	border-bottom: 1px solid #eaeaea;
+}
+
+.dojoxGridCell {
+	border: 0!important;
+}
+
+.dojoxGrid .dojoxGridHeader .dojoxGridCell {
+	height: 34px;
+	line-height: 34px;
+	border: 0!important;
+	padding: 0!important;
+}
+
+.dojoxGrid .dojoxGridCell {
+	height: 30px;
+	line-height: 30px;
+	padding: 0 5px!important;
+}
+
+.dojoxGrid {
+	border-top: 0px solid #eaeaea!important;
+	border-left: 0px solid #eaeaea!important;
+	border-bottom: 0!important;
+	border-right: 0!important;
+	-webkit-user-select: text!important;
+}
+
+.dojoxGridHeader {
+	margin-left: 0px!important;
+}
+
+.dojoxGridRowTable {
+	border-right: none!important;
+}
+
+.dojoxGrid .dojoxGridCellFocus {
+	background: #ca2e35!important;
+	color: #fff!important;
+	border-bottom: 0!important;
+	border-right: 0!important;
+	border-top: 0!important;
+	border-left: 0!important;
+}
+
+.dojoxGridArrowButtonNode {
+	position: relative;
+	top: 7px;
+	right: 5px;
+}
+
+.dojoxGrid a {
+	padding: 0 5px;
+	outline: none;
+	text-decoration: none;
+	color: #0088cc;
+}
+
+.dojoxGrid a:hover {
+	color: #ca2e35;
+}
+
+.dojoxGrid h3 {
+	padding-left: 15px;
+	color: #ca2e35;
+	line-height: 34px;
+	font-size: 18px!important;
+	font-weight: 400;
+	margin: 0;
+}
+
+.dojoxGridScrollbox {
+	background-color: #F4F4F4!important;
+}
+
+.dojoxGrid .gridTitle {
+	border-left: 1px solid #eaeaea!important;
+	border-right: 1px solid #eaeaea!important;
+	border-top: 1px solid #eaeaea!important;
+	border-bottom: 1px solid #eaeaea!important;
+	background-color: #FFF;
+}
+
+.dojoxGridView {
+	left: 0px!important;
+}
+
+.dojoxGridHeader {
+	left: 0px!important;
+}
+
+.dojoxGrid .gridToolbar {
+	border-left: 1px solid #eaeaea!important;
+	border-right: 1px solid #eaeaea!important;
+	border-bottom: 1px solid #eaeaea!important;
+}
+
+.dojoxGrid .gridToolbar .genericButton {
+	margin: 5px;
+}
+
+.gridQueryDialog {
+	height: 30px;
+	border: 1px solid #eaeaea!important;
+	text-align: center;
+	line-height: 30px;
+	padding: 0 2px;
+	background-color: rgba(250,250,250,0.9);
+}
+
+.gridQueryDialog input {
+	width: 98%;
+	border: 0;
+	background-color: transparent;
+}
+
+.dojoxGridSortNode span {
+	margin-left: 5px;
+	color: #A7A7A7;
+}
+
+.dojoxGridCellFocus a:hover {
+	color: #FFF;
+}

@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+<#include "config.html"/>
+<#assign curTopMenu="pz"/>
+<#assign curLeftMenu="myPz"/>
+<head>
+    <meta charset="utf-8">
+    <title>历史合约-财猫网</title>
+    <!--基本布局样式-->
+    <link rel="stylesheet" type="text/css" href="${dojoUrl}/style/page/page.css?v=${jsVersion}" />
+    <script src="${dojoUrl}/js/pzContracts.js?v=${jsVersion}"></script>
+</head>
+
+<body>
+<!--顶部条-->
+<#include "include/page/head.html" />
+
+
+<!--内容区-->
+<div id="main">
+    <div class="w sec_main">
+        <!--左右布局-->
+        <#include "include/menu/pz_left.html" />
+
+        <div class="right_bar">
+            <div class="tabNav">
+                <ul>
+                    <li><a href="/pz/contracts.html">当前合约</a></li>
+                    <li><a class="on" href="/pz/hiscontracts.html">历史合约</a></li>
+                    <li><a href="/pz/apply.html">我的申请</a></li>
+                </ul>
+            </div>
+
+            <div class="p_history m_t_30">
+                <#if contractList.items>
+                    <#list contractList.items as c>
+                        <h4 class="tit">
+                            <b>${c.prodName}  ${c.contractNo}</b>
+                            <strong><#if c.contractType == 0>主合约<#else/>次合约</#if></strong>
+                        <span class="f_r f_gray">
+                            发起时间：${c.contractSignDatetime} &nbsp;&nbsp;&nbsp;
+                            <a href="/pz/detail.html?contract_no=${c.contractNo}">查看详情</a>
+                        </span>
+                        </h4>
+                    </#list>
+                </#if>
+                ${pageHtml}
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!--底部-->
+<!--底部-->
+<#include "include/page/foot.html" />
+
+
+</body>
+</html>

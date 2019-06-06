@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>公告-财猫网</title>
+    <meta name="keywords" content="融资，股票融资，投资融资，理财融资，融资平台，融资炒股，融资网，融资公司" />
+	<meta name="description" content="财猫网由金融服务、风险管理及互联网运营等业界一流的专业人士组成的超百人全职运营团队。提供股票融资服务，致力于为公众提供一个国际化、高收益、安全、专业的互联网资产交易平台"/>
+    <#include 'include/page/commonlink.html'/>
+    <!--基本布局样式-->
+    <link rel="stylesheet" type="text/css" href="${dojoUrl}/style/page/page.css?v=${jsVersion}">
+    <script type="text/javascript" src="${dojoUrl}/js/global.js?v=${jsVersion}"></script>
+</head>
+<body>
+<#include 'include/page/head.html'/>
+<!--内容区-->
+<div id="main">
+    <div class="w sec_main">
+        <div class="notice">
+            <div class="left">
+                <div class="tit">
+                    <h3>${notice.title}</h3>
+                    <p><span>时间：</span>${notice.created?string("yyyy-MM-dd HH:mm:ss")} &nbsp;<span>来源：</span><a href="${notice.sourceHref}">${notice.source}</a></p>
+                </div>
+                <div class="con">
+                    ${notice.content}
+                </div>
+            </div>
+            <div class="right">
+                <h4><i class="icons icon_notices"></i>历史公告</h4>
+                <ul>
+                    <#list list as nt>
+                        <li><i></i><a href="${basePath}/content/notice/${nt.id}">${nt.title}</a><span>${nt.created?string("yyyy-MM-dd")}</span></li>
+                    </#list>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</div>
+<#include 'include/page/foot.html'/>
+</body>
+</html>

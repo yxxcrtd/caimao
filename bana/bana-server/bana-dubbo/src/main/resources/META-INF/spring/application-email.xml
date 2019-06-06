@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd">
+
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <!-- 服务器 -->
+        <property name="host" value="${email.host}" />
+        <!-- 端口号 -->
+        <property name="port" value="${email.port}" />
+        <!-- 用户名 -->
+        <property name="username" value="${email.username}" />
+        <!--  密码   -->
+        <property name="password" value="${email.password}" />
+        <!-- SMTP服务器验证 -->
+        <property name="javaMailProperties">
+            <props>
+                <!-- 验证身份 -->
+                <prop key="mail.smtp.auth">true</prop>
+            </props>
+        </property>
+    </bean>
+    <bean id="simpleMailMessage" class="org.springframework.mail.SimpleMailMessage">
+        <!-- 发件人email -->
+        <property name="from" value="${email.from}" />
+        <!--
+         收件人email
+        <property name="to" value="to@yeah.net" />
+        email主题(标题)
+        <property name="subject" value="Subject" />
+        email主题内容
+        <property name="text">
+          <value>ContentText</value>
+        </property>
+        -->
+    </bean>
+
+    <bean id="simpleMail" class="com.caimao.bana.server.utils.EmailUtils">
+        <property name="mailSender" ref="mailSender" />
+        <property name="simpleMailMessage" ref="simpleMailMessage" />
+    </bean>
+
+</beans>

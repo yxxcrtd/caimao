@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<#include "weixin/config.html"/>
+<head>
+    <meta charset="UTF-8">
+    <title>股计</title>
+    <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1, user-scalable=false">
+    <meta name="format-detection" content="telephone=no"/>
+    <#include "weixin/guji/include/js.html"/>
+</head>
+
+<body class="bottomMenu">
+
+<div class="listBox">
+    <#if (hallReq.items?size > 0)>
+        <#list hallReq.items as i>
+            <div class="list">
+                <dl>
+                    <dt class="mod-left">
+                        <div class="photo"><a href="/weixin/guji/analystIndex.html?wxId=${i.wxId}"><img src="${i.headimgurl}" alt="头像" /></a></div>
+                    </dt>
+                    <dd class="mod-right">
+                        <div class="mod-rightcontent">
+                            <div class="uInfo">
+                                <span onclick="window.location.href='/weixin/guji/analystIndex.html?wxId=${i.wxId}'" class="master">${i.nickname}<#if i.authStatus == 2><i class="vip vip1"></i></#if></span>
+                                <i>${i.publishTimeStr}</i>
+                                <span onclick="optAddLike(this, '${authInfo.openId}', '${i.shareId}')" data-isLike="${i.isLike}" <#if (i.isLike == 1)>class="faved"<#else>class="fav"</#if>>${i.favour}</span>
+                            </div>
+                            <div class="saying" onclick="window.location.href='/weixin/guji/recommendStock.html?wxId=${i.wxId}&stockCode=${i.stockCode}'">
+                                <#if (i.reason?length gt 80)>
+                                    ${i.reason?substring(0, 80)}...
+                                    <#else>
+                                        ${i.reason}
+                                </#if>
+                            </div>
+                            <span onclick="window.location.href='/weixin/guji/recommendStock.html?wxId=${i.wxId}&stockCode=${i.stockCode}'" class="stock">${i.stockName}<i><#if (i.stockType == 'GP')>${i.stockCode}</#if></i></span>
+                        </div>
+                    </dd>
+                </dl>
+            </div>
+        </#list>
+    <#else>
+        <div class="empty"><span>尚无动态，稍后再来看看吧</span></div>
+    </#if>
+</div>
+
+<div class="load" style="display: none;">加载中...</div>
+<script id="shareListTmpl" type="text/x-tmpl">
+    <% for(var i = 0,l = data.length; i < l; i++){%>
+            <div class="list">
+                <dl>
+                    <dt class="mod-left">
+                        <div class="photo"><span onclick="window.location.href='/weixin/guji/analystIndex.html?wxId=<%=data[i].wxId%>'"><img src="<%=data[i].headimgurl%>" alt="头像" /></span></div>
+                    </dt>
+                    <dd class="mod-right">
+                        <div class="mod-rightcontent">
+                            <div class="uInfo">
+                                <span onclick="window.location.href='/weixin/guji/analystIndex.html?wxId=<%=data[i].wxId%>'" class="master"><%=data[i].nickname%><%if (data[i].authStatus==2){%><i class="vip vip1"></i><%}%></span>
+                                <i><%=data[i].publishTimeStr%></i>
+                                <span onclick='optAddLike(this, "${authInfo.openId}", "<%=data[i].shareId%>")' data-isLike="<%=data[i].isLike%>" <%if (data[i].isLike){%>class="faved"<%}else{%>class="fav"<%}%> ><%=data[i].favour%></span>
+                            </div>
+                            <div class="saying" onclick="window.location.href='/weixin/guji/recommendStock.html?wxId=<%=data[i].wxId%>&stockCode=<%=data[i].stockCode%>'">
+                                <%if (data[i].reason.length > 80){%>
+                                    <%=data[i].reason.substring(0, 80)%>...
+                                <%}else{%>
+                                    <%=data[i].reason%>
+                                <%}%>
+                            </div>
+                            <span onclick="window.location.href='/weixin/guji/recommendStock.html?wxId=<%=data[i].wxId%>&stockCode=<%=data[i].stockCode%>'" class="stock"><%=data[i].stockName%><i><%if (data[i].stockType == 'GP'){%><%=data[i].stockCode%><%}%></i></span>
+                        </div>
+                    </dd>
+                </dl>
+            </div>
+    <%}%>
+</script>
+
+<#include "weixin/guji/include/menu.html"/>
+
+<script>
+    var page = 1;
+    var limit = 5;
+    var load = true;
+    var loadHtml = $('.load');
+    $(loadHtml).show();
+    var loadCreateHtmlFun = function(d) {
+        if (d.success == true) {
+            if (d.data.items.length < limit) load = false;
+            var loadHtml = rentmpl($('#shareListTmpl').html(), {data : d.data.items});
+            $('.listBox').append(loadHtml);
+        }
+    };
+
+    $(document).ready(function() {
+        $(window).scroll(function () {
+            if (($(window).height() + $(window).scrollTop()) >= $("body").height()) {
+                if (load == true) {
+                    page++;
+                    var data = {checkOpenId : '${authInfo.openId}', page : page, limit : limit};
+                    loadHallList(data, loadCreateHtmlFun);
+                } else {
+                    $(loadHtml).html("没有更多内容了").show();
+                }
+            }
+        });
+    });
+
+    wx.ready(function(){
+        // 要显示的菜单项
+        wx.showMenuItems({
+            menuList: ['menuItem:share:appMessage', 'menuItem:share:timeline', 'menuItem:favorite']
+        });
+        // 分享到朋友圈的东东
+        wx.onMenuShareTimeline({
+            title: '${shareInfo.title}', // 分享标题
+            link: '${shareInfo.link}', // 分享链接
+            imgUrl: '${shareInfo.imgUrl}', // 分享图标
+            success: function () {
+                // 用户确认分享后执行的回调函数
+            },
+            cancel: function () {
+                // 用户取消分享后执行的回调函数
+            }
+        });
+        // 分享给朋友的东东
+        wx.onMenuShareAppMessage({
+            title: '${shareInfo.title}', // 分享标题
+            desc: '${shareInfo.desc}', // 分享描述
+            link: '${shareInfo.link}', // 分享链接
+            imgUrl: '${shareInfo.imgUrl}', // 分享图标
+            type: '${shareInfo.type}', // 分享类型,music、video或link，不填默认为link
+            dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+            success: function () {
+                // 用户确认分享后执行的回调函数
+            },
+            cancel: function () {
+                // 用户取消分享后执行的回调函数
+            }
+        });
+    });
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,648 @@
+@charset "utf-8";
+@import "../module/mixin";
+
+/*全局样式*/
+i, em, b, strong {
+  font-style: normal;
+  font-weight: 400;
+}
+
+img {
+  vertical-align: middle
+}
+
+input::-ms-reveal {
+  display: none;
+}
+
+.right_bar {
+  color: #666666;
+}
+
+.tabNav {
+  overflow: hidden;
+  height: 41px;
+  border-bottom: 1px solid #e6e6e6;
+  ul {
+    position: absolute;
+    height: 40px;
+    line-height: 40px;
+  }
+  li {
+    display: inline-block;
+    padding-right: 20px;
+  }
+  a {
+    display: inline-block;
+    padding: 0 10px;
+    height: 40px;
+    font-size: 16px;
+    color: #999999;
+    &:hover, &.on {
+      color: #666666;
+      border-bottom: 2px solid #eb4636;
+    }
+  }
+}
+
+.formgroup {
+  height: 61px;
+  font-size: 14px;
+  dt {
+    float: left;
+    width: 78px;
+    padding-top: 8px;
+  }
+  dd {
+    float: left;
+    width: 900px;
+    color: #999999;
+    padding-top: 8px;
+    &.inputBox {
+      position: relative;
+      padding: 0;
+      z-index: 2;
+    }
+    &.mycard {
+      padding: 0;
+    }
+    label {
+      position: absolute;
+      z-index: 3;
+      left: 240px;
+      top: 12px;
+    }
+    &.selectBox {
+      z-index: 3;
+      span {
+        border-left: 1px solid #dad9d9;
+        position: absolute;
+        z-index: 3;
+        left: 240px;
+        top: 8px;
+        height: 22px;
+        width: 30px;
+        cursor: pointer;
+        @include img($imgURL+'recharge/arr.png');
+      }
+      .bankList {
+        position: absolute;
+        background: #fff;
+        width: 270px;
+        max-height: 180px;
+        overflow: auto;
+        border: 1px solid #dad9d9;
+        top: 39px;
+        z-index: 3;
+      }
+      li {
+        height: 30px;
+        line-height: 30px;
+        padding: 0 10px;
+        position: relative;
+        float: left;
+        cursor: pointer;
+        width: 230px;
+        &:hover {
+          background: #5588cc;
+          color: #fff
+        }
+      }
+    }
+    &.actionBox {
+      position: relative;
+      padding: 0;
+      input {
+        position: relative;
+        z-index: 3;
+      }
+      span {
+        position: absolute;
+        z-index: 4;
+        left: 240px;
+        top: 8px;
+        height: 22px;
+        width: 30px;
+        cursor: pointer;
+        @include img($imgURL+'recharge/eyes.jpg', 0 5px);
+        &.on {
+          background-position: 0 -25px;
+        }
+      }
+      .showInput {
+        position: absolute;
+        background: #fff;
+        width: 270px;
+        height: 200px;
+        overflow: auto;
+        border: 1px solid #dad9d9;
+        top: 39px;
+        z-index: 3;
+      }
+    }
+    .textInput {
+      height: 14px;
+      width: 200px;
+      padding: 12px 50px 12px 20px;
+      border: 1px solid #dad9d9;
+      outline: 0 none;
+      color: #000;
+      position: relative;
+      z-index: 2;
+    }
+  }
+}
+
+.transferBox, .bankcard {
+  .bold {
+    font-weight: 700;
+  }
+  .orange {
+    color: #eb4636
+  }
+  .black {
+    color: #000;
+  }
+  .btn {
+    width: 188px;
+  }
+  .graybtn {
+    background: #dcdcdc;
+    color: #000;
+  }
+  .graybtn:hover {
+    background: #bbb9b9;
+    color: #000
+  }
+  .disable {
+    background: #dfdfdf;
+    color: #fff;
+    cursor: default;
+  }
+}
+
+.selectBank {
+  padding: 35px 1px 22px;
+  p {
+    font-size: 14px;
+    height: 30px;
+    span {
+      font-size: 12px;
+      color: #eb4636;
+      float: right;
+      text-align: right;
+    }
+  }
+  ul {
+    width: 990px;
+    border-top: 1px dashed #e6e6e6;
+    border-left: 1px dashed #e3e3e3;
+    overflow: hidden;
+    li {
+      cursor: pointer;
+      width: 196px;
+      height: 71px;
+      line-height: 71px;
+      text-align: center;
+      float: left;
+      border-top: 1px dashed #ffffff;
+      border-left: 1px dashed #ffffff;
+      border-bottom: 1px dashed #e6e6e6;
+      border-right: 1px dashed #e6e6e6;
+      position: relative;
+
+      img {
+        vertical-align: middle;
+        position: relative;
+        z-index: 2;
+      }
+      i {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        z-index: 3;
+        width: 32px;
+        height: 33px;
+        @include img($imgURL+'recharge/checkMark.gif');
+        @include opacity(0);
+        @include css3(transition, opacity .2s);
+      }
+      &.on {
+        i {
+          @include opacity(1);
+        }
+        border: 1px solid #eb4636;
+      }
+      &:hover {
+        border: 1px solid #eb4636;
+      }
+    }
+
+  }
+}
+
+.cyberBank {
+
+}
+
+.confirmForm {
+  padding: 35px 0 22px;
+  table {
+    background: #e6e6e6;
+    border-collapse: separate;
+    border-spacing: 1px;
+    width: 100%;
+    font-size: 14px;
+  }
+  td {
+    background: #fff;
+    height: 67px;
+    color: #999;
+    span {
+      text-align: right;
+      display: block;
+      width: 140px;
+    }
+    &.thead {
+      width: 140px;
+      color: #666;
+    }
+  }
+  img {
+    vertical-align: middle
+  }
+  .btnGroup {
+    padding-top: 26px;
+  }
+  .btn {
+    margin-right: 24px;
+  }
+}
+
+.counter {
+  color: #000;
+  b {
+    font-weight: 700;
+  }
+  p {
+    padding-top: 20px;
+    height: 38px;
+    &.notice {
+      padding-top: 38px;
+      height: 32px;
+      min-height:32px;
+      border-bottom: 1px solid #e6e6e6;
+    }
+  }
+  .bankInfo {
+    background: #f6f7fb;
+    overflow: hidden;
+    dt {
+      float: left;
+      width: 184px;
+      text-align: center;
+      height: 94px;
+      line-height: 94px;
+    }
+    dd {
+      float: left;
+      width: 800px;
+      line-height: 24px;
+      padding-top: 13px;
+      span {
+        display: inline-block;
+        width: 54px;
+        color: #666;
+      }
+    }
+  }
+  .formHere {
+    padding-top: 26px;
+  }
+  .formSuccess {
+    width: 430px;
+    text-align: center;
+    padding-top: 40px;
+    strong {
+      font-size: 20px;
+      padding-left: 33px;
+      display: inline-block;
+      height: 50px;
+      @include img($imgURL+'recharge/success.png');
+    }
+    p {
+      color: #999;
+      display: block;
+      height: 35px;
+      padding: 0;
+    }
+    em {
+      color: #eb4636;
+      font-size: 22px;
+      display: block;
+      height: 60px;
+    }
+  }
+}
+
+.alipay {
+  padding: 20px 0;
+  .alipayActivity {
+    overflow: hidden;
+    width: 356px;
+    border: 1px solid #e3e3e3;
+    margin-bottom: 24px;
+    dt {
+      float: left;
+      width: 115px;
+      text-align: center;
+      height: 65px;
+      line-height: 65px;
+    }
+    dd {
+      float: left;
+      width: 240px;
+      height: 65px;
+      line-height: 65px;
+      span {
+        display: inline-block;
+        width: 100px;
+        color: #666;
+      }
+    }
+  }
+  .alipayInfo {
+    @include img($imgURL+'recharge/alipaybg.png');
+    background-color: #f6f7fb;
+    height: 70px;
+    padding: 24px 0 0 0;
+    dl {
+      overflow: hidden;
+      height: 24px;
+    }
+    dt {
+      float: left;
+      width: 200px;
+      padding-right: 12px;
+      text-align: right;
+    }
+    dd {
+      float: left;
+      width: 700px;
+      font-weight: 700;
+    }
+  }
+  .userAlipayInfo {
+    padding: 20px 0 32px;
+    table {
+      background: #e6e6e6;
+      border-collapse: separate;
+      border-spacing: 1px;
+      width: 100%;
+      font-size: 14px;
+    }
+    td {
+      background: #fff;
+      height: 67px;
+      color: #999;
+      span {
+        text-align: right;
+        display: block;
+        width: 140px;
+      }
+      &.thead {
+        width: 140px;
+        color: #000;
+      }
+    }
+  }
+  .notice {
+    color: #eb4636;
+    text-align: center;
+    background: #f6f7fb;
+    height: 28px;
+    line-height: 28px;
+  }
+  .payInfo {
+    border: 1px dashed #e3e3e3;
+    overflow: hidden;
+    .left {
+      float: left;
+      width: 495px;
+      height: 324px;
+      border-right: 1px dashed #e3e3e3;
+      @include img($imgURL+'recharge/info1.jpg');
+    }
+    .right {
+      float: left;
+      width: 495px;
+      height: 324px;
+      @include img($imgURL+'recharge/info2.jpg');
+    }
+    .code {
+      margin: 72px 0 0 89px;
+      width: 182px;
+      height: 182px;
+    }
+    p {
+      padding: 15px 0 0 120px;
+      font-size: 12px;
+      color: #000;
+    }
+    .btn {
+      margin: 235px 0 0 100px;
+    }
+  }
+}
+
+.takeCash {
+  padding-top: 40px;
+}
+
+.bindCard {
+  padding-top: 40px;
+  .title {
+    font-size: 16px;
+    color: #666;
+    height: 30px;
+  }
+  .notice {
+    font-size: 12px;
+    color: #eb4636;
+    height: 34px;
+    padding: 10px 0;
+  }
+  a {
+    @include img($imgURL+'recharge/addCard.jpg');
+    display: block;
+    width: 249px;
+    height: 157px;
+    overflow: hidden;
+    text-indent: -999px;
+    &:hover {
+      background-position: -249px 0;
+    }
+  }
+}
+
+.cardShow {
+  padding-top: 40px;
+  dl {
+    width: 334px;
+    height: 210px;
+    border: 1px solid #d8d8d8;
+  }
+  dt {
+    height: 165px;
+    position: relative;
+  }
+  dd {
+    color: #666;
+    background: #f6f6f6;
+    border-top: 1px dashed #d8d8d8;
+    height: 44px;
+    line-height: 44px;
+    text-align: center;
+  }
+  i {
+    @include img($imgURL+'recharge/bankIcon.jpg');
+    display: block;
+    width: 26px;
+    height: 26px;
+    position: absolute;
+    top: 10px;
+    left: 14px;
+  }
+  span {
+    position: absolute;
+    left: 20px;
+    top: 10px;
+    height: 26px;
+    line-height: 26px;
+  }
+  a {
+    display: block;
+    width: 38px;
+    padding-left: 32px;
+    height: 26px;
+    top: 10px;
+    right: 10px;
+    position: absolute;
+    color: #fff;
+    line-height: 26px;
+    @include img($imgURL+'recharge/refresh.gif');
+    background-color: #5588cc;
+    &:hover {
+      background-color: #4a76b1;
+    }
+    &.disable {
+      background: #dfdfdf;
+      padding: 0;
+      width: 70px;
+      text-align: center;
+      color: #fff;
+    }
+  }
+  em {
+    display: block;
+    padding: 65px 0 0 40px;
+    height: 33px;
+    font-size: 14px;
+    color: #000;
+  }
+  strong {
+    display: block;
+    padding-left: 40px;
+    font-size: 30px;
+    color: #000;
+  }
+}
+
+.changeCard {
+
+  padding: 35px 1px 22px;
+  p {
+    font-size: 16px;
+    height: 30px;
+    border-bottom: 1px solid #e6e6e6;
+    margin-bottom: 20px;
+    span {
+      font-size: 12px;
+      color: #eb4636;
+      float: right;
+      text-align: right;
+    }
+  }
+  .cardListBox {
+    height: auto;
+    ul {
+      width: 792px;
+      border-top: 1px dashed #e6e6e6;
+      border-left: 1px dashed #e3e3e3;
+      overflow: hidden;
+      margin-bottom: 30px;
+      overflow: hidden;
+      li {
+        cursor: pointer;
+        width: 196px;
+        height: 71px;
+        line-height: 71px;
+        text-align: center;
+        float: left;
+        border-top: 1px dashed #ffffff;
+        border-left: 1px dashed #ffffff;
+        border-bottom: 1px dashed #e6e6e6;
+        border-right: 1px dashed #e6e6e6;
+        position: relative;
+
+        img {
+          vertical-align: middle;
+          position: relative;
+          z-index: 2;
+        }
+        i {
+          position: absolute;
+          right: 0;
+          bottom: 0;
+          z-index: 3;
+          width: 32px;
+          height: 33px;
+          @include img($imgURL+'recharge/checkMark.gif');
+          @include opacity(0);
+          @include css3(transition, opacity .2s);
+        }
+        &.on {
+          i {
+            @include opacity(1);
+          }
+          border: 1px solid #eb4636;
+        }
+        &:hover {
+          border: 1px solid #eb4636;
+        }
+      }
+
+    }
+  }
+  select {
+    height: 40px;
+    padding-left: 10px;
+    border: 1px solid #dad9d9;
+    outline: 0 none;
+    color: #000;
+    margin-right: 20px;
+    color: #999;
+  }
+  dd {
+    p {
+      border: 0 none;
+      margin: 0;
+      font-size: 14px;
+      padding-top: 14px;
+    }
+    .graybtn {
+      margin-left: 16px;
+    }
+  }
+}
+.rechargeNumCh{display:none;position: absolute;top: -27px;left: 78px;z-index: 5;width: 250px !important;padding: 0 10px !important;height: 25px;line-height: 25px;background:#ecfcff;color:#5588cc;border:1px solid #5588cc;}

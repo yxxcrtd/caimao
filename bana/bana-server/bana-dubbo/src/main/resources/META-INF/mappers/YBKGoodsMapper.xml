@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="YBKGoods">
+    <resultMap id="BaseResultMap" type="com.caimao.bana.api.entity.ybk.YBKGoodsEntity">
+        <id column="exchange_id" property="exchangeId" jdbcType="INTEGER"/>
+        <id column="good_code" property="goodCode" jdbcType="VARCHAR"/>
+        <result column="short_name" property="shortName" jdbcType="VARCHAR"/>
+        <result column="exchange_name" property="exchangeName" jdbcType="VARCHAR"/>
+        <result column="good_name" property="goodName" jdbcType="VARCHAR"/>
+        <result column="good_pinyin" property="goodPinyin" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        exchange_id,short_name,exchange_name,good_code,good_name
+    </sql>
+
+    <insert id="insert" parameterType="com.caimao.bana.api.entity.ybk.YBKGoodsEntity">
+        INSERT INTO ybk_goods
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="exchangeId != null">exchange_id,</if>
+            <if test="exchangeName != null">exchange_name,</if>
+            <if test="shortName != null">short_name,</if>
+            <if test="goodCode != null">good_code,</if>
+            <if test="goodName != null">good_name,</if>
+            <if test="goodPinyin != null">good_pinyin,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="exchangeId != null">#{exchangeId},</if>
+            <if test="exchangeName != null">#{exchangeName},</if>
+            <if test="shortName != null">#{shortName},</if>
+            <if test="goodCode != null">#{goodCode},</if>
+            <if test="goodName != null">#{goodName},</if>
+            <if test="goodPinyin != null">#{goodPinyin},</if>
+        </trim>
+    </insert>
+
+    <update id="update">
+        UPDATE ybk_goods
+        <set>
+            <if test="exchangeName != null" >exchange_name = #{exchangeName},</if>
+            <if test="shortName != null" >short_name = #{shortName},</if>
+            <if test="goodName != null" >good_name = #{goodName},</if>
+            <if test="goodPinyin != null" >good_pinyin = #{goodPinyin},</if>
+        </set>
+        WHERE exchange_id = #{exchangeId} AND good_code=#{goodCode}
+    </update>
+
+    <select id="queryGood" parameterType="com.caimao.bana.api.entity.ybk.YBKGoodsEntity" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM ybk_goods
+        WHERE exchange_id = #{exchangeId} AND good_code=#{goodCode}
+    </select>
+
+    <select id="queryAllGoods" parameterType="com.caimao.bana.api.entity.ybk.YBKGoodsEntity" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM ybk_goods
+        WHERE short_name = #{exchangeShortName}
+    </select>
+
+    <select id="searchGoods" parameterType="com.caimao.bana.api.entity.ybk.YBKGoodsEntity" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM ybk_goods
+        WHERE good_code like CONCAT('%','${goodName}','%' )
+        OR good_name like CONCAT('%','${goodName}','%' )
+        OR good_pinyin like CONCAT('%','${goodName}','%' )
+        limit 10
+    </select>
+</mapper>

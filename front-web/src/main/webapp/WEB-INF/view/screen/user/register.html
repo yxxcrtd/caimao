@@ -1,0 +1,68 @@
+<#assign name="快速注册"/>
+<#assign controller="Register"/>
+<#assign login="false"/>
+<#include 'layout/layout.html'/>
+<#macro content>
+<div class="stretch">
+<div class="container">
+    <div class="content table">
+            <div class="con-registration grid1000 center">
+                <!--左边start-->
+                <div class="cm-left reg-lside">
+                    <div id="registerform" class="ui-form ui-form-registration" role="form">
+                        <div class="ui-form-item">
+                            <label class="ui-label-head">快速注册</label>
+                        </div>
+                        <div class="ui-form-item">
+                            <label for="phonenumber" class="ui-label">手机号：</label> <input
+                            id="phonenumber" type="text" class="ui-input" placeholder=""
+                            autocomplete="off">
+                            <p class="ui-prompt-gray martop12">请输入你常用手机号，我们会严格保密</p>
+                        </div>
+                        <div class="ui-form-item">
+                            <label for="password" class="ui-label">密码：</label> <input
+                            id="password" type="password" class="ui-input" placeholder=""
+                            autocomplete="off">
+                                <p class="ui-prompt-gray">6-16位字符，可包含英文字符、数字、符号</p>
+                                <div class="ui-prompt-grade"><p style="height:100%;width:0%;"></p></div>
+                        </div>
+
+                        <div class="ui-form-item">
+                            <label for="passwordconfirm" class="ui-label">确认密码：</label> <input
+                            id="passwordconfirm" type="password" class="ui-input"
+                            placeholder="">
+                        </div>
+
+                        <div class="ui-form-item">
+                            <label for="ref_phone" class="ui-label">邀请人手机号<br>(选填)：</label> <input
+                                id="ref_phone" type="text" class="ui-input"
+                                placeholder="">
+                        </div>
+
+                        <div class="ui-form-item ui-form-item-validate">
+                            <label for="captcha" class="ui-label">验证码：</label> <input
+                                id="captcha" type="text" class="ui-input" placeholder="">
+
+                            <img id="captchaimg" style="cursor:pointer;margin-left:10px" src="${basePath}/captcha?_=${.now?long}"/>
+                        </div>
+
+                        <div class="ui-form-item martop35">
+                            <div class="rside-item"><input id="protocoltoggler" name="" type="checkbox" value="" class="ui-checkbox"><span class="am-ft-gray">我已阅读并同意</span><a id="showtext2">《网上融资用户服务协议》</a>
+                                <div id="contentid2" class="none" style="height: 0; display: none;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--左边end-->
+                <!--右边start-->
+                <div class="cm-right reg-rside">
+                    <p class="am-lh-24"><span class="am-ft-md">已经注册？<a href="${basePath}/user/login.htm">请登录</a></span></p>
+                    <img src="${basePath}/app/resources/image/customize/register.png" />
+                </div>
+                <!--右边end-->
+            </div>
+    </div>
+    </div>
+    </div>
+</#macro>

@@ -1,0 +1,53 @@
+连续预测正确天数 ${weChatForecastCount.getCorrectDays()} 天<br>
+击败了 ${weChatForecastCount.getBeatRate()}% 的用户<br>
+
+明日预测结果如下：
+<#list forecastResult?keys as key>
+    <#if key != "total">
+        <#if key = "1">看涨<#elseif key = "2">看平<#else>看跌</#if>：${forecastResult[key]}<br>
+    </#if>
+</#list>
+<br>
+总预测人数： ${forecastResult["total"]} 人
+
+
+<script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript">
+    window.lineLink = 'http://172.32.3.227:8080/activity/stockMarketForecast';
+    window.shareTitle = '财猫每日大盘预测，赢取1亿免息资金！';
+
+    var imgUrl = "https://www.baidu.com/img/bdlogo.png";
+    var descContent = '我已经连续 ${weChatForecastCount.getCorrectDays()} 天看准了大盘走势！击败了 ${weChatForecastCount.getBeatRate()} % 的股友。哪位股神前来挑战？！';
+
+    wx.config({
+        debug: false,
+        appId: 'wxad6843828090a34d',
+        timestamp: ${weChatSign["timestamp"]},
+        nonceStr: '${weChatSign["nonceStr"]}',
+        signature: '${weChatSign["signature"]}',
+        jsApiList: [
+            // 所有要调用的 API 都要加到这个列表中
+            'onMenuShareTimeline',
+            'onMenuShareAppMessage',
+        ]
+    });
+
+    wx.ready(function () {
+        wx.onMenuShareAppMessage({
+            title: window.shareTitle,
+            desc: descContent,
+            link: window.lineLink,
+            imgUrl: imgUrl,
+            success: function (res) {},
+            cancel: function (res) {}
+        });
+        wx.onMenuShareTimeline({
+            title: window.shareTitle,
+            link: window.lineLink,
+            desc: descContent,
+            imgUrl: imgUrl,
+            success: function () {},
+            cancel: function () {}
+        });
+    });
+</script>

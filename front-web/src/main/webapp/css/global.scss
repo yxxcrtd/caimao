@@ -1,0 +1,168 @@
+@charset "utf-8";
+
+@import "../module/base";         /*基础样式*/
+
+
+#top{
+  background-color:$grayLLL;
+  height: 29px;
+  line-height: 30px;
+  border-bottom: 1px solid $grayLL;
+  font-size: 12px;
+  color: #999;
+  .top_in{
+    span{
+      display: inline-block;
+      margin-right: 20px;
+      b{
+        color: #666;
+        font-weight: normal;
+      }
+    }
+    .right{
+      color:#010101;
+      a{
+        color: #666;
+        &:hover{
+          color:#010101;
+        }
+      }
+    }
+  }
+
+}
+
+#header{
+  background-color: $white;
+  padding-top:24px;
+  height: 64px;
+  border-bottom: 2px solid $red;
+  .header_in{
+    .left{
+      @extend %clearFix;
+      .icons{
+        height:42px;
+        float: left;
+        text-indent: -99999em;
+      }
+      a{
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+    }
+    .right{
+      margin-top:24px;
+      ul{
+        overflow: hidden;
+        li{
+          float: left;
+          a {
+            display: block;
+            height:40px;
+            padding: 0 22px 0 22px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #666;
+            vertical-align: middle;
+            position: relative;
+            b {
+              border:8px solid #fff;
+              border-bottom:8px solid $red;
+              height:0;
+              width:0;
+              position: absolute;
+              bottom: 0;
+              left: 50%;
+              margin-left: -9px;
+              visibility: hidden;
+            }
+            &:hover, &.hov {
+              color: $red;
+              b{
+                visibility: visible;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+#main{
+  background-color: #eee;
+}
+
+#footer{
+  height: 167px;
+  background-color: #DFDFDF;
+  font-size: 12px;
+  padding-top: 9px;
+  p{
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    color: #B3B4B4;
+    &.nav_sub{
+      a{
+        color: #7A7A7A;
+        display: inline-block;
+        padding:0 25px;
+      }
+    }
+  }
+  .server{
+    width:380px;
+    margin:12px auto;
+    background-color: #767676;
+    color: #fff;
+    text-align: left;
+    .icons{
+      margin: 0 8px;
+    }
+  }
+  .server2{
+    a{
+      display: inline-block;
+      padding: 0 4px;
+      border: 1px solid #767676;
+      &:hover{
+        border-color: #EC594D;
+        .icons{
+          background-position: 0 -100px;
+        }
+      }
+    }
+    a.weixin{
+      margin-right: 9px;
+      position: relative;
+      cursor: pointer;
+      span{
+        position: absolute;
+        width: 120px;
+        height: 127px;
+        display: none;
+        top:-130px;
+        left:-44px;
+        @include img($imgURL+'erweima120127.png');
+        z-index: 9999;
+       }
+      &:hover{
+        background-color: #53BB1F;
+        border-color: #53BB1F;
+        span{
+          display: block;
+        }
+        .icons{
+          background-position:0 -60px;
+        }
+      }
+
+    }
+    .icons{
+      width: 25px;
+    }
+  }
+}

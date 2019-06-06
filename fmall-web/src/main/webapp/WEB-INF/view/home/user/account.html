@@ -1,0 +1,51 @@
+<#include "home/config.html"/>
+<#include "home/include/head.html"/>
+<#assign userTopMenu="account"/>
+    <title>财猫账户</title>
+</head>
+
+<body>
+<!--头部-->
+<div class="header">
+<#include "home/include/topRich.html" />
+<#include "home/include/menuLine.html" />
+
+</div>
+<!--内容区-->
+<div class="main">
+   <div class="docMain w">
+       <div class="docMainLeft">
+<#assign leftMenu="1"/>
+<#include "home/include/accountLeft.html" />
+       </div>
+       <div class="docMainIn">
+           <div class="informationTit">财猫账户</div>
+           <ul class="informationIn">
+               <li>
+                   <div class="left f_l">手机号码 <i class="icons icon_lock_red"></i></div>
+                   <div class="mid f_l">
+                       <div class="name">
+                           ${userInfo.mobile}
+                       </div>
+                   </div>
+                   <div class="right f_r">
+                       <!-- <a href="">修改</a> -->
+                   </div>
+               </li>
+               <li>
+                   <div class="left f_l">登录密码 <i class="icons icon_lock_red"></i></div>
+                   <div class="mid f_l">
+                       <div class="name">
+                           登陆财猫使用
+                       </div>
+                   </div>
+                   <div class="right f_r">
+                       <a href="/user/set_password.html">修改密码</a>
+                   </div>
+               </li>
+           </ul>
+       </div>
+   </div>
+</div>
+
+<#include "home/include/footRich.html" />

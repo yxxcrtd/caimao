@@ -1,0 +1,27 @@
+<div class="con-avatar clearfix">
+<div class="cm-left" style="width: 700px;padding-left: 30px;">
+		<div>
+			<div style="display:inline;" data-dojo-attach-point="realNameNode"></div>
+			<span class="am-ft-sm am-ft-gray">必须与银行账户姓名一致</span>
+			
+			<div style="display:inline;">
+				<div data-dojo-attach-point="IDNoNode"></div>
+				<span class="am-ft-sm am-ft-gray">输入18位正确身份证号码，如果您的身份证号中含有“*”号，请用“X”代替</span>
+			</div>
+			
+			<div class="l-txt">
+				<span>身份证正面图片：</span><input id="idcardPos" name="positive" data-dojo-attach-point="fileSelectorNode"
+					class="ui-input ui-input-file" placeholder="" type="file">
+				<span class="am-ft-sm am-ft-gray">请上传彩色、完整证件图片，支持jpg，jpeg，bmp格式。</span>
+			</div>
+			
+			<div class="l-txt">
+				<span>身份证反面图片：</span><input id="idcardOpp" name="opposite" data-dojo-attach-point="fileSelectorOppositeNode"
+					class="ui-input ui-input-file" placeholder="" type="file">
+				<span class="am-ft-sm am-ft-gray">请上传彩色、完整证件图片，支持jpg，jpeg，bmp格式。</span>
+			</div>
+		</div>
+		
+		<p class="am-pt-20"  data-dojo-attach-point="uploadBtnNode"></p>
+</div>
+</div>

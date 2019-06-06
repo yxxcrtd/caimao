@@ -1,0 +1,299 @@
+<!--设置安全密码的表单-->
+<form id="set_trade_from" action="/user/tradepwd/set" method="post" class="p_l_40">
+    <input type="hidden" name="mobile" id="set_trade_mobile" value="${cuser.mobile}" />
+    <div class="group m_t_10">
+        <div class="col_1">手机号</div>
+        <div class="col_2 m_t_8"><b>${umobile}</b></div>
+    </div>
+    <div class="group m_t_10">
+        <div class="col_1">验证码</div>
+        <div class="col_2">
+            <div class="">
+                <input type="text" autocomplete="off" name="code" id="set_trade_code" class="input_text f_l" style="width: 160px" validateType="empty:请输入验证码 authcode" placeholder="请输入验证码" maxlength="6">
+                <button type="button" id="set_trade_get_code" class="btn size_m  btn_blue f_l" style="width:106px; height: 40px">发送验证码</button>
+            </div>
+        </div>
+    </div>
+    <div class="group m_t_10">
+        <div class="col_1">安全密码</div>
+        <div class="col_2">
+            <input class="input_text" type="password" name="trade_pwd" id="set_trade_trade_pwd" validateType="empty:请输入新密码 len:6:16 password" placeholder="请输入新密码" maxlength="20"/>
+            <i id="set_trade_pwd_strong" class="icons icon_low"></i>
+        </div>
+    </div>
+    <div class="group m_t_10">
+        <div class="col_1">重复输入</div>
+        <div class="col_2">
+            <input class="input_text" name="reTradePwd" id="set_trade_re_pwd" type="password" validateType="empty:请再次确认密码 same:#set_trade_trade_pwd:两次密码输入不一致" placeholder="请确认密码" maxlength="20"/>
+        </div>
+    </div>
+    <div class="group m_t_10">
+        <div class="col_1"></div>
+        <div class="col_2">
+            <button type="button" id="set_trade_submit" class="btn size_m btn_blue">保存</button>
+        </div>
+    </div>
+</form>
+<!--修改安全密码的表单-->
+<form id="reset_trade_from" action="/user/tradepwd/reset" method="post" class="p_l_40">
+    <div class="group m_t_10">
+        <div class="col_1">旧安全密码</div>
+        <div class="col_2">
+            <input class="input_text" name="old_trade_pwd" id="reset_trade_old_pwd" type="password" validateType="empty:请输入旧密码 len:6:16 password" placeholder="请输入旧密码" maxlength="20"/>
+        </div>
+    </div>
+    <div class="group m_t_10">
+        <div class="col_1">新安全密码</div>
+        <div class="col_2">
+            <input class="input_text" name="new_trade_pwd" id="reset_trade_new_pwd" type="password" validateType="empty:请输入新密码 len:6:16 password" placeholder="请输入新密码" maxlength="20"/>
+        </div>
+    </div>
+    <div class="group m_t_10">
+        <div class="col_1">再次输入密码</div>
+        <div class="col_2">
+            <input class="input_text" name="re_trade_pwd" id="reset_trade_re_pwd" type="password" validateType="empty:请再次输入密码 same:#reset_trade_new_pwd:两次密码输入不一致" placeholder="请再次输入密码" maxlength="20"/>
+        </div>
+    </div>
+    <div class="group m_t_10">
+        <div class="col_1"></div>
+        <div class="col_2">
+            <button type="button" id="reset_trade_submilt" class="btn size_m btn_blue">保存</button>
+        </div>
+    </div>
+</form>
+<!--找回安全密码的表单-->
+<form id="find_trade_from" action="/user/tradepwd/find" method="post" class="p_l_40">
+    <div class="group m_t_10">
+        <div class="col_1">手机号</div>
+        <div class="col_2 m_t_8"><b>${umobile}</b></div>
+    </div>
+    <div class="group m_t_10">
+        <div class="col_1">验证码</div>
+        <div class="col_2">
+            <div class="">
+                <input type="text" autocomplete="off" name="code" id="find_trade_code" class="input_text f_l" style="width: 160px" validateType="empty:请输入验证码 authcode" placeholder="请输入验证码" maxlength="6">
+                <button type="button" id="find_trade_get_code" class="btn size_m  btn_blue f_l" style="width:106px; height: 40px">发送验证码</button>
+            </div>
+        </div>
+    </div>
+    <div class="group m_t_10">
+        <div class="col_1">安全保护问题</div>
+        <input type="hidden" id="find_question_id" value="${userPwdQuestion.items[questionIndex].questionId}" data-dojo-id="${questionIndex}">
+        <div class="col_2 m_t_8"><b><#if (userPwdQuestion.items??) >${userPwdQuestion.items[questionIndex].questionTitle}<#else/><span style="color: red;">请先设置安全密码保护问题</span></#if></b></div>
+    </div>
+    <div class="group m_t_10">
+        <div class="col_1">答案</div>
+        <div class="col_2">
+            <div class="">
+                <input type="text" autocomplete="off" name="code" id="find_question_answer" class="input_text" validateType="empty:请输入答案" placeholder="请输入答案" maxlength="20">
+            </div>
+        </div>
+    </div>
+    <div class="group m_t_10">
+        <div class="col_1">新安全密码</div>
+        <div class="col_2">
+            <input class="input_text" name="new_trade_pwd" id="find_trade_new_pwd" type="password" validateType="empty:请输入新密码 len:6:16 password" placeholder="请输入新密码" maxlength="20"/>
+        </div>
+    </div>
+    <div class="group m_t_10">
+        <div class="col_1">再次输入密码</div>
+        <div class="col_2">
+            <input class="input_text" name="re_trade_pwd" id="find_trade_re_pwd" type="password" validateType="empty:请再次输入密码 same:#find_trade_new_pwd:两次密码输入不一致" placeholder="请再次输入密码" maxlength="20"/>
+        </div>
+    </div>
+    <div class="group m_t_10">
+        <div class="col_1"></div>
+        <div class="col_2">
+            <button type="button" id="find_trade_submit" class="btn size_m btn_blue">保存</button>
+        </div>
+    </div>
+</form>
+
+<script type="text/javascript">
+    function changeShowTradePwd(type) {
+        var tradeSetType = '${cuser.isSetTradePwd}';
+        if (type == "find") {
+            $('#find_trade_from').show();
+            $('#set_trade_from').hide();
+            $('#reset_trade_from').hide();
+        } else {
+            $('#find_trade_from').hide();
+            if (tradeSetType == "1") {
+                $('#set_trade_from').hide();
+                $('#reset_trade_from').show();
+            } else {
+                $('#set_trade_from').show();
+                $('#reset_trade_from').hide();
+            }
+        }
+    }
+    $(document).ready(function() {
+        var tradeSetType = '${cuser.isSetTradePwd}';
+
+        var formSetTrade = $('#set_trade_from'),
+                setTradeCode = $('#set_trade_code'),
+                setTradeGetCode = $('#set_trade_get_code'),
+                setTradeNewPwd = $('#set_trade_trade_pwd'),
+                setTradePwdStrong = $('#set_trade_pwd_strong'),
+                setTradeRePwd = $('#set_trade_re_pwd'),
+                setTradeSubmit = $('#set_trade_submit'),
+
+                tradeMobile = $('#set_trade_mobile'),
+
+                formResetTrade = $('#reset_trade_from'),
+                resetTradeOldPwd = $('#reset_trade_old_pwd'),
+                resetTradeNewPwd = $('#reset_trade_new_pwd'),
+                resetTradeRePwd = $('#reset_trade_re_pwd'),
+                resetTradeSubmit = $('#reset_trade_submilt'),
+                setTradeperiodSeconds = 0,
+
+                formFindTrade = $('#find_trade_from'),
+                findQuestionId = $('#find_question_id'),
+                findTradeCode = $('#find_trade_code'),
+                findTradeGetCode = $('#find_trade_get_code'),
+                findAnswer = $('#find_question_answer'),
+                findNewPwd = $('#find_trade_new_pwd'),
+                findReNewPwd = $('#find_trade_re_pwd'),
+                findSubmit = $('#find_trade_submit');
+
+        if (tradeSetType == "1") {
+            $(formSetTrade).hide();
+            $(formResetTrade).show();
+        } else {
+            $(formSetTrade).show();
+            $(formResetTrade).hide();
+        }
+
+        formValidate.init(formSetTrade);
+        formValidate.init(formResetTrade);
+        formValidate.init(formFindTrade);
+
+        // 设置安全密码保存，密码键入时设置安全级别
+        $(setTradeNewPwd).keyup(function() {
+            var pwdStrongVal = CMUTILS.pwdStrong($(this).val());
+            switch (pwdStrongVal) {
+                case 2:
+                    $(setTradePwdStrong).attr("class", "icons icon_medium");
+                    break;
+                case 3:
+                    $(setTradePwdStrong).attr("class", "icons icon_high");
+                    break;
+                default :
+                    $(setTradePwdStrong).attr("class", "icons icon_low");
+            }
+            return true;
+        });
+
+        // 获取验证码的方法
+        $(setTradeGetCode).click(function() {
+            if (setTradeperiodSeconds > 0) return false;
+            // 发送验证码
+            $.post('/sms/code', {biz_type:3}, function (response) {
+                if (response.success) {
+                    setTradeperiodSeconds = 60;
+                    $(setTradeGetCode).addClass("btn_gray").removeClass("btn_blue");
+                    var disableInterval = window.setInterval(function () {
+                        if (setTradeperiodSeconds > 0) {
+                            $(setTradeGetCode).html((--setTradeperiodSeconds) + "秒后重试");
+                        } else {
+                            window.clearInterval(disableInterval);
+                            $(setTradeGetCode).html("发送验证码");
+                            $(setTradeGetCode).addClass("btn_blue").removeClass("btn_gray");
+                        }
+                    }, 1000);
+                } else {
+                    formValidate.showFormTips(setTradeGetCode, response.msg);
+                }
+            });
+        });
+
+        // 获取验证码的方法
+        $(findTradeGetCode).click(function() {
+            if (setTradeperiodSeconds > 0) return false;
+            // 发送验证码
+            $.post('/sms/code', {biz_type:6}, function (response) {
+                if (response.success) {
+                    setTradeperiodSeconds = 60;
+                    $(findTradeGetCode).addClass("btn_gray").removeClass("btn_blue");
+                    var disableInterval = window.setInterval(function () {
+                        if (setTradeperiodSeconds > 0) {
+                            $(findTradeGetCode).html((--setTradeperiodSeconds) + "秒后重试");
+                        } else {
+                            window.clearInterval(disableInterval);
+                            $(findTradeGetCode).html("发送验证码");
+                            $(findTradeGetCode).addClass("btn_blue").removeClass("btn_gray");
+                        }
+                    }, 1000);
+                } else {
+                    formValidate.showFormTips(findTradeGetCode, response.msg);
+                }
+            });
+        });
+
+        // 设置安全密码的东东
+        $(setTradeSubmit).click(function() {
+            if (formValidate.validateForm(formSetTrade) == false) {
+                return false;
+            }
+            $.post('/user/tradepwd/set',
+                    {
+                        mobile : $(tradeMobile).val(),
+                        code : $(setTradeCode).val(),
+                        trade_pwd : RSAUtils.encryptedString($(setTradeNewPwd).val())
+                    },
+                    function(response){
+                        if(response.success){
+                            // TODO 弹框提示修改成功吧
+                            Alert.show("设置安全密码成功", "确认", function() {window.location.reload()});
+                        }else{
+                            formValidate.showFormTips(setTradeSubmit, response.msg);
+                        }
+                    }
+            );
+        });
+        // 重置安全密码的东东
+        $(resetTradeSubmit).click(function() {
+            if (formValidate.validateForm(formResetTrade) == false) {
+                return false;
+            }
+            $.post('/user/tradepwd/reset',
+                    {
+                        old_trade_pwd : RSAUtils.encryptedString($(resetTradeOldPwd).val()),
+                        new_trade_pwd : RSAUtils.encryptedString($(resetTradeNewPwd).val())
+                    },
+                    function(response){
+                        if(response.success){
+                            // TODO 弹框提示修改成功吧
+                            Alert.show("重置安全密码成功", "确认", function() {window.location.reload()});
+                        }else{
+                            formValidate.showFormTips(resetTradeSubmit, response.msg);
+                        }
+                    }
+            );
+        });
+
+        // 找回安全密码的东东
+        $(findSubmit).click(function() {
+            if (formValidate.validateForm(formFindTrade) == false) {
+                return false;
+            }
+            $.post('/user/tradepwd/find',
+                    {
+                        code : $(findTradeCode).val(),
+                        question_id : $(findQuestionId).val(),
+                        answer : $(findAnswer).val(),
+                        trade_pwd : RSAUtils.encryptedString($(findNewPwd).val()),
+                    },
+                    function(response){
+                        if(response.success){
+                            // TODO 弹框提示修改成功吧
+                            Alert.show("重置安全密码成功", "确认", function() {window.location.reload()});
+                        }else{
+                            formValidate.showFormTips(findSubmit, response.msg);
+                        }
+                    }
+            );
+        });
+
+    });
+</script>

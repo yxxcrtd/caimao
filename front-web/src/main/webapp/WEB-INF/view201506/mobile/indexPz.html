@@ -1,0 +1,53 @@
+<#assign name="实名认证"/>
+<#assign title="融资"/>
+<#assign header="融资"/>
+<#assign footer="1"/>
+<#include 'mobile/layout/layout.html'/>
+<#macro content>
+
+<article class="content">
+<aside class="con-spacing10 ">
+
+    <!--首页-->
+    <div class="list-index">
+        <#if isProDay>
+            <a class="list-index-item item02 clearfix" href="${basePath}/mobile/P1.htm">
+                <i class="icon-index icon-index02"></i>
+                <h2>${proDay}</h2>
+                <span class="tx-prompt">8倍杠杆 8倍利润<br/>想炒盘几天就几天，按天收费</span>
+            </a>
+        </#if>
+        <#if isProMonth>
+            <a class="list-index-item item01 clearfix" href="${basePath}/mobile/P2.htm">
+                <i class="icon-index icon-index01"></i>
+                <h2>${proMonth}</h2>
+                <span class="tx-prompt">5倍杠杆 5倍利润<br/>按月付息，利率超低</span>
+            </a>
+        </#if>
+        <#if isProMonth>
+            <a class="list-index-item item01 clearfix" href="${basePath}/mobile/P10.htm">
+                <i class="icon-index icon-index01"></i>
+                <h2>${proMonth}(低息)</h2>
+                <span class="tx-prompt">1倍杠杆,稳定收益,利率超低</span>
+            </a>
+        </#if>
+        <#if isProFree>
+            <a class="list-index-item item03 clearfix" href="${basePath}/mobile/P3.htm">
+                <i class="icon-index icon-index03"></i>
+                <h2>${proFree}</h2>
+                <span class="tx-prompt">我出资金，您来炒股，盈利全亏您</span>
+            </a>
+        </#if>
+        <#if isProContest>
+            <a class="list-index-item item04 clearfix" href="${basePath}/mobile/P4.htm">
+                <i class="icon-index icon-index04"></i>
+                <h2>${proContest}</h2>
+                <span class="tx-prompt">免费提供操盘资金，全名实盘炒股</span>
+            </a>
+        </#if>
+    </div>
+    <!--首页-->
+</aside>
+
+</article>
+</#macro>

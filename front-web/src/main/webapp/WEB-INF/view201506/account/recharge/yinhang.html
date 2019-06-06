@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+<#include "config.html"/>
+<#assign curTopMenu="account"/>
+<#assign curLeftMenu="deposit"/>
+<head>
+    <meta charset="utf-8">
+    <title>银行转账-财猫网</title>
+    <meta name="keywords" content="融资，股票融资，投资融资，理财融资，融资平台，融资炒股，融资网，融资公司" />
+    <meta name="description" content="财猫网由金融服务、风险管理及互联网运营等业界一流的专业人士组成的超百人全职运营团队。提供股票融资服务，致力于为公众提供一个国际化、高收益、安全、专业的互联网资产交易平台"/>
+    <!--基本布局样式-->
+    <link rel="stylesheet" type="text/css" href="${dojoUrl}/style/page/page.css?v=${jsVersion}" />
+    <link rel="stylesheet" type="text/css" href="${dojoUrl}/style/page/recharge.css?v=${jsVersion}" />
+    <script type="text/javascript" src="${dojoUrl}/js/accountRecharge.js?v=${jsVersion}"></script>
+</head>
+<body>
+<#include 'include/page/head.html'/>
+<!--内容区-->
+<div id="main">
+    <div class="w sec_main">
+        <#include 'include/menu/account_left.html'/>
+        <div class="right_bar">
+            <div class="tabNav">
+                <ul>
+                    <li><a href="${basePath}/account/recharge/wangyin.htm">网银充值</a> </li>
+                    <li><a href="${basePath}/account/recharge/zhifubao.htm">支付宝转账</a> </li>
+                    <li><a class="on" href="${basePath}/account/recharge/yinhang.htm">银行转账</a> </li>
+                    <li><a href="${basePath}/account/recharge/history.htm">充值记录</a> </li>
+                </ul>
+            </div>
+            <div class="counter transferBox" id="transferBox">
+                <p>您可以通过网上银行或银行柜台向 <b>北京朋乐投资管理有限公司</b> 转账</p>
+                <dl class="bankInfo">
+                    <dt><img src="${imgUrl}/002.jpg"></dt>
+                    <dd>
+                        <span>账号</span><b>1109 1322 0310 301</b><br>
+                        <span>户名</span><b>北京朋乐投资管理有限公司</b><br>
+                        <span>开户行</span><b>招商银行西二旗支行</b><br>
+                    </dd>
+                </dl>
+                <p class="notice">
+                    银行转账确认单（<span class="orange">请在线下转账或银行汇款完成后填写，以方便客服为您及时处理！</span>）
+                </p>
+                <div class="formHere">
+                    <form id="yinhangForm">
+                        <dl class="clear_fix formgroup">
+                            <dt>入账银行</dt>
+                            <dd class="inputBox selectBox"><input type="text" autocomplete="off" readonly value="招商银行西二旗支行" class="textInput" id="cBank"/><span></span>
+                                <!--<div class="bankList">
+                                    <ul>
+                                        <li>招商银行西二旗支行</li>
+                                    </ul>
+                                </div>-->
+                            </dd>
+                        </dl>
+                        <dl class="clear_fix formgroup" style="position: relative">
+                            <dt class="attachTip noticeTip rechargeNumCh" id="cNumCh"></dt>
+                            <dt>充值金额</dt>
+                            <dd class="inputBox"><input maxlength="8" type="text" autocomplete="off" class="textInput" validateType="empty:请输入充值金额 money" id="cNum" placeholder="请输入充值金额"><label for="cNum">元</label></dd>
+                        </dl>
+                        <dl class="clear_fix formgroup">
+                            <dt>备注</dt>
+                            <dd class="inputBox"><input type="text" autocomplete="off" class="textInput" id="cRemark" validateType="empty:请填写备注" placeholder="请填写备注" maxlength="100"/></dd>
+                        </dl>
+                        <#if balance == null>
+                            <div>请先完成<a href="/account/safe.htm">实名认证</a></div>
+                            <#else>
+                                <a href="javascript:void(0);" class="btn btn_red" id="submitBtnYinhang">下一步</a>
+                        </#if>
+                    </form>
+                </div>
+            </div>
+            <div class="counter transferBox" id="transferBoxConfirm" style="display: none">
+                <p>您可以通过网上银行或银行柜台向 <b>北京朋乐投资管理有限公司</b> 转账</p>
+                <dl class="bankInfo">
+                    <dt><img src="${imgUrl}/002.jpg"></dt>
+                    <dd>
+                        <span>账号</span><b>1109 1322 0310 301</b><br>
+                        <span>户名</span><b>北京朋乐投资管理有限公司</b><br>
+                        <span>开户行</span><b>招商银行西二旗支行</b><br>
+                    </dd>
+                </dl>
+                <p class="notice">
+                    银行转账确认单（<span class="orange">请在线下转账或银行汇款完成后填写，以方便客服为您及时处理！</span>）
+                </p>
+                <div class="formSuccess">
+                    <strong>恭喜您，银行转账确认单提交成功！</strong>
+                    <p>申请确认正在紧张处理，请耐心等待。如有疑问请拨打客服电话</p>
+                    <em>4000-898-000</em>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<#include 'include/page/foot.html'/>
+</body>
+</html>

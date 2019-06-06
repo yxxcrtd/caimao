@@ -1,0 +1,151 @@
+@keyframes errorhighlight {
+    0% { background-color: #ff6666;}
+    50% {background-color: rgb(219, 0, 0);}
+    80% {tbackground-color: #ff6666; }
+}
+
+@-webkit-keyframes errorhighlight {
+    0% { background-color: #ff6666;}
+    50% {background-color: rgb(219, 0, 0);}
+    80% {tbackground-color: #ff6666; }
+}
+
+.errorhighlight {
+    -webkit-animation: errorhighlight 1s;
+    -moz-animation: errorhighlight 1s;
+    animation: errorhighlight 1s;
+}
+
+@keyframes shakeX {
+    0% {transform: rotateX(0deg);}
+    20% {transform: rotateX(30deg);}
+    40% {transform: rotateX(-30deg);}
+    60% {transform: rotateX(15deg);}
+    80% {transform: rotateX(0deg);}
+}
+
+@-webkit-keyframes shakeX {
+    0% {transform: rotateX(0deg);}
+    20% {transform: rotateX(30deg);}
+    40% {transform: rotateX(-30deg);}
+    60% {transform: rotateX(15deg);}
+    80% {transform: rotateX(0deg);}
+}
+
+.shakeX {
+    -webkit-animation: shakeX 2.5s;
+    -moz-animation: shakeX 2.5s;
+    animation: shakeX 2.5s;
+}
+
+@-webkit-keyframes pulse {
+    0% {
+        -webkit-transform: scale3d(1,1,1);
+    }
+
+    50% {
+        -webkit-transform: scale3d(1.05,1.05,1.05);
+    }
+
+    100% {
+        -webkit-transform: scale3d(1,1,1);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        -webkit-transform: scale3d(1,1,1);
+        -ms-transform: scale3d(1,1,1);
+        transform: scale3d(1,1,1);
+    }
+
+    50% {
+        -webkit-transform: scale3d(1.05,1.05,1.05);
+        -ms-transform: scale3d(1.05,1.05,1.05);
+        transform: scale3d(1.05,1.05,1.05);
+    }
+
+    100% {
+        -webkit-transform: scale3d(1,1,1);
+        -ms-transform: scale3d(1,1,1);
+        transform: scale3d(1,1,1);
+    }
+}
+
+.pulse {
+    -webkit-animation: pulse 1s;
+    animation: pulse 1s;
+}
+
+.list-amoutCompetition-item:hover {
+    -webkit-animation: pulse 0.5s;
+    animation: pulse 0.5s;
+}
+
+@-webkit-keyframes bounce {
+    0%,100%,20%,53%,80% {
+        -webkit-transition-timing-function: cubic-bezier(0.215,.61,.355,1);
+        transition-timing-function: cubic-bezier(0.215,.61,.355,1);
+        -webkit-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0)
+    }
+
+    40%,43% {
+        -webkit-transition-timing-function: cubic-bezier(0.755,.050,.855,.060);
+        transition-timing-function: cubic-bezier(0.755,.050,.855,.060);
+        -webkit-transform: translate3d(0,-30px,0);
+        transform: translate3d(0,-30px,0)
+    }
+
+    70% {
+        -webkit-transition-timing-function: cubic-bezier(0.755,.050,.855,.060);
+        transition-timing-function: cubic-bezier(0.755,.050,.855,.060);
+        -webkit-transform: translate3d(0,-15px,0);
+        transform: translate3d(0,-15px,0)
+    }
+
+    90% {
+        -webkit-transform: translate3d(0,-4px,0);
+        transform: translate3d(0,-4px,0)
+    }
+}
+
+@keyframes bounce {
+    0%,100%,20%,53%,80% {
+        -webkit-transition-timing-function: cubic-bezier(0.215,.61,.355,1);
+        transition-timing-function: cubic-bezier(0.215,.61,.355,1);
+        -webkit-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0)
+    }
+
+    40%,43% {
+        -webkit-transition-timing-function: cubic-bezier(0.755,.050,.855,.060);
+        transition-timing-function: cubic-bezier(0.755,.050,.855,.060);
+        -webkit-transform: translate3d(0,-30px,0);
+        -ms-transform: translate3d(0,-30px,0);
+        transform: translate3d(0,-30px,0)
+    }
+
+    70% {
+        -webkit-transition-timing-function: cubic-bezier(0.755,.050,.855,.060);
+        transition-timing-function: cubic-bezier(0.755,.050,.855,.060);
+        -webkit-transform: translate3d(0,-15px,0);
+        -ms-transform: translate3d(0,-15px,0);
+        transform: translate3d(0,-15px,0)
+    }
+
+    90% {
+        -webkit-transform: translate3d(0,-4px,0);
+        -ms-transform: translate3d(0,-4px,0);
+        transform: translate3d(0,-4px,0)
+    }
+}
+
+.bounce {
+    -webkit-animation: bounce 1s;
+    animation: bounce 1s;
+    -webkit-transform-origin: center bottom;
+    -ms-transform-origin: center bottom;
+    transform-origin: center bottom
+}

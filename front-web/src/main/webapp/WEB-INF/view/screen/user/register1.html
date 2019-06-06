@@ -1,0 +1,45 @@
+<#assign controller="RegisterSuccess"/>
+<#include 'layout/layout.html'/>
+<#macro content>
+    <div class="contents grid-990">
+        <!--框架-->
+        <div class="frame-all frame-all-box">
+            <div class="con-registration">
+                <!--内容start-->
+                <div class="con-success clearfix" style="width:900px;">
+                    <div class="cm-left successText-rside">
+                        <div class="icon-big-success-head">
+                            <p class="layout01"><i class="ui-icon icon-big-success"></i><b>恭喜您，注册成功！</b></p>
+                            <p class="layout-c"><a class="am-ft-red" data-direct="home" href="${basePath}/home/index.htm">会员中心</a></p>
+                        </div>
+                        <!--成功列表-->
+                        <div class="sideCatalog">
+                            <div class="success-validate">
+                                <i class="icon-reg-real-name"></i>
+                                <div class="success-validateText">
+                                    <p class="name"><a href="${basePath}/user/<#if !authentication>certification<#else>uploadID</#if>.htm"><span data-direct="real">实名认证</span></a><i class="icon-right"></i></p>
+                                    <p>仅需输入一张<em class="am-ft-orange">真实有效的身份证</em>即可认证成功。 </p>
+                                </div>
+                            </div>
+                            <div class="success-validate">
+                                <i class="icon-reg-password"></i>
+                                <div class="success-validateText">
+                                    <p class="name"><a href="${basePath}/account/tradepwd/set.htm"><span data-direct="tradePwd">安全密码</span></a><i class="icon-right"></i></p>
+                                    <p>安全密码是平台上进行核心操作时，<em class="am-ft-orange">唯一身份认证。</em></p>
+                                </div>
+                            </div>
+                        </div>
+                        <!--列表-->
+
+                    </div>
+                </div>
+                <!--内容end-->
+
+
+
+
+            </div>
+
+        </div><!--框架end-->
+    </div>
+</#macro>

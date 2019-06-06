@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="TpzSmsCheckcode" >
+  <resultMap id="BaseResultMap" type="com.caimao.bana.api.entity.TpzSmsCheckcodeEntity" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="sms_biz_type" property="smsBizType" jdbcType="VARCHAR" />
+    <result column="check_code" property="checkCode" jdbcType="VARCHAR" />
+    <result column="checkcode_set_datetime" property="checkcodeSetDatetime" jdbcType="TIMESTAMP" />
+    <result column="last_check_datetime" property="lastCheckDatetime" jdbcType="TIMESTAMP" />
+    <result column="invalid_datetime" property="invalidDatetime" jdbcType="TIMESTAMP" />
+    <result column="check_times" property="checkTimes" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, mobile, sms_biz_type, check_code, checkcode_set_datetime, last_check_datetime, 
+    invalid_datetime, check_times
+  </sql>
+  <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tpz_sms_checkcode
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Long" >
+    delete from tpz_sms_checkcode
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="save" parameterType="com.caimao.bana.api.entity.TpzSmsCheckcodeEntity" >
+    insert into tpz_sms_checkcode
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != 0  and    id != ''" >
+        id,
+      </if>
+      <if test="mobile != null and  mobile   != ''" >
+        mobile,
+      </if>
+      <if test="smsBizType != null and  smsBizType   != ''" >
+        sms_biz_type,
+      </if>
+      <if test="checkCode != null and    checkCode != ''" >
+        check_code,
+      </if>
+      <if test="checkcodeSetDatetime != null and checkcodeSetDatetime    != ''" >
+        checkcode_set_datetime,
+      </if>
+      <if test="lastCheckDatetime != null and  lastCheckDatetime   != ''" >
+        last_check_datetime,
+      </if>
+      <if test="invalidDatetime != null and   invalidDatetime  != ''" >
+        invalid_datetime,
+      </if>
+      <if test="checkTimes != null and   checkTimes  != ''" >
+        check_times,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != 0 and   id  != ''" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="mobile != null and  mobile   != ''" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="smsBizType != null and   smsBizType  != ''" >
+        #{smsBizType,jdbcType=VARCHAR},
+      </if>
+      <if test="checkCode != null and   checkCode  != ''" >
+        #{checkCode,jdbcType=VARCHAR},
+      </if>
+      <if test="checkcodeSetDatetime != null and   checkcodeSetDatetime  != ''" >
+        #{checkcodeSetDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastCheckDatetime != null and lastCheckDatetime    != ''" >
+        #{lastCheckDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="invalidDatetime != null and  invalidDatetime   != ''" >
+        #{invalidDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkTimes != null and   checkTimes  != ''" >
+        #{checkTimes,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.caimao.bana.api.entity.TpzSmsCheckcodeEntity" >
+    update tpz_sms_checkcode
+    <set >
+      <if test="mobile != null and  mobile   != ''" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="smsBizType != null and   smsBizType  != ''" >
+        sms_biz_type = #{smsBizType,jdbcType=VARCHAR},
+      </if>
+      <if test="checkCode != null and   checkCode  != ''" >
+        check_code = #{checkCode,jdbcType=VARCHAR},
+      </if>
+      <if test="checkcodeSetDatetime != null and  checkcodeSetDatetime   != ''" >
+        checkcode_set_datetime = #{checkcodeSetDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastCheckDatetime != null and  lastCheckDatetime   != ''" >
+        last_check_datetime = #{lastCheckDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="invalidDatetime != null and   invalidDatetime  != ''" >
+        invalid_datetime = #{invalidDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkTimes != null">
+        check_times = #{checkTimes},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <!-- no auto -->
+  <select id="getByMobileAndBiz" resultMap="BaseResultMap" parameterType="com.caimao.bana.api.entity.TpzSmsCheckcodeEntity" >
+    select 
+    <include refid="Base_Column_List" />
+    from tpz_sms_checkcode
+    where mobile = #{mobile,jdbcType=VARCHAR} and sms_biz_type = #{smsBizType,jdbcType=VARCHAR}
+  </select>
+</mapper>

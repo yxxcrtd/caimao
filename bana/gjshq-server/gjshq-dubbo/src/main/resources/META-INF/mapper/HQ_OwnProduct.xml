@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="HQ_OwnProduct">
+	<resultMap id="BaseResultMap" type="com.caimao.hq.api.entity.OwnProduct">
+		<id column="own_product_id" property="ownProductId" jdbcType="BIGINT" />
+		<result column="user_id" property="userId" jdbcType="BIGINT" />
+		<result column="exchange" property="exchange" jdbcType="VARCHAR" />
+		<result column="prod_code" property="prodCode" jdbcType="VARCHAR" />
+		<result column="prod_name" property="prodName" jdbcType="VARCHAR" />
+		<result column="sort" property="sort" jdbcType="VARCHAR" />
+		<result column="opt_date" property="optDate" jdbcType="VARCHAR" />
+		<result column="status" property="status" jdbcType="VARCHAR" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="category" property="category" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<sql id="baseField">
+		t.own_product_id,t.user_id,t.exchange, t.prod_code, t.prod_name,t.sort,t.opt_date,t.status,t.name,t.category
+	</sql>
+	<select id="selectList" resultMap="BaseResultMap" parameterType="STRING">
+		select   <include refid="baseField" />
+		from gjs_own_product t
+		WHERE  user_id=#{userId}
+		order by t.sort  asc,opt_date DESC
+	</select>
+
+
+	<select id="selectSingle" resultMap="BaseResultMap" parameterType="com.caimao.hq.api.entity.OwnProduct">
+		select   <include refid="baseField" />
+		from gjs_own_product t
+		WHERE  user_id=#{userId} and  exchange=#{exchange} and prod_code=#{prodCode}
+		order by t.sort  asc
+	</select>
+
+
+	<update id="batchUpdate"   parameterType="java.util.List">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			update gjs_own_product
+			set sort = #{item.sort}
+			WHERE user_id=#{item.userId,jdbcType=BIGINT}  and exchange =#{item.exchange,jdbcType=VARCHAR} and 	prod_code = #{item.prodCode,jdbcType=VARCHAR}
+		</foreach>
+
+	</update>
+
+
+	<insert id="insert" parameterType="com.caimao.hq.api.entity.OwnProduct"
+			useGeneratedKeys="true" keyProperty="ownProductId">
+			insert into gjs_own_product(user_id,exchange,prod_code,prod_name,sort,opt_date,status,name,category)
+		    values(#{userId},#{exchange},#{prodCode},#{prodName},#{sort},#{optDate},#{status},#{name},#{category})
+	</insert>
+	<delete id="deleteByPrimaryKey" parameterType = "java.util.Map" >
+		delete from gjs_own_product
+		where  user_id=#{userId} AND own_product_id in
+
+		<foreach item="item" index="index" collection="ownProductId"
+				 open="(" separator="," close=")">
+			#{item}
+		</foreach>
+
+	</delete>
+
+
+	<delete id="delete" parameterType = "java.util.List" >
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			delete from gjs_own_product
+			where user_id=#{item.userId}  and exchange=#{item.exchange} and prod_code=#{item.prodCode}
+		</foreach>
+	</delete>
+</mapper>

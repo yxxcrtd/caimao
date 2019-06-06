@@ -1,0 +1,240 @@
+<!doctype html>
+<#include "gjs/config.html" />
+<#assign topMenu="home" />
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>贵金属投资交易平台_贵金属行情|财猫贵金属交易平台</title>
+        <meta name="description" content="财猫贵金属是财猫网旗下的专业贵金属投资交易平台,提供黄金T+D、白银T+D交易，实时发布黄金、白银等贵金属交易行情和价格走势图，是上海黄金交易所、南方稀贵金属交易所的会员单位，投资贵金属就来财猫网。">
+        <meta name="Keywords" content="贵金属投资交易平台,贵金属实时行情,贵金属实时报价,黄金T+D,白银T+D,贵金属交易软件">
+<#include "gjs/include/page/head.html" />
+<!-- <body class="fixedBannerPage"> -->
+<body>
+<#include "gjs/include/menu/topNav.html" />
+<#include "gjs/include/menu/menu.html" />
+
+<div class="bannerFocus">
+    <div class="focus" id="focusBox">
+        <ul id="focus">
+            <#if (bannerList.items?size > 0)>
+                <#list bannerList.items as b>
+                    <#if b.pcPic != "">
+                        <li style="background-image:url(${b.pcPic})">
+                            <a <#if b.pcJumpUrl != "">href="${b.pcJumpUrl}" target="_blank"<#else />href="javascript:void(0);"</#if>></a>
+                        </li>
+                    </#if>
+                </#list>
+            </#if>
+        </ul>
+        <div class="btn"><div id="btn"></div></div>
+    </div>
+    <script>
+        focus("#focusBox","#focus/li","#btn/span",6000);
+    </script>
+<!--     <div class="tipshow">
+    <dl class="tipBox">
+        <dt><a href=""><img src="${imgUrl}/pic.jpg"></a></dt>
+        <dd><div>
+            <p class="topCount"><i class="icon1"></i>贵金属累计盈利：<b>￥4334839592.54</b></p>
+            <p><i></i>平台累计开户：<b>4334839592人</b></p>
+        </div></dd>
+    </dl>
+</div> -->
+</div>
+
+
+<div class="hotGoods modPart">
+    <div class="innerCont">
+        <div class="head">
+            <#if token != "">
+            <a href="market.html">我的自选</a>
+            <#else/>
+            <a href="market.html?2">热门品种行情</a> 
+            </#if>
+        </div>
+        <div class="body" id="queryHotGoods">
+            <div class="loading"><img src="${imgUrl}/loading.gif"></div>
+            <script type="text/x-tmpl">
+					<table class="table table_hover">
+						<colgroup>
+							<col style="width:180px"></col>
+							<col></col>
+							<col></col>
+							<col></col>
+							<col></col>
+							<col></col>
+							<col></col>
+							<col style="width:180px"></col>
+						</colgroup>
+						<thead>
+							<th>商品</th>
+							<th class="right">最新价</th>
+							<th class="right">涨跌幅</th>
+							<th class="right">今开盘</th>
+							<th class="right">昨收盘</th>
+							<th class="right">成交量</th>
+							<th class="right">成交金额</th>
+							<th class="right">最高价/最低价</th>
+						</thead>
+						<tbody>
+							<% 
+                                var exchangeArr = {
+                                    "NJS" : "南",
+                                    "SJS" : "上"
+                                };
+                                for(var _this,i = 0, l = Math.min(data.length,10); i < l; i++){
+								_this = data[i];%>
+							<tr onclick="location.href='chart.html?code=<%=_this.prodCode+'.'+_this.exchange%>'">
+								<td><%="["+exchangeArr[_this.exchange]+"] "+_this.prodName%></td>
+								<td class="right"><b <%if(_this.pxChangeRate < 0){%>class="green"<%}else{%>class="red"<%}%>><%=_this.lastPx%></b></td>
+								<td class="right"><b <%if(_this.pxChangeRate < 0){%>class="green"<%}else{%>class="red"<%}%>><%=cutFixed(_this.pxChangeRate,2)%>%</b> </td>
+								<td class="right"><%=_this.openPx%></td>
+								<td class="right"><%=_this.preclosePx%></td>
+								<td class="right"><%=shortIndex(_this.businessAmount*1,3)%></td>
+								<td class="right"><%=shortIndex(_this.businessBalance*1,3)%></td>
+								<td class="right"><%=_this.highPx%>/<%=_this.lowPx%></td>
+
+							</tr>
+							<%}%>
+						</script>
+            </tbody>
+            </table>
+
+        </div>
+        <script>
+            h.plan("#queryHotGoods",h.render.queryGoodsList.key);
+            h.option = isLogin ? h.api.query_fav_goods(token,h.render.queryGoodsList) : 
+                                 h.api.query_hot_goods(h.render.queryGoodsList);
+            h.request(h.option);
+        </script>
+    </div>
+</div>
+<div class="propaganda modPart">
+    <div class="innerCont overflowBox">
+        <ul class="innerBox">
+            <li class="info1" abcv="aaa">
+                <strong>T+0</strong>
+                <em>1天可多次买卖</em>
+            </li>
+            <li class="info2">
+                <strong>10倍杠杆</strong>
+                <em>小资金</em>
+                <em>博出大收益</em>
+            </li>
+            <li class="info3">
+                <strong>双向交易</strong>
+                <em>不管涨跌</em>
+                <em>都能赚钱</em>
+            </li>
+            <li class="info4">
+                <strong>秒速开户</strong>
+                <em>在线极速开户</em>
+                <em>随时随地炒金银</em>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="infoList modPart">
+    <div class="innerCont overflowBox">
+        <div class="innerBox">
+            <div class="unit news">
+                <div class="head"><a href="/gjs/article/list.html">经济要闻</a></div>
+                <div class="body" id="homeNotice">
+                    <div class="loading"><img src="${imgUrl}/loading.gif"></div>
+                    <script type="text/x-tmpl">
+                            <ul>
+                                    <% for(var _this,i = 0, l = data.items.length; i < l; i++){
+                                        _this = data.items[i];
+                                    %>
+                                    <li><i></i><a href="/gjs/article/detail.html?id=<%=_this.id%>" target="_blank"><%=_this.title%></a><em><span>浏览:<%=_this.viewCount%></span><%=_this.created%></em></li>
+                                    <%
+                                        }
+                                    %>
+                            </ul>
+                        </script>
+                </div>
+                <script>
+                    var fire = h.render.omnipotent();
+                    h.plan("#homeNotice",fire.key);
+                    h.option = h.api.notice_list(4,1,fire);
+                    h.request(h.option);
+                </script>
+            </div>
+            <div class="unit news">
+                <div class="head"><a href="/gjs/article/flash.html">实时快讯</a></div>
+                <div class="body" id="homeFlash">
+                    <div class="loading"><img src="${imgUrl}/loading.gif"></div>
+                    <script type="text/x-tmpl">
+                            <ul>
+                                    <% for(var _this,i = 0, l = data.items.length; i < l; i++){
+                                        _this = data.items[i];
+                                    %>
+                                    <li><i></i><a href="/gjs/article/flash.html" ><%=_this.content%></a><em><span><%=_this.time%></span></em></li>
+                                    <%
+                                        }
+                                    %>
+                            </ul>
+                        </script>
+                </div>
+                <script>
+                    var fire = h.render.omnipotent();
+                    h.plan("#homeFlash",fire.key);
+                    h.option = h.api.flash_list(4,1,fire);
+                    h.request(h.option);
+                </script>
+            </div>
+            <div class="unit help">
+                <div class="head"><a href="/gjs/article/help.html">帮助指引</a></div>
+                <div class="body">
+                    <ul>
+                        <li><i></i><a href="/gjs/article/help.html?1&1" target="_blank">上海黄金交易所简介</a></li>
+                        <li><i></i><a href="/gjs/article/help.html?1&2" target="_blank">南方稀贵金属交易所简介</a></li>
+                        <li><i></i><a href="/gjs/article/help.html?1&3" target="_blank">交易所热点对比</a></li>
+                        <li><i></i><a href="/gjs/article/help.html?2&4" target="_blank">南交所热点问题</a></li>
+                        <li><i></i><a href="/gjs/article/help.html?3&7" target="_blank">上金所热点问题</a></li>
+                    </ul>
+                </div>
+            </div>
+<!--             <div class="unit course">
+    <div class="head"><span class="title">新手学堂</span></div>
+    <div class="body">
+        <ul>
+            <li><i></i><a href="">敬请期待</a></li>
+        </ul>
+    </div>
+</div> -->
+            <div class="unit social">
+                <div class="head"><span class="title">专业投资群</span></div>
+                <div class="body">
+                    <ul>
+                        <li><i></i><a rel="nofollow" href="http://jq.qq.com/?_wv=1027&k=crstNQ">316681653</a><span>未满</span></li><!--
+                        <li><i></i><a href="">[南京]388881123</a><span>未满</span></li>
+                        <li><i class="unactivated"></i>[南京]388881123<span>已满</span></li>
+                        <li><i class="unactivated"></i>[南京]388881123<span>已满</span></li>
+                        <li><i class="unactivated"></i>[南京]388881123<span>已满</span></li> -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="partners modPart">
+    <div class="innerCont overflowBox">
+        <div class="title">合作伙伴</div>
+        <ul class="partnersList">
+            <li><img src="${imgUrl}/partner/1.jpg"></li>
+            <li><img src="${imgUrl}/partner/2.jpg"></li>
+            <li><img src="${imgUrl}/partner/3.jpg"></li>
+            <li><img src="${imgUrl}/partner/4.jpg"></li>
+            <li><img src="${imgUrl}/partner/5.jpg"></li>
+            <li><img src="${imgUrl}/partner/6.jpg"></li>
+        </ul>
+    </div>
+</div>
+
+<!-- <div class="fixedBottom"><div>
+    <img src="${imgUrl}/bottomNotice.png"><a href="/gjs/openAccount.html">立即开户</a>
+</div></div> -->
+<#include "gjs/include/page/foot.html" />
+    </body>
+</html>

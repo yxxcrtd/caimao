@@ -1,0 +1,38 @@
+<!doctype html>
+<#include "gjs/config.html" />
+<#assign topMenu="openAccount" />
+
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>开户-财猫贵金属</title>
+<#include "gjs/include/page/head.html" />
+<body>
+<#include "gjs/include/menu/topNav.html" />
+<#include "gjs/include/menu/menu.html" />
+	
+	
+
+	<div class="account">
+		<div class="innerCont upload">
+			<div class="titleBox">上传身份证</div>
+			<p class="notice">上交所提示您，为了保证您顺利开户，请及时上传有效身份证照片。</p>
+			<div class="uploadBox">
+				<dl>
+					<dt>身份证正面</dt>
+					<dd class="uppic"><img src="${imgUrl}/card1.jpg"></dd>
+					<dd class="notice"></dd>
+				</dl>
+				<dl>
+					<dt>身份证反面</dt>
+					<dd class="uppic"><img src="${imgUrl}/card1.jpg"></dd>
+					<dd class="notice"></dd>
+				</dl>
+			</div>
+		</div>
+	</div>
+
+
+<#include "gjs/include/page/foot.html" />
+	</body>
+</html>

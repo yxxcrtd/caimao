@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="YBKSummary">
+    <resultMap id="BaseResultMap" type="com.caimao.bana.api.entity.ybk.YBKSummaryEntity">
+        <id column="exchange_id" property="exchangeId" jdbcType="INTEGER"/>
+        <result column="short_name" property="shortName" jdbcType="VARCHAR" />
+        <result column="exchange_name" property="exchangeName" jdbcType="VARCHAR"/>
+        <result column="yester_balance_price" property="yesterBalancePrice" jdbcType="BIGINT"/>
+        <result column="open_price" property="openPrice" jdbcType="BIGINT"/>
+        <result column="cur_price" property="curPrice" jdbcType="BIGINT"/>
+        <result column="current_gains" property="currentGains" jdbcType="BIGINT"/>
+        <result column="total_amount" property="totalAmount" jdbcType="BIGINT"/>
+        <result column="total_money" property="totalMoney" jdbcType="BIGINT"/>
+        <result column="high_price" property="highPrice" jdbcType="BIGINT"/>
+        <result column="low_price" property="lowPrice" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        exchange_id,short_name,exchange_name, yester_balance_price, open_price,cur_price, current_gains, total_amount, total_money, high_price, low_price
+    </sql>
+
+    <select id="queryList" resultMap="BaseResultMap" parameterType="com.caimao.bana.api.entity.ybk.YBKSummaryEntity">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM ybk_account
+        ORDER BY current_gains DESC
+    </select>
+
+    <select id="queryById" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM ybk_summary
+        WHERE exchange_id = #{exchangeId}
+    </select>
+
+    <insert id="insert" parameterType="com.caimao.bana.api.entity.ybk.YBKSummaryEntity">
+        INSERT INTO ybk_summary
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="exchangeId != null">exchange_id,</if>
+            <if test="exchangeName != null">exchange_name,</if>
+            <if test="shortName != null">short_name,</if>
+            <if test="yesterBalancePrice != null">yester_balance_price,</if>
+            <if test="openPrice != null">open_price,</if>
+            <if test="curPrice != null">cur_price,</if>
+            <if test="currentGains != null">current_gains,</if>
+            <if test="totalAmount != null">total_amount,</if>
+            <if test="totalMoney != null">total_money,</if>
+            <if test="highPrice != null">high_price,</if>
+            <if test="lowPrice != null">low_price,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="exchangeId != null">#{exchangeId},</if>
+            <if test="exchangeName != null">#{exchangeName},</if>
+            <if test="shortName != null">#{shortName},</if>
+            <if test="yesterBalancePrice != null">#{yesterBalancePrice},</if>
+            <if test="openPrice != null">#{openPrice},</if>
+            <if test="curPrice != null">#{curPrice},</if>
+            <if test="currentGains != null">#{currentGains},</if>
+            <if test="totalAmount != null">#{totalAmount},</if>
+            <if test="totalMoney != null">#{totalMoney},</if>
+            <if test="highPrice != null">#{highPrice},</if>
+            <if test="lowPrice != null">#{lowPrice},</if>
+        </trim>
+    </insert>
+    <update id="update">
+        UPDATE ybk_summary
+        <set>
+            <if test="exchangeName != null">exchange_name=#{exchangeName},</if>
+            <if test="shortName != null">short_name=#{shortName},</if>
+            <if test="yesterBalancePrice != null">yester_balance_price=#{yesterBalancePrice},</if>
+            <if test="openPrice != null">open_price=#{openPrice},</if>
+            <if test="curPrice != null">cur_price=#{curPrice},</if>
+            <if test="currentGains != null">current_gains=#{currentGains},</if>
+            <if test="totalAmount != null">total_amount=#{totalAmount},</if>
+            <if test="totalMoney != null">total_money=#{totalMoney},</if>
+            <if test="highPrice != null">high_price=#{highPrice},</if>
+            <if test="lowPrice != null">low_price=#{lowPrice},</if>
+        </set>
+        WHERE exchange_id = #{exchangeId}
+    </update>
+
+    <select id="queryCompositeIndex" resultType="hashmap">
+        SELECT
+        t1.exchange_id AS exchangeId,
+        t1.short_name AS shortName,
+        t1.exchange_name AS exchangeName,
+        t1.yester_balance_price AS yesterBalancePrice,
+        t1.open_price AS openPrice,
+        t1.cur_price AS curPrice,
+        t1.current_gains AS currentGains,
+        t1.total_amount AS totalAmount,
+        t1.total_money AS totalMoney,
+        t1.high_price AS highPrice,
+        t1.low_price AS lowPrice,
+        t2.trade_day_type as tradeDayType,
+        t2.am_begin_time AS amBeginTime,
+        t2.am_end_time AS amEndTime,
+        t2.pm_begin_time AS pmBeginTime,
+        t2.pm_end_time AS pmEndTime,
+        t2.sort_no AS sortNo,
+        t2.shen_gou_num AS shenGouNum
+        FROM ybk_summary t1 LEFT JOIN ybk_exchange t2 ON t1.exchange_id = t2.id
+        WHERE t2.status=2
+        ORDER BY sortNo ASC
+    </select>
+</mapper>

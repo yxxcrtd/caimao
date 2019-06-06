@@ -1,0 +1,32 @@
+<div id="doc_foot">
+    <div class="section align_center">
+        <div class="foot_link">
+            <a href="${basePath}/company-intro.htm">关于我们</a><i class="seg">|</i>
+            <a href="${basePath}/qa-help.htm">帮助</a><i class="seg">|</i>
+            <a href="${basePath}/download.htm">客户端下载</a>
+        </div>
+        <div class="foot_share">
+            <#if weiboUrl><a href="${weiboUrl}" target="_blank"><i class="icon_foot_weibo"></i></a></#if>
+            <#if wechatImg>
+                <a href="javascript:void(0);" class="foot_weixin">
+                    <i class="icon_foot_weixin"></i>
+                    <span class="weixin_2d"><img src="${dojoUrl}/app/resources/image/customize/${wechatImg}" alt=""/></span>
+                </a>
+            </#if>
+        </div>
+        <div class="foot_phone">
+            <i class="icon_foot_phone"></i>
+            ${hotline}
+        </div>
+        <div class="foot_copyright">版权所有 © ${company} 丨 ${webRecord}</div>
+    </div>
+</div>
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?40c3749d7e01ea226451c05cc78ee57f";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>

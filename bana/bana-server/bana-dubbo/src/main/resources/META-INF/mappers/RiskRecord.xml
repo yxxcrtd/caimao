@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="RiskRecord">
+    <select id="getUserLastSendMsg" resultType="com.caimao.bana.api.entity.RiskRecordEntity">
+        SELECT
+        id,
+        user_id AS userId,
+        send_type AS sendType,
+        send_content AS sendContent,
+        created
+        FROM bana_risk_record
+        WHERE user_id = #{userId} AND send_type = #{sendType}
+        ORDER BY id DESC LIMIT 1
+    </select>
+
+    <insert id="doSave" parameterType="hashmap" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO bana_risk_record (user_id ,send_type ,send_content,created)
+        VALUES (#{userId}, #{sendType}, #{sendContent}, #{created})
+    </insert>
+</mapper>

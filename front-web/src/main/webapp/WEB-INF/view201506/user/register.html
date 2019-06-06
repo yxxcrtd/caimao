@@ -1,0 +1,110 @@
+<!doctype html>
+<#include "config.html"/>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>注册-财猫网</title>
+    <!--基本布局样式-->
+    <link rel="stylesheet" type="text/css" href="${dojoUrl}/style/page/page.css?v=${jsVersion}" />
+    <script src="${dojoUrl}/js/userRegister.js?v=${jsVersion}"></script>
+    <script>
+        var homeUrl = '${homeUrl}';
+        var ybkUrl = '${ybkUrl}';
+        var jinUrl = '${jinUrl}';
+    </script>
+</head>
+
+<body>
+<#include 'include/page/head.html'/>
+
+<div id="registerStep1Div" class="login register">
+    <div class="register_in <#if activityOpen == null>login_in</#if>">
+        <div class="w relative">
+            <img class="activity_img" src="${imgUrl}/images/login_bg.png"  width="630" height="516">
+            <div class="home_login home_login_bg"></div>
+            <div class="home_login">
+                <form action="/" method="post" id="regiester1">
+                    <div class="hd">
+                        <h5 class="align_left">&nbsp;注册财猫</h5>
+                    </div>
+                    <div class="bd">
+                        <div class="group m_t_10">
+                            <input id="registerMobile" validateType="empty:手机号码不能为空 phone" type="text" autocomplete="off" placeholder="请输入手机号码" class="input_text" maxlength="11"/>
+                        </div>
+                        <div class="group clear_fix">
+                            <input id="smsCheckCode" type="text" autocomplete="off" validateType="empty:验证码不能为空 authcode" placeholder="请输入短信验证码" class="input_text input_verify" maxlength="6"/>
+                            <button id="sendSmsCheckCode" type="button" class="verify">发送验证码</button>
+                        </div>
+                        <button id="registerS1Btn" type="button" class="btn btn_red size_full m_t_10">下一步</button>
+                    </div>
+                </form>
+
+                <div class="ft m_t_10">已有账户？<a href="/user/login.html">登录</a>${activity_open}</div>
+            </div>
+        </div>
+    </div>
+
+    <#if activityOpen??>
+        <p class="rule">
+            活动规则：<br>
+            1.本活动面向2015年8月19日00点至8月31日24点期间新注册并实名的用户。<br>
+            2.注册即送100元现金，注册后24小时内到账。<br>
+            3.用户在活动期间第一次配资后，即可提现红包。<br>
+            4.红包失效情况:（1）若充值后没有配资即提现，联系客服即可，同时红包失效;（2）8月31日24点之前没有配资，红包失效;（3）日配资用户当天配资当天归还，红包失效。<br>
+            5.本活动最终解释权归财猫网所有。
+        </p>
+    </#if>
+</div>
+
+<div id="registerStep2Div" class="login register" style="display:none;">
+    <div class="register_in">
+        <div class="w relative">
+            <#if activityOpen??>
+                <img class="activity_img" src="${imgUrl}/images/login_activity.png" width="604" height="400">
+                <#else>
+                    <img class="activity_img" src="${imgUrl}/images/login_bgm.png"  width="630" height="516">
+            </#if>
+            <div class="home_login home_regiester home_login_bg"></div>
+            <div class="home_login home_regiester">
+                <form action="/user/regiester" method="post" id="regiester2">
+                    <div class="hd">
+                        <h5 class="align_left"> &nbsp;注册财猫</h5>
+                    </div>
+                    <div class="bd">
+                        <p id="echoRegisterMobile" class="reg_phone">您的手机号码：<strong>18611356701</strong> </p>
+                        <!--<p ></p>-->
+                        <div class="group p_b_15">
+                            <input id="password" type="password" validateType="empty:密码不能为空 len:6:16 password" placeholder="设置登录密码" class="input_text input_pass" maxlength="20"/>
+                            <i id="levelBar" class="icons icon_low"></i>
+                        </div>
+                        <div class="group">
+                            <input id="passwordConfirm" type="password" validateType="empty:密码不能为空 same:#password:两次密码输入不一致" placeholder="确认登录密码" class="input_text input_pass" maxlength="20"/>
+                        </div>
+                        <div class="group">
+                            <input id="ref_phone" type="text" autocomplete="off" placeholder="邀请人手机号" class="input_text" maxlength="11"/>
+                        </div>
+                        <p class="font_12">
+                            <label><input id="protocol" type="checkbox" value="yue"/> 我已阅读并同意</label><a href="javascript:void(0);" id="regiesterProtocol">《网上融资用户服务协议》</a>
+                        </p>
+                        <button id="registerS2Btn" class="btn btn_red size_full" type="button">完成注册</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <#if activityOpen??>
+        <p class="rule">
+            活动规则：<br>
+            1.本活动面向2015年8月19日00点至8月31日24点期间新注册并实名的用户。<br>
+            2.注册即送100元现金，注册后24小时内到账。<br>
+            3.用户在活动期间第一次配资后，即可提现红包。<br>
+            4.红包失效情况：（1）若充值后没有配资即提现，联系客服即可，同时红包失效;（2）8月31日24点之前没有配资，红包失效;（3）日配资用户当天配资当天归还，红包失效。<br>
+            5.本活动最终解释权归财猫网所有。
+        </p>
+    </#if>
+</div>
+
+<#include 'include/page/foot.html'/>
+
+</body>
+</html>

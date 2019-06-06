@@ -1,0 +1,325 @@
+<!doctype html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title></title>
+		<link rel="stylesheet" href="../prod/style/style.css" />
+		<script src="../prod/js/metal.js"></script>
+		<script>
+			var h = http(),
+				isLogin = 0;
+		</script>
+	</head>
+	<body>
+
+	<div class="top">
+		<div class="innerCont clearfix">
+			<div class="topnav">
+				<a href="">财猫主站</a><!--
+				--><a href="">财猫邮币卡</a><!--
+				--><a href="">财猫贵金属</a>
+			</div>
+			<div class="user"><a href="" class="appdownload" id="appdownload"><i></i>APP下载</a><a href="">登录</a><span>|</span><a href="">注册</a><div class="qrcode" id="qrcode"><img src="../img/qrcode_android.png" ><img src="../img/qrcode_apple.png"></div></div>
+		</div>
+	</div>
+	<div class="menuline">
+		<div class="innerCont clearfix">
+			<div class="logo"><a href="home.html"><img src="../img/logo.png"></a></div>
+			<div class="menu">
+				<a href="home.html">首页<i><span>◆</span></i></a><!--
+				--><a href="market.html">行情<i><span>◆</span></i></a><!--
+				--><a href="news.html">资讯<i><span>◆</span></i></a><!--
+				--><a href="openAccount.html" class="on">快速开户<b>hot!</b><i><span>◆</span></i></a><!--
+				--><a href="help.html">帮助<i><span>◆</span></i></a>
+			</div>
+			<div class="asset">
+				<div class="totalAsset">
+					总资产：<b>9999999.99</b>
+				</div>
+				<dl class="assetDetail">
+					<dt><em><span>总收益：</span><i class="rise">+234.55</i></em><em><span>可用保证金：</span><b>99999999.55</b></em></dt>
+					<dd class="njs">
+						<p><b>南交所</b><span>ID：2342342</span><span>绑定卡：招行（尾号2342）</span></p>
+						<div class="countAsset">
+							<div class="result">净资产：<i>99999999.55</i> = </div>
+							<ul class="section">
+								<li><i></i>可用保证金：23422.55</li>
+								<li><i></i>持仓盈利：+53.55</li>
+								<li><i></i>持仓成本：563.22</li>
+							</ul>
+						</div>
+					</dd>
+					<dd class="sjs">
+						<p><b>上金所</b></p>
+						<div class="btnBox"><a href="" class="openAccount">去开户</a></div>
+					</dd>
+				</dl>
+			</div>
+		</div>
+	</div>
+	
+
+	<div class="account">
+		<div class="innerCont clearfix" id="bigBox">
+			<div class="stepShow">
+				<dl>
+					<dt></dt>
+					<dd id="stepShow"></dd>
+				</dl>
+			</div>
+
+
+
+
+
+			<div class="OAForm" style="display:none" id="step1" stepBox="1">
+				<div class="formitm">
+					<label class="lab">姓名</label>
+					<div class="ipt">
+						<input type="text" class="textInput" name="name" require="require"/><span class="hidden" empty="姓名不能为空"></span>
+					</div>
+				</div>
+				<div class="formitm">
+					<label class="lab">身份证</label>
+					<div class="ipt">
+						<input type="text" class="textInput" name="idcard" require="require"/><span class="hidden" empty="身份证不能为空"></span>
+					</div>
+				</div>
+				<div class="formitm">
+					<span class="lab">交易所</span>
+					<div class="ipt radioLine">
+						<input type="radio" class="radioInput" checked="checked" value="njs" name="exchange" id="njs"><label for="njs">南交所</label>
+						<input type="radio" class="radioInput" name="exchange" id="sjs" value="sjs"><label for="sjs">上金所</label>
+					</div>
+				</div>
+				<div class="formitm">
+					<label class="lab">银行</label>
+					<div class="ipt step1bank">
+						<input type="text" class="textInput" name="bank" readonly="readonly" id="bank" value="建设银行" stop="1" />
+						<ul stop="1">
+							<li act="fillBank" data="建设银行">建设银行,银商绑定,支持开户两家交易所</li>
+							<li act="fillBank" data="光大银行">光大银行,银商绑定</li>
+							<li act="fillBank" data="华夏银行">华夏银行,到银行柜台办理</li>
+							<li act="fillBank" data="平安银行">平安银行,银商绑定</li>
+							<li act="fillBank" data="兴业银行">兴业银行,银商绑定,需要输入交易密码</li>
+							<li act="fillBank" data="招商银行">招商银行,银商绑定,需要输入交易密码</li>
+							<li act="fillBank" data="中国银行">中国银行,银商绑定,需要输入交易密码</li>
+							<li act="fillBank" data="中信银行">中信银行,银商绑定,需要输入交易密码</li>
+						</ul>
+						<p>* 推荐建设银行，支持开户两家交易所。</p>
+					</div>
+				</div>
+				<div class="formitm">
+					<label class="lab">储蓄卡号</label>
+					<div class="ipt">
+						<input type="text" class="textInput" name="bankcard" require="require"/><span class="hidden" empty="储蓄卡号不能为空"></span>
+					</div>
+				</div>
+				<div class="formitm">
+					<div class="ipt">
+						<a href="" class="submit" act="next">下一步</a>
+					</div>
+				</div>
+			</div>
+
+
+
+
+
+
+			<div class="OAForm" style="display:none" id="step2" stepBox="1">
+				<div class="title">请设置<span class="blue">交易密码</span>，用于您的交易所帐号登录</div>
+				<div class="formitm">
+					<label class="lab">交易密码</label>
+					<div class="ipt">
+						<input type="password" name="tradePass" class="textInput" require="require" comp="tradePass"/><span class="hidden" empty="密码不能为空" comp="两次密码输入不同"></span>
+					</div>
+				</div>
+				<div class="formitm">
+					<label class="lab">再次确认</label>
+					<div class="ipt">
+						<input type="password" name="tradePass" class="textInput" require="require" comp="tradePass"/><span class="hidden" empty="确认密码不能为空" comp="两次密码输入不同"></span>
+					</div>
+				</div>
+				<div class="spaceLine"></div>
+				<div class="title">请设置<span class="blue">资金密码</span>，用于您的交易所帐号登录</div>
+				<div class="formitm">
+					<label class="lab">资金密码</label>
+					<div class="ipt">
+						<input type="password" name="bankrollPass" class="textInput" require="require" comp="bankrollPass"/><span class="hidden" empty="密码不能为空" comp="两次密码输入不同"></span>
+					</div>
+				</div>
+				<div class="formitm">
+					<label class="lab">再次确认</label>
+					<div class="ipt">
+						<input type="password" name="bankrollPass" class="textInput" require="require" comp="bankrollPass"/><span class="hidden" empty="确认密码不能为空" comp="两次密码输入不同"></span>
+					</div>
+				</div>
+				<div class="formitm">
+					<div class="ipt">
+						<a href="" class="submit" stop="1" act="next">下一步</a>
+					</div>
+				</div>
+			</div>
+
+
+
+
+
+			<div style="display:none" id="step3" stepBox="1">
+			<div class="questionnaire" >
+				<dl>
+					<dt>1.您的家庭收入</dt>
+					<dd><input type="radio" name="q1" id="q1A"/><label for="q1A">A.50万以上</label><input type="radio" name="q1" id="q1B"/><label for="q1B">B.10-50万</label><input type="radio" name="q1" id="q1C"/><label for="q1C">C.5-10万</label><input type="radio" name="q1" id="q1D"/><label for="q1D">D.3-5万</label><input type="radio" name="q1" id="q1E"/><label for="q1E">E.3万以下</label></dd>
+				</dl>
+				<dl>
+					<dt>2.您的家庭进行投资的资金占家庭总收入的多少</dt>
+					<dd><input type="radio" name="q2" id="q2A"/><label for="q2A">A.0-10%</label><input type="radio" name="q2" id="q2B"/><label for="q2B">B.10%-30%</label><input type="radio" name="q2" id="q2C"/><label for="q2C">C.30%-50%</label><input type="radio" name="q2" id="q2D"/><label for="q2D">D.50%-80%</label><input type="radio" name="q2" id="q2E"/><label for="q2E">E.80%以上</label></dd>
+				</dl>
+				<dl>
+					<dt>3.一般情况下，您进行投资的期限是多长</dt>
+					<dd><input type="radio" name="q3" id="q3A"/><label for="q3A">A.无限制</label><input type="radio" name="q3" id="q3B"/><label for="q3B">B.三年以上</label><input type="radio" name="q3" id="q3C"/><label for="q3C">C.一至三年左右</label><input type="radio" name="q3" id="q3D"/><label for="q3D">D.三个月至一年</label><input type="radio" name="q3" id="q3E"/><label for="q3E">E.三个月以内</label></dd>
+				</dl>
+
+
+				<dl>
+					<dt>4.您进行投资期望达到的年收益率水平</dt>
+					<dd><input type="radio" name="q4" id="q4A"/><label for="q4A">A.至少40%，可承担高风险</label></dd>
+					<dd><input type="radio" name="q4" id="q4B"/><label for="q4B">B.20%-40%，可承担一定的风险</label></dd>
+					<dd><input type="radio" name="q4" id="q4C"/><label for="q4C">C.10%-20%，要求风险适中</label></dd>
+					<dd><input type="radio" name="q4" id="q4D"/><label for="q4D">D.5%-10%，要求风险较低</label></dd>
+					<dd><input type="radio" name="q4" id="q4E"/><label for="q4E">E.高于、同期存款即可，不能出现亏损</label></dd>
+				</dl>
+				<dl>
+					<dt>5.您的投资知识</dt>
+					<dd><input type="radio" name="q5" id="q5A"/><label for="q5A">A.投资专业人士</label></dd>
+					<dd><input type="radio" name="q5" id="q5B"/><label for="q5B">B.对投资市场有充分的认识，懂得一些投资技巧</label></dd>
+					<dd><input type="radio" name="q5" id="q5C"/><label for="q5C">C.对投资市场略有了解，但不懂投资技巧</label></dd>
+					<dd><input type="radio" name="q5" id="q5D"/><label for="q5D">D.对投资市场不熟悉，缺乏基本的投资知识</label></dd>
+				</dl>
+				<dl>
+					<dt>6.您的投资经验</dt>
+					<dd><input type="radio" name="q6" id="q6A"/><label for="q6A">A.10年以上</label><input type="radio" name="q6" id="q6B"/><label for="q6B">B.6-10年</label><input type="radio" name="q6" id="q6C"/><label for="q6C">C.1-5年</label><input type="radio" name="q6" id="q6D"/><label for="q6D">D.1年以内</label></dd>
+				</dl>
+				<dl>
+					<dt>7.您的投资依据</dt>
+					<dd><input type="radio" name="q7" id="q7A"/><label for="q7A">A.靠专家指导</label><input type="radio" name="q7" id="q7B"/><label for="q7B">B.自己研究</label><input type="radio" name="q7" id="q7C"/><label for="q7C">C.听消息，靠直觉和运气，跟别人操作</label></dd>
+				</dl>
+				<dl>
+					<dt>8.一般投资都存在风险，您可容忍的最大亏损幅度为</dt>
+					<dd><input type="radio" name="q8" id="q8A"/><label for="q8A">A.40%以上</label><input type="radio" name="q8" id="q8B"/><label for="q8B">B.20%-40%</label><input type="radio" name="q8" id="q8C"/><label for="q8C">C.10%-20%</label><input type="radio" name="q8" id="q8D"/><label for="q8D">D.5%-10%</label><input type="radio" name="q8" id="q8E"/><label for="q8E">E.不能亏损</label></dd>
+				</dl>
+				<dl>
+					<dt>9.出现亏损您一般如何操作</dt>
+					<dd><input type="radio" name="q9" id="q9A"/><label for="q9A">A.投资前设好止损并能够执行止损操作</label></dd>
+					<dd><input type="radio" name="q9" id="q9B"/><label for="q9B">B.未设止损但实际操作中能够在一定范围内执行止损</label></dd>
+					<dd><input type="radio" name="q9" id="q9C"/><label for="q9C">C.开始不止损，并补仓摊低成本，跌到难以承受时再止损</label></dd>
+					<dd><input type="radio" name="q9" id="q9D"/><label for="q9D">D.不止损，持有等待解套</label></dd>
+				</dl>
+				<dl>
+					<dt>10.您的投资规划中，更倾向于下列哪个</dt>
+					<dd><input type="radio" name="q10" id="q10A"/><label for="q10A">A.贵金属</label><input type="radio" name="q10" id="q10B"/><label for="q10B">B.股票</label><input type="radio" name="q10" id="q10C"/><label for="q10C">C.基金</label><input type="radio" name="q10" id="q10D"/><label for="q10D">D.银行理财产品</label><input type="radio" name="q10" id="q10E"/><label for="q10E">E.债券</label></dd>
+				</dl>
+			</div>
+			
+			<div class="Qformitm">
+				<div class="ipt">
+					<p>分数忒低了，不予通过</p>
+					<a href="" class="submit" stop="1" act="getScore">下一步</a>
+				</div>
+			</div>
+			</div>
+
+
+
+
+
+			<div class="OAForm" style="display:none" id="step4" stepBox="1">
+				<div class="formitm">
+					<label class="lab">短信验证码</label>
+					<div class="ipt">
+						<input type="text" class="textInput" name="bankcard" require="require"/><span class="hidden" empty="短信验证码不能为空"></span>
+						<p>验证码已经发送到你的手机请注意查看</p>
+					</div>
+				</div>
+				<div class="formitm">
+					<div class="ipt">
+						<a href="" class="submit" act="submit">下一步</a>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="finish" style="display:none" id="step5" stepBox="1">
+				<div class="submitResult">
+					<i></i><div>
+						<p>恭喜开户成功</p>
+						<p>上海黄金交易所交易账号<b>19805503</b></p>
+						<p>上金所交易需要验证身份证，<a href="upload.html">去上传身份证</a></p>
+						<p><a href="home.html">返回首页</a> | <a href="openAccount.html">南交所开户</a></p>
+					</div>
+				</div>
+			</div>
+			<div class="finish" id="njsFinish" style="display:none">
+				<div class="submitResult">
+					<i></i><div>
+						<p>恭喜开户成功</p>
+						<p>南方稀贵金属交易所交易账号<b>19805503</b></p>
+						<p><a href="home.html">返回首页</a> | <a href="openAccount.html">上金所开户</a></p>
+					</div>
+				</div>
+			</div>
+
+
+
+		<script>step();</script>
+
+
+		</div>
+	</div>
+
+
+
+	<div class="bottom">
+		<div class="bottomnav">
+			<a href="about.html">关于我们</a><!--
+					--><span>|</span><!--
+					--><a href="rule.html">服务条款</a><!--
+					--><span>|</span><!--
+					--><a href="help.html">帮助中心</a>
+		</div>
+		<div class="contact">
+			<div class="inner">
+				<em class="qq"><i></i>官方QQ群 4006660888</em><!--
+						--><span>|</span><!--
+						--><em class="phone"><i></i>24小时服务电话 4000-898-000</em>
+			</div>
+		</div>
+		<div class="copyright">
+			<p>版权所有 © 北京朋乐投资管理有限公司 丨 京ICP备15016693号</p>
+		</div>
+	</div>
+
+	<div class="rightBar">
+		<div class="takeAim">
+			<div class="tools">
+				<dl class="goTop">
+					<dt></dt>
+				</dl>
+				<dl class="tel">
+					<dt></dt>
+					<dd><i></i><b>4000-898-000</b></dd>
+				</dl>
+				<dl class="qq">
+					<dt></dt>
+					<dd><i></i><b>800097600</b></dd>
+				</dl>
+				<dl class="app">
+					<dt></dt>
+					<dd><img src="../img/qrcode.jpg"><p>扫码下载贵金属APP</p></dd>
+				</dl>
+			</div>
+		</div>
+	</div>
+	</body>
+</html>

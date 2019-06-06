@@ -1,0 +1,104 @@
+<!doctype html>
+<html>
+<#include "config.html"/>
+<#assign curTopMenu="account"/>
+<#assign curLeftMenu="deposit"/>
+<head>
+    <meta charset="utf-8">
+    <title>充值记录-财猫网</title>
+    <meta name="keywords" content="融资，股票融资，投资融资，理财融资，融资平台，融资炒股，融资网，融资公司" />
+	<meta name="description" content="财猫网由金融服务、风险管理及互联网运营等业界一流的专业人士组成的超百人全职运营团队。提供股票融资服务，致力于为公众提供一个国际化、高收益、安全、专业的互联网资产交易平台"/>
+
+    <!--基本布局样式-->
+    <link rel="stylesheet" type="text/css" href="${dojoUrl}/style/page/page.css?v=${jsVersion}" />
+    <script type="text/javascript" src="${dojoUrl}/js/global.js?v=${jsVersion}"></script>
+</head>
+<body>
+<#include 'include/page/head.html'/>
+<!--内容区-->
+<div id="main">
+    <div class="w sec_main">
+        <#include 'include/menu/account_left.html'/>
+        <div class="right_bar">
+            <div class="tabNav">
+                <ul>
+                    <li><a href="${basePath}/account/recharge/wangyin.htm">网银充值</a> </li>
+                    <li><a href="${basePath}/account/recharge/zhifubao.htm">支付宝转账</a> </li>
+                    <li><a href="${basePath}/account/recharge/yinhang.htm">银行转账</a> </li>
+                    <li><a class="on" href="${basePath}/account/recharge/history.htm">充值记录</a> </li>
+                </ul>
+            </div>
+            <div class="record">
+                <div class="table_tit m_t_20">
+                    <form method="get">
+						<span>
+                           类型
+                            <select name="orderStatus" class="input_select">
+                                <option value="all"<#if orderStatus == "all"> selected</#if>>全部</option>
+                                <option value="02"<#if orderStatus == "02"> selected</#if>>待处理</option>
+                                <option value="03"<#if orderStatus == "03"> selected</#if>>成功</option>
+                                <option value="04"<#if orderStatus == "04"> selected</#if>>失败</option>
+                                <option value="06"<#if orderStatus == "06"> selected</#if>>待确认</option>
+                            </select>
+                        </span>
+                        <span>
+                            时间
+                             <select name="dateStep" class="input_select">
+                                 <option value="0"<#if dateStep == 0> selected</#if>>全部</option>
+                                 <option value="1"<#if dateStep == 1> selected</#if>>今天</option>
+                                 <option value="7"<#if dateStep == 7> selected</#if>>一周</option>
+                                 <option value="90"<#if dateStep == 90> selected</#if>>三个月</option>
+                                 <option value="180"<#if dateStep == 180> selected</#if>>半年</option>
+                             </select>
+                        </span>
+                        <span>
+                            <button type="submit" class="btn btn_red">查询</button>
+                        </span>
+                    </form>
+                </div>
+                <table class="table m_t_20 table_striped table_hover">
+                    <colgroup>
+                        <col style="width:210px;">
+                        <col style="width:150px;">
+                        <col style="width:210px;">
+                        <col style="width:130px;">
+                        <col style="width:160px;">
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th>单号</th>
+                        <th>订单金额</th>
+                        <th>创建时间</th>
+                        <th>订单状态</th>
+                        <th>充值渠道</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <#if dataList.items>
+                        <#list dataList.items as i>
+                            <tr>
+                                <td>${i.orderNo}</td>
+                                <td>${formatAmount(i.orderAmount, 2, "", 1)}</td>
+                                <td>${i.createDatetime}</td>
+                                <td><b class="${dictStr('orderStatus', i.orderStatus, 1)}">${dictStr("orderStatus", i.orderStatus, 0)}</b></td>
+                                <td>${dictStr("rechargeChannel", i.channelId, 0)}</td>
+                            </tr>
+                        </#list>
+                        <#else>
+                            <tr class="table_crumbs">
+                                <td colspan="100%">
+                                    <i class="icons icon_info_null"></i>
+                                    <p>充值记录为空</p>
+                                </td>
+                            </tr>
+                    </#if>
+                    </tbody>
+                </table>
+            </div>
+            ${pageHtml}
+        </div>
+    </div>
+</div>
+<#include 'include/page/foot.html'/>
+</body>
+</html>

@@ -1,0 +1,615 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>财猫首页</title>
+    <link href="../style/page/style.css" rel="stylesheet">
+</head>
+
+<body>
+<!--顶部未登录-->
+<div id="top">
+    <div class="w top_in">
+        <div class="f_l">您好！欢迎来到财猫网！</div>
+        <div class="f_r right">
+          <span class="plr_10"><a href="">登录</a></span><s>|</s>
+          <span class="plr_10"><a href="">注册</a></span><s>|</s>
+          <span class="plr_10"><i class="icons icon_weixin"><span></span></i></span><s>|</s>
+          <span class="plr_10 no_bor"><a href=""><i class="icons icon_weibo"></i></a></span><s>|</s>
+          <span class="font_red p_l_5"><i class="icons icon_tel"></i>24小时服务电话4000-898-000</span>
+        </div>
+    </div>
+</div>
+<!--顶部登录后-->
+<!--<div id="top">-->
+    <!--<div class="w top_in">-->
+        <!--<div class="f_l left">-->
+            <!--<span>总资产:<b>400,000</b>元</span>-->
+            <!--<span>浮动盈亏：<b class="red">-500元</b></span>-->
+            <!--<span>浮动盈亏：<b class="cyan">+1500元</b></span>-->
+            <!--<a class="red" href="">充值</a>-->
+            <!--<a href="">按日融资</a>-->
+            <!--<span class="icons icon_prompt">-->
+            <!--</span>-->
+            <!--<span class="icons icon_prompt_red"></span>-->
+            <!--<span class="icons icon_prompt_orange"></span>-->
+        <!--</div>-->
+        <!--<div class="f_r right">-->
+            <!--&lt;!&ndash;消息框位灰色时  直接去掉icon_info即可&ndash;&gt;-->
+            <!--<span class="font_red"><i class="icons icon_info"></i>6</span>-->
+            <!--<span class="plr_10">您好，马建军 </span>-->
+            <!--<a href="#">退出</a>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+
+<!--导航-->
+<div id="header">
+    <div class="w header_in">
+        <div class="f_l left">
+            <h1 class="icons icon_logo"><a href="#">财猫网</a></h1><p class="icons icon_logo_p">招招有财</p>
+        </div>
+        <div class="f_r right">
+            <ul>
+                <li><a class="hov" href="#">首页 <b></b></a></li>
+                <li><a href="#">交易<b></b></a></li>
+                <li><a href="#">融资<b></b></a></li>
+                <li><a href="#">账户<b></b></a></li>
+                <li><a class="new" href="#">下载<b></b> <i class="icons icon_nav_new"></i> </a></li>
+                <li><a href="#">新手引导<b></b></a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!--notice-->
+<div id="notice">
+    <div class="w">
+        <i class="icons icon_notice"></i><a href="">财猫上线一周年网庆，充值送宝马，你敢来吗？</a><span>我知道了</span>
+    </div>
+</div>
+
+<!--焦点图部分-->
+<div id="focus">
+    <div class="focus">
+        <div class="home_slide">
+            <ul class="slide_main">
+                    <li style="background: url('https://www.caimao.com/app/resources/image/customize/index-banner3.png') no-repeat 50% 0">
+                        <a href="">
+                            <img src="../../img/images/placeholder.png" alt="" width="1000" height="380">
+                        </a>
+                    </li>
+             </ul>
+         </div>
+
+        <div class="section">
+           <div class="home_login">
+               <!--登录前-->
+                <div class="hd">
+                    <h5>登录财猫网</h5>
+                </div>
+                <div class="bd">
+                    <div class="group">
+                        <input type="text" placeholder="请输入您的账号"  class="input_text input_name input_error">
+                        <div class="v_info"></div>
+                    </div>
+                    <div class="group">
+                        <input type="password" placeholder="请输入您的密码" class="input_text input_pass">
+                        <div class="v_info"></div>
+                    </div>
+
+                    <!--账号or密码错误提示-->
+                    <div class="v_error" style="display: block">您输入的账户或密码错误</div>
+                    <button type="submit" class="btn size_full">登录</button>
+
+                </div>
+                <div class="ft">
+                    <a href="#" class="f_l">注册即送100元</a>
+                    <a href="#" class="f_r">忘记密码?</a>
+                </div>
+
+               <!--登录后-->
+               <!--<div class="hd">-->
+                   <!--<h5 title="马建军马建军马建军马建军马建军马建军马建军马建军马建军马建军马建军马建军马建军马建军马建军马建军马建军马建军">你好，马建军马建军马建军马建军马建军马建军马建军马建军马建军马建军马建军马建军马建军马建军马建军马建军马建军马建军</h5>-->
+               <!--</div>-->
+               <!--<div class="bd_login clear_fix">-->
+                   <!--<a class="f_l" href="">股票融资</a>-->
+                   <!--<a class="f_r" href="">投资理财</a>-->
+                   <!--<a href="" class="btn btn_red size_full">进入我的账户</a>-->
+               <!--</div>-->
+
+                <div class="hd4">
+                    <ul id="zhishu_sh">
+                        <li>上证指数</li>
+                        <li class="red">3900.88 <i></i></li>
+                        <li>5.16%</li>
+                    </ul>
+                    <ul id="zhishu_sz">
+                        <li>深证指数</li>
+                        <li class="cyan">12032.17  <i></i> </li>
+                        <li>4.53%</li>
+                    </ul>
+                    <ul class="end" id="zhishu_szc">
+                        <li>创业板指</li>
+                        <li class="cyan">2535.71 <i></i></li>
+                        <li>4.10%</li>
+                        <!--不加时为白色-->
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+</div>
+</div>
+
+<!--服务情况-->
+<div id="condition">
+    <div class="w">
+        <ul>
+            <li>
+                已服务投资人
+                <p>1.5<strong>亿</strong></p>
+            </li>
+            <li>
+                为投资人累计融资
+                <p>2.5<strong>亿</strong></p>
+            </li>
+            <li>
+                为投资人累计投资
+                <p>5.5<strong>亿</strong></p>
+            </li>
+            <li>
+                为投资人赚取收益
+                <p>6.2<strong>亿</strong></p>
+            </li>
+            <li class="end">
+                <img src="../../img/images/lead.jpg" width="58" height="59">
+                <b>新手引导</b>
+                <span>了解投资从财猫开始</span>
+            </li>
+            <li class="end">
+                <img src="../../img/images/invite.jpg" width="59" height="59">
+                <b>邀请返佣</b>
+                <span>邀请好友，享百万佣金</span>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<!--内容区-->
+<div id="main">
+    <div class="w capital">
+        <div class="left f_l">
+            <p>
+                高收益、4天取现<br/>
+                手续费仅4折起<br/>
+                高收益、4天取现<br/>
+                手续费仅4折起
+            </p>
+        </div>
+        <div class="f_l right">
+            <ul>
+                <li>
+                    <div class="pro_list">
+                        <p><span>按天融资</span></p>
+                        <p><i class="icons icon_day"></i></p>
+                        <p>短线投资，操作灵活</p>
+                        <p class="bor">日息低至 <span>0.1%</span></p>
+                        <p>可投2-30天，资金放大5倍</p>
+                        <a class="btn btn_red" href="/pz/pzp2p.html">开始融资</a>
+                    </div>
+                </li>
+                <li class="relative">
+                    <div class="pro_list">
+                        <p><span>按月融资</span></p>
+                        <p><i class="icons icon_mine"></i></p>
+                        <p>中长线投资，稳定收益</p>
+                        <p class="bor">月息低至 <span>1.2%</span></p>
+                        <p>可投1-6个月，资金放大5倍</p>
+                        <a class="btn btn_red" href="/pz/pzp2p.html">开始融资</a>
+                    </div>
+                    <div class="times_prime"></div>
+                </li>
+                <li class="relative">
+                    <div class="pro_list">
+                        <p><span>超低月息</span></p>
+                        <p><i class="icons icon_month"></i></p>
+                        <p>超惠活动，限时开枪</p>
+                        <p class="bor">日息低至 <span>0.5%</span></p>
+                        <p>1倍杠杆，风险超低</p>
+                        <a class="btn btn_red" href="/pz/pzp2p.html">开始融资</a>
+                    </div>
+                    <div class="times_prime times_buy"></div>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+
+    <div class="invest w">
+        <div class="left">
+            <ul>
+                <li>高收益、4天取现</li>
+                <li>手续费仅4折起</li>
+                <li>高收益、4天取现</li>
+                <li>手续费仅4折起</li>
+            </ul>
+        </div>
+        <div class="right">
+            <div class="top">
+                <ul>
+                    <li class="color" onclick="showLoanPanel(this, 1)"><span>可投项目(1)</span></li>
+                    <li onclick="showLoanPanel(this, 0)" class=""><span>满投项目(17)</span></li>
+                </ul>
+                <a class="more" href="/p2p/index.html">更多投资产品</a>
+            </div>
+            <div id="loanPanel0" style="display: none;">
+                <div class="hd8_y-2">
+                    <ul class="lix">
+                        <li><span>王先生股票抵押借款</span></li>
+                        <li><b>5</b>万元</li>
+                    </ul>
+                    <ul class="nian">
+                        <li>年化收益率</li>
+                        <li class="c"><span><b>21.6%</b></span></li>
+                    </ul>
+                    <ul class="jie">
+                        <li>借款期限</li>
+                        <li><b>1个月</b></li>
+                    </ul>
+                    <ul class="jin">
+                        <li>进度</li>
+                        <li class="index_jindu"><b><i style="width:13.4%"></i></b><span class="co">13.4%</span></li>
+                    </ul>
+                    <ul class="yu">
+                        <li>剩余余额</li>
+                        <li><span>￥43,300</span></li>
+                    </ul>
+                    <ul>
+                        <li><a class="btn" target="_blank" href="/p2p/targetDetail.html?target_id=52">投资</a> </li>
+                    </ul>
+                </div>
+                <div class="hd8_y-2">
+                    <ul class="lix">
+                        <li><span>王先生股票抵押借款</span></li>
+                        <li><b>5</b>万元</li>
+                    </ul>
+                    <ul class="nian">
+                        <li>年化收益率</li>
+                        <li class="c"><span>21.6%</span></li>
+                    </ul>
+                    <ul class="jie">
+                        <li>借款期限</li>
+                        <li><b>1个月</b></li>
+                    </ul>
+                    <ul class="jin">
+                        <li>进度</li>
+                        <li class="index_jindu"><b><i style="width:13.4%"></i></b><span class="co">13.4%</span></li>
+                    </ul>
+                    <ul class="yu">
+                        <li>剩余余额</li>
+                        <li><span>￥43,300</span></li>
+                    </ul>
+                    <ul>
+                        <li><a class="btn" target="_blank" href="/p2p/targetDetail.html?target_id=52">投资</a> </li>
+                    </ul>
+                </div>
+            </div>
+            <div id="loanPanel1" style="display: block;">
+                <table class="table  table_striped">
+                    <tr class="table_crumbs">
+                        <td colspan="">
+                            <b class="invest_null"></b>
+                            <p class="font_18 m_t_10">可投项目为空，敬请期待！</p>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+    <!--排行榜+动态-->
+    <div class="w dynamic clear_fix">
+        <div class="f_l left">
+            <h3><i class="icons icon_dyn01"></i>融资排行榜</h3>
+            <table class="">
+                <thead>
+                <tr>
+                    <td width="70">排名</td>
+                    <td width="150">投资人</td>
+                    <td width="130">本金投入</td>
+                    <td width="100">杠杆倍数</td>
+                    <td width="130">融资金额</td>
+                    <td width="130">盈利</td>
+                    <td width="90">收益率</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><i class="icons icon_dynamic">1</i></td>
+                    <td>186****8577</td>
+                    <td><span class="font_red">150,000元</span> </td>
+                    <td>5倍</td>
+                    <td>750,000元</td>
+                    <td>750,000元</td>
+                    <td>750,000元</td>
+                </tr>
+                <tr>
+                    <td><i class="icons icon_dynamic">2</i></td>
+                    <td>186****8577</td>
+                    <td><span class="font_red">150,000元</span> </td>
+                    <td>5倍</td>
+                    <td>750,000元</td>
+                    <td>750,000元</td>
+                    <td>750,000元</td>
+
+                </tr>
+                <tr>
+                    <td><i class="icons icon_dynamic">3</i></td>
+                    <td>186****8577</td>
+                    <td><span class="font_red">150,000元</span> </td>
+                    <td>750,000元</td>
+                    <td>750,000元</td>
+                    <td>5倍</td>
+                    <td>750,000元</td>
+                </tr>
+                <tr>
+                    <td><i class="icons icon_dynamic_gary">4</i></td>
+                    <td>186****8577</td>
+                    <td><span class="font_red">150,000元</span> </td>
+                    <td>5倍</td>
+                    <td>750,000元</td>
+                    <td>750,000元</td>
+                    <td>750,000元</td>
+                </tr>
+                <tr>
+                    <td><i class="icons icon_dynamic_gary">5</i></td>
+                    <td>186****8577</td>
+                    <td><span class="font_red">150,000元</span> </td>
+                    <td>5倍</td>
+                    <td>750,000元</td>
+                    <td>750,000元</td>
+                    <td>750,000元</td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+        <div class="right f_l">
+            <h3><i class="icons icon_dyn02"></i>实时动态</h3>
+            <table class="">
+                <thead>
+                <tr>
+                    <td width="170">时间</td>
+                    <td width="120">投资人</td>
+                    <td width="90">融资金额</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>2015-06-24 14:25</td>
+                    <td>186****8577</td>
+                    <td> <span class="font_red">750,000</span>元</td>
+                </tr>
+                <tr>
+                    <td>2015-06-24 14:25</td>
+                    <td>186****8577</td>
+                    <td> <span class="font_red">750,000</span>元</td>
+                </tr>
+                <tr>
+                    <td>2015-06-24 14:25</td>
+                    <td>186****8577</td>
+                    <td> <span class="font_red">750,000</span>元</td>
+                </tr>
+                <tr>
+                    <td>2015-06-24 14:25</td>
+                    <td>186****8577</td>
+                    <td> <span class="font_red">750,000</span>元</td>
+                </tr>
+                <tr>
+                    <td>2015-06-24 14:25</td>
+                    <td>186****8577</td>
+                    <td> <span class="font_red">750,000</span>元</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="w merit">
+        <ul class="clear_fix">
+            <li>
+                <dl>
+                    <dt class="merit_icon merit_icon01"></dt>
+                    <dd>
+                        <p><span class="font_merit font_blue">融资快</span>
+                            立即开户<br>
+                            当天交易，快人一步
+                        </p>
+
+                    </dd>
+                </dl>
+            </li>
+            <li>
+                <dl>
+                    <dt class="merit_icon merit_icon02"></dt>
+                    <dd>
+                        <p><span class="font_merit font_blue">费率低</span>
+                            融资利息全网最低<br>
+                            没有最低，只有更低
+                        </p>
+
+                    </dd>
+                </dl>
+            </li>
+            <li>
+                <dl>
+                    <dt class="merit_icon merit_icon03"></dt>
+                    <dd>
+                        <p><span class="font_merit font_blue">安全高</span>
+                            资金银行托管<br>
+                            封闭管理，专款专用
+                        </p>
+
+                    </dd>
+                </dl>
+            </li>
+            <li>
+                <dl>
+                    <dt class="merit_icon merit_icon04"></dt>
+                    <dd>
+                        <p><span class="font_merit font_blue">风控高</span>
+                            五年以上专业证劵团队<br>
+                            智能监控，精准保障
+                        </p>
+
+                    </dd>
+                </dl>
+            </li>
+            <li>
+                <dl>
+                    <dt class="merit_icon merit_icon05"></dt>
+                    <dd>
+                        <p><span class="font_merit font_blue">服务好</span>
+                            金融互联网公司打造<br>
+                            专业客服1对1跟踪服务
+                        </p>
+
+                    </dd>
+                </dl>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div id="media">
+
+
+    <div class="w media">
+        <h3 class="tit"> <span><b>媒体报道</b> </span> </h3>
+        <h4 class="tit">Media reports</h4>
+
+        <ul class="clear_fix">
+            <li class="f_l">
+                <a href="#" class="img f_l"><img src="https://static.huobi.com/img/topic/salon_2015/about_1.jpg" alt="" width="158" height="116"></a>
+                <h4><a href="#">第十一届清华大学中国创业者训练营在京开营</a></h4>
+                <h6><a href="">新浪财经</a> 今天17:30</h6>
+                <p>新浪科技讯 4月25日下午消息，由清华大学五道口金融学院互联网金融实验室主办，未央网未央网未央网、《互联网金融观察》、《清华金融评论》协办的“第十一届清华...</p>
+            </li>
+            <li class="f_r">
+                <a href="#" class="img f_l"><img src="https://static.huobi.com/img/topic/salon_2015/about_1.jpg" alt="" width="158" height="116"></a>
+                <h4><a href="#">第十一届清华大学中国创业者训练营在京开营</a></h4>
+                <h6><a href="">新浪财经</a> 今天17:30</h6>
+                <p>新浪科技讯 4月25日下午消息，由清华大学五道口金融学院互联网金融实验室主办，未央网、《互联网金融观察》、《清华金融评论》协办的“第十一届清华...</p>
+            </li>
+            <li class="f_l">
+                <a href="#" class="img f_l"><img src="https://static.huobi.com/img/topic/salon_2015/about_1.jpg" alt="" width="158" height="116"></a>
+                <h4><a href="#">第十一届清华大学中国创业者训练营在京开营</a></h4>
+                <h6><a href="">新浪财经</a> 今天17:30</h6>
+                <p>新浪科技讯 4月25日下午消息，由清华大学五道口金融学院互联网金融实验室主办，未央网未央网未央网、《互联网金融观察》、《清华金融评论》协办的“第十一届清华...</p>
+            </li>
+            <li class="f_r">
+                <a href="#" class="img f_l"><img src="https://static.huobi.com/img/topic/salon_2015/about_1.jpg" alt="" width="158" height="116"></a>
+                <h4><a href="#">第十一届清华大学中国创业者训练营在京开营</a></h4>
+                <h6><a href="">新浪财经</a> 今天17:30</h6>
+                <p>新浪科技讯 4月25日下午消息，由清华大学五道口金融学院互联网金融实验室主办，未央网、《互联网金融观察》、《清华金融评论》协办的“第十一届清华...</p>
+            </li>
+            <li class="f_l">
+                <a href="#" class="img f_l"><img src="https://static.huobi.com/img/topic/salon_2015/about_1.jpg" alt="" width="158" height="116"></a>
+                <h4><a href="#">第十一届清华大学中国创业者训练营在京开营</a></h4>
+                <h6><a href="">新浪财经</a> 今天17:30</h6>
+                <p>新浪科技讯 4月25日下午消息，由清华大学五道口金融学院互联网金融实验室主办，未央网未央网未央网、《互联网金融观察》、《清华金融评论》协办的“第十一届清华...</p>
+            </li>
+            <li class="f_r">
+                <a href="#" class="img f_l"><img src="https://static.huobi.com/img/topic/salon_2015/about_1.jpg" alt="" width="158" height="116"></a>
+                <h4><a href="#">第十一届清华大学中国创业者训练营在京开营</a></h4>
+                <h6><a href="">新浪财经</a> 今天17:30</h6>
+                <p>新浪科技讯 4月25日下午消息，由清华大学五道口金融学院互联网金融实验室主办，未央网、《互联网金融观察》、《清华金融评论》协办的“第十一届清华...</p>
+            </li>
+            <li class="f_l">
+                <a href="#" class="img f_l"><img src="https://static.huobi.com/img/topic/salon_2015/about_1.jpg" alt="" width="158" height="116"></a>
+                <h4><a href="#">第十一届清华大学中国创业者训练营在京开营</a></h4>
+                <h6><a href="">新浪财经</a> 今天17:30</h6>
+                <p>新浪科技讯 4月25日下午消息，由清华大学五道口金融学院互联网金融实验室主办，未央网未央网未央网、《互联网金融观察》、《清华金融评论》协办的“第十一届清华...</p>
+            </li>
+            <li class="f_r">
+                <a href="#" class="img f_l"><img src="https://static.huobi.com/img/topic/salon_2015/about_1.jpg" alt="" width="158" height="116"></a>
+                <h4><a href="#">第十一届清华大学中国创业者训练营在京开营</a></h4>
+                <h6><a href="">新浪财经</a> 今天17:30</h6>
+                <p>新浪科技讯 4月25日下午消息，由清华大学五道口金融学院互联网金融实验室主办，未央网、《互联网金融观察》、《清华金融评论》协办的“第十一届清华...</p>
+            </li>
+        </ul>
+    </div>
+
+
+
+    <div class="w partners">
+        <h3 class="tit"> <span><b>合作伙伴</b> </span> </h3>
+        <h4 class="tit">Partners</h4>
+        <p class="part clear_fix">
+            <a href="#"><img src="../../img/images/partner_01.png"></a>
+            <a href="#"><img src="../../img/images/partner_02.png"></a>
+            <a href="#"><img src="../../img/images/partner_03.png"></a>
+            <a href="#"><img src="../../img/images/partner_04.png"></a>
+            <a href="#"><img src="../../img/images/partner_05.png"></a>
+            <a href="#"><img src="../../img/images/partner_06.png"></a>
+            <a href="#"><img src="../../img/images/partner_07.png"></a>
+            <a href="#"><img src="../../img/images/partner_08.png"></a>
+            <a href="#"><img src="../../img/images/partner_09.png"></a>
+            <a href="#"><img src="../../img/images/partner_10.png"></a>
+            <a href="#"><img src="../../img/images/partner_11.png"></a>
+            <a href="#"><img src="../../img/images/partner_12.png"></a>
+        </p>
+
+
+    </div>
+
+</div>
+
+
+<div id="footer">
+    <div class="w">
+        <p class="nav_sub"><a href="">关于我们</a>|<a href="">服务条款</a>|<a href="">帮助中心</a></p>
+        <p class="server"> <i class="icons icon_qqs"></i>官方QQ群4006660888  <i class="icons icon_telephone"></i>24小时服务电话4000-898-000</p>
+        <p class="server2">
+            <a class="weixin"><i class="icons icon_weixin_b"><span></span></i></a>
+            <a href="#"><i class="icons icon_weibo_b"> </i></a>
+        </p>
+        <p>版权所有 © 北京朋乐投资管理有限公司 丨 京ICP备15016693号</p>
+    </div>
+</div>
+
+<div id="float_right">
+    <div id="izl_rmenu" class="izl-rmenu">
+        <div class="side_toolbar btn-phone">
+            <i class="icons icon_btn_phone"></i>
+            <div class="phone" style="display: none;">
+                <i class="icons icon_btn_phone"></i>
+                <p>
+                    免费热线<br>
+                    4000 600 888
+                </p>
+            </div>
+        </div>
+        <div class="side_toolbar btn-tel">
+            <i class="icons icon_btn_tel"></i>
+            <div class="tel" style="display: none;">
+                <i class="icons icon_btn_tel"></i>
+                <p>
+                    配资QQ群 <br>
+                    <a href="">4000600888</a>
+                </p>
+                <p>
+                    配资QQ群 <br>
+                    <a href="">4000600888</a>
+                </p>
+            </div>
+        </div>
+        <div class="side_toolbar btn-top">
+            <i class="icons icon_btn_top"></i>
+        </div>
+    </div>
+</div>
+</body>
+</html>

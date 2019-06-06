@@ -1,0 +1,562 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>财猫-二级页面布局</title>
+    <link href="../style/page/page.css" rel="stylesheet">
+    <script src="../js/lib/jquery-1.11.1.min.js"></script>
+    <script src="../js/float_right.js"></script>
+</head>
+
+<body>
+<!--顶部未登录-->
+<div id="top">
+    <div class="w top_in">
+        <div class="f_l left">
+            <span><a href=""><i class="icons icon_app"></i> 财猫app </a></span><s >|</s>
+            <span class="weixin m_l_10"><i class="icons icon_weixin"><span></span></i></span>
+            <span><a href=""><i class="icons icon_weibo"></i></a></span>
+        </div>
+        <!--<div class="f_r right">-->
+            <!--<span><a href="">登录</a></span><s class="p_l_10">|</s>-->
+            <!--<span class="p_l_10"><a href="">注册</a></span>-->
+        <!--</div>-->
+        <!--顶部右侧登录后-->
+        <div class="f_r right">
+            <!--消息框位灰色时  直接去掉icon_info即可-->
+            <span class="font_red"><i class="icons icon_info"></i>6</span>
+            <span class="plr_10 font_black">您好，<a href="" class="font_black">1565078333333</a> </span>
+            <a class="font_grayD" href="#">退出</a>
+            <!--<div class="popNotice">-->
+            <!--<dl class="noticeHead">-->
+            <!--<dt>我的消息</dt>-->
+            <!--<dd><i class="orange">16条未读</i>/200000000条消息</dd>-->
+            <!--</dl>-->
+            <!--<div class="noticeBody">-->
+            <!--<dl class="unread">-->
+            <!--<dt><i>■</i><em>您的HOMS子账户101816已达预警线,请及时追加保证金</em><a href="">追加</a></dt>-->
+            <!--<dd>2015-06-16 11:00:41</dd>-->
+            <!--</dl>-->
+            <!--<dl>-->
+            <!--<dt><i>■</i><em>您的HOMS子账户101816已达预警线,请及时追加保证金</em><a href="">追加</a></dt>-->
+            <!--<dd>2015-06-16 11:00:41</dd>-->
+            <!--</dl>-->
+            <!--<dl>-->
+            <!--<dt><i>■</i><em>您的HOMS子账户101816已达预警线,请及时追加保证金</em><a href="">追加</a></dt>-->
+            <!--<dd>2015-06-16 11:00:41</dd>-->
+            <!--</dl>-->
+
+            <!--<p>暂无消息</p>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<script>  -->
+            <!--(function(){-->
+            <!--var noticeIsClose = 1,-->
+            <!--btn = document.querySelector("#noticeBtn"),-->
+            <!--box = btn.parentNode,-->
+            <!--tmpCN = box.className;-->
+            <!--document.addEventListener ?-->
+            <!--btn.addEventListener('click', switchNotice, false) : btn.attachEvent('onclick', switchNotice);-->
+            <!--function switchNotice(){-->
+            <!--if(noticeIsClose){-->
+            <!--noticeIsClose = 0;-->
+            <!--box.className = tmpCN + ' noticeOpen';-->
+            <!--}else{-->
+            <!--noticeIsClose = 1;-->
+            <!--box.className = tmpCN;-->
+            <!--}-->
+            <!--}-->
+            <!--})();-->
+            <!--</script>-->
+        </div>
+    </div>
+</div>
+
+
+<!--头部-->
+<div id="header">
+    <div class="w header_in">
+        <div class="f_l left">
+            <h1 class="icons icon_logo"><a href="#">财猫网</a></h1><p class="icons icon_logo_p">招招有财</p>
+        </div>
+        <div class="f_r right">
+            <ul>
+                <li><a href="#">首页 <b></b></a></li>
+                <li><a href="#">交易<b></b></a></li>
+                <li><a href="#">融资 <i class="icons icon_nav_hot"></i><b></b></a></li>
+                <li><a class="hov" href="#">账户<b></b></a></li>
+                <li><a href="#">投资<b></b></a></li>
+                <li><a href="#">下载 <b></b></a></li>
+                <li><a href="#">新手引导<b></b></a></li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+<!--notice-->
+<div id="notice">
+    <div class="w">
+        <i class="icons icon_notice"></i><a href="">财猫上线一周年网庆，充值送宝马，你敢来吗？</a><span>我知道了</span>
+    </div>
+</div>
+<!--内容区-->
+<div id="main">
+    <div class="w sec_main">
+        <!--左右布局-->
+        <div class="left_bar">
+            <ul>
+                <li><a href="#"><i class="icons icon_account"></i>我的账户</a></li>
+                <li><a href=""><i class="icons icon_recharge"></i>我要充值</a></li>
+                <li><a href=""><i class="icons icon_withdraw"></i>我要提现</a></li>
+                <li><a href=""><i class="icons icon_fund"></i>资金明细</a></li>
+                <li><a href=""><i class="icons icon_secure"></i>账户安全</a></li>
+                <li><a class="hov" href=""><i class="icons icon_message"></i>个人资料</a></li>
+                <li><a href=""><i class="icons icon_promotion"></i>推广赚钱</a></li>
+
+                <li><a class="hov" href="#"><i class="icons icon_p_day"></i>按日融资</a></li>
+                <li class="relative"><a href=""><i class="icons icon_p_month"></i>按月融资<i class="icons icon_nav_hot"></i></a></li>
+                <li><a href=""><i class="icons icon_p_mine"></i>我的融资</a></li>
+
+                <li><a class="hov" href="#"><i class="icons icon_invest"></i>开始投资</a></li>
+                <li><a href=""><i class="icons icon_my_invest"></i>我的投资</a></li>
+           </ul>
+            <ul class="about">
+                <li><a href="#"><i class="icons"></i>我的账户</a></li>
+                <li><a href=""><i class="icons"></i>我要充值</a></li>
+
+           </ul>
+        </div>
+        <div class="right_bar">
+            <!--table切换标题样式-->
+            <div class="tabNav">
+                <ul>
+                    <li><a href="" class="on">推广详情</a></li>
+                    <li><a href="">兑换记录</a></li>
+                    <li><a href="">推广用户</a></li>
+                    <li><a href="">返佣记录</a></li>
+                </ul>
+            </div>
+
+            <!--记录相关样式-->
+            <div class="record">
+                <div class="table_tit m_t_20">
+                   <span>
+                       类型
+                       <label>
+                       <select name="" class="input_select">
+                           <option value="全部">全部</option>
+                           <option value="待审核">待审核</option>
+                           <option value="审核通过">审核通过</option>
+                           <option value="审核未通过">审核未通过</option>>
+                       </select>
+                       </label>
+                   </span>
+                    <span>
+                       <label>
+                        时间
+                         <select name="" class="input_select">
+                             <option value="全部">全部</option>
+                             <option value="今天">今天</option>
+                             <option value="一周">一周</option>
+                             <option value="三个月">三个月</option>>
+                             <option value="半年">半年</option>>
+                         </select>
+                        </label>
+                    </span>
+                    <span>
+                        <a href="" class="btn btn_red">查询</a>
+                    </span>
+                </div>
+                <table class="table m_t_20 table_striped table_hover">
+                    <colgroup>
+                        <col style="width:260px;">
+                        <col style="width:260px;">
+                        <col style="width:180px;">
+                        <col style="width:160px;">
+                        <col style="width:120px;">
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th>申请日期</th>
+                        <th>返现日期</th>
+                        <th>兑换积分</th>
+                        <th>返现金额（元）</th>
+                        <th>状态</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>2015-06-10 14:13:12</td>
+                        <td>2015-06-11 12:13:12</td>
+                        <td><strong>20</strong></td>
+                        <td><b class="font_red">200.00</b></td>
+                        <td><b class="font_red">审核未通过</b></td>
+                    </tr>
+                    <tr>
+                        <td>2015-06-10 14:13:12</td>
+                        <td>2015-06-11 12:13:12</td>
+                        <td><strong>20</strong></td>
+                        <td><b class="font_red">200.00</b></td>
+                        <td>待审核</td>
+                    </tr>
+                    <tr>
+                        <td>2015-06-10 14:13:12</td>
+                        <td>2015-06-11 12:13:12</td>
+                        <td><strong>20</strong></td>
+                        <td><b class="font_red">200.00</b></td>
+                        <td><b class="font_cyan">审核通过</b></td>
+                    </tr>
+                    <tr>
+                        <td>2015-06-10 14:13:12</td>
+                        <td>2015-06-11 12:13:12</td>
+                        <td><strong>20</strong></td>
+                        <td><b class="font_red">200.00</b></td>
+                        <td><b class="font_cyan">审核通过</b></td>
+                    </tr>
+                    <tr class="table_crumbs">
+                        <td colspan="5">
+                            <i class="icons icon_info_null"></i>
+                            <p>兑换记录为空</p>
+                        </td>
+                    </tr>
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!--底部-->
+<div id="footer">
+    <div class="w">
+        <p class="nav_sub"><a href="">关于我们</a>|<a href="">服务条款</a>|<a href="">帮助中心</a></p>
+        <p class="server"> <i class="icons icon_qqs"></i>官方QQ群4006660888  <i class="icons icon_telephone"></i>24小时服务电话4000-898-000</p>
+        <p class="server2">
+            <a class="weixin"><i class="icons icon_weixin_b"><span></span></i></a>
+            <a href="#"><i class="icons icon_weibo_b"> </i></a>
+        </p>
+        <p>版权所有 © 北京朋乐投资管理有限公司 丨 京ICP备15016693号</p>
+    </div>
+</div>
+
+
+<!--弹层-->
+<div class="layout" style="display:none">
+    <h3 class="title">融资支付 <a href=""><i class="icons icon_close"></i></a></h3>
+    <form action="">
+        <div class="group m_t_20">
+            <div>安全密码</div>
+            <div class="m_t_10">
+                <input class="input_text" type="password" data-type="*" placeholder="请输入密码">
+                <div class="v_info">请输入密码</div>
+            </div>
+
+        </div>
+        <p class=""><a class="f_r" href="#">忘记密码？</a></p>
+
+        <div class="group m_t_30">
+            <button class="btn btn_red">保存</button>
+        </div>
+    </form>
+</div>
+
+<!--弹层2-->
+<div class="layout_wrap" style="display: none">
+    <div class="layout layout01" style="">
+        <h3 class="title">融资支付 <a href=""><i class="icons icon_close"></i></a></h3>
+        <div class="content">
+            <div class="fin-contract-content">
+                <h2>融资网注册协议</h2>
+                <h4>特别提示：</h4>
+                <p>欢迎使用财猫网为您提供的各项服务。</p>
+                <p>财猫网旨在为用户提供优质互联网金融服务，基于财猫团队在互联网及金融行业的丰富经验，财猫网可为用户提供高效、优质的信息支持、资金监管、风险控制等互联网金融服务。</p>
+                <p>在您使用财猫网提供的各项服务前，请您务必仔细阅读《财猫网用户协议》（下称“本协议”），充分理解本协议各条款内容。如您对本协议有任何疑问，您可直接拨打财猫网客服电话进行咨询。</p>
+                <h4>一、协议说明</h4>
+                <p>1、本协议所称财猫网，包括财猫网（域名为www.caimao.com）网站、财猫客户端、微信平台财猫官方账号等。</p>
+                <p>2、您访问和使用财猫网，一经勾选“阅读并同意《财猫网用户协议》”，即表示您已充分阅读、理解并接受本协议全部内容，与财猫网达成一致，成为财猫网用户；您与财猫网间的权利义务关系，受本协议各条款约束。</p>
+                <p>3、您与财猫网间的协议内容除本协议正文外，还包括各项财猫网规则。各项财猫网规则是本协议不可分割的组成部分，与本协议正文具有同等法律效力。</p>
+                <p>本协议所称财猫网规则，是指财猫网上已经发布及后续发布的全部规则、实施细则、产品（服务）流程说明、解读、公告、通知等。</p>
+                <p>4、财猫网根据需要，有权修改本协议或财猫网规则。相关修订内容将通过财猫网进行公告，届时不再另行单独通知您。本协议或财猫网规则修改后，如您继续访问和使用财猫网，即视为您已阅读、理解并接受相关修订内容。</p>
+                <h4>二、账户注册</h4>
+                <p>1、在您注册成为财猫网用户、访问使用财猫网服务前，您应为符合中华人民共和国法律法规规定的完全民事行为能力人。如您不具备完全民事行为能力，您及您的监护人应承担因此产生的全部法律后果。</p>
+                <p>2、您有义务确保您向财猫网提供信息的真实、准确、完整性。财猫网对您提供信息的真实、准确、完整性无审核义务。因您未如实、合法、完整提供信息造成的后果，由您自行承担，与财猫网无关。</p>
+                <p>3、请您务必按照财猫网注册页面的提示，真实、准确、完整的填写信息，阅读并同意《财猫网用户协议》。完成前述行为后，您可获得财猫网账户，成为财猫网用户。</p>
+                <p>4、您在财猫网的账户名称、密码及信息均为您自行设置，您应对您财猫网账户项下的所有行为结果负责。</p>
+                <h4>三、账户使用</h4>
+                <p>1、您财猫网账户仅限您个人使用，请您务必妥善保管好您财猫网账户、密码及相关信息。请勿将您财猫网账户转让或借予他人使用。因黑客行为，或因您疏忽保管财猫网账户导致被他人非法使用，或您将财猫网账户转让、借予他人使用产生的全部后果，由您自行承担，与财猫网无关。</p>
+                <p>2、您承诺合理、合法使用财猫网账户，不以任何方式利用财猫网从事有违中华人民共和国法律法规及社会公德的活动。否则财猫网有权终止对您的服务（包括但不限于删除违法违规内容、注销账户等），由此产生的后果由您自行承担，与财猫网无关。</p>
+                <p>3、为保障财猫网正常有序运行，财猫网有权对您访问、使用财猫网的活动进行管理和监督。如您有违反本协议或财猫网规则的行为，财猫网有权根据本协议及财猫网规则对您作出相应处理（包括但不限于中断或终止对您提供服务），由此产生的后果由您自行承担，与财猫网无关。</p>
+                <h4>四、用户授权</h4>
+                <p>您同意财猫网以短信、微信、电子邮件、网站（客户端）消息推送等方式向您发送产品（服务）及相关商业信息。</p>
+                <h4>五、隐私保护</h4>
+                <p>财猫网尊重并保护您的隐私。财猫网承诺，除以下情况外，不对外公开或向第三方披露您的注册资料及您在访问、使用财猫网时存储在财猫网上的非公开信息：</p>
+                <p>1、获得您明确授权；</p>
+                <p>2、依法律法规或应司法、行政部门要求，向第三人或司法、行政部门披露。</p>
+                <h4>六、协议变更及终止</h4>
+                <p>1、您同意，财猫网有权随时变更、中断、终止为您提供的部分或全部服务；在变更、中断、终止部分或全部服务前，无须事先通知您或征得您的同意；且财猫网无须为此向您或任何第三方承担任何责任。</p>
+                <p>2、如有以下情况，财猫网有权以注销（永久冻结）账户的方式终止与您的协议：</p>
+                <ul>
+                    <li>1)您提供的手机号码、电子邮件地址不存在，或财猫网无法与您取得联系的；</li>
+                    <li>2)您向财猫网提供的信息不真实或不准确或不完整的；</li>
+                    <li>3)本协议及财猫网规则变更时，您明确通知财猫网不接受修订协议及规则的；</li>
+                    <li>4)其他财猫网认为应当终止服务的情况。</li>
+                </ul>
+                <h4>七、通知</h4>
+                <p>您应确保您提供给财猫网的联系方式（手机号码、电子邮件地址）是能有效与您取得联系的。财猫网在服务过程中，将通过发送短信、电子邮件等方式向您送达各类通知。因您未提供正确、真实、有效的联系方式造成的后果，由您自行承担，与财猫网无关。</p>
+                <h4>八、免责声明</h4>
+                <p>1、您理解，股市有风险，入市应谨慎，您应对您的投资选择负责。</p>
+                <p>2、财猫网不保证财猫网上有关行情分析、市场评析等内容的正确性和适用性。</p>
+                <p>3、因网络服务特殊性，财猫团队需要定期或不定期对财猫网进行更新、检修或维护，因此产生服务变更、中断，财猫网不承担任何责任。</p>
+                <p>4、财猫网上可能会存在其他互联网网站或资源链接，是否使用该类网站或资源链接由您自行判断；财猫网不保证该类网站或资源链接的适用性，对因使用该类网站或资源链接产生的后果，由您自行承担。</p>
+                <p>5、您在财猫网上发表的内容仅代表您个人的立场与观点，您应对您所发表的内容负责。因您所发表的内容引发的后果，由您自行承担，与财猫网无关。</p>
+                <h4>九、法律适用及管辖</h4>
+                <p>1、本协议适用中华人民共和国大陆地区法律。</p>
+                <p>2、因本协议履行过程中产生的诉讼，由北京朋乐投资管理有限公司所在地人民法院管辖。</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--转出盈利-->
+<div class="layout layout02"  style="display:none;">
+    <h3 class="title">转出盈利 <a href=""><i class="icons icon_close"></i></a></h3>
+    <div class="font_black">提盈时间为交易日的上午10：00 到 下午3：00</div>
+    <form action="">
+        <p class="group">
+            <span class="col_1">可转余额 </span>
+            <span class="col_2"><b class="font_red"></b> 2000 元</span>
+        </p>
+        <div class="group m_t_10">
+            <span class="col_1">转出金额 </span>
+            <span class="col_2">
+                <input class="input_text" type="text" data-type="*" placeholder="请输入转出金额" data-msg-null="请输入转出金额">
+                <div class="v_info"></div>
+            </span>
+        </div>
+        <div class="group m_t_20">
+            <button class="btn btn_red">确认转出</button>
+        </div>
+    </form>
+</div>
+
+<!-- 还款-->
+<div class="layout layout02"  style="display:none;">
+    <h3 class="title">还款 <a href=""><i class="icons icon_close"></i></a></h3>
+    <form action="">
+        <p class="group">
+            <span class="col_1">可转余额 </span>
+            <span class="col_2">2000 元</span>
+        </p>
+        <p class="group">
+            <span class="col_1">还款状态 </span>
+            <span class="col_2 font_cyan">可还款</span>
+            <span class="col_2 font_red">可还款</span>
+        </p>
+        <p class="group">
+            <span class="col_1">还款状态 </span>
+            <span class="col_2 font_red">有持仓不可还款</span>
+        </p>
+        <p class="group align_center">
+            还款后交易账户将收回，你需要重新配资获取交易账户
+        </p>
+
+        <div class="group m_t_20">
+            <button class="btn btn_red">确认还款</button>
+        </div>
+    </form>
+</div>
+
+<!--展期-->
+<div class="layout layout02" style="display: none">
+    <h3 class="title">展期 <a href=""><i class="icons icon_close"></i></a></h3>
+    <form action="">
+        <div class="group m_t_20">
+            <span class="col_1">使用期限</span>
+            <span class="col_2">
+                <select name="" id=" " class="input_select" data-type="*">
+                    <option value="">1个月</option>
+                    <option value="01">2个月</option>
+                    <option value="02">3个月</option>
+                </select>
+            </span>
+        </div>
+        <p class="group">
+            <span class="col_1">费用 </span>
+            <span class="col_2"><b>300</b>/元（月利率：100.8%）</span>
+        </p>
+        <div class="group m_t_10">
+            <span class="col_1">安全密码 </span>
+            <span class="col_2">
+                <input class="input_text" type="password" data-type="*" placeholder="请输入安全密码" data-msg-null="请输入安全密码">
+                <div class="v_info"></div>
+            </span>
+        </div>
+        <div class="group m_t_20">
+            <button class="btn btn_red">确认展期</button>
+        </div>
+    </form>
+</div>
+
+<!--追加保证金-->
+<div class="layout layout02"  style="display: none">
+    <h3 class="title">追加保证金 <a href=""><i class="icons icon_close"></i></a></h3>
+    <form action="">
+        <p class="group m_t_10">
+            <span class="col_1">可用余额</span>
+            <span class="col_2"><b class="font_red">2000</b>/元  &nbsp; &nbsp;<a href="">充值</a></span>
+        </p>
+        <div class="group m_t_10">
+            <span class="col_1">追加金额 </span>
+            <span class="col_2">
+                <input class="input_text" type="text" data-type="*" placeholder="请输入追加金额" data-msg-null="请输入追加金额">
+                <div class="v_info"></div>
+            </span>
+        </div>
+        <div class="group m_t_10">
+            <span class="col_1">安全密码 </span>
+            <span class="col_2">
+                <input class="input_text" type="password" data-type="*" placeholder="请输入安全密码" data-msg-null="请输入安全密码">
+                <div class="v_info"></div>
+            </span>
+        </div>
+        <div class="group m_t_20">
+            <button class="btn btn_red">确认追加</button>
+        </div>
+    </form>
+</div>
+
+<!--追加合约-->
+<div class="layout layout02" style="display:none;" >
+    <h3 class="title">追加合约 <a href=""><i class="icons icon_close"></i></a></h3>
+    <form action="">
+        <div class="group m_t_20">
+            <span class="col_1">可用余额 </span>
+            <span class="col_2">
+                <input class="input_text" type="text" data-type="*" placeholder="请输入可用余额" >
+                <div class="v_info"></div>
+            </span>
+        </div>
+        <p class="group">
+            <span class="col_1">所需保证金 </span>
+            <span class="col_2"><b class="font_red">300</b>/元</span>
+        </p>
+        <div class="group m_t_10">
+            <span class="col_1">使用期限</span>
+            <span class="col_2">
+                <select name="" id="" class="input_select" data-type="*">
+                    <option value="">1个月</option>
+                    <option value="01">2个月</option>
+                    <option value="02">3个月</option>
+                </select>
+            </span>
+        </div>
+        <p class="group">
+            <span class="col_1">费用 </span>
+            <span class="col_2"><b>300</b>/元（月利率:10.8%）</span>
+        </p>
+        <p class="group align_center">
+            您需要保证金 <b class="font_red">2000</b> 元 +首付费用<b class="font_red">2000</b> 元
+        </p>
+        <div class="group m_t_20">
+            <span class="col_1">安全密码 </span>
+            <span class="col_2">
+                <input class="input_text" type="password" data-type="*" placeholder="请输入安全密码">
+                <div class="v_info"></div>
+            </span>
+        </div>
+        <div class="group m_t_20">
+            <button class="btn btn_red">确认追加</button>
+        </div>
+    </form>
+</div>
+
+
+
+
+<div id="float_right">
+    <div id="izl_rmenu" class="izl-rmenu">
+        <div class="side_toolbar btn-custom">
+            <a href=""  title="财猫行情"><i class="icons icon_btn_custom"></i></a>
+        </div>
+        <div class="side_toolbar btn-phone">
+            <i class="icons icon_btn_phone"></i>
+            <div class="phone" style="display: none;">
+                <i class="icons icon_btn_phone"></i>
+                <p>
+                    免费热线<br>
+                    4000 600 888
+                </p>
+            </div>
+        </div>
+        <div class="side_toolbar btn-tel">
+            <i class="icons icon_btn_tel"></i>
+            <div class="tel" style="display: none;">
+                <i class="icons icon_btn_tel"></i>
+                <p>
+                    配资QQ群 <br>
+                    <a href="">4000600888</a>
+                </p>
+                <p>
+                    配资QQ群 <br>
+                    <a href="">4000600888</a>
+                </p>
+            </div>
+        </div>
+        <div class="side_toolbar btn-top">
+            <i class="icons icon_btn_top"></i>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 左侧浮动条条
+    $("#izl_rmenu").each(function(){
+        //$(this).find(".btn-custom").mouseenter(function(){
+        //    $(this).find(".custom").fadeIn("slow");
+        //});
+        //$(this).find(".btn-custom").mouseleave(function(){
+        //    $(this).find(".custom").fadeOut("fast");
+        //});
+        $(this).find(".btn-phone").mouseenter(function(){
+            $(this).find(".phone").fadeIn("slow");
+        });
+        $(this).find(".btn-phone").mouseleave(function(){
+            $(this).find(".phone").fadeOut("fast");
+        });
+        $(this).find(".btn-tel").mouseenter(function(){
+            $(this).find(".tel").fadeIn("slow");
+        });
+        $(this).find(".btn-tel").mouseleave(function(){
+            $(this).find(".tel").fadeOut("fast");
+        });
+        $(this).find(".btn-top").click(function(){
+            $("html, body").animate({
+                "scroll-top":0
+            },"slow");
+        });
+    });
+    var lastRmenuStatus=false;
+    $(window).scroll(function(){//bug
+        var _top=$(window).scrollTop();
+        if(_top>200){
+            $("#izl_rmenu").data("expanded",true);
+        }else{
+            $("#izl_rmenu").data("expanded",false);
+        }
+        if($("#izl_rmenu").data("expanded")!=lastRmenuStatus){
+            lastRmenuStatus=$("#izl_rmenu").data("expanded");
+            if(lastRmenuStatus){
+                $("#izl_rmenu .btn-top").slideDown();
+            }else{
+                $("#izl_rmenu .btn-top").slideUp();
+            }
+        }
+    });
+</script>
+</body>
+</html>

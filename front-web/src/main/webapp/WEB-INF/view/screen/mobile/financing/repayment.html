@@ -1,0 +1,102 @@
+<#assign bg="bg-gray"/> 
+<#assign controller="repayment"/> 
+<#assign title="还款"/>
+<#assign header="还款"/>
+<#assign footer="1"/>
+<#include 'mobile/layout/layout.html'/>
+<#macro content>
+
+<!--下部-->
+<article class="content">
+
+
+<!--表单-->
+<aside class="con-frame">
+<ul class="datalist">
+<li class="datalist-item clearfix">
+<div class="am-grid datalist-line">
+        <div class="am-grid-item am-grid-item-25  am-ft-right">
+        <h4 class="am-ft-md cm-left">还款合约</h4>
+        </div>
+        <div class="am-grid-item am-grid-item-75 am-ft-left am-left-10">
+        <span id="contract_no"></span>
+
+        </div>
+</div>
+</li>
+<li class="datalist-item clearfix">
+<div class="am-grid datalist-line">
+        <div class="am-grid-item am-grid-item-25  am-ft-right">
+        <h4 class="am-ft-md cm-left">借款金额</h4>
+        </div>
+        <div class="am-grid-item am-grid-item-75 am-ft-left am-left-10">
+        <big class="am-ft-bignNum am-ft-orange am-right-5" id="loanAmount"></big>元
+</div>
+</div>
+</li>
+
+<li class="datalist-item clearfix">
+<div class="am-grid datalist-line">
+        <div class="am-grid-item am-grid-item-25  am-ft-right">
+        <h4 class="am-ft-md cm-left">可还金额</h4>
+        </div>
+        <div class="am-grid-item am-grid-item-75 am-ft-left am-left-10">
+        <span><span id="balanceAmount"></span> 元</span>
+</div>
+</div>
+</li>
+
+<!-- <li class="datalist-item clearfix">
+<div class="am-grid datalist-line">
+        <div class="am-grid-item am-grid-item-25  am-ft-right">
+        <h4 class="am-ft-md cm-left">罚息</h4>
+        </div>
+        <div class="am-grid-item am-grid-item-75 am-ft-left am-left-10">
+        <span><span id="punitive"></span> 元</span>
+</div>
+</div>
+</li> -->
+
+<li class="datalist-item clearfix">
+<div class="am-grid datalist-line">
+        <div class="am-grid-item am-grid-item-25  am-ft-right">
+        <h4 class="am-ft-md cm-left">合计</h4>
+        </div>
+        <div class="am-grid-item am-grid-item-75 am-ft-left am-left-10">
+        <span><span id="totalAmount"></span> 元</span>
+</div>
+</div>
+</li>
+
+<li class="datalist-item clearfix">
+<div class="am-grid datalist-line">
+        <div class="am-grid-item am-grid-item-25  am-ft-right">
+        <h4 class="am-ft-md cm-left">安全密码</h4>
+        </div>
+        <div class="am-grid-item am-grid-item-75 am-ft-left am-left-10">
+        <span class="ui-form-field">
+<input id="tradepwd" type="password" class="text_input" maxlength="18" defaultvalue="输入密码" value="" placeholder="输入密码">
+</span>
+</div>
+</div>
+</li>
+</ul>
+</aside>
+
+
+
+</article>
+
+</#macro>
+
+<#macro footerContent>
+<!--按钮-->
+<div class="btn-page btn-page-center bg-white con-spacing15">
+        <a id="repayBtn" class="am-button am-button-red">
+        <span>确认还款</span>
+        </a>
+        
+</div>
+
+
+</#macro>

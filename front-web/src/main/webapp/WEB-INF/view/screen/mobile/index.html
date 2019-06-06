@@ -1,0 +1,113 @@
+<#include 'mobile/layout/layout.html'/> 
+<#macro assignSet>
+	<#assign title=default_title /> 
+	<#assign header=default_title /> 
+	<#assign goBack="0"/>
+	<#assign footer="0"/> 
+	<#assign bg="bg-gray"/> 
+	<#assign controller="index"/> 
+</#macro>
+<#macro repayButton>
+    <a style="position: absolute; top:13px; right: 10px; color: #FFFFFF; font-size: 12px;" href="javascript:void(0);" id="visit_pc">访问电脑版</a>
+</#macro>
+<#macro headerContent>
+<div class="device">
+	<div class="swiper-container">
+		<div class="swiper-wrapper">
+			<div class="swiper-slide red-slide">
+				<img class="doc" src="${basePath}/mobile/images/index/mobile_banner_1.jpg" />
+			</div>
+		</div>
+	</div>
+	<div class="pagination"></div>
+</div>
+
+</#macro> <#macro content>
+<article class="content" id="bellowDevice">
+	<!--栏目-->
+	<ul class="nav-menuIndex listLateral">
+
+        <li class="nav-menuIndex-item">
+            <a href="${basePath}/mobile/account/recharge.htm" class="cz"> <i class="nav-icon nav-cz"></i></a>
+            <p>
+                <span class="am-ft-tabText am-ft-sm">立即充值</span>
+            </p>
+        </li>
+
+        <#if isProDay>
+            <li class="nav-menuIndex-item">
+                <a href="${basePath}/mobile/P1.htm" class="tian"><i class="nav-icon nav-tian"></i></a>
+                <p>
+                    <span class="am-ft-tabText am-ft-sm">${proDay}</span>
+                </p>
+            </li>
+        </#if>
+
+        <#if isProMonth>
+        <li class="nav-menuIndex-item">
+            <a href="${basePath}/mobile/P2.htm" class="yue"> <i class="nav-icon nav-yue"></i></a>
+            <p>
+                <span class="am-ft-tabText am-ft-sm">${proMonth}</span>
+            </p>
+        </li>
+        </#if>
+
+        <#if isProMonth>
+            <li class="nav-menuIndex-item">
+                <a href="${basePath}/mobile/P10.htm" class="yue"> <i class="nav-icon nav-yue"></i></a>
+                <p>
+                    <span class="am-ft-tabText am-ft-sm">${proMonth}(低息)</span>
+                </p>
+            </li>
+        </#if>
+
+        <#if isProP2P>
+        <li class="nav-menuIndex-item">
+            <a href="${basePath}/mobile/tender.htm" class="bao"> <i class="nav-icon nav-bao"></i></a>
+            <p>
+                <span class="am-ft-tabText am-ft-sm">${proP2P}</span>
+            </p>
+        </li>
+        </#if>
+
+        <#if isProFree>
+        <li class="nav-menuIndex-item">
+            <a href="${basePath}/mobile/P3.htm" class="mian"> <i class="nav-icon nav-mian"></i></a>
+            <p>
+                <span class="am-ft-tabText am-ft-sm">${proFree}</span>
+            </p>
+        </li>
+        </#if>
+
+        <#if isProContest>
+        <li class="nav-menuIndex-item">
+            <a href="${basePath}/mobile/P4.htm" class="ko"> <i class="nav-icon nav-ko"></i></a>
+            <p>
+                <span class="am-ft-tabText am-ft-sm">${proContest}</span>
+            </p>
+        </li>
+        </#if>
+
+        <li class="nav-menuIndex-item">
+            <a href="${basePath}/mobile/trade/assets.htm" class="jy"> <i class="nav-icon nav-jy"></i></a>
+            <p>
+                <span class="am-ft-tabText am-ft-sm">交易中心</span>
+            </p>
+        </li>
+
+        <li class="nav-menuIndex-item">
+            <a href="${basePath}/mobile/user/index.htm" class="gr"> <i class="nav-icon nav-gr"></i></a>
+            <p>
+                <span class="am-ft-tabText am-ft-sm">个人中心</span>
+            </p>
+        </li>
+	</ul>
+	<!--栏目-->
+
+
+	<div class="con-spacing15" id="content"></div>
+
+
+</article>
+
+</#macro>

@@ -1,0 +1,230 @@
+<!doctype html>
+<html>
+<#include "config.html"/>
+<head>
+    <meta charset="utf-8">
+    <title>财猫网</title>
+    <!--<meta name="keywords" content="融资，股票融资，投资融资，理财融资，融资平台，融资炒股，融资网，融资公司" />-->
+    <meta name="baidu-site-verification" content="fIBus97Xwi" />
+    <link rel="stylesheet" type="text/css" href="${dojoUrl}/style/page/style.css?v=${jsVersion}">
+    <script src="${dojoUrl}/js/index.js?v=${jsVersion}" type="text/javascript"></script>
+</head>
+<body>
+<#include 'include/page/head.html'/>
+<!--焦点图部分-->
+<div id="focus">
+    <div class="focus">
+        <div class="home_slide">
+            <ul class="slide_main">
+                <li style="background:#273F5B url(${imgUrl}/banner/index-banner18.jpg?v=${jsVersion}) no-repeat 50% 0">
+                    <a href="/topic/ybk.html" target="_blank"><img src="${imgUrl}/placeholder.png" width="1000px" height="380"></a>
+                </li>
+                <li style="background:#273F5B url(${imgUrl}/banner/index-banner3.png?v=${jsVersion}) no-repeat 50% 0">
+                    <a href="javascript:void(0);"><img src="${imgUrl}/placeholder.png" width="1000px" height="380"></a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <div class="home_login home_login_bg"></div>
+            <#if userBase??>
+                <!--登录后-->
+                <div class="home_login">
+                    <div class="hd">
+                        <h5>你好，<span id="index_user_name">　　　</span></h5>
+                    </div>
+                    <div class="bd_login clear_fix">
+                        <!--<a class="f_l" href="${basePath}/pz/pz_select?t=p1">股票融资</a>-->
+                        <a class="f_r" style="width: 215px;" href="${basePath}/p2p/index.html">投资理财</a>
+                        <a class="btn btn_red size_full" href="${basePath}/account/index.htm">进入我的账户</a>
+                    </div>
+
+                    <!--行情-->
+                    <div class="hd4">
+                        <ul id="zhishu_sh">
+                            <li>上证指数</li>
+                            <li>0</li>
+                            <li>0%</li>
+                        </ul>
+                        <ul id="zhishu_sz">
+                            <li>深证指数</li>
+                            <li>0</li>
+                            <li>0%</li>
+                        </ul>
+                        <ul class="end" id="zhishu_szc">
+                            <li>创业板指</li>
+                            <li>0</li>
+                            <li>0%</li>
+                        </ul>
+                    </div>
+                </div>
+            <#else>
+                <!--登录前-->
+                <div class="home_login">
+                    <div class="hd">
+                        <h5>登录财猫网</h5>
+                    </div>
+                    <div class="bd">
+                        <form id="loginform" method="get">
+                            <div class="group">
+                                <input type="text" autocomplete="off" placeholder="请输入您的账号" name="username" id="username" validateType="empty:手机号不能为空 phone" class="input_text input_name" onkeydown="sub_form_click(event)" maxlength="11">
+                            </div>
+                            <div class="group">
+                                <input type="password" placeholder="请输入您的密码" name="password" id="password" validateType="empty:密码不能为空 len:6:16 password" class="input_text input_pass" onkeydown="sub_form_click(event)" maxlength="20">
+                            </div>
+                            <!--<div class="group">
+                                <input type="text" autocomplete="off" placeholder="验证码" class="input_text input_verify"><img src="https://www.caimao.com/app/resources/image/customize/h1.jpg" width="86" height="34" alt="">
+                                <div class="v_info">您输入的验证码错误</div>
+                            </div>-->
+                            <!--账号or密码错误提示-->
+                            <button type="button" class="btn size_full" id="login_button">登录</button>
+                        </form>
+                    </div>
+                    <script type="text/javascript">
+                        function sub_form_click(e){
+                            var evt;
+                            evt = e ? e : (window.event ? window.event : null);//兼容IE和FF
+                            if (evt.keyCode==13){
+                                document.getElementById('login_button').click();
+                            }
+                        }
+                    </script>
+                    <div class="ft">
+                        <a href="${basePath}/user/register.html" class="f_l"><#if activityOpen??>注册即送100元<#else>注册</#if></a>
+                        <a href="${basePath}/user/forget.html" class="f_r">忘记密码?</a>
+                    </div>
+
+                    <div class="hd4">
+                        <ul id="zhishu_sh">
+                            <li>上证指数</li>
+                            <li>0</li>
+                            <li>0%</li>
+                        </ul>
+                        <ul id="zhishu_sz">
+                            <li>深证指数</li>
+                            <li>0</li>
+                            <li>0%</li>
+                        </ul>
+                        <ul class="end" id="zhishu_szc">
+                            <li>创业板指</li>
+                            <li>0</li>
+                            <li>0%</li>
+                        </ul>
+                    </div>
+                </div>
+            </#if>
+        </div>
+    </div>
+</div>
+<!--服务情况-->
+
+<!--内容区-->
+<div id="main">
+    <div class="invest w">
+        <div class="left">
+            <!--<ul>
+                <li>高收益、4天取现</li>
+                <li>手续费仅4折起</li>
+                <li>高收益、4天取现</li>
+                <li>手续费仅4折起</li>
+            </ul>-->
+        </div>
+        <div class="right">
+            <div class="top">
+                <ul>
+                    <li class="color" onclick="showLoanPanel(this, 0)"><span>可投项目(${loanCount})</span></li>
+                </ul>
+                <a class="more" href="/p2p/index.html">更多投资产品</a>
+            </div>
+            <div id="loanPanel0">
+                <#if (loanPage.items?size > 0) >
+                    <#list loanPage.items as loanRes>
+                        <div class="hd8_y-2">
+                            <ul class="lix">
+                                <li><span>${loanRes.targetName}</span></li>
+                                <li><b>${formatAmount(loanRes.targetAmount, 0, "w", 1)}元</b></li>
+                            </ul>
+                            <ul class="nian">
+                                <li>年化收益率</li>
+                                <li class="c"><span><b>${loanRes.yearRate * 100}%</b></span></li>
+                            </ul>
+                            <ul class="jie">
+                                <li>借款期限</li>
+                                <li><b>${loanRes.liftTime/30}个月</b></li>
+                            </ul>
+                            <ul class="jin">
+                                <li>进度</li>
+                                <li class="index_jindu"><b><i style="width:${loanRes.targetRate?number*100}%"></i></b><span class="co">${loanRes.targetRate?number*100}%</span></li>
+                            </ul>
+                            <ul class="yu">
+                                <li>剩余余额</li>
+                                <li><span>￥${formatAmount(loanRes.targetOver, 2, "", 1)}</span></li>
+                            </ul>
+                            <ul>
+                                <li><a class="btn" target="_blank" href="${basePath}/p2p/targetDetail.html?target_id=${loanRes.targetId}">投资</a> </li>
+                            </ul>
+                        </div>
+                    </#list>
+                <#else/>
+                    <table class="table  table_striped">
+                        <tbody><tr class="table_crumbs">
+                            <td colspan="">
+                                <b class="invest_null"></b>
+                                <p class="font_18 m_t_10">可投项目为空，敬请期待！</p>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </#if>
+
+            </div>
+            <div id="loanPanel1" style="display: none;">
+                <#if (loanFullPage.items?size > 0) >
+                    <#list loanFullPage.items as loanFullRes>
+                        <div class="hd8_y-2">
+                            <ul class="lix">
+                                <li><span>${loanFullRes.targetName}</span></li>
+                                <li><b>${formatAmount(loanFullRes.targetAmount, 0, "w", 1)}元</b></li>
+                            </ul>
+                            <ul class="nian">
+                                <li>年化收益率</li>
+                                <li class="c"><span><b>${loanFullRes.yearRate * 100}%</b></span></li>
+                            </ul>
+                            <ul class="jie">
+                                <li>借款期限</li>
+                                <li><b>${loanFullRes.liftTime/30}个月</b></li>
+                            </ul>
+                            <ul class="jin">
+                                <li>进度</li>
+                                <li class="index_jindu"><b><i style="width:${loanFullRes.targetRate?number*100}%"></i></b><span class="co">${loanFullRes.targetRate?number*100}%</span></li>
+                            </ul>
+                            <ul class="yu">
+                                <li>剩余余额</li>
+                                <li><span>￥${formatAmount(loanFullRes.targetOver, 2, "", 1)}</span></li>
+                            </ul>
+                            <ul>
+                                <li><a class="btn" target="_blank" href="${basePath}/p2p/targetDetail.html?target_id=${loanFullRes.targetId}">投资</a> </li>
+                            </ul>
+                        </div>
+                    </#list>
+                <#else/>
+                    <table class="table  table_striped">
+                        <tbody><tr class="table_crumbs">
+                            <td colspan="">
+                                <b class="invest_null"></b>
+                                <p class="font_18 m_t_10">可投项目为空，敬请期待！</p>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </#if>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<#include 'include/page/foot.html'/>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<div class="popNotice">
+    <dl class="noticeHead">
+        <dt>我的消息</dt>
+        <dd><i class="orange">${notReadNum}条未读</i>/${msg.totalCount}条消息</dd>
+    </dl>
+    <div class="noticeBody">
+        <#if (msg.items?size > 0) >
+            <#list msg.items as m>
+                <dl <#if m.isRead == 0>class="unread"</#if>>
+                <dt><i>■</i><em title="${m.pushMsgTitle}">${m.pushMsgTitle}</em></dt>
+                <dd>${m.createDatetime?string("yyyy-MM-dd HH:mm:ss")}</dd>
+                </dl>
+            </#list>
+        <#else/>
+            <p>暂无消息</p>
+        </#if>
+    </div>
+    ${pageHtml}
+</div>

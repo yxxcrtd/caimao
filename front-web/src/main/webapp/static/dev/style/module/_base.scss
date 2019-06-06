@@ -1,0 +1,234 @@
+@charset "utf-8";
+/*
+━━━━━━━
+base.scss
+基础常用样式
+BitUI
+━━━━━━━
+*/
+
+/*引入*/
+@import "reset";
+@import "variable";
+@import "mixin";
+@import "icon";
+
+/*==文本对齐==*/
+.align_left       {text-align: left}
+.align_right      {text-align:right}
+.align_center     {text-align: center}
+.align_middle     {vertical-align: middle}
+
+/*==字体 font(文字字体，尺寸，描边尺寸，颜色)==*/
+.font_12          {font-size: 12px}
+.font_14          {font-size: 14px}
+.font_16          {font-size: 16px}
+.font_18          {font-size: 18px}
+.font_20          {font-size: 20px}
+.font_22          {font-size: 22px}
+.font_24          {font-size: 24px}
+/*字体加粗*/
+.font_bold        {font-weight: 700}
+/*字体颜色*/
+.font_red         {color: $red}
+.font_green       {color: $green}
+.font_orange      {color: $orange}
+.font_blue        {color: $blue}
+.font_gray        {color: $gray}
+.font_grayD       {color: $grayD}
+.font_black       {color: $black;}
+.font_cyan        {color: $cyan;}
+
+.f_gray        {color:#999}
+/*==文本 text(大小写，文字装饰)==*/
+/*大写*/
+.text_upper       {text-transform: uppercase}
+/*小写*/
+.text_lower       {text-transform: lowercase}
+/*首字大写*/
+.text_capitalize  {text-transform: capitalize}
+/*下划线*/
+.text_underline   {text-decoration: inherit}
+/*上划线*/
+.text_overline    {text-decoration:underline}
+/*中横线*/
+.text_through     {text-decoration:overline}
+/*禁止换行*/
+.text_nowrap      { white-space: nowrap;}
+/*强制换行*/
+.text_break_word  { word-wrap: break-word}
+
+/*==浮动==*/
+.f_l       {float: left}
+.f_r       {float: right}
+
+/*==元素 (显示隐藏)==*/
+.show             { display: block}
+.hide             { display: none}
+.hidden           { visibility:hidden   }
+.visible          { visibility:visible  }
+.inline           { display:inline-block}
+
+
+.current,.cur{}
+.active{}
+
+/*==位置==*/
+.relative        { position: relative}
+.absolute        { position: absolute}
+.fixed           { position: fixed}
+
+/*==修正==*/
+.no_background   { background: none}
+.no_border       { border:0  }
+.no_padding      { padding:0 }
+.no_margin       { margin:0  }
+.clear_fix       { @extend %clearFix}
+
+//宽
+.w{
+  width: 1200px;
+  margin: auto;
+}
+
+.m_l_10{
+  margin-left: 10px;
+}
+.m_r_5{
+  margin-right: 5px;
+}
+.m_r_15{
+  margin-right: 15px;
+}
+.m_b_10{
+  margin-bottom: 10px;
+}
+.m_b_15{
+  margin-bottom: 15px;
+}
+.m_b_30{
+  margin-bottom:30px;
+}
+.m_t_30{
+  margin-top:30px;
+}
+.m_t_20{
+  margin-top:20px;
+}
+.m_t_10{
+   margin-top:10px;
+}
+.m_t_8{
+  margin-top:8px;
+}
+
+.p_l_40{
+  padding-left: 40px;
+}
+.p_l_10{
+  padding-left: 10px;
+}
+.p_l_5{
+  padding-left: 5px;
+}
+.plr_10{
+  padding: 0 10px;
+}
+
+
+.btn{
+  color: $white;
+  display:inline-block;
+  text-align: center;
+  height:33px;
+  line-height: 35px;
+  @include btn(none,#EB4636)
+}
+.btn_red,a.btn_red,a.btn_red:visited{@include btn(none, $red,$redD); }
+
+.btn_blue,a.btn_blue,a.btn_blue:visited{ @extend .btn_red; @include btn(none, $blue,$blueL);}
+
+a.btn:hover{
+  color: $white;
+}
+/*==尺寸==*/
+.size_full{
+  width: 100%;
+}
+.size_m{
+  width: 94px;
+  height: 28px;
+  line-height: 28px;
+  font-size: 12px;
+}
+.size_l{
+  height: 40px;
+  line-height: 40px;
+  width: 188px;
+  font-size: 15px
+}
+
+.btn_gray,.btn_gray:visited{
+  background-color: $gray;
+  cursor: not-allowed;
+}
+.input_text,.input_select{
+  text-indent: 5px;
+  height: $inputDefaultSize;
+  width: 268px;
+  @include input($gray, '', #646464);
+  transition: all .1s ease;
+}
+
+
+.group{
+  overflow: hidden;
+  .col_1{
+    width: 80px;
+    float: left;
+    padding-top: 8px;
+  }
+  .col_2{
+    width: 360px;
+    float: left;
+  }
+}
+
+.group_half{
+  width: 50%;
+  float: left;
+}
+
+/*分页样式*/
+.pagination{
+  display: inline-block;
+  @extend %clearFix;
+  padding-top: 20px;
+  li{
+    display: inline-block;
+    margin-right: 5px;
+    span,a{
+      color: #000;
+      border:1px solid #D7D7D7;
+      display: inline-block;
+      height:30px;
+      line-height: 30px;
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+    &.active{
+      span{
+        border-color: #EB4636;
+        color: #EB4636;
+      }
+    }
+    .pre,.next{
+      border-color: #EB4636;
+      color: #EB4636;
+    }
+    .none{color: #D7D7D7}
+  }
+}
+
+a{outline: none !important;}
+.field-set input[type=text]::-ms-clear{display: none;}

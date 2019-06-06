@@ -1,0 +1,77 @@
+
+<!doctype html>
+<#include "ybk/config.html" />
+<#assign topMenu="market" />
+<#assign leftMenu="all" />
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>行情中心--邮币卡</title>
+    <link href="${staticUrl}/style/style.css?version=${jsVersion}" rel="stylesheet">
+    <script src="${staticUrl}/js/chart/lib.js?version=${jsVersion}"></script>
+    <script src="${staticUrl}/js/ybk/exchangeIndex.js?version=${jsVersion}" type="text/javascript"></script>
+</head>
+
+<body>
+<#include "ybk/include/page/head.html" />
+
+<div class="main market">
+    <div class="clearfix">
+
+        <#include "ybk/include/menu/ybk_hq_left.html" />
+
+        <div class="mod-right">
+            <div class="mod-rightcontent">
+                <div class="goodsTable exchangeIndex">
+                    <div class="tableHead">
+                        <span class="small first">序号</span>
+                        <span class="big">邮币卡电子盘</span>
+                        <span class="right">指数</span>
+                        <span class="right">涨跌幅</span>
+                        <span class="right">成交金额</span>
+                        <span class="right">成交量</span>
+                        <span class="center">打新申购</span>
+                        <span class="center">是否开盘</span>
+                    </div>
+                    <div class="goodsList">
+                        <table class="table table_striped table_hover">
+                            <colgroup>
+                                <col style="width:80px;"></col>
+                                <col style="width:130px"></col>
+                                <col></col>
+                                <col></col>
+                                <col></col>
+                                <col></col>
+                                <col></col>
+                                <col></col>
+                            </colgroup>
+                            <tbody id="exchangeListPoint">
+                            <script id="exchangeListTmpl" type="text/x-tmpl">
+                            <% for(var i = 0,l = data.length; i < l; i++){%>
+                                <tr onclick="window.location.href='/ybk/market.html?name=<%=data[i].shortName%>'">
+                                    <td><%=i+1%></td>
+                                    <td><%=data[i].exchangeName%></td>
+                                    <td class="right"><b <%=data[i].changeRate >= 0 ? 'class="red"' : 'class="green"'%>><%=(data[i].currentPrice / 100)%></b></td>
+                                    <td class="right"><b <%=data[i].changeRate >= 0 ? 'class="red"' : 'class="green"'%>><%=(data[i].changeRate / 100).toFixed(2)%>%</b> </td>
+                                    <td class="right"><%=(data[i].totalMoney / 10000000000).toFixed(2)%>亿</td>
+                                    <td class="right"><%=shortIndex(data[i].totalAmount/100,2,10000,['万','亿','兆'])%></td>
+                                    <td class="center"><%=data[i].shenGouNum%></td>
+                                    <td class="center"><%=data[i].isOpen == 1 ? '开盘' : '未开盘'%></td>
+                                </tr>
+                            <%}%>
+                            </script>
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<#include "ybk/include/page/foot.html" />
+
+</body>
+</html>

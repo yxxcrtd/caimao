@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+	<contextName>bana-gate</contextName>
+	<appender name="STDOUT"
+              class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%d [%t] %-5p %C.%M\(%L\) -%m%n</pattern>
+        </encoder>
+    </appender>
+
+	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>log/bana-gate.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <FileNamePattern>bana-gate.log.%i.bak</FileNamePattern>
+        </rollingPolicy>
+        <MaxHistory>30</MaxHistory>
+
+        <triggeringPolicy
+            class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <MaxFileSize>100MB</MaxFileSize>
+        </triggeringPolicy>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>%d [%t] %-5p %C.%M\(%L\) -%m%n</Pattern>
+        </layout>
+    </appender>
+	
+    <root level="DEBUG">
+   		<appender-ref ref="STDOUT"/>
+    </root>
+</configuration>

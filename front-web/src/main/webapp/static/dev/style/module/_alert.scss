@@ -1,0 +1,53 @@
+@charset "utf-8";
+@import "variable";
+/*
+━━━━━━━
+alert.scss
+警告框（依赖base）
+BitUI
+━━━━━━━
+*/
+.alert{
+  background-color: lighten($blue,45%);
+  border: 1px solid lighten($blue,40%);
+  color: $blue;
+  margin-bottom: 15px;
+  position: relative;
+  padding: 5px 10px;
+  .close{
+    float: right;
+    font-style: normal;
+    cursor: pointer;
+    em{
+      font-style: normal; font-size: 12px; opacity: 0.8;
+    }
+    &:hover{
+      em{opacity: 1;}
+    }
+  }
+  a{
+    color: $linkColor;
+    &:hover,&:visited{ text-decoration: underline}
+  }
+
+}
+.alert_success,.alert_green {
+  background-color:lighten($green,40%);
+  border-color: lighten($green,35%);
+  color: $green;
+}
+.alert_warning,.alert_orange {
+  background-color:lighten($orange,45%);
+  border-color: lighten($orange,35%);
+  color: $orange;
+}
+.alert_danger,.alert_red {
+  background-color:lighten($red,35%);
+  border-color: lighten($red,30%);
+  color:$red;
+}
+.alert_gray {
+  background-color:$grayLighter;
+  border-color: darken($grayLighter,10%);
+  color:$grayDark;
+}

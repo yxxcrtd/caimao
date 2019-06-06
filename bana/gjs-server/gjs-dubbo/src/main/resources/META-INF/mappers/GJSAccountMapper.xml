@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="GJSAccount">
+    <resultMap id="BaseResultMap" type="com.caimao.gjs.api.entity.GJSAccountEntity">
+        <result column="user_id" property="userId" jdbcType="BIGINT"/>
+        <result column="exchange" property="exchange" jdbcType="VARCHAR"/>
+        <result column="salt_key" property="saltKey" jdbcType="VARCHAR"/>
+        <result column="firm_id" property="firmId" jdbcType="VARCHAR"/>
+        <result column="trader_id" property="traderId" jdbcType="VARCHAR"/>
+        <result column="real_name" property="realName" jdbcType="VARCHAR"/>
+        <result column="id_card" property="idCard" jdbcType="VARCHAR"/>
+        <result column="bank_id" property="bankId" jdbcType="VARCHAR"/>
+        <result column="bank_card" property="bankCard" jdbcType="VARCHAR"/>
+        <result column="is_sign" property="isSign" jdbcType="INTEGER"/>
+        <result column="upload_status" property="uploadStatus" jdbcType="INTEGER"/>
+        <result column="card_positive" property="cardObverse" jdbcType="VARCHAR"/>
+        <result column="card_obverse" property="cardObverse" jdbcType="VARCHAR"/>
+        <result column="is_sign_agreement" property="isSignAgreement" jdbcType="INTEGER"/>
+        <result column="create_datetime" property="createDatetime" jdbcType="TIMESTAMP"/>
+        <result column="open_bank_name" property="openBankName" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="BaseColumnList">
+        user_id, exchange, salt_key, firm_id, trader_id, real_name, id_card, bank_id, bank_card, is_sign, upload_status, card_positive, card_obverse, is_sign_agreement, create_datetime, open_bank_name
+    </sql>
+
+    <select id="queryAccountByUserId" resultMap="BaseResultMap">
+        SELECT
+        <include refid="BaseColumnList" />
+        FROM gjs_account
+        WHERE user_id = #{userId} AND exchange = #{exchange}
+    </select>
+
+    <select id="queryNotSignList" resultMap="BaseResultMap">
+        SELECT
+        <include refid="BaseColumnList" />
+        FROM gjs_account
+        WHERE is_sign = 0 AND exchange = #{exchange}
+    </select>
+
+    <select id="queryAccountList" resultMap="BaseResultMap">
+        SELECT
+        <include refid="BaseColumnList" />
+        FROM gjs_account
+        WHERE user_id = #{userId}
+    </select>
+
+    <select id="queryAccountAllList" resultMap="BaseResultMap">
+        SELECT
+        <include refid="BaseColumnList" />
+        FROM gjs_account
+    </select>
+
+    <select id="queryAccountListByExchange" resultMap="BaseResultMap">
+        SELECT
+        <include refid="BaseColumnList" />
+        FROM gjs_account
+        WHERE exchange = #{exchange}
+    </select>
+
+    <insert id="saveAccount" parameterType="com.caimao.gjs.api.entity.GJSAccountEntity">
+        INSERT INTO `gjs_account` (`user_id`, `exchange`, `salt_key`, `firm_id`, `trader_id`, `real_name`, `id_card`, `bank_id`, `bank_card`, `is_sign`, `upload_status`, `card_positive`, `card_obverse`, `is_sign_agreement`, `create_datetime`, `open_bank_name`)
+        VALUES (#{userId}, #{exchange}, #{saltKey}, #{firmId}, #{traderId}, #{realName}, #{idCard}, #{bankId}, #{bankCard}, #{isSign}, #{uploadStatus}, #{cardPositive}, #{cardObverse}, #{isSignAgreement}, #{createDatetime}, #{openBankName});
+    </insert>
+
+    <update id="updateAccount" parameterType="com.caimao.gjs.api.entity.GJSAccountEntity" >
+        UPDATE gjs_account
+        <set >
+            <if test="isSign != null" >
+                is_sign = #{isSign,jdbcType=TINYINT},
+            </if>
+            <if test="uploadStatus != null" >
+                upload_status = #{uploadStatus,jdbcType=TINYINT},
+            </if>
+            <if test="cardPositive != null" >
+                card_positive = #{cardPositive,jdbcType=VARCHAR},
+            </if>
+            <if test="cardObverse != null" >
+                card_obverse = #{cardObverse,jdbcType=VARCHAR},
+            </if>
+            <if test="isSignAgreement != null" >
+                is_sign_agreement = #{isSignAgreement,jdbcType=TINYINT},
+            </if>
+            <if test="bankCard != null" >
+                bank_card = #{bankCard,jdbcType=VARCHAR},
+            </if>
+        </set>
+        WHERE user_id = #{userId,jdbcType=BIGINT} AND exchange = #{exchange}
+    </update>
+
+    <select id="queryNJSOpenAccountCount" resultType="java.lang.Integer" parameterType="java.util.HashMap">
+        SELECT count(1) FROM gjs_account WHERE create_datetime BETWEEN #{startDate} AND #{endDate} AND exchange = 'NJS'
+    </select>
+    <select id="querySJSOpenAccountCount" resultType="java.lang.Integer" parameterType="java.util.HashMap">
+        SELECT count(1) FROM gjs_account WHERE create_datetime BETWEEN #{startDate} AND #{endDate} AND exchange = 'SJS'
+    </select>
+
+    <delete id="delAccountByUserId" parameterType="hashmap">
+        DELETE FROM gjs_account WHERE user_id = #{userId} AND exchange = #{exchange} LIMIT 1
+    </delete>
+</mapper>

@@ -1,0 +1,61 @@
+body{font-size:12px;font-family:'Microsoft YaHei',Lucida Grande,Lucida Sans Unicode,\5B8B\4F53;-webkit-text-size-adjust:none;_font:12px/1.5 \5B8B\4F53}
+body,dd,div,dl,dt,form,h1,h2,h3,h4,h5,h6,input,li,ol,p,textarea,ul{padding:0;margin:0}
+table,td,th,tr{font-size:12px}
+ol,ul{list-style:none}
+li{list-style-type:none}
+table{margin:0 auto;border-collapse:collapse;border-spacing:0}
+img{vertical-align:top;border:0}
+caption,th{text-align:left}
+button,h1,h2,h3,h4,h5,h6,input,select,textarea{font-size:100%;font-weight:400}
+b,em,i,strong,u{font-style:normal;text-decoration:none;font-weight:400}
+button,input,select,textarea{outline:0;resize:none;font-family:\5B8B\4F53}
+a{color:#666;text-decoration:none;-webkit-transition:color .4s ease;-moz-transition:color .4s ease;-o-transition:color .4s ease;transition:color .4s ease}
+a:visited{text-decoration:none}
+a:hover{color:#eb4636;text-decoration:none;-webkit-transition:color .2s ease;-moz-transition:color .2s ease;-o-transition:color .2s ease;transition:color .2s ease}
+.clearfix{*zoom:1}
+.clearfix:after{clear:both;height:0;overflow:hidden;display:block;visibility:hidden;content:"."}
+html{background:#ea4332}
+body{background:#ea4332;color:#fff;min-width:1200px}
+.table{width:100%;color:#666}
+.table td,.table th{text-align:left;font-size:14px;border-top:1px solid #E6E6E6;font-weight:400;font-family:Arial,Microsoft Yahei}
+.table td:first-child,.table th:first-child{padding-left:15px}
+.table thead{line-height:38px}
+.table thead th{background-color:#F6F7FB}
+.table tbody{line-height:43px}
+.table tbody b.red{color:#EC5243}
+.table tbody b.green{color:#29B203}
+.table tbody tr:nth-child(even){background-color:#F6F7FB}
+.table tbody tr:hover{background-color:#eff1f7;cursor:pointer}
+.table .table_crumbs td,.table .table_crumbs th{line-height:28px;border-top:none}
+.center td,.center th{text-align:center}
+.wrap{min-width:1200px}
+.inner{width:1200px;margin:0 auto;position:relative}
+.head{background:url(../../../img/topic/ybk/1.jpg) no-repeat center top}
+.head .inner{background:url(../../../img/topic/ybk/1.1.jpg) no-repeat center top;height:700px}
+.head .iwant{display:block;width:270px;height:83px;background:url(../../../img/topic/ybk/btn1.jpg) no-repeat;position:absolute;left:465px;top:615px}
+.about{background:url(../../../img/topic/ybk/2.jpg) no-repeat center top}
+.about .inner{background:url(../../../img/topic/ybk/2.1.jpg) no-repeat center top;height:782px}
+.about dl{width:1130px;text-align:right;font-size:18px}
+.about dt{padding-top:72px;height:35px}
+.about dd{height:165px}
+.about ul{width:1100px;margin:0 auto;line-height:30px;font-size:20px}
+.about .about1{height:180px}
+.about .about2{height:220px}
+.gift{background:url(../../../img/topic/ybk/3.jpg) no-repeat center top}
+.gift .inner{background:url(../../../img/topic/ybk/3.1.jpg) no-repeat center top;height:939px}
+.gift .rich{padding-top:95px;font-size:28px;padding-left:70px;height:170px}
+.gift .rich i{font-size:48px;color:#fcee21}
+.gift .iscoming{color:#ea4332;font-size:28px;padding-left:70px;height:400px}
+.gift .giftbox{overflow:hidden;padding-left:70px;font-size:16px;line-height:28px}
+.gift .giftbox ul{float:left;width:603px}
+.gift .giftbox li{width:470px;padding-bottom:5px}
+.gift .giftbox i{font-size:20px}
+.gift .giftbox p{width:470px;float:left}
+.account{background:url(../../../img/topic/ybk/4.jpg) no-repeat center top}
+.account .inner{background:url(../../../img/topic/ybk/4.1.jpg) no-repeat center top;height:579px}
+.account .step{padding-top:122px}
+.account dl{padding-left:75px}
+.account dt{font-size:16px;height:26px}
+.account dd{font-size:12px;height:35px}
+.account .btn2{display:block;width:365px;height:160px;background:url(../../../img/topic/ybk/btn2.jpg) no-repeat;position:absolute;left:770px;top:55px}
+.account .notice{padding:0;width:500px;text-align:right;line-height:25px;font-size:12px;position:absolute;left:634px;top:223px}

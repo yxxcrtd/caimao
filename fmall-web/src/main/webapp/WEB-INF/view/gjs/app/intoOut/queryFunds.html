@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<#include "gjs/config.html" />
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>转账查询</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1, user-scalable=false">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no"/>
+    <link rel="stylesheet" href="${staticUrl}/app/intoOut/css/reset.css" />
+    <link rel="stylesheet" href="${staticUrl}/app/intoOut/css/open.css" />
+</head>
+<body>
+<div class="wrapper2">
+    <div class='intoMain'>
+        <ul class='intoTab'>
+            <li><a href="#" id="into">转入</a></li>
+            <li><a href="out.html" id="out">转出</a></li>
+            <li class="high"><a class="wordHigh" href="queryFunds.html" id="query">转账查询</a></li>
+        </ul>
+        <ul class="queryList" id="ql">
+            <li><span class='time'>时间</span><span class='money'>金额</span></li>
+        </ul>
+        <div class="" id="btnBox" style="display:none"><span class="next-2">加载更多</span></div>
+    </div>
+</div>
+<script src='${staticUrl}/app/kaihu/js/zepto.js'></script>
+<script>
+    ;(function(){
+        var token = $_GET("token"),
+            exchange = $_GET("exchange") || "NJS",
+            ql = document.querySelector("#ql"),
+            btnBox = document.querySelector("#btnBox"),
+            empty = false,
+            cur = 0,
+            benginTime = ("${endDate}".slice(0,4) - 1) + "${endDate}".slice(4);
+        exchange = exchange.toUpperCase();
+        into.href = "into.html?exchange="+exchange+"&token="+token;
+        out.href = "out.html?exchange="+exchange+"&token="+token;
+        query.href = "queryFunds.html?exchange="+exchange+"&token="+token;
+        $.ajax({
+            type : "GET",
+            url : "${httpUrl}/api/gjs_account/queryTransfer?token=" + token + "&exchange=" + exchange,
+            success : function(data){
+                var str = "";
+                if(data.success){
+                    if(data.data.result.length){
+                        for(var i = 0,l = data.data.result.length; i < l; i++){
+                            str += "<li><span class='time'>"+data.data.result[i].createTime+"</span><span class='money'>";
+                            if(data.data.result[i].accessWay == "A" || data.data.result[i].accessWay == "1"){
+                                str += "+"
+                            }else{
+                                str += "-"
+                            }
+                            str += data.data.result[i].amount+"</span></li>";
+                        }
+                        ql.innerHTML += str;
+                        btnBox.style.display = "block";
+                    }else{
+                        getMore(1);
+                    }
+                }else{
+
+                }
+            }
+        });
+        function getMore(init){
+            if(empty)return;
+            btnBox.innerHTML = "<span class='next-2' style='background:#d4d4d4'>加载中</span>";
+            btnBox.setAttribute("status","loading");
+            cur += 1;
+            if(cur > 12 && init)return;
+            $.ajax({
+                type : "GET",
+                url : "${httpUrl}/api/gjs_trade/query_history_transfer?token=" + token + "&exchange=" + exchange,
+                data : {
+                    startDate : benginTime,
+                    endDate : "${endDate}",/*
+                    startDate : "${startDate}",
+                    endDate : "${endDate}",*/
+                    limit : 10,
+                    page : cur
+                },
+                success : function(data){
+                    var str = "";
+                    btnBox.setAttribute("status","result");
+                    btnBox.innerHTML = "<span class='next-2'>加载更多</span>";
+                    if(data.success){
+                        /*if(!data.data.items.length && init){
+                            getMore(1);
+                            return;
+                        }*/
+                        if(!data.data.items.length){
+                            empty = 1;
+                            return hiddenBtn();
+                        }else{
+                            for(var i = 0,l = data.data.items.length; i < l; i++){
+                                str += "<li><span class='time'>"+data.data.items[i].createTime+"</span><span class='money'>";
+                                
+                                if(data.data.items[i].accessWay == "A" || data.data.items[i].accessWay == "1"){
+                                    str += "+"
+                                }else{
+                                    str += "-"
+                                }
+                                str += data.data.items[i].amount+"</span></li>";
+                            }
+                            ql.innerHTML += str;
+                            btnBox.style.display = "block";
+                        }
+                    }else{
+
+                    }
+                }
+            });
+        }
+        function hiddenBtn(){
+            btnBox.style.display = "none";
+        }
+        $(btnBox).click(function(){
+            if(btnBox.getAttribute("status") == "loading")return;
+            getMore();
+        })
+
+    })();
+    /*
+18210046820  61593232
+技术-宁豪 2015/11/6 17:44:16
+333333 交易密码
+111111还是333333是资金密码
+*/
+</script>
+</body>
+</html>

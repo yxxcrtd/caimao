@@ -1,0 +1,13 @@
+<#if eList?size>
+    <div class="mod-left">
+        <div class="goodsnav">
+            <ul class="nav">
+
+                <li <#if leftExchangeId == 0>class="on"</#if>><a href="/ybk//article/list.html?categoryId=${categoryId}">全部交易所</a></li>
+                <#list eList as e>
+                    <li <#if leftExchangeId == e.id>class="on"</#if> ><a href="/ybk/article/list.html?exchangeId=${e.id}&categoryId=${categoryId}">${e.name}</a></li>
+                </#list>
+            </ul>
+        </div>
+    </div>
+</#if>

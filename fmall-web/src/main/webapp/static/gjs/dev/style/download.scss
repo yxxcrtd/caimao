@@ -1,0 +1,87 @@
+@charset "utf-8";
+@import 'base';
+$path : '../../img/';
+.w{width: 1200px;margin:0 auto;}
+.f_r{float: right}
+.f_l{float: left}
+.download_page{
+  background-color: #fff;
+ .header{
+   @extend .clearfix;
+   height: 54px;border-bottom: 1px solid #EAEAEA;padding-top: 36px;
+   h1{
+     float: left;
+     a{
+       display: block;width: 172px;height: 44px;background:url($path + 'download/jin_logo.png');
+     }
+   }
+    .right{
+      float: right;
+      a{
+        display: inline-block;padding: 25px 24px 0;font-size: 12px;color: #999999;height: 28px;
+        &.hov{border-bottom:1px solid #00AAEE;}
+      }
+    }
+ }
+  .banner{
+    padding-top:95px;padding-bottom:124px;background:url($path + 'download/banner_bg.png') no-repeat 50% 100%;
+    .banner01{
+      width: 564px;height: 148px;margin: auto;background:url($path + 'download/banner01_bg.png') no-repeat 100% 0;position: relative;
+      strong{display:block;position: absolute;width:100%;top:70px;text-align:center;font-size:20px;}
+    }
+    .banner02{
+      img{
+        display: block;margin: 0 auto;padding: 12px;border: 1px solid #EAEAEA;background-color: #fff;
+      }
+    }
+    .banner03{
+      height: 24px;text-align: center;padding-top: 24px;
+      a{
+        display: inline-block;color: #666666;font-size: 14px;
+        i{background:url($path + 'download/phone_type_bg.png') no-repeat 0 -22px;width:24px;height: 24px;display: inline-block;margin-bottom: -6px;}
+        &:hover{color:#0ae;}
+        &:first-child{
+          padding-right: 46px;
+          i{background-position: 0 0}
+        }
+      }
+    }
+  }
+  .advant{
+    padding-top:46px;height: 104px;background-color: #00AAEE;color: #fff;
+    ul{
+      @extend .clearfix;
+      li{
+        float: left;font-size: 16px;overflow: hidden;
+        i{float: left;display:inline-block; width:65px;height: 55px;background:url($path + 'download/product_advant.png') no-repeat 0 2px;margin-top: 5px}
+        span{float: left;
+          b{display: block;font-size:24px;padding-bottom: 8px}
+        }
+        &.one{width: 400px;}
+        &.two{width: 460px;
+          i{background-position:0 -49px;}
+        }
+        &.three{width: 340px;
+          i{background-position:0 -106px;}
+        }
+      }
+    }
+  }
+  .why{
+    overflow: hidden;height: 622px;background:url($path + 'download/why_bg.png') no-repeat 100% 100%;
+    h3{
+      height: 125px;padding-top: 95px;font-size: 36px;color: #333;text-align: center;
+    }
+    ul{
+      width: 1300px;
+      li{
+        width: 300px;float:left;color: #666;font-size: 14px; line-height: 24px;
+        b{display: block;color: #0ae;font-size: 22px;padding-bottom: 19px}
+        &:first-child{width: 330px}
+      }
+    }
+  }
+  .foot{
+    color: #999;text-align: center;font-size:12px;padding: 15px 0 30px 0;border-top:1px solid #EAEAEA;margin-top: 78px;
+  }
+}

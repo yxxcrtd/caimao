@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <!-- 提供方应用信息，用于计算依赖关系  ，不是匹配条件，不要与提供方一样-->
+    <dubbo:application name="fmall_web_consumer"/>
+    <!-- 使用zk注册中心暴露服务地址 -->
+    <dubbo:registry protocol="zookeeper" address="${zk_address}"/>
+
+    <!-- 生成远程服务代理，可以和本地bean一样使用demoService -->
+    <!-- 生成远程服务代理，可以和本地bean一样使用demoService -->
+
+    <!--股计微信的服务接口-->
+    <dubbo:reference id="gujiService"
+                     interface="com.caimao.bana.api.service.guji.IGujiService"
+                     group="${group}" version="${version}" timeout="${timeout}"/>
+
+    <!-- 用户相关的服务begin -->
+    <dubbo:reference id="userService"
+                     interface="com.caimao.bana.api.service.IUserService"
+                     group="${group}" version="${version}" timeout="${timeout}">
+        <dubbo:method name="doRegister" retries="0"/>
+    </dubbo:reference>
+
+    <dubbo:reference id="userBankCardService"
+                     interface="com.caimao.bana.api.service.IUserBankCardService"
+                     group="${group}" version="${version}" timeout="${timeout}"/>
+
+    <dubbo:reference id="userTrustService"
+                     interface="com.caimao.bana.api.service.IUserTrustService"
+                     group="${group}" version="${version}" timeout="${timeout}"/>
+
+    <!--用户消息的东东-->
+    <dubbo:reference id="messageService"
+                     interface="com.caimao.bana.api.service.content.IMessageService"
+                     group="${group}" version="${version}" timeout="${timeout}"/>
+
+    <dubbo:reference id="noticeService"
+                     interface="com.caimao.bana.api.service.content.INoticeService"
+                     group="${group}" version="${version}" timeout="${timeout}"/>
+
+    <!-- 发送短信 -->
+    <dubbo:reference id="smsService"
+                     interface="com.caimao.bana.api.service.SmsService"
+                     group="${group}" version="${version}" timeout="${timeout}"/>
+
+    <!--邮币卡相关服务-->
+    <dubbo:reference id="ybkService"
+                     interface="com.caimao.bana.api.service.ybk.IYBKService"
+                     group="${group}" version="${version}" timeout="${timeout}"/>
+
+    <dubbo:reference id="ybkDaxinService"
+                     interface="com.caimao.bana.api.service.ybk.IYbkDaxinService"
+                     group="${group}" version="${version}" timeout="${timeout}"/>
+
+    <dubbo:reference id="ybkNavigationService"
+                     interface="com.caimao.bana.api.service.ybk.IYbkNavigationService"
+                     group="${group}" version="${version}" timeout="${timeout}"/>
+
+    <dubbo:reference id="ybkHelpDocService"
+                     interface="com.caimao.bana.api.service.ybk.IYbkHelpDocService"
+                     group="${group}" version="${version}" timeout="${timeout}"/>
+
+    <dubbo:reference id="ybkAccountService"
+                     interface="com.caimao.bana.api.service.ybk.IYBKAccountService"
+                     group="${group}" version="${version}" timeout="${timeout}"/>
+
+    <dubbo:reference id="bannerService"
+                     interface="com.caimao.bana.api.service.content.IBannerService"
+                     group="${group}" version="${version}" timeout="${timeout}"/>
+    
+
+    <!--个推的服务接口-->
+    <dubbo:reference id="getuiService"
+                     interface="com.caimao.bana.api.service.getui.IGetuiService"
+                     group="${group}" version="${version}" timeout="${timeout}"/>
+
+    <!--贵金属接口服务-->
+    <!--贵金属文章相关的服务接口-->
+    <dubbo:reference id="articleService"
+                     interface="com.caimao.gjs.api.service.IArticleService"
+                     group="${group}" version="${version}" timeout="${timeout}"/>
+    <!--贵金属交易相关的服务接口-->
+    <dubbo:reference id="tradeService"
+                     interface="com.caimao.gjs.api.service.ITradeService"
+                     group="${group}" version="${version}" timeout="${timeout}" retries="0"/>
+    <!--贵金属账户相关的服务接口-->
+    <dubbo:reference id="accountService"
+                     interface="com.caimao.gjs.api.service.IAccountService"
+                     group="${group}" version="${version}" timeout="${timeout}" retries="0"/>
+    <!--贵金属K线相关的服务接口-->
+    <dubbo:reference id="hqService"
+                     interface="com.caimao.hq.api.service.IHQService"
+                     group="${group}" version="${version}" timeout="${timeout}"/>
+
+    <dubbo:reference id="gjsPriceAlertService"
+                     interface="com.caimao.hq.api.service.IGjsPriceAlertService"
+                     group="${group}" version="${version}" timeout="${timeout}"/>
+
+
+</beans>
+

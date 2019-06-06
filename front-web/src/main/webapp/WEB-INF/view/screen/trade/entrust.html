@@ -1,0 +1,81 @@
+<#assign controller="StockEntrust"/>
+<#include 'layout/layout.html'/>
+<#macro content>
+<div class="contents clearfix">
+    <div class="con-lside cm-left conside" id="sidemenuctn" style="position: inherit;">
+    </div>
+<!--右边start-->
+<div class="con-rside cm-right">
+<!--标题-->
+<!-- <div class="title-page"><h3 class="am-ft-xl">委托查询</h3></div> -->
+
+<div class="con-transactions ">
+
+<!--筛选-->
+<ul id="table-tags" style="margin:0;">
+<li class="selectTag"><a id="entrustLi" href="javascript:void(0)">当日委托</a> </li>
+<li class=""><a id="historyEntrustLi" href="javascript:void(0)">历史委托</a> </li>
+</ul>
+
+<div class="grid-812"  id="tagContent">
+<div class="tagContent selectTag" id="tagContent0" style="display: block;">
+<div class="filter-loan">
+<!--表单-->
+<form class="ui-form" role="form">
+<div class="ui-form-item" style="margin-bottom:0px;" >
+<label class="ui-label">操作员编号：</label>
+<div class="ui-select" id="childAccountDiv"  ><!--ui-select-expansion去掉时，下半部隐藏-->
+<!--   <a class="layer" href="#"><span class="text">100080</span><span class="icon"></span></a>
+  <div class="detail">
+   <a href="#">100080</a>
+	</div> -->
+</div>
+</div>
+</form>
+<!--表单-->
+</div>
+
+<div id="grid_f" >
+</div>
+
+</div><!--第一步-->
+
+<div class="tagContent" id="tagContent1" style="display: none;">
+<div class="filter-loan">
+<div class="clearfix">
+<div class="cm-left filter-date">
+<span class="filter-loan-th">委托日期：</span>
+<div id="historydaterangectn" style="margin-left: 90px;"></div>
+<div class="filter-button"><a id="historyinquirybutton" class="ui-button ui-button-sgray"><b class="ui-button-text am-ft-sm">查询</b></a></div>
+</div>
+
+<div class="cm-left second-left" id="historydatequickselectctn" >
+<!-- <ul class="listLateral list-filter">                 
+	<li class="list-filter-item"><a href="#" >今天</a></li>
+    <li class="list-filter-item"><a href="#" class="active" >一周</a></li>
+	<li class="list-filter-item"><a href="#">三个月</a></li>
+	<li class="list-filter-item"><a href="#">半年</a></li>
+	</ul> -->
+</div>
+</div>
+</div>
+
+<div id="history_grid_f" >
+</div>
+
+</div>
+
+</div>
+<!--筛选-->
+
+</div>
+
+</div>
+<!--右边end-->
+
+
+</div>
+</#macro>
+
+<#macro subScript>
+</#macro>

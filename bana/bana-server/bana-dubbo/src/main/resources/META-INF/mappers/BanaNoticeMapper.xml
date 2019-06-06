@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="BanaNotice">
+
+	<resultMap id="BaseResultMap" type="com.caimao.bana.api.entity.content.BanaNoticeEntity" >
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<id column="title" property="title" jdbcType="VARCHAR" />
+		<result column="content" property="content" jdbcType="VARCHAR" />
+		<result column="pv" property="pv" jdbcType="INTEGER" />
+		<result column="source" property="source" jdbcType="VARCHAR" />
+		<result column="source_href" property="sourceHref" jdbcType="VARCHAR" />
+        <result column="created" property="created" jdbcType="TIMESTAMP" />
+		<result column="list_show" property="listShow" jdbcType="INTEGER" />
+		<result column="top_show" property="topShow" jdbcType="INTEGER" />
+	</resultMap>
+
+	<sql id="Base_Column_List" >
+      id, title, content, pv, source, source_href AS sourceHref, created, list_show AS listShow, top_show AS topShow
+	</sql>
+
+    <!--根据ID查询公告信息-->
+	<select id="queryById" resultMap="BaseResultMap" parameterType="com.caimao.bana.api.entity.content.BanaNoticeEntity">
+        select
+            <include refid="Base_Column_List" />
+        from bana_notice
+        where id = #{id,jdbcType=BIGINT}
+	</select>
+
+    <!--查询公告列表-->
+    <select id="queryListWithPage" resultType="com.caimao.bana.api.entity.res.content.FNoticeInfoRes" parameterType="com.caimao.bana.api.entity.req.content.FNoticeQueryListReq">
+        select
+        <include refid="Base_Column_List" />
+        from bana_notice
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="listShow !=null">
+                AND list_show = #{listShow}
+            </if>
+            <if test="topShow !=null">
+                AND top_show = #{topShow}
+            </if>
+        </trim>
+        <trim prefix="ORDER BY ">
+            <if test="orderColumn != null and  orderColumn != ''">
+                ${orderColumn} ${orderDir}
+            </if>
+        </trim>
+    </select>
+
+    <!--保存公告信息-->
+    <insert id="save" useGeneratedKeys="true" keyProperty="id">
+      INSERT INTO bana_notice
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+          <if test="id != null">id,</if>
+          <if test="title != null">title,</if>
+          <if test="content != null">content,</if>
+          <if test="pv != null">pv,</if>
+          <if test="source != null">source,</if>
+          <if test="sourceHref != null">source_href,</if>
+          <if test="created != null">created,</if>
+          <if test="listShow != null">list_show,</if>
+          <if test="topShow != null">top_show,</if>
+      </trim>
+      <trim prefix="values (" suffix=")" suffixOverrides="," >
+          <if test="id !=null" >#{id},</if>
+          <if test="title !=null" >#{title},</if>
+          <if test="content !=null" >#{content},</if>
+          <if test="pv !=null" >#{pv},</if>
+          <if test="source !=null" >#{source},</if>
+          <if test="sourceHref !=null" >#{sourceHref},</if>
+          <if test="created !=null" >#{created},</if>
+          <if test="listShow !=null" >#{listShow},</if>
+          <if test="topShow !=null" >#{topShow},</if>
+      </trim>
+    </insert>
+
+    <!--更新公告信息-->
+    <update id="update" >
+        UPDATE bana_notice
+        <set>
+            <if test="title != null" >title = #{title},</if>
+            <if test="content != null" >content = #{content},</if>
+            <if test="pv != null" >pv = #{pv},</if>
+            <if test="source != null" >source = #{source},</if>
+            <if test="sourceHref != null" >source_href = #{sourceHref},</if>
+            <if test="created != null" >created = #{created},</if>
+            <if test="listShow != null" >list_show = #{listShow},</if>
+            <if test="topShow != null" >top_show = #{topShow},</if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <!--删除公告-->
+	<delete id="delete" parameterType="com.caimao.bana.api.entity.p2p.P2PConfigEntity" >
+      DELETE FROM bana_notice WHERE id = #{id,jdbcType=BIGINT}
+	</delete>
+
+</mapper>

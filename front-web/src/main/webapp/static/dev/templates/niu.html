@@ -1,0 +1,449 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>财猫-牛人实盘</title>
+    <link href="../style/page/niu.css" rel="stylesheet">
+    <script src="../js/lib/jquery-1.11.1.min.js"></script>
+</head>
+
+<body>
+<!--顶部未登录-->
+<div id="top">
+    <div class="w top_in">
+        <div class="f_l left">
+            <span><a href=""><i class="icons icon_app"></i> 财猫app </a></span><s >|</s>
+            <span class="weixin m_l_10"><i class="icons icon_weixin"><span></span></i></span>
+            <span><a href=""><i class="icons icon_weibo"></i></a></span>
+        </div>
+        <!--<div class="f_r right">-->
+            <!--<span><a href="">登录</a></span><s class="p_l_10">|</s>-->
+            <!--<span class="p_l_10"><a href="">注册</a></span>-->
+        <!--</div>-->
+        <!--顶部右侧登录后-->
+        <div class="f_r right">
+            <!--消息框位灰色时  直接去掉icon_info即可-->
+            <span class="font_red"><i class="icons icon_info"></i>6</span>
+            <span class="plr_10 font_black">您好，<a href="" class="font_black">1565078333333</a> </span>
+            <a class="font_grayD" href="#">退出</a>
+        </div>
+    </div>
+</div>
+
+
+<!--头部-->
+<div id="header">
+    <div class="w header_in">
+        <div class="f_l left">
+            <h1 class="icons icon_logo"><a href="#">财猫网</a></h1><p class="icons icon_logo_p">招招有财</p>
+        </div>
+        <div class="f_r right">
+            <ul>
+                <li><a href="#">首页 <b></b></a></li>
+                <li><a class="hov" href="#">牛人实盘<i class="icons icon_nav_hot"></i> <b></b></a></li>
+                <li><a href="#">私人订制 <b></b></a></li>
+                <li><a href="#">交易<b></b></a></li>
+                <li><a href="#">交易融资<b></b></a></li>
+                <li><a href="#">交易投资<b></b></a></li>
+                <li><a href="#">账户管理<b></b></a></li>
+                <li><a href="#">私人订制<b></b></a></li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+<!--notice-->
+<div id="notice">
+    <div class="w">
+        <i class="icons icon_notice"></i><a href="">财猫上线一周年网庆，充值送宝马，你敢来吗？</a><span>我知道了</span>
+    </div>
+</div>
+<div class="focus">
+    <div class="home_slide">
+        <ul class="slide_main">
+            <li style="background: url('../../img/niu/niu_banner.png') no-repeat 50% 0">
+                <a href=""><img src="../../img/images/placeholder.png" alt="" width="1000" height="325"></a>
+                <div id="CountMsg" class="HotDate">
+                    <span id="t_d">00</span>
+                    <span id="t_h">00</span>
+                    <span id="t_m">00</span>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+ <script type="text/javascript">
+    function getRTime(t_d,t_h,t_m,endDate){
+        var EndTime= new Date(endDate); //截止时间
+        var NowTime = new Date();
+        var t =EndTime.getTime() - NowTime.getTime();
+        var d=Math.floor(t/1000/60/60/24);
+        var h=Math.floor(t/1000/60/60%24);
+        var m=Math.floor(t/1000/60%60);
+
+        document.getElementById(t_d).innerHTML = d;
+        document.getElementById(t_h).innerHTML = h;
+        document.getElementById(t_m).innerHTML = m;
+    }
+    setInterval("getRTime('t_d', 't_h', 't_m', '2015-09-03 00:00:00')",1000);
+    setInterval(getRTime,1000);
+</script>
+
+<!--内容区-->
+<div id="main">
+   <div class="coming w">
+       <h3 class="tit"> <span><b>预热中</b> </span> </h3>
+       <h4 class="tit">Coming soon</h4>
+       <ul>
+           <li>
+               <p class="bg"><a href=""><img src="../../img/niu/coming_01.png" width="136" height="136" /></a></p>
+               <h4><a href="">杨阳</a>中国基金一哥</h4>
+               <p class="ellip">别人贪婪我恐惧，别人恐惧我贪婪</p>
+               <p class="key"><span>稳健性</span><span>需求回报</span></p>
+               <p class="more">王亚伟是中国著名公募基金一哥，毕业于清华大学金融系，曾经以清华大学金融系，曾经以... <a href=""> 查看更多</a></p>
+               <div>
+                    <span class="f_l">
+                       <strong><b>35</b>.58%</strong>
+                       当前收益率
+                   </span>
+                    <span class="f_r">
+                        <b>277人订阅</b>
+                        <b>126人分享</b>
+                    </span>
+               </div>
+               <p> <a class="btn_bg" href="">订阅</a> </p>
+           </li>
+           <li>
+               <p class="bg"><a href=""><img src="../../img/niu/coming_01.png" width="136" height="136" /></a></p>
+               <h4><a href="">杨阳</a>中国基金一哥</h4>
+               <p class="ellip">别人贪婪我恐惧，别人恐惧我贪婪</p>
+               <p class="key"><span>稳健性</span><span>需求回报</span></p>
+               <p class="more">王亚伟是中国著名公募基金一哥，毕业于清华大学金融系，曾经以清华大学金融系，曾经以... <a href=""> 查看更多</a></p>
+               <div>
+                    <span class="f_l">
+                       <strong><b>35</b>.58%</strong>
+                       当前收益率
+                   </span>
+                    <span class="f_r">
+                        <b>277人订阅</b>
+                        <b>126人分享</b>
+                    </span>
+               </div>
+               <p> <a class="btn_bg" href="">订阅</a> </p>
+           </li>
+           <li>
+               <p class="bg"><a href=""><img src="../../img/niu/coming_01.png" width="136" height="136" /></a></p>
+               <h4><a href="">杨阳</a>中国基金一哥</h4>
+               <p class="ellip">别人贪婪我恐惧，别人恐惧我贪婪</p>
+               <p class="key"><span>稳健性</span><span>需求回报</span></p>
+               <p class="more">王亚伟是中国著名公募基金一哥，毕业于清华大学金融系，曾经以清华大学金融系，曾经以... <a href=""> 查看更多</a></p>
+               <div>
+                    <span class="f_l">
+                       <strong><b>35</b>.58%</strong>
+                       当前收益率
+                   </span>
+                    <span class="f_r">
+                        <b>0人订阅</b>
+                        <b>0人分享</b>
+                    </span>
+               </div>
+               <p> <a class="btn_bg btn_finish" >已订阅</a> </p>
+           </li>
+           <li>
+               <p class="bg"><a href=""><img src="../../img/niu/coming_01.png" width="136" height="136" /></a></p>
+               <h4><a href="">杨阳</a>中国基金一哥</h4>
+               <p class="ellip">别人贪婪我恐惧，别人恐惧我贪婪</p>
+               <p class="key"><span>稳健性</span><span>需求回报</span></p>
+               <p class="more">王亚伟是中国著名公募基金一哥，毕业于清华大学金融系，曾经以清华大学金融系，曾经以... <a href=""> 查看更多</a></p>
+               <div>
+                    <span class="f_l">
+                       <strong><b>35</b>.58%</strong>
+                       当前收益率
+                   </span>
+                    <span class="f_r">
+                        <b>277人订阅</b>
+                        <b>126人分享</b>
+                    </span>
+               </div>
+               <p> <a class="btn_bg" href="">订阅</a> </p>
+           </li>
+       </ul>
+   </div>
+    <div class="running">
+        <div class="w">
+            <h3 class="tit"> <span><b>运行中</b> </span> </h3>
+            <h4 class="tit">Running</h4>
+            <ul>
+                <li>
+                    <div class="top">
+                        <a class="f_l" href=""><img src="../../img/niu/running_01.png" width="90" height="90" /></a>
+                        <h4><a href="">李易峰</a>中国基金一哥</h4>
+                        <p class="key"><span>稳健性</span><span>需求回报</span></p>
+                    </div>
+                    <p class="bg"><i class="icons icon_motto"></i>别人贪婪我恐惧，别人恐惧我贪婪</p>
+                    <div class="down">
+                         <span class="f_l">
+                            <strong><b>35</b>.58%</strong>
+                            当前收益率
+                        </span>
+                         <span class="f_r">
+                             <b>277人订阅</b>
+                             <b>126人分享</b>
+                         </span>
+                    </div>
+                    <p> <a class="btn_bg" href="">订阅</a> </p>
+                </li>
+                <li>
+                    <div class="top">
+                        <a class="f_l" href=""><img src="../../img/niu/running_01.png" width="90" height="90" /></a>
+                        <h4><a href="">李易峰</a>中国基金一哥</h4>
+                        <p class="key"><span>稳健性</span><span>需求回报</span></p>
+                    </div>
+                    <p class="bg"><i class="icons icon_motto"></i>别人贪婪我恐惧，别人恐惧我贪婪</p>
+                    <div class="down">
+                         <span class="f_l">
+                            <strong><b>35</b>.58%</strong>
+                            当前收益率
+                        </span>
+                         <span class="f_r">
+                             <b>277人订阅</b>
+                             <b>126人分享</b>
+                         </span>
+                    </div>
+                    <p> <a class="btn_bg" href="">订阅</a> </p>
+                </li>
+                <li>
+                    <div class="top">
+                        <a class="f_l" href=""><img src="../../img/niu/running_01.png" width="90" height="90" /></a>
+                        <h4><a href="">李易峰</a>中国基金一哥</h4>
+                        <p class="key"><span>稳健性</span><span>需求回报</span></p>
+                    </div>
+                    <p class="bg"><i class="icons icon_motto"></i>别人贪婪我恐惧，别人恐惧我贪婪</p>
+                    <div class="down">
+                         <span class="f_l">
+                            <strong><b>35</b>.58%</strong>
+                            当前收益率
+                        </span>
+                         <span class="f_r">
+                             <b>277人订阅</b>
+                             <b>126人分享</b>
+                         </span>
+                    </div>
+                    <p> <a class="btn_bg" href="">订阅</a> </p>
+                </li>
+                <li>
+                    <div class="top">
+                        <a class="f_l" href=""><img src="../../img/niu/running_01.png" width="90" height="90" /></a>
+                        <h4><a href="">李易峰</a>中国基金一哥</h4>
+                        <p class="key"><span>稳健性</span><span>需求回报</span></p>
+                    </div>
+                    <p class="bg"><i class="icons icon_motto"></i>别人贪婪我恐惧，别人恐惧我贪婪</p>
+                    <div class="down">
+                         <span class="f_l">
+                            <strong><b>35</b>.58%</strong>
+                            当前收益率
+                        </span>
+                         <span class="f_r">
+                             <b>277人订阅</b>
+                             <b>126人分享</b>
+                         </span>
+                    </div>
+                    <p> <a class="btn_bg" href="">订阅</a> </p>
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <div class="top">
+                        <a class="f_l" href=""><img src="../../img/niu/running_01.png" width="90" height="90" /></a>
+                        <h4><a href="">李易峰</a>中国基金一哥</h4>
+                        <p class="key"><span>稳健性</span><span>需求回报</span></p>
+                    </div>
+                    <p class="bg"><i class="icons icon_motto"></i>别人贪婪我恐惧，别人恐惧我贪婪</p>
+                    <div class="down">
+                         <span class="f_l">
+                            <strong><b>35</b>.58%</strong>
+                            当前收益率
+                        </span>
+                         <span class="f_r">
+                             <b>277人订阅</b>
+                             <b>126人分享</b>
+                         </span>
+                    </div>
+                    <p> <a class="btn_bg" href="">订阅</a> </p>
+                </li>
+                <li>
+                    <div class="top">
+                        <a class="f_l" href=""><img src="../../img/niu/running_01.png" width="90" height="90" /></a>
+                        <h4><a href="">李易峰</a>中国基金一哥</h4>
+                        <p class="key"><span>稳健性</span><span>需求回报</span></p>
+                    </div>
+                    <p class="bg"><i class="icons icon_motto"></i>别人贪婪我恐惧，别人恐惧我贪婪</p>
+                    <div class="down">
+                         <span class="f_l">
+                            <strong><b>35</b>.58%</strong>
+                            当前收益率
+                        </span>
+                         <span class="f_r">
+                             <b>277人订阅</b>
+                             <b>126人分享</b>
+                         </span>
+                    </div>
+                    <p> <a class="btn_bg" href="">订阅</a> </p>
+                </li>
+                <li>
+                    <div class="top">
+                        <a class="f_l" href=""><img src="../../img/niu/running_01.png" width="90" height="90" /></a>
+                        <h4><a href="">李易峰</a>中国基金一哥</h4>
+                        <p class="key"><span>稳健性</span><span>需求回报</span></p>
+                    </div>
+                    <p class="bg"><i class="icons icon_motto"></i>别人贪婪我恐惧，别人恐惧我贪婪</p>
+                    <div class="down">
+                         <span class="f_l">
+                            <strong><b>35</b>.58%</strong>
+                            当前收益率
+                        </span>
+                         <span class="f_r">
+                             <b>277人订阅</b>
+                             <b>126人分享</b>
+                         </span>
+                    </div>
+                    <p> <a class="btn_bg" href="">订阅</a> </p>
+                </li>
+                <li>
+                    <div class="top">
+                        <a class="f_l" href=""><img src="../../img/niu/running_01.png" width="90" height="90" /></a>
+                        <h4><a href="">李易峰</a>中国基金一哥</h4>
+                        <p class="key"><span>稳健性</span><span>需求回报</span></p>
+                    </div>
+                    <p class="bg"><i class="icons icon_motto"></i>别人贪婪我恐惧，别人恐惧我贪婪</p>
+                    <div class="down">
+                         <span class="f_l">
+                            <strong><b>35</b>.58%</strong>
+                            当前收益率
+                        </span>
+                         <span class="f_r">
+                             <b>277人订阅</b>
+                             <b>126人分享</b>
+                         </span>
+                    </div>
+                    <p> <a class="btn_bg" href="">订阅</a> </p>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</div>
+
+
+<!--底部-->
+<div id="footer">
+    <div class="w">
+        <p class="nav_sub"><a href="">关于我们</a>|<a href="">服务条款</a>|<a href="">帮助中心</a></p>
+        <p class="server"> <i class="icons icon_qqs"></i>官方QQ群4006660888  <i class="icons icon_telephone"></i>24小时服务电话4000-898-000</p>
+        <p class="server2">
+            <a class="weixin"><i class="icons icon_weixin_b"><span></span></i></a>
+            <a href="#"><i class="icons icon_weibo_b"> </i></a>
+        </p>
+        <p>版权所有 © 北京朋乐投资管理有限公司 丨 京ICP备15016693号</p>
+    </div>
+</div>
+
+
+<!--弹层-->
+<div id="_dialog">
+    <div class="layout" style="display: none">
+        <h3 class="title">订阅确认 <a href=""><i class="icons icon_close"></i></a></h3>
+        <p class="line_30">您还有一张免费赞助券，分享牛人可再获得一张免费赞助券，最多有9次机会。<br>确认收听吗？</p>
+        <p class="align_center"> <button class="btn btn_blue size_l">确定</button></p>
+    </div>
+
+</div>
+
+
+
+
+
+
+<div id="float_right">
+    <div id="izl_rmenu" class="izl-rmenu">
+        <div class="side_toolbar btn-custom">
+            <a href=""  title="财猫行情"><i class="icons icon_btn_custom"></i></a>
+        </div>
+        <div class="side_toolbar btn-phone">
+            <i class="icons icon_btn_phone"></i>
+            <div class="phone" style="display: none;">
+                <i class="icons icon_btn_phone"></i>
+                <p>
+                    免费热线<br>
+                    4000 600 888
+                </p>
+            </div>
+        </div>
+        <div class="side_toolbar btn-tel">
+            <i class="icons icon_btn_tel"></i>
+            <div class="tel" style="display: none;">
+                <i class="icons icon_btn_tel"></i>
+                <p>
+                    配资QQ群 <br>
+                    <a href="">4000600888</a>
+                </p>
+                <p>
+                    配资QQ群 <br>
+                    <a href="">4000600888</a>
+                </p>
+            </div>
+        </div>
+        <div class="side_toolbar btn-top">
+            <i class="icons icon_btn_top"></i>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 左侧浮动条条
+    $("#izl_rmenu").each(function(){
+        //$(this).find(".btn-custom").mouseenter(function(){
+        //    $(this).find(".custom").fadeIn("slow");
+        //});
+        //$(this).find(".btn-custom").mouseleave(function(){
+        //    $(this).find(".custom").fadeOut("fast");
+        //});
+        $(this).find(".btn-phone").mouseenter(function(){
+            $(this).find(".phone").fadeIn("slow");
+        });
+        $(this).find(".btn-phone").mouseleave(function(){
+            $(this).find(".phone").fadeOut("fast");
+        });
+        $(this).find(".btn-tel").mouseenter(function(){
+            $(this).find(".tel").fadeIn("slow");
+        });
+        $(this).find(".btn-tel").mouseleave(function(){
+            $(this).find(".tel").fadeOut("fast");
+        });
+        $(this).find(".btn-top").click(function(){
+            $("html, body").animate({
+                "scroll-top":0
+            },"slow");
+        });
+    });
+    var lastRmenuStatus=false;
+    $(window).scroll(function(){//bug
+        var _top=$(window).scrollTop();
+        if(_top>200){
+            $("#izl_rmenu").data("expanded",true);
+        }else{
+            $("#izl_rmenu").data("expanded",false);
+        }
+        if($("#izl_rmenu").data("expanded")!=lastRmenuStatus){
+            lastRmenuStatus=$("#izl_rmenu").data("expanded");
+            if(lastRmenuStatus){
+                $("#izl_rmenu .btn-top").slideDown();
+            }else{
+                $("#izl_rmenu .btn-top").slideUp();
+            }
+        }
+    });
+</script>
+</body>
+</html>

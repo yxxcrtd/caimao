@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="YbkExchange" >
+  <resultMap id="BaseResultMap" type="com.caimao.bana.api.entity.ybk.YbkExchangeEntity" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="short_name" property="shortName" jdbcType="VARCHAR" />
+    <result column="number" property="number" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="trade_day_type" property="tradeDayType" jdbcType="INTEGER" />
+    <result column="am_begin_time" property="amBeginTime" jdbcType="VARCHAR" />
+    <result column="am_end_time" property="amEndTime" jdbcType="VARCHAR" />
+    <result column="pm_begin_time" property="pmBeginTime" jdbcType="VARCHAR" />
+    <result column="pm_end_time" property="pmEndTime" jdbcType="VARCHAR" />
+    <result column="api_market_url" property="apiMarketUrl" jdbcType="VARCHAR" />
+    <result column="api_ticker_url" property="apiTickerUrl" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="add_datetime" property="addDatetime" jdbcType="TIMESTAMP" />
+
+    <result column="open_process_times" property="openProcessTimes" jdbcType="VARCHAR" />
+    <result column="come_in_times" property="comeInTimes" jdbcType="VARCHAR" />
+    <result column="bank_bind_times" property="bankBindTimes" jdbcType="VARCHAR" />
+    <result column="trade_times" property="tradeTimes" jdbcType="VARCHAR" />
+    <result column="trade_fee" property="tradeFee" jdbcType="VARCHAR" />
+
+    <result column="sort_no" property="sortNo" jdbcType="INTEGER" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="support_bank" property="supportBank" jdbcType="VARCHAR" />
+    <result column="add_user" property="addUser" jdbcType="VARCHAR" />
+    <result column="article_url" property="articleUrl" jdbcType="VARCHAR" />
+    <result column="shen_gou_num" property="shenGouNum" jdbcType="INTEGER" />
+    <result column="official_url" property="officialUrl" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, short_name, `number`, `name`, trade_day_type, am_begin_time, am_end_time, pm_begin_time, open_process_times, come_in_times, bank_bind_times, trade_times, trade_fee,
+    pm_end_time, api_market_url, api_ticker_url, status, add_datetime, sort_no, province, city, support_bank, add_user,article_url,
+    shen_gou_num,official_url
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from ybk_exchange
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByShortName" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from ybk_exchange
+    where short_name = #{shortName,jdbcType=VARCHAR}
+  </select>
+
+
+  <select id="queryList" resultMap="BaseResultMap" parameterType="com.caimao.bana.api.entity.req.ybk.FYbkExchangeQueryListReq" >
+    select
+    <include refid="Base_Column_List" />
+    from ybk_exchange
+    <trim prefix="WHERE" prefixOverrides="AND | OR">
+      <if test="status != null and status != 0">
+        `status` = #{status,jdbcType=INTEGER}
+      </if>
+    </trim>
+    order by sort_no ASC
+  </select>
+
+  <select id="queryListByBankNo" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List" />
+    from ybk_exchange
+    WHERE status = 2 AND support_bank LIKE "%"#{bankNo}"%";
+  </select>
+
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from ybk_exchange
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insertSelective" parameterType="com.caimao.bana.api.entity.ybk.YbkExchangeEntity" >
+    insert into ybk_exchange
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="shortName != null" >
+        short_name,
+      </if>
+      <if test="number != null" >
+        `number`,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="tradeDayType != null" >
+        trade_day_type,
+      </if>
+      <if test="amBeginTime != null" >
+        am_begin_time,
+      </if>
+      <if test="amEndTime != null" >
+        am_end_time,
+      </if>
+      <if test="pmBeginTime != null" >
+        pm_begin_time,
+      </if>
+      <if test="pmEndTime != null" >
+        pm_end_time,
+      </if>
+      <if test="apiMarketUrl != null" >
+        api_market_url,
+      </if>
+      <if test="apiTickerUrl != null" >
+        api_ticker_url,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="addDatetime != null" >
+        add_datetime,
+      </if>
+      <if test="openProcessTimes != null" >
+        open_process_times,
+      </if>
+      <if test="comeInTimes != null" >
+        come_in_times,
+      </if>
+      <if test="bankBindTimes != null" >
+        bank_bind_times,
+      </if>
+      <if test="tradeTimes != null" >
+        trade_times,
+      </if>
+      <if test="tradeFee != null" >
+        trade_fee,
+      </if>
+      <if test="sortNo != null" >
+        sort_no,
+      </if>
+      <if test="province != null" >
+        province,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="supportBank != null" >
+        support_bank,
+      </if>
+      <if test="addUser != null" >
+        add_user,
+      </if>
+      <if test="articleUrl != null" >
+        article_url,
+      </if>
+      <if test="shenGouNum != null" >
+        shen_gou_num,
+      </if>
+      <if test="officialUrl != null" >
+        official_url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="shortName != null" >
+        #{shortName,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeDayType != null" >
+        #{tradeDayType,jdbcType=INTEGER},
+      </if>
+      <if test="amBeginTime != null" >
+        #{amBeginTime,jdbcType=VARCHAR},
+      </if>
+      <if test="amEndTime != null" >
+        #{amEndTime,jdbcType=VARCHAR},
+      </if>
+      <if test="pmBeginTime != null" >
+        #{pmBeginTime,jdbcType=VARCHAR},
+      </if>
+      <if test="pmEndTime != null" >
+        #{pmEndTime,jdbcType=VARCHAR},
+      </if>
+      <if test="apiMarketUrl != null" >
+        #{apiMarketUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="apiTickerUrl != null" >
+        #{apiTickerUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="addDatetime != null" >
+        #{addDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="openProcessTimes != null" >
+        #{openProcessTimes,jdbcType=VARCHAR},
+      </if>
+      <if test="comeInTimes != null" >
+        #{comeInTimes,jdbcType=VARCHAR},
+      </if>
+      <if test="bankBindTimes != null" >
+        #{bankBindTimes,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeTimes != null" >
+        #{tradeTimes,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeFee != null" >
+        #{tradeFee,jdbcType=VARCHAR},
+      </if>
+      <if test="sortNo != null" >
+        #{sortNo,jdbcType=INTEGER},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="supportBank != null" >
+        #{supportBank,jdbcType=VARCHAR},
+      </if>
+      <if test="addUser != null" >
+        #{addUser,jdbcType=VARCHAR},
+      </if>
+      <if test="articleUrl != null" >
+        #{articleUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="shenGouNum != null" >
+        #{shenGouNum,jdbcType=INTEGER},
+      </if>
+      <if test="officialUrl != null" >
+        #{officialUrl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.caimao.bana.api.entity.ybk.YbkExchangeEntity" >
+    update ybk_exchange
+    <set >
+      <if test="shortName != null" >
+        short_name = #{shortName,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        `number` = #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeDayType != null" >
+        trade_day_type = #{tradeDayType,jdbcType=INTEGER},
+      </if>
+      <if test="amBeginTime != null" >
+        am_begin_time = #{amBeginTime,jdbcType=VARCHAR},
+      </if>
+      <if test="amEndTime != null" >
+        am_end_time = #{amEndTime,jdbcType=VARCHAR},
+      </if>
+      <if test="pmBeginTime != null" >
+        pm_begin_time = #{pmBeginTime,jdbcType=VARCHAR},
+      </if>
+      <if test="pmEndTime != null" >
+        pm_end_time = #{pmEndTime,jdbcType=VARCHAR},
+      </if>
+      <if test="apiMarketUrl != null" >
+        api_market_url = #{apiMarketUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="apiTickerUrl != null" >
+        api_ticker_url = #{apiTickerUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="addDatetime != null" >
+        add_datetime = #{addDatetime,jdbcType=TIMESTAMP},
+      </if>
+
+      <if test="openProcessTimes != null" >
+        open_process_times = #{openProcessTimes,jdbcType=TIMESTAMP},
+      </if>
+      <if test="comeInTimes != null" >
+        come_in_times = #{comeInTimes,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bankBindTimes != null" >
+        bank_bind_times = #{bankBindTimes,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tradeTimes != null" >
+        trade_times = #{tradeTimes,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tradeFee != null" >
+        trade_fee = #{tradeFee,jdbcType=TIMESTAMP},
+      </if>
+
+      <if test="sortNo != null" >
+        sort_no = #{sortNo,jdbcType=INTEGER},
+      </if>
+      <if test="province != null" >
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="supportBank != null" >
+        support_bank = #{supportBank,jdbcType=VARCHAR},
+      </if>
+      <if test="addUser != null" >
+        add_user = #{addUser,jdbcType=VARCHAR},
+      </if>
+      <if test="articleUrl != null" >
+        article_url = #{articleUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="shenGouNum != null" >
+        shen_gou_num = #{shenGouNum,jdbcType=INTEGER},
+      </if>
+      <if test="officialUrl != null" >
+        official_url = #{officialUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+</mapper>

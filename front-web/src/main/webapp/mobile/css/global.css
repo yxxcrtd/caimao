@@ -1,0 +1,660 @@
+/*----------------公共元素*/
+body{font-family: "Helvetica Neue", Arial, Helvetica, sans-serif; -webkit-touch-callout:none;-webkit-user-select:none; color:#333; font-size:15px;}
+input{font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;}
+a{text-decoration:none; color:#00aaff;}
+a,input{outline:none;}
+a:focus,input:focus{
+    /* 只支持手点。。。 http://www.ifrans.cn/remove-android-focus-highlight-outline/
+-webkit-tap-highlight-color:rgba(0,0,0,0);
+-webkit-user-modify:read-write-plaintext-only;
+    */
+}
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{
+  margin:0;
+  padding:0
+}
+table {
+  border-collapse:collapse;
+  border-spacing:0
+}
+fieldset,img {
+  border:0
+}
+address,caption,cite,code,dfn,em,strong,th,var {
+  font-style:normal;
+  font-weight:400
+}
+li {
+  list-style: none
+}
+caption,th {
+  text-align:left
+}
+h1,h2,h3,h4,h5,h6 {
+  font-size:100%;
+  font-weight:400
+}
+/*----------------浮动*/
+.cm-clear {
+zoom: 1;
+}
+.cm-left {
+display: inline;
+float: left;
+}
+.cm-right {
+display: inline;
+float: right;
+}
+
+.clearfix:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+.clearfix::before, .clearfix::after {
+display: table;
+content: "";
+line-height: 0;
+}
+/*----------------横向列表*/
+ ul.listLateral li{float:left;list-style:none; display:inline-block;}
+ 
+/*----------------iscroll滚动*/ 
+
+.wrapper{
+position:fixed;
+	z-index: 100;
+	width: 100%;
+	left: 0;
+	top:0;
+} 
+.content {
+z-index: 1;
+-webkit-tap-highlight-color: rgba(0,0,0,0);
+padding-top:42px;
+}
+.content-header{ padding-top:92px;}
+.content-headerTH{padding-top:135px;}
+
+
+
+/*----------------背景*/ 
+.bg-red{background:#b82728;}
+.bg-black{background:#101419;}
+.bg-gray{background:#f5f5f5;}
+.bg-white{background:#fff;}
+.bg-login{background:url(../images/bg/bg-login.jpg) no-repeat; width:100%; background-size:100%;}
+.bg-grayDeep{background-color:#f5f5f5;border-bottom:1px #ccc solid; font-size:12px; padding:6px 15px; line-height:18px;}
+
+
+
+/*----------------字体---------------*/
+.am-ft-xxxl{font-size:24px!important}
+.am-ft-xxl{font-size:20px!important}
+.am-ft-xl{font-size:18px!important}
+.am-ft-lg{font-size:16px!important}
+.am-ft-md{font-size:14px!important;}
+.am-ft-sm{font-size:12px!important;}
+.am-ft-ssm{font-size:10px!important;}
+.am-ft-bignNum{font-size:24px!important;}
+.am-user{ font-size:15px!important; font-weight:bold!important; line-height:24px!important;}
+.pt-prompt{padding:5px 0 0 15px;color:#999999;}
+
+.label {
+display: inline;
+padding: .2em .6em .3em;
+font-size:12px;
+font-weight: normal;
+line-height: 1;
+color: #fff;
+text-align: center;
+white-space: nowrap;
+vertical-align: baseline;
+border-radius: .25em;
+}
+.label-default {
+background-color:#999;
+}
+.label-primary {
+background-color:#428bca;
+}
+.label-success {
+background-color:#5cb85c;
+}
+.label-info {
+background-color:#5bc0de;
+}
+.label-warning {
+background-color:#f0ad4e;
+}
+.label-danger {
+background-color:#d9534f;
+}
+
+
+.am-lh-40{ line-height:40px;}
+.am-lh-36{ line-height:36px;}
+.am-lh-30{ line-height:30px;}
+.am-lh-24{ line-height:24px;}
+.am-lh-18{ line-height:18px;}
+
+.am-ft-main{color:#333!important}
+.am-ft-white{color:#fff!important}
+.am-ft-black{color:#000!important}
+.am-ft-red{color:#e71718!important}
+.am-ft-gray{color:#999999!important}
+.am-ft-tabText{color:#666!important}
+.am-ft-instructions{color:#8f8f95!important}
+.am-ft-prompt{color:#ccc!important}
+.am-ft-green{color:#52b929!important}
+.am-ft-blue{color:#00aaff!important}
+.am-ft-yellow{color:#fff109!important}
+.am-ft-orange{color:#ff8420!important}
+
+.prompt{color:#999999; line-height:15px; font-size:12px;}
+
+.level{ font-size:15px;}
+.level-strong{ color:#30ceb2}
+.level-in{ color:#ff821d}
+.level-weak{ color:#e42323}
+
+/*----------------图标---------------*/
+.type-icon {
+display:inline-block;
+vertical-align: middle;
+background-repeat: no-repeat;
+}
+.user-ico {
+width:22px;
+height:22px;
+background:url(../images/icon/user-ico.png);
+-moz-background-size: 22px;
+-webkit-background-size: 22px;
+-o-background-size: 22px;
+background-size: 22px;
+}
+.password-ico {
+width: 22px;
+height: 22px;
+background: url(../images/icon/password-ico.png);
+-moz-background-size: 22px;
+-webkit-background-size: 22px;
+-o-background-size: 22px;
+background-size: 22px;
+}
+.icon-successLogin {
+width: 16px;
+height: 12px;
+background:url(../images/icon/icon-successLogin.png);
+-moz-background-size:16px 12px;
+-webkit-background-size:16px 12px;
+-o-background-size:16px 12px;
+background-size:16px 12px;
+font-size:0;
+text-indent:-999px;
+}
+.icon-errorLogin {
+width: 12px;
+height: 12px;
+background:url(../images/icon/icon-errorLogin.png);
+-moz-background-size:12px;
+-webkit-background-size:12px;
+-o-background-size:12px;
+background-size:12px;
+font-size:0;
+text-indent:-999px;
+}
+.icon-more{
+width: 19px;
+height: 19px;
+background:url(../images/icon/icon-more.png);
+-moz-background-size:19px;
+-webkit-background-size:19px;
+-o-background-size:19px;
+background-size:19px;
+font-size:0;
+text-indent:-999px;
+}
+.icon-add {
+width:12px;
+height:16px;
+background:url(../images/icon/icon-add.png) no-repeat;
+-moz-background-size: 12px;
+-webkit-background-size: 12px;
+-o-background-size: 12px;
+background-size: 12px;
+}
+.icon-successBox{
+width:35px;
+height:35px;
+background:url(../images/icon/icon-successBox.png);
+-moz-background-size:35px;
+-webkit-background-size:35px;
+-o-background-size:35px;
+background-size:35px;
+}
+.bankNumber-icon {
+width: 40px;
+height: 25px;
+background:url(../images/icon/bankNumber.png);
+background-size: 40px 25px;
+}
+.icon-small-warning{
+width: 25px;
+height: 25px;
+background:url(../images/icon/warning-pormpt.png);
+background-size: 25px 25px;
+line-height:24px;
+margin-right:15px;
+}
+.am-icon-arrow-right, .am-icon-arrow-left, .am-icon-arrow-top, .am-icon-arrow-bottom {
+display: block;
+background: 0 0;
+width: 8px;
+height: 8px;
+border-bottom: solid 1px #959595;
+border-right: solid 1px #959595;
+position: absolute;
+top: 50%;
+right: 15px;
+margin-top: -4px;
+z-index: 1;
+-webkit-transform: rotate(315deg);
+transform: rotate(315deg);
+}
+.am-icon-arrow-right,.am-icon-arrow-left,.am-icon-arrow-top,.am-icon-arrow-bottom{display:block;background:0 0;width:8px;height:8px;border-bottom:solid 1px #959595;border-right:solid 1px #959595;position:absolute;top:50%;right:15px;margin-top:-4px;z-index:1;-webkit-transform:rotate(315deg);transform:rotate(315deg)}
+.am-icon-arrow-left{border-bottom:none;border-right:none;border-top:solid 2px #303030;border-left:solid 2px #303030;}
+.am-icon-arrow-top{border-bottom:none;border-right:none;border-right:solid 1px #959595;border-top:solid 1px #959595;}
+.am-icon-arrow-bottom{border-bottom:none;border-right:none;border-left:solid 1px #959595;border-bottom:solid 1px #959595;}
+
+.icon-index {
+display:inline-block;
+vertical-align: middle;
+background-repeat: no-repeat;
+-moz-background-size: 40px 45px;
+-webkit-background-size: 40px 45px;
+-o-background-size: 40px 45px;
+background-size: 40px 45px;
+width:40px;
+height:45px;
+}
+.icon-index01 {
+background:url(../images/index/icon-index01.png);background-size: 40px 45px;
+}
+.icon-index02 {
+background:url(../images/index/icon-index02.png);background-size: 40px 45px;
+}
+.icon-index03 {
+background:url(../images/index/icon-index03.png);background-size: 40px 45px;
+}
+.icon-index04 {
+background:url(../images/index/icon-index04.png);background-size: 40px 45px;
+}
+
+.icon-prompt {
+display:inline-block;
+vertical-align: middle;
+background-repeat: no-repeat;
+-moz-background-size:52px;
+-webkit-background-size:52px;
+-o-background-size:52px;
+background-size:52px;
+width:52px;
+height:52px;
+}
+.icon-prompt-success {
+background:url(../images/icon/success-pormpt.png);background-size:52px;
+}
+.icon-prompt-error {
+background:url(../images/icon/error-pormpt.png);background-size:52px;
+}
+.icon-prompt-wait {
+background:url(../images/icon/wait-pormpt.png);background-size:52px;
+}
+
+.footerIndex-ico{
+display:inline-block;
+vertical-align: middle;
+background:url(../images/icon/footerIndex-ico.png) no-repeat;
+-moz-background-size:23px;
+-webkit-background-size:23px;
+-o-background-size:23px;
+background-size:23px;
+width:23px;
+height:23px;	
+}
+a.active .footerIndex-ico{background:url(../images/icon/footerIndex-active-ico.png);background-size:23px;	}
+.footerAssets-ico{
+display:inline-block;
+vertical-align: middle;
+background:url(../images/icon/footerAssets-ico.png) no-repeat;
+-moz-background-size:23px;
+-webkit-background-size:23px;
+-o-background-size:23px;
+background-size:23px;
+width:23px;
+height:23px;	
+}
+a.active .footerAssets-ico{background:url(../images/icon/footerAssets-active-ico.png);background-size:23px;	}
+.footerMoney-ico{
+display:inline-block;
+vertical-align: middle;
+width:23px;
+height:23px;
+background:url(../images/icon/footerMoney-ico.png) no-repeat;	
+-moz-background-size:23px;
+-webkit-background-size:23px;
+-o-background-size:23px;
+background-size:23px;	
+}
+a.active .footerMoney-ico{background:url(../images/icon/footerMoney-active-ico.png);background-size:23px;	}
+.footerPerson-ico{
+display:inline-block;
+vertical-align: middle;
+width:23px;
+height:23px;
+background:url(../images/icon/footerPerson-ico.png) no-repeat;	
+-moz-background-size:23px;
+-webkit-background-size:23px;
+-o-background-size:23px;
+background-size:23px;
+}
+a.active .footerPerson-ico{background:url(../images/icon/footerPerson-active-ico.png);background-size:23px;	}
+
+
+/*加减图标*/
+.tagsinput{ display:block;border:1px #d3d4d6 solid; background-color:#f9f9fa; height:22px; line-height:22px; text-align:center; vertical-align:middle; color:#8b8a8c; }
+.UMtagsinput{color:#ceced0; }
+.tagsinput-minus{ border-right:none; border-top-left-radius:4px; border-bottom-left-radius:4px;font-size:14px;}
+.tagsinput-add{ border-left:none; border-top-right-radius:4px; border-bottom-right-radius:4px;font-size:14px;}
+
+/*------单选框-------*/
+.ui-input-radio{
+width:15px;
+height:15px;
+vertical-align:middle;
+display:inline-block;
+-moz-background-size:15px;
+-webkit-background-size:15px;
+-o-background-size:15px;
+background-size:15px;
+margin-right:5px;
+}
+.ui-input-radio {
+width:15px;
+height:15px;
+background:url(../images/icon/umradio-ico.png);
+-moz-background-size:15px;
+-webkit-background-size:15px;
+-o-background-size:15px;
+background-size:15px;
+}
+.ui-input-radio:checked, .ui-input-radio-active{
+width:15px;
+height:15px;
+background:url(../images/icon/radio-ico.png) no-repeat;
+-moz-background-size:15px;
+-webkit-background-size:15px;
+-o-background-size:15px;
+background-size:15px;
+}
+/*------按钮-------*/
+.am-button {
+-webkit-box-sizing: border-box;
+box-sizing: border-box;
+display: inline-block;
+margin: 0;
+padding: 10px 0;
+text-align: center;
+font-size: 14px;
+-webkit-border-radius:20px;
+border-radius: 20px;
+background-clip: padding-box;
+}
+.am-button-red {
+color: #fff;
+font-family: sans-serif;
+background: #ff4d4f;
+width: 100%;
+}
+.am-button-red span{
+color: #fff;
+}
+.am-button-green {
+color: #fff;
+font-family: sans-serif;
+background: #099b17;
+width: 100%;
+}
+.am-button-green span{
+color: #fff;
+}
+.am-button-blue {
+color: #fff;
+font-family: sans-serif;
+background: #4db2ff;
+width: 100%;
+}
+.am-button-blue span{
+color: #fff;
+}
+
+.am-button-textRed{
+color: #5b0f24;
+font-family: sans-serif;
+background:none;
+width: 100%;
+font-size:12px;
+}
+.am-button-textRed span{
+color: #5b0f24;
+}
+.am-button-lineRed{
+color: #ff4d4f;
+font-family: sans-serif;
+background:none;
+width: 100%;
+border:1px #ff4d4f solid;
+}
+.am-button-lineRed span{
+color: #ff4d4f;
+}
+.am-button-lineblack{
+color: #333333;
+font-family: sans-serif;
+background:none;
+width: 100%;
+border:1px #777777 solid;
+font-size:12px;
+padding:0;
+width:81px;
+line-height:24px;
+-webkit-border-radius:5px;
+border-radius: 5px;
+}
+.am-button-lineblack span{
+color: #333333;
+}
+
+.am-button-lineblack-active{border:1px #c3c3c3 solid; background-color:#f2f2f2; color:#999999!important;}
+
+.btn-disabled, .btn-disabled:hover, .btn-disabled:active {
+background: #ececec!important;
+color: #888!important;
+-webkit-box-shadow: none;
+box-shadow: none;
+}
+.btn-disabled span{
+color: #888!important;
+}
+
+/*------输入框-------*/
+.ui-formContainer{border: 1px solid #c3c3c3;}
+.ui-formContainer-error{border: 1px solid #DE3235;}
+.ui-formContainer-enter{border-color: #589AFF;}
+.ui-form-field {
+display: inline-block;
+width: 100%;
+}
+.ui-form-field .text_input {
+height: 22px;
+border: 0;
+font-size: 15px;
+margin-top: 0px;
+padding-top: 0px;
+margin-bottom: 0px;
+padding-bottom: 0px;
+text-align: left;
+width: 100%;
+background-color: transparent;
+background: none;
+color: #333;
+border-radius: 0;
+-webkit-box-shadow: none;
+}
+.am-textarea{
+height: 40px;
+border: 0;
+font-size: 15px;
+margin-top: 0px;
+padding-top: 0px;
+margin-bottom: 0px;
+padding-bottom: 0px;
+text-align: left;
+width: 95%;
+padding-right:5%;
+background-color: transparent;
+background: none;
+outline:medium;
+color: #999;
+border-radius: 0;
+-webkit-box-shadow: none;	
+}
+.ui-form-field .form-input {
+height: 44px;
+border: 0;
+font-size: 14px;
+margin-top: 0px;
+padding-top: 0px;
+margin-bottom: 0px;
+padding-bottom: 0px;
+text-align: left;
+width: 100%;
+background-color: transparent;
+background: none;
+border-radius: 0;
+-webkit-box-shadow: none;
+background-color: #f5f5f8;
+border: 1px #d3d4d6 solid;
+}
+/*------下拉菜单-------*/
+.select-container {
+position: relative;
+width: 100%!important;
+height:42px!important;
+padding: 10px 0px;
+width: 100%;
+text-align: left;
+vertical-align: middle;
+background: none repeat scroll 0% 0% #FFF;
+line-height: 22px;
+height: 42px;
+display: block;
+border: 1px solid #C3C3C3;
+}
+.select-container .select-choice {
+width: 100%!important;
+cursor: pointer;
+display:block;
+color: #484848;
+}
+.select-container .select-choice span{ text-align:left;}
+.select-container .select-results {
+position: absolute;
+top: 42px;
+left: -1px;
+width: 100%!important;
+background: #f5f5f5;
+border: 1px solid #ccc;
+display: none;
+z-index:10;
+}
+.select-container .select-results li {
+height:32px;
+line-height:32px;
+cursor: pointer;
+padding-left: 10px;
+margin-bottom: -1px;
+border-bottom: 1px solid #ccc;
+}
+.select-container .ui-select{ position:absolute; left:0; top:0; width:100%; height:42px;zoom:1; background-color:transparent; z-index:1; border:none; /*font-size:0;*/ display:none;}
+
+/*------复选框-------*/
+.ui-input-checkbox{
+width:18px;
+height:18px;
+vertical-align:middle;
+display:inline-block;
+-moz-background-size:18px;
+-webkit-background-size:18px;
+-o-background-size:18px;
+background-size:18px;
+position:relative;
+}
+.ui-input-checkbox {
+width:18px;
+height:18px;
+background:url(../images/icon/umcheck-ico.png);
+-moz-background-size:18px;
+-webkit-background-size:18px;
+-o-background-size:18px;
+background-size:18px;
+}
+.ui-input-checkbox:checked, .ui-input-checkbox-active{
+width:18px;
+height:18px;
+background:url(../images/icon/checkbox-ico.png) no-repeat;
+-moz-background-size:18px;
+-webkit-background-size:18px;
+-o-background-size:18px;
+background-size:18px;
+}
+.contractNum .am-button{ padding:2px 0;-webkit-border-radius: 4px;
+border-radius:4px; position:absolute; zoom:1; width:50px;font-size: 12px;top:7px;}
+.contractNum .btn1{ right:90px; }
+.contractNum .btn2{ right:30px;}
+/*------银行卡-------*/
+.am-bankInfo{ padding:5px;-moz-background-size:25px;
+-webkit-background-size:25px;-o-background-size:25px;  background-size:25px; background-repeat:no-repeat; height:45px; padding-left:40px; display:inline-block;}
+.am-small-bankInfo{padding-left:25px;background-repeat:no-repeat; display:inline-block;}
+.am-bankInfo p.name{color: #333;}
+.am-bankInfo p.number{ color:#999; padding-top:3px;}
+.bankInfo-CMB{ background:url(../images/borkers-logo/small-bank-CMB.png) no-repeat left 12px;background-size:25px;}
+.bankInfo-BOC{background:url(../images/borkers-logo/small-bank-BOC.png) no-repeat left 12px;background-size:25px;}
+.bankInfo-ABC{background:url(../images/borkers-logo/small-bank-ABC.png) no-repeat left 12px;background-size:25px;}
+.bankInfo-CCB{background:url(../images/borkers-logo/small-bank-CCB.png) no-repeat left 12px;background-size:25px;}
+.bankInfo-CEB{background:url(../images/borkers-logo/small-bank-CEB.png) no-repeat left 12px;background-size:25px;}
+.bankInfo-CIB{background:url(../images/borkers-logo/small-bank-CIB.png) no-repeat left 12px;background-size:25px;}
+.bankInfo-CITIC{background:url(../images/borkers-logo/small-bank-CITIC.png) no-repeat left 12px;background-size:25px;}
+.bankInfo-CMBC{background:url(../images/borkers-logo/small-bank-CMBC.png) no-repeat left 12px;background-size:25px;}
+.bankInfo-COMM{background:url(../images/borkers-logo/small-bank-COMM.png) no-repeat left 12px;background-size:25px;}
+.bankInfo-GDB{background:url(../images/borkers-logo/small-bank-GDB.png) no-repeat left 12px;background-size:25px;}
+.bankInfo-ICBC{background:url(../images/borkers-logo/small-bank-ICBC.png) no-repeat left 12px;background-size:25px;}
+.bankInfo-PINGAN{background:url(../images/borkers-logo/small-bank-PINGAN.png) no-repeat left 12px;background-size:25px;}
+.bankInfo-PSBC{background:url(../images/borkers-logo/small-bank-PSBC.png) no-repeat left 12px;background-size:25px;}
+.bankInfo-SHB{background:url(../images/borkers-logo/small-bank-SHB.png) no-repeat left 12px;background-size:25px;}
+.bankInfo-HXB{background:url(../images/borkers-logo/small-bank-HXB.png) no-repeat left 12px;background-size:25px;}
+.bankInfo-SPDB{background:url(../images/borkers-logo/small-bank-SPDB.png) no-repeat left 12px;background-size:25px;}
+.small-bankInfo-CMB{background:url(../images/borkers-logo/small-bank-CMB.png) no-repeat left 4px; background-size:20px;}
+.small-bankInfo-BOC{background:url(../images/borkers-logo/small-bank-BOC.png) no-repeat left 4px; background-size:20px;}
+.small-bankInfo-ABC{background:url(../images/borkers-logo/small-bank-ABC.png) no-repeat left 4px; background-size:20px;}
+.small-bankInfo-CCB{background:url(../images/borkers-logo/small-bank-CCB.png) no-repeat left 4px; background-size:20px;}
+.small-bankInfo-CEB{background:url(../images/borkers-logo/small-bank-CEB.png) no-repeat left 4px; background-size:20px;}
+.small-bankInfo-CIB{background:url(../images/borkers-logo/small-bank-CIB.png) no-repeat left 4px; background-size:20px;}
+.small-bankInfo-CITIC{background:url(../images/borkers-logo/small-bank-CITIC.png) no-repeat left 4px; background-size:20px;}
+.small-bankInfo-CMBC{background:url(../images/borkers-logo/small-bank-CMBC.png) no-repeat left 4px; background-size:20px;}
+.small-bankInfo-COMM{background:url(../images/borkers-logo/small-bank-COMM.png) no-repeat left 4px; background-size:20px;}
+.small-bankInfo-GDB{background:url(../images/borkers-logo/small-bank-GDB.png) no-repeat left 4px; background-size:20px;}
+.small-bankInfo-ICBC{background:url(../images/borkers-logo/small-bank-ICBC.png) no-repeat left 4px; background-size:20px;}
+.small-bankInfo-PINGAN{background:url(../images/borkers-logo/small-bank-PINGAN.png) no-repeat left 4px; background-size:20px;}
+.small-bankInfo-PSBC{background:url(../images/borkers-logo/small-bank-PSBC.png) no-repeat left 4px; background-size:20px;}
+.small-bankInfo-SHB{background:url(../images/borkers-logo/small-bank-SHB.png) no-repeat left 4px; background-size:20px;}
+.small-bankInfo-SPDB{background:url(../images/borkers-logo/small-bank-SPDB.png) no-repeat left 4px; background-size:20px;}
+.small-bankInfo-HXB{background:url(../images/borkers-logo/small-bank-HXB.png) no-repeat left 4px; background-size:20px;}

@@ -1,0 +1,936 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>财猫-融资-持仓</title>
+    <!--基本布局样式-->
+    <link rel="stylesheet" type="text/css" href="../style/page/list.css">
+</head>
+
+<body>
+<!--顶部条-->
+<div id="top">
+    <div class="w top_in">
+        <div class="f_l left">
+            <span>总资产：<b>400,000</b>元</span>
+            <span>股票市值：<b>400,000</b>元</span>
+            <span>可用：<b>400,000</b>元</span>
+            <span>警告线：<b>400,000</b>元</span>
+            <span>平仓线：<b>400,000</b>元</span>
+        </div>
+        <div class="f_r right">
+            <!--消息框位灰色时  直接去掉icon_info即可-->
+            <span class="font_red"><i class="icons icon_info"></i>6</span>
+            <span>您好，马建军 </span>
+            <a href="#">退出</a>
+        </div>
+    </div>
+    <!--登录前状态
+    <div class="w top_in">-->
+    <!--<div class="f_l left">-->
+    <!--</div>-->
+    <!--<div class="f_r right">-->
+    <!--您好！欢迎来到财猫网！-->
+    <!--<a href="#"> 登录</a> | <a href="#"> 注册</a>-->
+    <!--</div>-->
+    <!--</div>-->
+</div>
+
+<!--头部-->
+<div id="header">
+    <div class="w header_in">
+        <div class="f_l left">
+            <h1 class="icons icon_logo"><a href="#">财猫网</a></h1><p class="icons icon_logo_p">招招有财</p>
+        </div>
+        <div class="f_r right">
+            <ul>
+                <li><a href="#">首页 <b></b></a></li>
+                <li><a href="#">交易<b></b></a></li>
+                <li><a class="hov"  href="#">融资<b></b></a></li>
+                <li><a href="#">账户<b></b></a></li>
+                <li><a href="#">下载<b></b></a></li>
+                <li><a href="#">新手引导<b></b></a></li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+<div class="tong">
+    <p><img style="margin-top: 7px;" src="../../../static/img/deng.jpg"><span>财猫上线一周年网庆，充值送宝马，你敢来吗！</span><a href="#">我知道了</a> </p>
+</div>
+<!--弹出的列表-->
+<!--<div class="layout">
+    <ul style="padding-left: 30px; border-right: 1px solid #e6e6e6;">
+        <li><a href="#">电子器件</a></li>
+        <li><a href="#">玻璃行业</a></li>
+        <li><a href="#">飞机制造</a></li>
+        <li><a href="#">化工行业</a></li>
+        <li><a href="#">电子器件</a></li>
+        <li><a href="#">玻璃行业</a></li>
+        <li><a href="#">飞机制造</a></li>
+        <li><a href="#">化工行业</a></li>
+        <li><a href="#">电子器件</a></li>
+        <li><a href="#">玻璃行业</a></li>
+        <li><a href="#">飞机制造</a></li>
+        <li><a href="#">化工行业</a></li>
+        <li><a href="#">电子器件</a></li>
+        <li><a href="#">玻璃行业</a></li>
+        <li><a href="#">飞机制造</a></li>
+        <li><a href="#">化工行业</a></li>
+        <li><a href="#">飞机制造</a></li>
+        <li><a href="#">化工行业</a></li>
+        <li><a href="#">电子器件</a></li>
+        <li><a href="#">玻璃行业</a></li>
+        <li><a href="#">飞机制造</a></li>
+    </ul>
+    <ul style=" border-right: 1px solid #e6e6e6;">
+        <li><a href="#">电子器件</a></li>
+        <li><a href="#">玻璃行业</a></li>
+        <li><a href="#">飞机制造</a></li>
+        <li><a href="#">化工行业</a></li>
+        <li><a href="#">电子器件</a></li>
+        <li><a href="#">玻璃行业</a></li>
+        <li><a href="#">飞机制造</a></li>
+        <li><a href="#">化工行业</a></li>
+        <li><a href="#">电子器件</a></li>
+        <li><a href="#">玻璃行业</a></li>
+        <li><a href="#">飞机制造</a></li>
+        <li><a href="#">化工行业</a></li>
+        <li><a href="#">电子器件</a></li>
+        <li><a href="#">玻璃行业</a></li>
+        <li><a href="#">飞机制造</a></li>
+        <li><a href="#">化工行业</a></li>
+        <li><a href="#">飞机制造</a></li>
+        <li><a href="#">化工行业</a></li>
+        <li><a href="#">电子器件</a></li>
+        <li><a href="#">玻璃行业</a></li>
+        <li><a href="#">飞机制造</a></li>
+    </ul>
+    <ul style=" border-right: 1px solid #e6e6e6;">
+        <li><a href="#">电子器件</a></li>
+        <li><a href="#">玻璃行业</a></li>
+        <li><a href="#">飞机制造</a></li>
+        <li><a href="#">化工行业</a></li>
+        <li><a href="#">电子器件</a></li>
+        <li><a href="#">玻璃行业</a></li>
+        <li><a href="#">飞机制造</a></li>
+        <li><a href="#">化工行业</a></li>
+        <li><a href="#">电子器件</a></li>
+        <li><a href="#">玻璃行业</a></li>
+        <li><a href="#">飞机制造</a></li>
+        <li><a href="#">化工行业</a></li>
+        <li><a href="#">电子器件</a></li>
+        <li><a href="#">玻璃行业</a></li>
+        <li><a href="#">飞机制造</a></li>
+        <li><a href="#">化工行业</a></li>
+        <li><a href="#">飞机制造</a></li>
+        <li><a href="#">化工行业</a></li>
+        <li><a href="#">电子器件</a></li>
+        <li><a href="#">玻璃行业</a></li>
+        <li><a href="#">飞机制造</a></li>
+    </ul>
+    <ul style=" border-right: 1px solid #e6e6e6;">
+        <li><a href="#">电子器件</a></li>
+        <li><a href="#">玻璃行业</a></li>
+        <li><a href="#">飞机制造</a></li>
+        <li><a href="#">化工行业</a></li>
+        <li><a href="#">电子器件</a></li>
+        <li><a href="#">玻璃行业</a></li>
+        <li><a href="#">飞机制造</a></li>
+        <li><a href="#">化工行业</a></li>
+        <li><a href="#">电子器件</a></li>
+        <li><a href="#">玻璃行业</a></li>
+        <li><a href="#">飞机制造</a></li>
+        <li><a href="#">化工行业</a></li>
+        <li><a href="#">电子器件</a></li>
+        <li><a href="#">玻璃行业</a></li>
+        <li><a href="#">飞机制造</a></li>
+        <li><a href="#">化工行业</a></li>
+        <li><a href="#">飞机制造</a></li>
+        <li><a href="#">化工行业</a></li>
+        <li><a href="#">电子器件</a></li>
+        <li><a href="#">玻璃行业</a></li>
+        <li><a href="#">飞机制造</a></li>
+    </ul>
+    <ul style=" border-right: 1px solid #e6e6e6;">
+        <li><a href="#">电子器件</a></li>
+        <li><a href="#">玻璃行业</a></li>
+        <li><a href="#">飞机制造</a></li>
+        <li><a href="#">化工行业</a></li>
+        <li><a href="#">电子器件</a></li>
+        <li><a href="#">玻璃行业</a></li>
+        <li><a href="#">飞机制造</a></li>
+        <li><a href="#">化工行业</a></li>
+        <li><a href="#">电子器件</a></li>
+        <li><a href="#">玻璃行业</a></li>
+        <li><a href="#">飞机制造</a></li>
+        <li><a href="#">化工行业</a></li>
+        <li><a href="#">电子器件</a></li>
+        <li><a href="#">玻璃行业</a></li>
+        <li><a href="#">飞机制造</a></li>
+        <li><a href="#">化工行业</a></li>
+        <li><a href="#">飞机制造</a></li>
+        <li><a href="#">化工行业</a></li>
+        <li><a href="#">电子器件</a></li>
+        <li><a href="#">玻璃行业</a></li>
+        <li><a href="#">飞机制造</a></li>
+    </ul>
+    <ul>
+        <li><a href="#">电子器件</a></li>
+        <li><a href="#">玻璃行业</a></li>
+        <li><a href="#">飞机制造</a></li>
+        <li><a href="#">化工行业</a></li>
+        <li><a href="#">电子器件</a></li>
+        <li><a href="#">玻璃行业</a></li>
+        <li><a href="#">飞机制造</a></li>
+        <li><a href="#">化工行业</a></li>
+        <li><a href="#">电子器件</a></li>
+        <li><a href="#">玻璃行业</a></li>
+        <li><a href="#">飞机制造</a></li>
+        <li><a href="#">化工行业</a></li>
+        <li><a href="#">电子器件</a></li>
+        <li><a href="#">玻璃行业</a></li>
+        <li><a href="#">飞机制造</a></li>
+        <li><a href="#">化工行业</a></li>
+        <li><a href="#">飞机制造</a></li>
+        <li><a href="#">化工行业</a></li>
+        <li><a href="#">电子器件</a></li>
+        <li><a href="#">玻璃行业</a></li>
+        <li><a href="#">飞机制造</a></li>
+    </ul>
+</div>-->
+
+<!--内容区-->
+<div id="main">
+    <div class="main2">
+        <div class="main2-left">
+            <ul style="height: 45px; width: 120px; border-bottom: 1px solid #E6E6E6;"><a style="color: #0088cc;line-height: 45px;" href="#">沪深股市</a></ul>
+            <ul>
+                <li><a href="#">财猫行业</a><a style="padding-left:54px;color:#e2e2e2; " href="#">》</a> </li>
+                <li><a href="#">概念板块</a><a style="padding-left:54px;color:#e2e2e2; "href="#">》</a> </li>
+                <li><a href="#">地域板块</a><a style="padding-left:54px;color:#e2e2e2; " href="#">》</a> </li>
+                <li><a href="#">证监会行业</a><a style="padding-left:40px;color:#e2e2e2; " href="#">》</a> </li>
+            </ul>
+        </div><!--左边的盒子-->
+        <div class="main2-center">
+           <!-- <div class="main2-center-1">
+                <ul>
+                    <li style="padding-left: 0px;">代码</li>
+                    <li>名称</li>
+                    <li>最新价<a href="#"><img src="../../sanbufen/img/sj.jpg"> </a><a href="#"><img src="../../sanbufen/img/xj.jpg"> </a></li>
+                    <li style="padding-left: 20px;">涨跌额</li>
+                    <li style="padding-left: 30px;">涨跌幅</li>
+                    <li>买入</li>
+                    <li>卖出</li>
+                    <li>昨收</li>
+                    <li>金开</li>
+                    <li>最高</li>
+                    <li>最低</li>
+                    <li>成交量/手</li>
+                    <li style="padding-left:20px;">成交额/万</li>
+                </ul>
+            </div>
+            <div class="main2-center-2">
+                <ul>
+                    <li style="padding-left: 0px;"><b>300001</b></li>
+                    <li style="padding-left: 18px;" >特锐德</li>
+                    <li><b><span>66.77</span></b></li>
+                    <li style="padding-left: 45px;"><b><span>-3.65</span></b></li>
+                    <li><b><span>-5.183%</span></b></li>
+                    <li><b><span>66.77</span></b></li>
+                    <li style="padding-left: 30px;"><b><span>66.78</span></b></li>
+                    <li><b><span>70.42</span></b></li>
+                    <li><b><span>74.62</span></b></li>
+                    <li><b><span>74.77</span></b></li>
+                    <li><b><span>66.50</span></b></li>
+                    <li><b>149,872</b></li>
+                    <li style="padding-left: 25px;"><b>149,872.14</b></li>
+                    <li style="padding-left: 5px; margin-top: 15px;"><img src="../../sanbufen/img/jia1.jpg"> </li>
+                </ul>
+                <ul>
+                    <li style="padding-left: 0px;"><b>300001</b></li>
+                    <li style="padding-left: 18px;" >特锐德</li>
+                    <li><b><span>66.77</span></b></li>
+                    <li style="padding-left: 45px;"><b><span>-3.65</span></b></li>
+                    <li><b><span>-5.183%</span></b></li>
+                    <li><b><span>66.77</span></b></li>
+                    <li style="padding-left: 30px;"><b><span>66.78</span></b></li>
+                    <li><b><span>70.42</span></b></li>
+                    <li><b><span>74.62</span></b></li>
+                    <li><b><span>74.77</span></b></li>
+                    <li><b><span>66.50</span></b></li>
+                    <li><b>149,872</b></li>
+                    <li style="padding-left: 25px;"><b>149,872.14</b></li>
+                    <li style="padding-left: 5px; margin-top: 15px;"><img src="../../sanbufen/img/jia2.jpg"> </li>
+                </ul>
+                <ul>
+                    <li style="padding-left: 0px;"><b>300001</b></li>
+                    <li style="padding-left: 18px;" >特锐德</li>
+                    <li><b><span>66.77</span></b></li>
+                    <li style="padding-left: 45px;"><b><span>-3.65</span></b></li>
+                    <li><b><span>-5.183%</span></b></li>
+                    <li><b><span>66.77</span></b></li>
+                    <li style="padding-left: 30px;"><b><span>66.78</span></b></li>
+                    <li><b><span>70.42</span></b></li>
+                    <li><b><span>74.62</span></b></li>
+                    <li><b><span>74.77</span></b></li>
+                    <li><b><span>66.50</span></b></li>
+                    <li><b>149,872</b></li>
+                    <li style="padding-left: 25px;"><b>149,872.14</b></li>
+                    <li style="padding-left: 5px; margin-top: 15px;"><img src="../../sanbufen/img/jia2.jpg"> </li>
+                </ul>
+                <ul>
+                    <li style="padding-left: 0px;"><b>300001</b></li>
+                    <li style="padding-left: 18px;" >特锐德</li>
+                    <li><b><span>66.77</span></b></li>
+                    <li style="padding-left: 45px;"><b><span>-3.65</span></b></li>
+                    <li><b><span>-5.183%</span></b></li>
+                    <li><b><span>66.77</span></b></li>
+                    <li style="padding-left: 30px;"><b><span>66.78</span></b></li>
+                    <li><b><span>70.42</span></b></li>
+                    <li><b><span>74.62</span></b></li>
+                    <li><b><span>74.77</span></b></li>
+                    <li><b><span>66.50</span></b></li>
+                    <li><b>149,872</b></li>
+                    <li style="padding-left: 25px;"><b>149,872.14</b></li>
+                    <li style="padding-left: 5px; margin-top: 15px;"><img src="../../sanbufen/img/jia2.jpg"> </li>
+                </ul>
+                <ul>
+                    <li style="padding-left: 0px;"><b>300001</b></li>
+                    <li style="padding-left: 18px;" >特锐德</li>
+                    <li><b><span style="color: #eb4636;">66.77</span></b></li>
+                    <li style="padding-left: 45px;"><b><span style="color: #eb4636;">-3.65</span></b></li>
+                    <li><b><span style="color: #eb4636;">-5.183%</span></b></li>
+                    <li><b><span style="color: #eb4636;">66.77</span></b></li>
+                    <li style="padding-left: 30px;"><b><span style="color: #eb4636;">66.78</span></b></li>
+                    <li><b><span style="color: #eb4636;">70.42</span></b></li>
+                    <li><b><span style="color: #eb4636;">74.62</span></b></li>
+                    <li><b><span style="color: #eb4636;">74.77</span></b></li>
+                    <li><b><span style="color: #eb4636;">66.50</span></b></li>
+                    <li><b>149,872</b></li>
+                    <li style="padding-left: 25px;"><b>149,872.14</b></li>
+                    <li style="padding-left: 5px; margin-top: 15px;"><img src="../../sanbufen/img/jia2.jpg"> </li>
+                </ul>
+                <ul>
+                    <li style="padding-left: 0px;"><b>300001</b></li>
+                    <li style="padding-left: 18px;" >特锐德</li>
+                    <li><b><span style="color: #eb4636;">66.77</span></b></li>
+                    <li style="padding-left: 45px;"><b><span style="color: #eb4636;">-3.65</span></b></li>
+                    <li><b><span style="color: #eb4636;">-5.183%</span></b></li>
+                    <li><b><span style="color: #eb4636;">66.77</span></b></li>
+                    <li style="padding-left: 30px;"><b><span style="color: #eb4636;">66.78</span></b></li>
+                    <li><b><span style="color: #eb4636;">70.42</span></b></li>
+                    <li><b><span style="color: #eb4636;">74.62</span></b></li>
+                    <li><b><span style="color: #eb4636;">74.77</span></b></li>
+                    <li><b><span style="color: #eb4636;">66.50</span></b></li>
+                    <li><b>149,872</b></li>
+                    <li style="padding-left: 25px;"><b>149,872.14</b></li>
+                    <li style="padding-left: 5px; margin-top: 15px;"><img src="../../sanbufen/img/jia2.jpg"> </li>
+                </ul>
+                <ul>
+                    <li style="padding-left: 0px;"><b>300001</b></li>
+                    <li style="padding-left: 18px;" >特锐德</li>
+                    <li><b><span style="color: #eb4636;">66.77</span></b></li>
+                    <li style="padding-left: 45px;"><b><span style="color: #eb4636;">-3.65</span></b></li>
+                    <li><b><span style="color: #eb4636;">-5.183%</span></b></li>
+                    <li><b><span style="color: #eb4636;">66.77</span></b></li>
+                    <li style="padding-left: 30px;"><b><span style="color: #eb4636;">66.78</span></b></li>
+                    <li><b><span style="color: #eb4636;">70.42</span></b></li>
+                    <li><b><span style="color: #eb4636;">74.62</span></b></li>
+                    <li><b><span style="color: #eb4636;">74.77</span></b></li>
+                    <li><b><span style="color: #eb4636;">66.50</span></b></li>
+                    <li><b>149,872</b></li>
+                    <li style="padding-left: 25px;"><b>149,872.14</b></li>
+                    <li style="padding-left: 5px; margin-top: 15px;"><img src="../../sanbufen/img/jia2.jpg"> </li>
+                </ul>
+                <ul>
+                    <li style="padding-left: 0px;"><b>300001</b></li>
+                    <li style="padding-left: 18px;" >特锐德</li>
+                    <li><b><span>66.77</span></b></li>
+                    <li style="padding-left: 45px;"><b><span>-3.65</span></b></li>
+                    <li><b><span>-5.183%</span></b></li>
+                    <li><b><span>66.77</span></b></li>
+                    <li style="padding-left: 30px;"><b><span>66.78</span></b></li>
+                    <li><b><span>70.42</span></b></li>
+                    <li><b><span>74.62</span></b></li>
+                    <li><b><span>74.77</span></b></li>
+                    <li><b><span>66.50</span></b></li>
+                    <li><b>149,872</b></li>
+                    <li style="padding-left: 25px;"><b>149,872.14</b></li>
+                    <li style="padding-left: 5px; margin-top: 15px;"><img src="../../sanbufen/img/jia2.jpg"> </li>
+                </ul>
+                <ul>
+                    <li style="padding-left: 0px;"><b>300001</b></li>
+                    <li style="padding-left: 18px;" >特锐德</li>
+                    <li><b><span style="color: #eb4636;">66.77</span></b></li>
+                    <li style="padding-left: 45px;"><b><span style="color: #eb4636;">-3.65</span></b></li>
+                    <li><b><span style="color: #eb4636;">-5.183%</span></b></li>
+                    <li><b><span style="color: #eb4636;">66.77</span></b></li>
+                    <li style="padding-left: 30px;"><b><span style="color: #eb4636;">66.78</span></b></li>
+                    <li><b><span style="color: #eb4636;">70.42</span></b></li>
+                    <li><b><span style="color: #eb4636;">74.62</span></b></li>
+                    <li><b><span style="color: #eb4636;">74.77</span></b></li>
+                    <li><b><span style="color: #eb4636;">66.50</span></b></li>
+                    <li><b>149,872</b></li>
+                    <li style="padding-left: 25px;"><b>149,872.14</b></li>
+                    <li style="padding-left: 5px; margin-top: 15px;"><img src="../../sanbufen/img/jia2.jpg"> </li>
+                </ul>
+                <ul>
+                    <li style="padding-left: 0px;"><b>300001</b></li>
+                    <li style="padding-left: 18px;" >特锐德</li>
+                    <li><b><span>66.77</span></b></li>
+                    <li style="padding-left: 45px;"><b><span>-3.65</span></b></li>
+                    <li><b><span>-5.183%</span></b></li>
+                    <li><b><span>66.77</span></b></li>
+                    <li style="padding-left: 30px;"><b><span>66.78</span></b></li>
+                    <li><b><span>70.42</span></b></li>
+                    <li><b><span>74.62</span></b></li>
+                    <li><b><span>74.77</span></b></li>
+                    <li><b><span>66.50</span></b></li>
+                    <li><b>149,872</b></li>
+                    <li style="padding-left: 25px;"><b>149,872.14</b></li>
+                    <li style="padding-left: 5px; margin-top: 15px;"><img src="../../sanbufen/img/jia2.jpg"> </li>
+                </ul>
+                <ul>
+                    <li style="padding-left: 0px;"><b>300001</b></li>
+                    <li style="padding-left: 18px;" >特锐德</li>
+                    <li><b><span>66.77</span></b></li>
+                    <li style="padding-left: 45px;"><b><span>-3.65</span></b></li>
+                    <li><b><span>-5.183%</span></b></li>
+                    <li><b><span>66.77</span></b></li>
+                    <li style="padding-left: 30px;"><b><span>66.78</span></b></li>
+                    <li><b><span>70.42</span></b></li>
+                    <li><b><span>74.62</span></b></li>
+                    <li><b><span>74.77</span></b></li>
+                    <li><b><span>66.50</span></b></li>
+                    <li><b>149,872</b></li>
+                    <li style="padding-left: 25px;"><b>149,872.14</b></li>
+                    <li style="padding-left: 5px; margin-top: 15px;"><img src="../../sanbufen/img/jia2.jpg"> </li>
+                </ul>
+                <ul>
+                    <li style="padding-left: 0px;"><b>300001</b></li>
+                    <li style="padding-left: 18px;" >特锐德</li>
+                    <li><b><span style="color: #eb4636;">66.77</span></b></li>
+                    <li style="padding-left: 45px;"><b><span style="color: #eb4636;">-3.65</span></b></li>
+                    <li><b><span style="color: #eb4636;">-5.183%</span></b></li>
+                    <li><b><span style="color: #eb4636;">66.77</span></b></li>
+                    <li style="padding-left: 30px;"><b><span style="color: #eb4636;">66.78</span></b></li>
+                    <li><b><span style="color: #eb4636;">70.42</span></b></li>
+                    <li><b><span style="color: #eb4636;">74.62</span></b></li>
+                    <li><b><span style="color: #eb4636;">74.77</span></b></li>
+                    <li><b><span style="color: #eb4636;">66.50</span></b></li>
+                    <li><b>149,872</b></li>
+                    <li style="padding-left: 25px;"><b>149,872.14</b></li>
+                    <li style="padding-left: 5px; margin-top: 15px;"><img src="../../sanbufen/img/jia2.jpg"> </li>
+                </ul>
+                <ul>
+                    <li style="padding-left: 0px;"><b>300001</b></li>
+                    <li style="padding-left: 18px;" >特锐德</li>
+                    <li><b><span style="color: #eb4636;">66.77</span></b></li>
+                    <li style="padding-left: 45px;"><b><span style="color: #eb4636;">-3.65</span></b></li>
+                    <li><b><span style="color: #eb4636;">-5.183%</span></b></li>
+                    <li><b><span style="color: #eb4636;">66.77</span></b></li>
+                    <li style="padding-left: 30px;"><b><span style="color: #eb4636;">66.78</span></b></li>
+                    <li><b><span style="color: #eb4636;">70.42</span></b></li>
+                    <li><b><span style="color: #eb4636;">74.62</span></b></li>
+                    <li><b><span style="color: #eb4636;">74.77</span></b></li>
+                    <li><b><span style="color: #eb4636;">66.50</span></b></li>
+                    <li><b>149,872</b></li>
+                    <li style="padding-left: 25px;"><b>149,872.14</b></li>
+                    <li style="padding-left: 5px; margin-top: 15px;"><img src="../../sanbufen/img/jia2.jpg"> </li>
+                </ul>
+
+            </div>-->
+            <div class="main2-center-3">
+                <p><b><a>中国银行</a>(000723)</b><a class="top" href="#">5.06<img src="../../../static/img/xiangshangjiantou.jpg"></a>
+                <span><a class="btn" id="mai" href="#">买入</a><a class="btn" id="maic" href="#">卖出</a><a class="btn" id="jia" href="#">加入自选</a> </span></p>
+            </div>
+            <div class="main2-center-4">
+                <ul>
+                    <li class="fen" ><a class="shi" href="#">分时</a> </li>
+                    <li><a href="#">五日</a> </li>
+                    <li><a href="#">一年</a> </li>
+                    <li><a href="#">日K</a> </li>
+                    <li><a href="#">周K</a> </li>
+                    <li><a href="#">月K</a> </li>
+                    <li><a href="#">5分</a> </li>
+                    <li><a href="#">15分</a> </li>
+                    <li><a href="#">30分</a> </li>
+                    <li><a href="#">60分</a> </li>
+                </ul>
+            </div>
+            <div class="main2-center-5">
+                <p><a>2015-06-15</a><a>价位：<span class="col">5.00</span></a><a>均价：<span class="colo">5.02</span></a><a>成交量：<span class="colo">498,254</span></a><a>涨幅：<span class="col">+2.71%</span></a></p>
+            </div>
+            <div class="main2-center-6">
+
+            </div>
+            <div class="main2-center-7">
+                <ul>
+                    <li class="macd"><a class="ma" href="#">MACD</a> </li>
+                    <li><a href="#">KDJ</a> </li>
+                    <li><a href="#">BOLL</a> </li>
+                    <li><a href="#">PSY</a> </li>
+                    <li><a href="#">OBV</a> </li>
+                    <li><a href="#">RSI</a> </li>
+                    <li><a href="#">WVAD</a> </li>
+                    <li><a href="#">CCI</a> </li>
+                </ul>
+            </div>
+        </div><!--中间的盒子-->
+
+        <div class="main2-right">
+            <ul>
+                <li><a href="#">>>收起行情图</a> </li>
+            </ul>
+        </div><!--右边的盒子-->
+    </div><!--上面的内容区-->
+
+
+
+
+
+    <div class="sec_main">
+        <!--左右布局-->
+
+        <div class="left_bar">
+            <input type="text" value="简称/拼音/代码">
+            <div class="left_bar_1">
+                <div class="left_bar_1_1">
+                    <p><img src="../../../static/img/zi.jpg"><a href="#">我的自选</a> </p>
+                </div>
+                <div class="left_bar_1_2">
+                    <ul>
+                        <li>名称</li>
+                        <li style="padding-left: 80px;">价格(元)</li>
+                        <li style="padding-left: 27px;">跌涨幅</li>
+                    </ul>
+                    <ul>
+                        <li><img style="margin-top: 8px;" src="../../../static/img/dian.jpg"> 平安银行</li>
+                        <li style="padding-left: 40px;"><span style="color: #eb4636;">14.40</span></li>
+                        <li style="padding-left: 40px;"><span style="color: #eb4636;">0.70%</span></li>
+                        <li style=" margin-left: 10px; margin-top:3px;width:15px; height: 15px; background-color:#DAD8D9;"><a class="btn" id="hov" href="#"><img src="../../../static/img/111.jpg"> </a> </li>
+                    </ul>
+                    <ul>
+                        <li><img style="margin-top: 8px;"  src="../../../static/img/dian.jpg"> 交运设备服务</li>
+                        <li style="padding-left: 13px;"><span style="color: #6AC007;">14.40</span></li>
+                        <li style="padding-left: 40px;"><span style="color: #6AC007;">0.70%</span></li>
+                        <li style=" margin-left: 10px; margin-top:3px;width:15px; height: 15px; background-color:#DAD8D9;"><a class="btn" id="hov" href="#"><img src="../../../static/img/111.jpg"> </a> </li>
+                    </ul>
+                    <ul>
+                        <li><img style="margin-top: 8px;"  src="../../../static/img/dian.jpg"> 平安银行</li>
+                        <li style="padding-left: 40px;"><span style="color: #eb4636;">14.40</span></li>
+                        <li style="padding-left: 40px;"><span style="color: #eb4636;">0.70%</span></li>
+                        <li style=" margin-left: 10px; margin-top:3px;width:15px; height: 15px; background-color:#DAD8D9;"><a class="btn" id="hov" href="#"><img src="../../../static/img/111.jpg"> </a> </li>
+                    </ul>
+                    <ul>
+                        <li><img style="margin-top: 8px;" src="../../../static/img/dian.jpg"> 交运设备服务</li>
+                        <li style="padding-left: 13px;"><span style="color: #6AC007;">14.40</span></li>
+                        <li style="padding-left: 40px;"><span style="color: #6AC007;">0.70%</span></li>
+                        <li style=" margin-left: 10px; margin-top:3px;width:15px; height: 15px; background-color:#DAD8D9;"><a class="btn" id="hov" href="#"><img src="../../../static/img/111.jpg"> </a> </li>
+                    </ul>
+                    <ul>
+                        <li><img style="margin-top: 8px;" src="../../../static/img/dian2.jpg"> 平安银行</li>
+                        <li style="padding-left: 40px;"><span style="color: #eb4636;">14.40</span></li>
+                        <li style="padding-left: 40px;"><span style="color: #eb4636;">0.70%</span></li>
+                        <li style=" margin-left: 10px; margin-top:3px;width:15px; height: 15px; background-color:#DAD8D9;"><a class="btn" id="hov" href="#"><img src="../../../static/img/111.jpg"> </a> </li>
+                    </ul>
+                    <ul>
+                        <li><img style="margin-top: 8px;"  src="../../../static/img/dian2.jpg"> 交运设备服务</li>
+                        <li style="padding-left: 13px;"><span style="color: #6AC007;">14.40</span></li>
+                        <li style="padding-left: 40px;"><span style="color: #6AC007;">0.70%</span></li>
+                        <li style=" margin-left: 10px; margin-top:3px;width:15px; height: 15px; background-color:#DAD8D9;"><a class="btn" id="hov" href="#"><img src="../../../static/img/111.jpg"> </a> </li>
+                    </ul>
+                    <ul>
+                        <li><img style="margin-top: 8px;" src="../../../static/img/dian.jpg"> 平安银行</li>
+                        <li style="padding-left: 40px;"><span style="color: #eb4636;">14.40</span></li>
+                        <li style="padding-left: 40px;"><span style="color: #eb4636;">0.70%</span></li>
+                        <li style=" margin-left: 10px; margin-top:3px;width:15px; height: 15px; background-color:#DAD8D9;"><a class="btn" id="hov" href="#"><img src="../../../static/img/111.jpg"> </a> </li>
+                    </ul>
+                    <ul>
+                        <li><img style="margin-top: 8px;"  src="../../../static/img/dian.jpg"> 交运设备服务</li>
+                        <li style="padding-left: 13px;"><span style="color: #6AC007;">14.40</span></li>
+                        <li style="padding-left: 40px;"><span style="color: #6AC007;">0.70%</span></li>
+                        <li style=" margin-left: 10px; margin-top:3px;width:15px; height: 15px; background-color:#DAD8D9;"><a class="btn" id="hov" href="#"><img src="../../../static/img/111.jpg"> </a> </li>
+                    </ul>
+                    <ul>
+                        <li><img style="margin-top: 8px;" src="../../../static/img/dian.jpg"> 平安银行</li>
+                        <li style="padding-left: 40px;"><span style="color: #eb4636;">14.40</span></li>
+                        <li style="padding-left: 40px;"><span style="color: #eb4636;">0.70%</span></li>
+                        <li style=" margin-left: 10px; margin-top:3px;width:15px; height: 15px; background-color:#DAD8D9;"><a class="btn" id="hov" href="#"><img src="../../../static/img/111.jpg"> </a> </li>
+                    </ul>
+                    <ul>
+                        <li><img style="margin-top: 8px;"  src="../../../static/img/dian.jpg"> 交运设备服务</li>
+                        <li style="padding-left: 13px;"><span style="color: #6AC007;">14.40</span></li>
+                        <li style="padding-left: 40px;"><span style="color: #6AC007;">0.70%</span></li>
+                        <li style=" margin-left: 10px; margin-top:3px;width:15px; height: 15px; background-color:#DAD8D9;"><a class="btn" id="hov" href="#"><img src="../../../static/img/111.jpg"> </a> </li>
+                    </ul>
+                    <ul>
+                        <li><img style="margin-top: 8px;" src="../../../static/img/dian2.jpg"> 平安银行</li>
+                        <li style="padding-left: 40px;"><span style="color: #eb4636;">14.40</span></li>
+                        <li style="padding-left: 40px;"><span style="color: #eb4636;">0.70%</span></li>
+                        <li style=" margin-left: 10px; margin-top:3px;width:15px; height: 15px; background-color:#DAD8D9;"><a class="btn" id="hov" href="#"><img src="../../../static/img/111.jpg"> </a> </li>
+                    </ul>
+                    <ul>
+                        <li><img style="margin-top: 8px;"  src="../../../static/img/dian2.jpg"> 交运设备服务</li>
+                        <li style="padding-left: 13px;"><span style="color: #6AC007;">14.40</span></li>
+                        <li style="padding-left: 40px;"><span style="color: #6AC007;">0.70%</span></li>
+                        <li style=" margin-left: 10px; margin-top:3px;width:15px; height: 15px; background-color:#DAD8D9;"><a class="btn" id="hov" href="#"><img src="../../../static/img/111.jpg"> </a> </li>
+                    </ul>
+                </div>
+                <div class="left_bar_1_1">
+                    <p><img src="../../../static/img/gupiao.jpg"><a href="#">热门股票</a> </p>
+                </div>
+                <div class="left_bar_1_2">
+                    <ul>
+                        <li>名称</li>
+                        <li style="padding-left: 80px;">价格(元)</li>
+                        <li style="padding-left: 27px;">跌涨幅</li>
+                    </ul>
+                    <ul>
+                        <li><img style="margin-top: 8px;" src="../../../static/img/dian.jpg"> 平安银行</li>
+                        <li style="padding-left: 40px;"><span style="color: #eb4636;">14.40</span></li>
+                        <li style="padding-left: 40px;"><span style="color: #eb4636;">0.70%</span></li>
+                        <li><a class="btn" id="hov" href="#"><img src="../../../static/img/222.jpg"> </a> </li>
+                    </ul>
+                    <ul>
+                        <li><img style="margin-top: 8px;"  src="../../../static/img/dian.jpg"> 交运设备服务</li>
+                        <li style="padding-left: 13px;"><span style="color: #6AC007;">14.40</span></li>
+                        <li style="padding-left: 40px;"><span style="color: #6AC007;">0.70%</span></li>
+                        <li><a class="btn" id="hov" href="#"><img src="../../../static/img/222.jpg"> </a> </li>
+                    </ul>
+                    <ul>
+                        <li><img style="margin-top: 8px;" src="../../../static/img/dian.jpg"> 平安银行</li>
+                        <li style="padding-left: 40px;"><span style="color: #eb4636;">14.40</span></li>
+                        <li style="padding-left: 40px;"><span style="color: #eb4636;">0.70%</span></li>
+                        <li><a class="btn" id="hov" href="#"><img src="../../../static/img/222.jpg"> </a> </li>
+                    </ul>
+                    <ul>
+                        <li><img style="margin-top: 8px;"  src="../../../static/img/dian.jpg"> 交运设备服务</li>
+                        <li style="padding-left: 13px;"><span style="color: #6AC007;">14.40</span></li>
+                        <li style="padding-left: 40px;"><span style="color: #6AC007;">0.70%</span></li>
+                        <li><a class="btn" id="hov" href="#"><img src="../../../static/img/222.jpg"> </a> </li>
+                    </ul>
+                    <ul>
+                        <li><img style="margin-top: 8px;" src="../../../static/img/dian.jpg"> 平安银行</li>
+                        <li style="padding-left: 40px;"><span style="color: #eb4636;">14.40</span></li>
+                        <li style="padding-left: 40px;"><span style="color: #eb4636;">0.70%</span></li>
+                        <li><a class="btn" id="hov" href="#"><img src="../../../static/img/222.jpg"> </a> </li>
+                    </ul>
+                    <ul>
+                        <li><img style="margin-top: 8px;" src="../../../static/img/dian2.jpg"> 交运设备服务</li>
+                        <li style="padding-left: 13px;"><span style="color: #eb4636;">14.40</span></li>
+                        <li style="padding-left: 40px;"><span style="color: #eb4636;">0.70%</span></li>
+                        <li><a class="btn" id="hov" href="#"><img src="../../../static/img/222.jpg"> </a> </li>
+                    </ul>
+                    <ul>
+                        <li><img style="margin-top: 8px;"  src="../../../static/img/dian2.jpg"> 交运设备服务</li>
+                        <li style="padding-left: 13px;"><span style="color: #6AC007;">14.40</span></li>
+                        <li style="padding-left: 40px;"><span style="color: #6AC007;">0.70%</span></li>
+                        <li><a class="btn" id="hov" href="#"><img src="../../../static/img/333.jpg"> </a> </li>
+                    </ul>
+                    <ul>
+                        <li><img style="margin-top: 8px;"  src="../../../static/img/dian.jpg"> 交运设备服务</li>
+                        <li style="padding-left: 13px;"><span style="color: #6AC007;">14.40</span></li>
+                        <li style="padding-left: 40px;"><span style="color: #6AC007;">0.70%</span></li>
+                        <li><a class="btn" id="hov" href="#"><img src="../../../static/img/222.jpg"> </a> </li>
+                    </ul>
+                    <ul>
+                        <li><img style="margin-top: 8px;" src="../../../static/img/dian.jpg"> 平安银行</li>
+                        <li style="padding-left: 40px;"><span style="color: #eb4636;">14.40</span></li>
+                        <li style="padding-left: 40px;"><span style="color: #eb4636;">0.70%</span></li>
+                        <li><a class="btn" id="hov" href="#"><img src="../../../static/img/222.jpg"> </a> </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+        <div class="right_bar">
+            <div class="right_bar_1">
+                <ul>
+                    <li><span>操作账户</span></li>
+                    <li>22550006</li>
+                    <li><span>22550007</span></li>
+                    <li>22550009</li>
+                    <li>22550010</li>
+                    <li>22550020</li>
+                    <li>22550020</li>
+                </ul>
+                <a class="btn" href="#">></a>
+
+
+            </div><!--一个多余的盒子一行字的盒子-->
+            <div class="right_bar_left">
+                <p>可用<span style="color: #eb4636;">50000000.25</span>元</p>
+
+                <div class="right_bar_left_1">
+                    <div class="right_bar_left_1_1">
+                        <input style="margin-left: 0px;" type="text" value="000723"><span>平安银行</span></div>
+                    <div class="right_bar_left_1_2">
+                        <input style="color: #999999;" type="text" value="证券代码"><span>股票名称</span></div>
+                    <div style="margin-top: 25px;" class="right_bar_left_1_1">
+                        <input style="margin-left: 0px;" type="text" value="17.20"><span>元</span></div>
+                    <div style="margin-top: 25px;" class="right_bar_left_1_2">
+                        <input style="color: #999999;" type="text" value="卖出价格"><span>元</span></div>
+                    <div style="margin-top: 25px;" class="right_bar_left_1_1">
+                        <input style="margin-left: 0px;" type="text" value="25000"><span>可卖50000</span></div>
+                    <div style="margin-top: 25px;" class="right_bar_left_1_2">
+                        <input style="color: #999999;" type="text" value="卖出数量"></div>
+
+                    <ul>
+                        <li style="margin-left: 0px;"><a class="btn" id="hov" href="#">全部</a> </li>
+                        <li><a style="background-color: #0088cc; color: #fff;" class="btn" id="hov" href="#">2/1</a> </li>
+                        <li><a class="btn" id="hov" href="#">3/1</a> </li>
+                        <li><a class="btn" id="hov" href="#">4/1</a> </li>
+                    </ul>
+                    <ul>
+                        <li style="margin-left: 25px;"><a class="btn" id="hov" href="#">全部</a> </li>
+                        <li><a class="btn" id="hov" href="#">2/1</a> </li>
+                        <li><a class="btn" id="hov" href="#">3/1</a> </li>
+                        <li><a class="btn" id="hov" href="#">4/1</a> </li>
+                    </ul>
+
+
+                </div><!--右边盒子左边的上边的第一个-->
+                <div class="right_bar_left_2">
+                    <p><input style="margin-left: 0px;" type="text"  value="安全密码"><input type="text" value="输入密码"></p>
+                </div><!--右边的盒子的左边的第二个-->
+                <div class="right_bar_left_3">
+                    <ul>
+                        <li style="margin-left: 0px;"><a class="btn" href="#">买入</a> </li>
+                        <li><a style="background-color: #6CBF0B;" class="btn" href="#">卖出</a> </li>
+                    </ul>
+                </div>
+                <div class="right_bar_left_4">
+                    <ul>
+                        <li style="padding-left: 30px;"><a class="hov" style="color: #000;" href="#">持仓</a> </li>
+                        <li><a class="hov" href="#">委托</a> </li>
+                        <li><a class="hov" href="#">提交</a> </li>
+                    </ul>
+                </div>
+                <div class="right_bar_left_5">
+                    <ul>
+                        <li>代码</li>
+                        <li style="padding-left: 50px;">股票名称</li>
+                        <li style="padding-left: 45px;">类型</li>
+                        <li style="padding-left: 45px;">数量</li>
+                        <li style="padding-left: 45px;">价格</li>
+                        <li style="padding-left: 60px;">成本</li>
+                        <li style="padding-left: 45px;">盈亏</li>
+                        <li style="padding-left: 20px;">盈亏比</li>
+                        <li style="padding-left: 23px;">操作</li>
+                    </ul>
+                </div>
+                <div class="right_bar_left_6">
+                    <ul>
+                        <li style="padding-left: 0px;"><b>000004</b></li>
+                        <li style="padding-left: 22px;">国家科技</li>
+                        <li style="padding-left: 47px;"><span style="color:#6BC00D;">卖出</span></sp></li>
+                        <li>600</li>
+                        <li>25.24</li>
+                        <li style="padding-left: 57px;">25.18</li>
+                        <li>25</li>
+                        <li style="padding-left:25px;">25%</li>
+                        <li style="padding-left: 35px;"><b><span style="color: #48A9EE;">全部平仓</span></b></li>
+                    </ul>
+                    <ul>
+                        <li style="padding-left: 0px;"><b>000004</b></li>
+                        <li style="padding-left: 22px;">国家科技</li>
+                        <li style="padding-left: 47px;"><span style="color:#6BC00D;">卖出</span></sp></li>
+                        <li>600</li>
+                        <li>25.24</li>
+                        <li style="padding-left: 57px;">25.18</li>
+                        <li>25</li>
+                        <li style="padding-left:25px;">25%</li>
+                        <li style="padding-left: 35px;"><b><span style="color: #48A9EE;">全部平仓</span></b></li>
+                    </ul>
+                    <ul>
+                        <li style="padding-left: 0px;"><b>000004</b></li>
+                        <li style="padding-left: 22px;">国家科技</li>
+                        <li style="padding-left: 47px;"><span style="color:#eb4636;">卖入</span></sp></li>
+                        <li>600</li>
+                        <li>25.24</li>
+                        <li style="padding-left: 57px;">25.18</li>
+                        <li>25</li>
+                        <li style="padding-left:25px;">25%</li>
+                        <li style="padding-left: 35px;"><b><span style="color: #48A9EE;">全部平仓</span></b></li>
+                    </ul>
+                    <ul>
+                        <li style="padding-left: 0px;"><b>000004</b></li>
+                        <li style="padding-left: 22px;">国家科技</li>
+                        <li style="padding-left: 47px;"><span style="color:#6BC00D;">卖出</span></sp></li>
+                        <li>600</li>
+                        <li>25.24</li>
+                        <li style="padding-left: 57px;">25.18</li>
+                        <li>25</li>
+                        <li style="padding-left:25px;">25%</li>
+                        <li style="padding-left: 35px;"><b><span style="color: #48A9EE;">全部平仓</span></b></li>
+                    </ul>
+                    <ul>
+                        <li style="padding-left: 0px;"><b>000004</b></li>
+                        <li style="padding-left: 22px;">国家科技</li>
+                        <li style="padding-left: 47px;"><span style="color:#eb4636;">卖入</span></sp></li>
+                        <li>600</li>
+                        <li>25.24</li>
+                        <li style="padding-left: 57px;">25.18</li>
+                        <li>25</li>
+                        <li style="padding-left:25px;">25%</li>
+                        <li style="padding-left: 35px;"><b><span style="color: #48A9EE;">全部平仓</span></b></li>
+                    </ul>
+                    <ul>
+                        <li style="padding-left: 0px;"><b>000004</b></li>
+                        <li style="padding-left: 22px;">国家科技</li>
+                        <li style="padding-left: 47px;"><span style="color:#eb4636;">卖入</span></sp></li>
+                        <li>600</li>
+                        <li>25.24</li>
+                        <li style="padding-left: 57px;">25.18</li>
+                        <li>25</li>
+                        <li style="padding-left:25px;">25%</li>
+                        <li style="padding-left: 35px;"><b><span style="color: #48A9EE;">全部平仓</span></b></li>
+                    </ul>
+                    <ul>
+                        <li style="padding-left: 0px;"><b>000004</b></li>
+                        <li style="padding-left: 22px;">国家科技</li>
+                        <li style="padding-left: 47px;"><span style="color:#6BC00D;">卖出</span></sp></li>
+                        <li>600</li>
+                        <li>25.24</li>
+                        <li style="padding-left: 57px;">25.18</li>
+                        <li>25</li>
+                        <li style="padding-left:25px;">25%</li>
+                        <li style="padding-left: 35px;"><b><span style="color: #48A9EE;">全部平仓</span></b></li>
+                    </ul>
+
+                </div>
+            </div><!--右边盒子的左边-->
+
+            <div class="right_bar_right">
+                <p style="padding-left: 30px;"><b><a href="#">平安银行  168168</a> </b></p>
+                <div class="right_bar_right_1">
+                    <ul>
+                        <li>卖5</li>
+                        <li>卖4</li>
+                        <li>卖3</li>
+                        <li>卖2</li>
+                        <li>卖1</li>
+
+                        <li style="padding-top: 20px;">买1</li>
+                        <li>买2</li>
+                        <li>买3</li>
+                        <li>买4</li>
+                        <li>买5</li>
+                    </ul>
+                    <ul style="padding-left: 45px;">
+                        <li><span>17.20</span></li>
+                        <li><span>17.20</span></li>
+                        <li><span>17.20</span></li>
+                        <li><span>17.20</span></li>
+                        <li><span>17.20</span></li>
+                        <li style="padding-top: 20px;"><span style="color: #eb4636;">17.20</span></li>
+                        <li><span style="color: #eb4636;">17.20</span></li>
+                        <li><span style="color: #eb4636;">17.20</span></li>
+                        <li><span style="color: #eb4636;">17.20</span></li>
+                        <li><span style="color: #eb4636;">17.20</span></li>
+                    </ul>
+                    <ul style="padding-left: 45px;">
+                        <li>66</li>
+                        <li>66</li>
+                        <li>66</li>
+                        <li>66</li>
+                        <li>66</li>
+                        <li style="padding-top: 20px;">66</li>
+                        <li>66</li>
+                        <li>66</li>
+                        <li>66</li>
+                        <li>66</li>
+                    </ul>
+                    <ul style="width: 24px; height: 95px; background-color: #0088cc; float: right; margin-top: 0px;">
+                        <li style="line-height: 15px;"><a style="color: #fff; font-size: 14px;">展</a> </li>
+                        <li style="line-height:15px;"><a style="color: #fff; font-size: 14px;">开</a> </li>
+                        <li style="line-height:15px;"><a style="color: #fff; font-size: 14px;">行</a> </li>
+                        <li style="line-height: 15px;"><a style="color: #fff; font-size: 14px;" >情</a> </li>
+                        <li style="line-height: 15px;"><a style="color: #fff; font-size: 14px;">图</a> </li>
+                        <li style="line-height: 15px;"><a style="color: #fff; font-size: 14px;" href="#">>></a> </li>
+                    </ul>
+                </div>
+                <div class="right_bar_right_2">
+                    <ul>
+                        <li>最新<b><span style="color: #eb4636;">17.15</span></b></li>
+                        <li>最高<b><span>90</span></b></li>
+                        <li>涨跌<b><span style="color: #eb4636;">8.52</span></b></li>
+                        <li>涨幅<b><span style="color: #eb4636;">10.25%</span></b></li>
+                        <li>现手<b><span>610</span></b></li>
+                        <li>涨停<b><span style="color: #eb4636;">18.22</span></b></li>
+                        <li>外盘<b><span>4.15万</span></b></li>
+                    </ul>
+                    <ul style="padding-left: 35px;">
+                        <li>开盘<b><span>17.15</span></b></li>
+                        <li>最低<b><span>81.25</span></b></li>
+                        <li>金额<b><span>800.25亿</span></b></li>
+                        <li>振幅<b><span>10.69%</span></b></li>
+                        <li>总手<b><span>78.2万</span></b></li>
+                        <li>跌停<b><span style="color: #29B204;">12.25</span></b></li>
+                        <li>内盘<b><span>3.02万</span></b></li>
+                    </ul>
+                </div>
+                <div class="right_bar_right_3">
+                    <ul style="padding-left: 0px;">
+                        <li>14:54</li>
+                        <li>14:54</li>
+                        <li>14:54</li>
+                        <li>14:54</li>
+                        <li>14:54</li>
+                        <li>14:54</li>
+                        <li>14:54</li>
+                        <li>14:54</li>
+                        <li>14:54</li>
+                        <li>14:54</li>
+                    </ul>
+                    <ul>
+                        <li>17.12</li>
+                        <li>17.12</li>
+                        <li>17.12</li>
+                        <li>17.12</li>
+                        <li>17.12</li>
+                        <li>17.12</li>
+                        <li>17.12</li>
+                        <li>17.12</li>
+                        <li>17.12</li>
+                        <li>17.12</li>
+                    </ul>
+                    <ul>
+                        <li><span>10</span><img src="../../../static/img/shang.jpg"> </li>
+                        <li><span>10</span><img src="../../../static/img/shang.jpg"> </li>
+                        <li><span>10</span><img src="../../../static/img/shang.jpg"> </li>
+                        <li><span>10</span><img src="../../../static/img/shang.jpg"> </li>
+                        <li><span style="color: #29B204;">38</span><img src="../../../static/img/xia.jpg"> </li>
+                        <li><span>10</span><img src="../../../static/img/shang.jpg"> </li>
+                        <li><span>10</span><img src="../../../static/img/shang.jpg"> </li>
+                        <li><span>10</span><img src="../../../static/img/shang.jpg"> </li>
+                        <li><span>10</span><img src="../../../static/img/shang.jpg"> </li>
+                        <li><span>10</span><img src="../../../static/img/shang.jpg"> </li>
+                    </ul>
+
+                </div>
+            </div><!--右边盒子的右边-->
+        </div><!--整个右边的盒子-->
+
+
+    </div>
+
+</div>
+
+
+<!--底部-->
+<div id="footer">
+    <div class="w">
+        <p class="nav_sub"><a href="">关于我们</a>|<a href="">服务条款</a>|<a href="">帮助中心</a></p>
+        <p class="server"> <i class="icons icon_qq"></i>官方QQ群4006660888 &nbsp;| <i class="icons icon_tel"></i>24小时服务电话4000-898-000</p>
+        <p class="server2">
+            <a class="weixin"><i class="icons icon_weixin"><span></span></i></a>
+            <a href="#"><i class="icons icon_weibo"> </i></a>
+        </p>
+        <p>版权所有 © 北京朋乐投资管理有限公司 丨 京ICP备15016693号</p>
+    </div>
+</div>
+</body>
+</html>

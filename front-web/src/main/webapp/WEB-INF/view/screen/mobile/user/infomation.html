@@ -1,0 +1,44 @@
+<#assign bg="bg-gray"/>
+<#assign controller="infomation"/> 
+<#assign title="融资"/>
+<#assign header="融资"/>
+<#assign footer="1"/>
+<#include 'mobile/layout/layout.html'/>
+
+<#macro headerContent>
+<!--tab-->
+<div class="navi-container bg-gray">
+<ul class="listTab listTab-2 listLateral">
+<li class="listTab-item active"><a href="###">操盘中</a></li>
+<li class="listTab-item"><a href="###">已结束</a></li>
+</ul>
+</div>
+<!--tab-->
+</#macro>
+
+<#macro content>
+
+<!--下部-->
+<article class="content" style="padding-top:53px;" id="content">
+<div class="con-spacing15 con-prompt" style="display: none;" id="noPzPanel">
+<!--提示-->
+<p><span>您暂时还没有任何融资</span></p>
+        
+
+<!--提示-->
+
+
+<!--按钮-->
+<div class="btn-page btn-page-center con-spacing15">
+        <a href="../capital/index.html" class="am-button am-button-red">
+        <span class="am-ft-white">去融资</span>
+        </a>
+        
+</div>
+<!--按钮-->
+
+</div>
+
+</article>
+</#macro>
+

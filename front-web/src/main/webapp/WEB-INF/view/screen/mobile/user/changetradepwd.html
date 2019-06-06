@@ -1,0 +1,85 @@
+<#assign title="修改安全密码"/>
+<#assign header="修改安全密码"/>
+<#assign bg="bg-gray"/>
+<#assign controller="changetradepwd"/>
+<#include 'mobile/layout/layout.html'/>
+<#macro content>
+
+<article class="content" style="padding-bottom:60px;">
+<!--表单-->
+<aside class="con-frame">
+<ul class="datalist">
+<li class="datalist-item clearfix">
+<div class="am-grid datalist-line">
+        <div class="am-grid-item am-grid-item-25  am-ft-right">
+        <h4 class="am-ft-md cm-left">手机号</h4>
+        </div>
+        <div class="am-grid-item am-grid-item-75 am-ft-left am-left-10">
+        <b class="am-ft-xl" id="userName"></b>
+        </div>
+</div>
+</li>
+<li class="datalist-item clearfix">
+<div class="am-grid datalist-line">
+        <div class="am-grid-item am-grid-item-25  am-ft-right">
+        <h4 class="am-ft-md cm-left">旧密码</h4>
+        </div>
+        <div class="am-grid-item am-grid-item-75 am-ft-left am-left-10">
+        <span class="ui-form-field">
+<input id="old_trade_pwd" type="password" class="text_input" maxlength="18" defaultvalue="输入密码" value="" placeholder="输入密码">
+</span>
+<p class="f-right"></p>
+</div>
+</div>
+</li>
+
+<li class="datalist-item clearfix">
+<div class="am-grid datalist-line">
+        <div class="am-grid-item am-grid-item-25  am-ft-right">
+        <h4 class="am-ft-md cm-left">新密码</h4>
+        </div>
+        <div class="am-grid-item am-grid-item-75 am-ft-left am-left-10">
+        <span class="ui-form-field">
+<input id="new_trade_pwd" type="password" class="text_input" maxlength="18" defaultvalue="输入密码" value="" placeholder="输入密码">
+</span>
+<p class="f-right"></p>
+</div>
+</div>
+</li>
+
+<li class="datalist-item clearfix">
+<div class="am-grid datalist-line">
+        <div class="am-grid-item am-grid-item-25  am-ft-right">
+        <h4 class="am-ft-md cm-left">确认密码</h4>
+        </div>
+        <div class="am-grid-item am-grid-item-75 am-ft-left am-left-10">
+        <span class="ui-form-field"> 
+<input id="new_trade_pwd2" type="password" class="text_input" maxlength="18" defaultvalue="输入密码" value="" placeholder="输入密码">
+</span>
+<p class="f-right"></p>
+</div>
+</div>
+</li>
+</ul>
+</aside>
+
+
+
+
+
+
+</article>
+
+
+
+<div class="am-footer am-footerBtn-one">
+<!--按钮-->
+<div class="btn-page btn-page-center bg-white con-spacing15">
+        <a id="reset_submit" class="am-button am-button-red">
+        <span>提交</span>
+        </a>
+        
+</div>
+<!--按钮-->
+</div>
+</#macro>

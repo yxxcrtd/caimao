@@ -1,0 +1,269 @@
+<#assign title="展期"/> 
+<#assign header="展期"/> 
+<#assign footer="1"/>
+<#assign bg="bg-white"/> 
+<#assign controller="extension"/> 
+<#include 'mobile/layout/layout.html'/>
+ <#macro headerContent>
+<!--流程-->
+<div class="navi-container bg-gray" >
+
+
+	<ol class="ui-step ui-step-3" id="ol_steps">
+		<li class="ui-step-start ui-step-active">
+			<div class="ui-step-line">-</div>
+			<div class="ui-step-icon">
+				<i class="iconfont"></i> <i class="ui-step-number">1</i> <span
+					class="ui-step-text">申请展期</span>
+			</div>
+		</li>
+
+		<li>
+			<div class="ui-step-line">-</div>
+			<div class="ui-step-icon">
+				<i class="iconfont"></i> <i class="ui-step-number">2</i> <span
+					class="ui-step-text">支付利息</span>
+			</div>
+		</li>
+
+
+		<li class="ui-step-end">
+			<div class="ui-step-line">-</div>
+			<div class="ui-step-icon">
+				<i class="iconfont"></i> <i class="ui-step-number">3</i> <span
+					class="ui-step-text">申请成功</span>
+			</div>
+		</li>
+	</ol>
+</div>
+<!--流程-->
+</#macro> <#macro content>
+
+<!--下部-->
+<article  id = "panel1" class="content" style="padding-top: 118px; padding-bottom: 118px;">
+	<a class="am-ft-main"> <!--合同号-->
+		<div class="contractNum bg-gray con-spacing10 clearfix">
+			<p class="cm-left contractNum-month">
+				<mark class="label">月融资</mark>
+				<b class="am-left-10" id="contractNo"></b>
+			</p>
+			<p class="cm-right">
+				<span class="am-ft-sm am-ft-gray">开始<em class="bar">|</em></span><span
+					id="contractBeginDate" class="am-ft-sm am-ft-gray"> </span>
+			</p>
+		</div> <!--合同--> <!--金额-->
+		<dl class="dl-moneyMain bg-white">
+			<dt>
+				<p>
+					<b id="allAmount"></b><span class="am-ft-sm">元</span>
+				</p>
+				<p class="am-pt-5">
+					<span class="am-ft-sm am-ft-tabText">总操盘资产</span>
+				</p>
+			</dt>
+			<dt>
+				<p>
+					<b id="cashAmount"></b><span class="am-ft-sm">元</span>
+				</p>
+				<p class="am-pt-5">
+					<span class="am-ft-sm am-ft-tabText">保证金</span>
+				</p>
+			</dt>
+			<dt>
+				<p>
+					<b id="interestRate"></b><span class="am-ft-sm">元/月</span>
+				</p>
+				<p class="am-pt-5">
+					<span class="am-ft-sm am-ft-tabText">利率</span>
+				</p>
+			</dt>
+		</dl> <!--金额-->
+	</a>
+
+	<aside class="con-spacing15 am-mt-20">
+		<h4 class="am-ft-md">使用期限</h4>
+		<div class="am-flexbox am-mt-10 select-container">
+			<a  id="loan_term_select" class="select-choice"><span class="am-ft-md am-left-15"
+				id="selectedTerm">1个月</span><i class="type-ico am-icon-arrow-bottom"></i></a>
+			<ul class="select-results" id="loan_term" style="display: none;">
+
+			</ul>
+		</div>
+	</aside>
+
+	<div class="bg-gray con-spacing15 am-mt-15 lineTop-gray">
+		<dl class="dl-capitalInfo">
+			<dt class="dl-capitalInfo-item">
+				<h4>月利率</h4>
+				<div class="clearfix pt">
+					<div class="cm-left text-left">
+						<span class="am-ft-orange" id="interestRateNew"></span><span>分/月</span>
+					</div>
+					<div class="cm-left">
+						<span class="am-ft-gray am-ft-sm">即每1万元每月</span><span
+							class="am-ft-orange" id="interestRate100New"></span>元
+					</div>
+				</div>
+			</dt>
+		</dl>
+	</div>
+
+
+</article>
+
+
+<article id="panel2" class="content"
+	style="padding-top: 118px;">
+	<div class="con-spacing15 con-prompt">
+		<!--提示-->
+		
+	
+		
+		<div>
+			<p>
+				<span>支付下月利息 <span class="am-ft-orange"
+					id="interestRateAmount"></span>元
+				</span>
+			</p>
+		</div>
+
+		<div id="trustPanel">
+			<p>
+				<a href="${basePath}/mobile/user/certification.htm?tg=${basePath}/mobile/extension.htm">立即实名认证</a>
+			</p>
+		</div>
+		
+		
+		<div id="selfDetail">
+			<p class="am-ft-gray">
+			可用余额 <b class="am-ft-main"><span id="selfAccount"></span></b> 元
+			</p>
+			
+			<div class="con-spacing10">
+				<aside class="con-frame">
+					<ul class="datalist datalist-password">
+						<li class="datalist-item clearfix">
+							<div class="am-grid datalist-line">
+								<div class="am-grid-item am-grid-item-25  am-ft-right">
+									<h4 class="am-ft-md cm-left" id="riskValue">安全密码</h4>
+								</div>
+								<div
+									class="am-grid-item am-grid-item-75 am-ft-right am-right-15">
+									<span class="ui-form-field"> <input type="password"
+										class="text_input" maxlength="18" id="password" placeholder="输入安全密码" />
+									</span>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</aside>
+			</div>
+		</div>
+
+		<div id="selfPass">
+			<p class="am-ft-gray">
+				可用余额 <b class="am-ft-main"><span id="selfAccount1"></span></b> 元,还差 <b
+					class="am-ft-main"><span id="lackAccount"></span></b> 元
+			</p>
+			<p>
+				<a href="${basePath}/mobile/account/recharge.htm?tg=${basePath}/mobile/extension.htm">立即充值</a>
+			</p>
+		</div>
+
+
+
+		<!--提示-->
+
+
+		<!--按钮-->
+		<div id="addBtn2" class="btn-page btn-page-center con-spacing15">
+			<a  class="am-button am-button-red"> <span
+				class="am-ft-white">确认展期</span>
+			</a>
+
+		</div>
+		<!--按钮-->
+	</div>
+
+
+
+</article>
+
+<div id="panel3">
+	<article class="content"
+		style="padding-top: 118px;">
+		<div class="con-spacing15 con-prompt">
+			<!--提示-->
+			<p>
+				<i class="icon-prompt icon-prompt-error"></i>
+			</p>
+			<p>
+				<span>很抱歉，申请失败啦！</span>
+			</p>
+			<p class="am-ft-gray">
+				<span class="am-ft-sm" id="errMsg"></span>
+			</p>
+
+
+			<!--提示-->
+
+
+			<!--按钮-->
+			<div class="btn-page btn-page-center con-spacing15">
+				<a href="${basePath}/mobile/user/contracts.htm" class="am-button am-button-red">
+			<span class="am-ft-white">合约详情</span>
+			</a>
+
+			</div>
+			<!--按钮-->
+		</div>
+
+
+
+	</article>
+</div>
+<!--实名认证页面结束 -->
+<!--  申请成功开始-->
+
+<div class="con-spacing15 con-prompt" id="panel4" style="padding-top: 118px;">
+	<!--提示-->
+	<p>
+		<i class="icon-prompt icon-prompt-wait"></i>
+	</p>
+	<p>
+		<span>融资展期申请已成功提交</span>
+	</p>
+	<p class="am-ft-gray">
+		<span class="am-ft-sm">申请正在紧张处理，请耐心等待</span>
+	</p>
+
+
+	<!--提示-->
+
+
+	<!--按钮-->
+	<div class="btn-page btn-page-center con-spacing15">
+		<a href="${basePath}/mobile/user/contracts.htm" class="am-button am-button-red">
+			<span class="am-ft-white">合约详情</span>
+		</a>
+
+	</div>
+	<!--按钮-->
+
+	<p class="am-ft-sm phone">
+		如有疑问请拨打客服电话: <#include 'mobile/component/phonePanel.html'/>
+	</p>
+</div>
+<!-- 申请 成功结束 -->
+</article>
+</#macro> <#macro footerContent>
+
+<!--按钮-->
+<div 
+	class="btn-page btn-page-center bg-white con-spacing15">
+	<a class="am-button am-button-red" id="addBtn1"> <span class="am-ft-white">我要展期</span>
+	</a>
+</div>
+<!--按钮-->
+
+</#macro>

@@ -1,0 +1,38 @@
+<#list req.items as contract>
+<div class="right_bar_2" no="${contract.contractNo}">
+	<div class="right_bar_2_left">
+		<p>
+			按月融资 ${contract.contractNo}<a>${(contract.contractType=="0")?string('主合约','子合约')}</a><span>可用余额</span>
+		</p>
+	</div>
+	<div class="right_bar_2_right">
+		<p>
+			发起时间：${contract.contractBeginDate?string("yyyy-MM-dd HH:mm:ss")}<a href="#"><span>查看详情</span></a>
+		</p>
+	</div>
+</div>
+<div class="right_bar_3">
+	<ul class="my_asset asset_in">
+		<li>总操盘资产<b>${(list[contract_index].totalAsset/100)?string(",##0.##")}</b></li>
+		<li>股票市值<b>${(list[contract_index].totalMarketValue/100)?string(",##0.##")}</b></li>
+		<li>可用金额<b> ${(list[contract_index].enableWithdraw/100)?string(",##0.##")}</b></li>
+		<li>亏损警告线<b> ${((list[contract_index].homs.enableRatio * list[contract_index].loanAmount)/100)?string(",##0.##")}</b></li>
+		<li>亏损平仓线<b>${((list[contract_index].homs.exposureRatio * list[contract_index].loanAmount)/100)?string(",##0.##")}</b></li>
+		<li>浮动盈亏<b class="font_red"> ${(list[contract_index].totalProfit/100)?string(",##0.##")}</b></li>
+	</ul>
+	<ul class="my_asset asset_in m_b_15">
+		<li>借款金额<b>${(contract.loanAmount/100)?string(",##0.##")}</b></li>
+		<li>保证金<b>${(contract.cashAmount/100)?string(",##0.##")}</b></li>
+		<li>费用<b>${((contract.interestRate*contract.loanAmount)/100)?string(",##0.##")}</b></li>
+		<li>到期日<b>${(contract.contractStopDatetime)?string("yyyy-MM-dd")}</b></li>
+		<li>下次结息日<b>${(contract.nextSettleInterestDate)?string("yyyy-MM-dd")}</b></li>
+		<li>浮动盈亏<b>${(list[contract_index].totalProfit)?string(",##0.##")/100?string(",##0.##")}</b></li>
+	</ul>
+	<p>
+		<a href="" class="btn btn_blue m_r_15">追加合约</a> 
+		<a href="" class="btn btn_blue m_r_15">追加保证金 </a> 
+		<a href="" class="btn btn_blue m_r_15">还款</a> 
+		<a href="" class="btn btn_blue m_r_15">展期</a>
+	</p>
+</div>
+</#list>

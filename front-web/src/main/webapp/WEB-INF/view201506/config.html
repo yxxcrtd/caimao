@@ -1,0 +1,65 @@
+<#--front config start-->
+<#assign basePath=""/><#--freemarker html-->
+<#assign homeUrl="http://www.localcaimao.com:8082" />
+<#assign ybkUrl="http://ybk.localcaimao.com:8082" />   <#-- 邮币卡的网址 -->
+<#assign jinUrl="http://jin.localcaimao.com:8082" />   <#-- 邮币卡的网址 -->
+<#assign dojoUrl="/static/prod"/><#--js,css-->
+<#assign imgUrl="/static/img"/><#--image-->
+<#assign resRelease=""/><#--"" or ".min"-->
+<#assign jsVersion="1.0.03"/><#--clear cache-->
+<#assign isDebug=0/><#--1为开发测试环境，0为生产环境-->
+<#--front config end-->
+
+<#--网站总体配置，图片一律放在static/img下;-->
+<#--网站标题-->
+<#assign title="财猫网"/>
+<#--网站名称-->
+<#assign webName="财猫网"/>
+<#--网站备案号-->
+<#assign webRecord="京ICP备15016693号"/>
+<#--公司-->
+<#assign company="北京朋乐投资管理有限公司"/>
+<#--微博-->
+<#assign weiboUrl="http://weibo.com/p/1005055576410959"/>
+<#--qq号-->
+<#assign QQ="800097600"/>
+<#--qq群-->
+<#assign QQQUN="284822493"/>
+<#--热线电话-->
+<#assign hotline="4000-898-000"/>
+<#--邮箱地址-->
+<#assign email="123@caimao.com"/>
+<#--地址-->
+<#assign address="北京市海淀区上地三街9号嘉华大厦A座301"/>
+
+<#--融资产品名称-->
+<#assign proDay="按日融资"/>
+<#assign proMonth="按月融资"/>
+<#assign proFree="免费体验"/>
+<#assign proContest="实盘大赛"/>
+<#assign proOffer="限时特惠"/>
+<#assign proP2P="投标赚钱"/>
+<#--支付宝账户-->
+<#assign alpayAccountID="zhifu@caimao.com"/>
+<#assign alpayAccountName="北京朋乐投资管理有限公司"/>
+<#assign alpayImg="alipay.png"/>
+<#--银行转账-->
+<#assign bankCards=[{"ID": "1109 1322 0310 301", "name": "北京朋乐投资管理有限公司", "bank": "招商银行西二旗支行", "img": "23.jpg"}]/>
+
+<#--功能开关 V2 这些都没用了-->
+<#assign isProDay=true/><#--按日融资-->
+<#assign isProMonth=true/><#--按月融资-->
+<#assign isProFree=false/><#--免费体验-->
+<#assign isProContest=false/><#--实盘大赛-->
+<#assign isProOffer=false/><#--特惠(暂时不加)-->
+<#assign isProP2P=false/><#--投标-->
+<#assign isPopularize=true/><#--推广积分-->
+<#assign isAlipay=true/><#--支付宝充值-->
+<#assign isBankTransfer=true/><#--银行转账-->
+<#assign authentication=false/><#--上传身份证 -->
+<#assign isHeepayTest=false/><#--汇付宝充值是否用于测试 -->
+
+<#assign proDaySwitch=true/><#--按日融资开关-->
+<#assign proDayCloseMsg="今日融资额已领完"/><#--按日融资关闭提示-->
+<#assign proMonthSwitch=true/><#--按月融资开关-->
+<#assign proMonthCloseMsg="今日融资额已领完"/><#--按月融资关闭提示-->

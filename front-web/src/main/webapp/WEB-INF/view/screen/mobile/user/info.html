@@ -1,0 +1,63 @@
+<#assign titile="个人资料"/>
+<#assign header="个人资料"/>
+<#assign bg="bg-gray"/>
+<#assign controller="info"/> 
+<#include 'mobile/layout/layout.html'/>
+<#macro content>
+<article class="content">
+<aside class="con-frame con-frame-notop">
+<ul class="datalist">
+<li class="datalist-item clearfix">
+<a href="###" class="am-grid datalist-line">
+        <div class="am-grid-item am-grid-item-50  am-ft-left">
+        <h4 class="am-ft-md cm-left am-ft-main">账户名</h4>
+        </div> 
+        <div class="am-grid-item am-grid-item-50 am-ft-right am-right-15">
+        <span class="am-ft-gray" id="userName"></span>
+        </div>
+</a>
+</li>
+</ul>
+</aside>
+
+
+<!--表单-->
+<aside class="con-frame">
+<ul class="datalist">
+<li class="datalist-item clearfix">
+<a href="###" class="am-grid datalist-line">
+        <div class="am-grid-item am-grid-item-50  am-ft-left">
+        <h4 class="am-ft-md cm-left am-ft-main">姓名</h4>
+        </div> 
+        <div class="am-grid-item am-grid-item-50 am-ft-right am-right-15">
+        <span class="am-ft-gray" id="userRealName"></span>
+        </div>
+</a>
+</li>
+<li class="datalist-item clearfix">
+<a href="###" class="am-grid datalist-line">
+        <div class="am-grid-item am-grid-item-50  am-ft-left">
+        <h4 class="am-ft-md cm-left am-ft-main">手机号</h4>
+        </div> 
+        <div class="am-grid-item am-grid-item-50 am-ft-right am-right-15">
+        <span class="am-ft-gray" id="mobile"></span>
+        </div>
+</a>
+</li>
+<li class="datalist-item clearfix">
+<a  class="am-grid datalist-line">
+        <div class="am-grid-item am-grid-item-50  am-ft-left">
+        <h4 class="am-ft-md cm-left am-ft-main">实名认证</h4>
+        </div> 
+        <div class="am-grid-item am-grid-item-50 am-ft-right am-right-15" id="certification_icon">
+        </div>
+</a>
+</li>
+
+</ul>
+</aside>
+
+</article>
+
+</#macro>
+

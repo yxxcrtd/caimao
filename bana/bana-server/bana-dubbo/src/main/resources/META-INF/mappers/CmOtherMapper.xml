@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CmOther">
+    <select id="queryDaysContract" resultType="com.caimao.bana.api.entity.CmOtherActivityEntity">
+        SELECT
+        contract_no AS contractNo, user_id AS userId, user_real_name AS userRealName, loan_amount AS loanAmount, interest_rate AS interestRate, (loan_amount * interest_rate) AS fee
+        FROM tpz_loan_contract
+        WHERE interest_settle_days = 1 AND contract_type = 0 AND prod_id = 4 AND create_datetime &gt; #{beginDate} AND create_datetime &lt;= #{endDate}
+    </select>
+
+
+    <select id="queryMonthsContract" resultType="com.caimao.bana.api.entity.CmOtherActivityEntity">
+        SELECT
+        contract_no AS contractNo, user_id AS userId, user_real_name AS userRealName, loan_amount AS loanAmount, interest_rate AS interestRate, settled_interest / 22 * 3 AS fee
+        FROM tpz_loan_contract
+        WHERE interest_settle_days = 30 AND contract_type = 0 AND prod_id = 3 AND create_datetime &gt; #{beginDate} AND create_datetime &lt;= #{endDate}
+        GROUP BY user_id
+    </select>
+
+    <select id="queryOldDaysContract" resultType="com.caimao.bana.api.entity.CmOtherActivityEntity">
+        SELECT
+        contract_no AS contractNo, user_id AS userId, user_real_name AS userRealName, loan_amount AS loanAmount, interest_rate AS interestRate, (loan_amount * interest_rate) AS fee
+        FROM tpz_loan_contract
+        WHERE interest_settle_days = 1 AND contract_type = 0 AND prod_id = 4 AND user_id = #{userId} AND create_datetime &gt; #{beginDate} AND create_datetime &lt;= #{endDate}
+        GROUP BY user_id
+    </select>
+
+    <select id="queryOldMonthsContract" resultType="com.caimao.bana.api.entity.CmOtherActivityEntity">
+        SELECT
+        contract_no AS contractNo, user_id AS userId, user_real_name AS userRealName, loan_amount AS loanAmount, interest_rate AS interestRate, settled_interest / 22 * 3 AS fee
+        FROM tpz_loan_contract
+        WHERE interest_settle_days = 30 AND contract_type = 0 AND prod_id = 3 AND user_id = #{userId} AND create_datetime &gt; #{beginDate} AND create_datetime &lt;= #{endDate}
+    </select>
+
+    <select id="queryOldHisDaysContract" resultType="com.caimao.bana.api.entity.CmOtherActivityEntity">
+        SELECT
+        contract_no AS contractNo, user_id AS userId, user_real_name AS userRealName, loan_amount AS loanAmount, interest_rate AS interestRate, (loan_amount * interest_rate) AS fee
+        FROM his_tpz_loan_contract
+        WHERE interest_settle_days = 1 AND contract_type = 0 AND prod_id = 4 AND user_id = #{userId} AND create_datetime &gt; #{beginDate} AND create_datetime &lt;= #{endDate}
+    </select>
+
+    <select id="queryOldHisMonthsContract" resultType="com.caimao.bana.api.entity.CmOtherActivityEntity">
+        SELECT
+        contract_no AS contractNo, user_id AS userId, user_real_name AS userRealName, loan_amount AS loanAmount, interest_rate AS interestRate, settled_interest / 22 * 3 AS fee
+        FROM his_tpz_loan_contract
+        WHERE interest_settle_days = 30 AND contract_type = 0 AND prod_id = 3 AND user_id = #{userId} AND create_datetime &gt; #{beginDate} AND create_datetime &lt;= #{endDate}
+    </select>
+
+    <!--查询P2P融资首次充值的活动数据-->
+    <select id="queryP2PReturnFeeList" resultType="com.caimao.bana.api.entity.res.other.FOtherP2PReturnFeeRes">
+        SELECT u.user_id AS userId, u.user_real_name AS userRealName, u.mobile, p.invest_value AS investValue, p.invest_created AS investCreated
+        FROM (SELECT * FROM p2p_invest_record ORDER BY invest_id ASC) AS p, tpz_user AS u
+        WHERE p.invest_user_id = u.user_id
+        GROUP BY p.invest_user_id
+    </select>
+
+
+
+    <resultMap id="BaseResultMap" type="com.caimao.bana.api.entity.TpzLoanContractEntity" >
+        <id column="contract_no" property="contractNo" jdbcType="BIGINT" />
+        <result column="pz_account_id" property="pzAccountId" jdbcType="BIGINT" />
+        <result column="contract_type" property="contractType" jdbcType="CHAR" />
+        <result column="user_id" property="userId" jdbcType="BIGINT" />
+        <result column="user_real_name" property="userRealName" jdbcType="VARCHAR" />
+        <result column="contract_begin_date" property="contractBeginDate" jdbcType="VARCHAR" />
+        <result column="contract_end_date" property="contractEndDate" jdbcType="VARCHAR" />
+        <result column="begin_interest_date" property="beginInterestDate" jdbcType="VARCHAR" />
+        <result column="cash_amount" property="cashAmount" jdbcType="BIGINT" />
+        <result column="loan_ratio" property="loanRatio" jdbcType="INTEGER" />
+        <result column="interest_rate" property="interestRate" jdbcType="DECIMAL" />
+        <result column="interest_settle_mode" property="interestSettleMode" jdbcType="VARCHAR" />
+        <result column="interest_accrual_mode" property="interestAccrualMode" jdbcType="VARCHAR" />
+        <result column="loan_amount" property="loanAmount" jdbcType="BIGINT" />
+        <result column="repay_amount" property="repayAmount" jdbcType="BIGINT" />
+        <result column="contract_sign_datetime" property="contractSignDatetime" jdbcType="TIMESTAMP" />
+        <result column="contract_stop_datetime" property="contractStopDatetime" jdbcType="TIMESTAMP" />
+        <result column="contract_status" property="contractStatus" jdbcType="CHAR" />
+        <result column="settled_interest" property="settledInterest" jdbcType="BIGINT" />
+        <result column="accrued_interest" property="accruedInterest" jdbcType="BIGINT" />
+        <result column="last_settle_interest_date" property="lastSettleInterestDate" jdbcType="VARCHAR" />
+        <result column="next_settle_interest_date" property="nextSettleInterestDate" jdbcType="VARCHAR" />
+        <result column="counterpart_idcard" property="counterpartIdcard" jdbcType="VARCHAR" />
+        <result column="counterpart_name" property="counterpartName" jdbcType="VARCHAR" />
+        <result column="counterpart_fund_account" property="counterpartFundAccount" jdbcType="VARCHAR" />
+        <result column="counterpart_user_id" property="counterpartUserId" jdbcType="BIGINT" />
+        <result column="rel_contract_no" property="relContractNo" jdbcType="BIGINT" />
+        <result column="prod_id" property="prodId" jdbcType="BIGINT" />
+        <result column="idcard" property="idcard" jdbcType="VARCHAR" />
+        <result column="remark" property="remark" jdbcType="VARCHAR" />
+        <result column="create_datetime" property="createDatetime" jdbcType="TIMESTAMP" />
+        <result column="update_datetime" property="updateDatetime" jdbcType="TIMESTAMP" />
+        <result column="fee" property="fee" jdbcType="BIGINT" />
+        <result column="prod_bill_type" property="prodBillType" jdbcType="VARCHAR" />
+        <result column="interest_settle_days" property="interestSettleDays" jdbcType="BIGINT" />
+        <result column="prod_term" property="prodTerm" jdbcType="INTEGER" />
+        <result column="homs_fund_account" property="homsFundAccount" />
+        <result column="homs_combine_id" property="homsCombineId" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        contract_no, pz_account_id, contract_type, user_id, user_real_name, contract_begin_date,
+        contract_end_date, begin_interest_date, cash_amount, loan_ratio, interest_rate,
+        interest_settle_mode, interest_accrual_mode, loan_amount, repay_amount, contract_sign_datetime,
+        contract_stop_datetime, contract_status, settled_interest, accrued_interest, last_settle_interest_date,
+        next_settle_interest_date, counterpart_idcard, counterpart_name, counterpart_fund_account,
+        counterpart_user_id, rel_contract_no, prod_id, idcard, remark, create_datetime, update_datetime,
+        fee,prod_bill_type,interest_settle_days,prod_term
+    </sql>
+    <!--融资合约展期不收利息的记录-->
+    <select id="queryLoanInterestList" resultMap="BaseResultMap">
+      SELECT
+        <include refid="Base_Column_List" />
+      FROM tpz_loan_contract
+      WHERE next_settle_interest_date IS NULL OR next_settle_interest_date = '' OR next_settle_interest_date &lt; NOW()
+    </select>
+
+    <!--查询指定结息日期的配资记录列表-->
+    <select id="queryNextSettleLoanList" resultMap="BaseResultMap" parameterType="java.lang.String">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tpz_loan_contract
+        WHERE next_settle_interest_date = #{settleDate}
+    </select>
+
+    <!--更新哪些值-->
+    <update id="updateLoanInterestMonth" parameterType="com.caimao.bana.api.entity.TpzLoanContractEntity">
+        update tpz_loan_contract
+        <set >
+            <if test="contractEndDate != null" >
+                contract_end_date = #{contractEndDate,jdbcType=VARCHAR},
+            </if>
+            <if test="contractStopDatetime != null" >
+                contract_stop_datetime = #{contractStopDatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="nextSettleInterestDate != null" >
+                next_settle_interest_date = #{nextSettleInterestDate,jdbcType=VARCHAR},
+            </if>
+            <if test="prodTerm != null" >
+                prod_term = #{prodTerm},
+            </if>
+        </set>
+        where contract_no = #{contractNo,jdbcType=BIGINT}
+    </update>
+
+    <!--获取指定结算日期的日融资利息-->
+    <select id="queryDayInterestList" resultType="com.caimao.bana.api.entity.other.OTReturnDayInterestEntity">
+        SELECT
+        user_id AS userId, contract_no AS contractNo, order_amount AS orderAmount, create_datetime AS createDatetime
+        FROM tpz_accrued_interest_bill
+        WHERE settle_interest_begin_date = settle_interest_end_date AND work_date = #{workDate}
+    </select>
+
+</mapper>

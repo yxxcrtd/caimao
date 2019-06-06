@@ -1,0 +1,60 @@
+<!doctype html>
+<#include "ybk/config.html" />
+<#assign topMenu="myaccount"/>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>个人中心--邮币卡</title>
+		<link rel="stylesheet" href="${staticUrl}/style/style.css?version=${jsVersion}" />
+    <script src="${staticUrl}/js/chart/lib.js?version=${jsVersion}" type="text/javascript"></script>
+		<script src="${staticUrl}/js/ybk/global.js?version=${jsVersion}" type="text/javascript"></script>
+	</head>
+	<body>
+		<#include "ybk/include/page/head.html" />
+
+		<div class="main usercenter">
+			
+			<div class="clearfix">
+
+				<div class="mod-left pagenav">
+					<em class="myaccount"><i></i>我的开户</em>
+					<a href="${caimaoUrl}/account/index.htm"><em class="myaccount" style="color: #666; cursor: auto;"><i></i>主站账户</em></a>
+				</div>
+
+				<div class="mod-right">
+					<div class="mod-rightcontent maincont">
+						<div class="accountList">
+							<div class="innerBox">
+								<#if (list.items?size > 0)>
+									<#list list.items as i>
+										<dl>
+											<dt><img src="${imgUrl}/exchange/${shortNames[i.exchangeName]}.gif"><strong>${i.exchangeName}</strong></dt>
+											<dd>${i.userName}</dd>
+											<dd>${i.bankName} ${i.createDate?string("yyyy-MM-dd")}</dd>
+											<dd>卡号：${i.bankNum}</dd>
+											<#if i.status=="3">
+												<dd>交易账户：${i.exchangeAccount}</dd>
+											<#else/>
+												<dd> &nbsp; </dd>
+											</#if>
+											<dd class="curstatus">当前状态：
+												<#if i.status=="1"><span class="checkin">待审核</span></#if>
+												<#if i.status=="2"><span class="checkin">审核中</span></#if>
+												<#if i.status=="3"><span class="ispassed">开通成功</span><a href="/ybk/article/help_doc_list.html?categoryId=7">银商签约教程</a></#if>
+												<#if i.status=="4"><span class="isnotpassed">不予通过</span></#if>
+											</dd>
+										</dl>
+									</#list>
+								</#if>
+								<div class="addNew">
+									<a href="/ybk/open_account.html"></a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<#include "ybk/include/page/foot.html" />
+	</body>
+</html>

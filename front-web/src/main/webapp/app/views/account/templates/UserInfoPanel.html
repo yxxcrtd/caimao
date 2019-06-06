@@ -1,0 +1,41 @@
+<div>
+	<div class="top-basicInfo lineBottom-gray clearfix">
+		<div class="cm-left">
+			<p data-dojo-attach-point="userNameCtnNode"><span class="am-ft-md">用户名：</span></p>
+			<p class="am-pt-5" data-dojo-attach-point="msgNode"><b data-dojo-attach-point="usernameNode" class="am-ft-number text-phone"></b></p>
+		</div>
+		<div class="cm-left">
+			<ul data-dojo-attach-point="formNorthNode" class="account-info-det">
+			<li data-dojo-attach-point="usernameRealNode" class="firstLi">
+			</li>
+			<!-- <li>
+			<span>地址：</span>
+			<b data-dojo-attach-point="userAddressNode"></b>
+			</li> -->
+			<li class="">
+			<span>手机号码：</span>
+			<b data-dojo-attach-point="mobileNode"></b>
+			<span class="ui-aseparator">|</span>
+			</li>
+			<li class="">
+			<span>电子邮箱：</span>
+			<b data-dojo-attach-point ="emailNode"></b>
+			<span class="ui-aseparator">|</span>
+			<a data-dojo-attach-point ="emailLinkNode" href="${baseUrl}/user/changemail.htm"></a>
+			</li>
+			</ul>
+		</div>
+	
+	</div>
+	<!--个人资料上部-->
+
+	<!--个人资料下部-->
+	<div class="bottom-basicInfo clearfix">
+		<p class="ui-form-other">
+			<a data-dojo-attach-point ="detailBtnNode" class="textlink forgot am-ft-md">修改</a>
+		</p>
+		<div>
+			<div data-dojo-attach-point="detailCtnNode" style="perspective: 1000px;"></div>
+		</div>
+	</div>
+</div>

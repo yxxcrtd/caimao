@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="GJSNJSTraderId">
+    <resultMap id="BaseResultMap" type="com.caimao.gjs.api.entity.GJSNJSTraderIdEntity">
+        <result column="firm_id" property="firmId" jdbcType="VARCHAR"/>
+        <result column="trader_id" property="traderId" jdbcType="VARCHAR"/>
+        <result column="user_id" property="userId" jdbcType="BIGINT"/>
+        <result column="account_type" property="accountType" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <sql id="BaseColumnList">
+        firm_id, trader_id, user_id, account_type
+    </sql>
+
+    <select id="getCanUseForUpdate" resultMap="BaseResultMap">
+        SELECT
+        <include refid="BaseColumnList" />
+        FROM gjs_njs_trader_id
+        WHERE user_id = 0 AND account_type = 0 LIMIT 1 FOR UPDATE
+    </select>
+
+    <select id="queryCanUseNum" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM gjs_njs_trader_id WHERE user_id = 0 AND account_type = 0;
+    </select>
+
+    <select id="queryByUserId" resultMap="BaseResultMap">
+        SELECT
+        <include refid="BaseColumnList" />
+        FROM gjs_njs_trader_id
+        WHERE user_id = #{userId} LIMIT 1 FOR UPDATE
+    </select>
+
+    <update id="addUserId" parameterType="hashmap">
+        UPDATE gjs_njs_trader_id
+        SET user_id = #{userId,jdbcType=BIGINT}
+        WHERE firm_id = #{firmId,jdbcType=VARCHAR} AND trader_id = #{traderId,jdbcType=VARCHAR}
+    </update>
+
+    <delete id="delTraderId" parameterType="hashmap">
+        DELETE FROM gjs_njs_trader_id WHERE user_id = #{userId} AND trader_id = #{traderId} LIMIT 1
+    </delete>
+</mapper>

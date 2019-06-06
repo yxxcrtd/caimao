@@ -1,0 +1,52 @@
+<div>
+    <div class="hnode" style="border: 1px solid #e0e0e0;border-top: none;">
+        <div class="txt">
+            <i data-dojo-attach-point="toggleNode" class="fa small-icon-btn">&#xf0d7;</i>
+            <em class="name" data-dojo-attach-point="productTypeNode"></em>
+            <em class="hnode-vline">|</em>
+            <em class="name" data-dojo-attach-point="labelNode"></em>
+            <em class="hnode-vline">|</em>
+            <em class="num" data-dojo-attach-point="contractNoNode"></em>
+            <em class="op" data-dojo-attach-point="contractStatusNode"></em>
+        </div>
+        <div style="position: absolute;top: 0;right: 135px;">
+            <div class="txt" style="line-height: 35px;float: right;padding-top: 2px;font-size: 14px;display: none;" data-dojo-attach-point="ext_text_contract_info">
+                <div data-dojo-attach-point="hoverNode">
+                    <a data-dojo-attach-point="contractLink" target="_blank">合约详情　</a>
+                    <a data-dojo-attach-point="addLink" target="_blank">我要追加　</a>
+                    <a data-dojo-attach-point="deferLink" target="_blank">我要展期　</a>
+                    <a data-dojo-attach-point="repayLink" target="_blank">我要还款</a>
+                </div>
+            </div>
+        </div>
+        <div class="relr-txt">
+            <em class="date">时间：<span data-dojo-attach-point="contractBeginDateNode"></span></em>
+        </div>
+    </div>
+    <div class="node-content clearfix" data-dojo-attach-point="contentNode" style="border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-style: none solid solid; border-right-color: rgb(224, 224, 224); border-bottom-color: rgb(224, 224, 224); border-left-color: rgb(224, 224, 224); display: block; overflow: inherit; height: 93px;">
+        <div class="" style="border-right:none;">
+            <div class="txt">
+                <em class="name">借款金额</em><br>
+                <em class="name" data-dojo-attach-point="loanAmountNode"></em> 元
+            </div>
+            <div class="txt">
+                <em class="name">保证金</em><br>
+                <em class="name" data-dojo-attach-point="cashAmountNode"></em> 元
+            </div>
+            <div class="txt">
+                <em class="name">费用</em><br>
+                <em class="name" data-dojo-attach-point="feeNode"></em>
+            </div>
+            <div class="txt">
+                <em class="name">到期日</em><br>
+                <em class="name" data-dojo-attach-point="contractEndDateNode"></em>
+            </div>
+            <div class="txt">
+                <em class="name" data-dojo-attach-point="freezeAmountNode">下次结息日</em><br>
+                <em class="name" data-dojo-attach-point="nextSettleInterestDateNode"></em>
+            </div>
+        </div>
+
+    </div>
+
+</div>

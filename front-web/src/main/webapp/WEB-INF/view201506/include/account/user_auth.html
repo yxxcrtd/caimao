@@ -1,0 +1,48 @@
+<form id="userAuthForm" action="/user/identity" class="p_l_40" method="post">
+    <div class="group m_t_10">
+        <div class="col_1">姓名</div>
+        <div class="col_2">
+            <input class="input_text" type="text" autocomplete="off" name="real_name" id="userAuthRealName" validateType="empty:请输入用户姓名" maxlength="5"/>
+        </div>
+    </div>
+    <div class="group m_t_10">
+        <div class="col_1">身份证号码</div>
+        <div class="col_2">
+            <input class="input_text" name="idcard" id="userAuthIdCard"  type="text" autocomplete="off" validateType="empty:请输入身份证号码" maxlength="18"/>
+        </div>
+    </div>
+    <div class="group m_t_10">
+        <div class="col_1"></div>
+        <div class="col_2">
+            <button type="button" id="userAuthSubmit" class="btn size_m btn_blue">保存</button>
+            <div id="userAuthError" class="error"></div>
+        </div>
+    </div>
+</form>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        var form = $('#userAuthForm'),
+                realName = $('#userAuthRealName'),
+                idCard = $('#userAuthIdCard'),
+                submit = $('#userAuthSubmit');
+
+        // 表单验证
+        formValidate.init(form);
+
+        // 提交
+        $(submit).click(function() {
+            if (formValidate.validateForm(form) == false) {
+                return false;
+            }
+            $.post("/user/identity",{real_name:$(realName).val(), idcard:$(idCard).val()},function(response){
+                if(response.success){
+                    // TODO 关闭所有显示框，弹框提示成功
+                    Alert.show("实名验证通过", "确认", function() {window.location.reload()});
+                }else{
+                    formValidate.showFormTips(submit, response.msg);
+                }
+            });
+        });
+    });
+</script>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ZeusUserProhiWithdrawLog">
+
+	<resultMap id="BaseResultMap" type="com.caimao.bana.api.entity.zeus.ZeusUserProhiWithdrawLogEntity" >
+		<id column="id" property="id" jdbcType="BIGINT" />
+        <result column="user_id" property="userId" jdbcType="BIGINT" />
+        <result column="status" property="status" jdbcType="INTEGER" />
+        <result column="type" property="type" jdbcType="INTEGER" />
+        <result column="memo" property="memo" jdbcType="VARCHAR" />
+        <result column="created" property="created" jdbcType="DATE" />
+
+	</resultMap>
+
+	<sql id="Base_Column_List" >
+      id, user_id, type, status, memo, created
+	</sql>
+
+    <!--保存用户提现状态变更操作-->
+    <insert id="save" parameterType="com.caimao.bana.api.entity.zeus.ZeusUserProhiWithdrawLogEntity">
+        INSERT INTO zeus_user_prohi_withdraw_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test="type != null">type,</if>
+            <if test="status != null">status,</if>
+            <if test="memo != null">memo,</if>
+            <if test="created != null">created,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="userId != null">#{userId},</if>
+            <if test="type != null">#{type},</if>
+            <if test="status != null">#{status},</if>
+            <if test="memo != null">#{memo},</if>
+            <if test="created != null">#{created},</if>
+        </trim>
+    </insert>
+
+    <!--查询用户禁止提现变动历史-->
+    <select id="queryUserLogWithPage" resultType="com.caimao.bana.api.entity.res.user.FUserQueryProhiWithdrawLogRes" parameterType="com.caimao.bana.api.entity.req.user.FUserQueryProhiWithdrawLogReq">
+        SELECT
+        w.id, w.user_id AS userId, w.type, w.status, w.created, u.user_real_name AS userName, u.mobile, w.memo
+        FROM zeus_user_prohi_withdraw_log AS w
+        LEFT JOIN tpz_user AS u ON w.user_id = u.user_id
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="userId != null">
+                AND w.user_id = #{userId}
+            </if>
+            <if test="type != null">
+                AND w.type = #{type}
+            </if>
+            <if test="status == 1">
+                AND w.status = #{status}
+            </if>
+        </trim>
+        <trim prefix="ORDER BY ">
+            <if test="orderColumn != null and  orderColumn != ''">
+                ${orderColumn} ${orderDir}
+            </if>
+        </trim>
+    </select>
+
+</mapper>

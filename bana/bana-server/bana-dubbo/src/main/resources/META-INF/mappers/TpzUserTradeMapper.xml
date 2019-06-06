@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="TpzUserTrade" >
+  <resultMap id="BaseResultMap" type="com.caimao.bana.api.entity.TpzUserTradeEntity" >
+    <id column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="error_count" property="errorCount" jdbcType="INTEGER" />
+    <result column="user_trade_pwd" property="userTradePwd" jdbcType="VARCHAR" />
+    <result column="user_trade_pwd_strength" property="userTradePwdStrength" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    user_id, error_count, user_trade_pwd, user_trade_pwd_strength
+  </sql>
+  <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tpz_user_trade
+    where user_id = #{userId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Long" >
+    delete from tpz_user_trade
+    where user_id = #{userId,jdbcType=BIGINT}
+  </delete>
+  <!--  è®¾ç½®äº¤æå¯ç   -->
+  <insert id="save" parameterType="com.caimao.bana.api.entity.TpzUserTradeEntity" >
+    insert into tpz_user_trade
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != 0" >
+        user_id,
+      </if>
+      <if test="errorCount != null" >
+        error_count,
+      </if>
+      <if test="userTradePwd != null" >
+        user_trade_pwd,
+      </if>
+      <if test="userTradePwdStrength != null" >
+        user_trade_pwd_strength,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="errorCount != null" >
+        #{errorCount,jdbcType=INTEGER},
+      </if>
+      <if test="userTradePwd != null" >
+        #{userTradePwd,jdbcType=VARCHAR},
+      </if>
+      <if test="userTradePwdStrength != null" >
+        #{userTradePwdStrength,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <!-- æ ¹æ®ç¨æ·IDä¿®æ¹äº¤æå¯ç     -->
+  <update id="update" parameterType="com.caimao.bana.api.entity.TpzUserTradeEntity" >
+    update tpz_user_trade
+    <set >
+      <if test="errorCount != null" >
+        error_count = #{errorCount,jdbcType=INTEGER},
+      </if>
+      <if test="userTradePwd != null" >
+        user_trade_pwd = #{userTradePwd,jdbcType=VARCHAR},
+      </if>
+      <if test="userTradePwdStrength != null" >
+        user_trade_pwd_strength = #{userTradePwdStrength,jdbcType=CHAR},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=BIGINT}
+  </update>
+  <!--更新用户安全密码错误次数 -->
+   <update id="updateErrorCountById" parameterType="java.lang.Long" >
+    update tpz_user_trade
+  	set
+    error_count = error_count + 1
+    where user_id = #{userId,jdbcType=BIGINT}
+  </update>
+</mapper>

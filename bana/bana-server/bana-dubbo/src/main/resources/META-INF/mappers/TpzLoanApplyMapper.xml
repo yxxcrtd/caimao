@@ -1,0 +1,508 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="LoanApply" >
+  <resultMap id="BaseResultMap" type="com.caimao.bana.api.entity.TpzLoanApplyEntity" >
+    <id column="order_no" property="orderNo" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="user_real_name" property="userRealName" jdbcType="VARCHAR" />
+    <result column="pz_account_id" property="pzAccountId" jdbcType="BIGINT" />
+    <result column="loan_apply_action" property="loanApplyAction" jdbcType="VARCHAR" />
+    <result column="apply_datetime" property="applyDatetime" jdbcType="TIMESTAMP" />
+    <result column="contract_begin_date" property="contractBeginDate" jdbcType="VARCHAR" />
+    <result column="contract_end_date" property="contractEndDate" jdbcType="VARCHAR" />
+    <result column="begin_interest_date" property="beginInterestDate" jdbcType="VARCHAR" />
+    <result column="loan_ratio" property="loanRatio" jdbcType="INTEGER" />
+    <result column="interest_rate" property="interestRate" jdbcType="DECIMAL" />
+    <result column="cash_amount" property="cashAmount" jdbcType="BIGINT" />
+    <result column="freeze_amount" property="freezeAmount" jdbcType="BIGINT" />
+    <result column="order_amount" property="orderAmount" jdbcType="BIGINT" />
+    <result column="prod_id" property="prodId" jdbcType="BIGINT" />
+    <result column="rel_contract_no" property="relContractNo" jdbcType="BIGINT" />
+    <result column="verify_user" property="verifyUser" jdbcType="VARCHAR" />
+    <result column="verify_datetime" property="verifyDatetime" jdbcType="TIMESTAMP" />
+    <result column="verify_status" property="verifyStatus" jdbcType="VARCHAR" />
+    <result column="order_abstract" property="orderAbstract" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="fee" property="fee" jdbcType="BIGINT" />
+    <result column="prod_bill_type" property="prodBillType" jdbcType="VARCHAR" />
+    <result column="interest_accrual_mode" property="interestAccrualMode" jdbcType="VARCHAR" />
+    <result column="interest_settle_mode" property="interestSettleMode" jdbcType="VARCHAR" />
+    <result column="interest_settle_days" property="interestSettleDays" jdbcType="BIGINT" />
+    <result column="prod_term" property="prodTerm" jdbcType="INTEGER" />
+    <result column="apply_type" property="applyType" jdbcType="SMALLINT" />
+    <result column="p2p_contract_no" property="p2pContractNo" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    order_no, user_id, user_real_name, pz_account_id, loan_apply_action, apply_datetime, 
+    contract_begin_date, contract_end_date, begin_interest_date, loan_ratio, interest_rate, 
+    cash_amount, freeze_amount, order_amount, prod_id, rel_contract_no, verify_user, 
+    verify_datetime, verify_status, order_abstract, remark,fee,prod_bill_type,
+    interest_accrual_mode,interest_settle_mode,interest_settle_days,prod_term,apply_type,p2p_contract_no
+  </sql>
+  <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tpz_loan_apply
+    where order_no = #{orderNo,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Long" >
+    delete from tpz_loan_apply
+    where order_no = #{orderNo,jdbcType=BIGINT}
+  </delete>
+  <insert id="save" parameterType="com.caimao.bana.api.entity.TpzLoanApplyEntity" >
+    insert into tpz_loan_apply
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orderNo != 0" >
+        order_no,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userRealName != null" >
+        user_real_name,
+      </if>
+      <if test="pzAccountId != null" >
+        pz_account_id,
+      </if>
+      <if test="loanApplyAction != null" >
+        loan_apply_action,
+      </if>
+      <if test="applyDatetime != null" >
+        apply_datetime,
+      </if>
+      <if test="contractBeginDate != null" >
+        contract_begin_date,
+      </if>
+      <if test="contractEndDate != null" >
+        contract_end_date,
+      </if>
+      <if test="beginInterestDate != null" >
+        begin_interest_date,
+      </if>
+      <if test="loanRatio != null" >
+        loan_ratio,
+      </if>
+      <if test="interestRate != null" >
+        interest_rate,
+      </if>
+      <if test="cashAmount != null" >
+        cash_amount,
+      </if>
+      <if test="freezeAmount != null" >
+        freeze_amount,
+      </if>
+      <if test="orderAmount != null" >
+        order_amount,
+      </if>
+      <if test="prodId != null" >
+        prod_id,
+      </if>
+      <if test="relContractNo != null" >
+        rel_contract_no,
+      </if>
+      <if test="verifyUser != null" >
+        verify_user,
+      </if>
+      <if test="verifyDatetime != null" >
+        verify_datetime,
+      </if>
+      <if test="verifyStatus != null" >
+        verify_status,
+      </if>
+      <if test="orderAbstract != null" >
+        order_abstract,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="fee != null" >
+        fee,
+      </if>
+      <if test="prodBillType != null" >
+        prod_bill_type,
+      </if>
+      <if test="interestAccrualMode != null" >
+        interest_accrual_mode,
+      </if>
+      <if test="interestSettleMode != null" >
+        interest_settle_mode,
+      </if>
+      <if test="interestSettleDays != null" >
+        interest_settle_days,
+      </if>
+      <if test="prodTerm != null" >
+        prod_term,
+      </if>
+      <if test="applyType != null" >
+        apply_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderNo != 0" >
+        #{orderNo,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="userRealName != null" >
+        #{userRealName,jdbcType=VARCHAR},
+      </if>
+      <if test="pzAccountId != null" >
+        #{pzAccountId,jdbcType=BIGINT},
+      </if>
+      <if test="loanApplyAction != null" >
+        #{loanApplyAction,jdbcType=VARCHAR},
+      </if>
+      <if test="applyDatetime != null" >
+        #{applyDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="contractBeginDate != null" >
+        #{contractBeginDate,jdbcType=VARCHAR},
+      </if>
+      <if test="contractEndDate != null" >
+        #{contractEndDate,jdbcType=VARCHAR},
+      </if>
+      <if test="beginInterestDate != null" >
+        #{beginInterestDate,jdbcType=VARCHAR},
+      </if>
+      <if test="loanRatio != null" >
+        #{loanRatio,jdbcType=INTEGER},
+      </if>
+      <if test="interestRate != null" >
+        #{interestRate,jdbcType=DECIMAL},
+      </if>
+      <if test="cashAmount != null" >
+        #{cashAmount,jdbcType=BIGINT},
+      </if>
+      <if test="freezeAmount != null" >
+        #{freezeAmount,jdbcType=BIGINT},
+      </if>
+      <if test="orderAmount != null" >
+        #{orderAmount,jdbcType=BIGINT},
+      </if>
+      <if test="prodId != null" >
+        #{prodId,jdbcType=BIGINT},
+      </if>
+      <if test="relContractNo != null" >
+        #{relContractNo,jdbcType=BIGINT},
+      </if>
+      <if test="verifyUser != null" >
+        #{verifyUser,jdbcType=VARCHAR},
+      </if>
+      <if test="verifyDatetime != null" >
+        #{verifyDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="verifyStatus != null" >
+        #{verifyStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="orderAbstract != null" >
+        #{orderAbstract,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="fee != null" >
+        #{fee,jdbcType=BIGINT},
+      </if>
+      <if test="prodBillType != null" >
+        #{prodBillType,jdbcType=VARCHAR},
+      </if>
+      <if test="interestAccrualMode != null" >
+        #{interestAccrualMode,jdbcType=VARCHAR},
+      </if>
+      <if test="interestSettleMode != null" >
+        #{interestSettleMode,jdbcType=VARCHAR},
+      </if>
+      <if test="interestSettleDays != null" >
+        #{interestSettleDays,jdbcType=BIGINT},
+      </if>
+      <if test="prodTerm != null" >
+      	#{prodTerm,jdbcType=INTEGER},
+      </if>
+      <if test="applyType != null" >
+        #{applyType},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.caimao.bana.api.entity.TpzLoanApplyEntity" >
+    update tpz_loan_apply
+    <set >
+      <if test="verifyUser != null" >
+        verify_user = #{verifyUser,jdbcType=VARCHAR},
+      </if>
+      <if test="verifyDatetime != null" >
+        verify_datetime = #{verifyDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="verifyStatus != null" >
+        verify_status = #{verifyStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where order_no = #{orderNo,jdbcType=BIGINT}
+  </update>
+  
+  <!-- user define -->
+<!--   <resultMap id="F830203ResMap" type="com.hsnet.pz.biz.loan.dto.res.F830203Res" > -->
+<resultMap id="FLoanApplyResMap" type="com.caimao.bana.api.entity.res.loan.FLoanApplyRes" >
+    <id column="order_no" property="orderNo" jdbcType="BIGINT" />
+    <result column="loan_apply_action" property="loanApplyAction" jdbcType="VARCHAR" />
+    <result column="apply_datetime" property="applyDatetime" jdbcType="TIMESTAMP" />
+    <result column="contract_begin_date" property="contractBeginDate" jdbcType="VARCHAR" />
+    <result column="contract_end_date" property="contractEndDate" jdbcType="VARCHAR" />
+    <result column="begin_interest_date" property="beginInterestDate" jdbcType="VARCHAR" />
+    <result column="loan_ratio" property="loanRatio" jdbcType="INTEGER" />
+    <result column="interest_rate" property="interestRate" jdbcType="DECIMAL" />
+    <result column="cash_amount" property="cashAmount" jdbcType="BIGINT" />
+    <result column="freeze_amount" property="freezeAmount" jdbcType="BIGINT" />
+    <result column="order_amount" property="orderAmount" jdbcType="BIGINT" />
+    <result column="prod_id" property="prodId" jdbcType="BIGINT" />
+    <result column="rel_contract_no" property="relContractNo" jdbcType="BIGINT" />
+    <result column="verify_datetime" property="verifyDatetime" jdbcType="TIMESTAMP" />
+    <result column="verify_status" property="verifyStatus" jdbcType="VARCHAR" />
+    <result column="order_abstract" property="orderAbstract" jdbcType="VARCHAR" />
+    <result column="fee" property="fee" jdbcType="BIGINT" />
+    <result column="prod_bill_type" property="prodBillType" jdbcType="VARCHAR" />
+    <result column="interest_accrual_mode" property="interestAccrualMode" jdbcType="VARCHAR" />
+    <result column="interest_settle_mode" property="interestSettleMode" jdbcType="VARCHAR" />
+    <result column="interest_settle_days" property="interestSettleDays" jdbcType="BIGINT" />
+    <result column="prod_term" property="prodTerm" jdbcType="INTEGER" />
+    <result column="prod_name" property="prodName" jdbcType="VARCHAR" />
+    <result column="prodTypeId" property="prod_type_id" jdbcType="VARCHAR" />
+  </resultMap>
+  <!--<select id="queryF830203ResWithPage" resultMap="F830203ResMap" parameterType="com.hsnet.pz.biz.loan.dto.req.F830203Req" >-->
+ <select id="queryFLoanApplyWithPage" resultMap="FLoanApplyResMap" parameterType="com.caimao.bana.api.entity.req.loan.FLoanApplyReq" >
+    select a.order_no, a.loan_apply_action, a.apply_datetime, 
+    a.contract_begin_date, a.contract_end_date, a.begin_interest_date, a.loan_ratio, a.interest_rate, 
+    a.cash_amount, a.freeze_amount, a.order_amount, a.prod_id, a.rel_contract_no,  a.verify_datetime, a.verify_status, 
+    a.order_abstract, a.fee,a.prod_bill_type, a.interest_accrual_mode,a.interest_settle_mode,a.interest_settle_days,a.prod_term,b.prod_name,b.prod_type_id 
+    from tpz_loan_apply a,tpz_prod b 
+    where a.prod_id = b.prod_id
+    <if test="userId != null and userId != 0">
+		AND a.user_id = #{userId}
+	</if>
+	<if test="orderNo != null and orderNo != 0">
+		AND a.order_no = #{orderNo}
+	</if>
+	<if test="prodTypeId != null and prodTypeId != ''">
+		AND b.prod_type_id = #{prodTypeId}
+	</if>
+	<if test="loanApplyAction != null and  loanApplyAction != ''">
+		AND a.loan_apply_action = #{loanApplyAction}
+	</if>
+	<if test="verifyStatus != null and  verifyStatus != ''">
+		AND a.verify_status = #{verifyStatus}
+	</if>
+	<if test="relContractNo != null and  relContractNo != 0">
+		AND a.rel_contract_no = #{relContractNo}
+	</if>
+	<if test="applyDatetimeBegin != null and  applyDatetimeBegin != ''">
+		AND a.apply_datetime &gt;= #{applyDatetimeBegin}
+	</if>
+	<if test="applyDatetimeEnd != null and  applyDatetimeEnd != ''">
+		AND a.apply_datetime &lt;= #{applyDatetimeEnd}
+	</if>
+   	<trim prefix="ORDER BY ">
+		<if test="orderColumn != null and  orderColumn != ''">
+			${orderColumn} ${orderDir} 
+		</if>
+	</trim>
+  </select>
+  
+<!--   <resultMap id="F831201ResMap" type="com.hsnet.pz.biz.loan.dto.res.F831201Res" > -->
+<!--     <id column="order_no" property="orderNo" jdbcType="BIGINT" /> -->
+<!--     <result column="user_id" property="userId" jdbcType="BIGINT" /> -->
+<!--     <result column="user_real_name" property="userRealName" jdbcType="VARCHAR" /> -->
+<!--     <result column="pz_account_id" property="pzAccountId" jdbcType="BIGINT" /> -->
+<!--     <result column="loan_apply_action" property="loanApplyAction" jdbcType="VARCHAR" /> -->
+<!--     <result column="apply_datetime" property="applyDatetime" jdbcType="TIMESTAMP" /> -->
+<!--     <result column="contract_begin_date" property="contractBeginDate" jdbcType="VARCHAR" /> -->
+<!--     <result column="contract_end_date" property="contractEndDate" jdbcType="VARCHAR" /> -->
+<!--     <result column="begin_interest_date" property="beginInterestDate" jdbcType="VARCHAR" /> -->
+<!--     <result column="loan_ratio" property="loanRatio" jdbcType="INTEGER" /> -->
+<!--     <result column="interest_rate" property="interestRate" jdbcType="DECIMAL" /> -->
+<!--     <result column="cash_amount" property="cashAmount" jdbcType="BIGINT" /> -->
+<!--     <result column="freeze_amount" property="freezeAmount" jdbcType="BIGINT" /> -->
+<!--     <result column="order_amount" property="orderAmount" jdbcType="BIGINT" /> -->
+<!--     <result column="prod_id" property="prodId" jdbcType="BIGINT" /> -->
+<!--     <result column="rel_contract_no" property="relContractNo" jdbcType="BIGINT" /> -->
+<!--     <result column="verify_user" property="verifyUser" jdbcType="VARCHAR" /> -->
+<!--     <result column="verify_datetime" property="verifyDatetime" jdbcType="TIMESTAMP" /> -->
+<!--     <result column="verify_status" property="verifyStatus" jdbcType="VARCHAR" /> -->
+<!--     <result column="order_abstract" property="orderAbstract" jdbcType="VARCHAR" /> -->
+<!--     <result column="remark" property="remark" jdbcType="VARCHAR" /> -->
+<!--     <result column="fee" property="fee" jdbcType="BIGINT" /> -->
+<!--     <result column="prod_bill_type" property="prodBillType" jdbcType="VARCHAR" /> -->
+<!--     <result column="interest_accrual_mode" property="interestAccrualMode" jdbcType="VARCHAR" /> -->
+<!--     <result column="interest_settle_mode" property="interestSettleMode" jdbcType="VARCHAR" /> -->
+<!--     <result column="interest_settle_days" property="interestSettleDays" jdbcType="BIGINT" /> -->
+<!--     <result column="prod_term" property="prodTerm" jdbcType="INTEGER" /> -->
+<!--     <result column="prod_name" property="prodName" jdbcType="VARCHAR" /> -->
+<!--     <result column="prod_type_id" property="prodTypeId" jdbcType="VARCHAR" /> -->
+<!--   </resultMap> -->
+<!--   <sql id="F831201Res_Column_List" > -->
+<!--     a.order_no, a.user_id, a.user_real_name, a.pz_account_id, a.loan_apply_action, a.apply_datetime,  -->
+<!--     a.contract_begin_date, a.contract_end_date, a.begin_interest_date, a.loan_ratio, a.interest_rate,  -->
+<!--     a.cash_amount, a.freeze_amount, a.order_amount, a.prod_id, a.rel_contract_no, a.verify_user,  -->
+<!--     a.verify_datetime, a.verify_status, a.order_abstract, a.remark,a.fee,a.prod_bill_type, -->
+<!--     a.interest_accrual_mode,a.interest_settle_mode,a.interest_settle_days,a.prod_term,b.prod_name,b.prod_type_id -->
+<!--   </sql> -->
+<!--   <select id="queryF831201ResWithPage" resultMap="F831201ResMap" parameterType="com.hsnet.pz.biz.loan.dto.req.F831201Req" > -->
+<!--     select  -->
+<!--     <include refid="F831201Res_Column_List"/>  -->
+<!--     from tpz_loan_apply a,tpz_prod b  -->
+<!--     where a.prod_id = b.prod_id -->
+<!--     <if test="prodTypeId != null and prodTypeId != ''"> -->
+<!-- 		AND b.prod_type_id = #{prodTypeId} -->
+<!-- 	</if> -->
+<!--     <if test="userId != null and userId != 0"> -->
+<!-- 		AND a.user_id = #{userId} -->
+<!-- 	</if> -->
+<!-- 	<if test="orderNo != null and orderNo != 0"> -->
+<!-- 		AND a.order_no = #{orderNo} -->
+<!-- 	</if> -->
+<!-- 	<if test="loanApplyAction != null and  loanApplyAction != ''"> -->
+<!-- 		AND a.loan_apply_action = #{loanApplyAction} -->
+<!-- 	</if> -->
+<!-- 	<if test="verifyStatus != null and  verifyStatus != ''"> -->
+<!-- 		AND a.verify_status = #{verifyStatus} -->
+<!-- 	</if> -->
+<!-- 	<if test="applyDatetimeBegin != null and  applyDatetimeBegin != ''"> -->
+<!-- 		AND a.apply_datetime &gt;= #{applyDatetimeBegin} -->
+<!-- 	</if> -->
+<!-- 	<if test="applyDatetimeEnd != null and  applyDatetimeEnd != ''"> -->
+<!-- 		AND a.apply_datetime &lt;= #{applyDatetimeEnd} -->
+<!-- 	</if> -->
+<!-- 	<trim prefix="ORDER BY "> -->
+<!-- 		<if test="orderColumn != null and  orderColumn != ''"> -->
+<!-- 			${orderColumn} ${orderDir}  -->
+<!-- 		</if> -->
+<!-- 	</trim> -->
+<!--   </select> -->
+  
+  <select id="getByUserProdCount" resultType="java.lang.Integer" parameterType="java.util.HashMap">
+  	 select count(1) 
+    from tpz_loan_apply 
+    where user_id = #{userId} and prod_id = #{prodId} 
+    	and verify_status = #{verifyStatus} and loan_apply_action = #{loanApplyAction}
+  </select>
+  
+  <select id="getCountByRefContract" resultType="java.lang.Integer" parameterType="java.util.HashMap">
+  	 select count(1) 
+    from tpz_loan_apply 
+    where rel_contract_no = #{relContractNo} and verify_status = #{verifyStatus} and loan_apply_action = #{loanApplyAction}
+  </select>
+  
+  <select id="getLastDeferedProdTerm" resultType="java.lang.Integer" parameterType="java.lang.Long">
+  	 select prod_term
+    from tpz_loan_apply 
+    where rel_contract_no = #{value} and verify_status = 1 and loan_apply_action = 2 
+    ORDER BY order_no desc LIMIT 0,1
+  </select>
+  
+  <select id="getCountByProd" resultType="java.lang.Integer" parameterType="java.lang.Long">
+  	 select count(1) 
+    from tpz_loan_apply 
+    where prod_id = #{prodId} 
+  </select>
+  
+  <select id="getLoanUserCount" resultType="java.lang.Integer" parameterType="java.lang.Long">
+  	 SELECT
+			count(1)
+		FROM
+			tpz_user u
+		WHERE	u.user_id IN (
+			SELECT
+				la.user_id
+			FROM
+				tpz_loan_apply la
+			WHERE
+				la.verify_status = 1
+		)
+		<if test="value != null and  value != 0">
+			AND u.ref_user_id =  #{value} 
+		</if>
+  </select>
+  
+  <select id="getLoanTotalAmount" resultType="java.lang.Long" parameterType="java.lang.Long">
+  	 SELECT
+			IFNULL(sum(la.order_amount), 0)
+		FROM
+			tpz_loan_apply la
+		WHERE	la.verify_status=1 
+		<if test="value != null and  value != 0">
+			AND la.user_id IN (
+			SELECT
+				user_id
+			FROM
+				tpz_user u
+			WHERE
+				u.ref_user_id =  #{value} 
+			)
+		</if>
+  </select>
+
+  <select id="getUserHasLoan" resultMap="BaseResultMap" parameterType="hashmap" >
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM tpz_loan_apply
+    WHERE user_id = #{userId} AND verify_status = 1
+    <if test="verifyDatetimeEnd != null and verifyDatetimeEnd != ''">
+      AND verify_datetime &lt;= #{verifyDatetimeEnd}
+    </if>
+    LIMIT 1
+  </select>
+
+  <update id="updateP2PContractNo" parameterType="hashmap" >
+    UPDATE tpz_loan_apply
+    SET p2p_contract_no = #{p2pContractNo}
+    WHERE order_no = #{orderNo}
+  </update>
+
+  <select id="getP2PContractNoNullList" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM tpz_loan_apply
+    WHERE apply_type = 1 AND p2p_contract_no = 0 AND verify_status = 1
+  </select>
+
+  <!--查询指定用户的申请合约列表（配资P2P合并）-->
+  <select id="queryLoanP2PLiseWithPage" resultType="com.caimao.bana.api.entity.res.loan.FLoanP2PApplyRes" parameterType="com.caimao.bana.api.entity.req.loan.FLoanP2PApplyReq">
+    SELECT * FROM (
+    (SELECT l.user_id AS userId, l.order_no AS orderNo, l.apply_datetime AS applyDatetime, l.loan_apply_action AS loanApplyAction, l.order_amount AS orderAmount, l.verify_status AS verifyStatus,
+    l.prod_id AS prodId, l.loan_ratio AS loanRatio, l.interest_rate AS interestRate, l.contract_begin_date AS contractBeginDate, l.contract_end_date AS contractEndDate,
+    l.begin_interest_date AS beginInterestDate, l.cash_amount AS cashAmount, l.freeze_amount AS freezeAmount, l.order_abstract AS orderAbstract, l.fee, l.prod_term AS prodTerm, p.prod_name AS prodName, p.prod_type_id AS prodType, 0 AS investNum
+    FROM tpz_loan_apply AS l
+    LEFT JOIN tpz_prod AS p ON p.prod_id = l.prod_id
+    WHERE l.apply_type = 0
+    <if test="userId != null">AND l.user_id = #{userId}</if>
+    <if test="prodId != null">AND l.prod_id = #{prodId}</if>
+    <if test="loanApplyAction != null">AND l.loan_apply_action = #{loanApplyAction}</if>
+    <if test="verifyStatus != null">AND l.verify_status = #{verifyStatus}</if>
+    <if test="applyDatetimeBegin != null">AND l.apply_datetime &gt;= #{applyDatetimeBegin}</if>
+    <if test="applyDatetimeEnd != null">AND l.apply_datetime &lt;= #{applyDatetimeEnd}</if>
+    )
+    UNION ALL
+    (SELECT l.target_user_id AS userId, l.target_id AS orderNo, l.created AS applyDatetime, 9 AS loanApplyAction, l.target_amount AS orderAmount, l.target_status AS verifyStatus,
+    l.target_prod_id AS prodId, l.target_prod_lever AS loanRatio, l.year_rate / 12 AS interestRate, l.target_full_datetime AS contractBeginDate, NULL AS contractEndDate,
+    l.target_full_datetime AS beginInterestDate, l.pay_margin AS cashAmount,
+    l.pay_margin + l.pay_pz_interest + l.pay_target_interest + l.pay_manage_fee AS freezeAmount,
+    'P2P配资' AS orderAbstract, l.pay_pz_interest + l.pay_target_interest + l.pay_manage_fee AS fee, l.lift_time AS prodTerm, p.prod_name AS prodName, p.prod_type_id AS prodType, l.invest_user_num AS investNum
+    FROM p2p_loan_record AS l
+    LEFT JOIN tpz_prod AS p ON p.prod_id = l.target_prod_id
+    WHERE 1 = 1
+    <if test="userId != null">AND l.target_user_id = #{userId}</if>
+    <if test="prodId != null">AND l.target_prod_id = #{prodId}</if>
+    <if test="loanApplyAction != null">AND 3 = #{loanApplyAction}</if>
+    <!--<if test="verifyStatus != null">AND l.verify_status = #{verifyStatus}</if>-->
+    <if test="applyDatetimeBegin != null">AND l.created &gt;= #{applyDatetimeBegin}</if>
+    <if test="applyDatetimeEnd != null">AND l.created &lt;= #{applyDatetimeEnd}</if>
+    )) AS loan_apply
+    WHERE 1 = 1
+    ORDER BY applyDatetime DESC
+  </select>
+
+
+</mapper>

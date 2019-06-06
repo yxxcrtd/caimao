@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="GjsSJSHistoryEntrust">
+
+    <resultMap id="BaseResultMap" type="com.caimao.gjs.api.entity.history.GjsSJSHistoryEntrustEntity">
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="trader_id" property="trader_id" jdbcType="VARCHAR" />
+        <result column="entr_date" property="entr_date" jdbcType="VARCHAR" />
+        <result column="order_no" property="order_no" jdbcType="VARCHAR" />
+        <result column="market_id" property="market_id" jdbcType="VARCHAR" />
+        <result column="exch_type" property="exch_type" jdbcType="VARCHAR" />
+        <result column="prod_code" property="prod_code" jdbcType="VARCHAR" />
+        <result column="entr_price" property="entr_price" jdbcType="DECIMAL" />
+        <result column="entr_amount" property="entr_amount" jdbcType="INTEGER" />
+        <result column="remain_amount" property="remain_amount" jdbcType="INTEGER" />
+        <result column="offset_flag" property="offset_flag" jdbcType="VARCHAR" />
+        <result column="deli_flag" property="deli_flag" jdbcType="VARCHAR" />
+        <result column="bs" property="bs" jdbcType="VARCHAR" />
+        <result column="entr_stat" property="entr_stat" jdbcType="VARCHAR" />
+        <result column="cancel_flag" property="cancel_flag" jdbcType="VARCHAR" />
+        <result column="accept_time" property="accept_time" jdbcType="VARCHAR" />
+        <result column="e_term_type" property="e_term_type" jdbcType="VARCHAR" />
+        <result column="e_exch_time" property="e_exch_time" jdbcType="VARCHAR" />
+        <result column="c_term_type" property="c_term_type" jdbcType="VARCHAR" />
+        <result column="c_exch_time" property="c_exch_time" jdbcType="VARCHAR" />
+        <result column="local_order_no" property="local_order_no" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <!--所有列-->
+    <sql id="Base_Column_List">
+        id, trader_id, entr_date, order_no, market_id, exch_type, prod_code, entr_price, entr_amount, remain_amount, offset_flag, deli_flag, bs, entr_stat, cancel_flag, accept_time, e_term_type, e_exch_time, c_term_type, c_exch_time, local_order_no
+    </sql>
+
+    <!--根据开始时间和结束时间查询-->
+    <select id="querySJSHistoryEntrustWithPage" resultMap="BaseResultMap" parameterType="com.caimao.gjs.api.entity.req.FQueryHistoryEntrustReq">
+        SELECT <include refid="Base_Column_List" />
+        FROM gjs_sjs_history_entrust
+        WHERE trader_id = #{traderId, jdbcType=VARCHAR}
+        <if test="startDate != null and  startDate != ''">
+            AND entr_date &gt;= #{startDate}
+        </if>
+        <if test="endDate != null and  endDate != ''">
+            AND entr_date &lt;= #{endDate}
+        </if>
+        ORDER BY entr_date desc,e_exch_time DESC
+    </select>
+
+    <!--添加-->
+    <insert id="insert" parameterType="com.caimao.gjs.api.entity.history.GjsSJSHistoryEntrustEntity">
+        insert into gjs_sjs_history_entrust
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="trader_id != null">trader_id,</if>
+            <if test="entr_date != null">entr_date,</if>
+            <if test="order_no != null">order_no,</if>
+            <if test="market_id != null">market_id,</if>
+            <if test="exch_type != null">exch_type,</if>
+            <if test="prod_code != null">prod_code,</if>
+            <if test="entr_price != null">entr_price,</if>
+            <if test="entr_amount != null">entr_amount,</if>
+            <if test="remain_amount != null">remain_amount,</if>
+            <if test="offset_flag != null">offset_flag,</if>
+            <if test="deli_flag != null">deli_flag,</if>
+            <if test="bs != null">bs,</if>
+            <if test="entr_stat != null">entr_stat,</if>
+            <if test="cancel_flag != null">cancel_flag,</if>
+            <if test="accept_time != null">accept_time,</if>
+            <if test="e_term_type != null">e_term_type,</if>
+            <if test="e_exch_time != null">e_exch_time,</if>
+            <if test="c_term_type != null">c_term_type,</if>
+            <if test="c_exch_time != null">c_exch_time,</if>
+            <if test="local_order_no != null">local_order_no,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="trader_id != null">#{trader_id, jdbcType=VARCHAR},</if>
+            <if test="entr_date != null">#{entr_date, jdbcType=VARCHAR},</if>
+            <if test="order_no != null">#{order_no, jdbcType=VARCHAR},</if>
+            <if test="market_id != null">#{market_id, jdbcType=VARCHAR},</if>
+            <if test="exch_type != null">#{exch_type, jdbcType=VARCHAR},</if>
+            <if test="prod_code != null">#{prod_code, jdbcType=VARCHAR},</if>
+            <if test="entr_price != null">#{entr_price, jdbcType=DECIMAL},</if>
+            <if test="entr_amount != null">#{entr_amount, jdbcType=INTEGER},</if>
+            <if test="remain_amount != null">#{remain_amount, jdbcType=INTEGER},</if>
+            <if test="offset_flag != null">#{offset_flag, jdbcType=VARCHAR},</if>
+            <if test="deli_flag != null">#{deli_flag, jdbcType=VARCHAR},</if>
+            <if test="bs != null">#{bs, jdbcType=VARCHAR},</if>
+            <if test="entr_stat != null">#{entr_stat, jdbcType=VARCHAR},</if>
+            <if test="cancel_flag != null">#{cancel_flag, jdbcType=VARCHAR},</if>
+            <if test="accept_time != null">#{accept_time, jdbcType=VARCHAR},</if>
+            <if test="e_term_type != null">#{e_term_type, jdbcType=VARCHAR},</if>
+            <if test="e_exch_time != null">#{e_exch_time, jdbcType=VARCHAR},</if>
+            <if test="c_term_type != null">#{c_term_type, jdbcType=VARCHAR},</if>
+            <if test="c_exch_time != null">#{c_exch_time, jdbcType=VARCHAR},</if>
+            <if test="local_order_no != null">#{local_order_no, jdbcType=VARCHAR},</if>
+        </trim>
+    </insert>
+
+    <!-- 后台管理用的查询 -->
+    <!-- 根据TraderId查询SJS历史委托列表 -->
+    <select id="querySJSHistoryEntrustListByTraderIdForManage" resultMap="BaseResultMap" parameterType="java.lang.String">
+        SELECT <include refid="Base_Column_List" /> FROM gjs_sjs_history_entrust WHERE trader_id = #{traderId, jdbcType=VARCHAR}
+    </select>
+
+</mapper>

@@ -1,0 +1,401 @@
+
+<#include 'mobile/layout/layout.html'/> 
+<#macro assignSet>
+	<#assign bg="bg-white"/>
+	<#assign title=proContest/>
+	<#assign controller="P4"/> 
+	<#assign header=proContest/> 
+	<#assign footer="1"/>
+</#macro>
+
+
+<#macro headerContent>
+<div class="navi-container bg-gray" id="header1">
+	<ul class="listTab listLateral" id="selectTab">
+		<li class="listTab-item active" id="select1"><a>第一季大赛</a></li>
+		<li class="listTab-item" id="select2"><a>第二季大赛</a></li>
+	</ul>
+</div>
+
+<div class="navi-container bg-gray" id="header2">
+	<ol class="ui-step ui-step-3" id="ol_steps">
+		<li class="ui-step-start">
+			<div class="ui-step-line">-</div>
+			<div class="ui-step-icon">
+				<i class="iconfont"></i> <i class="ui-step-number">1</i> <span
+					class="ui-step-text">申请报名</span>
+			</div>
+		</li>
+
+		<li class=" ui-step-active">
+			<div class="ui-step-line">-</div>
+			<div class="ui-step-icon">
+				<i class="iconfont"></i> <i class="ui-step-number">2</i> <span
+					class="ui-step-text">支付保证金</span>
+			</div>
+		</li>
+
+
+		<li class="ui-step-end">
+			<div class="ui-step-line">-</div>
+			<div class="ui-step-icon">
+				<i class="iconfont"></i> <i class="ui-step-number">3</i> <span
+					class="ui-step-text">参赛成功</span>
+			</div>
+		</li>
+	</ol>
+</div>
+
+<!--tab-->
+
+<!--下部-->
+
+</#macro>
+
+<!--报名标题-->
+<!--流程-->
+<#macro content>
+
+<article class="content" id="panel1"
+	style="padding-top: 97px;">
+	<div class="con-spacing10">
+		<!--报名标题-->
+		<div class="title-signUp clearfix">
+			<p class="am-ft-left am-ft-white">
+				<span class="am-ft-sm" id="startEndDate">（9月01日-9月31日）</span>
+			</p>
+			<p class="am-ft-right am-ft-white">
+				<span class="am-ft-sm">报名人数<b class="am-ft-md"
+					id="contestUserNum">1,003</b>人
+				</span>
+			</p>
+		</div>
+		<div class="bg-white">
+			<ul class="list-navContest listLateral">
+				<li><i class="icon"></i>
+					<p class="am-pt-10">
+						<b class="am-ft-sm">开始比赛</b>
+					</p>
+					<p>
+						<span class="am-ft-sm" id="startDate">10月01日</span>
+					</p></li>
+				<li><i class="icon"></i>
+					<p class="am-pt-10">
+						<span class="am-ft-sm" id="stopDate">10月31日</span>
+					</p>
+					<p>
+						<b class="am-ft-sm">停止报名</b>
+					</p></li>
+				<li><i class="icon"></i>
+					<p class="am-pt-10">
+						<b class="am-ft-sm">公布战绩</b>
+					</p>
+					<p>
+						<span class="am-ft-sm" id="resultDate">11月01日</span>
+					</p></li>
+			</ul>
+		</div>
+		<!--流程-->
+
+		<!--奖金-->
+		<div class="bgBonus">
+			<ul class="listLateral">
+				<li class="">
+					<div class="NO1">
+						<p class="p1">
+							<i class="iconBonus iconBonus1"></i>
+						</p>
+						<p class="line am-ft-red">
+							<span class="am-ft-sm">￥</span><b class="am-ft-md"
+								id="rankAmount1">30000</b>
+						</p>
+						<p class="p1">
+							<span class="am-ft-sm">NO.1</span>
+						</p>
+					</div>
+				</li>
+				<li class="">
+					<div class="NO2">
+						<p class="p1">
+							<i class="iconBonus iconBonus2"></i>
+						</p>
+						<p class="line am-ft-red">
+							<span class="am-ft-sm">￥</span><b class="am-ft-md"
+								id="rankAmount2"></b>
+						</p>
+						<p class="p1">
+							<span class="am-ft-sm">NO.2</span>
+						</p>
+					</div>
+				</li>
+				<li class="">
+					<div class="NO3">
+						<p class="p1">
+							<i class="iconBonus iconBonus3"></i>
+						</p>
+						<p class="line am-ft-red">
+							<span class="am-ft-sm">￥</span><b class="am-ft-md"
+								id="rankAmount3"></b>
+						</p>
+						<p class="p1">
+							<span class="am-ft-sm">NO.3</span>
+						</p>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<!--奖金-->
+
+		<ol class="nav-contestInfo">
+			<li>
+				<div class="clearfix">
+					<span class="cm-left number"><i>01</i></span>
+					<div class="cm-right">
+						<p>
+							<span class="am-ft-lg">赠送<b class="am-ft-orange"
+								id="loanAmount"></b>元实盘资金
+							</span>
+						</p>
+						<p class="p2">
+							<span class="am-ft-sm am-ft-gray">完全免费</span>
+						</p>
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class="clearfix">
+					<span class="cm-left number"><i>02</i></span>
+					<div class="cm-right">
+						<p>
+							<span class="am-ft-lg">缴纳 <b class="am-ft-orange"
+								id="riskAmount"></b>元 保证金
+							</span>
+						</p>
+						<p class="p2">
+							<span class="am-ft-sm am-ft-gray">结束时如无亏损全额返还如亏损扣除亏损剩余返还</span>
+						</p>
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class="clearfix">
+					<span class="cm-left number"><i>03</i></span>
+					<div class="cm-right">
+						<p>
+							<span class="am-ft-lg">总共<b class="am-ft-orange"
+								id="allAmount"></b>元 实盘资金
+							</span>
+						</p>
+						<p class="p2">
+							<span class="am-ft-sm am-ft-gray">由您操盘，盈利归您，亏损在您的保证金中扣除</span>
+						</p>
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class="clearfix">
+					<span class="cm-left number"><i>04</i></span>
+					<div class="cm-right">
+						<p>
+							<span class="am-ft-lg">比赛<b class="am-ft-orange">1</b>个月
+							</span>
+						</p>
+						<p class="p2">
+							<span class="am-ft-sm am-ft-gray">公布战绩，发放奖金</span>
+						</p>
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class="clearfix">
+					<span class="cm-left number"><i>05</i></span>
+					<div class="cm-right">
+						<p>
+							<span class="am-ft-lg">盈利归你，亏损自负</span>
+						</p>
+						<p class="p2">
+							<span class="am-ft-sm am-ft-gray">交易账户总资产低于</span><span class="am-ft-sm am-ft-gray"
+								id="exposureAmount"></span><span class="am-ft-sm am-ft-gray">元时自动平仓并退出比赛，剩余保证金退还给您</span>
+						</p>
+					</div>
+				</div>
+			</li>
+		</ol>
+
+
+		<div class="bgBonus">
+			<span class="am-ft-lg">报名费<b class="am-ft-orange" id="fee"></b>元 <span
+				class="am-ft-sm am-ft-gray">如有疑问请联系客服：<#include 'mobile/component/phonePanel.html'/></span></span>
+		</div>
+
+
+	</div>
+</article>
+
+<article class="content" 
+	style="padding-top: 97px; padding-bottom: 50px;">
+	
+	<div class="con-spacing15 con-prompt" id="panel2">
+			<!--提示-->
+
+			<p id="riskAmountP">
+				<span>支付保证金<span class="am-ft-orange" id="riskAmount1"></span>元
+				</span>
+			</p>
+			<div id="trustPanel">
+				
+				
+				<!--提示-->
+				<div id="panel2_prompt1">
+					<p ><i class="icon-prompt icon-prompt-error"></i></p>
+					<p><span>很抱歉，未实名认证！</span></p>
+				</div>
+				
+				<div  class="btn-page btn-page-center con-spacing15">
+					<a href="${basePath}/mobile/user/certification.htm?tg=${basePath}/mobile/P4.htm" class="am-button am-button-red">立即实名认证</a>
+				</div>
+			
+			</div>
+			<div id="selfDetail">
+				<p class="am-ft-gray">
+					可用余额 <b class="am-ft-main"><span id="selfAccount"></span></b> 元
+				</p>
+				<div class="con-spacing10">
+				<aside class="con-frame">
+					<ul class="datalist datalist-password">
+						<li class="datalist-item clearfix">
+							<div class="am-grid datalist-line">
+								<div class="am-grid-item am-grid-item-25  am-ft-right">
+									<h4 class="am-ft-md cm-left" id="riskValue">安全密码</h4>
+								</div>
+								<div
+									class="am-grid-item am-grid-item-75 am-ft-right am-right-15">
+									<span class="ui-form-field"> <input type="password"  id="password" class="text_input" maxlength="18" type="password"  class="text_input" id = "password" placeholder="输入安全密码" />
+									</span>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</aside>
+			</div>				
+				
+			</div>
+			
+			<div id="selfPass">
+				<p class="am-ft-gray">
+					可用余额 <b class="am-ft-main"><span  id="selfAccount1"></span></b> 元
+				</p>
+				<p>
+				<div   class="btn-page btn-page-center con-spacing15">
+					<a href="${basePath}/mobile/account/recharge.htm?tg=${basePath}/mobile/P4.htm" class="am-button am-button-red">立即充值</a>
+					</div>
+				</p>
+			</div>
+
+			
+
+			<!--按钮-->
+			<div  id = "addBtn2" class="btn-page btn-page-center con-spacing15">
+			<a  class="am-button am-button-red"> <span
+				class="am-ft-white">确认报名</span>
+			</a>
+
+		</div>
+			<!--按钮-->
+
+		</div>
+	
+	<div id="panel3">
+	<article class="content"
+		style="padding-top: 97px; padding-bottom: 50px;">
+		<div class="con-spacing15 con-prompt">
+			<!--提示-->
+			<p>
+				<i class="icon-prompt icon-prompt-error"></i>
+			</p>
+			<p>
+				<span>很抱歉，申请失败啦！</span>
+			</p>
+			<p class="am-ft-gray">
+				<span class="am-ft-sm" id="errMsg"></span>
+			</p>
+
+
+			<!--提示-->
+
+
+			<!--按钮-->
+			<div class="btn-page btn-page-center con-spacing15">
+				<a href="${basePath}/mobile/P4.htm" class="am-button am-button-red"> <span
+					class="am-ft-white">重新申请</span>
+				</a>
+
+			</div>
+			<!--按钮-->
+		</div>
+
+
+
+	</article>
+</div>
+		<!--实名认证页面结束 -->
+		<!--  申请成功开始-->
+
+		<div class="con-spacing15 con-prompt" id="panel4">
+			<!--提示-->
+			<p>
+				<i class="icon-prompt icon-prompt-wait"></i>
+			</p>
+			<p>
+				<span>实盘大赛申请已成功提交</span>
+			</p>
+			<p class="am-ft-gray">
+				<span class="am-ft-sm">申请正在紧张处理，请耐心等待</span>
+			</p>
+
+
+			<!--提示-->
+
+
+			<!--按钮-->
+			<div class="btn-page btn-page-center con-spacing15">
+				<a href="${basePath}/mobile/user/contracts.htm" class="am-button am-button-red"> <span
+					class="am-ft-white">合约详情</span>
+				</a>
+
+			</div>
+			<!--按钮-->
+
+			<p class="am-ft-sm phone">
+				如有疑问请拨打客服电话: <#include 'mobile/component/phonePanel.html'/>
+			</p>
+		</div>
+
+
+
+</article>
+</#macro> <#macro footerContent>
+
+<div  id="addBtn3" class="btn-page btn-page-center bg-white con-spacing15" style="display:none">
+        <a class="am-button btn-disabled am-button-red">
+        <span>停止报名</span>
+        </a>
+ </div>
+
+<!--按钮-->
+<div id="addBtn1"
+	class="btn-page btn-page-center bg-white con-spacing15" style="display:none">
+	<a class="am-button am-button-red"> <span class="am-ft-white">开始报名</span>
+	</a>
+
+</div>
+
+<div  id="addBtn0" class="btn-page btn-page-center bg-white con-spacing15" style="display:none">
+        <a class="am-button btn-disabled am-button-red">
+        <span>敬请期待</span>
+        </a>
+ </div>
+       
+<!--按钮-->
+
+</#macro>

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="YbkDaxin">
+
+    <!-- 表所有字段和属性 -->
+    <resultMap id="BaseResultMap" type="com.caimao.bana.api.entity.ybk.YbkDaxinEntity" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="exchange_id" property="exchangeId" jdbcType="INTEGER" />
+        <result column="exchange_name" property="exchangeName" jdbcType="VARCHAR" />
+        <result column="daxin_name" property="daxinName" jdbcType="VARCHAR" />
+        <result column="end_datetime" property="endDatetime" jdbcType="TIMESTAMP" />
+        <result column="is_show" property="isShow" jdbcType="VARCHAR" />
+        <result column="daxin_url" property="daxinUrl" jdbcType="VARCHAR" />
+        <result column="sort" property="sort" jdbcType="INTEGER" />
+        <result column="created" property="created" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <!-- 表所有字段 -->
+    <sql id="Base_Column_List" >
+        id, 
+        exchange_id, 
+        exchange_name, 
+        daxin_name, 
+        end_datetime, 
+        is_show, 
+        daxin_url, 
+        sort, 
+        created
+    </sql>
+
+    <!-- 根据ID查找 -->
+    <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select <include refid="Base_Column_List" /> from ybk_daxin where id = #{id, jdbcType=BIGINT}
+    </select>
+
+    <!-- 根据ID删除 -->
+    <delete id="deleteById" parameterType="java.lang.Long" >
+        delete from ybk_daxin where id = #{id, jdbcType=BIGINT}
+    </delete>
+
+    <!-- 分页查询 -->
+    <select id="queryYbkDaxinWithPage" resultMap="BaseResultMap" parameterType="com.caimao.bana.api.entity.req.ybk.FQueryYbkDaxinReq" >
+        select <include refid="Base_Column_List" /> from ybk_daxin
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="exchangeId !=null and exchangeId != ''">
+                AND exchange_id = #{exchangeId}
+            </if>
+            <if test="isShow !=null and isShow != ''">
+                AND is_show = #{isShow}
+            </if>
+        </trim>
+        ORDER BY sort DESC
+    </select>
+
+    <!-- 插入 -->
+    <insert id="insert" parameterType="com.caimao.bana.api.entity.ybk.YbkDaxinEntity">
+        insert into ybk_daxin
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="exchangeId != null">
+                exchange_id,
+            </if>
+            <if test="exchangeName != null">
+                exchange_name,
+            </if>
+            <if test="daxinName != null">
+                daxin_name,
+            </if>
+            <if test="endDatetime != null">
+                end_datetime,
+            </if>
+            <if test="isShow != null">
+                is_show,
+            </if>
+            <if test="daxinUrl != null">
+                daxin_url,
+            </if>
+            <if test="sort != null">
+                sort,
+            </if>
+            <if test="created != null">
+                created,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id, jdbcType=BIGINT},
+            </if>
+            <if test="exchangeId != null">
+                #{exchangeId, jdbcType=INTEGER},
+            </if>
+            <if test="exchangeName != null">
+                #{exchangeName, jdbcType=VARCHAR},
+            </if>
+            <if test="daxinName != null">
+                #{daxinName, jdbcType=VARCHAR},
+            </if>
+            <if test="endDatetime != null">
+                #{endDatetime, jdbcType=VARCHAR},
+            </if>
+            <if test="isShow != null">
+                #{isShow, jdbcType=VARCHAR},
+            </if>
+            <if test="daxinUrl != null">
+                #{daxinUrl, jdbcType=VARCHAR},
+            </if>
+            <if test="sort != null">
+                #{sort, jdbcType=INTEGER},
+            </if>
+            <if test="created != null">
+                #{created, jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <!-- 修改 -->
+    <update id="update" parameterType="com.caimao.bana.api.entity.ybk.YbkDaxinEntity">
+        update ybk_daxin
+        <set>
+            <if test="exchangeId != null">
+                exchange_id = #{exchangeId, jdbcType=INTEGER},
+            </if>
+            <if test="exchangeName != null">
+                exchange_name = #{exchangeName, jdbcType=VARCHAR},
+            </if>
+            <if test="daxinName != null">
+                daxin_name = #{daxinName, jdbcType=VARCHAR},
+            </if>
+            <if test="endDatetime != null">
+                end_datetime = #{endDatetime, jdbcType=TIMESTAMP},
+            </if>
+            <if test="isShow != null">
+                is_show = #{isShow, jdbcType=VARCHAR},
+            </if>
+            <if test="daxinUrl != null">
+                daxin_url = #{daxinUrl, jdbcType=VARCHAR},
+            </if>
+            <if test="sort != null">
+                sort = #{sort, jdbcType=INTEGER},
+            </if>
+            <if test="created != null">
+                created = #{created, jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id, jdbcType=BIGINT}
+    </update>
+
+</mapper>

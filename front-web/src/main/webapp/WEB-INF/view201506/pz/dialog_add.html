@@ -1,0 +1,156 @@
+<div class="layout_wrap" id="dialog_point">
+    <div class="layout layout02">
+        <h3 class="title">追加合约<a href="javascript:void(0);" id="dialog_close"><i class="icons icon_close"></i></a>  </h3>
+
+        <form id="dialog_pz_add">
+            <input type="hidden" id="dialogContractNo" value="${contract.contractNo}" />
+            <div class="group m_t_20">
+                <span class="col_1">追加金额 </span>
+            <span class="col_2">
+                <input type="text" autocomplete="off" name="deposit_amount" id="dialogDepostiAmount" value="100000" validateType="empty:请输入追加金额 money min:10000" placeholder="请输入追加金额" class="input_text" maxlength="8"/>
+            </span>
+            </div>
+            <p class="group">
+                <span class="col_1">所需保证金 </span>
+                <span class="col_2"><b class="font_red"><span id="dialogMarginAmount">0</span></b> 元&nbsp; &nbsp;<a href="/account/recharge/wangyin.htm">充值</a></span>
+            </p>
+
+            <#if contract.prodTypeId == 1>
+                <p class="group">
+                    <span class="col_1">使用期限 </span>
+                    <span class="col_2">不限</span>
+                </p>
+                <#else/>
+                <div class="group m_t_10">
+                    <span class="col_1">使用期限</span>
+                    <span class="col_2">
+                        <select id="dialogProdTerm" class="input_select">
+                            <#list terms as t>
+                                <option value="${t}">${t?number/30}个月</option>
+                            </#list>
+                        </select>
+                    </span>
+                </div>
+            </#if>
+            <p class="group">
+                <span class="col_1">费用 </span>
+                <span class="col_2" id="dialogFee"><b>0</b>/元（月利率:10.8%）</span>
+            </p>
+            <p class="group align_center">
+                您需要保证金 <b class="font_red" id="dialogMarginAmount2">0</b> 元 + 手续费用<b class="font_red" id="dialogFeeAmount">0</b> 元
+            </p>
+            <div class="group m_t_20">
+                <span class="col_1">安全密码 </span>
+            <span class="col_2">
+                <input type="password" name="tradePwd" id="dialogTradePwd" value="" validateType="empty:请输入安全密码 len:6:16 password" placeholder="请输入安全密码" class="input_text" maxlength="20"/>
+            </span>
+            </div>
+            <div class="group m_t_20">
+                <button class="btn btn_red" type="button" id="dialogQuerenzhuijiaheyue">确认追加合约</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function(){
+        // 当前合约杠杆
+        var curLever = "${contract.loanRatio}";
+        // 合约费率
+        var curFeeRate = '${contract.interestRate}';
+        // 合约产品类型（1日、2月）
+        var curProdType = '${contract.prodTypeId}';
+        var prodMaxAmount = '${product.prodAmountMax/100}';
+        var prodMinAmount = '${product.prodAmountMin/100}';
+
+        var prodDetail = PZ.getProductDetail(${contract.prodId});
+
+        var loanAmount = 0;
+        var depositAmount = 0;
+        var fee = 0;
+        var productTerm = 1;
+
+        var formObj = $('#dialog_pz_add'),
+                inputContractNo = $('#dialogContractNo'),
+                inputDepositAmount = $('#dialogDepostiAmount'),
+                inputTradePwd = $('#dialogTradePwd'),
+                spanMarginAmount = $('#dialogMarginAmount'),
+                spanMarginAmount2 = $('#dialogMarginAmount2'),
+                selectProdTerm = $('#dialogProdTerm'),
+                spanFee = $('#dialogFee'),
+                spanFeeAmount = $('#dialogFeeAmount'),
+                btnSubmit = $('#dialogQuerenzhuijiaheyue');
+
+        formValidate.init(formObj);
+
+        // 变动金额的时候
+        $(inputDepositAmount).keyup(function() {
+            // 计算要交的保证金
+            loanAmount = $(this).val() * 100;
+            depositAmount = parseInt(loanAmount / curLever);
+            $(spanMarginAmount).html(CMUTILS.toYuanAndCommas(depositAmount));
+            $(spanMarginAmount2).html(CMUTILS.toYuanAndCommas(depositAmount));
+            curFeeRate = PZ.getProdFee(prodDetail, loanAmount, curLever);
+            if (curFeeRate == false) {
+                curFeeRate = 0;
+                formValidate.showTips(inputDepositAmount, "追加金额最小" + prodMinAmount + "元 最大" + prodMaxAmount + "元");
+            }
+            // 计算要交的手续费
+            fee = CMUTILS.accMul(loanAmount, curFeeRate);
+            $(spanFeeAmount).html(CMUTILS.toYuanAndCommas(fee));
+            if (curProdType == 1) {
+                // 日
+                $(spanFee).html(CMUTILS.toYuanAndCommas(fee)+"元/天 (日费率: "+(curFeeRate*100).toFixed(2)+"%)");
+            } else {
+                // 月
+                $(spanFee).html(CMUTILS.toYuanAndCommas(fee)+"元/月 (月费率: "+(curFeeRate*100).toFixed(2)+"%)");
+            }
+        });
+        $(inputDepositAmount).trigger("keyup");
+
+        // 变动日期的
+
+        $(selectProdTerm).change(function() {
+            productTerm = $(this).val();
+        });
+        $(selectProdTerm).trigger("change");
+
+        // 追加的操作
+        $(btnSubmit).click(function() {
+            // 表单验证
+            if (formValidate.validateForm(formObj) == false) {
+                return false;
+            }
+            if (curFeeRate <= 0) {
+                formValidate.showFormTips(btnSubmit, "请输入正确的追加金额");
+                return false;
+            }
+            // 合约ID，转入金额
+            var contractNo = $(inputContractNo).val();
+            var tradePwd = $(inputTradePwd).val();
+
+            $.ajax({
+                url : "/pz/operation/add",
+                type : "POST",
+                data : {
+                    contract_no : contractNo,
+                    trade_pwd : RSAUtils.encryptedString(tradePwd),
+                    produce_term : productTerm,
+                    deposit_amount : depositAmount,
+                    add_amount : loanAmount
+                },
+                dataType : "json",
+                success : function(res) {
+                    if (res.success == true) {
+                        Alert.show("追加合约成功", "确认", function() {window.location.reload()});
+                    } else {
+                        formValidate.showFormTips(btnSubmit, res.msg);
+                    }
+                }
+            });
+        });
+    });
+
+</script>

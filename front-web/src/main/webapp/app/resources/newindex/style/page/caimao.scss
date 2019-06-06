@@ -1,0 +1,224 @@
+@charset "utf-8";
+/*引入base*/
+@import "../module/base";
+/*引入图标*/
+@import "../module/icon";
+/*引入布局*/
+@import "../module/layout";
+
+/*==变量==*/
+$imgURL : '../../images/';
+/*==复用样式==*/
+%bg_home{
+  @include img($imgURL + 'home_sprites.png');
+}
+/*轮播*/
+.home_slide{
+  height: 370px;
+  .home_idea{
+    position: relative;
+    z-index: 2;
+  }
+  .section{
+    position: relative;
+    top: -370px;
+    z-index: 3;
+  }
+}
+
+/*登录框*/
+.home_login{
+  position: absolute;
+  background: #FFF;
+  right: 0;
+  top: 20px;
+  z-index: 4;
+  border-top: 4px solid $red;
+  padding: 0 18px ;
+  width: 230px;
+  .hd{
+    color: #9f2d2e;
+    font-size: 16px;
+    border-bottom: 1px dashed #c9c9c9;
+    line-height: 45px;
+    height: 45px;
+  }
+  .bd{
+    padding: 12px 0 0;
+    .group{
+      height: 65px;
+    }
+  }
+  .ft{
+    line-height: 50px;
+    font-size: 12px;
+    @extend %clearFix;
+  }
+  .input_text{
+    @include input($gray,'' , #edd0d0);
+    width: 218px;
+    line-height: 43px;
+    height: 43px;
+    padding-left: 10px;
+    font-size: 16px;
+  }
+  .btn{
+    height: 45px;
+    width: 230px;
+    color: #FFF;
+    @include btn(none,$red)
+  }
+}
+
+/*产品特点*/
+.home_feature{
+  font-weight: 700;
+  overflow: hidden;
+  .case{
+    clear: both;
+    margin-right: -50px;
+    dt{
+      clear: both;
+      width: 100%;
+      height: 40px;
+      @extend %bg_home;
+      background-position: 50% 0;
+      margin: 55px 0;
+      strong{
+        display: none;
+      }
+    }
+    dd{
+      width: 300px;
+      margin-right: 50px;
+      float: left;
+      background-color: #FFF;
+      border-top: 4px solid $red;
+      min-height: 340px;
+      text-align: center;
+      position: relative;
+      font-size: 16px;
+      h3{
+        font-size: 23px;
+        color: $red;
+        padding: 20px 0 70px ;
+      }
+      p{
+        line-height: 2;
+        &.text_1{
+          font-size: 28px ;
+        }
+      }
+      div{
+        position: relative;
+        height: 280px;
+        z-index: 2;
+      }
+      .home_feature_btn{
+        @include btn(none, $red);
+        width: 230px ;
+        height: 43px ;
+        line-height: 43px;
+        color: #FFF ;
+        display: inline-block;
+        font-size: 20px;
+      }
+      &:after{
+        position: absolute;
+        z-index: 1;
+        content: '';
+        width: 180px;
+        height: 180px;
+        @extend %bg_home;
+        background-position: -360px -40px ;
+        left: 50%;
+        top: 50%;
+        margin: -90px 0 0 -90px ;
+      }
+      &.day{
+        &:after{background-position: 0 -40px }
+      }
+      &.month{
+        &:after{background-position: -180px -40px }
+      }
+    }
+  }
+
+  .merit{
+    padding: 70px 0;
+    clear: both;
+    text-align: center;
+    @extend %clearFix;
+    li{
+      float: left;
+      width: 250px;
+      font-size: 16px;
+      line-height: 2;
+      div{
+        border: 2px solid $red;
+        border-radius: 50%;
+        width: 110px;
+        height: 100px;
+        display: inline-block;
+        clear: both;
+        padding-top: 10px;
+        i{
+          @extend %bg_home;
+          display: inline-block;
+          width: 90px;
+          height: 90px;
+          background-position: 0 -220px ;
+          &.h_icon_2{
+            background-position: -90px -220px;
+          }
+          &.h_icon_3{
+            background-position: -180px -220px;
+          }
+          &.h_icon_4{
+            background-position: -270px -220px;
+          }
+        }
+      }
+      h3{
+        font-size: 26px;
+        color: $red;
+      }
+      p{}
+    }
+  }
+}
+
+/*合作伙伴*/
+.home_partners{
+  @extend %clearFix;
+  padding-bottom: 20px;
+  .title{
+    font-size: 20px;
+    color:$red;
+    padding: 30px 0 ;
+    i.h_icon{
+      display: inline-block;
+      width: 36px;
+      height: 26px;
+      @extend %bg_home;
+      background-position: -360px -220px;
+      vertical-align: middle;
+    }
+  }
+  .partners{
+    margin-right: -20px;
+    a{
+      display: inline-block;
+      float: left;
+      width: 150px;
+      height: 50px;
+      box-shadow: 0 0 10px $gray;
+      padding-top: 10px;
+      text-align: center;
+      background-color: #FFF;
+      margin: 0 20px 20px 0;
+    }
+  }
+}
+
+

@@ -1,0 +1,15 @@
+####dubbo\u914D\u7F6E#######
+zk.address=172.32.1.222:2121
+dubbo.server.host=127.0.0.1
+dubbo.server.port=20888
+dubbo.group=test_wx
+dubbo.version=0.0.1
+dubbo.timeout=10000
+dubbo.executes=300
+
+###dubbo#####
+group=test_wx
+zk_address=172.32.1.222:2121
+timeout=60000
+executes=300
+version=0.0.1

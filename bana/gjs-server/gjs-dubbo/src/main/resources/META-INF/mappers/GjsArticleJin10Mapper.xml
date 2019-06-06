@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="GjsArticleJin10">
+
+    <!-- 表所有字段和属性 -->
+    <resultMap id="BaseResultMap" type="com.caimao.gjs.api.entity.article.GjsArticleJin10Entity" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="time_id" property="timeId" jdbcType="VARCHAR" />
+        <result column="category" property="category" jdbcType="INTEGER" />
+        <result column="time" property="time" jdbcType="VARCHAR" />
+        <result column="content" property="content" jdbcType="VARCHAR" />
+        <result column="star" property="star" jdbcType="INTEGER" />
+        <result column="infact" property="infact" jdbcType="VARCHAR" />
+        <result column="before_value" property="beforeValue" jdbcType="VARCHAR" />
+        <result column="expect" property="expect" jdbcType="VARCHAR" />
+        <result column="result" property="result" jdbcType="INTEGER" />
+    </resultMap>
+
+    <!-- 表所有字段 -->
+    <sql id="Base_Column_List" >
+        id, 
+        time_id, 
+        category, 
+        time, 
+        content, 
+        star, 
+        infact, 
+        before_value,
+        expect, 
+        result
+    </sql>
+
+    <!-- 根据ID查找 -->
+    <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select <include refid="Base_Column_List" /> from gjs_article_jin10 where id = #{id, jdbcType=BIGINT}
+    </select>
+
+    <!-- 根据TimeId查找 -->
+    <select id="selectByTimeId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select <include refid="Base_Column_List" /> from gjs_article_jin10 where time_id = #{timeId, jdbcType=VARCHAR}
+    </select>
+
+    <!-- 根据ID删除 -->
+    <delete id="deleteById" parameterType="java.lang.Long" >
+        delete from gjs_article_jin10 where id = #{id, jdbcType=BIGINT}
+    </delete>
+
+    <!-- 分页查询 -->
+    <select id="queryArticleWithPage" resultMap="BaseResultMap" parameterType="com.caimao.gjs.api.entity.req.FQueryGjsArticleJin10Req" >
+        select <include refid="Base_Column_List" /> from gjs_article_jin10
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="null != category and '' != category">
+                AND category = #{category}
+            </if>
+            <if test="null != content and '' != content">
+                AND content like concat('%', #{content}, '%')
+            </if>
+            <if test="null != timeId and '' != timeId">
+                AND time_id &gt; #{timeId}
+            </if>
+        </trim>
+        ORDER BY time_id DESC
+    </select>
+
+    <!-- 插入 -->
+    <insert id="insert" parameterType="com.caimao.gjs.api.entity.article.GjsArticleJin10Entity">
+        insert into gjs_article_jin10
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="timeId != null">
+                time_id,
+            </if>
+            <if test="category != null">
+                category,
+            </if>
+            <if test="time != null">
+                time,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+            <if test="star != null">
+                star,
+            </if>
+            <if test="infact != null">
+                infact,
+            </if>
+            <if test="beforeValue != null">
+                before_value,
+            </if>
+            <if test="expect != null">
+                expect,
+            </if>
+            <if test="result != null">
+                result,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id, jdbcType=BIGINT},
+            </if>
+            <if test="timeId != null">
+                #{timeId, jdbcType=VARCHAR},
+            </if>
+            <if test="category != null">
+                #{category, jdbcType=INTEGER},
+            </if>
+            <if test="time != null">
+                #{time, jdbcType=VARCHAR},
+            </if>
+            <if test="content != null">
+                #{content, jdbcType=VARCHAR},
+            </if>
+            <if test="star != null">
+                #{star, jdbcType=INTEGER},
+            </if>
+            <if test="infact != null">
+                #{infact, jdbcType=VARCHAR},
+            </if>
+            <if test="beforeValue != null">
+                #{beforeValue, jdbcType=VARCHAR},
+            </if>
+            <if test="expect != null">
+                #{expect, jdbcType=VARCHAR},
+            </if>
+            <if test="result != null">
+                #{result, jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <!-- 修改 -->
+    <update id="update" parameterType="com.caimao.gjs.api.entity.article.GjsArticleJin10Entity">
+        update gjs_article_jin10
+        <set>
+            <if test="timeId != null">
+                time_id = #{timeId, jdbcType=VARCHAR},
+            </if>
+            <if test="category != null">
+                category = #{category, jdbcType=INTEGER},
+            </if>
+            <if test="time != null">
+                time = #{time, jdbcType=VARCHAR},
+            </if>
+            <if test="content != null">
+                content = #{content, jdbcType=VARCHAR},
+            </if>
+            <if test="star != null">
+                star = #{star, jdbcType=INTEGER},
+            </if>
+            <if test="infact != null">
+                infact = #{infact, jdbcType=VARCHAR},
+            </if>
+            <if test="beforeValue != null">
+                before_value = #{beforeValue, jdbcType=VARCHAR},
+            </if>
+            <if test="expect != null">
+                expect = #{expect, jdbcType=VARCHAR},
+            </if>
+            <if test="result != null">
+                result = #{result, jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id, jdbcType=BIGINT}
+    </update>
+
+</mapper>

@@ -1,0 +1,93 @@
+html, body, .page-wrap {
+    height: 100%;
+}
+
+.container {
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+    height: 100%;
+    width: 1000px;
+    position: relative;
+}
+
+/*@media (min-width: 768px) {*/
+    /*.container {*/
+        /*width: 750px;*/
+    /*}*/
+/*}*/
+
+/*@media (min-width: 992px) {*/
+    /*.container {*/
+        /*width: 970px;*/
+    /*}*/
+/*}*/
+
+/*@media (min-width: 1200px) {*/
+    /*.container {*/
+        /*width: 1170px;*/
+    /*}*/
+/*}*/
+
+.layout-flex-column {
+    display: table;
+    width: 100%;
+}
+
+.layout-flex-column > div {
+    display: table-row;
+}
+
+.layout-flex-column > .content-wrapper {
+    height: 100%;
+}
+
+.layout-flex-column .stretch {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.content {
+    position: relative;
+}
+
+.layout-flex-column .content, .layout-flex-column .contents {
+    height: 100%;
+    display: block;
+}
+
+.layout-flex-column .content.table {
+    display: table;
+    width: 100%;
+}
+
+.layout-flex-column .content > .main, .layout-flex-column .contents > .main {
+    height: 100%;
+}
+
+.layout-flex-column .content.table .center {
+    display: table-cell!important;
+    vertical-align: middle;
+}
+
+.bg-img-stretch {
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.img-zoom-up:hover {
+    transform: scale(1.1);
+    transition: .3s all;
+}
+
+.img-zoom-up:before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.img-zoom-up:hover:before {
+    background-color: rgba(0, 0, 0, 0.1);
+}

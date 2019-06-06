@@ -1,0 +1,68 @@
+<#assign title="当日委托"/>
+<#assign header="当日委托"/>
+<#assign footer="0"/>
+<#assign bg="bg-gray"/>
+<#assign controller="dayTrust"/>
+<#include 'mobile/layout/layout.html'/>
+
+
+<#macro headerContent>
+<!--tab-->
+	<#assign tabItem="4"/>
+	<#include 'mobile/component/tradeHeader.html'/>
+	
+	<!--tab-->
+		
+		
+	<div class="trading-tside bg-white con-spacing15 con-frame con-frame-horizontal" style="padding-top: 0px;">
+	<aside class="am-mt-20">        
+	<h4 class="am-ft-md">交易子账号</h4>
+	<div class="am-flexbox am-mt-10 select-container">
+	<span  class="select-choice"><select class="am-ft-md am-left-15" style="display: none;" id="choseHoms"></select><i class="type-ico am-icon-arrow-bottom"></i></span>
+	
+	</div>
+	</aside>
+	</div>
+</#macro>
+
+<#macro content>
+<article class="content" style="padding-top:200px; padding-bottom:56px;" id="panel1">
+
+
+<div class="con-horizontal am-mt-15 clearfix">
+<!--左边-->
+<div class="horizontal-left">
+<table class="table-list lineTop-gray" width="100%" border="0" cellspacing="0" cellpadding="0" >
+        <tbody><tr id="lTrustsTitle">
+          <th class="tb-left">名称/代码</th>
+        </tr>
+      </tbody>
+      </table>
+</div>
+<!--左边-->
+
+<!--右边-->
+<div class="horizontal-wrapper" id="scrollTable">
+<table border="0" cellspacing="0" class="table-list lineTop-gray   horizontal-scroller-800">
+  <tr id="rTrustsTitle">
+    <th class="tb-center">委托编号</th>
+    <th class="tb-center">委托时间</th>
+    <th class="tb-center">委托状态</th>
+    <th class="tb-center">方向</th>
+    <th class="tb-right">委托价格</th>
+    <th class="tb-center">委托数量</th>
+    <th class="tb-center">成交数量</th>
+    <th class="tb-right">成交金额</th>
+  </tr>
+</table>
+</div>
+<!--右边-->
+<!--右边的三角形，如滑动时不出现-->
+<span class="arrow-horizontal" id="arrowShape"></span>
+</div>
+
+
+</article>
+
+  <#include 'mobile/component/choseHoms.html'/>
+</#macro>

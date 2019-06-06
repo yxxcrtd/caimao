@@ -1,0 +1,96 @@
+@charset "utf-8";
+@import "variable";
+/*
+━━━━━━━
+table.scss
+表格（依赖base）
+BitUI
+━━━━━━━
+*/
+.table{
+  width: 100%;
+  th,td{ border-bottom: 1px solid #E6E6E6;
+    text-align: left;
+    &:first-child{
+      padding-left: 20px;
+    }
+  }
+  thead{
+   line-height: 38px;
+    th{ background-color:#F6F7FB;border-top: 1px solid #E6E6E6;}
+  }
+  tbody{
+    line-height:44px;
+    b{
+      font-weight: 500;
+    }
+  }
+  &.table_border{
+    th,td{
+      border: 1px solid #E6E6E6;
+    }
+    thead{
+      th{
+        border-bottom-width: 2px;
+        font-weight: 500;
+      }
+    }
+  }
+  &.table_hover{
+    tbody tr:hover{
+      background-color: #F6F7FB;
+    }
+  }
+  &.table_striped {
+    tbody tr:nth-child(even){
+      background-color: #F6F7FB;
+    }
+  }
+  .table_crumbs{
+    color: #ADADAD;
+    th,td{
+      line-height:28px;
+      border-bottom: none;
+      text-align: center !important;
+      padding-top:30px;
+      padding-left:0;
+    }
+    i{
+      margin: 0;
+      margin-right:5px;
+    }
+  }
+}
+
+.center{
+  td,th{
+    text-align: center;
+  }
+}
+
+.table_tit{
+  @extend %clearFix;
+  span{
+    float: left;
+    margin-right:20px;
+    line-height: 26px;
+    .input_select{
+      width:120px;
+      height:26px;
+      color: #999;
+    }
+    a{
+      width: 50px;
+      height: 24px;
+      line-height: 24px;
+    }
+    button{
+      width: 50px;
+      height: 26px;
+      line-height: 26px;
+      border: none;
+    }
+  }
+
+}
+

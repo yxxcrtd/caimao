@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="TpzUserAuthJour">
+    <resultMap type="com.caimao.bana.api.entity.TpzUserAuthJourEntity" id="BaseResultMap">
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="user_id" property="userId" jdbcType="BIGINT" />
+        <result column="user_real_name" property="userRealName" jdbcType="VARCHAR" />
+        <result column="idcard_kind" property="idcardKind" jdbcType="CHAR" />
+        <result column="idcard" property="idcard" jdbcType="VARCHAR" />
+        <result column="auth_status" property="authStatus" jdbcType="CHAR" />
+        <result column="auth_fail_reason" property="authFailReason" jdbcType="VARCHAR" />
+        <result column="reg_date" property="regDate" jdbcType="VARCHAR" />
+        <result column="pay_account_id" property="payAccountId" jdbcType="VARCHAR" />
+        <result column="pay_user_id" property="payUserId" jdbcType="VARCHAR" />
+        <result column="create_datetime" property="createDatetime" jdbcType="TIMESTAMP" />
+        <result column="update_datetime" property="updateDatetime" jdbcType="TIMESTAMP" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        id, user_id, user_real_name, idcard_kind, idcard,
+		auth_status,
+		auth_fail_reason,
+		reg_date, pay_account_id, pay_user_id,
+		create_datetime, update_datetime
+    </sql>
+
+    <select id="getPassedUserAuthJour" resultMap="BaseResultMap"
+            parameterType="com.caimao.bana.api.entity.TpzUserAuthJourEntity">
+        select
+        <include refid="Base_Column_List" />
+        from tpz_user_auth_jour
+        where idcard_kind = #{idcardKind}
+        and
+        idcard=#{idcard}
+        and auth_status='1'
+    </select>
+
+    <select id="countAuthNum"  resultType="java.lang.Integer"
+            parameterType="java.lang.Long">
+        select
+        count(1)
+        from tpz_user_auth_jour
+        where user_id =
+        #{userId,jdbcType=BIGINT}
+    </select>
+
+    <insert id="save" parameterType="com.caimao.bana.api.entity.TpzUserAuthJourEntity">
+        insert into tpz_user_auth_jour
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != 0">
+                id,
+            </if>
+            <if test="userId != 0">
+                user_id,
+            </if>
+            <if test="userRealName != null">
+                user_real_name,
+            </if>
+            <if test="idcardKind != null">
+                idcard_kind,
+            </if>
+            <if test="idcard != null">
+                idcard,
+            </if>
+            <if test="authStatus != null">
+                auth_status,
+            </if>
+            <if test="authFailReason != null">
+                auth_fail_reason,
+            </if>
+            <if test="regDate != null">
+                reg_date,
+            </if>
+            <if test="payAccountId != null">
+                pay_account_id,
+            </if>
+            <if test="payUserId != null">
+                pay_user_id,
+            </if>
+            <if test="createDatetime != null">
+                create_datetime,
+            </if>
+            <if test="updateDatetime != null">
+                update_datetime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != 0">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="userId != 0">
+                #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="userRealName != null">
+                #{userRealName,jdbcType=VARCHAR},
+            </if>
+            <if test="idcardKind != null">
+                #{idcardKind,jdbcType=CHAR},
+            </if>
+            <if test="idcard != null">
+                #{idcard,jdbcType=VARCHAR},
+            </if>
+            <if test="authStatus != null">
+                #{authStatus,jdbcType=CHAR},
+            </if>
+            <if test="authFailReason != null">
+                #{authFailReason,jdbcType=VARCHAR},
+            </if>
+            <if test="regDate != null">
+                #{regDate,jdbcType=VARCHAR},
+            </if>
+            <if test="payAccountId != null">
+                #{payAccountId,jdbcType=VARCHAR},
+            </if>
+            <if test="payUserId != null">
+                #{payUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="createDatetime != null">
+                #{createDatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDatetime != null">
+                #{updateDatetime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="update" parameterType="com.caimao.bana.api.entity.TpzUserAuthJourEntity">
+        update tpz_user_auth_jour
+        <set>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="userRealName != null">
+                user_real_name = #{userRealName,jdbcType=VARCHAR},
+            </if>
+            <if test="idcardKind != null">
+                idcard_kind = #{idcardKind,jdbcType=CHAR},
+            </if>
+            <if test="idcard != null">
+                idcard = #{idcard,jdbcType=VARCHAR},
+            </if>
+            <if test="authStatus != null">
+                auth_status = #{authStatus,jdbcType=CHAR},
+            </if>
+            <if test="authFailReason != null">
+                auth_fail_reason = #{authFailReason,jdbcType=VARCHAR},
+            </if>
+            <if test="regDate != null">
+                reg_date = #{regDate,jdbcType=VARCHAR},
+            </if>
+            <if test="payAccountId != null">
+                pay_account_id = #{payAccountId,jdbcType=VARCHAR},
+            </if>
+            <if test="payUserId != null">
+                pay_user_id = #{payUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="createDatetime != null">
+                create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDatetime != null">
+                update_datetime = #{updateDatetime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+</mapper>

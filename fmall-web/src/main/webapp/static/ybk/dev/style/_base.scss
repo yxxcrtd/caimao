@@ -1,0 +1,25 @@
+@charset "utf-8";
+@import 'mixin';
+/** RESET **/
+body{font-size:12px; font-family:'Microsoft YaHei',Lucida Grande,Lucida Sans Unicode,\5B8B\4F53;-webkit-text-size-adjust:none;color:#6a6a6a;_font:12px/1.5 \5B8B\4F53}
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,p,form,input,textarea{padding:0;margin:0}
+table,td,tr,th{font-size:12px}
+ol,ul{list-style:none}
+li{list-style-type:none}
+table{margin:0 auto;border-collapse:collapse;border-spacing:0}
+img{vertical-align:top;border:0}
+caption,th{text-align:left}
+h1,h2,h3,h4,h5,h6,button,input,select,textarea{font-size:100%;font-weight:400}
+i,u,em,b,strong{font-style:normal;text-decoration:none;font-weight:400}
+input,textarea,button,select,button{outline:none;resize:none;font-family:\5B8B\4F53}
+a{
+	color:#666;text-decoration:none;@include tran(color,.4s);
+	&:visited{text-decoration:none}
+	&:hover{
+		color:#eb4636;text-decoration:none;@include tran(color,.2s);
+	}
+}
+.clearfix{
+	*zoom:1;
+	&:after{clear:both;height:0;overflow:hidden;display:block;visibility:hidden;content:".";}
+}

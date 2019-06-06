@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <#include "weixin/config.html"/>
+    <head>
+        <meta charset="UTF-8">
+        <title>股计</title>
+        <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1">
+        <meta name="format-detection" content="telephone=no"/>
+        <#include "weixin/guji/include/js.html"/>
+        <script>
+            domready(function() {
+
+            });
+        </script>
+    </head>
+
+    <body>
+        <#list userStockEntityList as l>
+            <#if ("GP" == l.stockType)>
+                ${l.stockCode}
+                ${l.stockName}
+                ${l.targetPrice}
+                <a href="/weixin/guji/myCommentGPEdit?id=${l.id}&stock=${l.stockCode}">追加点评</a>
+            </#if>
+            <br />
+        </#list>
+
+        <a href="/weixin/guji/myCommentGPEdit?wxId=${wxId}&id=${l.id}&stock=${l.stockCode}">点评新股</a>
+
+        <#include "weixin/guji/include/menu.html"/>
+    </body>
+</html>

@@ -1,0 +1,155 @@
+﻿<!doctype html>
+<#include "ybk/config.html"/>
+<html>
+<head>
+    <title></title>
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+     <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1, user-scalable=false">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-touch-fullscreen" content="yes">
+<meta name="format-detection" content="telephone=no" />
+    <link href='${staticUrl}/topic/m20151028/css/style0.css' rel='stylesheet'/>
+    <script type='text/javascript'>
+        //判断系统及版本
+        (function () {
+            var phoneWidth = parseInt(window.screen.width),
+                    phoneScale = phoneWidth / 640,
+                    ua = navigator.userAgent;
+
+            if (/Android (\d+\.\d+)/.test(ua)) {
+                var version = parseFloat(RegExp.$1);
+                // andriod 2.3
+                if (version > 2.3) {
+                    document.write('<meta name="viewport" content="width=640, minimum-scale = " + phoneScale + ", maximum-scale = " + phoneScale + ", target-densitydpi=device-dpi">');
+                    // andriod 2.3以上
+                } else {
+                    document.write('<meta name="viewport" content="width=640, target-densitydpi=device-dpi">');
+                }
+                // 其他系统
+            } else {
+                document.write('<meta name="viewport" content="width=640, user-scalable=no">');
+            }
+        })();
+        var coverUrl = '';
+        var config = {
+            coverUrl: coverUrl,
+            swipeCur: 0,
+            swipeDir: 'vertical'// 'vertical' // horizontal
+        }
+    </script>
+    <script src='${staticUrl}/topic/m20151028/js/zepto.min.js'></script>
+    <script src='${staticUrl}/topic/m20151028/js/swipe.js'></script>
+    <script src='${staticUrl}/topic/m20151028/js/player.js'></script>
+</head>
+<body>
+<div class='container'>
+    <div class='swipe' id='swipe'>
+        <ul>
+            <!--首页~动画1-->
+            <li class='js-flag-expired' id='hehe'>
+                <div class='page index ' style='background: url("${staticUrl}/topic/m20151028/img/page01.jpg")no-repeat;background-size: 100% 100%;'>
+                   <div class='index-1 '>
+                       <img src="${staticUrl}/topic/m20151028/img/logo1.png" alt="">
+                       <img src="${staticUrl}/topic/m20151028/img/logo2.png" alt="">
+                   </div>
+                   <div class="index-2">
+                       <img src="${staticUrl}/topic/m20151028/img/t1.png" alt="" class="t1">
+                       <img src="${staticUrl}/topic/m20151028/img/t2.png" alt="" class='t2'>
+                   </div>
+                   <div class='index-3'>
+                       <img src="${staticUrl}/topic/m20151028/img/h8.png" alt="" class='phone'>
+                       <img src="${staticUrl}/topic/m20151028/img/h3.png" alt="" class='word'>
+                   </div>
+                   <div class="index-4">
+                       <a href="https://ybk.caimao.com/ybk/topic/download.html?channelId=<#if channelId??>${channelId}<#else></#if>" class='btn'></a>
+                   </div>
+                   <div class="a-fadeoutB">
+                       <span class="next"></span>
+                   </div>
+                </div>
+            </li>
+
+            <!--动画2-->
+            <li class='js-flag-expired'>
+                <div class='page page02' style='background: url("${staticUrl}/topic/m20151028/img/page02.jpg")no-repeat;background-size: 100% 100%;'>
+                    <div class='page02-1'>
+                        <img src="${staticUrl}/topic/m20151028/img/1.png" alt="">
+                       
+                    </div>
+                    <div class='page02-2'>
+                        <img src="${staticUrl}/topic/m20151028/img/2.png" alt="">
+                    </div>
+                    <div class='page02-3'>
+                       <img src="${staticUrl}/topic/m20151028/img/4.png" alt="" class='vedio'>
+                       <img src="${staticUrl}/topic/m20151028/img/6.png" alt="" class='money'>
+                       <img src="${staticUrl}/topic/m20151028/img/3.png" alt="" class='huojian'>
+                   </div>
+                   <div class="page02-4">
+                       <a href="https://ybk.caimao.com/ybk/topic/download.html?channelId=<#if channelId??>${channelId}<#else></#if>" class='btn2'></a>
+                   </div>
+                   <div class="a-fadeoutB">
+                       <span class="next"></span>
+                   </div>
+                </div>
+            </li>
+            <!--动画3-->
+            <li class='js-flag-normal'>
+                <div class='page page03' style='background: url("${staticUrl}/topic/m20151028/img/page03.jpg")no-repeat;background-size: 100% 100%;'>
+                  <div class='page03-1'>
+                      <img src="${staticUrl}/topic/m20151028/img/t3.png" alt="">
+                      <img src="${staticUrl}/topic/m20151028/img/t4.png" alt="" class='t4'>
+                  </div>
+                  <div class='page03-2'>
+                      <img src="${staticUrl}/topic/m20151028/img/xin1.png" alt="" class="xin xin1">
+                      <img src="${staticUrl}/topic/m20151028/img/xin2.png" alt="" class="xin xin2">
+                      <img src="${staticUrl}/topic/m20151028/img/xin3.png" alt="" class="xin xin3">
+                      <img src="${staticUrl}/topic/m20151028/img/8.png" alt="" class='B1'>
+                      <img src="${staticUrl}/topic/m20151028/img/9.png" alt="" class='B2'>
+                      <img src="${staticUrl}/topic/m20151028/img/pel.png" alt="" class='pel'>
+                  </div>
+                  <div class="page03-3">
+                       <a href="https://ybk.caimao.com/ybk/topic/download.html?channelId=<#if channelId??>${channelId}<#else></#if>" class='btn3'></a>
+                   </div>
+                   <div class="a-fadeoutB">
+                       <span class="next"></span>
+                   </div>
+                </div>
+            </li>
+            <!--动画4-->
+            <li class='js-flag-normal'>
+                <div class='page page04' style='background: url("${staticUrl}/topic/m20151028/img/page04.jpg")no-repeat;background-size: 100% 100%;'>
+                  <div class='page04-1'>
+                      <img src="${staticUrl}/topic/m20151028/img/t5.png" alt="">
+                      <img src="${staticUrl}/topic/m20151028/img/t6.png" alt="" class="t6">
+                  </div>
+                  <div class='page04-2'>
+                      <img src="${staticUrl}/topic/m20151028/img/12.png" alt="" class='page04-img'>
+                      <img src="${staticUrl}/topic/m20151028/img/pel2.png" alt="" class='page04-pel'>
+                  </div>
+                   <div class="page04-3">
+                       <a href="https://ybk.caimao.com/ybk/topic/download.html?channelId=<#if channelId??>${channelId}<#else></#if>" class='btn2'></a>
+                   </div>
+                   <div class="a-fadeoutB">
+                       <span class="next"></span>
+                   </div>
+                </div>
+            </li>
+
+        </ul>
+        <!--<a href='javascript:;' id='sw-music' class='ui-music f-b4p f-r4p playing'><i class='ui-icon icon-music'></i>
+            <audio autoplay='autoplay' preload='auto' loop='loop' data-src='music/14290722924984.mp3' src='music/RightNow&RightHere.mp3' data-play='1'></audio>
+        </a>-->
+    </div>
+</div>
+<script>
+   var _hmt = _hmt || [];
+   (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?a1539df98107c7df914ae2d77cd616c3";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+   })();
+</script>
+</body>
+</html>

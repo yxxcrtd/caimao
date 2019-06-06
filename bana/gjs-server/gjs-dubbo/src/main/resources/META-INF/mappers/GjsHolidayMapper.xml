@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="GjsHoliday">
+
+    <!-- 表所有字段和属性 -->
+    <resultMap id="BaseResultMap" type="com.caimao.gjs.api.entity.GjsHolidayEntity" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="exchange" property="exchange" jdbcType="VARCHAR" />
+        <result column="holiday" property="holiday" jdbcType="VARCHAR" />
+        <result column="trade_time" property="tradeTime" jdbcType="VARCHAR" />
+        <result column="opt_date" property="optDate" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <!-- 表所有字段 -->
+    <sql id="Base_Column_List" >
+        id, 
+        exchange, 
+        holiday, 
+        trade_time, 
+        opt_date
+    </sql>
+
+    <!-- 根据ID查找 -->
+    <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select <include refid="Base_Column_List" /> from gjs_holiday where id = #{id, jdbcType=BIGINT}
+    </select>
+
+    <!-- 根据ID删除 -->
+    <delete id="deleteById" parameterType="java.lang.Long" >
+        delete from gjs_holiday where id = #{id, jdbcType=BIGINT}
+    </delete>
+
+    <!-- 分页查询 -->
+    <select id="queryGjsHolidayWithPage" resultMap="BaseResultMap" parameterType="com.caimao.gjs.api.entity.req.FQueryGjsHolidayReq" >
+        select <include refid="Base_Column_List" /> from gjs_holiday
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="exchange !=null and exchange != ''">AND exchange = #{exchange}</if>
+            <if test="holiday !=null and holiday != ''">AND holiday = #{holiday}</if>
+            <if test="beginHoliday != null and beginHoliday != ''">AND holiday >= ${beginHoliday}</if>
+        </trim>
+        ORDER BY holiday ASC
+    </select>
+
+    <!-- 根据exchange和holiday查询列表 -->
+    <select id="queryGjsHolidayByExchangeAndHoliday" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List" /> from gjs_holiday
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="exchange !=null and exchange != ''">AND exchange = #{exchange}</if>
+            <if test="holiday != null and holiday != ''">AND holiday = #{holiday}</if>
+        </trim>
+    </select>
+
+    <!-- 插入 -->
+    <insert id="insert" parameterType="com.caimao.gjs.api.entity.GjsHolidayEntity">
+        insert into gjs_holiday
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="exchange != null">
+                exchange,
+            </if>
+            <if test="holiday != null">
+                holiday,
+            </if>
+            <if test="tradeTime != null">
+                trade_time,
+            </if>
+            <if test="optDate != null">
+                opt_date,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id, jdbcType=BIGINT},
+            </if>
+            <if test="exchange != null">
+                #{exchange, jdbcType=VARCHAR},
+            </if>
+            <if test="holiday != null">
+                #{holiday, jdbcType=VARCHAR},
+            </if>
+            <if test="tradeTime != null">
+                #{tradeTime, jdbcType=VARCHAR},
+            </if>
+            <if test="optDate != null">
+                #{optDate, jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <!-- 修改 -->
+    <update id="update" parameterType="com.caimao.gjs.api.entity.GjsHolidayEntity">
+        update gjs_holiday
+        <set>
+            <if test="exchange != null">
+                exchange = #{exchange, jdbcType=VARCHAR},
+            </if>
+            <if test="holiday != null">
+                holiday = #{holiday, jdbcType=VARCHAR},
+            </if>
+            <if test="tradeTime != null">
+                trade_time = #{tradeTime, jdbcType=VARCHAR},
+            </if>
+            <if test="optDate != null">
+                opt_date = #{optDate, jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id, jdbcType=BIGINT}
+    </update>
+
+</mapper>

@@ -1,0 +1,112 @@
+<form id="set_pwd_question" action="/user/pwdquestion/set" class="p_l_40">
+    <div class="group m_t_10">
+        <div class="col_1">问题一</div>
+        <div class="col_2">
+            <select id="ques1" class="input_select question" name="question1"></select>
+        </div>
+    </div>
+    <div class="group m_t_10">
+        <div class="col_1">答案一</div>
+        <div class="col_2">
+            <div class="col_2"><input id="ans1" class="input_text" name="answer1" type="text" autocomplete="off" validateType="empty:请输入答案" maxlength="20"/></div>
+        </div>
+    </div>
+    <div class="group m_t_10">
+        <div class="col_1">问题二</div>
+        <div class="col_2">
+            <select id="ques2" class="input_select question" name="question2" ></select>
+        </div>
+    </div>
+    <div class="group m_t_10">
+        <div class="col_1">答案二</div>
+        <div class="col_2">
+            <div class="col_2"><input id="ans2" class="input_text" name="answer2" type="text" autocomplete="off" validateType="empty:请输入答案" maxlength="20"/></div>
+        </div>
+    </div>
+    <div class="group m_t_10">
+        <div class="col_1">问题三</div>
+        <div class="col_2">
+            <select id="ques3" class="input_select question" name="question3"></select>
+        </div>
+    </div>
+    <div class="group m_t_10">
+        <div class="col_1">答案三</div>
+        <div class="col_2">
+            <div class="col_2"><input id="ans3" class="input_text" name="answer3" type="text" autocomplete="off" validateType="empty:请输入答案" maxlength="20"/></div>
+        </div>
+    </div>
+    <div class="group m_t_10">
+        <div class="col_1"></div>
+        <div class="col_2"><button id="jsQuestionSub" type="button"  class="btn size_m btn_blue">保存</button></div>
+        <div id="setPwdQuestionError" class="error"></div>
+    </div>
+</form>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        //加载密保问题选项，互斥
+        $.get("/pwdquestion",function(response){
+            if(response.success){
+                var elements = $(".question");
+                selectArr = response.data;
+                elements.each(function(i){
+                    var html = '<option value="" selected="true">请选择</option>';
+                    for(var q in selectArr){
+                        html += '<option value="'+ selectArr[q].questionId +'">' + selectArr[q].questionTitle + '</option>';
+                    }
+                    $(this).html(html);
+                });
+                elements.change(function(){
+                    var cIndex = $(".question").index($(this)); //当前select选框索引值
+                    var selected = [];
+                    $(".question").each(function(){
+                        selected.push($(this).val());
+                    });
+                    //遍历所有select选框，重置所有问题
+                    $(".question").each(function(i){
+                        //跳过当前的select选框，因为该内容无需校正
+                        if (cIndex == i) return;
+                        var html="";
+                        var tValue = $(this).val();
+                        if(tValue==""){
+                            html = '<option value="" selected="true">请选择</option>'
+                        }else{
+                            html = '<option value="' + tValue + '" selected="true">'+ $(this).find("option:selected").text() + '</option>';
+                        }
+                        for(var q in selectArr){
+                            if($.inArray(selectArr[q].questionId, selected)==-1){
+                                html += '<option value="'+ selectArr[q].questionId +'" >' + selectArr[q].questionTitle + '</option>';
+                            }
+                        }
+                        $(this).html(html);
+                    });
+                });
+            }
+        });
+    });
+
+    var setPwdQuestionFormObj = $('#set_pwd_question'),
+            ques1 = $('#ques1'),
+            ans1 = $('#ans1'),
+            ques2 = $('#ques2'),
+            ans2 = $('#ans2'),
+            ques3 = $('#ques3'),
+            ans3 = $('#ans3'),
+            setPwdQuestionSubmitObj = $('#jsQuestionSub');
+    // 表单验证
+    formValidate.init(setPwdQuestionFormObj);
+    // 提交
+    $(setPwdQuestionSubmitObj).click(function() {
+        if (formValidate.validateForm(setPwdQuestionFormObj) == false) {
+            return false;
+        }
+        $.post("/user/pwdquestion/set",{question1:$(ques1).val(),answer1:$(ans1).val(),question2:$(ques2).val(),answer2:$(ans2).val(),question3:$(ques3).val(),answer3:$(ans3).val()},function(response){
+            if (response.success) {
+                // TODO 关闭所有显示框，弹框提示成功
+                Alert.show("设置安全问题成功", "确认", function() {window.location.reload()});
+            } else {
+                formValidate.showFormTips(setPwdQuestionSubmitObj, response.msg);
+            }
+        });
+    });
+</script>

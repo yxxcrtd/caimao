@@ -1,0 +1,26 @@
+@charset "utf-8";
+@import 'base';
+@import 'module';
+$path : '../../img/';
+html{background:#ffffff;}
+body{background:#ffffff;color:#000;font-size:16px;padding:0 12px;font-family:"Microsoft Yahei";}
+.overflowdot{white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+h1{font-size:20px;line-height:27px;padding:20px 0 0;overflow: hidden;font-weight:700;}
+h2{
+	padding-top:12px;font-size:12px;color:#969696;line-height:21px;height:45px;
+	img{width:21px;height:21px;border-radius:2px;vertical-align:middle;margin-right:10px;}
+	strong,i{display:inline-block;}
+	span{display:inline-block;color:#ececeb;text-align:center;width:21px;}
+	i{color:#b6b6b6;}
+}
+.content{
+	line-height:27px;
+	img{width:100%;margin-bottom:27px;display:block;}
+	p{padding-bottom:27px;}
+}
+.fixedBox{
+	width:1px;height:1px;position: fixed;left:50%;top:50%;
+	img{
+		position: absolute;left:-33px;top:-32px;width:67px;height:65px;
+	}
+}

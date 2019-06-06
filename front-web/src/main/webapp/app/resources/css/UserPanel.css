@@ -1,0 +1,41 @@
+.user {
+	width: 290px;
+	padding: 20px 20px 10px 20px;
+	border-right: 1px #eaeaea solid;
+	display: inline;
+	float: left;
+}
+
+.userAvatar {
+	float: left;
+}
+
+.userAvatar img {
+	width: 70px;
+}
+
+.userMain {
+	display: inline;
+	float: left;
+	width: 210px;
+	padding-left: 10px;
+}
+
+.userBase:after {
+	display: block;
+	clear: both;
+	content: "";
+	visibility: hidden;
+	height: 0;
+	
+}
+
+.userTitle {
+	font-weight: bold;
+	font-size: 14px;
+}
+
+.userField {
+	color: #959595;
+	padding-top: 5px;
+}

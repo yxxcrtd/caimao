@@ -1,0 +1,114 @@
+<#assign title="资产"/>
+<#assign header="资产"/>
+<#assign footer="0"/>
+<#assign bg="bg-gray"/>
+<#assign controller="assets"/>
+<#include 'mobile/layout/layout.html'/>
+
+
+<#macro headerContent>
+<!--tab-->
+	<#assign tabItem="0"/>
+	<#include 'mobile/component/tradeHeader.html'/>
+<!--tab-->
+	<div id="headerPanel">
+	<!--账户总值-->
+	<aside class="bg-white trader-Top">
+	<div class="trader-Top-1 lineBottom-gray-dashed">
+	<h6 class="am-ft-sm am-ft-tabText">账户总值</h6>
+	<p class="am-ft-red"><big id="totalNetAssets"></big><span class="am-ft-xl">元</span></p>
+	</div>
+	<!--金额-->
+	<dl class="dl-moneyMain bg-white">
+	<dt>
+	<p><b id="currentCash" ></b><span class="am-ft-sm">元</span></p>
+	<p class="am-pt-5"><span class="am-ft-sm am-ft-tabText">资金余额</span></p>
+	</dt>
+	<dt>
+	<p><b  id="curAmount"></b><span class="am-ft-sm">元</span></p>
+	<p class="am-pt-5"><span class="am-ft-sm am-ft-tabText">可用余额</span></p>
+	</dt>
+	<dt>
+	<p><b id="totalMarketValue"></b><span class="am-ft-sm">元</span></p>
+	<p class="am-pt-5"><span class="am-ft-sm am-ft-tabText">证券市值</span></p>
+	</dt>
+	</dl>
+	<!--金额-->
+	
+	</ul>
+	</aside>
+	<!--账户总值-->
+	
+	<div class="trading-tside bg-white con-spacing15 con-frame con-frame-horizontal" style="padding-top: 0px;">
+	<aside class="am-mt-20">        
+	<h4 class="am-ft-md">交易子账号</h4>
+	<div class="am-flexbox am-mt-10 select-container">
+	<span class="select-choice"><select class="am-ft-md am-left-15" style="display: none;" id="choseHoms"></select><i class="type-ico am-icon-arrow-bottom"></i></span>
+	
+	</div>
+	</aside>
+	</div>
+	
+	<!--表单-->
+<!-- 	<aside class="con-frame con-frame-horizontal">
+	<ul class="">
+	<li class="datalist-item clearfix">
+	<a id="choseHoms" class="am-grid datalist-line">
+	        <div class="am-grid-item am-grid-item-25  am-ft-left">
+	        <h4 class="am-ft-md cm-left am-ft-tabText">交易子账号</h4>
+	        </div> 
+	        <div class="am-grid-item am-grid-item-75 am-ft-right am-right-15">
+	        <span class="am-ft-md am-ft-main am-right-10"></span>
+	        <span class="type-ico am-icon-arrow-right"></span>
+	        </div>
+	</a>
+	</li>
+	</ul>
+	</aside> -->
+	<!--表单-->
+	</div>
+</#macro>
+
+
+<#macro content>
+
+<article class="content" style="padding-top:350px;" id="panel1">
+
+
+
+
+
+<div class="con-horizontal am-mt-15 clearfix">
+<!--左边-->
+<div class="horizontal-left" >
+<table  class="table-list lineTop-gray" width="100%" border="0" cellspacing="0" cellpadding="0" id="lAsset">
+        <tbody><tr>
+          <th class="tb-left">名称/代码</th>
+        </tr>
+      </tbody>
+      </table>
+</div>
+<!--左边-->
+
+<!--右边--> 
+<div class="horizontal-wrapper" id="scrollTable" >
+<table border="0" cellspacing="0" class="table-list lineTop-gray" id="rAsset"  style="width:360px;">
+  <tr>
+    <th class="tb-center">当前数量</th>
+    <th class="tb-center">可用数量</th>
+    <th class="tb-center">当前成本</th>
+    <th class="tb-right">最新市值</th>
+  </tr>
+</table>
+
+
+</div>
+<!--右边-->
+<!--右边的三角形，如滑动时不出现-->
+<span class="arrow-horizontal" id="arrowShape"></span>
+</div>
+
+</article>
+
+<#include 'mobile/component/choseHoms.html'/>
+</#macro>

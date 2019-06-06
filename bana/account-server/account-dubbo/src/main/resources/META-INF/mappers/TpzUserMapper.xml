@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="TpzUser">
+    <resultMap id="BaseResultMap" type="com.caimao.account.api.entity.user.TpzUserEntity">
+        <id column="user_id" property="userId" jdbcType="BIGINT"/>
+        <result column="user_name" property="userName" jdbcType="VARCHAR"/>
+        <result column="user_real_name" property="userRealName" jdbcType="VARCHAR"/>
+        <result column="user_nick_name" property="userNickName" jdbcType="VARCHAR"/>
+        <result column="user_grade" property="userGrade" jdbcType="DECIMAL"/>
+        <result column="user_score" property="userScore" jdbcType="INTEGER"/>
+        <result column="user_pwd" property="userPwd" jdbcType="VARCHAR"/>
+        <result column="user_pwd_strength" property="userPwdStrength" jdbcType="CHAR"/>
+        <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="mobile" property="mobile" jdbcType="VARCHAR"/>
+        <result column="idcard_kind" property="idcardKind" jdbcType="CHAR"/>
+        <result column="idcard" property="idcard" jdbcType="VARCHAR"/>
+        <result column="user_address" property="userAddress" jdbcType="VARCHAR"/>
+        <result column="register_datetime" property="registerDatetime" jdbcType="TIMESTAMP"/>
+        <result column="register_ip" property="registerIp" jdbcType="VARCHAR"/>
+        <result column="last_login_datetime" property="lastLoginDatetime" jdbcType="TIMESTAMP"/>
+        <result column="last_login_ip" property="lastLoginIp" jdbcType="VARCHAR"/>
+        <result column="login_count" property="loginCount" jdbcType="INTEGER"/>
+        <result column="user_status" property="userStatus" jdbcType="CHAR"/>
+        <result column="error_count" property="errorCount" jdbcType="INTEGER"/>
+        <result column="is_trust" property="isTrust" jdbcType="CHAR"/>
+        <result column="user_init" property="userInit" jdbcType="VARCHAR"/>
+        <result column="user_kind" property="userKind" jdbcType="VARCHAR"/>
+        <result column="ref_user_id" property="refUserId" jdbcType="BIGINT"/>
+        <result column="caimao_id" property="caimaoId" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        user_id, user_name, user_real_name, user_nick_name, user_grade, user_score, user_pwd,
+        user_pwd_strength, email, mobile, idcard_kind, idcard, user_address, register_datetime,
+        register_ip, last_login_datetime, last_login_ip, login_count, user_status, error_count,
+        is_trust, user_init, user_kind,ref_user_id,caimao_id
+    </sql>
+
+    <!-- 根据用户ID来查找用户-->
+    <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from tpz_user
+        WHERE user_id = #{userId,jdbcType=BIGINT}
+    </select>
+
+    <select id="queryUserByPhone" resultMap="BaseResultMap" parameterType="java.lang.String">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM tpz_user
+        WHERE mobile = #{mobile}
+    </select>
+
+</mapper>

@@ -1,0 +1,48 @@
+<#assign title="团融网"/>
+<#assign name="会员中心"/>
+<#assign controller="RepaymentInquiry"/>
+<#include 'layout/main_layout.html'/>
+<#macro subContent>
+	<#include 'layout/home_head.html'/>
+	<#include 'layout/twolevel_menu.html'/>
+</#macro>
+<#macro content>
+<div class="contents clearfix">
+<#include 'layout/financing_sidebar.html'/>
+<!--右边start-->
+<div class="con-rside cm-right">
+<!--标题-->
+<div class="title-page"><h3 class="am-ft-xl">历史还款</h3></div>
+<!--筛选-->
+<div class="frame-all grid-812">
+<div class="filter-loan">
+<div class="clearfix">
+<div class="cm-left filter-date">
+<span class="filter-loan-th">起止日期：</span>
+<div id="daterangectn"></div>
+<div class="filter-button"><a id="inquirybutton" href="javascript:void(0)" class="ui-button ui-button-sgray"><b class="ui-button-text am-ft-sm">查询</b></a></div>
+</div>
+
+<div id="datequickselectctn" class="cm-left second-left">
+</div>
+</div>
+
+</div>
+</div>
+<!--筛选-->
+<div id="grid_f"></div>
+
+
+<!--页码-->
+
+<!--页码-->
+
+</div>
+<!--右边end-->
+
+</div>
+</#macro>
+
+
+<#macro subScript>
+</#macro>

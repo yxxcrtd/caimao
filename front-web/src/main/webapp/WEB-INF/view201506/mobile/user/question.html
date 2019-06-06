@@ -1,0 +1,115 @@
+<#assign title="设置安全密码"/>
+<#assign header="设置安全密码"/>
+<#assign bg="bg-gray"/>
+<#assign controller="question"/>
+<#include 'mobile/layout/layout.html'/>
+<#macro content>
+
+<article class="content" style="padding-bottom:60px;">
+
+
+<!--表单-->
+<aside class="con-frame">
+<ul class="datalist">
+<li class="datalist-item clearfix">
+<div class="am-grid datalist-line">
+        <div class="am-grid-item am-grid-item-25  am-ft-right">
+        <h4 class="am-ft-md cm-left">问题1</h4>
+        </div>
+        <div class="am-grid-item am-grid-item-75 am-ft-left am-left-10">
+        <span class="ui-form-field">
+		<select id="question1" class="text_input question" style="display: none;" value=""></select>
+</span>
+</div>
+</div>
+</li>
+
+<li class="datalist-item clearfix">
+<div class="am-grid datalist-line">
+        <div class="am-grid-item am-grid-item-25  am-ft-right">
+        <h4 class="am-ft-md cm-left">答案</h4>
+        </div>
+        <div class="am-grid-item am-grid-item-75 am-ft-left am-left-10">
+        <span class="ui-form-field">
+<input  type="text" autocomplete="off" id="answer1" class="text_input" defaultvalue="输入密码" value="" placeholder="输入密码">
+</span>
+</div>
+</div>
+</li>
+
+<li class="datalist-item clearfix">
+<div class="am-grid datalist-line">
+        <div class="am-grid-item am-grid-item-25  am-ft-right">
+        <h4 class="am-ft-md cm-left">问题2</h4>
+        </div>
+        <div class="am-grid-item am-grid-item-75 am-ft-left am-left-10">
+        <span class="ui-form-field">
+		<select id="question2" class="text_input question" style="display: none;" value=""></select>
+</span>
+</div>
+</div>
+</li>
+
+<li class="datalist-item clearfix">
+<div class="am-grid datalist-line">
+        <div class="am-grid-item am-grid-item-25  am-ft-right">
+        <h4 class="am-ft-md cm-left">答案</h4>
+        </div>
+        <div class="am-grid-item am-grid-item-75 am-ft-left am-left-10">
+        <span class="ui-form-field">
+<input  type="text" autocomplete="off" id="answer2" class="text_input"  defaultvalue="输入密码" value="" placeholder="输入密码">
+</span>
+</div>
+</div>
+</li>
+
+<li class="datalist-item clearfix">
+<div class="am-grid datalist-line">
+        <div class="am-grid-item am-grid-item-25  am-ft-right">
+        <h4 class="am-ft-md cm-left">问题3</h4>
+        </div>
+        <div class="am-grid-item am-grid-item-75 am-ft-left am-left-10">
+        <span class="ui-form-field">
+		<select id="question3" class="text_input question" style="display: none;" value=""></select>
+</span>
+</div>
+</div>
+</li>
+
+<li class="datalist-item clearfix">
+<div class="am-grid datalist-line">
+        <div class="am-grid-item am-grid-item-25  am-ft-right">
+        <h4 class="am-ft-md cm-left">答案</h4>
+        </div>
+        <div class="am-grid-item am-grid-item-75 am-ft-left am-left-10">
+        <span class="ui-form-field">
+<input  type="text" autocomplete="off" id="answer3" class="text_input" defaultvalue="输入密码" value="" placeholder="输入密码">
+</span>
+</div>
+</div>
+</li>
+
+</ul>
+</aside>
+
+
+
+
+
+
+</article>
+
+
+
+<div class="am-footer am-footerBtn-one">
+<!--按钮-->
+<div class="btn-page btn-page-center bg-white con-spacing15">
+        <a id="submit_btn" class="am-button am-button-red">
+        <span>提交</span>
+        </a>
+        
+</div>
+<!--按钮-->
+</div>
+</#macro>
+

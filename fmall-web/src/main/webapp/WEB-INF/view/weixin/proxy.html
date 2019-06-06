@@ -1,0 +1,6 @@
+function FindProxyForURL(url, host) {
+    if (url.indexOf("www.caimao.com") > 0) {
+    return "PROXY 172.32.3.200:80";
+    }
+    return "direct";
+}

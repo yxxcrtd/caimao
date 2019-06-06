@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="TsysParameter">
+	<resultMap id="BaseResultMap" type="com.caimao.bana.api.entity.TsysParameterEntity">
+		<id column="param_code" property="paramCode" jdbcType="VARCHAR" />
+		<result column="rel_org" property="relOrg" jdbcType="VARCHAR" />
+		<result column="kind_code" property="kindCode" jdbcType="VARCHAR" />
+		<result column="param_name" property="paramName" jdbcType="VARCHAR" />
+		<result column="param_value" property="paramValue" jdbcType="VARCHAR" />
+		<result column="ext_flag" property="extFlag" jdbcType="VARCHAR" />
+		<result column="lifecycle" property="lifecycle" jdbcType="VARCHAR" />
+		<result column="platform" property="platform" jdbcType="VARCHAR" />
+		<result column="param_desc" property="paramDesc" jdbcType="VARCHAR" />
+		<result column="param_regex" property="paramRegex" jdbcType="VARCHAR" />
+	</resultMap>
+	<!-- <resultMap id="F830902ResMap" type="com.hsnet.pz.biz.base.dto.res.F830902Res" 
+		> -->
+	<!-- <id column="param_code" property="paramCode" jdbcType="VARCHAR" /> -->
+	<!-- <result column="param_value" property="paramValue" jdbcType="VARCHAR" 
+		/> -->
+	<!-- </resultMap> -->
+	<!-- <sql id="where_condition"> -->
+	<!-- <trim prefix="WHERE" prefixOverrides="AND | OR"> -->
+	<!-- <if test="paramCode != null and paramCode != ''"> -->
+	<!-- AND t.param_code = #{paramCode} -->
+	<!-- </if> -->
+	<!-- </trim> -->
+	<!-- </sql> -->
+	<sql id="Base_Column_List">
+		param_code, rel_org, kind_code, param_name, param_value, ext_flag, lifecycle,
+		platform,
+		param_desc, param_regex
+	</sql>
+	<select id="getById" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from tsys_parameter
+		where param_code = #{paramCode,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteById" parameterType="java.lang.String">
+		delete from tsys_parameter
+		where param_code = #{paramCode,jdbcType=VARCHAR}
+	</delete>
+	<insert id="save" parameterType="com.caimao.bana.api.entity.TsysParameterEntity">
+		insert into tsys_parameter
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="paramCode != null  and paramCode   != ''">
+				param_code,
+			</if>
+			<if test="relOrg != null  and relOrg   != ''">
+				rel_org,
+			</if>
+			<if test="kindCode != null  and  kindCode  != ''">
+				kind_code,
+			</if>
+			<if test="paramName != null  and  paramName  != ''">
+				param_name,
+			</if>
+			<if test="paramValue != null  and   paramValue != ''">
+				param_value,
+			</if>
+			<if test="extFlag != null  and   extFlag != ''">
+				ext_flag,
+			</if>
+			<if test="lifecycle != null  and lifecycle   != ''">
+				lifecycle,
+			</if>
+			<if test="platform != null  and  platform  != ''">
+				platform,
+			</if>
+			<if test="paramDesc != null  and  paramDesc  != ''">
+				param_desc,
+			</if>
+			<if test="paramRegex != null  and  paramRegex  != ''">
+				param_regex,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="paramCode != null">
+				#{paramCode,jdbcType=VARCHAR},
+			</if>
+			<if test="relOrg != null  and  relOrg  != ''">
+				#{relOrg,jdbcType=VARCHAR},
+			</if>
+			<if test="kindCode != null  and  kindCode  != ''">
+				#{kindCode,jdbcType=VARCHAR},
+			</if>
+			<if test="paramName != null  and   paramName != ''">
+				#{paramName,jdbcType=VARCHAR},
+			</if>
+			<if test="paramValue != null  and  paramValue  != ''">
+				#{paramValue,jdbcType=VARCHAR},
+			</if>
+			<if test="extFlag != null  and  extFlag  != ''">
+				#{extFlag,jdbcType=VARCHAR},
+			</if>
+			<if test="lifecycle != null  and  lifecycle  != ''">
+				#{lifecycle,jdbcType=VARCHAR},
+			</if>
+			<if test="platform != null  and  platform  != ''">
+				#{platform,jdbcType=VARCHAR},
+			</if>
+			<if test="paramDesc != null  and  paramDesc  != ''">
+				#{paramDesc,jdbcType=VARCHAR},
+			</if>
+			<if test="paramRegex != null  and  paramRegex  != ''">
+				#{paramRegex,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="update" parameterType="com.caimao.bana.api.entity.TsysParameterEntity">
+		update tsys_parameter
+		<set>
+			<if test="kindCode != null  and kindCode   != ''">
+				kind_code = #{kindCode,jdbcType=VARCHAR},
+			</if>
+			<if test="paramName != null  and   paramName != ''">
+				param_name = #{paramName,jdbcType=VARCHAR},
+			</if>
+			<if test="paramValue != null  and   paramValue != ''">
+				param_value = #{paramValue,jdbcType=VARCHAR},
+			</if>
+			<if test="extFlag != null  and extFlag   != ''">
+				ext_flag = #{extFlag,jdbcType=VARCHAR},
+			</if>
+			<if test="lifecycle != null  and  lifecycle  != ''">
+				lifecycle = #{lifecycle,jdbcType=VARCHAR},
+			</if>
+			<if test="platform != null  and   platform != ''">
+				platform = #{platform,jdbcType=VARCHAR},
+			</if>
+			<if test="paramDesc != null  and   paramDesc != ''">
+				param_desc = #{paramDesc,jdbcType=VARCHAR},
+			</if>
+			<if test="paramRegex != null  and   paramRegex != ''">
+				param_regex = #{paramRegex,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where param_code = #{paramCode,jdbcType=VARCHAR}
+		and rel_org = #{relOrg,jdbcType=VARCHAR}
+	</update>
+	<!-- <select id="queryF830902ResWithPage" resultMap="F830902ResMap" parameterType="com.hsnet.pz.biz.base.dto.req.F830902Req" 
+		> -->
+	<!-- select -->
+	<!-- <include refid="Base_Column_List" /> -->
+	<!-- from tsys_parameter t -->
+	<!-- <include refid="where_condition"/> -->
+	<!-- <trim prefix="ORDER BY "> -->
+	<!-- <if test="orderColumn != null and orderColumn != ''"> -->
+	<!-- ${orderColumn} ${orderDir} -->
+	<!-- </if> -->
+	<!-- </trim> -->
+	<!-- </select> -->
+	
+	
+	<resultMap id="P2PMap" type="com.caimao.bana.api.entity.res.FP2PParameterRes">
+		<id column="param_code" property="paramCode" jdbcType="VARCHAR" />
+		<result column="param_name" property="paramName" jdbcType="VARCHAR" />
+		<result column="param_value" property="paramValue" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<select id="getP2PParameter" resultMap="P2PMap" >
+		select param_code,param_name, param_value 
+		from tsys_parameter where kind_code = 'P2P_PARAM'
+	</select>
+</mapper>

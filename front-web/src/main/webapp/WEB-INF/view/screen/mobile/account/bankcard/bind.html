@@ -1,0 +1,117 @@
+<#assign title="银行卡信息"/>
+<#assign header="银行卡信息"/>
+<#assign footer="3"/>
+<#assign bg="bg-gray"/>
+<#assign controller="bind"/>
+<#include 'mobile/layout/layout.html'/>
+
+<#macro content>
+<article class="content" style="padding-bottom:59px;">
+	
+
+<!--表单-->
+<aside class="con-frame">
+<ul class="datalist" id="panel1">
+<li class="datalist-item clearfix">
+<div class="am-grid datalist-line">
+        <div class="am-grid-item am-grid-item-25  am-ft-right">
+        <h4 class="am-ft-md cm-left">持卡人信息</h4>
+        </div>
+        <div class="am-grid-item am-grid-item-75 am-ft-left am-left-10">
+        <span id="userInfo"></span>
+        </div>
+</div>
+</li>
+<li class="datalist-item clearfix">
+<div class="am-grid datalist-line">
+        <div class="am-grid-item am-grid-item-25  am-ft-right">
+        <h4 class="am-ft-md cm-left">银行卡类型</h4>
+        </div>
+        <div class="am-grid-item am-grid-item-75 am-ft-left am-left-10">
+        <span class="am-ft-gray" id="bankCardType">请选择银行卡</span>
+        <p class="f-right"><a id="selectCard"><i class="type-icon bankNumber-icon"></i></a></p>
+</div>
+</div>
+</li>
+<li class="datalist-item clearfix">
+<div class="am-grid datalist-line">
+        <div class="am-grid-item am-grid-item-25  am-ft-right">
+        <h4 class="am-ft-md cm-left">银行卡号</h4>
+        </div>
+        <div class="am-grid-item am-grid-item-75 am-ft-left am-left-10">
+        <span class="ui-form-field">
+		<input id="bankcard" type="text" class="text_input" maxlength="19" defaultvalue="输入银行卡号" value="" placeholder="输入银行卡号">
+</span>
+<p class="f-right" id="f_bankCard"></p>
+</div>
+</div>
+</li>
+</ul>
+
+
+<ul class="datalist" style="display: none;" id="panel2">
+<li class="datalist-item clearfix bankCard">
+<a href="bank-1.html" class="am-grid datalist-line">
+        <div class="am-grid-item am-grid-item-50  am-ft-left">
+        <h4 class="am-ft-md cm-left am-ft-main">工商银行</h4>
+        </div> 
+        <div class="am-grid-item am-grid-item-50 am-ft-right am-right-15">
+        <span class="type-ico am-icon-arrow-right"></span>
+        </div>
+</a>
+</li>
+<li class="datalist-item clearfix bankCard">
+<a href="bank-1.html" class="am-grid datalist-line">
+        <div class="am-grid-item am-grid-item-50  am-ft-left">
+        <h4 class="am-ft-md cm-left am-ft-main">农业银行</h4>
+        </div> 
+        <div class="am-grid-item am-grid-item-50 am-ft-right am-right-15">
+        <span class="type-ico am-icon-arrow-right"></span>
+        </div>
+</a>
+</li>
+<li class="datalist-item clearfix bankCard">
+<a href="bank-1.html" class="am-grid datalist-line">
+        <div class="am-grid-item am-grid-item-50  am-ft-left">
+        <h4 class="am-ft-md cm-left am-ft-main">建设银行</h4>
+        </div> 
+        <div class="am-grid-item am-grid-item-50 am-ft-right am-right-15">
+        <span class="type-ico am-icon-arrow-right"></span>
+        </div>
+</a>
+</li>
+<li class="datalist-item clearfix bankCard">
+<a href="bank-1.html" class="am-grid datalist-line">
+        <div class="am-grid-item am-grid-item-50  am-ft-left">
+        <h4 class="am-ft-md cm-left am-ft-main">平安银行</h4>
+        </div> 
+        <div class="am-grid-item am-grid-item-50 am-ft-right am-right-15">
+        <span class="type-ico am-icon-arrow-right"></span>
+        </div>
+</a>
+</li>
+
+
+</ul>
+</aside>
+
+
+    <!--按钮-->
+    <div class="btn-page btn-page-center bg-white con-spacing15">
+        <a id="submit" class="am-button am-button-red">
+            <span class="am-ft-white">确定</span>
+        </a>
+    </div>
+    <!--按钮-->
+
+
+
+</article>
+
+
+
+<div class="am-footer am-footerBtn">
+
+</div>
+</#macro>
+

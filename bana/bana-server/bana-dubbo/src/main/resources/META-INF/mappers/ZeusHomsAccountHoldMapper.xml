@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ZeusHomsAccountHold">
+
+	<resultMap id="BaseResultMap" type="com.caimao.bana.api.entity.zeus.ZeusHomsAccountHoldEntity" >
+		<id column="id" property="id" jdbcType="BIGINT" />
+        <result column="user_id" property="userId" jdbcType="BIGINT" />
+        <result column="real_name" property="realName" jdbcType="VARCHAR" />
+        <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+        <result column="homs_fund_account" property="homsFundAccount" jdbcType="VARCHAR" />
+		<result column="homs_combine_id" property="homsCombineId" jdbcType="VARCHAR" />
+		<result column="exchange_type" property="exchangeType" jdbcType="TINYINT" />
+		<result column="stock_code" property="stockCode" jdbcType="VARCHAR" />
+        <result column="stock_name" property="stockName" jdbcType="VARCHAR" />
+        <result column="current_amount" property="currentAmount" jdbcType="VARCHAR" />
+        <result column="enable_amount" property="enableAmount" jdbcType="VARCHAR" />
+        <result column="cost_balance" property="costBalance" jdbcType="VARCHAR" />
+        <result column="market_value" property="marketValue" jdbcType="VARCHAR" />
+        <result column="buy_amount" property="buyAmount" jdbcType="VARCHAR" />
+        <result column="sell_amount" property="sellAmount" jdbcType="VARCHAR" />
+        <result column="updated" property="updated" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<sql id="Base_Column_List" >
+        id,user_id,real_name,mobile,homs_fund_account,homs_combine_id,exchange_type,stock_code,stock_name,current_amount,
+        enable_amount,cost_balance,market_value,buy_amount,sell_amount,updated
+	</sql>
+
+    <select id="searchHomsHoldListWithPage" resultMap="BaseResultMap" parameterType="com.caimao.bana.api.entity.req.FZeusHomsAccountHoldReq">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM zeus_homs_account_hold
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="userId != null and userId != ''">
+                AND user_id = #{userId}
+            </if>
+            <if test="mobile != null and mobile != ''">
+                AND mobile = #{mobile}
+            </if>
+            <if test="realName != null and realName != ''">
+                AND real_name = #{realName}
+            </if>
+            <if test="updated != null and updated != ''">
+                AND updated = #{updated}
+            </if>
+            <if test="homsFundAccount != null and homsFundAccount != ''">
+                AND homs_fund_account = #{homsFundAccount}
+            </if>
+            <if test="homsCombineId != null and homsCombineId != ''">
+                AND homs_combine_id = #{homsCombineId}
+            </if>
+        </trim>
+        ORDER BY updated DESC
+    </select>
+
+    <select id="queryUpdated" resultType="hashmap">
+        SELECT
+        homs_fund_account AS homsFundAccount,
+        homs_combine_id AS homsCombineId,
+        stock_code AS stockCode
+        FROM zeus_homs_account_hold
+        WHERE updated = #{updated}
+    </select>
+
+    <!--保存homs操盘账户的资产信息-->
+    <insert id="saveZeusHomsAccountHold" parameterType="com.caimao.bana.api.entity.zeus.ZeusHomsAccountHoldEntity">
+        INSERT INTO zeus_homs_account_hold
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test="realName != null">real_name,</if>
+            <if test="mobile != null">mobile,</if>
+            <if test="homsFundAccount != null">homs_fund_account,</if>
+            <if test="homsCombineId != null">homs_combine_id,</if>
+            <if test="exchangeType != null">exchange_type,</if>
+            <if test="stockCode != null">stock_code,</if>
+            <if test="stockName != null">stock_name,</if>
+            <if test="currentAmount != null">current_amount,</if>
+            <if test="enableAmount != null">enable_amount,</if>
+            <if test="costBalance != null">cost_balance,</if>
+            <if test="marketValue != null">market_value,</if>
+            <if test="buyAmount != null">buy_amount,</if>
+            <if test="sellAmount != null">sell_amount,</if>
+            <if test="updated != null">updated</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="userId != null">#{userId},</if>
+            <if test="realName != null">#{realName},</if>
+            <if test="mobile != null">#{mobile},</if>
+            <if test="homsFundAccount != null">#{homsFundAccount},</if>
+            <if test="homsCombineId != null">#{homsCombineId},</if>
+            <if test="exchangeType != null">#{exchangeType},</if>
+            <if test="stockCode != null">#{stockCode},</if>
+            <if test="stockName != null">#{stockName},</if>
+            <if test="currentAmount != null">#{currentAmount},</if>
+            <if test="enableAmount != null">#{enableAmount},</if>
+            <if test="costBalance != null">#{costBalance},</if>
+            <if test="marketValue != null">#{marketValue},</if>
+            <if test="buyAmount != null">#{buyAmount},</if>
+            <if test="sellAmount != null">#{sellAmount},</if>
+            <if test="updated != null">#{updated}</if>
+        </trim>
+    </insert>
+</mapper>

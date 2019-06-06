@@ -1,0 +1,139 @@
+<div class="frame-all">
+    <div class="">
+        <!--表单-->
+        <form class="ui-form ui-form-specialStep" role="form">
+
+            <div class="ui-form-item" style="padding-left: 130px;">
+                <label class="ui-label">充值方式：</label>
+
+                <div class="ui-text">
+                    <span class="ui-logo-small"><img data-dojo-attach-point="bankImgNode"/></span>
+                </div>
+            </div>
+
+            <div class="ui-form-item ui-form-itemNobottom" style="padding-left: 130px;">
+                <label class="ui-label">充值金额：</label>
+
+                <div class="ui-text">
+                    <b class="am-ft-md am-ft-number am-ft-orange" data-dojo-attach-point="amountNode">
+                    </b> 元
+                </div>
+            </div>
+            <div class="ui-form-item ui-form-itemNobottom" style="padding-left: 130px;">
+                <label class="ui-label">手续费：</label>
+
+                <div class="ui-text">
+                    <b class="am-ft-md am-ft-number" data-dojo-attach-point="tipNode">
+                    </b> 元
+                </div>
+            </div>
+            <div class="ui-form-item ui-form-itemNobottom" style="padding-left: 130px;">
+                <label class="ui-label">合计：</label>
+
+                <div class="ui-text">
+                    <b class="am-ft-md am-ft-number am-ft-orange" data-dojo-attach-point="totalAmountNode">
+                    </b> 元
+                </div>
+            </div>
+            <div data-dojo-attach-point="preBtnNode"></div>
+            <div data-dojo-attach-point="confirmBtnNode"></div>
+        </form>
+        <form name="form2" id="recharge-form" style="display:none" action="" method="post" target="_blank">
+            <input type="hidden" name="pickupUrl" value="<%=pickupUrl%>"/>
+            <input type="hidden" name="receiveUrl" value="<%=receiveUrl%>"/>
+            <input type="hidden" name="inputCharset" value="<%=inputCharset%>"/>
+            <input type="hidden" name="version" value="<%=version%>"/>
+            <input type="hidden" name="issuerId" value="<%=issuerId%>"/>
+            <input type="hidden" name="language" value="<%=language%>"/>
+            <input type="hidden" name="signType" value="<%=signType%>"/>
+            <input type="hidden" name="merchantId" value="<%=merchantId%>"/>
+            <input type="hidden" name="orderAmount" value="<%=orderAmount %>"/>
+            <input type="hidden" name="orderCurrency" value="<%=orderCurrency%>"/>
+            <input type="hidden" name="orderDatetime" value="<%=orderDatetime%>"/>
+            <input type="hidden" name="orderNo" value="<%=orderNo%>"/>
+            <!-- 手续费 -->
+            <input type="hidden" name="ext1" value="<%=ext1%>"/>
+            <input type="hidden" name="ext2" value="<%=ext2%>"/>
+            <!-- 充值方式：0 -->
+            <input type="hidden" name="payType" value="<%=payType%>"/>
+            <!-- 银行编号  -->
+            <!--  <input type="hidden" name="issuerId" value="<%=issuerId%>" /> -->
+            <input type="hidden" name="pan" value="<%=pan %>"/>
+            <input type="hidden" name="signMsg" value="<%=strSignMsg %>"/>
+
+            <input type="submit" value="确认付款，到通联支付去啦"/>
+        </form>
+
+        <form name="form3" id="recharge-form_yibao" style="display:none" action="" method="post" target="_blank">
+            <!--ext1-->
+            <input type='hidden' name='p0_Cmd' value='<%=ext1 %>'/>
+            <!--merchantId -->
+            <input type='hidden' name='p1_MerId' value='<%=merchantId %>'/>
+            <!--orderNo -->
+            <input type='hidden' name='p2_Order' value='<%=orderNo %>'/>
+            <!--orderAmount -->
+            <input type='hidden' name='p3_Amt' value='<%=orderAmount %>'/>
+            <!--orderCurrency -->
+            <input type='hidden' name='p4_Cur' value='<%=orderCurrency %>'/>
+            <!--暂时默认为空 -->
+            <input type='hidden' name='p5_Pid' value=''/>
+            <!--暂时默认为空 -->
+            <input type='hidden' name='p6_Pcat' value=''/>
+            <!--暂时默认为空 -->
+            <input type='hidden' name='p7_Pdesc' value=''/>
+            <!--pickupUrl -->
+            <input type='hidden' name='p8_Url' value='<%=receiveUrl %>'/>
+            <!--默认为0 -->
+            <input type='hidden' name='p9_SAF' value='0'/>
+            <!--ext2 -->
+            <input type='hidden' name='pa_MP' value='<%=ext2 %>'/>
+            <!--pan -->
+            <input type='hidden' name='pd_FrpId' value='<%=pan %>'/>
+            <!--默认为1 -->
+            <input type="hidden" name="pr_NeedResponse" value="1"/>
+            <!--signMsg -->
+            <input type='hidden' name='hmac' value='<%=signMsg %>'/>
+            <input type='submit' value="PC支付(网银支付)"/>
+        </form>
+
+        <form name="form3" id="recharge-form_heepay" style="display:none" action="" method="post" target="_blank">
+            <!--必填--》当前接口版本号 1 -->
+            <input type='hidden' name='version' value=''/>
+            <!--选填--》是否使用手机触屏版，1=是，PC版请不用传本参数 -->
+            <input type='hidden' name='is_phone' value=''/>
+            <!--必填--》支付类型 -->
+            <input type='hidden' name='pay_type' value=''/>
+            <!--选填--》支付类型编码 -->
+            <input type='hidden' name='pay_code' value=''/>
+            <!--必填--》商户编号 -->
+            <input type='hidden' name='agent_id' value=''/>
+            <!--必填--》商户系统内部的定单号 -->
+            <input type='hidden' name='agent_bill_id' value=''/>
+            <!--必填--》订单总金额 -->
+            <input type='hidden' name='pay_amt' value=''/>
+            <!--必填--》支付后返回的商户处理页面 -->
+            <input type='hidden' name='notify_url' value=''/>
+            <!--必填--》支付后返回的商户显示页面 -->
+            <input type='hidden' name='return_url' value=''/>
+            <!--必填--》用户所在客户端的真实ip其中的“.”替换为“_” -->
+            <input type='hidden' name='user_ip' value='0'/>
+            <!--必填--》提交单据的时间 -->
+            <input type='hidden' name='agent_bill_time' value=''/>
+            <!--必填--》商品名称 -->
+            <input type='hidden' name='goods_name' value=''/>
+            <!--选填--》产品数量 -->
+            <input type="hidden" name="goods_num" value=""/>
+            <!--必填--》商户自定义 -->
+            <input type='hidden' name='remark' value=''/>
+            <#if isHeepayTest>
+                <!--选填--》是否测试，1=测试，非测试请不用传本参数 -->
+                <input type='hidden' name='is_test' value=''/>
+            </#if>
+            <!--选填--》支付说明-->
+            <input type='hidden' name='goods_note' value=''/>
+            <!--必填--》MD5签名结果-->
+            <input type='hidden' name='sign' value=''/>
+            <input type='submit' value="PC支付(网银支付)"/>
+        </form>
+    </div>
+</div>

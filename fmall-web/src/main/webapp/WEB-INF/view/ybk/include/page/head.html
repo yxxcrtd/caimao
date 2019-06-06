@@ -1,0 +1,150 @@
+<div class="top">
+    <div class="innerCont clearfix">
+        <div class="topnav">
+            <a href="${homeUrl}">财猫主站</a>
+            <a href="${ybkUrl}" style="color: red;">财猫邮币卡</a>
+            <a href="${gjsUrl}">财猫贵金属</a>
+        </div>
+        <div class="user">
+            <a href="javascript:void(0);" class="appdownload" id="appdownload"><i></i>APP下载</a>
+
+                <a onclick="window.location.href='${homeUrl}/user/login.html?return=' + encodeURIComponent(window.location.href);" href="javascript:void(0);" class="noLogin" style="display: none;">登录</a><span>|</span>
+                <a onclick="window.location.href='${homeUrl}/user/register.html?return=' + encodeURIComponent(window.location.href);" href="javascript:void(0);" class="noLogin" style="display: none;">注册</a>
+
+                <a href="${homeUrl}/user/info.html" id="_userName" class="login" style="display: none;"></a><span>|</span>
+                <a href="${caimaoUrl}/user/logout.html" class="login" style="display: none;">退出</a>
+
+
+
+            <div class="qrcode" id="qrcode"><img src="${imgUrl}/qrcode_android.png?version=${jsVersion}" ><!--<img src="${ybkUrl}/static/ybk/img/qrcode_apple.png">--><p style="
+    text-align: center;
+          ">
+                <a href="/static/ybk/img/app/Youbi.apk" target="_blank" stoped="1">Android点击下载</a> <br/>
+                <a href="itms-services://?action=download-manifest&url=https://ybk.caimao.com/static/ybk/img/app/ybk.plist" target="_blank" stoped="1">iOS点击下载</a>
+            </p></div></div>
+        <script>
+        (function(){
+            var isShow = 0,
+                qrcode = document.querySelector("#qrcode"),
+            addEvent = document.addEventListener ?
+                    function(o, t, f) {
+                        o.addEventListener(t, f, false)
+                } : function(o, t, f) {
+                    o.attachEvent('on' + t, f)
+                }
+            addEvent(document,'click',function(e){
+                var tar = e.target || window.event.srcElement;
+                if(tar.getAttribute("stoped"))return;
+                if(isShow){
+                    isShow = false;
+                    qrcode.style.display = "none";
+                }
+
+            });
+            addEvent(document.querySelector("#appdownload"),'click',function(e){
+                var tar = e.target || window.event.srcElement;
+                if(tar.getAttribute("stoped"))return;
+                if (e && e.stopPropagation) {
+                    e.stopPropagation();
+                    e.preventDefault();
+                } else {
+                    window.event.cancelBubble = true;
+                    window.event.returnValue = false;
+                }
+                if(isShow){
+                    isShow = false;
+                    qrcode.style.display = "none";
+                }else{
+                    isShow = true;
+                    qrcode.style.display = "block";
+                }
+            });
+        })();
+        </script>
+    </div>
+</div>
+<div class="menuline">
+    <div class="innerCont clearfix">
+        <div class="logo"><a href="/ybk/"><img src="${imgUrl}/logo.png?version=${jsVersion}"></a></div>
+        <div class="menu">
+           <a href="/ybk/" <#if topMenu=="index">class="on"</#if> >首页<i><span>◆</span></i></a><!--
+        --><a href="/ybk/optional.html" <#if topMenu == "market">class="on"</#if> >行情中心<i><span>◆</span></i></a><!--
+        --><a href="/ybk/article/list.html?categoryId=1" <#if topMenu == "1">class="on"</#if> >打新申购<i><span>◆</span></i></a><!--
+        --><a href="/ybk/article/list.html?categoryId=3" <#if topMenu == "3">class="on"</#if>>交易所公告<i><span>◆</span></i></a><!--
+        --><a href="/ybk/open_account.html" <#if topMenu == "openAccount">class="on"</#if>>开户中心<b>hot!</b><i><span>◆</span></i></a>
+        </div>
+    </div>
+</div>
+<div class="rightBar">
+<div class="inner">
+    <div class="barBox">
+        <span class="ybkRightBarCloseBtn" id="closeBtn"></span>
+        <ul id="activity_list">
+            <script type="text/x-tmpl">
+                <%
+                    for(var _this,i = 0, l = Math.min(data.length,2); i < l; i++){
+                    _this = data[i];
+                %>
+                    <li><a href="/ybk/topic/open_gift.html" title="<%=_this.activityName%>"><%=_this.activityName%></a></li>
+                <%}%>
+            </script>
+        </ul>
+        <div class="otherInfo">
+        <dl>
+            <dt></dt>
+            <dd><a rel="nofollow" href="http://wpa.b.qq.com/cgi/wpa.php?ln=1&uin=800097600&1445239347032"><i></i>活动咨询</a></dd>
+            <dd><a rel="nofollow" href="http://wpa.b.qq.com/cgi/wpa.php?ln=1&uin=800097600&1445239347032"><i></i>了解邮币卡</a></dd>
+            <dd><span><i class="tel"></i>4000-898-000</span></dd>
+        </dl>
+        <b><i class="code"></i>手机开户</b>
+        <em><img src="${imgUrl}/qrcode_android.png?version=${jsVersion}" ></em>
+        </div>
+
+    </div>
+    <script>
+    (function(){
+        var r = request(),
+            closeBtn = document.getElementById("closeBtn"),
+            list = document.getElementById("activity_list"),
+            bigBox = closeBtn.parentNode.parentNode.parentNode,
+            html = list.getElementsByTagName("script")[0].innerHTML,
+            url = "/api/ybk/content/query_activity_list?limit=10";
+        Event.add(closeBtn,"click",function(){
+            bigBox.style.display = "none";
+        })
+        r.ajax({
+            url : url,
+            type : "GET",
+            success : function(d){
+                if(d.success){
+                    if(!d.data.items.length){
+                        list.style.display = "none";
+                    }
+                    list.innerHTML = rentmpl(html,{
+                        data : d.data.items
+                    })
+                }else{
+
+                        list.style.display = "none";
+                }
+            }
+        })
+    })()
+    </script>
+</div></div>
+<div class="topNotice"><div class="inner"><i></i><div id="topNoticeText">公告正在路上，请稍安勿躁...</div></div></div>
+<script>
+    (function(){
+        var r = request(),
+            tnt = document.getElementById("topNoticeText");
+        r.ajax({
+            url : "/ybk/article/top_notice",
+            type : "GET",
+            success : function(d){
+                if(d.success){
+                    tnt.innerHTML = "<a href='${caimaoUrl}/content/notice/"+ d.data.id+"' target='_blank'>" + d.data.title + "</a>";
+                }
+            }
+        })
+    })()
+</script>

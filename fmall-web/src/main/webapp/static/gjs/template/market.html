@@ -1,0 +1,197 @@
+<!doctype html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title></title>
+		<link rel="stylesheet" href="../prod/style/style.css" />
+		<script src="../prod/js/metal.js"></script>
+		<script>
+			var h = http(),
+				isLogin = 0;
+		</script>
+	</head>
+	<body>
+
+	<div class="top">
+		<div class="innerCont clearfix">
+			<div class="topnav">
+				<a href="">财猫主站</a><!--
+				--><a href="">财猫邮币卡</a><!--
+				--><a href="">财猫贵金属</a>
+			</div>
+			<div class="user"><a href="" class="appdownload" id="appdownload"><i></i>APP下载</a><a href="">登录</a><span>|</span><a href="">注册</a><div class="qrcode" id="qrcode"><img src="../img/qrcode_android.png" ><img src="../img/qrcode_apple.png"></div></div>
+		</div>
+	</div>
+	<div class="menuline">
+		<div class="innerCont clearfix">
+			<div class="logo"><a href="home.html"><img src="../img/logo.png"></a></div>
+			<div class="menu">
+				<a href="home.html">首页<i><span>◆</span></i></a><!--
+				--><a href="market.html" class="on">行情<i><span>◆</span></i></a><!--
+				--><a href="news.html">资讯<i><span>◆</span></i></a><!--
+				--><a href="openAccount.html">快速开户<b>hot!</b><i><span>◆</span></i></a><!--
+				--><a href="help.html">帮助<i><span>◆</span></i></a>
+			</div>
+			<div class="asset">
+				<div class="totalAsset">
+					总资产：<b>9999999.99</b>
+				</div>
+				<dl class="assetDetail">
+					<dt><em><span>总收益：</span><i class="rise">+234.55</i></em><em><span>可用保证金：</span><b>99999999.55</b></em></dt>
+					<dd class="njs">
+						<p><b>南交所</b><span>ID：2342342</span><span>绑定卡：招行（尾号2342）</span></p>
+						<div class="countAsset">
+							<div class="result">净资产：<i>99999999.55</i> = </div>
+							<ul class="section">
+								<li><i></i>可用保证金：23422.55</li>
+								<li><i></i>持仓盈利：+53.55</li>
+								<li><i></i>持仓成本：563.22</li>
+							</ul>
+						</div>
+					</dd>
+					<dd class="sjs">
+						<p><b>上金所</b></p>
+						<div class="btnBox"><a href="" class="openAccount">去开户</a></div>
+					</dd>
+				</dl>
+			</div>
+		</div>
+	</div>
+	
+
+	
+	<div class="goods">
+		<div class="innerCont">
+			<div class="body">
+				<ul class="tab" id="tab">
+					<script type="text/x-tmpl">
+						<li <% if(tab == 1){%>class="on"<%}%> onclick=location.href="market.html?1">我的自选</li>
+						<li <% if(tab == 2){%>class="on"<%}%> onclick=location.href="market.html?2">南方稀贵金属交易所</li>
+						<li <% if(tab == 3){%>class="on"<%}%> onclick=location.href="market.html?3">上海黄金交易所</li>
+					</script>
+				</ul>
+				<div class="tableBox" id="queryGoodsList">
+					<div class="loading"><img src="../img/loading.gif"></div>
+					<script type="text/x-tmpl">
+					<table class="table table_hover table_striped">
+						<colgroup>
+							<col style="width:180px"></col>
+							<col></col>
+							<col></col>
+							<col></col>
+							<col></col>
+							<col></col>
+							<col></col>
+							<col></col>
+							<col style="width:180px"></col>
+						</colgroup>
+						<thead>
+							<th>商品</th>
+							<th class="center">代码</th>
+							<th class="right">最新价</th>
+							<th class="right">涨跌幅</th>
+							<th class="right">今开盘</th>
+							<th class="right">昨收盘</th>
+							<th class="right">成交量</th>
+							<th class="right">成交金额</th>
+							<th class="right">最高价/最低价</th>
+						</thead>
+						<tbody>
+								<%
+									if(data.length){
+								 for(var _this,i = 0, l = data.length; i < l; i++){
+									_this = data[i];%>
+								<tr onclick="location.href='chart.html?<%=_this.prodCode+'.'+_this.exchange%>&<%=tab%>'">
+									<td><%=_this.prodName%></td>
+									<td class="center"><%=_this.prodCode%></td>
+									<td class="right"><b <%if(_this.pxChangeRate < 0){%>class="green"<%}else{%>class="red"<%}%>><%=_this.lastPx%></b></td>
+									<td class="right"><b <%if(_this.pxChangeRate < 0){%>class="green"<%}else{%>class="red"<%}%>><%=_this.pxChangeRate%>%</b> </td>
+									<td class="right"><%=_this.openPx%></td>
+									<td class="right"><%=_this.preclosePx%></td>
+									<td class="right"><%=shortIndex(_this.businessAmount*1,2,10000,binary[10000])%></td>
+									<td class="right"><%=shortIndex(_this.businessBalance*1,2,10000,binary[10000])%></td>
+									<td class="right"><%=_this.highPx%>/<%=_this.lowPx%></td>
+								</tr>
+								<%}}else{%>
+									<tr class="emptyMarket"><td colspan="9"><div>您暂无自选,<a href="?2">去商品行情页添加自选</a></div></td></tr>
+								<%}%>
+						</tbody>
+					</table>
+					</script>
+				</div>
+				<script>
+					var exchange = ['tab','','NJS','SJS'],
+						tab = location.search.replace(/[^\d]/g,'')*1 || 2;
+					if(tab > 1){
+						h.plan("#queryGoodsList",h.render.queryGoodsList.key);
+						h.option = h.api.query_goods_list(exchange[tab],h.render.queryGoodsList);
+						h.request(h.option);
+					}else if(isLogin){
+
+					}else{
+						h.plan("#queryGoodsList",h.render.queryLocalGoods.key);
+						h.render.queryLocalGoods.callback();
+					}
+					marketTab('#tab',tab);
+				</script>
+				<div class="page">
+					<!-- <div class="mod-page mod-page-separate mod-page-small">
+						<a href="#" class="pageprv z-dis">上一页</a>
+						<a href="#">1</a>
+						<a href="#" class="z-crt">2</a>
+						<a href="#">3</a>
+						<a href="#">4</a>
+						<i>...</i>
+						<a href="#">10</a>
+						<a href="#" class="pagenxt">下一页</a>
+					</div> -->
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+	<div class="bottom">
+		<div class="bottomnav">
+			<a href="about.html">关于我们</a><!--
+					--><span>|</span><!--
+					--><a href="rule.html">服务条款</a><!--
+					--><span>|</span><!--
+					--><a href="help.html">帮助中心</a>
+		</div>
+		<div class="contact">
+			<div class="inner">
+				<em class="qq"><i></i>官方QQ群 4006660888</em><!--
+						--><span>|</span><!--
+						--><em class="phone"><i></i>24小时服务电话 4000-898-000</em>
+			</div>
+		</div>
+		<div class="copyright">
+			<p>版权所有 © 北京朋乐投资管理有限公司 丨 京ICP备15016693号</p>
+		</div>
+	</div>
+
+	<div class="rightBar">
+		<div class="takeAim">
+			<div class="tools">
+				<dl class="goTop">
+					<dt></dt>
+				</dl>
+				<dl class="tel">
+					<dt></dt>
+					<dd><i></i><b>4000-898-000</b></dd>
+				</dl>
+				<dl class="qq">
+					<dt></dt>
+					<dd><i></i><b>800097600</b></dd>
+				</dl>
+				<dl class="app">
+					<dt></dt>
+					<dd><img src="../img/qrcode.jpg"><p>扫码下载贵金属APP</p></dd>
+				</dl>
+			</div>
+		</div>
+	</div>
+	</body>
+</html>

@@ -1,0 +1,37 @@
+<!doctype html>
+<#include "gjs/config.html" />
+<#assign topMenu="article" />
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>资讯-财猫贵金属（财猫网）最安全的贵金属投资理财平台</title>
+<#include "gjs/include/page/head.html" />
+<body>
+<#include "gjs/include/menu/topNav.html" />
+<#include "gjs/include/menu/menu.html" />
+	
+	
+
+	<div class="newsContent">
+		<div class="innerCont">
+			<div class="content" id="newsCont">
+				<script type="text/x-tmpl">
+					<h1><%=data.title%></h1>
+					<p class="smallInfo"><span>浏览:<%=data.viewCount%></span><span><%=data.created%></span><a href="list.html">返回资讯列表</a></p>
+					<div class="contMain"><%=data.content%></div>
+					<div class="notice">【慎重声明】财猫贵金属对文中陈述、观点判断保持中立，不对所包含内容的准确性、可靠性或完整性提供任何明示或暗示的保证。客户应详细了解所有有关外汇贵金属买卖的风险，并请自行承担全部责任。
+					</div>
+				</script>	
+			</div>
+
+			<script>
+				h.plan("#newsCont",h.render.noticeContent.key);
+				h.option = h.api.notice_content(location.search.replace(/[^\d]/g,''),h.render.noticeContent);
+				h.request(h.option);
+			</script>
+		</div>
+	</div>
+
+<#include "gjs/include/page/foot.html" />
+	</body>
+</html>

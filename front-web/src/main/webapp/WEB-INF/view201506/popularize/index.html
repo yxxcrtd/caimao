@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+<#include "config.html"/>
+<#assign curTopMenu="account"/>
+<#assign curLeftMenu="popularize"/>
+<head>
+	<meta charset="utf-8">
+	<title>推广赚钱-财猫网</title>
+	<link rel="stylesheet" type="text/css" href="${dojoUrl}/style/page/page.css?v=${jsVersion}">
+	<script src="${dojoUrl}/js/popularize.js?v=${jsVersion}" type="text/javascript"></script>
+</head>
+<body>
+<#include 'include/page/head.html'/>
+<div id="main">
+	<div class="w sec_main">
+		<#include 'include/menu/account_left.html'/>
+		<div class="right_bar">
+			<#include 'popularize/include_nav_bar.html'/>
+			<div class="promotion">
+				<div class="top">
+					<p><i class="icons icon_level"></i>事在人为 ! 精诚所至，金石为开！</p>
+					<div class="invite">
+						<span class="f_l m_r_15">您的邀请链接</span>
+						<div class="invite_box" id="copy_url" data-clipboard-text="https://www.caimao.com?i=${userDetail.caimaoId}"><input class="invite_link" type="text" autocomplete="off" value="https://www.caimao.com?i=${userDetail.caimaoId}" /><i class="icons icon_copy"> 复制</i><b class="msg" id="copy_tip" style="display: none">复制成功</b>
+						</div>
+					</div>
+				</div>
+				<div class="down">
+					<div class="tit">您的邀请</div>
+					<ul class="my_asset asset_in">
+						<li>注册人数<b><#if inviteInfo.regCnt??>${inviteInfo.regCnt}<#else/>0</#if></b></li>
+						<li>配资人数<b><#if inviteInfo.pzCnt??>${inviteInfo.pzCnt}<#else/>0</#if></b></li>
+						<li>配资金额<b><#if inviteInfo.pzAmount??>${formatAmount(inviteInfo.pzAmount, 2, "", 1)}<#else/>0</#if></b></li>
+						<li>实际利息<b><#if inviteInfo.interestAmount??>${formatAmount(inviteInfo.interestAmount, 2, "", 1)}<#else/>0</#if></b></li>
+					</ul>
+					<div class="tit">您的等级</div>
+					<ul class="my_asset asset_in">
+						<li>返佣等级<b>V<#if inviteInfo.commissionLevel??>${inviteInfo.commissionLevel}<#else/>0</#if></b></li>
+						<li>返佣比例<b><#if inviteInfo.commissionRate??>${formatAmount(inviteInfo.commissionRate * 10000, 2, "", 1)}%<#else/>0%</#if></b></li>
+					</ul>
+					<div class="tit">您的收益</div>
+					<ul class="my_asset asset_in">
+						<li>累计返佣<b><#if inviteInfo.commissionTotal??>${formatAmount(inviteInfo.commissionTotal, 0, "", 1)}<#else/>0</#if></b></li>
+						<li>邀请奖励<b><#if inviteInfo.inviteTotal??>${formatAmount(inviteInfo.inviteTotal, 0, "", 1)}<#else/>0</#if></b></li>
+						<li>总共战绩<b><#if inviteInfo.commissionTotal??>${formatAmount(inviteInfo.commissionTotal + inviteInfo.inviteTotal, 0, "", 1)}<#else/>0</#if></b></li>
+						<li>当前积分<b><#if userDetail.userScore??>${userDetail.userScore}<#else/>0</#if></b></li>
+					</ul>
+				</div>
+				<div class="qing4">
+					<a href="javascript:;" style="width: 100px;" class="btn btn_red" onclick="document.getElementById('score_box').style.display='block';">兑现返现</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="layout jifenduihuan" style="padding-bottom: 20px;display: none;" id="score_box">
+	<h3 class="title">兑现返现<a onclick="document.getElementById('score_box').style.display='none';" style="cursor: pointer"><i class="icons icon_close"></i></a></h3>
+	<div class="group m_t_10" style="height: 200px;">
+		<p class="tip_s">1单元积分转1单位本位币</p>
+		<p class="text_group_s">　　积分：<span style="padding-left: 16px; color: #eb4636;" id="user_score">${userDetail.userScore}</span>分</p>
+		<p class="text_group_s">兑换金额：<input type="text" autocomplete="off" id="tuihuan_score" maxlength="8"></p>
+		<p class="text_group_s">安全密码：<input type="password" id="pwd" maxlength="16"></p>
+		<p class="text_group_s" id="show_alert_stock" style="color: red;text-align: center"></p>
+	</div>
+
+	<div class="group" style="margin-top: 10px;">
+		<button class="btn btn_red" type="button" id="duihuan_btn" onclick="exchange_score()"><a style="font-size: 16px; color: #fff;">确认兑换</a></button>
+	</div>
+</div>
+<#include 'include/page/foot.html'/>
+</body>
+</html>

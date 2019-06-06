@@ -1,0 +1,128 @@
+<#include "home/config.html"/>
+<#include "home/include/head.html"/>
+<#assign userTopMenu="info"/>
+	<title>个人资料</title>
+</head>
+
+<body>
+<!--头部-->
+<div class="header">
+<#include "home/include/topRich.html" />
+<#include "home/include/menuLine.html" />
+
+
+</div>
+<!--内容区-->
+<div class="main">
+   <div class="docMain w">
+	   <div class="docMainLeft">
+		   <ul>
+			   <li><a class="hov" href=""><i class="icons icon_information_account"></i><span>个人信息</span><i class="icons icon_arrows_account"></i></a></li>
+		   </ul>
+	   </div>
+	   <div class="docMainIn" id="infoList">
+		   <div class="informationTit">个人信息</div>
+		   <ul class="informationIn">
+			   <li>
+				   <div class="left f_l">昵称</div>
+				   <div class="mid f_l">
+					   <div class="name">
+						   ${userAll.userNickName}
+					   </div>
+					   <div class="form">
+							   <div class="group">
+								   <div class="col_2">
+									   <input type="text" placeholder="请输入昵称" value="${userAll.userNickName}" />
+								   </div>
+							   </div>
+							   <div class="hidden"><i class="icons"></i>请输入昵称</div>
+							   <div class="group mt_20">
+								   <div class="col_2">
+									   <button type="submit" class="btn" name="nickName" action="submit">保存</button>
+								   </div>
+							   </div>
+					   </div>
+				   </div>
+				   <div class="right f_r">
+					   <a href="javascript:void(0);" action="showHide">修改</a>
+				   </div>
+			   </li>
+			   <li>
+				   <div class="left f_l">QQ</div>
+				   <div class="mid f_l">
+					   <div class="name">
+						   ${userExt.userQq}
+					   </div>
+					   <div class="form" >
+							   <div class="group">
+								   <div class="col_2">
+									   <input type="text" placeholder="请输入QQ" value="${userExt.userQq}" />
+								   </div>
+							   </div>
+							   <div class="hidden"><i class="icons"></i>请输入QQ</div>
+							   <div class="group mt_20">
+								   <div class="col_2">
+									   <button type="submit" class="btn" name="qq" action="submit">保存</button>
+								   </div>
+							   </div>
+					   </div>
+				   </div>
+				   <div class="right f_r">
+					   <a href="javascript:void(0);" action="showHide">修改</a>
+				   </div>
+			   </li>
+			   <li>
+				   <div class="left f_l">微信</div>
+				   <div class="mid f_l">
+					   <div class="name">
+						   ${userExt.userWeixin}
+					   </div>
+					   <div class="form" >
+							   <div class="group">
+								   <div class="col_2">
+									   <input type="text" placeholder="请输入微信" value="${userExt.userWeixin}" />
+								   </div>
+							   </div>
+							   <div class="hidden"><i class="icons"></i>请输入微信</div>
+							   <div class="group mt_20">
+								   <div class="col_2">
+									   <button type="submit" class="btn" name="weixin" action="submit">保存</button>
+								   </div>
+							   </div>
+					   </div>
+				   </div>
+				   <div class="right f_r">
+					   <a href="javascript:void(0);" action="showHide">修改</a>
+				   </div>
+			   </li>
+			   <li>
+				   <div class="left f_l">邮寄地址</div>
+				   <div class="mid f_l">
+					   <div class="name">
+						   ${userAll.userAddress}
+					   </div>
+					   <div class="form" >
+							   <div class="group">
+								   <div class="col_2">
+									   <input type="text" placeholder="请输入邮寄地址" value="${userAll.userAddress}" style="width:600px"/>
+								   </div>
+							   </div>
+							   <div class="hidden"><i class="icons"></i>请输入邮寄地址</div>
+							   <div class="group mt_20">
+								   <div class="col_2">
+									   <button type="submit" class="btn" name="address" action="submit">保存</button>
+								   </div>
+							   </div>
+					   </div>
+				   </div>
+				   <div class="right f_r">
+					   <a href="javascript:void(0);" action="showHide">修改</a>
+				   </div>
+			   </li>
+		   </ul>
+	   </div>
+   </div>
+</div>
+
+<script>infoList("infoList")</script>
+<#include "home/include/footRich.html" />

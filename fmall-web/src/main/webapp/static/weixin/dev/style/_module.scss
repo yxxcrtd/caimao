@@ -1,0 +1,95 @@
+@charset 'utf-8';
+@mixin autoLayoutFixLeft($w:200px){
+	.mod-left{position:relative;float:left;width:$w;margin-right:-$w;}
+	.mod-right{float:right;width:100%;}
+	.mod-rightcontent{margin-left:$w;}
+	/*****
+		<div class="clearfix">
+		    <div class="mod-left">
+		    	left
+		    </div>
+		    <div class="mod-right">
+		        <div class="mod-rightcontent">
+		        	right
+		        </div>
+		    </div>
+		</div>
+	*****/
+ }
+
+
+@mixin autoLayoutFixRight($w:200px){
+	.mod-right{position:relative;float:left;width:$w;margin-right:-$w;}
+	.mod-left{float:left;width:100%;}
+	.mod-leftcontent{margin-right:$w;}
+	/*****
+		<div class="clearfix">
+		    <div class="mod-left">
+		        <div class="mod-leftcontent">
+		        	left
+		        </div>
+		    </div>
+		    <div class="mod-right">
+				right
+		    </div>
+		</div>
+	*****/
+ }
+
+@mixin pageMod(){
+	.mod-page{
+		margin:10px 0 0;text-align:center;line-height:32px;font-size:0;letter-spacing:-0.307em;
+		word-wrap:normal;white-space:nowrap;color:#999;
+		a,i{
+			display:inline-block;vertical-align:top;padding:0 12px;margin-left:-1px;border:1px solid #ddd;
+			font-size:12px;letter-spacing:normal;background:#fff;
+			-webkit-transition:background-color 0.3s;
+			-moz-transition:background-color 0.3s;
+			-ms-transition:background-color 0.3s;
+			transition:background-color 0.3s;
+		}
+		a{
+			color:#568eff;
+			&:first-child{margin-left:0;}
+			&:last-child{margin-right:0;}
+			&.pageprv:before,&.pagenxt:after{font-weight:bold;font-family:\5b8b\4f53;vertical-align:top;}
+			&.pageprv:before{margin-right:3px;content:'\3C';}
+			&.pagenxt:after{margin-left:3px;content:'\3E';}
+			&:hover{background:#568eff;}
+			&:active{background:#f0f0f0;}
+			&.z-crt,&.z-crt:hover,&.z-crt:active{cursor:default;color:#fff;background:#568eff;}
+			&.z-dis,&.z-dis:hover,&.z-dis:active{cursor:default;color:#ccc;background:#fff;}
+			&:hover{color:#fff;}
+		}
+	}
+	.mod-page-left{text-align:left;}
+
+	.mod-page-right{text-align:right;}
+
+	.mod-page-small{line-height:22px;}
+	.mod-page-small a,.mod-page-small i{padding:0 8px;}
+
+	.mod-page-separate a,.mod-page-separate i{margin:0 3px;}
+	.mod-page-separate i{border:0;}
+
+}
+
+@mixin btnGroup($radius:0){
+	.btnGroup{display:inline-block;position:relative;}
+	.btnGroup .btn{float:left;margin-left:-1px;}
+	.btnGroup .btn:first-child{margin-left:0;}
+	@if $radius != 0 {
+		.btnGroup .btn{border-radius:0;}
+		.btnGroup .btn:first-child{border-radius:$radius 0 0 $radius;}
+		.btnGroup .btn:nth-last-of-type(1){border-radius:0 $radius $radius 0;}
+		.btnGroup .btn:only-of-type{border-radius:$radius;}
+	}
+	/*
+		<em class="btnGroup">
+			<span class="btn">按钮</span>
+			<span class="btn">按钮</span>
+			<span class="btn">按钮</span>
+			<span class="btn">按钮</span>
+		</em>
+	*/
+}

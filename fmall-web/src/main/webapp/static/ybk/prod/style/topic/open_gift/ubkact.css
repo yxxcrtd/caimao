@@ -1,0 +1,390 @@
+@charset "UTF-8";
+/*
+━━━━━━━
+reset.scss
+样式重置
+BitUI
+━━━━━━━
+*/
+/*reset*/
+html {
+  color: #333; }
+
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, button, textarea, p, blockquote, th, td {
+  margin: 0;
+  padding: 0; }
+
+body {
+  line-height: 1.6;
+  font-size: 14px; }
+
+body,
+button,
+input,
+select,
+textarea {
+  font-family: 'Microsoft YaHei','Arial',tahoma,'hiragino sans gb',stheiti,'wenquanyi micro hei',\5FAE\8F6F\96C5\9ED1,\5B8B\4F53,sans-serif; }
+
+a {
+  background: transparent;
+  color: #08c;
+  text-decoration: none; }
+  a:focus, a:hover {
+    outline: thin dotted;
+    color: #005580; }
+  a:active, a:hover {
+    outline: 0; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+  table th, table td {
+    padding: .5em; }
+
+fieldset, img {
+  border: 0; }
+
+address, caption, cite, code, dfn, em, th, var, optgroup {
+  font-style: inherit;
+  font-weight: inherit; }
+
+del, ins {
+  text-decoration: none; }
+
+li {
+  list-style: none; }
+
+caption, th {
+  text-align: left;
+  font-weight: bold; }
+
+h1, h2, h3 {
+  margin: 0; }
+
+q:before, q:after {
+  content: ""; }
+
+abbr, acronym {
+  border: 0;
+  font-variant: normal; }
+
+sup, sub {
+  vertical-align: baseline; }
+
+code, kbd, pre, samp {
+  font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
+  font-size: 1em; }
+
+pre {
+  white-space: pre-wrap;
+  page-break-inside: avoid;
+  background: #333;
+  color: #FFF;
+  border-radius: 5px;
+  text-align: left; }
+
+code {
+  color: deeppink; }
+
+legend {
+  color: #000; }
+
+input, button, textarea, select, optgroup, option {
+  font-size: inherit;
+  font-style: inherit;
+  font-weight: inherit; }
+
+input, button, textarea, select {
+  vertical-align: middle;
+  font: inherit; }
+
+button {
+  *overflow: visible;
+  text-transform: none; }
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  padding: 0;
+  border: 0; }
+
+img {
+  vertical-align: top; }
+
+optgroup {
+  font-weight: normal; }
+
+abbr, acronym {
+  border-bottom: 1px dotted #000;
+  cursor: help; }
+
+em {
+  font-style: italic; }
+
+del {
+  text-decoration: line-through; }
+
+caption {
+  margin-bottom: .5em;
+  text-align: center; }
+
+sup {
+  vertical-align: super; }
+
+sub {
+  vertical-align: sub; }
+
+area, area:focus, area:active {
+  outline: none;
+  -moz-outline-style: none; }
+
+hr {
+  border: none;
+  border-bottom: 1px solid #e6e6e6;
+  margin: 0; }
+
+.clearFix {
+  *zoom: 1; }
+  .clearFix:after {
+    clear: both;
+    height: 0;
+    overflow: hidden;
+    display: block;
+    visibility: hidden;
+    content: "."; }
+
+.ubkActWarp {
+  width: 100%;
+  background: #ffb400; }
+  .ubkActWarp .ubkActMain {
+    width: 1208px;
+    margin: 0 auto; }
+    .ubkActWarp .ubkActMain .ubkActBanner {
+      width: 100%;
+      height: 380px; }
+      .ubkActWarp .ubkActMain .ubkActBanner img {
+        width: 100%; }
+    .ubkActWarp .ubkActMain .ubkActMain1 {
+      width: 1050px;
+      margin: 0 auto;
+      margin-top: 42px;
+      position: relative; }
+      .ubkActWarp .ubkActMain .ubkActMain1 .xuanfu {
+        position: absolute;
+        left: -40px;
+        top: -85px; }
+      .ubkActWarp .ubkActMain .ubkActMain1 .ubkActMain1-1 {
+        width: 1050px;
+        height: 25px;
+        margin: 0 auto;
+        background: url(img/tokebox1-1.png) no-repeat;
+        float: left; }
+      .ubkActWarp .ubkActMain .ubkActMain1 .ubkActMain1-2 {
+        width: 1050px;
+        height: auto;
+        margin: 0 auto;
+        background: url(img/tokebox1-2.png);
+        float: left; }
+      .ubkActWarp .ubkActMain .ubkActMain1 .ubkActMain1-3 {
+        width: 1050px;
+        height: 35px;
+        margin: 0 auto;
+        background: url(img/tokebox1-3.png) no-repeat;
+        float: left; }
+      .ubkActWarp .ubkActMain .ubkActMain1 .ubkactlist {
+        width: 100%;
+        height: 25px;
+        line-height: 25px;
+        background: #fbca60;
+        margin-top: 5px;
+        float: left;
+        padding-left: 30px;
+        box-sizing: border-box;
+        margin-bottom: 10px; }
+        .ubkActWarp .ubkActMain .ubkActMain1 .ubkactlist li {
+          float: left;
+          color: #c37048;
+          font-size: 14px;
+          width: 170px; }
+        .ubkActWarp .ubkActMain .ubkActMain1 .ubkactlist .widMin {
+          width: 100px; }
+      .ubkActWarp .ubkActMain .ubkActMain1 .ubkactlist2 {
+        width: 100%;
+        height: 25px;
+        line-height: 25px;
+        margin-top: 3px;
+        float: left;
+        padding-left: 30px;
+        box-sizing: border-box; }
+        .ubkActWarp .ubkActMain .ubkActMain1 .ubkactlist2 li {
+          float: left;
+          color: #c37048;
+          font-size: 14px;
+          width: 170px;
+          line-height: 18px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis; }
+          .ubkActWarp .ubkActMain .ubkActMain1 .ubkactlist2 li span {
+            display: inline-block;
+            color: #4c7ce7;
+            position: relative;
+            cursor: pointer; }
+            .ubkActWarp .ubkActMain .ubkActMain1 .ubkactlist2 li span .ubkActMask {
+              position: absolute;
+              width: 189px;
+              height: 42px;
+              font-size: 12px;
+              background: url(img/unkmask.png) no-repeat;
+              color: #c37048;
+              padding-left: 14px;
+              padding-top: 8px;
+              box-sizing: border-box;
+              left: -14px;
+              top: -45px;
+              display: none; }
+            .ubkActWarp .ubkActMain .ubkActMain1 .ubkactlist2 li span:hover .ubkActMask {
+              display: block; }
+        .ubkActWarp .ubkActMain .ubkActMain1 .ubkactlist2 .li1 {
+          width: 18px;
+          height: 18px;
+          float: left;
+          margin-right: 5px; }
+        .ubkActWarp .ubkActMain .ubkActMain1 .ubkactlist2 .li4 {
+          margin-top: 3px;
+          vertical-align: middle;
+          margin-left: 3px; }
+        .ubkActWarp .ubkActMain .ubkActMain1 .ubkactlist2 .listBtn {
+          width: 230px; }
+          .ubkActWarp .ubkActMain .ubkActMain1 .ubkactlist2 .listBtn a {
+            display: block;
+            float: left;
+            width: 81px;
+            height: 22px;
+            border: 1px solid #f6c356;
+            border-radius: 7px;
+            text-align: center;
+            line-height: 22px;
+            color: #4c7ce7;
+            margin-right: 22px; }
+        .ubkActWarp .ubkActMain .ubkActMain1 .ubkactlist2 .widMin {
+          width: 100px; }
+    .ubkActWarp .ubkActMain .qqBtnBox {
+      width: 100%;
+      height: 55px; }
+      .ubkActWarp .ubkActMain .qqBtnBox .qqBtn {
+        width: 234px;
+        height: 54px;
+        margin: 0 auto;
+        display: block;
+        margin-top: 20px; }
+    .ubkActWarp .ubkActMain .ubkActMain2 {
+      width: 1050px;
+      height: 156px;
+      margin: 0 auto;
+      margin-top: 25px;
+      background: url(img/tokebox2.png) no-repeat; }
+      .ubkActWarp .ubkActMain .ubkActMain2 img {
+        margin-left: 32px;
+        margin-top: 24px; }
+      .ubkActWarp .ubkActMain .ubkActMain2 p {
+        font-size: 14px;
+        line-height: 24px;
+        width: 100%;
+        padding: 0 40px;
+        box-sizing: border-box;
+        color: #98471f; }
+    .ubkActWarp .ubkActMain .ubkActMain3 {
+      width: 1050px;
+      margin: 0 auto;
+      margin-top: 20px; }
+      .ubkActWarp .ubkActMain .ubkActMain3 img {
+        margin-left: 32px;
+        margin-top: 24px;
+        margin-bottom: 20px; }
+      .ubkActWarp .ubkActMain .ubkActMain3 div {
+        width: 510px;
+        height: 212px;
+        background: url(img/tokebox3.png) no-repeat; }
+      .ubkActWarp .ubkActMain .ubkActMain3 .ubkActMain3-1 {
+        float: left; }
+        .ubkActWarp .ubkActMain .ubkActMain3 .ubkActMain3-1 p {
+          font-size: 14px;
+          line-height: 24px;
+          width: 100%;
+          padding: 0 30px;
+          box-sizing: border-box;
+          color: #98471f; }
+      .ubkActWarp .ubkActMain .ubkActMain3 .ubkActMain3-2 {
+        float: right; }
+        .ubkActWarp .ubkActMain .ubkActMain3 .ubkActMain3-2 div.ubkuser {
+          height: 92px;
+          overflow: hidden;
+          background: none;
+          position: relative; }
+          .ubkActWarp .ubkActMain .ubkActMain3 .ubkActMain3-2 div.ubkuser .listBox {
+            position: absolute;
+            background: none;
+            top: 0;
+            transition: top 0.3s; }
+          .ubkActWarp .ubkActMain .ubkActMain3 .ubkActMain3-2 div.ubkuser .listBox2 {
+            position: absolute;
+            background: none;
+            top: 0; }
+        .ubkActWarp .ubkActMain .ubkActMain3 .ubkActMain3-2 .nameList {
+          width: 99.8%;
+          height: 25px;
+          line-height: 25px;
+          background: #fbca60;
+          margin-top: 30px;
+          float: left;
+          padding-left: 30px;
+          box-sizing: border-box;
+          margin-bottom: 10px; }
+          .ubkActWarp .ubkActMain .ubkActMain3 .ubkActMain3-2 .nameList li {
+            float: left;
+            color: #c37048;
+            font-size: 14px;
+            width: 114px; }
+          .ubkActWarp .ubkActMain .ubkActMain3 .ubkActMain3-2 .nameList .widMin2 {
+            width: 100px; }
+          .ubkActWarp .ubkActMain .ubkActMain3 .ubkActMain3-2 .nameList .widMax {
+            width: 110px;
+            padding-left: 40px; }
+        .ubkActWarp .ubkActMain .ubkActMain3 .ubkActMain3-2 .nameList2 {
+          width: 100%;
+          height: 20px;
+          line-height: 20px;
+          margin-top: 3px;
+          float: left;
+          padding-left: 30px;
+          box-sizing: border-box; }
+          .ubkActWarp .ubkActMain .ubkActMain3 .ubkActMain3-2 .nameList2 li {
+            float: left;
+            overflow: hidden;
+            color: #c37048;
+            font-size: 14px;
+            width: 114px;
+            line-height: 18px; }
+            .ubkActWarp .ubkActMain .ubkActMain3 .ubkActMain3-2 .nameList2 li span {
+              margin-left: 10px; }
+          .ubkActWarp .ubkActMain .ubkActMain3 .ubkActMain3-2 .nameList2 .widMin2 {
+            width: 100px; }
+          .ubkActWarp .ubkActMain .ubkActMain3 .ubkActMain3-2 .nameList2 .widMax {
+            width: 110px;
+            padding-left: 40px; }
+    .ubkActWarp .ubkActMain .ubkActMainF {
+      width: 100%;
+      height: 130px;
+      font-size: 14px;
+      text-align: center;
+      line-height: 130px;
+      color: #fff; }
+  .ubkActWarp .ubkActFooter {
+    width: 100%;
+    height: 62px;
+    line-height: 62px;
+    background: #fff;
+    text-align: center;
+    color: #c6c6c6; }
+
+/*# sourceMappingURL=ubkact.css.map */

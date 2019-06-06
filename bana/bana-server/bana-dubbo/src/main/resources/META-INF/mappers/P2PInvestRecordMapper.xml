@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="P2PInvestRecord">
+    <select id="queryUserTotalInvestment" parameterType="hashmap" resultType="long">
+        SELECT SUM(invest_value) AS total FROM p2p_invest_record WHERE invest_status IN (3, 4) AND invest_user_id = #{userId}
+    </select>
+
+    <select id="queryUserTotalIncome" parameterType="hashmap" resultType="long">
+        SELECT SUM(pay_interest) AS total FROM p2p_invest_record WHERE invest_status IN (3, 4) AND invest_user_id = #{userId}
+    </select>
+
+    <select id="queryUserTotalMarginReceived" parameterType="hashmap" resultType="long">
+        SELECT SUM(invest_value) AS total FROM p2p_invest_record WHERE invest_status = 4 AND invest_user_id = #{userId}
+    </select>
+
+    <select id="queryUserTotalMarginClosed" parameterType="hashmap" resultType="long">
+        SELECT SUM(invest_value) AS total FROM p2p_invest_record WHERE invest_status = 3 AND invest_user_id = #{userId}
+    </select>
+
+    <select id="queryUserTotalInterestReceived" parameterType="hashmap" resultType="long">
+        SELECT SUM(pay_interest) AS total FROM p2p_invest_record WHERE invest_status IN (3, 4) AND invest_user_id = #{userId}
+    </select>
+
+    <select id="queryUserTotalInterestClosed" parameterType="hashmap" resultType="long">
+        SELECT SUM(year_value / 12 * lift_time / 30 - pay_interest) AS total FROM p2p_invest_record WHERE invest_status = 3 AND invest_user_id = #{userId}
+    </select>
+	<insert id="insert" parameterType="com.caimao.bana.api.entity.p2p.P2PInvestRecordEntity" useGeneratedKeys="true" keyProperty="investId">
+    insert into p2p_invest_record 
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="investUserId !=null">
+                invest_user_id,
+            </if>
+            <if test="targetId !=null">
+                target_id,
+            </if>
+            <if test="targetUserId !=null">
+                target_user_id,
+            </if>
+            <if test="targetName !=null">
+                target_name,
+            </if>
+            <if test="targetProdId !=null">
+                target_prod_id,
+            </if>
+            <if test="investValue !=null">
+                invest_value,
+            </if>
+            <if test="yearRate !=null">
+                year_rate,
+            </if>
+            <if test="yearValue !=null">
+                year_value,
+            </if>
+             <if test="interestTimes !=null">
+                interest_times,
+            </if>
+            <if test="interestPeriod !=null">
+                interest_period,
+            </if>
+            <if test="payInterest !=null">
+                pay_interest,
+            </if>
+            <if test="investCreated !=null">
+                invest_created,
+            </if>
+            <if test="fullDatetime !=null">
+               full_datetime,
+            </if>
+            <if test="expirationDatetime !=null">
+                expiration_datetime,
+            </if>
+            <if test="investStatus !=null">
+                invest_status,
+            </if>
+            <if test="lastUpdate !=null">
+                last_update,
+            </if>
+            <if test="liftTime !=null">
+               lift_time,
+            </if>
+            <if test="interestDatetime !=null">
+                interest_datetime
+            </if>
+        </trim>
+       <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="investUserId !=null">
+                #{investUserId},
+            </if>
+            <if test="targetId !=null">
+                #{targetId},
+            </if>
+            <if test="targetUserId !=null">
+                #{targetUserId},
+            </if>
+            <if test="targetName !=null">
+                #{targetName},
+            </if>
+            <if test="targetProdId !=null">
+                #{targetProdId},
+            </if>
+            <if test="investValue !=null">
+                #{investValue},
+            </if>
+            <if test="yearRate !=null">
+                #{yearRate},
+            </if>
+            <if test="yearValue !=null">
+                #{yearValue},
+            </if>
+            <if test="interestTimes !=null">
+                #{interestTimes},
+            </if>
+            <if test="interestPeriod !=null">
+                #{interestPeriod},
+            </if>
+            <if test="payInterest !=null">
+                #{payInterest},
+            </if>
+            <if test="investCreated !=null">
+                #{investCreated},
+            </if>
+            <if test="fullDatetime !=null">
+                #{fullDatetime},
+            </if>
+            <if test="expirationDatetime !=null">
+                #{expirationDatetime},
+            </if>
+            <if test="investStatus !=null">
+                #{investStatus},
+            </if>
+            <if test="lastUpdate !=null">
+                #{lastUpdate},
+            </if>
+            <if test="liftTime !=null">
+                #{liftTime},
+            </if>
+            <if test="interestDatetime !=null">
+                #{interestDatetime}
+            </if>
+        </trim>
+  </insert>
+    <sql id="FP2PQueryUserPageInvestRes_Column_List" >
+        invest_id AS investId,
+        invest_user_id AS investUserId,
+        target_id AS targetId,
+        target_user_id  AS targetUserId,
+        target_name AS targetName,
+        target_prod_id AS targetProdId,
+        lift_time AS liftTime,
+        invest_value AS investValue,
+        year_rate AS yearRate,
+        year_value AS yearValue,
+        interest_times AS interestTimes,
+        interest_period AS interestPeriod,
+        pay_interest AS payInterest,
+        invest_created AS investCreated,
+        full_datetime AS fullDatetime,
+        expiration_datetime AS expirationDatetime,
+        interest_datetime AS interestDatetime,
+        invest_status AS investStatus
+    </sql>
+
+    <select id="queryFP2PQueryUserPageInvestResWithPage" resultType="com.caimao.bana.api.entity.res.FP2PQueryUserPageInvestRes" parameterType="com.caimao.bana.api.entity.req.FP2PQueryUserPageInvestReq" >
+        SELECT
+        <include refid="FP2PQueryUserPageInvestRes_Column_List" />
+        FROM p2p_invest_record
+        WHERE invest_user_id = #{userId}
+        <if test="investStatus != null">
+            AND invest_status = #{investStatus}
+        </if>
+        <if test="startDate != null and  startDate != ''">
+            AND invest_created &gt;= #{startDate}
+        </if>
+        <if test="endDate != null and  endDate != ''">
+            AND invest_created &lt;= #{endDate}
+        </if>
+        <trim prefix="ORDER BY ">
+            <if test="orderColumn != null and  orderColumn != ''">
+                ${orderColumn} ${orderDir}
+            </if>
+        </trim>
+    </select>
+
+    <select id="queryUserInvestRecord" parameterType="hashmap" resultType="com.caimao.bana.api.entity.p2p.P2PInvestRecordEntity">
+        SELECT
+        <include refid="FP2PQueryUserPageInvestRes_Column_List" />
+        FROM p2p_invest_record
+        WHERE invest_user_id = #{userId} AND invest_id = #{investId}
+    </select>
+
+    <select id="queryFP2PQueryLoanPageInvestResWithPage" resultType="com.caimao.bana.api.entity.res.FP2PQueryLoanPageInvestRes" parameterType="com.caimao.bana.api.entity.req.FP2PQueryLoanPageInvestReq" >
+        SELECT
+        <include refid="FP2PQueryUserPageInvestRes_Column_List" />
+        FROM p2p_invest_record
+        WHERE target_id = #{targetId}
+        <trim prefix="ORDER BY ">
+            <if test="orderColumn != null and  orderColumn != ''">
+                ${orderColumn} ${orderDir}
+            </if>
+        </trim>
+    </select>
+    
+    <select id="queryFP2PQueryLoanAndUserPageInvestResWithPage" resultType="com.caimao.bana.api.entity.res.FP2PQueryLoanPageInvestWithUserRes" parameterType="com.caimao.bana.api.entity.req.FP2PQueryLoanPageInvestWithUserReq" >
+        SELECT
+        i.invest_id AS investId,
+        i.invest_user_id AS investUserId,
+        i.target_id AS targetId,
+        i.target_user_id  AS targetUserId,
+        i.target_name AS targetName,
+        i.target_prod_id AS targetProdId,
+        i.lift_time AS liftTime,
+        i.invest_value AS investValue,
+        i.year_rate AS yearRate,
+        i.year_value AS yearValue,
+        i.interest_period AS interestPeriod,
+        i.pay_interest AS payInterest,
+        i.invest_created AS investCreated,
+        i.full_datetime AS fullDatetime,
+        i.expiration_datetime AS expirationDatetime,
+        i.interest_datetime AS interestDatetime,
+        i.invest_status AS investStatus,
+        u.user_real_name AS userName,
+        u.mobile AS mobile
+        FROM p2p_invest_record i ,tpz_user u
+        WHERE u.user_id = i.invest_user_id and target_id = #{targetId}
+        <trim prefix="ORDER BY ">
+            <if test="orderColumn != null and  orderColumn != ''">
+                ${orderColumn} ${orderDir}
+            </if>
+        </trim>
+    </select>
+
+    <!--后台  查询投资人的投资列表-->
+    <select id="queryInvestPageWithPage" resultType="com.caimao.bana.api.entity.res.FP2PQueryLoanPageInvestWithUserRes" parameterType="com.caimao.bana.api.entity.req.FP2PQueryPageInvestListReq" >
+        SELECT
+        i.invest_id AS investId,
+        i.invest_user_id AS investUserId,
+        i.target_id AS targetId,
+        i.target_user_id  AS targetUserId,
+        i.target_name AS targetName,
+        i.target_prod_id AS targetProdId,
+        i.lift_time AS liftTime,
+        i.invest_value AS investValue,
+        i.year_rate AS yearRate,
+        i.year_value AS yearValue,
+        i.interest_period AS interestPeriod,
+        i.pay_interest AS payInterest,
+        i.invest_created AS investCreated,
+        i.full_datetime AS fullDatetime,
+        i.expiration_datetime AS expirationDatetime,
+        i.interest_datetime AS interestDatetime,
+        i.invest_status AS investStatus,
+        u.user_real_name AS userName,
+        u.mobile AS mobile
+        FROM p2p_invest_record i ,tpz_user u
+        <trim prefix="WHERE" prefixOverrides="AND|OR">
+            AND i.invest_user_id = u.user_id
+            <if test="targetId != null">AND i.target_id = #{targetId}</if>
+            <if test="investStatus != null">AND i.invest_status = #{investStatus}</if>
+            <if test="userName != null and userName != ''">AND u.user_real_name like concat('%', #{userName,jdbcType=VARCHAR}, '%')</if>
+            <if test="mobile != null and mobile != ''">AND u.mobile = #{mobile}</if>
+            <if test="beginDateTime != null"><![CDATA[AND i.invest_created > #{beginDateTime}]]></if>
+            <if test="endDateTime != null"><![CDATA[AND i.invest_created <= #{endDateTime}]]></if>
+        </trim>
+        <trim prefix="ORDER BY ">
+            <if test="orderColumn != null and  orderColumn != ''">
+                ${orderColumn} ${orderDir}
+            </if>
+        </trim>
+    </select>
+    
+    <select id="queryStatisticsByUserWithPage" resultType="com.caimao.bana.api.entity.res.FP2PQueryStatisticsByUserRes" parameterType="com.caimao.bana.api.entity.req.FP2PQueryStatisticsByUserReq" >
+        SELECT 
+        i.invest_user_id AS investUserId,
+        i.num AS num,
+        i.total AS total,
+        u.user_real_name AS userName,
+        u.mobile AS mobile
+        from (
+        	SELECT invest_user_id,
+        	count(invest_user_id) AS num,
+        	sum(invest_value) AS total 
+        	FROM p2p_invest_record 
+        	<if test="investStatus != null">
+        		where invest_status = #{investStatus}
+        	</if>
+        	 GROUP BY invest_user_id
+        	) i,tpz_user u
+        WHERE u.user_id = i.invest_user_id
+        <if test="userName != null and userName != ''">
+        	AND u.user_real_name like concat('%', #{userName,jdbcType=VARCHAR}, '%')      
+        </if>
+        <if test="mobile != null and mobile != ''">
+        	AND u.mobile = #{mobile}
+        </if>
+        <trim prefix="ORDER BY ">
+            <if test="orderColumn != null and  orderColumn != ''">
+                ${orderColumn} ${orderDir}
+            </if>
+        </trim>
+    </select>
+    
+    <select id="getInvestRecordList" resultType="com.caimao.bana.api.entity.p2p.P2PInvestRecordEntity">
+		SELECT
+		<include refid="FP2PQueryUserPageInvestRes_Column_List" />
+		FROM p2p_invest_record
+		<where>
+			<if test="expirationDatetimeStart!=null"><![CDATA[ and expiration_datetime<#{expirationDatetimeStart}]]></if>
+			<if test="investStatus!=null"> and invest_status=#{investStatus}</if>
+		</where>
+		limit #{start},#{length}
+	</select>
+	
+	<update id="update" parameterType="com.caimao.bana.api.entity.p2p.P2PInvestRecordEntity">
+		update p2p_invest_record
+		<set>
+			<if test="payInterest != null">
+				pay_interest = #{payInterest,jdbcType=BIGINT},
+			</if>
+			<if test="lastUpdate != null">
+				last_update = #{lastUpdate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="interestTimes != null">
+				interest_times = #{interestTimes},
+			</if>
+		</set>
+		where invest_id = #{investId,jdbcType=BIGINT}
+	</update>
+	<!-- 改变标的状态 -->
+	<update id="updateStatus" parameterType="map">
+		update p2p_invest_record set invest_status=#{investStatus},last_update=now() where invest_id=#{investId} 
+	</update>
+	<!-- 查找一个标的的投资用户列表 -->
+	<select id="getFailedTargetUsers" resultType="com.caimao.bana.api.entity.p2p.P2PInvestRecordEntity">
+		 SELECT
+        <include refid="FP2PQueryUserPageInvestRes_Column_List" />
+        FROM p2p_invest_record
+        where target_id=#{targetId} and invest_status=#{investStatus}
+	</select>
+	
+	
+	<update id="updateTargetStatus" parameterType="map">
+		update p2p_invest_record
+		<set>
+			<if test="status != null">
+				 invest_status = #{status},
+			</if>
+			<if test="fullDate != null">
+				 full_datetime = #{fullDate},
+			</if>
+			<if test="lastUpdate != null">
+				 last_update = #{lastUpdate},
+			</if>
+		</set>
+		where target_id = #{targetId}
+	</update>
+	<update id="setInterestTime" parameterType="map">
+		update p2p_invest_record set  interest_datetime=#{interestDatetime}, expiration_datetime=#{expirationDatetime},invest_status=3
+		where target_id=#{targetId}
+	</update>
+
+    <update id="updateExtByTargetId" parameterType="map">
+        update p2p_invest_record
+        <set>
+            <if test="expirationDatetime != null">
+                expiration_datetime = #{expirationDatetime},
+            </if>
+            <if test="interestDatetime != null">
+                interest_datetime = #{interestDatetime},
+            </if>
+            <if test="investStatus != null">
+                invest_status = #{investStatus},
+            </if>
+            <if test="lastUpdate != null">
+                last_update = #{lastUpdate},
+            </if>
+            <if test="fullDatetime != null">
+                full_datetime = #{fullDatetime},
+            </if>
+        </set>
+        where target_id = #{targetId}
+    </update>
+
+    <select id="queryPrepaymentList" resultType="com.caimao.bana.api.entity.p2p.P2PInvestRecordEntity">
+        SELECT
+        invest_id AS investId,
+        invest_user_id AS investUserId,
+        target_id AS targetId,
+        target_user_id AS targetUserId,
+        target_name AS targetName,
+        target_prod_id AS targetProdId,
+        lift_time AS liftTime,
+        invest_value AS investValue,
+        year_rate AS yearRate,
+        year_value AS yearValue,
+        interest_times AS interestTimes,
+        interest_period AS interestPeriod,
+        pay_interest AS payInterest,
+        invest_created AS investCreated,
+        full_datetime AS fullDatetime,
+        expiration_datetime AS expirationDatetime,
+        interest_datetime AS interestDatetime,
+        invest_status AS investStatus,
+        last_update AS lastUpdate
+        FROM p2p_invest_record
+        WHERE invest_status = 3 AND target_id IN (SELECT target_id FROM p2p_loan_record WHERE p2p_type = 1)
+    </select>
+</mapper>

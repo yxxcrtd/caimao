@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="InviteReturnHistory">
+
+    <resultMap id="BaseResultMap" type="com.caimao.bana.api.entity.InviteReturnHistoryEntity">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="user_id" property="userId" jdbcType="BIGINT"/>
+        <result column="invite_user_id" property="inviteUserId" jdbcType="BIGINT"/>
+        <result column="return_type" property="returnType" jdbcType="INTEGER"/>
+        <result column="order_no" property="orderNo" jdbcType="BIGINT"/>
+        <result column="order_amount" property="orderAmount" jdbcType="BIGINT"/>
+        <result column="return_rate" property="returnRate" jdbcType="DECIMAL"/>
+        <result column="return_amount" property="returnAmount" jdbcType="BIGINT"/>
+        <result column="created" property="created" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, user_id, invite_user_id, return_type, order_no, order_amount, return_rate, return_amount, created
+    </sql>
+
+    <insert id="save" parameterType="com.caimao.bana.api.entity.InviteReturnHistoryEntity">
+        INSERT INTO invite_return_history
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="inviteUserId != null">
+                invite_user_id,
+            </if>
+            <if test="returnType != null">
+                return_type,
+            </if>
+            <if test="orderNo != 0">
+                order_no,
+            </if>
+            <if test="orderAmount != null">
+                order_amount,
+            </if>
+            <if test="returnRate != null">
+                return_rate,
+            </if>
+            <if test="returnAmount != null">
+                return_amount,
+            </if>
+            created,
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="inviteUserId != null">
+                #{inviteUserId,jdbcType=BIGINT},
+            </if>
+            <if test="returnType != null">
+                #{returnType,jdbcType=INTEGER},
+            </if>
+            <if test="orderNo != 0">
+                #{orderNo,jdbcType=BIGINT},
+            </if>
+            <if test="orderAmount != null">
+                #{orderAmount,jdbcType=BIGINT},
+            </if>
+            <if test="returnRate != null">
+                #{returnRate,jdbcType=DECIMAL},
+            </if>
+            <if test="returnAmount != null">
+                #{returnAmount,jdbcType=BIGINT},
+            </if>
+            UNIX_TIMESTAMP(),
+        </trim>
+    </insert>
+
+    <select id="getInviteReturnHistoryByReturnTypeAndInviteUserId"
+            resultType="com.caimao.bana.api.entity.InviteReturnHistoryEntity">
+        SELECT
+            id,
+            user_id        AS userId,
+            invite_user_id AS inviteUserId,
+            return_type    AS returnType,
+            order_no       AS orderNo,
+            order_amount   AS orderAmount,
+            return_rate    AS returnRate,
+            return_amount  AS returnAmount,
+            created
+        FROM invite_return_history
+        WHERE invite_user_id = #{inviteUserId} AND return_type = #{returnType}
+    </select>
+
+    <select id="getInviteReturnHistoryListByUserIdWithPage" resultType="com.caimao.bana.api.entity.InviteReturnHistoryEntity">
+        SELECT
+            id,
+            user_id        AS userId,
+            invite_user_id AS inviteUserId,
+            return_type    AS returnType,
+            order_no       AS orderNo,
+            order_amount   AS orderAmount,
+            return_rate    AS returnRate,
+            return_amount  AS returnAmount,
+            created
+        FROM invite_return_history
+        WHERE user_id = #{userId}
+        <trim prefix="ORDER BY ">
+            <if test="orderColumn != null and  orderColumn != ''">
+                ${orderColumn} ${orderDir}
+            </if>
+        </trim>
+    </select>
+
+    <select id="getInviteReturnHistoryByBillOrderNoAndReturnType" resultType="com.caimao.bana.api.entity.InviteReturnHistoryEntity" parameterType="map">
+        SELECT
+            id,
+            user_id        AS userId,
+            invite_user_id AS inviteUserId,
+            return_type    AS returnType,
+            order_no       AS orderNo,
+            order_amount   AS orderAmount,
+            return_rate    AS returnRate,
+            return_amount  AS returnAmount,
+            created
+        FROM invite_return_history
+        WHERE order_no = #{orderNo} AND return_type = #{returnType}
+    </select>
+
+    <select id="getInviteReturnHistoryByType" resultType="com.caimao.bana.api.entity.InviteReturnHistoryEntity">
+        SELECT
+        id,
+        user_id        AS userId,
+        invite_user_id AS inviteUserId,
+        return_type    AS returnType,
+        order_no       AS orderNo,
+        order_amount   AS orderAmount,
+        return_rate    AS returnRate,
+        return_amount  AS returnAmount,
+        created
+        FROM invite_return_history
+        WHERE return_type = #{type}
+    </select>
+</mapper>

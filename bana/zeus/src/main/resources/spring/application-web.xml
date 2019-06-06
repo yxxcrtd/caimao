@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
+	http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd">
+
+
+    <!-- 启动Spring MVC的注解功能 -->
+    <!--<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"/>-->
+    <!-- 地址映射 -->
+    <!--<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">-->
+    <mvc:annotation-driven validator="validator" conversion-service="conversion-service" />
+
+    <!-- <mvc:default-servlet-handler />将静态资源的处理经由Spring MVC框架交回Web应用服务器处理。
+         而<mvc:resources />更进一步，由Spring MVC框架自己处理静态资源，并添加一些有用的附加值功能。-->
+    <mvc:default-servlet-handler/>
+    <!-- 静态资源映射 -->
+    <mvc:resources mapping="/img/**" location="/WEB-INF/static/img/"/>
+    <mvc:resources mapping="/css/**" location="/WEB-INF/static/css/"/>
+    <mvc:resources mapping="/js/**" location="/WEB-INF/static/js/"/>
+    <mvc:resources mapping="/fonts/**" location="/WEB-INF/static/fonts/"/>
+
+    <mvc:view-controller path="/" view-name="redirect:/login"/>
+
+    <context:property-placeholder
+            ignore-resource-not-found="true"
+            location="classpath:/conf/application.properties,classpath:/conf/jdbc.properties,classpath:/conf/dubbo-conf.properties,classpath:/conf/redis-conf.properties" />
+
+    <!-- 如果配置include-filter,expression=org.springframework.stereotype.Controller模式,则annotation驱动的事务和缓存都不会起作用,详细请读源码 -->
+    <context:component-scan base-package="com.caimao.zeus">
+        <context:exclude-filter type="annotation"
+                                expression="org.springframework.stereotype.Service"/>
+        <context:exclude-filter type="annotation"
+                                expression="org.springframework.stereotype.Repository"/>
+    </context:component-scan>
+
+    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+        <property name="providerClass" value="org.hibernate.validator.HibernateValidator"/>
+        <property name="validationMessageSource" ref="messageSource"/>
+    </bean>
+
+    <bean id="conversion-service"
+          class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+    </bean>
+
+    <!-- 对pdf、json、xml、excel之类的视图解析器 -->
+    <bean id="beanNameViewResolver"
+          class="org.springframework.web.servlet.view.BeanNameViewResolver"
+          p:order="0"/>
+
+    <!-- 默认视图解析器,此处为servlet、jsp解析器 -->
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+          p:order="1">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <bean id="restFulViewResolver" class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver"
+          p:order="2">
+        <property name="viewResolvers">
+            <list>
+                <ref bean="beanNameViewResolver"/>
+                <ref bean="viewResolver"/>
+            </list>
+        </property>
+        <property name="defaultViews">
+            <list>
+                <bean class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
+                    <property name="extractValueFromSingleKeyModel" value="true"/>
+                    <property name="objectMapper" ref="objectMapper"/>
+                </bean>
+                <bean class="org.springframework.web.servlet.view.xml.MarshallingView">
+                    <property name="marshaller">
+                        <bean class="org.springframework.oxm.xstream.XStreamMarshaller"/>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="objectMapper" class="com.fasterxml.jackson.databind.ObjectMapper">
+        <property name="serializationInclusion">
+            <value type="com.fasterxml.jackson.annotation.JsonInclude$Include">NON_NULL</value>
+        </property>
+    </bean>
+<!--
+    <bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+        &lt;!&ndash; 扩展名至mimeType的映射,即 /user.json => application/json &ndash;&gt;
+        <property name="favorPathExtension" value="true"/>
+        &lt;!&ndash; 用于开启 /userinfo/123?format=json 的支持 &ndash;&gt;
+        <property name="favorParameter" value="true"/>
+        <property name="parameterName" value="format"/>
+        &lt;!&ndash; 是否忽略Accept Header &ndash;&gt;
+        <property name="ignoreAcceptHeader" value="true"/>
+        <property name="defaultContentType" value="text/html"/>
+        &lt;!&ndash;扩展名到MIME的映射；favorPathExtension, favorParameter是true时起作用  &ndash;&gt;
+        <property name="mediaTypes">
+            <map>
+                <entry key="json" value="application/json"/>
+                <entry key="xml" value="application/xml"/>
+                <entry key="jsonp" value="application/jsonp"/>
+            </map>
+        </property>
+    </bean>-->
+
+    <!-- 文件上传相关 -->
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="50000000"/>
+    </bean>
+
+    <!--  配置mvc的拦截器 可以配置多个 -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <!--  需要被拦截的路径 -->
+            <mvc:mapping path="/**" />
+            <mvc:exclude-mapping path="/css/**" />
+            <mvc:exclude-mapping path="/js/**" />
+            <mvc:exclude-mapping path="/img/**" />
+            <mvc:exclude-mapping path="/fonts/**" />
+            <!-- 拦截处理的interceptor -->
+            <bean class="com.caimao.zeus.interceptor.AdminInterceptor" />
+        </mvc:interceptor>
+    </mvc:interceptors>
+</beans>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="TpzAdjustOrder">
+    <insert id="save">
+        INSERT INTO tpz_adjust_order
+        (order_no, pz_account_id, user_id, user_real_name, order_amount, order_abstract, oper_user, verify_user, remark, verify_datetime, verify_status, create_datetime, update_datetime, account_biz_type, seq_flag)
+        VALUES
+        (#{orderNo}, #{pzAccountId}, #{userId}, #{userRealName}, #{orderAmount}, #{orderAbstract}, #{operUser}, #{verifyUser}, #{remark}, #{verifyDatetime}, #{verifyStatus}, #{createDatetime}, #{updateDatetime}, #{accountBizType}, #{seqFlag})
+    </insert>
+
+    <update id="update">
+        UPDATE tpz_adjust_order SET 
+        order_no = #{orderNo}, pz_account_id = #{pzAccountId}, user_id = #{userId}, user_real_name = #{userRealName}, order_amount = #{orderAmount}, order_abstract = #{orderAbstract}, oper_user = #{operUser}, verify_user = #{verifyUser}, remark = #{remark}, verify_datetime = #{verifyDatetime}, verify_status = #{verifyStatus}, create_datetime = #{createDatetime}, update_datetime = #{updateDatetime}, account_biz_type = #{accountBizType}, seq_flag = #{seqFlag}
+        WHERE order_no = #{orderNo}
+    </update>
+
+</mapper>

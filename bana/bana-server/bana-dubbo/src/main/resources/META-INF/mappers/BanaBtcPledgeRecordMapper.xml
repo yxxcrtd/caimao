@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="BtcPledgeRecord">
+	<resultMap id="BaseResultMap" type="com.caimao.bana.api.entity.BanaBtcPledgeRecordEntity" >
+		<id column="id" property="id" jdbcType="BIGINT" />
+        <result column="pz_account_id" property="pzAccountId" jdbcType="BIGINT" />
+        <result column="user_id" property="userId" jdbcType="BIGINT" />
+        <result column="user_real_name" property="userRealName" jdbcType="VARCHAR" />
+        <result column="order_amount" property="orderAmount" jdbcType="BIGINT" />
+        <result column="order_abstract" property="orderAbstract" jdbcType="VARCHAR" />
+        <result column="oper_user" property="operUser" jdbcType="VARCHAR" />
+        <result column="created" property="created" jdbcType="DATE" />
+        <result column="account_biz_type" property="accountBizType" jdbcType="VARCHAR" />
+        <result column="seq_flag" property="seqFlag" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<sql id="Base_Column_List" >
+        id,
+        pz_account_id AS pzAccountId,
+        user_id AS userId,
+        user_real_name AS userRealName,
+        order_amount AS orderAmount,
+        order_abstract AS orderAbstract,
+        oper_user AS operUser,
+        created,
+        account_biz_type AS accountBizType,
+        seq_flag AS seqFlag
+	</sql>
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="id" parameterType="com.caimao.bana.api.entity.BanaBtcPledgeRecordEntity">
+      INSERT INTO bana_btc_pledge_record
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+          <if test="pzAccountId != null">pz_account_id,</if>
+          <if test="userId != null">user_id,</if>
+          <if test="userRealName != null">user_real_name,</if>
+          <if test="orderAmount != null">order_amount,</if>
+          <if test="orderAbstract != null">order_abstract,</if>
+          <if test="operUser != null">oper_user,</if>
+          <if test="created != null">created,</if>
+          <if test="accountBizType != null">account_biz_type,</if>
+          <if test="seqFlag != null">seq_flag,</if>
+      </trim>
+      <trim prefix="values (" suffix=")" suffixOverrides="," >
+          <if test="pzAccountId != null">#{pzAccountId},</if>
+          <if test="userId != null">#{userId},</if>
+          <if test="userRealName != null">#{userRealName},</if>
+          <if test="orderAmount != null">#{orderAmount},</if>
+          <if test="orderAbstract != null">#{orderAbstract},</if>
+          <if test="operUser != null">#{operUser},</if>
+          <if test="created != null">#{created},</if>
+          <if test="accountBizType != null">#{accountBizType},</if>
+          <if test="seqFlag != null">#{seqFlag},</if>
+      </trim>
+    </insert>
+</mapper>

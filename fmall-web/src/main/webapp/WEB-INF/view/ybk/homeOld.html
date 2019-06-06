@@ -1,0 +1,252 @@
+<!doctype html>
+<html>
+<#include "ybk/config.html"/>
+<#assign topMenu="index" />
+<head>
+	<meta charset="utf-8">
+    <title>首页--邮币卡</title>
+	<script src="${staticUrl}/js/chart/lib.js?version=${jsVersion}"></script>
+	<script src="${staticUrl}/js/ybk/home.tab.js?version=${jsVersion}"></script>
+	<link href="${staticUrl}/style/style.css?version=${jsVersion}" rel="stylesheet">
+    <script src="${staticUrl}/js/ybk/exchangeIndex.js?version=${jsVersion}" type="text/javascript"></script>
+    <script src="${staticUrl}/js/ybk/index.js?version=${jsVersion}" type="text/javascript"></script>
+    <script src="${staticUrl}/js/ybk/user.fav.js?version=${jsVersion}"></script>
+	<link href="${staticUrl}/style/focus.css?version=${jsVersion}" rel="stylesheet">
+    <script src="${staticUrl}/js/ybk/home.focus.js?version=${jsVersion}"></script>
+</head>
+
+<body>
+
+<#include 'ybk/include/page/head.html'/>
+
+<div class="bannerFocus">
+	<div class="focus" id="focusBox">
+		<ul id="focus">
+			<#if (bannerList.items?size > 0)>
+				<#list bannerList.items as b>
+					<#if b.pcPic != "">
+						<li style="background-image:url(${b.pcPic})">
+							<a <#if b.pcJumpUrl != "">href="${b.pcJumpUrl}" target="_blank"<#else />href="javascript:void(0);"</#if>></a>
+						</li>
+					</#if>
+				</#list>
+			</#if>
+		</ul>
+		<div class="btn"><div id="btn"></div></div>
+	</div>
+	<div class="qrcode"><img src="${imgUrl}/banner/qrcode_banner.jpg" alt=""></div>
+	<script>
+		focus("#focusBox","#focus/li","#btn/span",6000);
+	</script>
+</div>
+
+
+<div class="main home">
+	<div class="marketRank">
+		<div class="clearfix">
+		    <div class="mod-left rankTitle">
+		    	<a href="">今日行情</a>
+		    </div>
+		    <div class="mod-right">
+		        <div class="mod-rightcontent rankList">
+		        	<div class="tableList">
+		        	<table class="table table_striped table_hover">
+                        <colgroup>
+                            <col></col>
+                            <col></col>
+                            <col></col>
+                            <col></col>
+                            <col></col>
+                            <col></col>
+                            <col></col>
+                            <col></col>
+                        </colgroup>
+                        <thead>
+                        	<tr>
+                        		<th>邮币卡电子盘</th>
+                        		<th class="right">指数</th>
+                        		<th class="right">涨跌幅</th>
+								<th class="right">成交金额</th>
+								<th class="right">成交量</th>
+								<th class="center">打新申购</th>
+                        		<th class="center">是否开盘</th>
+                        		<!--<th class="center">行情</th>-->
+                        	</tr>
+                        </thead>
+                        <tbody id="exchangeListPoint">
+                            <script id="exchangeListTmpl" type="text/x-tmpl">
+                            <% for(var i = 0,l = data.length; i < l; i++){%>
+                            	<%if(i >= 10) break;%>
+                                <tr onclick="window.location.href='/ybk/market.html?name=<%=data[i].shortName%>'">
+                                    <td><%=data[i].exchangeName%></td>
+                                    <td class="right"><b <%=data[i].changeRate >= 0 ? 'class="red"' : 'class="green"'%>><%=(data[i].currentPrice / 100)%></b></td>
+                                    <td class="right"><b <%=data[i].changeRate >= 0 ? 'class="red"' : 'class="green"'%>><%=(data[i].changeRate / 100).toFixed(2)%>%</b> </td>
+                                    <td class="right"><%=(data[i].totalMoney / 10000000000).toFixed(2)%>亿</td>
+                                    <td class="right"><%=shortIndex(data[i].totalAmount/100,2,10000,['万','亿','兆'])%></td>
+                                    <td class="center"><%=data[i].shenGouNum%></td>
+                                    <td class="center"><%=data[i].isOpen == 1 ? '开盘' : '未开盘'%></td>
+                                </tr>
+                            <%}%>
+                            </script>
+                        </tbody>
+                    </table>
+                    </div>
+		        </div>
+		    </div>
+		</div>
+	</div>
+	<div class="top10">
+		<div class="clearfix">
+		    <div class="mod-left rankTitle">
+		    	<a href="">今日行情</a>
+		    </div>
+		    <div class="mod-right">
+		        <div class="mod-rightcontent rankList">
+		        	<div class="tableList">
+		        	<div class="tbas">
+		        		<div class="tabinner" id="tabbox">
+		        			<div class="tabList">
+		        			<ul id="tabs">
+                                <#if (eList?size > 0)>
+                                    <#list eList as i>
+                                        <li><a act="switch" href="" onclick="refreshMarket('${i.shortName}')">${i.name}</a></li>
+                                    </#list>
+                                </#if>
+		        			</ul>
+		        			</div>
+							<#if (eList?size > 10)>
+		        				<b act="next">&gt;</b><i act="pre">&lt;</i>
+							</#if>
+		        		<script>
+		        		tabLoopMove('#tabbox','#tabs',1)
+		        		</script>
+		        		</div>
+		        	</div>
+		        	<table class="table table_striped table_hover">
+                        <colgroup>
+                            <col style="width:50px;"></col>
+                            <col></col>
+                            <col></col>
+                            <col></col>
+                            <col></col>
+                            <col></col>
+                            <col></col>
+                            <col></col>
+                            <col></col>
+                            <col></col>
+                            <col></col>
+                        </colgroup>
+                        <thead>
+                        	<tr>
+                        		<th></th>
+                        		<th>藏品代码</th>
+                        		<th>藏品简称</th>
+                        		<th class="right">最新价</th>
+                        		<th class="right">涨跌幅</th>
+                        		<th class="right">今开盘</th>
+                        		<th class="right">昨收盘</th>
+                        		<th class="right">成交量</th>
+                        		<th class="right">成交金额</th>
+                        		<th class="right">最高价</th>
+                        		<th class="right">最低价</th>
+                        	</tr>
+                        </thead>
+                        <tbody id="marketPoint">
+                        </tbody>
+                    </table>
+                    </div>
+		        </div>
+		    </div>
+		</div>
+	</div>
+	<div class="news">
+		<div class="innerBox">
+			<div class="listUnit pause">
+				<div class="head">
+					<strong><a href="/ybk/topic/open_gift.html">开户活动</a></strong><a class="more" href="/ybk/topic/open_gift.html">更多》</a>
+				</div>
+				<div class="body">
+					<ul style="background:#F6F7FB;">
+						<li><b style="text-indent:2em;color:#666">活动</b><span style="color:#666">截止日期</span></li>
+					</ul>
+                     <#if (activityList.items?size > 0)>
+					<ul>
+                            <#list activityList.items as i>
+								<li><a href="${i.activityUrl}"><#if ((i.exchangeName+i.activityName)?length>18)>${(i.exchangeName+i.activityName)[0..18]}<#else>${i.exchangeName+i.activityName}</#if></a><span>[${i.endDatetime?string("MM-dd")}]</span></li>
+							</#list>
+					</ul>
+						<#else>
+							 <dl class="empty" id="emptyOpt">
+		                        <dt><img src="${imgUrl}/empty.jpg"></dt>
+		                        <dd>暂无停牌公告</dd>
+		                    </dl>
+						</#if>
+					</ul>
+				</div>
+			</div>
+			<div class="listUnit newgoods">
+				<div class="head">
+					<strong><a href="/ybk/article/list.html?categoryId=1">打新申购</a></strong><a class="more" href="/ybk/article/list.html?categoryId=1">更多》</a>
+				</div>
+				<div class="body">
+
+					<ul style="background:#F6F7FB;">
+						<li><b style="text-indent:2em;color:#666">打新</b><span style="color:#666">截止日期</span></li>
+					</ul>
+					<#if (dxsgList.items?size > 0)>
+						<ul>
+                       
+                            <#list daxinList.items as i>
+						        <li><a href="${i.daxinUrl}"><#if ((i.exchangeName+i.daxinName)?length>18)>${(i.exchangeName+i.daxinName)[0..18]}<#else>${(i.exchangeName+i.daxinName)}</#if></a><span>[${i.endDatetime?string("MM-dd")}]</span></li>
+                            </#list>
+					</ul>
+						<#else>
+							 <dl class="empty" id="emptyOpt">
+		                        <dt><img src="${imgUrl}/empty.jpg"></dt>
+		                        <dd>暂无</dd>
+		                    </dl>
+						</#if>
+				</div>
+			</div>
+			<div class="listUnit knowledge">
+				<div class="head">
+					<strong><a href="/ybk/article/list.html?categoryId=5">邮币百科</a></strong><a class="more" href="/ybk/article/list.html?categoryId=5">更多》</a>
+				</div>
+				<div class="body">
+                        <#if (ybbkList.items?size > 0)>
+					<ul>
+                            <#list ybbkList.items as i>
+                                <li><a href="/ybk/article/detail.html?id=${i.id}"><#if (i.title?length>18)>${i.title[0..18]}<#else>${i.title}</#if></a><span>[${i.created?string("MM-dd")}]</span></li>
+							</#list>
+					</ul>
+						<#else>
+							 <dl class="empty" id="emptyOpt">
+		                        <dt><img src="${imgUrl}/empty.jpg"></dt>
+		                        <dd>暂无邮币百科</dd>
+		                    </dl>
+						</#if>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="partners">
+	<div class="innerBox">
+		<div class="title"><img src="${imgUrl}/partners.jpg"></div>
+		<div class="list">
+			<div class="inner">
+				<#if (eList?size > 0)>
+					<#list eList as i>
+						<a href="${i.officialUrl}" target="view_window"><img src="${imgUrl}/exchange/${i.shortName}.jpg"></a>
+					</#list>
+				</#if>
+			</div>
+		</div>
+	</div>
+</div>
+
+<#include 'ybk/include/page/foot.html'/>
+</body>
+</html>

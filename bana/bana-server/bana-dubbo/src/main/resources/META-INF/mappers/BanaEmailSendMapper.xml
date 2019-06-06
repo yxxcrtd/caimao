@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="BanaEmailSend">
+
+	<resultMap id="BaseResultMap" type="com.caimao.bana.api.entity.EmailSendEntity" >
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="email_subject" property="emailSubject" jdbcType="VARCHAR" />
+		<result column="email_to" property="emailTo" jdbcType="VARCHAR" />
+		<result column="email_content" property="emailContent" jdbcType="VARCHAR" />
+        <result column="created" property="created" jdbcType="DATE" />
+		<result column="send_status" property="sendStatus" jdbcType="INTEGER" />
+		<result column="send_time" property="sendTime" jdbcType="DATE" />
+	</resultMap>
+
+	<sql id="Base_Column_List" >
+      id, email_subject AS emailSubject, email_to AS emailTo, email_content AS emailContent, created, send_status AS sendStatus, send_time AS sendTime
+	</sql>
+
+    <select id="queryEmailSendList" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM bana_email_send
+        WHERE send_status = 0
+        ORDER BY id ASC
+    </select>
+
+    <insert id="insertEmailSend" useGeneratedKeys="true" keyProperty="id" parameterType="com.caimao.bana.api.entity.EmailSendEntity">
+      INSERT INTO bana_email_send
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+          <if test="emailSubject != null">email_subject,</if>
+          <if test="emailTo != null">email_to,</if>
+          <if test="emailContent != null">email_content,</if>
+          <if test="created != null">created,</if>
+          <if test="sendStatus != null">send_status,</if>
+          <if test="sendTime != null">send_time,</if>
+      </trim>
+      <trim prefix="values (" suffix=")" suffixOverrides="," >
+          <if test="emailSubject != null">#{emailSubject},</if>
+          <if test="emailTo != null">#{emailTo},</if>
+          <if test="emailContent != null">#{emailContent},</if>
+          <if test="created != null">#{created},</if>
+          <if test="sendStatus != null">#{sendStatus},</if>
+          <if test="sendTime != null">#{sendTime},</if>
+      </trim>
+    </insert>
+
+    <update id="sendSuccess" parameterType="hashmap">
+        UPDATE bana_email_send
+        SET send_status = #{sendStatus}, send_time = #{sendTime}
+        WHERE id = #{id}
+    </update>
+</mapper>

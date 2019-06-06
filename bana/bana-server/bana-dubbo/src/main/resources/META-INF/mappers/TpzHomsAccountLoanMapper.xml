@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="TpzHomsAccountLoan">
+
+    <resultMap id="BaseResultMap" type="com.caimao.bana.api.entity.TpzHomsAccountLoanEntity">
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="user_id" property="userId" jdbcType="BIGINT" />
+        <result column="pz_account_id" property="pzAccountId" jdbcType="BIGINT" />
+        <result column="contract_no" property="contractNo" jdbcType="BIGINT" />
+        <result column="homs_fund_account" property="homsFundAccount" jdbcType="VARCHAR" />
+        <result column="homs_combine_id" property="homsCombineId" jdbcType="VARCHAR" />
+        <result column="homs_manage_id" property="homsManageId" jdbcType="VARCHAR" />
+        <result column="begin_amount" property="beginAmount" jdbcType="BIGINT" />
+        <result column="operator_no" property="operatorNo" jdbcType="VARCHAR" />
+        <result column="create_datetime" property="createDatetime" jdbcType="TIMESTAMP" />
+        <result column="update_datetime" property="updateDatetime" jdbcType="TIMESTAMP" />
+        <result column="trade_limit" property="tradeLimit" jdbcType="VARCHAR" />
+        <result column="enable_ratio" property="enableRatio" jdbcType="DECIMAL" />
+        <result column="exposure_ratio" property="exposureRatio" jdbcType="DECIMAL" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, user_id, pz_account_id, contract_no, homs_fund_account,
+        homs_combine_id, homs_manage_id, begin_amount,
+        create_datetime,update_datetime,operator_no,trade_limit,enable_ratio,exposure_ratio
+    </sql>
+
+    <select id="getAccountByContractNo" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List" />
+        from tpz_homs_account_loan
+        where contract_no = #{contractNo}
+    </select>
+
+    <select id="getHomsAccount" resultMap="BaseResultMap" parameterType="com.caimao.bana.api.entity.TpzHomsAccountLoanEntity">
+        select
+        <include refid="Base_Column_List" />
+        from tpz_homs_account_loan
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="userId != null">
+                AND user_id = #{userId}
+            </if>
+            <if test="contractNo != null and contractNo != ''">
+                AND contract_no = #{contractNo}
+            </if>
+            <if test="homsFundAccount != null and homsFundAccount != ''">
+                AND homs_fund_account = #{homsFundAccount}
+            </if>
+            <if test="homsCombineId != null and homsCombineId != ''">
+                AND homs_combine_id = #{homsCombineId}
+            </if>
+        </trim>
+    </select>
+    <select id="queryTpzHomsAccountLoan" resultMap="BaseResultMap" parameterType="com.caimao.bana.api.entity.TpzHomsAccountLoanEntity">
+        select
+        <include refid="Base_Column_List" />
+        from tpz_homs_account_loan
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="homsFundAccount != null and homsFundAccount != ''">
+                AND homs_fund_account = #{homsFundAccount}
+            </if>
+            <if test="homsCombineId != null and homsCombineId != ''">
+                AND homs_combine_id = #{homsCombineId}
+            </if>
+        </trim>
+    </select>
+
+    <select id="getByCombineId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from tpz_homs_account_loan
+        WHERE homs_combine_id = #{homsCombineId}
+    </select>
+</mapper>

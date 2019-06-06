@@ -1,0 +1,124 @@
+<!doctype html>
+<html>
+<#include "config.html"/>
+<#assign curTopMenu="pz"/>
+<#assign curLeftMenu="pzMonth"/>
+<head>
+    <meta charset="utf-8">
+    <title>按月融资-财猫网</title>
+    <!--基本布局样式-->
+    <link rel="stylesheet" type="text/css" href="${dojoUrl}/style/page/page.css?v=${jsVersion}" />
+    <script src="${dojoUrl}/js/pzp8.js?v=${jsVersion}"></script>
+</head>
+
+<body>
+<!--顶部条-->
+<#include "include/page/head.html" />
+
+<!--内容区-->
+<div id="main">
+    <div class="w sec_main">
+        <!--左右布局-->
+        <#include "include/menu/pz_left.html" />
+        <div class="right_bar">
+            <!--以上注释选择银行卡-->
+            <div class="pei clear_fix">
+                <div class="f_l left">
+                    <div class="title">您的投资本金</div>
+                    <div class="p_input">
+                        <input class="input_text" type="text" autocomplete="off" name="marginAmount" id="marginAmount" value="100000" placeholder="请输入投资本金" maxlength="7"/> <span id="showAvailable" style="display: none;"></span>
+                    </div>
+                    <div class="title m_t_20">可融资金额</div>
+                    <div class="p_money month">
+                        <ul id="selectPzAmountPoint">
+                            <script id="selectPzAmountTmpl" type="text/x-tmpl">
+                                <% for(var i = 1,l = data.length; i < l; i++){%>
+                                <li <%=select == i ? "class='hov'" : ""%> data-lever="<%=data[i].lever%>" <%=data[i].feeRate ? "" : " class='no_pointer' style='background-color: #d3d3d3;'"%>>
+                                    <p class="bei p_l_10"><%=data[i].lever%><span style="font-size: 14px;">倍/</span></p>
+                                    <p class="align_center"> <b><%=data[i].loanAmountStr%>万</b>元 </p>
+                                    <p class="bor_top p_l_10">月利率：<%=data[i].feeRateStr%></p>
+                                </li>
+                                <%}%>
+                            </script>
+                        </ul>
+                    </div>
+                </div>
+                <div class="f_r right">
+                    <div class="title">确认操盘规则</div>
+                    <ul>
+                        <li>
+                            <span class="f_l">操盘须知</span>
+                            <span class="f_r" id="caopanxuzhi"> </span>
+                        </li>
+                        <li>
+                            <span class="f_l">总操盘金</span>
+                            <span class="f_r"><b id="zongcaopanjin">0元</b></span>
+                        </li>
+                        <li>
+                            <span class="f_l">亏损警戒线
+                            <i class="fa help" id="kuisunTip" title="到达亏损警告线时只能卖出不能买入，财猫网有权利将仓位减至50%">?</i></span>
+                            <span class="f_r"><b id="kuisunjingjiexian">0元</b></span>
+                        </li>
+                        <li>
+                            <span class="f_l">亏损平仓线
+                            <i class="fa help" id="pingcangTip" title="系统将进行平仓处理">?</i></span>
+                            <span class="f_r"><b id="kuisunpingcangxian">0元</b></span>
+                        </li>
+                        <li>
+                            <span class="f_l">资金使用期限</span>
+                            <span class="f_r">
+                                <select id="shiyongqixian">
+
+                                </select>
+                            </span>
+                        </li>
+                        <li>
+                            <span class="f_l">月费率</span>
+                            <span class="f_r no_border">
+                                <div class="pink" id="yuefeilv">0.00%</div>
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pei_down">
+                <p class="f_r" id="haichaPoint" style="display: none;">
+                    可用保证金<span id="keyongbaozhengjinTip">0</span>元
+                    还差 <span class="font_red" id="haichaTip">0</span>元
+                    <a href="/account/recharge/wangyin.htm" class="btn size_m btn_red m_l_10">立即充值</a>
+                </p>
+                <p class="f_r">
+                    您需要支付保证金 <span class="font_red" id="baozhengjinTip">0元</span> +
+                    首付费用 <span class="font_red" id="shoufufeiyongTip">0元</span>
+                    共 <b class="font_red font_24" id="gongTip">0元</b>
+                </p>
+            </div>
+            <p class="read">
+                <label><input type="checkbox" id="tongyi" value="1" /> 我已阅读并同意</label>  <a href="javascript:void(0);" id="jiekuanxieyi">《借款协议》</a>
+            </p>
+            <p class="m_t_20">
+                <div class="error" id="errorMsg"></div>
+                <a href="" onclick="return false;" class="btn size_l btn_gray" id="shenqingpeizi">申请融资</a>
+            </p>
+
+            <div class="con-instructions">
+                <b class="am-ft-md">详细说明：</b>
+                <ul>
+                    <li>我们提醒您：股市有风险，投资需谨慎！市场风险莫测，务请谨慎行事！</li>
+                    <li>亏损警告线：总资金触及警告线及以下时，只能卖出股票，不能买入。</li>
+                    <li>亏损平仓线：总资金触及平仓线及以下时，您的股票将随时可能被平仓。</li>
+                    <li>资金使用期限：最短2天，最长不限天数，默认每天自动延续，并扣息。</li>
+                    <li>20:00--23:00 为交易所结算时间，在此期间无法进行资产操作与融资。</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<!--弹层-->
+
+<!--底部-->
+<#include "include/page/foot.html" />
+</body>
+</html>

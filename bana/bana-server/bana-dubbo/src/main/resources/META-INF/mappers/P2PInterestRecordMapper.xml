@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="P2PInterestRecord">
+	<sql id="FP2PQueryUserPageInterestRes_Column_List">
+		id,
+		invest_id AS investId,
+		invest_user_id AS investUserId,
+		target_id AS targetId,
+		target_user_id AS targetUserId,
+		interest_times AS interestTimes,
+		interest_date AS interestDate,
+		interest_value AS interestValue,
+		create_time AS createTime
+	</sql>
+
+	<select id="queryFP2PQueryUserPageInterestResWithPage"
+		resultType="com.caimao.bana.api.entity.res.FP2PQueryUserPageInterestRes"
+		parameterType="com.caimao.bana.api.entity.req.FP2PQueryUserPageInterestReq">
+		SELECT
+		<include refid="FP2PQueryUserPageInterestRes_Column_List" />
+		FROM p2p_interest_record
+		WHERE invest_user_id = #{userId} AND invest_id = #{investId}
+		<trim prefix="ORDER BY ">
+			<if test="orderColumn != null and  orderColumn != ''">
+				${orderColumn} ${orderDir}
+			</if>
+		</trim>
+	</select>
+
+    <!--查询指定的投资id是否已经在第几次发息过了-->
+    <select id="queryInvestInterestExist" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM p2p_interest_record
+        WHERE invest_id = #{investId} AND interest_times = #{interestTimes}
+    </select>
+
+	<insert id="save" parameterType="com.caimao.bana.api.entity.p2p.P2PInterestRecordEntity" >
+    insert into p2p_interest_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="investId != null" >
+        invest_id,
+      </if>
+      <if test="investUserId != null" >
+        invest_user_id,
+      </if>
+      <if test="targetId != null" >
+        target_id,
+      </if>
+      <if test="targetUserId != null" >
+        target_user_id,
+      </if>
+      <if test="interestTimes != null" >
+        interest_times,
+      </if>
+      <if test="interestDate != null" >
+        interest_date,
+      </if>
+      <if test="interestValue != null" >
+        interest_value,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="investId != null" >
+        #{investId,jdbcType=BIGINT},
+      </if>
+      <if test="investUserId != null" >
+        #{investUserId,jdbcType=BIGINT},
+      </if>
+      <if test="targetId != null" >
+        #{targetId,jdbcType=BIGINT},
+      </if>
+      <if test="targetUserId != null" >
+        #{targetUserId,jdbcType=BIGINT},
+      </if>
+      <if test="interestTimes != null" >
+        #{interestTimes},
+      </if>
+      <if test="interestDate != null" >
+        #{interestDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="interestValue != null" >
+        #{interestValue,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        now(),
+      </if>
+    </trim>
+  </insert>
+</mapper>

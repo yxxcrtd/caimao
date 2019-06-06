@@ -1,0 +1,35 @@
+<#assign controller="MyTenders"/>
+<#include 'layout/layout.html'/>
+<#macro content> 
+    <div class="contents clearfix">
+        <div class="con-lside cm-left conside" id="sidemenuctn" style="position: inherit;">
+        </div>
+        <!--右边start-->
+        <div class="con-rside cm-right">
+
+            <div style="width: 100%;">
+                <div class="filter-loan">
+
+                    <div class="clearfix am-mt-10">
+                        <span class="cm-left filter-loan-th">类型：</span>
+                        <ul id="filterlist" class="cm-left listLateral list-filter">
+                            <li class="list-filter-item" data-type=""><a href="javascript:void(0)" class="active">全部</a>
+                            </li>
+                            <li class="list-filter-item" data-type="1,2"><a href="javascript:void(0)">进行中</a></li>
+                            <li class="list-filter-item" data-type="3,4"><a href="javascript:void(0)">已结束</a></li>
+                        </ul>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div id="tenderlistctn"></div>
+<div class="pagination-holder clearfix">
+    <div id="light-pagination" class="pagination"></div>
+  </div>
+        </div>
+        <!--右边end-->
+
+    </div>
+</#macro>

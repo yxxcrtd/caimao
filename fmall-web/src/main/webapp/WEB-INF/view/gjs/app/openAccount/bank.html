@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<#include "gjs/config.html" />
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>开户</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1, user-scalable=false">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no"/>
+    <link rel="stylesheet" href="${staticUrl}/app/kaihu/css/reset.css" />
+    <link rel="stylesheet" href="${staticUrl}/app/kaihu/css/open.css" />
+    <style>
+        select,input{outline:0 none;}
+    </style>
+</head>
+<body>
+<div class='operMain'>
+    <p class="cardholder">持卡人<span id="realName"></span></p>
+   <!--  <p class="words-2">推荐建设银行支持两家交易所</p> -->
+    <div class="bankList">
+        <p><select name="" id="pw1"><option value="">请选择银行</option></select></p>
+        <p><input type="number" id="pw2" placeholder="请输入银行储蓄卡号"></p>
+    </div>
+</div>
+<p class="words-2">资金第三方托管，安全可信赖。</p>
+<a href="#" class='next' id="next">下一步</a>
+<script src='${staticUrl}/app/kaihu/js/zepto.js'></script>
+<script src='${staticUrl}/app/kaihu/js/fuc.js'></script>
+<script>
+    var bankList = {
+        "njs" : 
+        [{"bankName":"中国银行","bankNo":"BOC"},{"bankName":"工商银行","bankNo":"ICBC"},{"bankName":"农业银行","bankNo":"ABC"},{"bankName":"建设银行","bankNo":"CCB"},{"bankName":"邮政储蓄","bankNo":"PSBC"},{"bankName":"交通银行","bankNo":"BOCM"},{"bankName":"招商银行","bankNo":"CMB"},{"bankName":"中信银行","bankNo":"CNCB"},{"bankName":"光大银行","bankNo":"CEB"},{"bankName":"平安银行","bankNo":"PAB"},{"bankName":"兴业银行","bankNo":"CIB"},{"bankName":"民生银行","bankNo":"CMBC"},{"bankName":"华夏银行","bankNo":"HXB"},{"bankName":"广发银行","bankNo":"GDB"},{"bankName":"浦发银行","bankNo":"SPDB"},{"bankName":"浙商银行","bankNo":"CZB"}],
+        /*[{"bankName":"招商银行","bankNo":"003","needCardPwd":"0"},
+            //{"bankName":"建设银行","bankNo":"005","needCardPwd":"0"},
+            {"bankName":"中信银行","bankNo":"012","needCardPwd":"0"},{"bankName":"华夏银行","bankNo":"013","needCardPwd":"0"},{"bankName":"平安银行","bankNo":"014","needCardPwd":"0"},{"bankName":"光大银行","bankNo":"019","needCardPwd":"0"},{"bankName":"中国银行","bankNo":"408","needCardPwd":"1"},{"bankName":"兴业银行","bankNo":"410","needCardPwd":"0"}
+        ],*/
+        "sjs" : [{"bankName":"建设银行","bankNo":"005","needCardPwd":"0"}]
+    }
+    ;
+    $(function () {
+        var ischeck = 0,
+            next = $("#next"),
+            realName = $("#realName"),
+            data = localStorage.getItem("MOAD"),
+            banks,
+            bank = document.getElementById('pw1'),
+            bankCard = document.getElementById('pw2');
+        if(!data)return;
+        data = JSON.parse(data);
+        banks = bankList[data.exchange.toLowerCase()];
+        function change() {
+            if (bank.value !== "" && bankCard.value !== "") {
+                ischeck = 1;
+                next.addClass('next-2').removeClass('next');
+            } else {
+                next.addClass('next').removeClass('next-2');
+                ischeck = 0;
+            }
+            setTimeout(change,300);
+        }
+        next.click(function(){
+            if(!ischeck)return;
+            data.openBankCode = bank.value;
+            data.bankNo = 212;
+            data.bankCard = bankCard.value;
+            localStorage.setItem("MOAD",JSON.stringify(data));
+            location.href = "passWord.html?exchange="+data.exchange+"&token="+data.token;
+        });
+        realName.html(data.realName);
+        for(var i = 0, l = banks.length,def; i < l; i++){
+            def = (data["openBankCode"] === banks[i].bankNo ? true : false);
+            bank.options.add(new Option(banks[i].bankName,banks[i].bankNo,1,def))
+        }
+        if(data["bankNo"]){
+            bankCard.value = data.bankCard;
+        }
+        change();
+    });
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<#assign title="查询"/>
+<#assign header="查询"/>
+<#assign footer="0"/>
+<#assign bg="bg-gray"/>
+<#include 'mobile/layout/layout.html'/>
+
+
+<#macro headerContent>
+<!--tab-->
+	<#assign tabItem="4"/>
+	<#include 'mobile/component/tradeHeader.html'/>
+<!--tab-->
+
+</#macro>
+
+
+<#macro content>
+<article class="content" style="padding-top:99px;">
+<!--表单-->
+<aside class="con-frame">
+<ul class="datalist">
+<li class="datalist-item clearfix">
+<a href="${basePath}/mobile/trade/dayTrust.htm" class="am-grid datalist-line">
+        <div class="am-grid-item am-grid-item-75  am-ft-left">
+         <span class="am-ft-md am-ft-main">当日委托</span>
+        </div> 
+        <div class="am-grid-item am-grid-item-25 am-ft-right am-right-15">
+        <span class="type-ico am-icon-arrow-right"></span>
+        </div>
+</a>
+</li>
+<li class="datalist-item clearfix">
+<a href="${basePath}/mobile/trade/historyTrust.htm" class="am-grid datalist-line">
+        <div class="am-grid-item am-grid-item-75  am-ft-left">
+         <span class="am-ft-md am-ft-main">历史委托</span>
+        </div> 
+        <div class="am-grid-item am-grid-item-25 am-ft-right am-right-15">
+        <span class="type-ico am-icon-arrow-right"></span>
+        </div>
+</a>
+</li>
+<li class="datalist-item clearfix">
+
+<a href="${basePath}/mobile/trade/dayDeal.htm" class="am-grid datalist-line">
+        <div class="am-grid-item am-grid-item-75  am-ft-left">
+         <span class="am-ft-md am-ft-main">当日成交</span>
+        </div> 
+        <div class="am-grid-item am-grid-item-25 am-ft-right am-right-15">
+        <span class="type-ico am-icon-arrow-right"></span>
+        </div>
+</a>
+</li>
+<li class="datalist-item clearfix">
+<a href="${basePath}/mobile/trade/historyDeal.htm" class="am-grid datalist-line">
+        <div class="am-grid-item am-grid-item-75  am-ft-left">
+         <span class="am-ft-md am-ft-main">历史成交</span>
+        </div> 
+        <div class="am-grid-item am-grid-item-25 am-ft-right am-right-15">
+        <span class="type-ico am-icon-arrow-right"></span>
+        </div>
+</a>
+</li>
+</aside>
+<!--表单-->
+</article>
+</#macro>

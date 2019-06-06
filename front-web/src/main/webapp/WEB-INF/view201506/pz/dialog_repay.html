@@ -1,0 +1,74 @@
+<div class="layout_wrap" id="dialog_point">
+    <div class="layout layout02">
+        <h3 class="title">还款  <a href="javascript:void(0);" id="dialog_close"><i class="icons icon_close"></i></a> </h3>
+
+        <form id="dialog_pz_repay">
+            <input type="hidden" id="dialogContractNo" name="dialogContractNo" value="${repay.contract.contractNo}"/>
+            <p class="group">
+                <span class="col_1">借款金额 </span>
+                <span class="col_2">${formatAmount(repay.contract.loanAmount, 2, "", 1)} 元</span>
+            </p>
+            <p class="group">
+                <span class="col_1">可用金额 </span>
+                <span class="col_2"><#if repay.availableAmount??>${formatAmount(repay.availableAmount, 2, "", 1)}<#else/>--</#if> 元</span>
+            </p>
+            <p class="group">
+                <span class="col_1">还款状态 </span>
+                <#if repay.enableRepay>
+                    <span class="col_2 font_cyan">${repay.repayMsg}</span>
+                <#else/>
+                    <span class="col_2 font_red">${repay.repayMsg}</span>
+                </#if>
+            </p>
+            <div class="group m_t_10">
+                <span class="col_1">安全密码 </span>
+            <span class="col_2">
+                <input class="input_text" type="password" validateType="empty:请输入安全密码 len:6:16 password" id="dialogTradePwd" placeholder="请输入安全密码" maxlength="20"/>
+            </span>
+            </div>
+            <p class="group align_center">
+                还款后交易账户将收回，你需要重新配资获取交易账户
+            </p>
+            <div class="group m_t_20">
+                <button class="btn btn_red" type="button" id="dialogQuerenhuankuan">确认还款</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+    var formObj = $('#dialog_pz_repay'),
+            inputContractNo = $('#dialogContractNo'),
+            inputTradePwd = $('#dialogTradePwd'),
+            btnSubmit = $('#dialogQuerenhuankuan');
+
+    formValidate.init(formObj);
+
+    // 还款的操作
+    $(btnSubmit).click(function() {
+        if (formValidate.validateForm(formObj) == false) {
+            return false;
+        }
+        // 合约ID，转入金额
+        var contractNo = $(inputContractNo).val();
+        var tradePwd = $(inputTradePwd).val();
+        $.ajax({
+            url : "/pz/operation/repay",
+            type : "POST",
+            data : {
+                contract_no : contractNo,
+                trade_pwd : RSAUtils.encryptedString(tradePwd)
+            },
+            dataType : "json",
+            success : function(res) {
+                if (res.success == true) {
+                    Alert.show("还款成功", "确认", function() {window.location.reload()});
+                } else {
+                    formValidate.showFormTips(btnSubmit, res.msg);
+                }
+            }
+        });
+    });
+</script>

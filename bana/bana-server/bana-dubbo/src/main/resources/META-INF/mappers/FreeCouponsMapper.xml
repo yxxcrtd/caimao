@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="FreeCoupons">
+    <insert id="insertCouponsChannel" parameterType="com.caimao.bana.api.entity.CouponChannelEntity" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO free_coupons_channel (channel_type, money, `scale`, amount, `status`, created)
+        VALUES (#{channelType.value}, #{money}, #{scale}, #{amount}, #{status}, unix_timestamp())
+    </insert>
+
+    <update id="updateCouponsChannel" parameterType="map">
+        UPDATE free_coupons_channel
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="_parameter.containsKey('channelType')">
+                channel_type=#{channelType},
+            </if>
+            <if test="_parameter.containsKey('money')">
+                money=#{money},
+            </if>
+            <if test="_parameter.containsKey('scale')">
+                `scale`=#{scale},
+            </if>
+            <if test="_parameter.containsKey('amount')">
+                amount=#{amount},
+            </if>
+            <if test="_parameter.containsKey('status')">
+                `status`=#{status},
+            </if>
+        </trim>
+        <where>
+            id=#{id}
+        </where>
+    </update>
+
+    <select id="getCouponChannel" resultType="com.caimao.bana.api.entity.CouponChannelEntity">
+        SELECT id, channel_type AS ChannelType, money, `scale`, amount, `status`, created
+        FROM free_coupons_channel
+        WHERE id = #{id}
+    </select>
+
+    <select id="lotteryCouponChannel" resultType="com.caimao.bana.api.entity.CouponChannelEntity">
+        SELECT channel_type AS channelType, money, `scale`, amount, `status`, created
+        FROM free_coupons_channel
+        WHERE
+        <where>
+            `channel_type`=#{channelType} AND `money` &lt;=#{money}
+        </where>
+        ORDER BY money DESC
+        LIMIT 1
+    </select>
+
+    <select id="getCouponChannelList" resultType="com.caimao.bana.api.entity.CouponChannelEntity">
+        SELECT id, channel_type AS ChannelType, money, `scale`, amount, `status`, created
+        FROM free_coupons_channel
+        <where>
+            <if test="status != null">
+                `status`=#{status}
+            </if>
+        </where>
+        ORDER BY id ASC
+        LIMIT #{limitStart}, #{limitEnd}
+    </select>
+
+    <insert id="insertCoupons" parameterType="com.caimao.bana.api.entity.CouponsEntity" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO free_coupons (user_id, channel_id, amount, package_data, end_time, created)
+        VALUES (#{userId}, #{channelId}, #{amount}, #{package_data}, #{end_time}, unix_timestamp())
+    </insert>
+
+    <update id="updateCoupons" parameterType="map">
+        UPDATE free_coupons
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="_parameter.containsKey('moneyUsed')">
+                money_used=#{moneyUsed},
+            </if>
+            <if test="_parameter.containsKey('amountUsed')">
+                amount_used=#{amountUsed},
+            </if>
+            <if test="_parameter.containsKey('packageData')">
+                `package_data`=#{packageData},
+            </if>
+            <if test="_parameter.containsKey('status')">
+                status=#{status},
+            </if>
+            <if test="_parameter.containsKey('endTime')">
+                `end_time`=#{endTime},
+            </if>
+        </trim>
+        <where>
+            id=#{id}
+        </where>
+    </update>
+
+    <select id="getCoupons" resultType="com.caimao.bana.api.entity.CouponsEntity">
+        SELECT
+        id,
+        user_id AS userId,
+        channel_id AS channelId,
+        money,
+        money_used AS moneyUsed,
+        amount,
+        amount_used AS amountUsed,
+        package_data AS packageData,
+        `status`,
+        ext_id AS extId,
+        end_time AS endTime,
+        created
+        FROM ${table}
+        WHERE id = #{id}
+    </select>
+
+    <select id="getCouponsForUpdate" resultType="com.caimao.bana.api.entity.CouponsEntity">
+        SELECT
+        id,
+        user_id AS userId,
+        channel_id AS channelId,
+        money,
+        money_used AS moneyUsed,
+        amount,
+        amount_used AS amountUsed,
+        package_data AS packageData,
+        `status`,
+        ext_id AS extId,
+        end_time AS endTime,
+        created
+        FROM ${table}
+        WHERE id = #{id} FOR UPDATE
+    </select>
+
+    <select id="queryCouponsSend" resultType="com.caimao.bana.api.entity.CouponsEntity">
+        SELECT
+        id,
+        user_id AS userId,
+        channel_id AS channelId,
+        money,
+        money_used AS moneyUsed,
+        amount,
+        amount_used AS amountUsed,
+        package_data AS packageData,
+        `status`,
+        ext_id AS extId,
+        end_time AS endTime,
+        created
+        FROM ${table}
+        WHERE user_id = #{userId} AND channel_id = #{channelId} AND ext_id = #{extId}
+    </select>
+
+    <select id="getCouponsList" resultType="com.caimao.bana.api.entity.CouponsEntity">
+        SELECT
+        id,
+        user_id AS userId,
+        channel_id AS channelId,
+        money,
+        money_used AS moneyUsed,
+        amount,
+        amount_used AS amountUsed,
+        package_data AS packageData,
+        `status`,
+        ext_id AS extId,
+        end_time AS endTime,
+        created
+        FROM ${table}
+        <where>
+            1 = 1
+            <if test="status != null">
+                AND `status`=#{status}
+            </if>
+            <if test="userId != null">
+                AND `user_id`=#{userId}
+            </if>
+            <if test="extId != null">
+                AND `ext_id`=#{extId}
+            </if>
+        </where>
+        ORDER BY id ASC
+        LIMIT #{limitStart}, #{limitEnd}
+    </select>
+
+    <select id="queryCouponsReceiveSend" resultType="com.caimao.bana.api.entity.CouponReceiveEntity">
+        SELECT
+        id,
+        coupon_id AS couponId,
+        user_id AS userId,
+        money,
+        receive_type AS receiveType,
+        phone,
+        ext_id AS extId,
+        `status`,
+        created
+        FROM ${table}
+        WHERE coupon_id = #{couponId} AND receive_type = #{receiveType} AND phone = #{phone}
+    </select>
+
+    <insert id="insertCouponReceive" parameterType="com.caimao.bana.api.entity.CouponReceiveEntity" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO free_coupons_receive (coupon_id, user_id, money, receive_type, phone, created)
+        VALUES (#{couponId}, #{userId}, #{money}, #{receiveType}, #{receiveType}, unix_timestamp())
+    </insert>
+
+    <update id="updateCouponReceive" parameterType="map">
+        UPDATE free_coupons_receive
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="_parameter.containsKey('userId')">
+                user_id=#{userId},
+            </if>
+            <if test="_parameter.containsKey('extId')">
+                ext_id=#{extId},
+            </if>
+            <if test="_parameter.containsKey('status')">
+                `status`=#{status},
+            </if>
+        </trim>
+        <where>
+            id=#{id}
+        </where>
+    </update>
+
+    <select id="getCouponReceive" resultType="com.caimao.bana.api.entity.CouponReceiveEntity">
+        SELECT
+        id,
+        coupon_id AS couponId,
+        user_id AS userId,
+        money,
+        receive_type AS receiveType,
+        phone,
+        ext_id AS extId,
+        `status`,
+        created
+        FROM ${table}
+        WHERE id = #{id}
+    </select>
+
+    <select id="getCouponReceiveForUpdate" resultType="com.caimao.bana.api.entity.CouponReceiveEntity">
+        SELECT
+        id,
+        coupon_id AS couponId,
+        user_id AS userId,
+        money,
+        receive_type AS receiveType,
+        phone,
+        ext_id AS extId,
+        `status`,
+        created
+        FROM ${table}
+        WHERE id = #{id} FOR UPDATE
+    </select>
+
+    <select id="getCouponReceiveList" resultType="com.caimao.bana.api.entity.CouponReceiveEntity">
+        SELECT
+        id,
+        coupon_id AS couponId,
+        user_id AS userId,
+        money,
+        receive_type AS receiveType,
+        phone,
+        ext_id AS extId,
+        `status`,
+        created
+        FROM ${table}
+        <where>
+            1 = 1
+            <if test="couponId != null">
+                AND `coupon_id`=#{couponId}
+            </if>
+            <if test="userId != null">
+                AND `user_id`=#{userId}
+            </if>
+            <if test="receiveType != null">
+                AND `receive_type`=#{receiveType}
+            </if>
+            <if test="status != null">
+                AND `phone`=#{phone}
+            </if>
+            <if test="status != null">
+                AND `status`=#{status}
+            </if>
+        </where>
+        ORDER BY id ASC
+        LIMIT #{limitStart}, #{limitEnd}
+    </select>
+</mapper>

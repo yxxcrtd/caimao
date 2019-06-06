@@ -1,0 +1,10 @@
+.pages{padding:0;text-align:center;margin:0 auto;height:39px}
+.pages table,.pages td{margin:0 auto}
+.pages a:link,.pages a:visited,.pages i,.pages span{text-decoration:none;display:block;float:left;padding-top:10px;width:40px;text-align:center;font:14px Arial;color:#4b4b4b;height:27px}
+.pages a:hover{color:#47A9EE;text-decoration:none}
+.pages .pagebox span.pager_cur{color:#47a9ee}
+.pages .pagebox{text-align:center;zoom:1;width:99%;border:1px solid #d7d7d7;border-radius:5px;overflow:hidden;height:37px}
+.pages .pagebox div{overflow:hidden;width:150%}
+.pages a.nextpage:hover,.pages a.nextpage:link,.pages a.nextpage:visited,.pages a.prepage:hover,.pages a.prepage:link,.pages a.prepage:visited,.pages span.nextpage,.pages span.prepage{width:95px;font:700 14px simsun}
+.pages a.prepage,.pages span.prepage{border-right:1px solid #d7d7d7}
+.pages a.nextpage,.pages span.nextpage{border-left:1px solid #d7d7d7}

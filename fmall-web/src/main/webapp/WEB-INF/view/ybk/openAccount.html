@@ -1,0 +1,236 @@
+
+<!doctype html>
+<#include "ybk/config.html" />
+<#assign topMenu="openAccount" />
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>快速开户--邮币卡</title>
+        <link rel="stylesheet" href="${staticUrl}/style/style.css?version=${jsVersion}" />
+    <link href="${staticUrl}/style/miao.css?version=${jsVersion}" rel="stylesheet">
+    <script src="${staticUrl}/js/chart/lib.js?version=${jsVersion}" type="text/javascript"></script>
+    <script src="${staticUrl}/js/ybk/openAccount.js?version=${jsVersion}" type="text/javascript"></script>
+    <style type="text/css">
+        /*.uploadify-queue {display: none;}*/
+        .uploadify-queue .fileName {display: none;}
+        .uploadify-queue .cancel {display: none;}
+        .oaTab{margin-left:325px;font-size:16px;width:290px;}
+        .qr{margin-left:415px;padding:50px 0;}
+        .qr img{width:200px;}
+        .qr p{width:200px;text-align:center;padding:8px 0;font-size:14px;}
+        .oaTab span{display:inline-block;padding:5px 55px 5px 15px;border-left:2px solid #EB4636;}
+        .oaTab i{color:#EB4636;font-size:14px;padding-left:20px;}
+    </style>
+    <script type="text/javascript">
+        var caimaoUrl = '${caimaoUrl}';
+        var ybkUrl = '${ybkUrl}';
+        var _token = '${token}';
+        var _mobile = '${mobile}';
+        var _name = '${name}';
+        var _idcard = '${idcard}';
+        var _refCaimaoId = '${refCaimaoId}';
+    </script>
+</head>
+
+<body>
+<#include "ybk/include/page/head.html" />
+${user.userId}
+<div class="main">
+    <div class="account">
+        <div class="tit">
+            <ul id="naviUl">
+                <li><i>1</i>手机验证</li>
+                <li><i>2</i>个人信息</li>
+                <li><i>3</i>交易所、银行卡</li>
+                <li><i>4</i>上传图片</li>
+            </ul>
+        </div>
+        <div class="one" id="openAccountDivOne">
+            <div class="oaTab"><span>PC端开户</span></div>
+            <form method="post" id="openAccountFormOne">
+                <div class="group">
+                    <div class="col_01">手机号码</div>
+                    <div class="col_02">
+                        <input type="text" name="phone" id="phone" validateType="empty:请输入手机号 phone" maxlength="11" placeholder="请输入手机号" />
+                    </div>
+                </div>
+                <div class="group" id="passwordDiv" style="display: none;">
+                    <div class="col_01">登陆密码</div>
+                    <div class="col_02">
+                        <input type="password" name="password" id="password" validateType="empty:请输入登陆密码 password" maxlength="20" placeholder="请输入登陆密码" />
+                    </div>
+                </div>
+
+                <div class="group" id="authCodeDiv" style="display: none;">
+                    <div class="col_01">验证码</div>
+                    <div class="col_02 verify">
+                        <input type="text" name="authCode" id="authCode" validateType="empty:请输入验证码 authcode" maxlength="6" placeholder="请输入验证码" />
+                        <a href="javascript:void(0);" id="getAuthCode">获取验证码</a>
+                    </div>
+                </div>
+                <div class="group" style="padding-bottom:50px;border-bottom:1px solid #E4E4E4">
+                    <div class="col_01"></div>
+                    <div class="col_02"><button type="button" class="btn" id="nextOpentAccountBtnOne">下一步</button></div>
+                </div>
+            </form>
+            <div class="oaTab"><span>移动端开户<i>推荐，更快</i></span></div>
+            <div class="qr"><img src="${imgUrl}/qrcode_android.png?version=${jsVersion}"><p>扫描安装手机APP后，快速开户</p></div>
+        </div>
+
+        <div class="two" id="openAccountDivTwo" style="display: none;">
+            <form method="post" id="openAccountFormTwo">
+                <div class="group">
+                    <div class="col_01">姓  名</div>
+                    <div class="col_02">
+                        <input type="text" name="name" id="name" value="" validateType="empty:请输入姓名" maxlength="10" placeholder="请输入姓名" />
+                    </div>
+                </div>
+                <div class="group">
+                    <div class="col_01">身份证号</div>
+                    <div class="col_02">
+                        <input type="text" name="idcard" id="idcard" value="" validateType="empty:请输入身份证号 idcard" maxlength="18" placeholder="请输入身份证号" />
+                    </div>
+                </div>
+
+
+                <div class="group">
+                    <div class="col_01"></div>
+                    <div class="col_02">
+                        <button type="button" id="preOpenAccountBtnTwo" class="btn_last">上一步</button>
+                        <button type="button" id="nextOpenAccountBtnTwo" class="btn">下一步</button>
+                    </div>
+
+                </div>
+
+            </form>
+        </div>
+
+        <div class="three" id="openAccountDivThree" style="display: none;">
+            <div class="group" id="registerOK" style="display : none;">
+                <p style="color: #47A9EE;">注册成功，初始密码已经发送到您的注册手机</p>
+            </div>
+
+            <div class="group select_tit">
+                <a class="selectBankA" href="javascript:void(0);">选择银行卡</a><a class="selectExchangeA" href="javascript:void(0);">选择交易所</a>
+            </div>
+
+
+            <!--选择交易所的-->
+            <form method="post" id="openAccountExchangeFormThree" style="display: none; margin-top: 0px;">
+                <div class="group">
+                    <div class="col_01">选择交易所</div>
+                    <div class="col_02">
+                        <select name="exchangeId" id="exchangeIdSelect" validateType="empty:请选择交易所">
+                            <option value="">请选择交易所</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="group clearfix">
+                    <div class="col_01 f_l">支持银行</div>
+                    <div class="col_2 f_l">
+                        <ul class="select_bank" id="supportBankExchangeList">
+                        </ul>
+                    </div>
+                </div>
+                <div class="group">
+                    <div class="col_01">银行卡号</div>
+                    <div class="col_02">
+                        <input type="text" name="bankNoExchange" id="bankNoExchange" value="" maxlength="30" validateType="empty:请输入银行卡号" placeholder="请输入银行卡号"/>
+                    </div>
+                </div>
+            </form>
+            <!--选择银行的-->
+            <form method="post" id="openAccountBankFormThree" style="display:none; margin-top: 0px;">
+                <div class="group">
+                    <div class="col_01">选择银行</div>
+                    <div class="col_02">
+                        <select name="supportBankBank" id="supportBankSelectList" validateType="empty:请选择银行">
+                            <option value="">请选择银行</option>
+                            <!--<option value="招商银行">招商银行</option>-->
+                        </select>
+                    </div>
+                </div>
+                <div class="group">
+                    <div class="col_01">银行卡号</div>
+                    <div class="col_02">
+                        <input type="text" name="bankNoBank" id="bankNoBank" placeholder="请输入银行卡号" maxlength="30" validateType="empty:请输入银行卡号" />
+                        <span class="v_info"></span>
+                    </div>
+                </div>
+            </form>
+
+            <div class="bourse">
+                <p>该银行所支持的交易所</p>
+                <p class="supportExchangeList"></p>
+            </div>
+
+            <div class="bourse">
+                <label>
+                    <input type="checkbox" name="xieyi" id="xieyi" value="1" checked />
+                    我已认真阅读并完全理解 <a href="javascript:void(0);" id="showXieyiA" style="color:blue;">财猫邮币卡用户相关协议</a>，并已对交易平台其他规则文件有了全面了解，同意遵守交易平台各项管理制度
+                </label>
+            </div>
+
+
+            <div class="group">
+                <button type="button" id="preOpenAccountBtnThree" class="btn_last">上一步</button>
+                <button type="button" id="nextOpenAccountBtnThree" class="btn">下一步</button>
+            </div>
+        </div>
+
+
+        <div class="four" id="openAccountDivFour" style="display : none;">
+            <form method="post" id="openAccountFormFour">
+                <ul class="upload">
+                    <li>
+                        <span id="uploadIdCardAPicSpan" class="spanbox pics" style="display:none"></span>
+                        <span id="uploadIdCardATipSpan" class="spanbox">
+                            <i></i>
+                            上传身份证正面图片
+                        </span>
+                        <a href="javascript:void(0);" id="uploadIdCardAPic">点击上传</a>
+                    </li>
+                    <li>
+                        <span id="uploadIdCardBPicSpan" class="spanbox pics" style="display:none"></span>
+                        <span id="uploadIdCardBTipSpan" class="spanbox">
+                            <i></i>
+                        上传身份证反面图片
+                        </span>
+                        <a href="javascript:void(0);" id="uploadIdCardBPic">点击上传</a>
+                    </li>
+                    <li>
+                        <span id="uploadBankPicSpan" class="spanbox pics" style="display:none"></span>
+                        <span id="uploadBankTipSpan" class="spanbox">
+                            <i></i>
+                        上传银行卡正面图片
+                        </span>
+                        <a href="javascript:void(0);" id="uploadBankPic">点击上传</a>
+                    </li>
+                </ul>
+                <div class="group">
+                    <div class="col_01"></div>
+                    <div class="col_02">
+                        <button type="button" id="preOpenAccountBtnFour" class="btn_last">上一步</button>
+                        <button type="button" id="nextOpenAccountBtnFour" class="btn">提交</button>
+                    </div>
+                </div>
+            </form>
+            <div class="layout_wrap" id="openAccountDivSuccess">
+                <div class="layout">
+                    <h3><i></i>开户申请提交成功</h3>
+                    <p>请耐心等待，我们将在1个工作日为您办理开户，成功后我们会以短信通知您。</p>
+                    <p>届时请前往个人中心-我的开户，下载《<a href="/ybk/article/bind_help.html">银行卡对应的帮助文档名</a>》，以及<a href="/ybk/article/download.html">下载交易所客户端</a>，即可进行邮币卡交易。</p>
+                    <p><a class="btn" href="/ybk/article/bind_help.html">我知道了</a></p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+<#include "ybk/include/page/foot.html" />
+
+</body>
+</html>

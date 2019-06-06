@@ -1,0 +1,220 @@
+<!doctype html>
+<#include "ybk/config.html" />
+<#assign topMenu="openAccount" />
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>我的开户--邮币卡</title>
+		<link rel="stylesheet" href="${staticUrl}/style/account.css" />
+    	<script src="${staticUrl}/js/chart/lib.js?version=${jsVersion}" type="text/javascript"></script>
+		<script src="${staticUrl}/js/ybk/global.js?version=${jsVersion}" type="text/javascript"></script>
+	</head>
+	<body>
+<script>
+	var token = "${token}";
+</script>
+<#include "ybk/include/page/head.html" />
+${user.userId}
+		<div class="main">
+			<div class="my_account">
+				<div class="acc_left">
+					<ul id="exlist">
+            			<script type="text/x-tmpl">
+            			<%if(items1.length){%>
+						<li>
+							<% for(var _this,i = 0, l = items1.length; i < l; i++){_this=items1[i];%>
+							<dl class="bor">
+								<dt><a href="javascript:void(0);"><img src="${imgUrl}/exchange/<%=_this.exchangeShortName%>.gif" height="44" alt="<%=_this.exchangeName%>"/>[<%=_this.exchangeName%>]</a> <span><%=status[_this.status-1]%></span></dt>
+								<dd>
+									<div class="table">
+										<div class="table_cell">您的资料已提交，开户成功后会短信通知您结果。<br>处理时长为1个工作日以内。</div>
+									</div>
+								</dd>
+							</dl>
+							<%}%>
+						</li>
+						<%}%>
+            			<%if(items3.length){%>
+						<li>
+							<% for(var _this,i = 0, l = items3.length; i < l; i++){_this=items3[i];%>
+							<dl>
+								<dt><a href="javascript:void(0);"><img src="${imgUrl}/exchange/<%=_this.exchangeShortName%>.gif" height="44" alt="<%=_this.exchangeName%>"/>[<%=_this.exchangeName%>]</a> <span class="red"><%=status[_this.status-1]%></span></dt>
+								<dd>
+									<div class="table">
+										<div class="table_cell">
+											<span class="failure">失败原因：<%=_this.reason%></span>
+										</div>
+										<div class="table_cell">
+											<a class="btn" href="open_account_step.html?id=<%=_this.applyId%>">修改提交资料</a>
+										</div>
+									</div>
+								</dd>
+							</dl>
+							<%}%>
+						</li>
+						<%}%>
+            			<%if(items2.length){%>
+						<li>
+							<% for(var _this,i = 0, l = items2.length; i < l; i++){_this=items2[i];%>
+							<dl>
+								<dt><a href="javascript:void(0);"><img src="${imgUrl}/exchange/<%=_this.exchangeShortName%>.gif" height="44" alt="<%=_this.exchangeName%>"/>[<%=_this.exchangeName%>]</a> <span class="blue"><%=status[_this.status-1]%></span></dt>
+								<dd>
+									<div class="table">
+										<div class="table_cell">
+											<p><%=_this.bankName%>：<%=_this.bankNum%>
+												<a class="btn btn_tip" href="/ybk/article/help_doc_list.html?categoryId=7">银商绑定[?]
+													<span class="tips">
+														银商绑定是将您的银行卡与交易所联起来，方便您充值。
+														<i></i>
+													</span>
+												</a>
+											</p>
+											<p class="m_t_10">交易账户：<%=_this.exchangeAccount%><a class="btn" href="/ybk/article/download.html">下载交易软件</a></p>
+										</div>
+									</div>
+								</dd>
+							</dl>
+							<%}%>
+						</li>
+						<%}%>
+						<li class="more">
+							<span></span>
+							<a href="open_account_step.html"><i class="icons"></i>开通更多</a>
+							<span></span>
+						</li>
+						</script>
+					</ul>
+				</div>
+				<div class="acc_right">
+					<div class="hint">
+						<h3>小贴士</h3>
+						<div class="hint_in">
+							开户成功后，我还需要做什么？<br>
+							<b>银商绑定</b>
+							<p>银商绑定是将您的银行卡与交易所联起来，方便您充值。</p>
+							<b>下载交易软件</b>
+							<p>下载交易所提供的交易软件后，就可以开始交易了。</p>
+						</div>
+					</div>
+					<div class="open_jys" style="display:none" id="open_jys">
+						<h3>您的银行卡支持一键开通下列交易所</h3>
+						<div class="open_in" id="open_in">
+            				<script type="text/x-tmpl">
+								<%for(var i = 0, l = data.length; i < l; i++){%>
+									<label><input type="checkbox" name="ex" value="<%=data[i].exchangeShortNo%>"><i class="icons"></i><%=data[i].exchangeName%></label>
+								<%}%>
+								<a class="btn" href="javascript:void(0);" action="openBtn">一键开通</a>
+							</script>
+						</div>
+					</div>
+					<script>
+						(function(){
+							var r = request(),
+								requesting,
+								open_jys = document.getElementById("open_jys"),
+								openBtn = document.getElementById("open_in"),
+								htmls = openBtn.getElementsByTagName("script")[0].innerHTML;
+								exlist = document.getElementById("exlist"),
+								exlisthtmls = exlist.getElementsByTagName("script")[0].innerHTML;
+							Event.add(openBtn,'click',function(e){
+								var val = getVal(openBtn.getElementsByTagName("input")),
+									tar = Event.target(e),
+									sendCount = 0;
+								if(!tar.getAttribute("action"))return;
+								Event.stop(e);
+								if(!val)return;
+								if(requesting)return;
+								requesting = 1;
+								for(var l = val.length;l--;){
+									r.ajax({
+										url : "${httpUrl}/api/ybk/one_step_open_exchange",
+										type : "POST",
+										data : {
+												token : token, 
+												exchangeShortNo : val[l]
+											},
+										success : function(){
+											requesting = 0;
+											if(sendCount == val.length){
+												location.href = location.href;
+											}
+										}
+									});
+									sendCount++;
+								}
+
+							})
+
+
+							r.ajax({
+								url : "${httpUrl}/api/ybk/apply_account_list",
+								type : "GET", 
+								data : {
+										token : token
+									},
+								success : function(d){
+									var data = d.data.items,
+										status = ["待审核","审核中","开通成功","不予通过"],
+										checkRepeatData = {},
+										items1 = [],
+										items2 = [],
+										items3Tem = [],
+										items3 = [];
+									if(d.success){
+										for(var l = data.length; l--;){
+											if(data[l].status < 3){
+												checkRepeatData[data[l].exchangeShortNo] = 1;
+												items1.push(data[l]);
+											}else if(data[l].status < 4){
+												checkRepeatData[data[l].exchangeShortNo] = 1;
+												items2.push(data[l]);
+											}else{
+												items3Tem.push(data[l]);
+											}
+										}
+										for(var l = items3Tem.length; l--;){
+											if(!checkRepeatData[items3Tem[l].exchangeShortNo])
+												items3.push(items3Tem[l]);
+										}
+										exlist.innerHTML = rentmpl(exlisthtmls,{
+											items1:items1,
+											items2:items2,
+											items3:items3,
+											status : status
+										})
+									}
+								}
+							})
+							r.ajax({
+								url : "${httpUrl}/api/ybk/may_open_exchange",
+								type : "GET",
+								data : {
+										token : token
+									},
+								success : function(d){
+									if(d.success){
+										openBtn.innerHTML = rentmpl(htmls,{data:d.data})
+										if(d.data.length){
+											open_jys.style.display = "block";
+										}
+									}
+								}
+							})
+							function getVal(doms){
+								var val = [];
+								for(var l = doms.length;l--;){
+									if(doms[l].checked){
+										val.push(doms[l].value);
+									}
+								}
+								return val;
+							}
+						})()
+						</script>
+				</div>
+			</div>
+		</div>
+
+<#include "ybk/include/page/foot.html" />
+	</body>
+</html>

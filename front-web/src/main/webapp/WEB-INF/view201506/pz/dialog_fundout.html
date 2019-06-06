@@ -1,0 +1,57 @@
+<div class="layout_wrap" id="dialog_point">
+    <div class="layout layout02">
+        <h3 class="title">转出盈利 <a href="javascript:void(0);" id="dialog_close"><i class="icons icon_close"></i></a>  </h3>
+
+        <div class="font_black">提盈时间为交易日的上午10：00 到 下午3：00</div>
+        <form id="dialog_pz_fundout">
+            <input type="hidden" id="dialogContractNo" name="dialogContractNo" value="${contractNo}"/>
+            <p class="group">
+                <span class="col_1">可转余额 </span>
+                <span class="col_2"><b class="font_red"></b> <#if canTrans == null>--<#else/>${formatAmount(canTrans, 2, "", 1)}</#if> 元</span>
+            </p>
+            <div class="group m_t_10">
+                <span class="col_1">转出金额 </span>
+            <span class="col_2">
+                <input class="input_text" name="zhuanchujine" id="dialogZhuanchujine" validateType="empty:请输入转出金额 money" type="text" autocomplete="off" placeholder="请输入转出金额" maxlength="8" />
+            </span>
+            </div>
+            <div class="group m_t_20">
+                <button class="btn btn_red" type="button" id="dialogQuerentiying">确认转出</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    var formObj = $('#dialog_pz_fundout'),
+            inputContractNo = $('#dialogContractNo'),
+            inputAmount = $('#dialogZhuanchujine'),
+            btnSubmit = $('#dialogQuerentiying');
+
+    formValidate.init(formObj);
+
+    // 转出盈利的操作
+    $(btnSubmit).click(function() {
+        if (formValidate.validateForm(formObj) == false) {
+            return false;
+        }
+        // 合约ID，转入金额
+        var contractNo = $(inputContractNo).val();
+        var transAmount = CMUTILS.accMul($(inputAmount).val(), 100);
+
+        $.ajax({
+            url : "/pz/operation/out",
+            type : "POST",
+            data : {contract_no : contractNo, trans_amount : transAmount},
+            dataType : "json",
+            success : function(res) {
+                if (res.success == true) {
+                    Alert.show("转出盈利成功", "确认", function() {window.location.reload()});
+                } else {
+                    formValidate.showFormTips(btnSubmit, res.msg);
+                }
+            }
+        });
+    });
+</script>

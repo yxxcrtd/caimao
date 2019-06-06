@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/mvc
+	http://www.springframework.org/schema/mvc/spring-mvc.xsd"
+       default-autowire="default">
+    <!-- 扫描package进行注解 -->
+    <context:component-scan base-package="com.hsnet, com.caimao.bana">
+        <context:include-filter type="annotation"
+                                expression="org.springframework.stereotype.Controller"></context:include-filter>
+        <context:include-filter type="annotation"
+                                expression="org.springframework.web.bind.annotation.RestController"></context:include-filter>
+    </context:component-scan>
+
+    <!-- 对静态资源文件的访问 -->
+    <mvc:resources mapping="/frontend/**" location="/frontend/"/>
+    <mvc:default-servlet-handler/>
+    <mvc:annotation-driven validator="validator">
+        <mvc:message-converters>
+            <ref bean="messageConverter"/>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+    <bean id="validator"
+          class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+        <property name="providerClass" value="org.hibernate.validator.HibernateValidator"/>
+        <property name="validationMessageSource" ref="messageSource"/>
+    </bean>
+    <!-- 转json所支持的头信息类型  -->
+    <bean id="messageConverter"
+          class="com.hsnet.frontcore.converters.CustomMappingJackson2HttpMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
+                <value>application/json;charset=UTF-8</value>
+                <value>text/html;charset=UTF-8</value>
+                <!-- 解决火狐发送的ajax请求不是json格式   -->
+            </list>
+        </property>
+    </bean>
+
+
+    <!-- 配置 文件上传的支持 -->
+    <bean
+            class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!--  指定所上传文件的总大小不能超过1M -->
+        <property name="maxUploadSize" value="1000"/>
+        <property name="resolveLazily" value="true"/>
+        <property name="maxInMemorySize" value="4096"/>
+    </bean>
+    <!-- 视图配置 -->
+    <bean id="viewResolver"
+          class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+        <property name="cache" value="true"/>
+        <property name="prefix" value=""/>
+        <property name="suffix" value=".html"/>
+        <property name="contentType" value="text/html;charset=UTF-8"/>
+        <!-- 设置requestContext变量的名称 -->
+        <property name="requestContextAttribute" value="request"/>
+        <!-- 配置是否在生成模板内容之前把HTTPsession中的数据放入model中 -->
+        <property name="exposeSessionAttributes" value="true"/>
+        <!-- 配置是否在生成模板内容之前把HTTPrequest中的数据放入model中 -->
+        <property name="exposeRequestAttributes" value="true"/>
+        <!-- 使用spring lib时 是否暴露 RequestContext 变量 默认为true -->
+        <property name="exposeSpringMacroHelpers" value="true"/>
+    </bean>
+    <bean id="freemarkerConfig"
+          class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+        <property name="templateLoaderPath" value="/WEB-INF/view201506"/>
+        <property name="freemarkerSettings">
+            <props>
+                <prop key="template_update_delay">0</prop>
+                <prop key="default_encoding">utf-8</prop>
+                <prop key="number_format">0.##########</prop>
+                <prop key="datetime_format">yyyy-MM-dd HH:mm:ss</prop>
+                <prop key="classic_compatible">true</prop>
+                <prop key="template_exception_handler">ignore</prop>
+                <!-- 自动引入模板 -->
+                <!-- <prop key="auto_import">components/spring.ftl as p</prop> -->
+            </props>
+        </property>
+        <property name="freemarkerVariables">
+            <map>
+                <entry key="formatAmount">
+                    <bean class="com.caimao.bana.freemarker.method.formatAmount"/>
+                </entry>
+                <entry key="dateCal">
+                    <bean class="com.caimao.bana.freemarker.method.dateCal"/>
+                </entry>
+                <entry key="dictStr">
+                    <bean class="com.caimao.bana.freemarker.method.dictStr"/>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    <!-- 视图找不到不会有异常信息 -->
+    <bean id="handlerExceptionResolver" class="com.hsnet.pz.controller.quote.utils.CaimaoExceptionResolver">
+        <property name="warnLogCategory" value="INFO"/>
+        <property name="defaultStatusCode" value="500"/>
+        <property name="defaultErrorView" value="error/error"/>
+        <property name="exceptionMappings">
+            <props>
+                <prop key="SessionTimeoutException">redirect:/user/login.html</prop>
+                <prop key="MobileSessionTimeoutException">redirect:/mobile/user/login.htm</prop>
+            </props>
+        </property>
+        <property name="statusCodes">
+            <props>
+                <prop key="error/404">404</prop>
+                <prop key="error/500">500</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!-- 国际化配置 -->
+    <!-- 资源配置 -->
+    <bean id="messageSource"
+          class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="basename" value="classpath:i18n/messages"/>
+        <property name="useCodeAsDefaultMessage" value="false"/>
+    </bean>
+    <!-- 国际化拦截器配置 使用cookie存储 -->
+    <bean id="localeResolver"
+          class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+        <property name="cookieName" value="_l_"/>
+        <property name="cookieMaxAge" value="100000"/>
+        <property name="cookiePath" value="/"/>
+        <property name="defaultLocale" value="zh_CN"/>
+    </bean>
+
+    <!-- 会话管理器 -->
+    <bean id="sessionInterceptor" class="com.caimao.bana.utils.Session.SessionContextInterceptor">
+        <property name="sessionProvider" ref="sessionProvider"/>
+    </bean>
+
+
+    <bean id="sessionProvider" class="com.caimao.bana.utils.Session.HttpSessionProvider"/>
+    <mvc:interceptors>
+        <!-- 拦截HttpServletRequest、 HttpServletResponse -->
+        <bean class="com.caimao.bana.utils.Session.Interceptor.ContextInterceptor"/>
+
+        <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+            <!-- //改变语言时所用的参数名称 -->
+            <property name="paramName" value="lang"/>
+        </bean>
+        <mvc:interceptor>
+            <mvc:mapping path="/account/**"/>
+            <mvc:mapping path="/specialInterface/**"/>
+            <mvc:mapping path="/activity/**"/>
+            <mvc:mapping path="/mobile/**"/>
+
+            <mvc:mapping path="/sms/*"/>
+            <mvc:mapping path="/bankcard/**"/>
+            <mvc:mapping path="/financing/**"/>
+            <mvc:mapping path="/homs/**"/>
+            <mvc:mapping path="/stock/**"/>
+            <mvc:mapping path="/msg/*"/>
+            <mvc:mapping path="/planning/**"/>
+            <mvc:mapping path="/home/**"/>
+            <mvc:mapping path="/trade/**"/>
+            <mvc:mapping path="/tender/**"/>
+            <mvc:mapping path="/popularize/**"/>
+            <mvc:mapping path="/pwdquestion"/>
+            <mvc:mapping path="/userpwdquestion"/>
+            <mvc:mapping path="/tradepwd"/>
+            <mvc:mapping path="/deposit"/>
+            <mvc:mapping path="/userextra"/>
+
+            <!-- BEGIN V2新加的-->
+            <!--用户-->
+            <mvc:mapping path="/user/**"/>
+            <!--融资-->
+            <mvc:mapping path="/pz/**"/>
+            <!--投资-->
+            <mvc:mapping path="/p2p/**"/>
+            <!--内容-->
+            <mvc:mapping path="/content/**"/>
+
+            <!--用户相关-->
+            <mvc:exclude-mapping path="/user/login.html"/>
+            <mvc:exclude-mapping path="/user/login"/>
+            <mvc:exclude-mapping path="/user/loginpwd/find"/>
+            <mvc:exclude-mapping path="/user/loginErrorCount"/>
+            <mvc:exclude-mapping path="/user/isLoginAjax"/>
+            <mvc:exclude-mapping path="/user/checkRegisterSmsCode"/>
+            <mvc:exclude-mapping path="/user/checkFindPwdSmsCode"/>
+            <mvc:exclude-mapping path="/user/regist*"/>
+            <mvc:exclude-mapping path="/user/getRegisterUserCount"/>
+            <mvc:exclude-mapping path="/user/forget.html"/>
+
+            <!--融资-->
+            <mvc:exclude-mapping path="/pz/product"/>
+            <mvc:exclude-mapping path="/pz/proddetail"/>
+            <mvc:exclude-mapping path="/pz/pz_select"/>
+            <mvc:exclude-mapping path="/pz/p1.html"/>
+            <mvc:exclude-mapping path="/pz/p8.html"/>
+            <mvc:exclude-mapping path="/pz/p10.html"/>
+            <mvc:exclude-mapping path="/pz/pzp2p.html"/>
+            <!--投资-->
+            <mvc:exclude-mapping path="/p2p/product/config"/>
+            <mvc:exclude-mapping path="/p2p/target/queryLoanCount"/>
+            <mvc:exclude-mapping path="/p2p/index.html"/>
+            <mvc:exclude-mapping path="/p2p/targetDetail.html"/>
+
+            <!--内容-->
+            <mvc:exclude-mapping path="/content/notice/**"/>
+            <mvc:exclude-mapping path="/content/top_notice"/>
+            <mvc:exclude-mapping path="/content/notice_info"/>
+
+            <!-- END V2新加的-->
+            <mvc:exclude-mapping path="/content/top_notice"/>
+            <mvc:exclude-mapping path="/content/notice_info"/>
+
+            <mvc:exclude-mapping path="/financing/getLoanTotalAmount"/>
+            <mvc:exclude-mapping path="/financing/getLoanUserCount"/>
+
+            <mvc:exclude-mapping path="/mobile/user/login*"/>
+            <mvc:exclude-mapping path="/mobile/css/**"/>
+            <mvc:exclude-mapping path="/mobile/js/**"/>
+            <mvc:exclude-mapping path="/mobile/images/**"/>
+            <mvc:exclude-mapping path="/account/charge/callback*"/>
+            <mvc:exclude-mapping path="/index*"/>
+            <mvc:exclude-mapping path="/spread/*"/>
+            <mvc:exclude-mapping path="/time"/>
+            <mvc:exclude-mapping path="/user/mobile/check"/>
+            <mvc:exclude-mapping path="/sms/registercode"/>
+            <mvc:exclude-mapping path="/sms/loginpwdcode"/>
+            <mvc:exclude-mapping path="/mobile/index.htm"/>
+            <mvc:exclude-mapping path="/mobile/indexPz.htm"/>
+            <mvc:exclude-mapping path="/mobile/P1.htm"/>
+            <mvc:exclude-mapping path="/mobile/P2.htm"/>
+            <mvc:exclude-mapping path="/mobile/P3.htm"/>
+            <mvc:exclude-mapping path="/mobile/P4.htm"/>
+            <mvc:exclude-mapping path="/mobile/P10.htm"/>
+            <mvc:exclude-mapping path="/mobile/user/forgetloginpwd.htm"/>
+            <mvc:exclude-mapping path="/mobile/user/login.htm"/>
+            <mvc:exclude-mapping path="/mobile/user/register.htm"/>
+            <mvc:exclude-mapping path="/mobile/tender.htm"/>
+            <mvc:exclude-mapping path="/mobile/tenderDetail.html"/>
+            <mvc:exclude-mapping path="/mobile/agreement-1.htm"/>
+            <mvc:exclude-mapping path="/mobile/agreement-2.htm"/>
+            <mvc:exclude-mapping path="/mobile/agreement-3.htm"/>
+            <mvc:exclude-mapping path="/mobile/agreement-4.htm"/>
+            <mvc:exclude-mapping path="/specialInterface/isMobileExist"/>
+            <mvc:exclude-mapping path="/activity/stockMarketForecast"/>
+            <mvc:exclude-mapping path="/activity/doStockMarketForecast"/>
+            <mvc:exclude-mapping path="/activity/tomorrowStockMarketForecast"/>
+            <mvc:exclude-mapping path="/activity/todayStockMarketForecast"/>
+            <mvc:exclude-mapping path="/activity/brokerage"/>
+            <mvc:exclude-mapping path="/activity/getBrokerageRank"/>
+            <mvc:exclude-mapping path="/activity/getBrokerageRank2"/>
+
+            <!-- 财猫自定义 -->
+            <!-- 充值回调 -->
+            <mvc:exclude-mapping path="/account/charge/heepay/review/sync"/>
+            <mvc:exclude-mapping path="/account/charge/heepay/review/async"/>
+            <mvc:exclude-mapping path="/account/withdraw/heepay/review"/>
+            <!-- 充值回调结束 -->
+            <ref bean="sessionInterceptor"/>
+        </mvc:interceptor>
+
+        <!--限速模块-->
+        <mvc:interceptor>
+            <mvc:mapping path="/account/withdraw"/>
+            <mvc:mapping path="/account/charge/heepay"/>
+            <mvc:mapping path="/pz/operation/in"/>
+            <mvc:mapping path="/pz/operation/out"/>
+            <mvc:mapping path="/pz/operation/repay"/>
+            <mvc:mapping path="/pz/operation/add"/>
+            <mvc:mapping path="/pz/operation/defered"/>
+            <mvc:mapping path="/financing/loan/apply"/>
+            <mvc:mapping path="/financing/defered/apply"/>
+            <mvc:mapping path="/stock/buy"/>
+            <mvc:mapping path="/stock/sell"/>
+            <mvc:mapping path="/user/score/apply"/>
+            <bean class="com.caimao.bana.interceptor.LimitInterceptor"/>
+        </mvc:interceptor>
+
+    </mvc:interceptors>
+
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/user/enrich"/>
+            <bean class="com.caimao.bana.interceptor.ReferInterceptor"/>
+        </mvc:interceptor>
+        <!-- 判断是否手机请求 -->
+        <!--<mvc:interceptor>-->
+            <!--<mvc:mapping path="/"/>-->
+            <!--<mvc:mapping path="/index.htm"/>-->
+            <!--<bean class="com.caimao.bana.interceptor.IsMobileDevice"/>-->
+        <!--</mvc:interceptor>-->
+
+        <!-- 邀请的那个东东 -->
+        <mvc:interceptor>
+            <mvc:mapping path="/**" />
+            <bean class="com.caimao.bana.interceptor.InviteSession"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+</beans>

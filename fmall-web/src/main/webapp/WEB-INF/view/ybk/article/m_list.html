@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<#include "ybk/config.html"/>
+<head>
+	<meta charset="UTF-8">
+	<title>公告 -- 邮币卡</title>
+	<link rel="stylesheet" type="text/css" href="${staticUrl}/style/article/reset.css">
+	<link rel="stylesheet" type="text/css" href="${staticUrl}/style/article/notice.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+	<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1, user-scalable=false">
+
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-touch-fullscreen" content="yes">
+	<meta name="format-detection" content="telephone=no" />
+</head>
+<body>
+<div class='warp' id='wrapper'>
+	<div id = "scroller">
+		<div id = "scroller-pullDown">
+			<span id = "down-icon" class = "icon-double-angle-down pull-down-icon"></span>
+			<span id = "pullDown-msg" class = "pull-down-msg"></span>
+		</div>
+		<div class='banner'>
+			<img src="${imgUrl}/article/banner.png">
+			<div class='mb'><p></p></div>
+		</div>
+		<div class='list' id = "scroller-content">
+			<#if (list.items?size > 0)>
+				<#list list.items as i>
+					<dl>
+						<dd>
+							<p class='bt'><a href="/ybk/article/m_detail.html?id=${i.id}">${i.title}</a></p>
+							<p class='time'><a href="/ybk/article/m_detail.html?id=${i.id}">${i.created?string("yyyy-MM-dd HH:mm:ss")}</a>
+								<a href="/ybk/article/m_detail.html?id=${i.id}">${i.viewCount}阅读</a></p>
+						</dd>
+					</dl>
+				</#list>
+			</#if>
+		</div>
+	</div>
+</div>
+</body>
+<script src='${staticUrl}/js/article/zepto.js'></script>
+<script src='${staticUrl}/js/article/iscroll.js'></script>
+<script type="text/javascript">
+	var myScroll,
+			upIcon = $("#up-icon"),
+			downIcon = $("#down-icon"),
+			page = '${page}',
+			limit = '${limit}',
+			totalPage = '${totalPage}',
+			categoryId = '${categoryId}',
+			exchangeId = '${exchangeId}';
+
+	var myScroll = new IScroll('#wrapper', {
+		mouseWheel: false,
+		scrollbars: true,
+		interactiveScrollbars: true,
+		shrinkScrollbars: 'scale',
+		fadeScrollbars: true,
+		bounceEasing: 'elastic',
+		bounceTime: 1200,
+		click: true/*,
+		 bounce: false*/
+	});
+	//probeType属性，表明此插件，可以监听scroll事件
+
+	myScroll.on("scroll",function(){
+		//scroll事件，可以用来控制上拉和下拉之后显示的模块中，
+		//样式和内容展示的部分的改变。
+		var y = this.y,
+				maxY = this.maxScrollY - y,
+				downHasClass = downIcon.hasClass("reverse_icon"),
+				upHasClass = upIcon.hasClass("reverse_icon");
+
+		if(y >= 40){
+			!downHasClass && downIcon.addClass("reverse_icon");
+			return "";
+		}else if(y < 40 && y > 0){
+			downHasClass && downIcon.removeClass("reverse_icon");
+			return "";
+		}
+
+		if(maxY >= 40){
+			!upHasClass && upIcon.addClass("reverse_icon");
+			return "";
+		}else if(maxY < 40 && maxY >=0){
+			upHasClass && upIcon.removeClass("reverse_icon");
+			return "";
+		}
+	});
+
+	myScroll.on("slideDown",function(){
+		//当下拉，使得边界超出时，如果手指从屏幕移开，则会触发该事件
+		if(this.y > 40){
+			//获取内容于屏幕拉开的距离
+			//可以在该部分中，修改样式，并且仅限ajax或者其他的一些操作
+			//此时只是为了能演示该功能，只添加了一个alert功能。
+			//并且，由于alert会阻塞后续的动画效果，所以，
+			//添加了后面的一行代码，移除之前添加上的一个样式
+			window.location.reload();
+			upIcon.removeClass("reverse_icon");
+		}
+	});
+
+	myScroll.on("slideUp",function(){
+		if(this.maxScrollY - this.y > 40){
+			//与slideDown相同的，maxScrollY表示文档区域的最大高度
+			getNewsList();
+			myScroll.refresh();
+		}
+	});
+
+	//获取文章列表
+	function getNewsList(){
+		//判断页数
+		if (page > totalPage) return false;
+		page = parseInt(page) + 1;
+		//转json对象
+		$.ajax({
+			url: '/api/ybk/query_article_list',
+			data : {category_id : categoryId, exchange_id : exchangeId, limit : limit, page : page},
+			type : 'get',
+			dataType : 'json',
+			success:function(data){
+				//判断数据验证
+				if (data.success != true) {
+					return  false;
+				}
+				//循环数组
+				$.each(data.data.items, function(index, item){
+					var result = '';
+					result += "<dl>";
+					result +=	"<dd>";
+					result +=		"<p class='bt'><a href='/ybk/article/m_detail.html?id="+item['id']+"'>"+item['title']+"</a></p>";
+					result +=		"<p class='time'><a href=>" + formatDate(new Date(item['created'])) + "</a><a href=>"+item['viewCount']+"阅读</a></p>";
+					result +=	"</dd>";
+					result +="</dl>";
+					//追加内容
+					$('.list').append(result);
+				});
+			}
+		});
+	}
+
+	function formatDate(now) {
+		var year = now.getFullYear();
+		var month = now.getMonth()+1;
+		var date = now.getDate();
+		var hour = now.getHours();
+		var minute = now.getMinutes();
+		var second = now.getSeconds();
+		return year+"-"+month+"-"+date+" "+hour+":"+minute+":"+second;
+	}
+
+</script>
+
+<script>
+	var _hmt = _hmt || [];
+	(function() {
+		var hm = document.createElement("script");
+		hm.src = "//hm.baidu.com/hm.js?a1539df98107c7df914ae2d77cd616c3";
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+</html>

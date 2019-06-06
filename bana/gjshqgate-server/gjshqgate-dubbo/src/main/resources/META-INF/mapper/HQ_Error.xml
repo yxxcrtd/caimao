@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="GJS_Error">
+	<resultMap id="BaseResultMap" type="com.caimao.hq.api.entity.GjsError">
+
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="type" property="type" jdbcType="VARCHAR" />
+		<result column="message" property="message" jdbcType="VARCHAR" />
+		<result column="opt_date" property="optDate" jdbcType="VARCHAR" />
+		<result column="status" property="status" jdbcType="VARCHAR" />
+		<result column="exchange" property="exchange" jdbcType="VARCHAR" />
+		<result column="content" property="content" jdbcType="VARCHAR" />
+
+	</resultMap>
+
+	<sql id="baseField_Product">
+		t.id,t.type,t.message, t.optdate, t.status,t.exchange,t.content
+	</sql>
+	<select id="selectList" resultMap="BaseResultMap" parameterType="STRING">
+		select   <include refid="baseField_Product" />
+		from gjs_error t
+		WHERE t.exchange = #{exchange} and type=#{type}
+	</select>
+
+	<insert id="insert" parameterType="com.caimao.hq.api.entity.GjsError"
+			useGeneratedKeys="true" keyProperty="id">
+			insert into gjs_error(id,type,message,opt_date,status,exchange,content)
+		    values(#{id},#{type},#{message},#{optDate},#{status},#{exchange},#{content})
+	</insert>
+
+</mapper>

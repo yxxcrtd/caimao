@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+<#include "config.html"/>
+<#assign curTopMenu="account"/>
+<#assign curLeftMenu="deposit"/>
+<head>
+    <meta charset="utf-8">
+    <title>支付宝转账-财猫网</title>
+    <meta name="keywords" content="融资，股票融资，投资融资，理财融资，融资平台，融资炒股，融资网，融资公司" />
+    <meta name="description" content="财猫网由金融服务、风险管理及互联网运营等业界一流的专业人士组成的超百人全职运营团队。提供股票融资服务，致力于为公众提供一个国际化、高收益、安全、专业的互联网资产交易平台"/>
+    <!--基本布局样式-->
+    <link rel="stylesheet" type="text/css" href="${dojoUrl}/style/page/page.css?v=${jsVersion}" />
+    <link rel="stylesheet" type="text/css" href="${dojoUrl}/style/page/recharge.css?v=${jsVersion}" />
+    <script type="text/javascript" src="${dojoUrl}/js/accountRecharge.js?v=${jsVersion}"></script>
+</head>
+<body>
+<#include 'include/page/head.html'/>
+<style type="text/css">
+    #dialog_point .success-msg{padding-top: 20px;}
+</style>
+<!--内容区-->
+<div id="main">
+    <div class="w sec_main">
+        <#include 'include/menu/account_left.html'/>
+        <div class="right_bar">
+            <div class="tabNav">
+                <ul>
+                    <li><a href="${basePath}/account/recharge/wangyin.htm">网银充值</a> </li>
+                    <li><a class="on" href="${basePath}/account/recharge/zhifubao.htm">支付宝转账</a> </li>
+                    <li><a href="${basePath}/account/recharge/yinhang.htm">银行转账</a> </li>
+                    <li><a href="${basePath}/account/recharge/history.htm">充值记录</a> </li>
+                </ul>
+            </div>
+            <div class="alipay transferBox">
+                <dl class="alipayActivity" style="width: 375px;">
+                    <dt><img src="${imgUrl}/bao.jpg"></dt>
+                    <dd><span>账户支付</span><em class="orange">手机转账0手续费</em></dd>
+                </dl>
+                <div class="alipayInfo" style="padding: 10px 0">
+                    <dl>
+                        <dd style="color: red;padding-left: 87px;">扫描下方二维码登录支付宝，支付完成后，提交交易号、金额，操作完成后将为您充值</dd>
+                    </dl>
+                    <dl>
+                        <dt>收款人支付宝账户</dt>
+                        <dd>zhifu@caimao.com</dd>
+                    </dl>
+                    <dl>
+                        <dt>账户名称</dt>
+                        <dd>北京朋乐投资管理有限公司</dd>
+                    </dl>
+                </div>
+                <div class="payInfo">
+                    <div class="left">
+                        <div class="code"><img src="${imgUrl}/recharge/alipay.png"></div>
+                        <p>快速转账，<i class="orange">0手续费</i></p>
+                    </div>
+                    <div class="right">
+                        <a href="https://shenghuo.alipay.com/send/payment/fill.htm?_tosheet=true&_pdType=afcabecbafgggffdhjch" target="_blank" class="btn btn_red">去支付</a>
+                    </div>
+                </div>
+                <div class="formHere" style="margin-top: 20px;">
+                    <form id="alipayForm">
+                        <dl class="clear_fix formgroup">
+                            <dt style="width:105px">支付宝帐号</dt>
+                            <dd style="width:850px;" class="inputBox"><input type="text" autocomplete="off" class="textInput" id="cAccount" validateType="empty:请输入支付宝帐号" placeholder="例:zhifu@caimao.com" maxlength="100"/></dd>
+                        </dl>
+                        <dl class="clear_fix formgroup">
+                            <dt style="width:105px">交易号(流水号)</dt>
+                            <dd style="width:850px;" class="inputBox"><input type="text" autocomplete="off" class="textInput" id="cTradeNo" validateType="empty:请输入交易号" placeholder="例:2015042600001000****************" maxlength="100"/></dd>
+                        </dl>
+                        <dl class="clear_fix formgroup" style="position: relative">
+                            <dt style="width:105px;left: 105px;top: -20px;" class="attachTip noticeTip rechargeNumCh" id="cNumCh"></dt>
+                            <dt style="width:105px">充值金额</dt>
+                            <dd style="width:850px;" class="inputBox"><input maxlength="8" type="text" autocomplete="off" class="textInput" id="cNum" validateType="empty:请输入充值金额 money" placeholder="例:2000"><label for="cNum">元</label></dd>
+                        </dl>
+                        <#if balance == null>
+                            <div>请先完成<a href="/account/safe.htm">实名认证</a></div>
+                            <#else>
+                                <a href="javascript:void(0);" class="btn btn_red" id="submitBtnAlipay">提交</a>
+                        </#if>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<#include 'include/page/foot.html'/>
+</body>
+</html>

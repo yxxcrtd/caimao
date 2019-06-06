@@ -1,0 +1,10 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>财猫贵金属</title>
+		<link rel="stylesheet" href="${staticUrl}/style/style.css" />
+		<script src="${staticUrl}/js/metal.js?version=${jsVersion}"></script>
+		<script>
+			var httpUrl = "${httpUrl}",h = http("${httpUrl}"),	isLogin = <#if token != "">1<#else/>0</#if>;
+			var token = <#if token != "">"${token}"<#else/>null</#if>;
+		</script>

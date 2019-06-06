@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+    <!-- 提供方应用信息，用于计算依赖关系 -->
+    <dubbo:application name="bana_provider"/>
+    <!-- 使用zookeeper注册中心暴露服务地址 -->
+    <dubbo:registry id="bana_dubbo_server" protocol="zookeeper" address="${zk.address}"/>
+    <!-- 用dubbo协议在20880端口暴露服务 -->
+    <dubbo:protocol name="dubbo" host="${dubbo.server.host}" port="${dubbo.server.port}"/>
+    <!-- 声明需要暴露的服务接口 -->
+    <!-- 产品相关服务begin -->
+    <dubbo:service interface="com.caimao.bana.api.service.product.IProductService"
+                   ref="productService"
+                   group="${dubbo.group}" version="${dubbo.version}" timeout="${dubbo.timeout}"
+                   executes="${dubbo.executes}"/>
+
+    <!-- 产品相关服务end -->
+    <dubbo:service interface="com.caimao.bana.api.service.IUserService"
+                   ref="userService"
+                   group="${dubbo.group}" version="${dubbo.version}" timeout="${dubbo.timeout}"
+                   executes="${dubbo.executes}"/>
+    <dubbo:service interface="com.caimao.bana.api.service.IUserTrustService"
+                   ref="userTrustService"
+                   group="${dubbo.group}" version="${dubbo.version}" timeout="${dubbo.timeout}"
+                   executes="${dubbo.executes}"/>
+
+    <!-- 用户相关服务end -->
+    <!-- 融资相关服务begin -->
+    <dubbo:service interface="com.caimao.bana.api.service.ILoanService"
+                   ref="loanService"
+                   group="${dubbo.group}" version="${dubbo.version}" timeout="${dubbo.timeout}"
+                   executes="${dubbo.executes}"/>
+    <!-- 融资相关服务end -->
+    <!-- 产品相关服务begin -->
+    <dubbo:service interface="com.caimao.bana.api.service.product.IProductService"
+                   ref="productService"
+                   group="${dubbo.group}" version="${dubbo.version}" timeout="${dubbo.timeout}"
+                   executes="${dubbo.executes}"/>
+    <!-- 产品相关服务end -->
+
+    <!--账户相关的服务-->
+    <dubbo:service interface="com.caimao.bana.api.service.IAccountService"
+                   ref="accountService"
+                   group="${dubbo.group}" version="${dubbo.version}" timeout="${dubbo.timeout}"
+                   executes="${dubbo.executes}"/>
+    <!-- 用户相关服务end -->
+    <dubbo:service interface="com.caimao.bana.api.service.content.IContentService"
+                   ref="contentService"
+                   group="${dubbo.group}" version="${dubbo.version}" timeout="${dubbo.timeout}"
+                   executes="${dubbo.executes}"/>
+
+    <dubbo:service interface="com.caimao.bana.api.service.content.INoticeService"
+                   ref="noticeService"
+                   group="${dubbo.group}" version="${dubbo.version}" timeout="${dubbo.timeout}"
+                   executes="${dubbo.executes}"/>
+
+    <dubbo:service interface="com.caimao.bana.api.service.content.IMessageService"
+                   ref="messageService"
+                   group="${dubbo.group}" version="${dubbo.version}" timeout="${dubbo.timeout}"
+                   executes="${dubbo.executes}"/>
+
+    <dubbo:service interface="com.caimao.bana.api.service.IHomsAccountService"
+                   ref="homsAccountService"
+                   group="${dubbo.group}" version="${dubbo.version}" timeout="${dubbo.timeout}"
+                   executes="${dubbo.executes}"/>
+
+    <dubbo:service interface="com.caimao.bana.api.service.FreeCouponsService"
+                   ref="freeCouponsService"
+                   group="${dubbo.group}" version="${dubbo.version}" timeout="${dubbo.timeout}"
+                   executes="${dubbo.executes}"/>
+
+    <dubbo:service interface="com.caimao.bana.api.service.IHeepayRecharge"
+                   ref="heepayRecharge"
+                   group="${dubbo.group}" version="${dubbo.version}" timeout="${dubbo.timeout}"
+                   executes="${dubbo.executes}"  retries="0"/>
+
+    <dubbo:service interface="com.caimao.bana.api.service.IHeepayWithdraw"
+                   ref="heepayWithdraw"
+                   group="${dubbo.group}" version="${dubbo.version}" timeout="${dubbo.timeout}"
+                   executes="${dubbo.executes}"  retries="0"/>
+
+    <dubbo:service interface="com.caimao.bana.api.service.IYeepayRecharge"
+                   ref="yeepayRecharge"
+                   group="${dubbo.group}" version="${dubbo.version}" timeout="${dubbo.timeout}"
+                   executes="${dubbo.executes}"/>
+    <!--sms服务类  -->
+    <dubbo:service interface="com.caimao.bana.api.service.SmsService"
+                   ref="smsService"
+                   group="${dubbo.group}" version="${dubbo.version}" timeout="${dubbo.timeout}"
+                   executes="${dubbo.executes}">
+        <!--发送短信验证码不进行重试 一次只能有一个连接-->
+        <dubbo:method name="doSendSmsCheckCode" retries="0" actives="1" />
+    </dubbo:service>
+
+    <dubbo:service interface="com.caimao.bana.api.service.IAdjustOrderService"
+                   ref="adjustOrderService"
+                   group="${dubbo.group}" version="${dubbo.version}" timeout="${dubbo.timeout}"
+                   executes="${dubbo.executes}"/>
+
+    <!--其他数据查询-->
+    <dubbo:service interface="com.caimao.bana.api.service.IOtherDataService"
+                   ref="otherDataService"
+                   group="${dubbo.group}" version="${dubbo.version}" timeout="${dubbo.timeout}"
+                   executes="${dubbo.executes}"/>
+    <!--微信  -->
+    <dubbo:service interface="com.caimao.bana.api.service.WeChatUserService"
+                   ref="weChatUserService"
+				   group="${dubbo.group}" version="${dubbo.version}" timeout="${dubbo.timeout}"
+                   executes="${dubbo.executes}"/>
+
+    <dubbo:service interface="com.caimao.bana.api.service.IUserBankCardService"
+                   ref="userBankCardService"
+                   group="${dubbo.group}" version="${dubbo.version}" timeout="${dubbo.timeout}"
+                   executes="${dubbo.executes}"/>
+    <!--返佣  -->
+    <dubbo:service interface="com.caimao.bana.api.service.InviteInfoService"
+                   ref="inviteInfoService"
+				   group="${dubbo.group}" version="${dubbo.version}" timeout="${dubbo.timeout}"
+                   executes="${dubbo.executes}" retries="0"/>
+    <dubbo:service interface="com.caimao.bana.api.service.InviteReturnHistoryService"
+                   ref="inviteReturnHistoryService"
+                   group="${dubbo.group}" version="${dubbo.version}" timeout="${dubbo.timeout}"
+                   executes="${dubbo.executes}"/>
+    <dubbo:service interface="com.caimao.bana.api.service.IActivityService"
+                   ref="activityService"
+                   group="${dubbo.group}" version="${dubbo.version}" timeout="${dubbo.timeout}"
+                   executes="${dubbo.executes}"/>
+
+    <dubbo:service interface="com.caimao.bana.api.service.TpzAccruedInterestBillService"
+                   ref="tpzAccruedInterestBillService"
+                   group="${dubbo.group}" version="${dubbo.version}" timeout="${dubbo.timeout}"
+                   executes="${dubbo.executes}"/>
+
+    <dubbo:service interface="com.caimao.bana.api.service.SysParameterService"
+                   ref="sysParameterService"
+                   group="${dubbo.group}" version="${dubbo.version}" timeout="${dubbo.timeout}"
+                   executes="${dubbo.executes}"/>
+
+    <dubbo:service interface="com.caimao.bana.api.service.ILoanService"
+                   ref="loanService"
+                   group="${dubbo.group}" version="${dubbo.version}" timeout="${dubbo.timeout}"
+                   executes="${dubbo.executes}"/>
+
+    <!--P2P  -->
+    <dubbo:service interface="com.caimao.bana.api.service.IP2PService"
+                   ref="P2PService"
+                   group="${dubbo.group}" version="${dubbo.version}" timeout="${dubbo.timeout}"
+                   executes="${dubbo.executes}"/>
+    <dubbo:service interface="com.caimao.bana.api.service.IP2PJobService"
+                   ref="p2pJobService"
+                   group="${dubbo.group}" version="${dubbo.version}" timeout="${dubbo.timeout}"
+                   executes="${dubbo.executes}" retries="0"/>
+    <!--风控服务  -->
+    <dubbo:service interface="com.caimao.bana.api.service.IRiskService"
+                   ref="riskService"
+                   group="${dubbo.group}" version="${dubbo.version}" timeout="${dubbo.timeout}"
+                   executes="${dubbo.executes}" retries="0"/>
+
+    <!--自选股服务  -->
+    <dubbo:service interface="com.caimao.bana.api.service.IOptionalStockService"
+                   ref="optionalStockService"
+                   group="${dubbo.group}" version="${dubbo.version}" timeout="${dubbo.timeout}"
+                   executes="${dubbo.executes}"/>
+
+    <!--运营相关服务-->
+    <dubbo:service interface="com.caimao.bana.api.service.IOperationService"
+                   ref="operationService"
+                   group="${dubbo.group}" version="${dubbo.version}" timeout="${dubbo.timeout}"
+                   executes="${dubbo.executes}"/>
+
+    <!--后台统计功能  -->
+    <dubbo:service interface="com.caimao.bana.api.service.IZeusStatisticsService"
+                   ref="zeusStatisticsService"
+                   group="${dubbo.group}" version="${dubbo.version}" timeout="60000"
+                   executes="${dubbo.executes}" retries="0"/>
+
+    <!--Email发送服务  -->
+    <dubbo:service interface="com.caimao.bana.api.service.IEmailService"
+                   ref="emailService"
+                   group="${dubbo.group}" version="${dubbo.version}" timeout="60000"
+                   executes="${dubbo.executes}" retries="0"/>
+
+    <!--比特币抵押服务  -->
+    <dubbo:service interface="com.caimao.bana.api.service.IBtcPledgeService"
+                   ref="btcPledgeService"
+                   group="${dubbo.group}" version="${dubbo.version}" timeout="60000"
+                   executes="${dubbo.executes}" retries="0"/>
+
+    <!--股计微信服务的接口-->
+    <dubbo:service interface="com.caimao.bana.api.service.guji.IGujiService"
+                   ref="gujiService"
+                   group="${dubbo.group}" version="${dubbo.version}" timeout="${dubbo.timeout}"
+                   executes="${dubbo.executes}" />
+
+    <dubbo:service interface="com.caimao.bana.api.service.guji.IGujiAdminService"
+                   ref="gujiAdminService"
+                   group="${dubbo.group}" version="${dubbo.version}" timeout="${dubbo.timeout}"
+                   executes="${dubbo.executes}" />
+
+    <!--支付宝服务  -->
+    <dubbo:service interface="com.caimao.bana.api.service.IAlipayService"
+                   ref="alipayService"
+                   group="${dubbo.group}" version="${dubbo.version}" timeout="60000"
+                   executes="${dubbo.executes}" retries="0"/>
+
+    <dubbo:service interface="com.caimao.bana.api.service.ybk.IYBKService"
+                   ref="YBKService"
+                   group="${dubbo.group}" version="${dubbo.version}" timeout="${dubbo.timeout}"
+                   executes="${dubbo.executes}" />
+
+
+    <dubbo:service interface="com.caimao.bana.api.service.ybk.IYBKJobService"
+                   ref="ybkJobService"
+                   group="${dubbo.group}" version="${dubbo.version}" timeout="${dubbo.timeout}"
+                   executes="10" retries="0"/>
+
+    <!-- 邮币卡账户-->
+    <dubbo:service interface="com.caimao.bana.api.service.ybk.IYBKAccountService"
+                   ref="ybkAccountService"
+                   group="${dubbo.group}" version="${dubbo.version}" timeout="${dubbo.timeout}"
+                   executes="${dubbo.executes}"/>
+
+    <dubbo:service interface="com.caimao.bana.api.service.ybk.IYbkHelpDocService"
+                   ref="ybkHelpDocService"
+                   group="${dubbo.group}" version="${dubbo.version}" timeout="${dubbo.timeout}"
+                   executes="${dubbo.executes}"/>
+
+    <dubbo:service interface="com.caimao.bana.api.service.ybk.IYbkDaxinService"
+                   ref="ybkDaxinService"
+                   group="${dubbo.group}" version="${dubbo.version}" timeout="${dubbo.timeout}"
+                   executes="${dubbo.executes}"/>
+
+    <dubbo:service interface="com.caimao.bana.api.service.ybk.IYbkNavigationService"
+                   ref="ybkNavigationService"
+                   group="${dubbo.group}" version="${dubbo.version}" timeout="${dubbo.timeout}"
+                   executes="${dubbo.executes}"/>
+
+    <dubbo:service interface="com.caimao.bana.api.service.content.IBannerService"
+                   ref="bannerService"
+                   group="${dubbo.group}" version="${dubbo.version}" timeout="${dubbo.timeout}"
+                   executes="${dubbo.executes}"/>
+
+    <!-- 文交所综合指数-->
+    <dubbo:service interface="com.caimao.bana.api.service.ybk.IYBKSummaryService"
+                   ref="ybkSummaryService"
+                   group="${dubbo.group}" version="${dubbo.version}" timeout="${dubbo.timeout}"
+                   executes="${dubbo.executes}"/>
+
+    <!--个推服务的接口服务-->
+    <dubbo:service interface="com.caimao.bana.api.service.getui.IGetuiService"
+                   ref="getuiService"
+                   group="${dubbo.group}" version="${dubbo.version}" timeout="${dubbo.timeout}"
+                   executes="${dubbo.executes}"/>
+
+
+
+</beans>

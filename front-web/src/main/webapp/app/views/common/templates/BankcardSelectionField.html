@@ -1,0 +1,17 @@
+<div class="ui-form-item">
+<label class="ui-label" data-dojo-attach-point="labelNode" style="line-height:50px;">选择银行：</label>
+<div class="form-content bank-select-tip">
+<!--选择银行卡--><div data-dojo-attach-point="bankcardNode" class="bank-select-block">
+<span class="ui-input-placeholder-extra">选择您的银行</span>
+<span class="bank-no"></span>
+
+<span data-dojo-attach-point="bankListToggleNode" class="bank-select-icon-extra fa" id="showOrHidden_bank_list">&#xf0d7;</span>
+</div>
+<div style="position: absolute;top: 15px;left: 440px;color: red;">注：暂时不支持信用卡充值</div>
+<!--拓展内容-->
+<div data-dojo-attach-point="bankListBoxNode" class="bank-list-box">
+<ul data-dojo-attach-point="bankListNode" class="list-chooseBank">
+</ul>
+</div>
+</div>
+</div>

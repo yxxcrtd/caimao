@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="GjsArticleIndex">
+
+    <!-- 表所有字段和属性 -->
+    <resultMap id="BaseResultMap" type="com.caimao.gjs.api.entity.GjsArticleIndexEntity">
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="category" property="category" jdbcType="INTEGER" />
+        <result column="title" property="title" jdbcType="VARCHAR" />
+        <result column="content" property="content" jdbcType="VARCHAR" />
+        <result column="is_show" property="isShow" jdbcType="INTEGER" />
+        <result column="status" property="status" jdbcType="INTEGER" />
+        <result column="view" property="view" jdbcType="INTEGER" />
+        <result column="user" property="user" jdbcType="VARCHAR" />
+        <result column="pub" property="pub" jdbcType="VARCHAR" />
+        <result column="created" property="created" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <!-- 表所有字段 -->
+    <sql id="Base_Column_List">
+        id, category, title, content, is_show, status, view, user, pub, created
+    </sql>
+
+    <!-- 根据ID查找 -->
+    <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select <include refid="Base_Column_List" /> from gjs_article_index where id = #{id, jdbcType=BIGINT}
+    </select>
+
+    <!-- 根据ID删除 -->
+    <delete id="deleteById" parameterType="java.lang.Long">
+        delete from gjs_article_index where id = #{id, jdbcType=BIGINT}
+    </delete>
+
+    <!-- 分页查询 -->
+    <select id="queryArticleWithPage" resultMap="BaseResultMap" parameterType="com.caimao.gjs.api.entity.req.FQueryArticleIndexReq">
+        SELECT i.id, c.name as category, i.title, i.content, i.is_show, i.status, i.view, i.user, i.pub, i.created
+        FROM gjs_article_index i LEFT JOIN gjs_article_category c ON i.category = c.id
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="0 == category">
+                AND i.status = #{category}
+            </if>
+            <if test="-1 == category">
+                AND i.status = #{category}
+            </if>
+            <if test="1 == category">
+                AND i.status &gt; 0
+            </if>
+            <if test="0 == isShow">
+                AND i.is_show = 0
+            </if>
+            <if test="1 == isShow">
+                AND i.is_show = 1
+            </if>
+            <if test="dateStart != null and dateStart != ''">
+                AND created &gt;= #{dateStart}
+            </if>
+            <if test="dateEnd != null and dateEnd != ''">
+                AND created &lt;= #{dateEnd}
+            </if>
+            <if test="pubStart != null and pubStart != ''">
+                AND pub &gt;= #{pubStart}
+            </if>
+            <if test="pubEnd != null and pubEnd != ''">
+                AND pub &lt;= #{pubEnd}
+            </if>
+        </trim>
+        ORDER BY i.status desc, i.is_show, i.pub desc, i.created DESC
+    </select>
+
+
+    <!-- 获取所有置顶 -->
+    <select id="queryTopGjsArticleIndexList" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List" /> FROM gjs_article_index WHERE status > 0 ORDER BY status
+    </select>
+
+    <!-- 分页查询 for 接口 -->
+    <select id="queryGjsArticleIndexListForInterfaceWithPage" resultMap="BaseResultMap" parameterType="com.caimao.gjs.api.entity.req.FQueryArticleIndexReq">
+        SELECT i.id, c.name as category, i.title, i.content, i.status, i.view, i.user, i.pub, i.created
+        FROM gjs_article_index i LEFT JOIN gjs_article_category c ON i.category = c.id
+        WHERE i.pub != '' AND i.status &gt; -1 AND i.is_show = 0 AND i.pub &lt;= #{pubStart}
+        ORDER BY i.status desc, i.is_show, i.pub desc, i.created DESC
+    </select>
+
+    <!-- 查询分类列表 -->
+    <select id="queryGjsArticleIndexCategoryList" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        SELECT <include refid="Base_Column_List" /> FROM gjs_article_index WHERE category = #{category, jdbcType=INTEGER}
+    </select>
+
+    <!-- 插入 -->
+    <insert id="insert" parameterType="com.caimao.gjs.api.entity.GjsArticleIndexEntity" useGeneratedKeys="true" keyProperty="id">
+        insert into gjs_article_index
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="null != category">
+                category,
+            </if>
+            <if test="null != title">
+                title,
+            </if>
+            <if test="null != content">
+                content,
+            </if>
+            <if test="null != isShow">
+                is_show,
+            </if>
+            <if test="null != status">
+                status,
+            </if>
+            <if test="null != view">
+                view,
+            </if>
+            <if test="null != user">
+                user,
+            </if>
+            <if test="null != pub">
+                pub,
+            </if>
+            <if test="null != created">
+                created,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="null != category">
+                #{category, jdbcType=INTEGER},
+            </if>
+            <if test="null != title">
+                #{title, jdbcType=VARCHAR},
+            </if>
+            <if test="null != content">
+                #{content, jdbcType=VARCHAR},
+            </if>
+            <if test="null != isShow">
+                #{isShow, jdbcType=INTEGER},
+            </if>
+            <if test="null != status">
+                #{status, jdbcType=INTEGER},
+            </if>
+            <if test="null != view">
+                #{view, jdbcType=INTEGER},
+            </if>
+            <if test="null != user">
+                #{user, jdbcType=VARCHAR},
+            </if>
+            <if test="null != pub">
+                #{pub, jdbcType=VARCHAR},
+            </if>
+            <if test="null != created">
+                #{created, jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <!-- 修改 -->
+    <update id="update" parameterType="com.caimao.gjs.api.entity.GjsArticleIndexEntity">
+        update gjs_article_index
+        <set>
+            <if test="null != category">
+                category = #{category, jdbcType=INTEGER},
+            </if>
+            <if test="null != title">
+                title = #{title, jdbcType=VARCHAR},
+            </if>
+            <if test="null != content">
+                content = #{content, jdbcType=VARCHAR},
+            </if>
+            <if test="null != isShow">
+                is_show = #{isShow, jdbcType=INTEGER},
+            </if>
+            <if test="null != status">
+                status = #{status, jdbcType=INTEGER},
+            </if>
+            <if test="null != view">
+                view = #{view, jdbcType=INTEGER},
+            </if>
+            <if test="null != user">
+                user = #{user, jdbcType=VARCHAR},
+            </if>
+            <if test="null != pub">
+                pub = #{pub, jdbcType=VARCHAR},
+            </if>
+            <if test="null != created">
+                created = #{created, jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id, jdbcType=BIGINT}
+    </update>
+
+</mapper>

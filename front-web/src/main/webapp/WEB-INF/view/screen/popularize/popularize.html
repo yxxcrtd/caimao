@@ -1,0 +1,133 @@
+<#assign controller="Popularize"/> <#include 'layout/layout.html'/>
+<#macro content>
+	<link rel="stylesheet" type="text/css" href="${dojoUrl}/app/resources/custom/style/page/invite.css" />
+	<div id="contentctn" class="grid-1000 contents">
+		<div class="con-lside conside" id="sidemenuctn"
+			 style="position: inherit;"></div>
+		<div class="content-wrap">
+			<div class="">
+				<div class="tab" id="tab">
+					<div class="head">
+						<span class="select"><i></i>推广详情</span>
+						<span><i></i>兑换记录</span>
+						<span><i></i>推广用户</span>
+						<span><i></i>返佣记录</span>
+					</div>
+					<div class="invite panel">
+						<div class="title clear_fix">
+							<p class="float_left"> <i class="icon_level float_left"></i> <span class="col_red float_left" id="returnLevel2">V0</span> <span class="float_left"> 事在人为 ! 精诚所至，金石为开！</span></p>
+							<div class="invite_box float_right" id="copy_url">
+								您的邀请链接
+								<input class="invite_link" id="popularTextUrl2" type="text">
+								<span class="copy">复制</span>
+								<b class="msg" id="copy_tip" style="display: none">复制成功</b>
+							</div>
+						</div>
+						<dl>
+							<dt>您的邀请</dt>
+							<dd>
+								<span>注册人数：<b id="regCnt">0</b></span>
+								<span>融资人数：<b id="pzCnt">0</b></span>
+								<span>融资金额：<b id="pzAmount">0</b></span>
+								<span>实际利息：<b id="interestAll">0</b></span>
+							</dd>
+							<dt>您的等级</dt>
+							<dd>
+								<span>返佣等级：<b id="returnLevel">V0</b></span>
+								<span>返佣比例：<b id="returnRate">0%</b></span>
+							</dd>
+							<dt>您的收益</dt>
+							<dd>
+								<span>累计返佣：<b id="returnTotal">0</b></span>
+								<span>邀请奖励：<b id="returnInvite">0</b></span>
+								<span>总共战绩：<b id="returnAll">0</b></span>
+								<span>当前积分：<b id="userScore">0</b></span>
+							</dd>
+						</dl>
+						<div id="makeGood" style="margin-left: 40px;"></div>
+					</div>
+
+					<div class="panel" style="padding: 20px; display: none">
+						<div class="frame-all frame-all-box" style="width: 800px;">
+							<div class="filter-loan">
+								<div class="clearfix">
+									<div class="cm-left filter-date">
+										<span class="filter-loan-th">起止日期：</span>
+										<div id="daterangectn" style="margin-left: 90px;"></div>
+										<div class="filter-button">
+											<a id="inquirybutton" href="javascript:void(0)"
+											   class="ui-button ui-button-sgray"><b
+													class="ui-button-text am-ft-sm">查询</b></a>
+										</div>
+									</div>
+
+									<div id="datequickselectctn" class="cm-left second-left"></div>
+								</div>
+
+							</div>
+						</div>
+						<div class="clearfix am-mb-10">
+							<span class="cm-left filter-loan-th">状态：</span>
+							<ul id="filterlist" class="cm-left listLateral list-filter">
+								<li class="list-filter-item" data-type="0"><a
+										href="javascript:void(0)" class="active">待审核</a></li>
+								<li class="list-filter-item" data-type="1"><a
+										href="javascript:void(0)">审核通过</a></li>
+								<li class="list-filter-item" data-type="3"><a
+										href="javascript:void(0)">审核未通过</a></li>
+							</ul>
+						</div>
+						<div id="fundgrid"></div>
+					</div>
+					<div class="panel" style="padding: 20px; display: none">
+						<div id="promotedUser"></div>
+					</div>
+					<div class="panel" style="padding: 20px; display: none">
+						<div id="returnInterest"></div>
+					</div>
+					<div class="panel" style="padding: 20px; display: none;">
+						<div style="border: 1px solid #e6e6e6; padding: 10px 30px;">
+							<p>以下网址是您对外界进行推广的地址，您可以通过朋友、QQ、微信、博客、论坛或自己的网站进行推广，所有通过该地址访问过来的人，注册后就都属于您的用户，而当这些用户在本站申请时，您就可以赚取佣金了。</p>
+							<p class="am-pt-10 am-pb-10" style="display: inline;"> 您的推广链接：<input id="popularTextUrl" type="text" class="text" value="" style="width: 420px;"></p>
+							<div id="copyButton"></div>
+						</div>
+
+						<div style="padding-top: 10px;">
+							<div style="border: 1px solid #e6e6e6; padding: 10px 30px;">
+								<p class="" style="display: inline;">
+									<em class="paddl-50" style="padding-left: 27px;">已兑返现：<span id="duixian" style="font-size: 22px; color: red;">0</span>元</em>
+									<em class="paddl-50" style="padding-left: 27px;">注册用户：<span id="refUser" style="font-size: 22px; color: red;">0</span>个</em>
+									<em class="paddl-50" style="padding-left: 27px;">借贷用户：<span id="jiedai" style="font-size: 22px; color: red;">0</span>个</em>
+									<!--<em class="paddl-50" style="padding-left: 27px;">积分：<span id="userScore" style="font-size: 22px; color: red;">0</span>个</em>-->
+								</p>
+								<!--<div id="makeGood" style="margin-left: 40px;"></div>-->
+							</div>
+							<br />
+							<p class="am-pb-5">
+								<b class="color-black">什么是${webName}推广</b>
+							</p>
+							<p>${webName}投资推广是一种按用户融资赚取佣金的推广平台，您可以通过朋友、QQ、微信、微博、博客、论坛或在自己的网站上进行推广，所有通过您的推广链接访问过来的用户，注册后都将成为您的下线用户，而当这些用户在本站融资时，您就可以获得佣金。</p>
+							<p class="am-pb-5">
+								<b class="color-black">佣金怎么结算</b>
+							</p>
+							<p>您的用户每发生一笔融资，在融资完成后您将获得利息5%的积分 ，1积分可以兑换1元人民币，当您积分满100时 可以申请兑换。您就可以随时兑换并取出，当然也可以在本站进行融资。</p>
+							<p></p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="${dojoUrl}/app/resources/custom/images//ZeroClipboard.min.js"></script>
+	<script>
+		var CopyUrl = new ZeroClipboard( document.getElementById('copy_url')),
+				CopyTip = document.getElementById('copy_tip');
+
+		CopyUrl.on( "ready", function( readyEvent ) {
+			CopyUrl.on( "aftercopy", function( event ) {
+				CopyTip.style.display = 'block';
+			});
+
+		});
+	</script>
+</#macro>

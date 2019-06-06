@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <#include "weixin/config.html"/>
+    <head>
+        <meta charset="UTF-8">
+        <title>股计</title>
+        <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1, user-scalable=false">
+        <meta name="format-detection" content="telephone=no"/>
+        <#include "weixin/guji/include/js.html"/>
+        <script>
+            domready(function() {
+
+            });
+        </script>
+    </head>
+
+
+    <body>
+        <div id="myComment">
+            <div id="myCommentProfile">
+                <div id="headImg"><img src="${userInfo.headimgurl}" /></div>
+                <div id="headImgRight">
+                    <div class="myCommentFont">我的点评主页</div>
+                    <div id="headImgRightBottom">转发点评到微信圈、好友圈</div>
+                </div>
+            </div>
+            <div id="myCommentConfig">
+                <span id="myCommentConfigInfo">是否公开点评</span>
+                <input type="radio" class="radio1" name="value" value="y" /> 是
+                <input type="radio" class="radio1" name="value" value="n" /> 否
+            </div>
+            <div id="myCommentGP">
+                <span>
+                    <a href="/weixin/guji/myCommentGP" class="myCommentFont">我要点评个股</a>
+                </span>
+                已点评<span class="red">0</span>条
+            </div>
+            <div id="myCommentDP">
+                <span>
+                    <a href="/weixin/guji/myCommentDP" class="myCommentFont">我要点评大盘</a>
+                </span>
+                已点评<span class="red">0</span>条
+            </div>
+            <div id="myCommentInfo">机构用户，请联系工作人员加V认证<br />微信号：roxanna212</div>
+        </div>
+        <#include "weixin/guji/include/menu.html"/>
+    </body>
+</html>

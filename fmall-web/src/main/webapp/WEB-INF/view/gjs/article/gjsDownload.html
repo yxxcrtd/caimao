@@ -1,0 +1,173 @@
+<!doctype html>
+<#include "gjs/config.html" />
+<html>
+<head>
+    <title>财猫贵金属手机APP下载</title>
+    <meta charset='utf-8'>
+  
+   <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1, user-scalable=false">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-touch-fullscreen" content="yes">
+
+    <link href='${staticUrl}/app/download/css/style0.css' rel='stylesheet'/>
+    <link rel="stylesheet" href="${staticUrl}/app/download/css/animation.css">
+    <script type='text/javascript'>
+        //判断系统及版本
+      
+        var coverUrl = '';
+        var config = {
+            coverUrl: coverUrl,
+            swipeCur: 0,
+            swipeDir: 'vertical'// 'vertical' // horizontal
+        }
+    </script>
+    <script src='${staticUrl}/app/download/js/zepto.min.js'></script>
+    <script src='${staticUrl}/app/download/js/swipe.js'></script>
+    <script src='${staticUrl}/app/download/js/player.js'></script>
+</head>
+<body>
+
+<div class='container'>
+    <div class='swipe' id='swipe'>
+        <ul>
+            <!--首页~动画1-->
+            <li class='js-flag-expired' id='hehe' style="background: url("img/onebg.png")no-repeat;
+    background-size:100% 100%;">
+                <div class='page index '>
+                   <div class='index-1 a-flipinY' id="animate">
+                       <img src="${staticUrl}/app/download/img/loadlogo.png" alt="">
+                   </div>
+                   <div class="index-2 a-bounceinL">
+                       <img src="${staticUrl}/app/download/img/indexword.png" alt="">
+                   </div>
+                   <div class="index-4 ">
+                       <img src="/static/gjs/prod/app/download/img/indeximg1.png" alt="">
+                   </div>
+                    <div class="index-3">
+                       <a href="#" action="download" class='loadBtn'></a>
+                   </div>
+                    
+                  <img src="${staticUrl}/app/download/img/upimg.png" alt="" class='xiala1'>
+                  
+                </div>
+            </li>
+
+            <!--动画2-->
+            <li class='js-flag-expired'>
+                <div class='page page02'>
+                    <div class='page02-1 a-flipinY'>
+                         <img src="${staticUrl}/app/download/img/loadlogo2.png" alt="">
+                    </div>
+                    <div class='page02-2 a-bounceinR'>
+                        <img src="${staticUrl}/app/download/img/loadtit1.png" alt="">
+                    </div>
+                    <div class='page02-3'>
+                       <img src="${staticUrl}/app/download/img/imgone1.png" alt="" class='a-fadein'>
+                       <img src="${staticUrl}/app/download/img/imgone2.png" alt=""class='a-bouncein'>
+                   </div>
+                   <div class="page02-4">
+                       <a href="#" action="download" class='loadBtn2'></a>
+                   </div>
+                  <img src="${staticUrl}/app/download/img/upimg2.png" alt="" class='xiala1'>
+                </div>
+            </li>
+            <!--动画3-->
+            <li class='js-flag-normal'>
+                <div class='page page03' >
+                    <div class='page03-1 a-flipinY'>
+                         <img src="${staticUrl}/app/download/img/loadlogo2.png" alt="">
+                    </div>
+                    <div class='page03-2 a-bounceinR'>
+                        <img src="${staticUrl}/app/download/img/loadtit2.png" alt="">
+                    </div>
+                    <div class='page03-3'>
+                       <img src="${staticUrl}/app/download/img/imgtwo1.png" alt="" class='a-flipinY'>
+                       <div class='dwMarker'><img src="${staticUrl}/app/download/img/imgtwo2.png" alt=""class=''></div>
+                       
+                   </div>
+                   <div class="page03-4">
+                       <a href="#" action="download" class='loadBtn2'></a>
+                   </div>
+                  <img src="${staticUrl}/app/download/img/upimg2.png" alt="" class='xiala1'>
+                </div>
+            </li>
+            <!--动画4-->
+            <li class='js-flag-normal'>
+                <div class='page page04'>
+                  <div class='page04-1 a-flipinY'>
+                         <img src="${staticUrl}/app/download/img/loadlogo2.png" alt="">
+                    </div>
+                    <div class='page04-2 a-bounceinR'>
+                        <img src="${staticUrl}/app/download/img/loadtit3.png" alt="">
+                    </div>
+                    <div class='page04-3'>
+                       <img src="${staticUrl}/app/download/img/imgthree1.png" alt="" class='a-bounceinL'>
+                      <img src="${staticUrl}/app/download/img/imgthree2.png" alt=""class='a-fadeinT'>
+                       <img src="${staticUrl}/app/download/img/imgthree3.png" alt=""class='a-bounceinR'>
+                         <img src="${staticUrl}/app/download/img/imgthree4.png" alt=""class='a-bounceinR'>
+                       <img src="${staticUrl}/app/download/img/imgthree4.png" alt=""class='a-bounceinR'> 
+                   </div>
+                   <div class="page04-4">
+                       <a href="#" action="download" class='loadBtn2'></a>
+                   </div>
+                  <img src="${staticUrl}/app/download/img/upimg2.png" alt="" class='xiala1'>
+                </div>
+            </li>
+        </ul>
+        <!--<a href='javascript:;' id='sw-music' class='ui-music f-b4p f-r4p playing'><i class='ui-icon icon-music'></i>
+            <audio autoplay='autoplay' preload='auto' loop='loop' data-src='music/14290722924984.mp3' src='music/RightNow&RightHere.mp3' data-play='1'></audio>
+        </a>-->
+    </div>
+
+    <div class="mask" id="mask">
+        <dl>
+            <dt><img src="/static/ybk/img/topic/ybk/download/people.png" alt=""></dt>
+            <dd>
+                <p>点击右上角【在浏览器中打开】</p>
+                <p>下载财猫贵金属APP</p>
+            </dd>
+        </dl>
+    </div>
+</div>
+</body>
+<script>
+  (function(){
+    var browser = {
+      versions: function() {
+      var u = navigator.userAgent, app = navigator.appVersion;
+      return {
+      trident: u.indexOf('Trident') > -1,
+      presto: u.indexOf('Presto') > -1,
+      webKit: u.indexOf('AppleWebKit') > -1,
+      gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1,
+      mobile: !!u.match(/AppleWebKit.*Mobile.*/) || !!u.match(/AppleWebKit/),
+      ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),
+      android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1,
+      iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1,
+      iPad: u.indexOf('iPad') > -1,
+      webApp: u.indexOf('Safari') == -1
+      };
+      }(),
+      language: (navigator.browserLanguage || navigator.language).toLowerCase()
+    }
+    var swipe = $("#swipe"),
+        mask = document.querySelector("#mask");
+    swipe.click(function(e){
+      var tar = e.target ? e.target : window.event.srcElement;
+      if(tar.getAttribute("action")){
+
+        if(tar.getAttribute("action") == "download"){
+          if ("micromessenger" == navigator.userAgent.toLowerCase().match(/MicroMessenger/i)){
+            mask.style.display = "block";
+          }else if (browser.versions.ios || browser.versions.iPhone || browser.versions.iPad) {
+            window.location="itms-services://?action=download-manifest&url=https://jin.caimao.com/static/gjs/img/app/gjs.plist";
+          }
+          else if (browser.versions.android) {
+            window.location="https://jin.caimao.com/static/gjs/img/app/gjs.apk";
+          }
+        }
+      }
+    })
+  })()
+</script>
+</html>

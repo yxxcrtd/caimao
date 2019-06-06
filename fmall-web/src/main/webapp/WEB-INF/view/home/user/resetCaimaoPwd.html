@@ -1,0 +1,225 @@
+<#include "home/config.html"/>
+<#include "home/include/head.html"/>
+    <title>找回财猫密码</title>
+</head>
+<#assign userTopMenu="account"/>
+
+<body>
+<!--头部-->
+<div class="header">
+<#include "home/include/topRich.html" />
+<#include "home/include/menuLine.html" />
+    </div>
+<!--重置资金密码第一步-->
+    <div class="main" id="step0">
+        <div class="w">
+            <div class="setMain">
+                <div class="setMainTit" id="title0">找回密码</div>
+                <div class="setMainIn">
+                    <form action="">
+                        <div class="group">
+                            <div class="col_1">手机号</div>
+                            <div class="col_2"><input type="text" placeholder="请输入手机号" /></div>
+                        </div>
+                        <div class="group">
+                            <div class="col_1">手机效验码</div>
+                            <div class="col_2 clearfix">
+                                <input class="input_verify"  type="text" placeholder="请输入手机效验码" />
+                                <button class="verify" type="button" action="getCode" id="getMobCode">获取验证码</button>
+                            </div>
+                        </div>
+                        <div class="hidden" id="notice1"> <i class="icons"></i>效验码已发送到您的手机，30分钟内输入有效，请勿泄露。</div>
+                        <div class="group">
+                            <div class="col_1"></div>
+                            <div class="col_2"><button type="submit" class="btn" action="nextStep">下一步</button></div>
+                        </div> 
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+<!--找回密码第二步-->
+<div class="main" id="step1" style="display:none">
+    <div class="w">
+        <div class="setMain">
+            <div class="setMainTit" id="title1">找回密码</div>
+            <div class="setMainIn">
+                <p class="setMainInTit"><i class="icons icon_info"></i>定期更换密码可以让你的账户更加安全。</p>
+                <form action="">
+                    <div class="group">
+                        <div class="col_1">新密码</div>
+                        <div class="col_2"><input type="password" placeholder="请输入新密码" /></div>
+                    </div>
+                    <div class="group">
+                        <div class="col_1">确认新密码</div>
+                        <div class="col_2"><input type="password" placeholder="请再次输入新密码" /></div>
+                    </div>
+                    <div class="hidden" id="notice2"> <i class="icons"></i>你输入的密码有误，请重新输入。 </div>
+                    <div class="group">
+                        <div class="col_1"></div>
+                        <div class="col_2"><button type="submit" class="btn" id="submitMod">确认修改</button></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--找回密码完成-->
+<div class="main" id="step2" style="display:none">
+    <div class="w">
+        <div class="setMain">
+            <div class="setMainTit" id="title2">找回密码</div>
+            <div class="setMainSuccess">
+                <div class="setMainSuccessTop">
+                    <div class="left"><i class="icons icon_compete"></i>恭喜您，密码设置成功！</div>
+                </div>
+                <div class="setMainSuccessFoot">
+                    <a href="/user/login.html">返回登录</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    ;(function(){
+        var step0 = document.querySelector("#step0"),
+            step1 = document.querySelector("#step1"),
+            step2 = document.querySelector("#step2"),
+        	title0 = document.querySelector("#title0"),
+            title1 = document.querySelector("#title1"),
+            title2 = document.querySelector("#title2"),
+			notice1 = document.querySelector("#notice1"),
+			notice2 = document.querySelector("#notice2"),
+			getMobCode = document.querySelector("#getMobCode"),
+			submitMod = document.querySelector("#submitMod"),
+			input = {
+				"box1" : step0.querySelectorAll("input"),
+				"box2" : step1.querySelectorAll("input")
+			},
+            req = request(),
+			scd = 60,
+			cooldown = 0,
+			timer,data = {};
+		function getMC(){
+			if(cooldown)return;
+			data.mob = input.box1[0].value;
+			if(data.mob == ""){
+				notice1.innerHTML = '<i class="icons"></i>请输入手机号';
+				notice1.className = "error";
+				return;
+			}
+			notice1.className = "hidden";
+			wait();
+			cooldown = 1;
+			req.ajax({
+				type : "GET",
+				url  : "/sms/findpwdcode",
+				data : { 
+					mobile : data.mob
+				},
+				success : function(d){
+					if(!d.success){
+						notice1.innerHTML = '<i class="icons"></i>'+d.msg;
+						notice1.className = "error";
+						clearWait();
+					}else{
+						mobile = data.mob;
+					}
+				}
+			})
+		}
+
+		function wait(){
+			scd--;
+			timer && clearTimeout(timer);
+			getMobCode.innerHTML = scd+"秒后重试";
+			if(!scd){
+				clearWait();
+			}else{
+				timer = setTimeout(wait,1000);
+			}
+		}
+		function clearWait(){
+			scd = 60;
+			cooldown = 0;
+			timer && clearTimeout(timer);
+			timer = null;
+			getMobCode.innerHTML = "获取验证码";
+		}
+
+	function nextStep(){
+		data.code = input.box1[1].value;
+		data.mob = input.box1[0].value;
+		if(data.code == ""){
+			notice1.innerHTML = '<i class="icons"></i>请输入短信验证码';
+			notice1.className = "error";
+			return;
+		}
+
+		step0.style.display = "none";
+		step1.style.display = "block";
+		console.log(data)
+	}
+	function checkForm(e){
+		var pwd = input.box2[0].value,
+			repwd = input.box2[1].value;
+		Event.stop(e)
+		if(!pwd || !repwd){
+			notice2.innerHTML = '<i class="icons"></i>密码和确认密码都是必填项';
+			notice2.className = "error";
+			return;
+		}
+/*        if(pwd.length < 8){
+            notice2.innerHTML = '<i class="icons"></i>密码不能短于8位';
+            notice2.className = "error";
+            return;
+        }*/
+		if(pwd != repwd){
+
+			notice2.innerHTML = '<i class="icons"></i>两次输入的密码不相同，请重新输入';
+			notice2.className = "error";
+			return;
+		}
+		notice2.className = "success";
+		notice2.innerHTML = '<i class="icons"></i>请求发送中请稍后';
+		req.ajax({
+			url : "/user/loginpwd/find",
+			data : {
+				mobile : data.mob,
+				userPwd : encodePwd(pwd),
+				checkCode : data.code
+			},
+			type : "POST",
+			success : function(d){
+				if(d.success){
+					step1.style.display = "none";
+					step2.style.display = "block";
+				}else{
+					notice2.innerHTML = '<i class="icons"></i>'+d.msg;
+					notice2.className = "error";
+					return;
+				}
+			}
+		})
+	};
+
+	Event.add(step0,"click",function(e){
+		var tar = Event.target(e),
+			action = tar.getAttribute("action");
+		if(action == "getCode"){
+			getMC();
+		}else if(action == "nextStep"){
+			Event.stop(e);
+			nextStep();
+		}
+	});
+	Event.add(submitMod,"click",checkForm);
+
+    })();
+</script>
+
+
+<#include "home/include/footRich.html" />

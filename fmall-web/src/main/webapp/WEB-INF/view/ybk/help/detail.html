@@ -1,0 +1,45 @@
+<!doctype html>
+<#include "ybk/config.html" />
+<#assign topMenu="${detail.categoryId}"/>
+<#assign title="帮助文档"/>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>${title}--邮币卡</title>
+	<script src="${staticUrl}/js/chart/lib.js?version=${jsVersion}"></script>
+	<link rel="stylesheet" href="${staticUrl}/style/style.css" />
+	<script src="${staticUrl}/js/ybk/global.js?version=${jsVersion}" type="text/javascript"></script>
+</head>
+<body>
+
+<#include "ybk/include/page/head.html" />
+
+<div class="main market">
+	<div class="clearfix">
+
+		<div class="mod-left">
+			<div class="goodsnav">
+				<ul class="nav">
+					<#list categoryList as e >
+						<li <#if detail.categoryId == e.code>class="on"</#if> ><a href="/ybk/article/help_doc_list.html?categoryId=${e.code}">${e.val}</a></li>
+					</#list>
+				</ul>
+			</div>
+		</div>
+
+		<div class="mod-right">
+			<div class="mod-rightcontent">
+				<div class="Content contentDetails">
+					<div class="article">
+						<h1>${detail.title}</h1>
+						<div class="mainContBox">${detail.content}</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<#include "ybk/include/page/foot.html" />
+</body>
+</html>

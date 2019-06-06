@@ -1,0 +1,86 @@
+@charset "utf-8";
+/*
+━━━━━━━
+variable.scss
+变量
+BitUI
+━━━━━━━
+*/
+
+/****===配色===******/
+
+/*灰阶*/
+$black:                 #000;
+$grayDarker:            #4c4c4c;
+$grayDark:              #8d8d8d;
+$gray:                  #ADADAD;
+$grayL:                 #EEE;
+$grayLL:                #E9E9E9;
+$grayLLL:               #F7F7F7;
+$grayD:                 #9F9F9F;
+$white:                 #FFF;
+
+/*强调色*/
+$red:                   #EB4636;
+$redD:                  #B01C0C;
+$blue:                  #5588CC;
+$blueL:                 #47A9EE;
+$green:                 #4B6E94;
+$greenDark:             #11c269;
+$yellow:                #FCD31F;
+$orange:                #f89406;
+$pink:                  #c3325f;
+$purple:                #7a43b6;
+$cyan:                  #6CBF09;
+
+/*===尺寸===*/
+
+/*控件尺寸(高)*/
+$inputDefaultSize:      40px;
+$inputSmall:            30px;
+$inputMini:             25px;
+
+$inputXs:               20px;
+$inputS:                25px;
+$inputM:                30px;
+$inputL:                40px;
+
+/*==页面配置==*/
+
+/*默认边框色*/
+$borderColor:        #DAD9D9;
+
+/*默认文字色*/
+$fontColor:             #666;
+
+//默认边框色
+
+
+
+/*默认链接色*/
+$linkColor:             #00b4f9;
+$linkColorHover:        lighten($linkColor,10%);
+$linkColorActive:       $linkColorHover;
+$linkColorVisited:      $linkColorHover;
+
+/*文字选取色*/
+$selection:             $green;
+
+/*控件焦点色*/
+$inputFocusColor:       $green;
+
+/*响应式设置*/
+/*超小 Extra Small（xs） <768px*/
+/*小   Small      （s）≥768px*/
+/*中   Medium     （m）≥992px*/
+/*大   Large      （l）≥1200px*/
+$screen-xs:             480px ;
+$screen-s:              768px ;
+$screen-m:              1000px ;
+$screen-l:              1200px;
+
+/*图片目录*/
+$imgURL         : '../../../img/';
+
+/*版本号*/
+$versions       :       '?150428';

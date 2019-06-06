@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="YBKKDJ">
+    <resultMap id="BaseResultMap" type="com.caimao.bana.api.entity.ybk.YBKKDJEntity">
+        <id column="exchange_name" property="exchangeName" jdbcType="CHAR"/>
+        <id column="code" property="code" jdbcType="CHAR"/>
+        <id column="date" property="date" jdbcType="TIMESTAMP"/>
+        <id column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="rsv" property="rsv" jdbcType="BIGINT"/>
+        <result column="k" property="k" jdbcType="BIGINT"/>
+        <result column="d" property="d" jdbcType="BIGINT"/>
+        <result column="k" property="j" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        exchange_name, code, date, update_time, rsv, k, d, j
+    </sql>
+
+    <insert id="insert" parameterType="com.caimao.bana.api.entity.ybk.YBKKDJEntity">
+        INSERT INTO ybk_kdj
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="exchangeName != null">exchange_name,</if>
+            <if test="code != null">code,</if>
+            <if test="date != null">date,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="rsv != null">rsv,</if>
+            <if test="k != null">k,</if>
+            <if test="d != null">d,</if>
+            <if test="j != null">j,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="exchangeName != null">#{exchangeName},</if>
+            <if test="code != null">#{code},</if>
+            <if test="date != null">#{date},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="rsv != null">#{rsv},</if>
+            <if test="k != null">#{k},</if>
+            <if test="d != null">#{d},</if>
+            <if test="j != null">#{j},</if>
+        </trim>
+    </insert>
+
+    <update id="update" parameterType="com.caimao.bana.api.entity.ybk.YBKKDJEntity">
+        UPDATE ybk_kdj
+        <set>
+            <if test="updateTime != null" >update_time = #{updateTime},</if>
+            <if test="rsv != null" >rsv = #{rsv},</if>
+            <if test="k != null" >k = #{k},</if>
+            <if test="d != null" >d = #{d},</if>
+            <if test="j != null" >j = #{j},</if>
+        </set>
+        WHERE exchange_name = #{exchangeName} AND code = #{code} AND date = #{date,jdbcType=DATE}
+    </update>
+
+    <select id="queryExist" parameterType="com.caimao.bana.api.entity.ybk.YBKKDJEntity" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM ybk_kdj
+        WHERE exchange_name = #{exchangeName} AND code = #{code} AND date = #{date,jdbcType=DATE}
+    </select>
+
+    <select id="queryKDJ" parameterType="com.caimao.bana.api.entity.req.ybk.FYbkMarketReq" resultType="com.caimao.bana.api.entity.res.ybk.FYBKKDJRes">
+        SELECT
+        date,
+        update_time AS updateTime,
+        k,
+        d,
+        J
+        FROM ybk_kdj
+        WHERE exchange_name = #{exchangeShortName} AND code = #{code}
+        ORDER BY date DESC
+        LIMIT #{limit}
+    </select>
+</mapper>

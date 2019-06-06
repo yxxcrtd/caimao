@@ -1,0 +1,121 @@
+<#assign title="团融网"/>
+<#assign name="会员中心"/>
+<#assign controller="RWInquiry"/>
+<#include 'layout/main_layout.html'/>
+<#macro subContent>
+	<#include 'layout/home_head.html'/>
+	<#include 'layout/twolevel_menu.html'/>
+</#macro>
+<#macro content>
+<div class="contents clearfix">
+<#include 'layout/account_sidebar.html'/>
+<!--右边start-->
+<div class="con-rside cm-right">
+<div class="frame-all grid-812">
+
+<div class="con-ReCa">
+<table width="100%" border="0" cellspacing="0" class="table-assetsIndex">
+  <tbody>
+  <tr>
+    <th>可用余额：</th>
+    <td><b id="avalaible_amount_label" class="am-ft-number">0.00</b> <span class="am-ft-md">元</span>
+    </td>
+    <th>冻结金额：</th>
+    <td><b id="freeze" class="am-ft-number">0.00</b> <span class="am-ft-md">元</span>
+    </td>
+    <th></th>
+    <td>
+    <a href="${basePath}/account/recharge.htm" target="_blank"><div id="rechargebtn"></div></a>
+	<a href="${basePath}/account/withdraw.htm" target="_blank"><div id="withdrawbtn"></div></a>
+    </td>
+  </tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<!--筛选-->
+<ul id="table-tags">
+<li class="selectTag"><a onclick="selectTag('tagContent0',this)" href="javascript:void(0)">充值查询</a> </li>
+<li class=""><a onclick="selectTag('tagContent1',this)" href="javascript:void(0)">取现查询</a> </li>
+</ul>
+
+<div class="grid-812" id="tagContent">
+<div class="tagContent selectTag" id="tagContent0" style="display: block;">
+<div class="filter-loan">
+<div class="clearfix">
+<div class="cm-left filter-date">
+<span class="filter-loan-th">起止日期：</span>
+<div id="rechargedaterangectn" style="margin-left: 90px;"></div>
+<div class="filter-button"><a id="rechargeinquirybutton" href="javascript:void(0)" class="ui-button ui-button-sgray"><b class="ui-button-text am-ft-sm">查询</b></a></div>
+</div>
+
+<div id="rechargedatequickselectctn" class="cm-left second-left"></div>
+</div>
+<div class="clearfix am-mt-10">
+<span class="cm-left filter-loan-th">状态：</span>
+<ul id="rechargefilterlist" class="cm-left listLateral list-filter">
+	<li class="list-filter-item" data-type="02"><a href="javascript:void(0)">待充值</a></li>                 
+	<li class="list-filter-item" data-type="03"><a href="javascript:void(0)" class="active">充值成功</a></li>
+	</ul>
+</div>
+
+</div>
+
+<div id="rechargegrid"></div>
+
+</div><!--第一步-->
+
+<div class="tagContent" id="tagContent1" style="display: none;">
+<div class="filter-loan">
+<div class="clearfix">
+<div class="cm-left filter-date">
+<span class="filter-loan-th">起止日期：</span>
+<div id="withdrawdaterangectn" style="margin-left: 90px;"></div>
+<div class="filter-button"><a id="withdrawinquirybutton" href="javascript:void(0)" class="ui-button ui-button-sgray"><b class="ui-button-text am-ft-sm">查询</b></a></div>
+</div>
+<div id="withdrawdatequickselectctn" class="cm-left second-left"></div>
+</div>
+<div class="clearfix am-mt-10">
+<span class="cm-left filter-loan-th">状态：</span>
+<ul id="withdrawfilterlist" class="cm-left listLateral list-filter">
+	<li class="list-filter-item" data-type="02"><a href="javascript:void(0)">待审核</a></li>                 
+	<li class="list-filter-item" data-type="03"><a href="javascript:void(0)" class="active">审核通过</a></li>
+	</ul>
+</div>
+
+</div>
+<div id="withdrawgrid"></div>
+</div>
+
+
+<script type="text/javascript">
+function selectTag(showContent,selfObj){
+	// 操作标签
+	var tag = document.getElementById("table-tags").getElementsByTagName("li");
+	var taglength = tag.length;
+	for(i=0; i<taglength; i++){
+		tag[i].className = "";
+	}
+	selfObj.parentNode.className = "selectTag";
+	// 操作内容
+	for(i=0; j=document.getElementById("tagContent"+i); i++){
+		j.style.display = "none";
+	}
+	document.getElementById(showContent).style.display = "block";
+	
+	
+}
+</script>
+
+</div>
+<!--筛选-->
+
+</div>
+<!--右边end-->
+
+</div>
+</#macro>
+
+<#macro subScript>
+</#macro>

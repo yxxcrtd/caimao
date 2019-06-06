@@ -1,0 +1,63 @@
+<div class="con-all">
+
+
+
+
+<!--内容start-->
+<div class="con-success clearfix">
+<div class="cm-left successIcon-lside"><i class="ui-icon icon-big-warning"></i></div>
+<div class="cm-left successText-rside">
+<p class="layout01"><b>银行卡信息已提交，正在验证中</b></p>
+<!--第一次绑定时，手动刷新不会出现; 等跳转以后成功就到成功页面，还在验证时就没有等待5秒-->
+<p data-dojo-attach-point="countdownCtn" class="layout02"><span class="am-ft-md">请等待<b data-dojo-attach-point="countdownEl" class="am-ft-orange am-left-5 am-right-5">5</b>秒</span></p>
+<p data-dojo-attach-point="noReplyEl" class="layout02" style="display: none"><span class="am-ft-md">还未成功，请<a data-dojo-attach-point="refreshEl" href="javascript:void(0)">手动刷新</a></span></p>
+<p class="layout02"><a class="am-ft-md" href="${baseUrl}/home/index.htm">会员中心首页</a></p>
+
+
+<!--成功列表-->
+<div class="sideCatalog">
+<dl class="list-successNav">
+<dd class="successNav-item visited">
+<p class="layout01"><span>注册登录</span></p>
+<p class="layout02"></p>
+<span class="sideCatalog-dot"></span>
+</dd>
+<dd class="successNav-item visited">
+<p class="layout01"><span>实名认证</span></p>
+<p class="layout02"><span></span></p>
+<span class="sideCatalog-dot"></span>
+</dd>
+<dd class="successNav-item activeWarning">
+<p class="layout01"><span>绑定银行卡</span></p>
+<p class="layout02"><span>绑定一张有效的银行卡，方便资金操作</span></p>
+<span class="sideCatalog-dot"></span>
+</dd>
+<dd class="successNav-item next">
+<p class="layout01"><a href="${baseUrl}/account/tradepwd/set.htm"><span>设置安全密码</span></a></p>
+<p class="layout02"><span>安全密码是平台上进行核心操作时，唯一身份认证</span></p>
+<span class="sideCatalog-dot"></span>
+</dd>
+<dd class="successNav-item">
+<p class="layout01">充值</p>
+<p class="layout02"><span>通过绑定的银行卡充入保证金</span></p>
+<span class="sideCatalog-dot"></span>
+</dd>
+<dd class="successNav-item">
+<p class="layout01"><span>融资</span></p>
+<p class="layout02"><span>根据保证金金额按比例融资</span></p>
+<span class="sideCatalog-dot"></span>
+</dd>
+<dd class="successNav-item lastLi">
+<p class="layout01"><span>交易并盈利</span></p>
+<span class="sideCatalog-dot"></span>
+</dd>
+</dl>
+</div>
+<!--列表-->
+
+</div>
+</div>
+<!--内容end-->
+
+
+</div>

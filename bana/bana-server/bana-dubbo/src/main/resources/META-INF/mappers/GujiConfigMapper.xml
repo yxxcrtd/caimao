@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="GujiConfig">
+
+    <!-- 表所有字段和属性 -->
+    <resultMap id="BaseResultMap" type="com.caimao.bana.api.entity.guji.GujiConfigEntity">
+        <result column="id" property="id" jdbcType="BIGINT" />
+        <result column="type" property="type" jdbcType="VARCHAR" />
+        <result column="key" property="key" jdbcType="VARCHAR" />
+        <result column="value" property="value" jdbcType="VARCHAR" />
+        <result column="comment" property="comment" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <!-- 表所有字段 -->
+    <sql id="Base_Column_List" >id, type, `key`, `value`, comment</sql>
+
+    <!-- 根据ID查找 -->
+    <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select <include refid="Base_Column_List" /> from guji_config where id = #{id, jdbcType=BIGINT}
+    </select>
+
+    <!-- 根据key查找 -->
+    <select id="findByKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select <include refid="Base_Column_List" /> from guji_config where `key` = #{key, jdbcType=VARCHAR}
+    </select>
+
+    <!-- 配置列表 -->
+    <select id="queryAdminConfigList" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List" /> from guji_config
+    </select>
+
+    <!-- 修改 -->
+    <update id="update" parameterType="com.caimao.bana.api.entity.guji.GujiConfigEntity">
+        update guji_config
+        <set>
+            <if test="value != null">
+                value = #{value, jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id, jdbcType=BIGINT}
+    </update>
+
+</mapper>

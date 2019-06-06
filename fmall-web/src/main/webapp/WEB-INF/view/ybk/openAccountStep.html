@@ -1,0 +1,696 @@
+<!doctype html>
+<#include "ybk/config.html" />
+<#assign topMenu="openAccount" />
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>开户--邮币卡</title>
+		<link rel="stylesheet" href="${staticUrl}/style/account.css" />
+    	<script src="${staticUrl}/js/chart/lib.js?version=${jsVersion}" type="text/javascript"></script>
+		<script src="${staticUrl}/js/ybk/global.js?version=${jsVersion}" type="text/javascript"></script>
+	</head>
+	<body>
+<script>
+	var token = "${token}";
+</script>
+<#include "ybk/include/page/head.html" />
+${user.userId}
+
+		<div class="main">
+			<div class="account">
+				<p class="tit_top" style="display:none;">您已经成功注册财猫账户。</p>
+				<div class="tit">
+					<ul id="titles">
+						<li>
+							<i>1</i>实名认证
+						</li>
+						<li>
+							<i>2</i>选择开户
+						</li>
+						<li>
+							<i>3</i>上传照片
+						</li>
+					</ul>
+				</div>
+				<div class="ready" id="ready">
+					数据们正在陆陆续续的赶来，请稍后片刻!
+				</div>
+				<div class="one" id="one" style="display:none;">
+					<form action="">
+						<div class="group">
+							<div class="col_01">姓名</div>
+							<div class="col_02">
+								<input type="text" placeholder="请输入姓名" name="userName"/>
+								<span class="v_info">姓名不能为空</span>
+							</div>
+						</div>
+						<div class="group">
+							<div class="col_01">身份证号</div>
+							<div class="col_02">
+								<input type="text" placeholder="请输入身份证号" name="cardNumber"/>
+								<span class="v_info">身份证号不能为空</span>
+							</div>
+						</div>
+						<div class="group">
+							<div class="col_01"></div>
+							<div class="col_02">
+								<button type="submit" class="btn" action="next">下一步</button>
+							</div>
+						</div>
+
+					</form>
+				</div>
+				<div class="two" id="two" style="display:none;">
+						<div class="group clearfix">
+							<div class="col_01 f_l">您要开通的交易所</div>
+							<div class="col_2 f_l">
+								<ul class="select_bank select_jys" id="exchangeList">
+									<script type="text/x-tmpl">
+										<% for(var i = 0,l = data.length; i < l; i++){%>
+											<li action="selectExchange" click="switchBtn" idx="<%=i%>" data="<%=data[i].supportBank%>" data-val="<%=data[i].id%>" <%if(i == 0){%>class="cur"<%}%>><img src="${imgUrl}/exchange/<%=data[i].shortName%>.jpg" alt="<%=data[i].name%>"/></li>
+										<%}%>
+									</script>
+								</ul>
+							</div>
+						</div>
+						<div class="group clearfix">
+							<div class="col_01 f_l">支持银行</div>
+							<div class="col_2 f_l">
+								<ul class="select_bank" id="bankList">
+									<script type="text/x-tmpl">
+										<% for(var i = 0,l = data.length; i < l; i++){%>
+											<li action="selectBank" click="switchBtn" idx="<%=i%>" data="<%=data[i].bankNo%>" <%if(!bankIdx && i == 0){%>class="cur"<%}else if(bankIdx == i){%>class="cur"<%}%>><img src="${imgUrl}/bank/<%=data[i].bankNo%>.jpg"  alt="<%=data[i].bankName%>"></li>
+										<%}%>
+									</script>
+								</ul>
+							</div>
+						</div>
+						<div class="group">
+							<div class="col_01">银行卡号</div>
+							<div class="col_02">
+								<input type="text" placeholder="请输入银行卡号" name="bankNum" restrict="0"/>
+								<span class="v_info">银行卡号不能为空</span>
+							</div>
+						</div>
+
+						<div class="group">
+							<div class="group">
+								<div class="col_01"></div>
+								<div class="col_02">
+									<button type="submit" class="btn" action="next">下一步</button>
+								</div>
+							</div>
+						</div>
+
+				</div>
+
+				<div class="three" id="three" style="display:none;">
+						<ul class="upload">
+							<li>
+								<p>身份证信息页面</p>
+								<div class="load_in">
+									<div class="form">
+										<form action="${httpUrl}/api/ybk/iFrameUploadIMG?iframeUpload=1&callback=top.setPhoto1" method="post" target="__inner_form_iframe" enctype="multipart/form-data"><input id="filesInput" name="file" type="file"/><a class="submit" href="javascript:void(0);" id="status1">点击上传</a><input type="hidden" name="token" value="${token}"/></form>
+										<div class="showSample"><img src="${imgUrl}/account/space.png" id="pic1"></div>
+									</div>
+									<span class="example">
+										<b class="front">
+											<a href="${imgUrl}/account/front.png" target="_blank"><i class="icons"></i></a>
+											示例
+										</b>
+										<span class="popups front_popups"></span>
+									</span>
+								</div>
+								<iframe id="__inner_form_iframe" name="__inner_form_iframe" src="javascript:null;" style="display:none;"></iframe>
+								<p id="notice1">支持JPG、PNG格式，大小不超过1M</p>
+								<script>
+									var filesInput = document.querySelector("#filesInput"),
+										status1 = document.querySelector("#status1"),
+										notice1 = document.querySelector("#notice1"),
+										notice1Text = notice1.innerHTML,
+										pic1 = document.querySelector("#pic1");
+									Event.add(filesInput,"change",function(){
+										filesInput.form.submit();
+										status1.innerHTML = "上传中";
+									})
+									function setPhoto1(d){
+										if(d.success){
+											subData.card_positive = d.msg;
+											status1.innerHTML = "";
+											pic1.src = "${httpUrl}"+d.msg;
+											notice1.innerHTML = notice1Text;
+										}else{
+											subData.card_positive = null;
+											status1.innerHTML = "点击上传";
+											pic1.src = "${imgUrl}/account/space.png";
+											notice1.innerHTML = d.msg;
+										}
+									}
+								</script>
+							</li>
+							<li>
+								<p>身份证国徽页面</p>
+								<div class="load_in">
+									<div class="form">
+										<form action="${httpUrl}/api/ybk/iFrameUploadIMG?iframeUpload=1&callback=top.setPhoto2" method="post" target="__inner_form_iframe2" enctype="multipart/form-data"><input id="filesInput2" name="file" type="file"/><a class="submit" href="javascript:void(0);" id="status2">点击上传</a><input type="hidden" name="token" value="${token}"/></form>
+										<div class="showSample"><img src="${imgUrl}/account/space.png" id="pic2"></div>
+									</div>
+									<span class="example">
+										<b class="back">
+											<a href="${imgUrl}/account/back.png" target="_blank"><i class="icons"></i></a>
+											示例
+										</b>
+										<span class="popups back_popups"></span>
+									</span>
+								</div><iframe id="__inner_form_iframe2" name="__inner_form_iframe2" src="javascript:null;" style="display:none;"></iframe>
+								<p id="notice2">支持JPG、PNG格式，大小不超过1M</p>
+								<script>
+									var filesInput2 = document.querySelector("#filesInput2"),
+										status2 = document.querySelector("#status2"),
+										notice2 = document.querySelector("#notice2"),
+										notice2Text = notice2.innerHTML,
+										pic2 = document.querySelector("#pic2");
+									Event.add(filesInput2,"change",function(){
+										filesInput2.form.submit();
+										status2.innerHTML = "上传中";
+									})
+									function setPhoto2(d){
+										if(d.success){
+											subData.card_opposite = d.msg;
+											status2.innerHTML = "";
+											pic2.src = "${httpUrl}"+d.msg;
+											notice2.innerHTML = notice2Text;
+										}else{
+											subData.card_opposite = null;
+											status2.innerHTML = "点击上传";
+											pic2.src = "${imgUrl}/account/space.png";
+											notice2.innerHTML = d.msg;
+										}
+									}
+								</script>
+							</li>
+							<li>
+								<p id="bankTitle">银行卡正面</p>
+								<div class="load_in">
+									<div class="form">
+										<form action="${httpUrl}/api/ybk/iFrameUploadIMG?iframeUpload=1&callback=top.setPhoto3" method="post" target="__inner_form_iframe3" enctype="multipart/form-data"><input id="filesInput3" name="file" type="file"/><a class="submit" href="javascript:void(0);" id="status3">点击上传</a><input type="hidden" name="token" value="${token}"/></form>
+										<div class="showSample"><img src="${imgUrl}/account/space.png" id="pic3"></div>
+									</div>
+									<span class="example">
+										<b class="bank_bg">
+											<a href="${imgUrl}/account/bank_front.png" target="_blank"><i class="icons"></i></a>
+											示例
+										</b>
+										<span class="popups bank_popups"></span>
+									</span>
+								</div><iframe id="__inner_form_iframe3" name="__inner_form_iframe3" src="javascript:null;" style="display:none;"></iframe>
+								<p id="notice3">支持JPG、PNG格式，大小不超过1M</p>
+								<script>
+									var filesInput3 = document.querySelector("#filesInput3"),
+										status3 = document.querySelector("#status3"),
+										notice3 = document.querySelector("#notice3"),
+										notice3Text = notice3.innerHTML,
+										pic3 = document.querySelector("#pic3");
+									Event.add(filesInput3,"change",function(){
+										filesInput3.form.submit();
+										status3.innerHTML = "上传中";
+									})
+									function setPhoto3(d){
+										if(d.success){
+											subData.bank_picture = d.msg;
+											status3.innerHTML = "";
+											pic3.src = "${httpUrl}"+d.msg;
+											notice3.innerHTML = notice3Text;
+										}else{
+											subData.bank_picture = null;
+											status3.innerHTML = "点击上传";
+											pic3.src = "${imgUrl}/account/space.png";
+											notice3.innerHTML = d.msg;
+										}
+									}
+								</script>
+							</li>
+
+						</ul>
+						<div class="group" style="width: 190px;">
+							<div class="col_01"></div>
+							<div class="col_02">
+								<button type="button" class="btn" action="submitAll">提交</button>
+								<div style="color: #666;font-size: 13px;">照片太大？ &nbsp;&nbsp;&nbsp;&nbsp;<a rel="nofollow" href="http://pic.sdodo.com/tool/picadjust/" style="color: blue;" target="_blank"> 在线压缩</a></div>
+							</div>
+						</div>
+
+				</div>
+
+				
+				<script>
+				/*tabSwitch*/
+				var showTab,step,data,formEle = {},resetBank,subData = {},defPic = "${imgUrl}/account/space.png",
+					modId = $_GET("id");
+				function showTitles(def){
+					var titles = document.querySelector("#titles"),
+						tab = titles.querySelectorAll("li");
+					function show(n){
+						var n = n || 1;
+						for(var i = 0;i < n;i++){
+							tab[i].className = "complete";
+						}
+						tab[n-1].className = "cur";
+					}
+					return show
+				}
+				function getAttForeach(n, a) {
+					if (!n || !a || !n.parentNode) return null;
+
+					if (n.getAttribute(a)) {
+						return [n,n.getAttribute(a)];
+					}
+					return getAttForeach(n.parentNode, a);
+				}
+				var showTab = showTitles();
+
+				/* data preparation */
+				;(function(){
+					var r = request(),
+						ready = {
+							query_exchange_list : 0,
+							apply_account_list : 0
+						},
+						count = 0,
+						total = 3;
+						step = [
+							document.querySelector("#ready"),
+							document.querySelector("#one"),
+							document.querySelector("#two"),
+							document.querySelector("#three")
+						],
+						data = {
+							bank : {},
+							exchange : {},
+							myEx : {},
+							myExOrderByTime : []
+						};
+
+					formEle.exchange = document.querySelector("#exchangeList"),
+					formEle.exchangeHtml = formEle.exchange.querySelector("script").innerHTML,
+					formEle.bank = document.querySelector("#bankList"),
+					formEle.bankHtml = formEle.bank.querySelector("script").innerHTML,
+					formEle.pic1 = document.querySelector("#pic1"),
+					formEle.pic2 = document.querySelector("#pic2"),
+					formEle.pic3 = document.querySelector("#pic3");
+					r.ajax({
+						url : "${httpUrl}/api/ybk/query_exchange_list",
+						type : "GET",
+						data : {status : 2},
+						success : function(d){
+							var _this;
+							if(d.success){
+								_this = d.data;
+								for(var i = 0,l = _this.length; i<l;i++){
+									data.exchange[_this[i].shortName] = _this[i];
+								}
+								ready.query_exchange_list = 1;
+								if(ready.apply_account_list)formatExchange();
+								checkReady();
+							}
+						}
+					})
+					r.ajax({
+						url : "${httpUrl}/api/ybk/apply_account_list",
+						type : "GET",
+						data : {token : token},
+						success : function(d){
+							var _this,__this;
+							if(d.success){
+								_this = d.data.items;
+								if(modId){
+									for(var l = _this.length; l--; ){
+										if(_this[l].applyId == modId){
+											data.myEx[_this[l].exchangeShortName] = _this[l];
+										}
+									}
+									for(var l = _this.length; l--; ){
+										if(_this[l].status < 4){
+											data.myExOrderByTime.push(_this[l]);
+										}
+									}
+								}else{
+									for(var l = _this.length; l--; ){
+										if(_this[l].status < 4){
+											data.myEx[_this[l].exchangeShortName] = _this[l];
+											data.myExOrderByTime.push(_this[l]);
+										}
+									}
+								}
+
+								ready.apply_account_list = 1;
+								if(ready.query_exchange_list)formatExchange();
+								checkReady();
+							}
+						}
+					})
+					r.ajax({
+						url : "${httpUrl}/api/ybk/query_bank_list",
+						type : "GET",
+						success : function(d){
+							var _this;
+							if(d.success){
+								_this = d.data;
+								for(var l = _this.length; l--; ){
+									data.bank[_this[l].bankNo] = _this[l];
+								}
+								checkReady();
+							}
+						}
+					})
+					function formatExchange(){
+						var tmp = [],myEx;
+						if(!modId){
+							for(var k in data.myEx){
+								data.exchange[k] && (delete data.exchange[k]);
+							}
+							for(var k in data.exchange){
+								data.exchange[k].number && tmp.push(data.exchange[k]);
+							}
+						}else{
+							for(var k in data.myEx){
+								myEx = data.myEx[k];
+								data.exchange[k] && tmp.push(data.exchange[k]);
+							}
+							data.myEx = myEx;
+						}
+						data.exchange = tmp;
+					}
+					function checkReady(){
+						count += 1;
+						if(count == total){
+							showTab();
+							resetBank = modId ? initData(data.myEx ? data.myEx : null) : 
+												initData(data.myExOrderByTime.length ? data.myExOrderByTime[0] : null);
+							step1();
+							step[0].style.display = "none";
+							step[1].style.display = "block";
+						}
+					}
+				})();
+
+				function initData(d){
+					var inputs = [],bankIdx,ishas,inputList = {};
+
+					inputs = inputs.concat([].slice.apply(step[1].querySelectorAll("input")));
+					inputs = inputs.concat([].slice.apply(step[2].querySelectorAll("input")));
+					if(d){
+					for(var _this,i = 0, l = inputs.length; i < l; i++){
+						_this = inputs[i];
+						inputList[_this.name] = _this;
+						if(d[_this.name]){
+							_this.value = d[_this.name];
+							_this.setAttribute("def",d[_this.name]);
+						}
+					}}
+					subData.exchange_id = data.exchange[0].id;
+					formEle.exchange.innerHTML = rentmpl(formEle.exchangeHtml,{data:data.exchange});
+
+					writeBanks(data.exchange[0].supportBank);
+					function writeBanks(bankData){
+						var supBank = bankData.split(","),banks = [];
+						for(var i = 0, l = supBank.length; i < l; i++){
+							banks.push(data.bank[supBank[i]]);
+							if(d && d.bankCode == supBank[i]){
+								bankIdx = i;
+								ishas = 1;
+							}else if(!d){
+								bankIdx = 0;
+								ishas = 0;
+							}
+						}
+						formEle.bank.innerHTML = rentmpl(formEle.bankHtml,{data:banks,bankIdx : bankIdx});
+						if(!ishas && inputList.length){
+							inputList.bankNum.value = "";
+						}
+						if(d){
+							formEle.pic1.src = "${httpUrl}"+d.cardPath;
+							formEle.pic2.src = "${httpUrl}"+d.cardOppositePath;
+							formEle.pic3.src = "${httpUrl}"+d.bankPath;
+							status1.innerHTML = "";
+							status2.innerHTML = "";
+							status3.innerHTML = "";
+							subData.card_positive = d.cardPath;
+							subData.card_opposite = d.cardOppositePath;
+							subData.bank_picture = d.bankPath;
+						}
+					}
+					function setData(myData){
+						d = myData;
+					}
+					return {
+						bank : writeBanks,
+						setData : setData
+					};
+				}
+				/* step1 */
+				function step1(){
+					var box = step[1],
+						next = step[2],
+						myData = data.myExOrderByTime.length ? data.myExOrderByTime[0] : null,
+						inputs = box.querySelectorAll("input"),
+						listenInput,
+						checked = 1;
+
+
+
+					Event.add(box,'click',function(e){
+						var tar = Event.target(e);
+						checked = 1;
+						if(tar.getAttribute("action")){
+							Event.stop(e);
+							for(var i = 0, l = inputs.length; i < l; i++){
+								if(!inputs[i].value){
+									inputs[i].parentNode.querySelector("span").style.visibility = "visible";
+									checked = 0
+								}else{
+									inputs[i].parentNode.querySelector("span").style.visibility = "hidden";
+								}
+							}
+							if(checked){
+								box.style.display = "none";
+								next.style.display = "block";
+								showTab(2);
+								subData.user_name = inputs[0].value;
+								subData.user_idcard = inputs[1].value;
+								checkStep3();
+								step2(inputs[1].value == inputs[1].getAttribute("def"));
+							}
+						}
+					})
+				};
+				/* step2 */
+
+				function step2(cardHold){
+					var box = step[2],
+						next = step[3],
+						inputs = box.querySelectorAll("input"),
+						checked = 1,bk,ex;
+					if(!cardHold){
+						for(var had = null,l = data.myExOrderByTime.length;l--;){
+							if(data.myExOrderByTime[l].cardNumber == subData.user_idcard){
+								had = data.myExOrderByTime[l];
+								break;
+							}
+						}
+						resetBank.setData(had);
+						if(modId){
+							resetBank.bank(data.exchange[0].supportBank);
+						}
+					}
+					Event.add(inputs[0],"keyup",function(){
+						subData.bank_num = inputs[0].value;
+					})
+
+
+					Event.add(box,'click',function(e){
+						var tar = Event.target(e),
+							action = getAttForeach(tar,"action");
+						checked = 1;
+						if(!action)return;
+						if(action[1] == "next"){
+							Event.stop(e);
+							for(var i = 0, l = inputs.length; i < l; i++){
+								if(inputs[i].value == ""){
+									inputs[i].parentNode.querySelector("span").style.visibility = "visible";
+									checked = 0
+								}else{
+									inputs[i].parentNode.querySelector("span").style.visibility = "hidden";
+								}
+							}
+							if(checked){
+								if(!subData.bank_num){
+									subData.bank_num = inputs[0].value;
+								}
+								showTab(3)
+								bankTitle.innerHTML = "银行卡正面("+data.bank[subData.bank_code].bankName+")";
+								box.style.display = "none";
+								next.style.display = "block";
+								checkStep3Bank();
+							}
+						}else if(action[1] == "selectExchange"){
+							resetBank.bank(action[0].getAttribute("data"));
+							subData.exchange_id = action[0].getAttribute("data-val");
+							bank(inputs);
+						}else if(action[1] == "selectBank"){
+							checkedMybank(action[0],inputs);
+						}
+					});
+
+
+
+					bank = switchBtn(formEle.bank,"li",inputs)
+					ex = switchBtn(formEle.exchange,"li",inputs)
+
+
+					Event.add(next,'click',function(e){
+						var r = request();
+						var tar = Event.target(e),
+							action = getAttForeach(tar,"action");
+						checked = 1;
+						if(!action)return;
+						if(action[1] == "submitAll"){
+							Event.stop(e);
+							if(!subData.bank_picture || !subData.card_opposite || !subData.card_positive){
+								checked = 0
+							}
+							if(checked){
+								subData.token = token;
+								r.ajax({
+									url : "${httpUrl}/api/ybk/register",
+									type : "POST",
+									data : subData,
+									success : function(d){
+										location.href = 'open_account_old.html'
+									}
+								})
+							}
+						}
+					});
+				}
+				function checkedMybank(tar,inputs,debug){
+					var code = tar.getAttribute("data").split(","),
+						codeObj = {},
+						_this;
+					for(var l = code.length;l--;){
+						codeObj[code[l]] = 1;
+					}
+					if(modId && codeObj[data.myEx.bankCode]){
+						_this = data.myEx;
+					}
+					if(!_this){
+						for(var i = 0, l = data.myExOrderByTime.length; i < l; i++){
+							if(data.myExOrderByTime[i].cardNumber == subData.user_idcard && codeObj[data.myExOrderByTime[i].bankCode]){
+								_this = data.myExOrderByTime[i];
+								break;
+							}
+						}
+					}
+					if(_this){
+						inputs[0].value = _this.bankNum;
+						subData.bank_num = _this.bankNumAll;
+						subData.bank_code = _this.bankCode;
+					}else{
+						subData.bank_code = code[0];
+						inputs[0].value = "";
+					}
+				}
+				function switchBtn(box,btn,inputs){
+					var btns,current;
+					Event.add(box,"click",function(e){
+						var tar = Event.target(e),
+							action = getAttForeach(tar,"click"),
+							idx = getAttForeach(tar,"idx");
+						if(action && action[1] == "switchBtn"){
+							btns[current] && (btns[current].className = "");
+							current = idx[1];
+							btns[current] && (btns[current].className = "cur");
+						}
+					});setCurr(inputs);
+					function setCurr(inputs){
+						var hasIt;
+						btns = box.querySelectorAll(btn);
+						for(var i = 0, l = btns.length;i < l;i++){
+							if(btns[i].className == "cur"){
+								hasIt = 1;
+								current = btns[i].getAttribute("idx");
+								checkedMybank(btns[i],inputs);
+							}
+						}
+						if(current >= l){
+							current = 0;
+							checkedMybank(btns[0],inputs);
+							if(!hasIt){
+								btns[current] && (btns[current].className = "cur");
+							}
+						}
+					}
+					return setCurr;
+				}
+				function checkStep3(){
+					var _this;
+					for(var i = 0, l = data.myExOrderByTime.length; i < l; i++){
+						if(data.myExOrderByTime[i].cardNumber == subData.user_idcard){
+							_this = data.myExOrderByTime[i];
+							break;
+						}
+					}
+
+					if(_this){
+						formEle.pic1.src = "${httpUrl}"+_this.cardPath;
+						formEle.pic2.src = "${httpUrl}"+_this.cardOppositePath;
+						formEle.pic3.src = "${httpUrl}"+_this.bankPath;
+						status1.innerHTML = "";
+						status2.innerHTML = "";
+						status3.innerHTML = "";
+						subData.card_positive = _this.cardPath;
+						subData.card_opposite = _this.cardOppositePath;
+						subData.bank_picture = _this.bankPath;
+					}else{
+						formEle.pic1.src = defPic;
+						formEle.pic2.src = defPic;
+						formEle.pic3.src = defPic;
+						status1.innerHTML = "点击上传";
+						status2.innerHTML = "点击上传";
+						status3.innerHTML = "点击上传";
+						delete subData.card_positive;
+						delete subData.card_opposite;
+						delete subData.bank_picture;
+					}
+				}
+				function checkStep3Bank(){
+					var _this;
+					if(modId && data.myEx.bankCode == subData.bank_code && data.myEx.bankNumAll == subData.bank_num){
+						_this = data.myEx;
+					}
+					if(!_this){
+						for(var i = 0, l = data.myExOrderByTime.length; i < l; i++){
+							if(data.myExOrderByTime[i].bankNumAll == subData.bank_num){
+								_this = data.myExOrderByTime[i];
+								break;
+							}
+						}
+					}
+					if(_this){
+						formEle.pic3.src = _this.bankPath;
+						subData.bank_picture = _this.bankPath;
+						status3.innerHTML = "";
+					}else{
+						formEle.pic3.src = defPic;
+						status3.innerHTML = "点击上传";
+						delete subData.bank_picture;
+					}
+				}
+				filterEvent(document)
+				</script>
+			</div>
+		</div>
+
+<#include "ybk/include/page/foot.html" />
+	</body>
+</html>

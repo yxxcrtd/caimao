@@ -1,0 +1,68 @@
+<#assign controller="NewGuidelines"/>
+<#include 'layout/layout.html'/>
+<#macro content>
+
+<!--新人注册-->
+<style type="text/css">
+body {
+    background: #f4f4f4;
+}
+</style>
+<div class="newGuidelines-content">
+    <div class="section lead">
+        <ul class="compare clearfix">
+            <li class="float_left"><img src="${dojoUrl}/app/resources/custom/images/compare01_304452.jpg" width="304" height="452"/></li>
+            <li class="float_left"><img src="${dojoUrl}/app/resources/custom/images/compare02_304452.png" width="304" height="452"/></li>
+            <li class="float_left"><img src="${dojoUrl}/app/resources/custom/images/compare03_304452.jpg" width="304" height="452"/></li>
+        </ul>
+
+        <div class="warp show">
+            <h3 class="tit icons"><b>操盘演示</b>（例：投资本金1万，融资5万，总操盘资金6万，每月利息950元）</h3>
+            <div class="show_in clearfix">
+                <div class="float_left left">
+                    <div class="left_in">
+                        <p class="titl">投资本金1万，融资5万，您的总操盘资金6万，每月利息950元，买入股票6万，并持有30天，股票上涨10％。</p>
+                        <ul>
+                            <li><span class="tian float_left">第1天</span><span class="shi float_left">买入股票6万</span></li>
+                            <li><span class="tian float_left">第2-29天</span><span class="shi float_left">继续持有</span></li>
+                            <li><span class="tian bor float_left">第30天</span><span class="shi float_left">股票涨了10%，卖出股票，结束操盘</span></li>
+                        </ul>
+                        <p class=""><b>结算盈亏</b></p>
+                        <p class="font_12">股票盈利：<b>60000元 x 10％ = 6000元</b></p>
+                        <p class="font_12">支付利息：<b>950元</b></p>
+                        <p class="font_12">投资本金：<b>10000元</b></p>
+                        <p class="font_12">您可以获得：<b>6000元 - 950元 + 10000元 = 15050元</b></p>
+                        <p class="font_12">投资收益率：<b>（6000元 - 950元）÷ 10000元 = 50.5％</b></p>
+                    </div>
+                    <h2 class="icons">融资盈利演示</h2>
+                </div>
+
+                <div class="float_left left">
+                    <div class="left_in">
+                        <p class="titl">投资本金1万，融资5万，您的总操盘资金6万，每月利息950元，买入股票6万，并持有30天，股票下跌2％。</p>
+                        <ul>
+                            <li><span class="tian float_left">第1天</span><span class="shi float_left">买入股票6万</span></li>
+                            <li><span class="tian float_left">第2-29天</span><span class="shi float_left">继续持有</span></li>
+                            <li><span class="tian bor float_left">第30天</span><span class="shi float_left">股票下跌了2％，卖出股票，结束操盘</span></li>
+                        </ul>
+                        <p class=""><b>结算盈亏</b></p>
+                        <p class="font_12">股票亏损：<b>60000元 x 2％ = 1200元</b></p>
+                        <p class="font_12">支付利息：<b>950元</b></p>
+                        <p class="font_12">投资本金：<b>10000元</b></p>
+                        <p class="font_12">您可以获得：<b>10000元 - 950元 - 1200元 = 7850元</b></p>
+                        <p class="font_12">投资亏损率：<b>（10000元 - 7850元）÷ 10000元 = 21.5％</b></p>
+                    </div>
+                    <h2 class="icons icons_r">融资亏损演示</h2>
+                </div>
+                <div class="align_center">
+                    <a href="${baseUrl}/p2.htm" class="lead_btn">开始操盘</a>
+                </div>
+                <br>
+                <br>
+                <br>
+            </div>
+        </div>
+    </div>
+
+    </div>
+</#macro>

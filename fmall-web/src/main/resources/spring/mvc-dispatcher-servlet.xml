@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/mvc
+	http://www.springframework.org/schema/mvc/spring-mvc.xsd"
+       default-autowire="default">
+
+    <!-- 扫描package进行注解 -->
+    <context:component-scan base-package="com.fmall.bana">
+        <context:include-filter type="annotation"
+                                expression="org.springframework.stereotype.Controller"></context:include-filter>
+        <context:include-filter type="annotation"
+                                expression="org.springframework.web.bind.annotation.RestController"></context:include-filter>
+    </context:component-scan>
+
+    <!-- 对静态资源文件的访问 -->
+    <mvc:resources mapping="/frontend/**" location="/frontend/"/>
+    <mvc:default-servlet-handler/>
+    <mvc:annotation-driven validator="validator">
+        <mvc:message-converters>
+            <ref bean="messageConverter"/>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+    <bean id="validator"
+          class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+        <property name="providerClass" value="org.hibernate.validator.HibernateValidator"/>
+        <property name="validationMessageSource" ref="messageSource"/>
+    </bean>
+    <!-- 转json所支持的头信息类型  -->
+    <bean id="messageConverter"
+          class="com.fmall.bana.utils.CustomMappingJackson2HttpMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
+                <value>application/json;charset=UTF-8</value>
+                <value>text/html;charset=UTF-8</value>
+                <!-- 解决火狐发送的ajax请求不是json格式   -->
+            </list>
+        </property>
+    </bean>
+    <!-- 配置 文件上传的支持 -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!--  指定所上传文件的总大小不能超过1M -->
+        <property name="maxUploadSize" value="5120000"/>
+        <property name="resolveLazily" value="true"/>
+        <property name="maxInMemorySize" value="20480"/>
+    </bean>
+
+    <!-- 视图配置 -->
+    <bean id="viewResolver"
+          class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+        <property name="cache" value="true"/>
+        <property name="prefix" value=""/>
+        <property name="suffix" value=".html"/>
+        <property name="contentType" value="text/html;charset=UTF-8"/>
+        <!-- 设置requestContext变量的名称 -->
+        <property name="requestContextAttribute" value="request"/>
+        <!-- 配置是否在生成模板内容之前把HTTPsession中的数据放入model中 -->
+        <property name="exposeSessionAttributes" value="true"/>
+        <!-- 配置是否在生成模板内容之前把HTTPrequest中的数据放入model中 -->
+        <property name="exposeRequestAttributes" value="true"/>
+        <!-- 使用spring lib时 是否暴露 RequestContext 变量 默认为true -->
+        <property name="exposeSpringMacroHelpers" value="true"/>
+        <!-- 允许session重写覆盖 -->
+        <property name="allowSessionOverride" value="true" />
+    </bean>
+    <bean id="freemarkerConfig"
+          class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+        <property name="templateLoaderPath" value="/WEB-INF/view"/>
+        <property name="freemarkerSettings">
+            <props>
+                <prop key="template_update_delay">0</prop>
+                <prop key="default_encoding">utf-8</prop>
+                <prop key="number_format">0.##########</prop>
+                <prop key="datetime_format">yyyy-MM-dd HH:mm:ss</prop>
+                <prop key="classic_compatible">true</prop>
+                <prop key="template_exception_handler">ignore</prop>
+                <prop key="auto_import">"spring.ftl" as s</prop>
+            </props>
+        </property>
+        <property name="freemarkerVariables">
+            <map>
+                <entry key="formatAmount">
+                    <bean class="com.fmall.bana.freemarker.method.formatAmount"/>
+                </entry>
+                <entry key="dateCal">
+                    <bean class="com.fmall.bana.freemarker.method.dateCal"/>
+                </entry>
+                <entry key="dictStr">
+                    <bean class="com.fmall.bana.freemarker.method.dictStr"/>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    <!-- 视图找不到不会有异常信息 -->
+    <bean id="handlerExceptionResolver" class="com.fmall.bana.utils.exception.CaimaoExceptionResolver">
+        <property name="warnLogCategory" value="INFO"/>
+        <property name="defaultStatusCode" value="500"/>
+        <property name="defaultErrorView" value="error/error"/>
+        <property name="exceptionMappings">
+            <props>
+                <prop key="SessionTimeoutException">redirect:${home_url}/user/login.html</prop>
+            </props>
+        </property>
+        <property name="statusCodes">
+            <props>
+                <prop key="error/404">404</prop>
+                <prop key="error/500">500</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!-- 国际化配置 -->
+    <!-- 资源配置 -->
+    <bean id="messageSource"
+          class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="basename" value="classpath:i18n/messages"/>
+        <property name="useCodeAsDefaultMessage" value="false"/>
+    </bean>
+    <!-- 国际化拦截器配置 使用cookie存储 -->
+    <bean id="localeResolver"
+          class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+        <property name="cookieName" value="_l_"/>
+        <property name="cookieMaxAge" value="100000"/>
+        <property name="cookiePath" value="/"/>
+        <property name="defaultLocale" value="zh_CN"/>
+    </bean>
+
+    <!-- 会话管理器 -->
+    <bean id="sessionInterceptor" class="com.fmall.bana.utils.Session.SessionContextInterceptor">
+        <property name="sessionProvider" ref="sessionProvider"/>
+    </bean>
+    <bean id="sessionProvider" class="com.fmall.bana.utils.Session.HttpSessionProvider"/>
+    <mvc:interceptors>
+        <!-- 拦截HttpServletRequest、 HttpServletResponse -->
+        <bean class="com.fmall.bana.utils.Session.Interceptor.ContextInterceptor"/>
+        <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+            <!-- //改变语言时所用的参数名称 -->
+            <property name="paramName" value="lang"/>
+        </bean>
+        <mvc:interceptor>
+            <!-- BEGIN V2新加的-->
+            <!--需要登录的-->
+            <mvc:mapping path="/ybk/ucenter.html" />
+            <mvc:mapping path="/ybk/get_user_info.html" />
+            <!--<mvc:mapping path="/ybk/open_account.html" />-->
+            <mvc:mapping path="/ybk/open_account_old.html" />
+            <mvc:mapping path="/ybk/open_account_step.html" />
+
+            <mvc:mapping path="/gjs/get_user_info.html" />
+            <mvc:mapping path="/gjs/openAccount.html" />
+            <mvc:mapping path="/gjs/cardUpload.html" />
+            <!--用户中心-->
+            <mvc:mapping path="/user/account.html" />
+            <mvc:mapping path="/user/info.html" />
+            <mvc:mapping path="/user/set_password.html" />
+            <mvc:mapping path="/user/message.html" />
+            <mvc:mapping path="/user/clear_message.html" />
+            <mvc:mapping path="/user/del_message.html" />
+            <mvc:mapping path="/user/update_info" />
+            <mvc:mapping path="/user/loginpwd/reset" />
+            <mvc:mapping path="/user/mobile/reset" />
+            <mvc:mapping path="/sms/changemobile" />
+            <mvc:mapping path="/sms/auth_code" />
+
+            <mvc:mapping path="/gjs/account.html" />
+            <mvc:mapping path="/gjs/account/resetPwd.html" />
+            <mvc:mapping path="/gjs/account/modifyPwd.html" />
+
+            <!--不需要登陆查看的-->
+            <mvc:exclude-mapping path="/"/>
+            <mvc:exclude-mapping path="/ybk/"/>
+
+            <!--邮币卡API接口-->
+            <mvc:exclude-mapping path="/api/ybk/get_exchange_info"/>
+            <mvc:exclude-mapping path="/api/ybk/query_exchange_list"/>
+            <mvc:exclude-mapping path="/api/ybk/get_bank_info"/>
+            <mvc:exclude-mapping path="/api/ybk/query_exchange_by_bankno"/>
+            <mvc:exclude-mapping path="/api/ybk/query_composite_index"/>
+            <mvc:exclude-mapping path="/api/ybk/query_collection_ranking"/>
+            <mvc:exclude-mapping path="/api/ybk/get_collection_info"/>
+            <mvc:exclude-mapping path="/api/ybk/query_timeline"/>
+            <mvc:exclude-mapping path="/api/ybk/query_kline"/>
+            <mvc:exclude-mapping path="/api/ybk/query_macd"/>
+            <mvc:exclude-mapping path="/api/ybk/query_kdj"/>
+            <mvc:exclude-mapping path="/api/ybk/query_rsi"/>
+            <mvc:exclude-mapping path="/api/ybk/query_article_list"/>
+            <mvc:exclude-mapping path="/api/ybk/get_article"/>
+            <mvc:exclude-mapping path="/api/ybk/register"/>
+            <mvc:exclude-mapping path="/api/ybk/searchGoods"/>
+
+            <!--用户相关API接口-->
+            <mvc:exclude-mapping path="/api/user/mobile_exists"/>
+            <mvc:exclude-mapping path="/api/user/login"/>
+            <mvc:exclude-mapping path="/api/user/register"/>
+            <mvc:exclude-mapping path="/api/user/registercode"/>
+            <mvc:exclude-mapping path="/api/user/get_user_info"/>
+            <mvc:exclude-mapping path="/api/user/mobile_exists"/>
+
+
+
+            <ref bean="sessionInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/user/enrich"/>
+            <bean class="com.fmall.bana.interceptor.ReferInterceptor"/>
+        </mvc:interceptor>
+        <!-- 判断是否手机请求 -->
+        <!--<mvc:interceptor>-->
+            <!--<mvc:mapping path="/"/>-->
+            <!--<mvc:mapping path="/index.htm"/>-->
+            <!--<bean class="com.fmall.bana.interceptor.IsMobileDevice"/>-->
+        <!--</mvc:interceptor>-->
+        <!-- 邀请的那个东东 -->
+        <mvc:interceptor>
+            <mvc:mapping path="/**" />
+            <bean class="com.fmall.bana.interceptor.InviteSession" />
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+</beans>

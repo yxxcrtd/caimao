@@ -1,0 +1,72 @@
+@charset "utf-8";
+
+@import "../module/global";         /*全局样式*/
+
+
+.func_area {
+  position: relative;
+  left: 0;
+  top: 0;
+}
+.section {
+  width: 100%;
+  overflow: hidden;
+  position: relative
+}
+
+.section .con {
+  width: 430px;
+  margin: auto
+}
+
+.section .con img {
+  display: block;
+  margin: auto
+}
+
+.section .con img.p_t_30 {
+  padding-top: 30px
+}
+
+.section .con img.p_t_40 {
+  padding-top: 40px
+}
+
+.section .con img.p_t_70 {
+  padding-top: 70px
+}
+
+.section1 {
+  background: url("../../../img/images/download_bg01.png?150428") 50% no-repeat;
+  background-color: #FFFFFF
+}
+
+.section2 {
+  background: url("../../../img/images/download_bg02.png?150428") 50% no-repeat;
+  background-color: #FBFBFB
+}
+
+.section3 {
+  background: url("../../../img/images/download_bg03.png?150428") 50% no-repeat;
+  background-color: #AF4338
+}
+
+.section4 {
+  background: url("../../../img/images/download_bg04.png?150428") 0 0 no-repeat;
+  background-color: #D8C6B8;
+  position: relative;
+  background-size: cover;
+  -moz-background-size: cover;
+  -webkit-background-size: cover;
+  -ms-background-size: cover;
+  -o-background-size: cover;
+}
+
+
+.bg4 {
+  position: absolute;
+  left: 50%;
+  top: 16%;
+  margin-left: -635px
+}
+
