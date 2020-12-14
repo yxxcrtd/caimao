@@ -51,7 +51,7 @@ public class Code {
     // 包名
     private static final String CONFIG_PACKAGE = "com.caimao.bana.api.entity";
     // 创建者（如果不填，会自动生成当前登录账户）
-    private static final String CONFIG_AUTHOR = "wangxu@huobi.com";
+    private static final String CONFIG_AUTHOR = "yangxinxin@huobi.com";
 
     // 初始化实例
     private Configuration cfg = null;
