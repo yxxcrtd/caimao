@@ -35,7 +35,7 @@
         <fasterxml.version>2.2.2</fasterxml.version>
         <zookeeper.version>3.4.5</zookeeper.version>
         <zkclient.version>0.1</zkclient.version>
-        <dubbo.version>2.5.3</dubbo.version>
+        <dubbo.version>2.6.12</dubbo.version>
         <freemarker.version>2.3.22</freemarker.version>
         <commons-dbcp.version>1.4</commons-dbcp.version>
         <commons-pool.version>1.6</commons-pool.version>
